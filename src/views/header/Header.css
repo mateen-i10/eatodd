@@ -1,0 +1,336 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*=======================
+******* Header 1  *******
+===========================*/
+
+.header1{
+    display: flex;
+    justify-content: space-between;
+    /*border: 2px solid red;*/
+    background-color: #f0f0f0;
+    padding:1em;
+    text-transform: uppercase;
+}
+
+img{
+    display: block;
+}
+
+/*==================
+    Header Section 1
+=========================*/
+.head-sec-1{
+    display: flex;
+    justify-content: space-between;
+    /*border: 2px solid brown;*/
+    width:18%;
+    color: black;
+    align-items: center;
+}
+
+.head-sec-1 .sign-in{
+    display: flex;
+    align-self: center;
+    /*align-items: center;*/
+    justify-content: space-between;
+    color: #57ab00;
+    /*border: 2px solid red;*/
+    /*width: 30%;*/
+}
+
+.head-sec-1 .sign-in img{
+    width: 100%;
+}
+
+.head-sec-1 .sign-in i{
+    font-size:30px
+}
+
+.head-sec-1 .sign-in p{
+    font-size:12px;
+    margin-top: 10px;
+}
+.head-sec-1 .logo{
+    width: 50%;
+    box-shadow: 2px 2px 5px #adadad;
+    background-color: green;
+    padding: .5em;
+    /*border: 2px solid blue;*/
+}
+
+
+
+/*==================
+    Header Section 2
+=========================*/
+
+.head-sec-2{
+    display: flex;
+    /*border: 2px solid brown;*/
+    width:50%;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.head-sec-2 h2{
+    padding: .5em;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #57ab00;
+}
+
+/*==================
+    Header Section 3
+=========================*/
+
+.head-sec-3{
+    display: flex;
+    /*border: 2px solid brown;*/
+    justify-content: space-around;
+    align-items: center;
+    width:23%
+}
+
+.head-sec-3 .eatOMG{
+    display: flex;
+    background-color: #57ab00;
+    width: 65%;
+    justify-content: space-evenly;
+    padding:0 .25em;
+    letter-spacing: 1px;
+    color:white;
+    /*align-items: center;*/
+    align-items: center;
+    border-radius: 25px;
+
+}
+.head-sec-3 .eatOMG p{
+    margin-top: 12px;
+    /*font-size: ;*/
+}
+
+.head-sec-3 .eatOMG .seprator{
+    margin-left: 1px;
+    margin-right: 2px;
+    height: 21px;
+    width: 1px;
+    border-right: 1px solid rgb(255 255 255);
+}
+
+.head-sec-3 .cart{
+    font-size:30px;
+    color:#57ab00;
+}
+
+/*=======================
+******* Header 2   *******
+===========================*/
+
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #f0f0f0;
+}
+
+.header2 .logo {
+    max-width: 100px;
+}
+
+
+.logo{
+    box-shadow: 2px 2px 5px #adadad;
+    background-color: green;
+    padding: .5em;
+}
+
+.header2 .eatOMG{
+    display: flex;
+    background-color: #57ab00;
+    width: 200px;
+    justify-content: space-evenly;
+    padding:0 .25em;
+    letter-spacing: 1px;
+    color:white;
+    /*align-items: center;*/
+    align-items: center;
+    border-radius: 25px;
+
+}
+
+.header2 .eatOMG p{
+    margin-top: 12px;
+    /*font-size: ;*/
+}
+
+.header2 .eatOMG .seprator{
+    margin-left: 1px;
+    margin-right: 2px;
+    height: 21px;
+    width: 1px;
+    border-right: 1px solid rgb(255 255 255);
+}
+
+.header2 .cart{
+    font-size:30px;
+    color:#57ab00;
+    align-self: center;
+}
+
+.nav {
+    position: fixed;
+    background: #f0f0f0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+
+    transform: translateX(100%);
+    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+
+.nav-toggle {
+    padding: .5em;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    /*position: absolute;*/
+    right: 1em;
+    top: 1em;
+    z-index: 1000;
+}
+
+.nav-open .nav {
+    transform: translateX(0);
+}
+
+.nav-open .nav-toggle {
+    position: fixed;
+}
+
+.nav-open .hamburger {
+    transform: rotate(.625turn);
+}
+
+.nav-open .hamburger::before {
+    transform: rotate(90deg) translateX(-6px);
+}
+
+.nav-open .hamburger::after {
+    opacity: 0;
+}
+
+.logo-toggle{
+   display: flex;
+}
+
+
+.hamburger {
+    display: block;
+    position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    background: #57ab00;
+    width: 2em;
+    height: 3px;
+    border-radius: 1em;
+    transition: transform 250ms ease-in-out;
+}
+
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.hamburger::before { top: 6px; }
+.hamburger::after { bottom: 6px; }
+
+
+.nav-sec-1{
+    background-color: #e0e0e0;
+    margin-top: 4em;
+    padding: 2em;
+}
+
+.nav-sec-2 h2 , .nav-sec-1 h2{
+    color: #57ab00;
+    font-weight: bolder;
+}
+
+.nav-sec-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-sec-2 .challanges {
+    padding: 1em;
+}
+
+.nav-sec-2 .challanges span{
+    display: block;
+    text-align: center;
+}
+
+.nav-sec-2 .create-account-btn{
+    border: none;
+    background-color: #57ab00;
+    padding: 1em;
+    width: 70%;
+}
+
+.nav-sec-2 .sign-in {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-top: 1em;
+}
+
+.nav-sec-2 .sign-in p {
+    font-size: 1.25rem;
+    font-weight: bolder;
+    color: #57ab00;
+}
+
+.nav-sec-2 .sign-in a{
+    color: darkgoldenrod;
+    font-weight: bolder;
+    font-size: 1.35rem;
+    text-decoration: underline;
+}
+
+.nav-sec-2 .state{
+    display: flex;
+    justify-content: space-between;
+    /*border: 2px solid darkolivegreen;*/
+    width: 150px;
+}
+
+.nav-sec-2 .state div{
+    background-color: #ff9a60;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+}
+
+.nav-sec-2 .state p{
+    color: black;
+    font-weight: bold;
+    margin-top: 5px;
+}
