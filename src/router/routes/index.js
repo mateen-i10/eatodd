@@ -4,7 +4,7 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - EatOMG'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/menu'
 
 // ** Merge Routes
 const Routes = [
@@ -14,16 +14,13 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/login',
-    component: lazy(() => import('../../views/Login')),
-    layout: 'BlankLayout',
-    meta: {
-      authRoute: true
-    }
+    path: '/menu',
+    component: lazy(() => import('../../views/menu/Menu')),
+    layout: 'BlankLayout'
   },
   {
-    path: '/error',
-    component: lazy(() => import('../../views/Error')),
+    path: '/EventDetails',
+    component: lazy(() => import('../../views/menu/components/EventDetails')),
     layout: 'BlankLayout'
   }
 ]
