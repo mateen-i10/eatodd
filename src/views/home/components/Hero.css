@@ -33,6 +33,7 @@
     margin: 0 30%;
 }
 .banner-text {
+    user-select: none;
     text-align: center;
     font-size: 20px;
     margin-top: 25%;
