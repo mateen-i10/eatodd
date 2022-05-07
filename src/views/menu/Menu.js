@@ -7,7 +7,6 @@ import './components/stylesheet/Menu.css'
 import Link from "react-router-dom/es/Link"
 
 const Menu = () => {
-
     return (
         <div className='bg-white'>
             <Card style={{backgroundColor:'#402914'}}>
