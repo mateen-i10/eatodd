@@ -1,12 +1,16 @@
 import { Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
-import Order from "./components/Order"
-import Hero from "./components/Hero"
+import Order from "./components/Order/Order"
+import Hero from "./components/Hero/Hero"
+import Header from "../../shared/header/Header"
+import Footer from "../../shared/footer/Footer"
 
 const Home = () => {
   return (
     <div>
-      <Hero />
-      <Order />
+        <Header/>
+          <Hero />
+          <Order />
+        <Footer/>
     </div>
   )
 }
