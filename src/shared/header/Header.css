@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     /*border: 2px solid red;*/
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     padding:1em;
     text-transform: uppercase;
 }
@@ -31,33 +31,34 @@ img{
     color: black;
     align-items: center;
 }
-
+.usericon{
+    width: 50px;
+}
 .head-sec-1 .sign-in{
     display: flex;
     align-self: center;
-    /*align-items: center;*/
     justify-content: space-between;
     color: #57ab00;
-    /*border: 2px solid red;*/
-    /*width: 30%;*/
+    padding-top: 12px;
 }
 
-.head-sec-1 .sign-in img{
-    width: 100%;
-}
+/*.head-sec-1 .sign-in img{*/
+/*    width: 100%;*/
+/*}*/
 
 .head-sec-1 .sign-in i{
     font-size:30px
 }
-
+.navlinks{
+    font-size: large;
+    cursor: pointer;
+}
 .head-sec-1 .sign-in p{
-    font-size:12px;
-    margin-top: 10px;
+    font-size:15px;
+    margin-top: 14px;
 }
 .head-sec-1 .logo{
     width: 50%;
-    box-shadow: 2px 2px 5px #adadad;
-    background-color: green;
     padding: .5em;
     /*border: 2px solid blue;*/
 }
@@ -71,9 +72,10 @@ img{
 .head-sec-2{
     display: flex;
     /*border: 2px solid brown;*/
-    width:50%;
+    width:60%;
     align-items: center;
-    justify-content: center;
+    margin-top: 10px;
+    justify-content: right;
 
 
 }
@@ -93,7 +95,7 @@ img{
     /*border: 2px solid brown;*/
     justify-content: space-around;
     align-items: center;
-    width:23%
+    width:30%
 }
 
 .head-sec-3 .eatOMG{
@@ -135,7 +137,7 @@ img{
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 .header2 .logo {
@@ -144,8 +146,6 @@ img{
 
 
 .logo{
-    box-shadow: 2px 2px 5px #adadad;
-    background-color: green;
     padding: .5em;
 }
 
@@ -333,4 +333,7 @@ img{
     color: black;
     font-weight: bold;
     margin-top: 5px;
+}
+.navlinksss{
+    cursor: pointer;
 }
