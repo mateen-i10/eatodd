@@ -14,6 +14,31 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
+    path: '/OmgPlate',
+    component: lazy(() => import('../../views/home/options/OmgPlate')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/OmgSandwhich',
+    component: lazy(() => import('../../views/home/options/OmgSandwhich')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/OmgSalad',
+    component: lazy(() => import('../../views/home/options/OmgSalads')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/OmgFeaturedPlates',
+    component: lazy(() => import('../../views/home/options/OmgFeaturedPlates')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/OmgTacos',
+    component: lazy(() => import('../../views/home/options/OmgTacos')),
+    layout: 'BlankLayout'
+  },
+  {
     path: '/menu',
     component: lazy(() => import('../../views/menu/Menu')),
     layout: 'BlankLayout'
@@ -21,6 +46,11 @@ const Routes = [
   {
     path: '/EventDetails',
     component: lazy(() => import('../../views/menu/components/EventDetails')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/LoginPage',
+    component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout'
   }
 ]

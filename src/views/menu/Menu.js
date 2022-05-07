@@ -33,7 +33,7 @@ const Menu = () => {
                     </div>
                     <div className="col-sm">
                         <div>
-                        <h1 style={{color:'#451400', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'TradeGothic'}}>BURRITOS</h1>
+                        <h1 style={{color:'#451400', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BURRITOS</h1>
                         <h1 style={{color:'#451400', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 350, letterSpacing: -2, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BY THE BOX</h1>
                         </div>
                         <div>
@@ -63,34 +63,34 @@ const Menu = () => {
                         <h1 style={{color:'#451400', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>OWN</h1>
                         <h6 style={{color:'#736357', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 10 people</h6>
                     </div>
-                    <div className="col-sm-2" style={{ marginTop: 100, color: '#736357', fontSize: 12, marginLeft:-60 }}>
+                    <div className="col-sm-2" style={{ marginTop: 150, color: '#736357', fontSize: 12, marginLeft:-60 }}>
                         <p>*Pricing & availability vary by location.</p>
                     </div>
                     <div className="col-sm">
-                        <img src = {food} width='380' height='200'  />
-                        <button type="button" className="col-sm-11 btn but" style={{height:50, marginBottom: 30}}>
+                        <img src = {food} width='380' height='200' />
+                        <button type="button" className="col-sm-11 btn but" style={{height:50, marginBottom: 30, marginTop: 30}}>
                             START A BURRITO BOX
                             <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
                         </button>
-                        <h6 style={{color:'#786259', marginTop: 20, fontSize:10}}>Please place your order at least 24 hours in advance, so we can coordinate making it along with all of the food we prepare fresh every day.</h6>
+                        <h6 style={{color:'#786259', fontSize:10}}>Please place your order at least 24 hours in advance, so we can coordinate making it along with all of the food we prepare fresh every day.</h6>
                     </div>
                 </div>
             </div>
 
             <div className="container-fluid" style={{backgroundColor: '#e8e8e5'}}>
-                <div className="row" style={{paddingTop:30, paddingBottom: 30, marginLeft: 100, marginRight:100}}>
+                <div className="row" style={{paddingTop:30, paddingBottom: 30, paddingLeft:70, marginLeft: 100, marginRight:100}}>
                     <div className="col-sm align-right">
                         <h1 style={{color:'#451400', fontSize: 60, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700, width: '100%'}}>CHIPS & DIPS</h1>
-                        <h6 style={{color:'#786259', fontFamily: 'Helvetica,Arial,sans-serif'}}>Serves 10-15</h6>
-                        <h6 style={{color:'#736357', fontFamily: 'Helvetica,Arial,sans-serif'}}>$*</h6>
-                        <button type="button" className="col-sm-11 btn but" style={{height:50}}>
+                        <h6 style={{color:'#786259', fontFamily: 'Helvetica,Arial,sans-serif', marginTop:10}}>Serves 10-15</h6>
+                        <h6 style={{color:'#736357', fontFamily: 'Helvetica,Arial,sans-serif', marginTop:30}}>$*</h6>
+                        <button type="button" className="col-sm-11 btn but" style={{width:'50%', height:50, marginTop: 30}}>
                             GET CHIPS AND DIPS
                             <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
                         </button>
-                        <p>*Pricing & availability vary by location.</p>
+                        <p style={{marginTop:20, fontSize:12}}>*Pricing & availability vary by location.</p>
                     </div>
                     <div className="col-sm">
-                        <img src = {logo2} width='300' height='230' align='center' />
+                        <img src = {logo2} width='400' height='350' align='center' />
                     </div>
                 </div>
             </div>

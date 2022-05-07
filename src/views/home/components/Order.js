@@ -1,21 +1,22 @@
 import React from 'react'
 import "./Order.css"
+import Link from "react-router-dom/es/Link"
 
 const Order = () => {
     return (
         <div className="order-main">
             <div className="unlock-section">
                 <img  className="unlock-img" src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/rewards/icons/points%402x.png" alt="Join Chipotle Rewards. Unlock free Chipotle." />
-                <h2  className="loyalty-text">Join EatOMG
-                    Rewards. Unlock free EatOMG.</h2>
+                <h2  className="loyalty-text">Join EatOMG Rewards. Unlock free EatOMG.</h2>
                 <div className="account">
-                    <div  className="create-an-account" >
+                    <div  className="create-an-account" style={{marginTop:-6}} >
                         <div className="content">
-                            <div  aria-label="" >Create an Account</div>
+                            <div>Create an Account</div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
                     <h2   className="unlock-or">OR</h2>
-                    <div className="sign-in">Sign In</div>
+                    <div className="sign-in" style={{marginTop:-5}}>Sign In</div>
             </div>
 
             <div  className="top-level-menus">
@@ -26,7 +27,8 @@ const Order = () => {
                             </div>
                             <div  className="text">
                                 <div  className="display-name mealBurrito">Burrito</div>
-                                <div  className="order-cta">Order
+                                <div  className="order-cta">
+                                    <Link to = "/OmgPlate">Order</Link>
                                     <div  className="arrow-right" ></div>
                                 </div>
                             </div>
@@ -41,13 +43,77 @@ const Order = () => {
                             </div>
                             <div  className="text">
                                 <div  className="display-name mealBurrito">Burrito</div>
-                                <div  className="order-cta">Order
+                                <div  className="order-cta">
+                                    <Link to = "/OmgSandwhich">Order</Link>
                                     <div  className="arrow-right" ></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
+                <div  className="top-level-menu">
+                    <div  className="menu-item">
+                        <div className="thumbnail">
+                            <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
+
+                        </div>
+                        <div  className="text">
+                            <div  className="display-name mealBurrito">LIFESTYLE BOWL</div>
+                            <div  className="order-cta">
+                                <Link to = "/OmgSalad">Order</Link>
+                                <div  className="arrow-right" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  className="top-level-menu">
+                    <div  className="menu-item">
+                        <div className="thumbnail">
+                            <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
+
+                        </div>
+                        <div  className="text">
+                            <div  className="display-name mealBurrito">QUESADILLA</div>
+                            <div  className="order-cta">
+                                <Link to = "/OmgFeaturedPlates">Order</Link>
+                                <div  className="arrow-right" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  className="top-level-menu">
+                    <div  className="menu-item">
+                        <div className="thumbnail">
+                            <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
+
+                        </div>
+                        <div  className="text">
+                            <div  className="display-name mealBurrito">SALAD</div>
+                            <div  className="order-cta">
+                                <Link to = "/OmgSandwhich">Order</Link>
+                                <div  className="arrow-right" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  className="top-level-menu">
+                    <div  className="menu-item">
+                        <div className="thumbnail">
+                            <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
+
+                        </div>
+                        <div  className="text">
+                            <div  className="display-name mealBurrito">TACOS</div>
+                            <div  className="order-cta">
+                                <Link to = "/OmgTacos">Order</Link>
+                                <div  className="arrow-right" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             <div  className="promo-banner" id="highlight">
                 <div  className="promo">
