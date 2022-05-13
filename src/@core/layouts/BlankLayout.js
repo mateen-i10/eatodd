@@ -29,7 +29,7 @@ const BlankLayout = ({ children }) => {
         'dark-layout': skin === 'dark'
       })}
     >
-      <div className='app-content content'>
+      <div className='app-content'>
         <div className='content-wrapper'>
           <div className='content-body'>{children}</div>
         </div>

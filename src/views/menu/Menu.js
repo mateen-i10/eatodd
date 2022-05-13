@@ -10,7 +10,6 @@ import Link from "react-router-dom/es/Link"
 import React from "react"
 
 const Menu = () => {
-
     return (
         <div>
             <Header/>

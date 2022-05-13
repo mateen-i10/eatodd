@@ -72,7 +72,12 @@ const Routes = [
     path: '/LoginPage',
     component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout'
-  }
+  },
+  {
+      path: '/reward',
+      component: lazy(() => import('../../views/Reward/Reward')),
+      layout: 'BlankLayout'
+    }
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }
