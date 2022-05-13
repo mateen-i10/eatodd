@@ -37,6 +37,7 @@ export default function Header () {
                     <div className="head-sec-2">
                         <Link to="/home"><h2>HOME</h2></Link>
                         <Link to="/about"><h2>Founders Story</h2></Link>
+                        <Link to="/values"><h2>Our Values</h2></Link>
                         <Link to="/gallery"><h2>Gallery</h2></Link>
                         <Link to="/menu"><h2>Catering</h2></Link>
                     </div>

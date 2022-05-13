@@ -56,6 +56,7 @@ const Router = () => {
   // ** Init Error Component
   const Error = lazy(() => import('@src/views/Error'))
 
+
   /**
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
