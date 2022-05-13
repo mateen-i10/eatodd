@@ -7,6 +7,7 @@ import fish from '../../../assets/images/foodItems/fish.jpg'
 import meatBalls from '../../../assets/images/foodItems/meatBalls.jpg'
 import okra from '../../../assets/images/foodItems/okra.png'
 import steak from '../../../assets/images/foodItems/steak.jpg'
+import Header from "../../../shared/header/Header"
 
 const OmgTacos = () => {
 
@@ -21,6 +22,8 @@ const OmgTacos = () => {
     }
 
     return (
+        <div>
+            <Header/>
         <div className="container">
             <div className="row">
                 <div>
@@ -153,7 +156,20 @@ const OmgTacos = () => {
                     </div>
                 </div>
             </div>
-
+        </div>
+            <div className="container-fluid">
+                <div style={{display:'flex', flexDirection:'row', backgroundColor:'#d4cfcb', padding:20, marginTop: 30 }}>
+                    <div style={{marginLeft:30}}>
+                        <h1 style={{color:'#451400'}}>Your Meal</h1>
+                        <h6 style={{color:'#451400'}}>Select a protien or a vegie to get started</h6>
+                    </div>
+                    <div>
+                        <button type="button" style={{width:'20%', marginRight:-80, height:50, marginLeft:800, backgroundColor:'#451400', color:'white'}}>
+                            ADD TO BAG
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

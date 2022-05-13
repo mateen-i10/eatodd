@@ -24,7 +24,7 @@
     flex: 0 1 auto;
     margin-left: 15px;
     padding-right: 10px;
-    color: rgb(69 20 0);
+    color: #57ab00;
     font-weight: 700;
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -35,13 +35,14 @@
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
+    border: 1px solid #57ab00;
 }
 .create-an-account {
     padding: 0 7px;
     flex-grow: 1;
-    border: 1px solid rgb(69 20 0);
+    border: #57ab00;
     background-color: rgb(0 0 0 / 0%);
-    color: rgb(69 20 0) !important;
+    color: #57ab00;
     height: 1.6em;
     width: 100%;
     user-select: none;
@@ -64,13 +65,13 @@
 .unlock-or {
     font-size: 1rem;
     margin-left: 15px;
-    color: rgb(69 20 0);
+    color: #343434;
     text-transform: uppercase;
     font-weight: 500;
 }
 .sign-in {
-    /*margin-left: 10px;*/
-    color: rgb(182 130 7);
+    margin-left: 15px;
+    color: #509806;
     min-width: 100px;
     margin-bottom: 0.1em;
     text-transform: uppercase;
@@ -122,7 +123,7 @@
 .top-level-menu:hover .thumbnail>img {
     transform: scale(1.1);
 }
-.text {
+.text2 {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -132,12 +133,12 @@
     font-weight: 700;
     font-family: TradeGothicLTCom, TradeGothic, sans-serif;;
     text-transform: uppercase;
-    color: rgb(69 20 0);
+    color: #57ab00;
 
 }
 .order-cta{
     font-weight: 700;
-    color: rgb(182 130 7);
+    color: black;
     text-transform: uppercase;
     font-size: 1.4em;
     align-items: center;
@@ -156,13 +157,8 @@
     width: 20px;
     height: 20px;
     top: -0.05em;
-    background-image: url("https://www.chipotle.com/content/dam/poc/order/images/icons/arrow-gold.svg");
+    background-image: url("../../../../assets/images/icons/arrow-black.svg");
 }
-
-
-
-
-
 
 .promo-banner {
     max-width: 1200px;
@@ -205,11 +201,11 @@
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;
-    color: rgb(69, 20, 0);
+    color: #57ab00;
 }
 
 .banner-subtitle{
-    color: rgb(69, 20, 0);
+    color: #57ab00;
     margin-bottom: 30px;
     font-size: 1rem;
     line-height: 25px;
@@ -241,7 +237,7 @@ p {
     font-size: 1.2rem;
     font-weight: 500;
     border: 0px;
-    background-color: rgb(69, 20, 0);
+    background-color: #57ab00;
 }
 .content{
     position: relative;
@@ -305,7 +301,7 @@ p {
     margin-bottom: 5px;
     position: relative;
     font-weight: 700;
-    color: rgb(69 20 0);
+    color: #57ab00;
     text-transform: uppercase;
 
 
@@ -320,7 +316,7 @@ p {
     font-family: Nunito,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     font-weight: 700;
     font-size: 22px;
-    color: rgb(69 20 0);
+    color: #57ab00;
     letter-spacing: normal;
     text-align: center;
     z-index: 1;
@@ -336,8 +332,8 @@ p {
     z-index: 1;
     font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     font-weight: 700;
-    border: 1px solid rgb(69 20 0);
-    background-color: rgb(69 20 0);
+    border: #57ab00;
+    background-color: #57ab00;
     color: rgb(255 255 255);
     height: 2.5em;
     width: 100%;
@@ -397,14 +393,14 @@ p {
     font-family: Nunito,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     font-weight: 700;
     font-size: 20px;
-    color: rgb(69 20 0);
+    color: #57ab00;
 }
 
 
 
 .large-order-promo{
     background-color: rgb(255, 255, 255);
-    background-image: url(https://www.chipotle.comundefined);
+    /*background-image: url(https://www.chipotle.comundefined);*/
     padding: 30px 0;
     text-align: center;
     background-repeat: no-repeat;
@@ -423,7 +419,7 @@ p {
 
 }
 .title{
-    color: rgb(69, 20, 0);
+    color: #57ab00;
     font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     text-transform: uppercase;
     font-size: 2.2rem;
@@ -490,14 +486,14 @@ ul li{
     font-size: 18px;
     text-align: left;
     font-weight: 700;
-    color: rgb(69 20 0);
+    color: #57ab00;
 }
 .type-ordering-primary{
     width: 241px;
     margin-top: 1.3em;
     padding: 0;
-    border: 1px solid rgb(167 103 33);
-    background-color: rgb(167 103 33);
+    border: #57ab00;
+    background-color: #57ab00;
     color: rgb(255 255 255);
     height: 2.5em;
     user-select: none;

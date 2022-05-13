@@ -1,78 +1,140 @@
 import React from "react"
-import facebook from "../../assets/images/icons/social/facebook.png"
-import twitter from "../../assets/images/icons/social/twitter.png"
-import instagram from "../../assets/images/icons/social/instagram.png"
+import facebook from "../../assets/images/icons/social/facebook.svg"
+import twitter from "../../assets/images/icons/social/twitter.svg"
+import instagram from "../../assets/images/icons/social/instagram.svg"
+import './Footer.css'
 
 export default function Footer() {
     return (
-       <div className="py-1" style={{backgroundColor:"black"}}>
-           <div className="container-fluid px-5 text-light">
-               <div className="row text-xs-center">
-                   <h2 className="col-sm-6 col-lg-3 text-light">Contact Support</h2>
-                   <h2 className="col-sm-6 col-lg-3 text-light">Careers</h2>
-                   <h2 className="col-sm-6 col-lg-3 text-light">Goods & Gift Cards</h2>
-                   <h2 className="col-sm-6 col-lg-3 text-light">Fund Raising</h2>
-               </div>
-               <div className="row mt-3">
-                   <div className="col-lg-6 mb-2 ">
-                       <h4 className="text-light">About</h4>
-                       <div className="row">
-                           <div className="row box">
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Our values</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">News and Events</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Investors</div>
-                           </div>
-                           <div className="row">
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Health and safety</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Cultivate Foundation</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Pizzeria Locale</div>
-                           </div>
-                           <div className="row">
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">All Locations</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Sustainability</div>
-                               <div className="col-lg-4 p-lg-1 pt-sm-1">Do Not Sell My Products</div>
-                           </div>
-                       </div>
-                   </div>
-                   <div className="col-lg-3 mt-xs-3 mb-2">
-                       <h4 className="text-light">Connect With Us</h4>
-                       <div className="row gap-1">
-                           <div className="col-sm-3 col-3"><img src={facebook} alt="facebook"/></div>
-                           <div className="col-sm-3 col-3"><img src={instagram} alt="instagram"/></div>
-                           <div className="col-sm-3 col-3"><img src={twitter} alt="twitter"/></div>
-                       </div>
-                   </div>
-                   <div className=" col-lg-3">
-                       <h4 className="text-light">Download Our App</h4>
-                       <div className="row">
-                           <div className="d-flex justify-content-between border mb-1 mx-1 " style={{width:"210px"}}>
-                               <div className="bg-light  text-black">Play</div>
-                               <div className="small">Download on <span className="d-block h3 text-light" >Play Store</span></div>
-                           </div>
-                           <div className="d-flex justify-content-between border mb-1 mx-1" style={{width:"210px"}}>
-                               <div className="bg-light  text-black">App</div>
-                               <div className="small">Get it on <span className="d-block h3 text-light" >Google Play</span></div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-               <div className="row " style={{marginBottom:"10px"}}>
-                   <div className="col-xs-4 col-lg-4">
-                       <div className="d-flex w-sm-25 ">
-                           <div className="bg-light text-black rounded-circle p-1">US</div>
-                           <p className="mt-1 mx-1 ">United States</p>
-                       </div>
-                       <div className="small mt-1">© 2022 EatOMG Mexican Grill</div>
-                   </div>
-                   <div className="row col-xs-4 col-lg-8 d-flex info">
-                       <p className="col-sm-6 col-lg-3 small p-1">California Transparancy in Supply Chain Act</p>
-                       <p className="col-sm-6 col-lg-3 small p-1">Terms Of Use</p>
-                       <p className="col-sm-6 col-lg-3 small p-1">Accessibility Statement</p>
-                       <p className="col-sm-6 col-lg-3 small p-1">Privacy Policy</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-
+        <div>
+            <div className="container-fluid footer-1">
+                <div className="container">
+                    <div className="row footer-top-row">
+                        <div className="col-md-3">
+                            <h2 className="text-white">Contact Support</h2>
+                        </div>
+                        <div className="col-md-3">
+                            <h2 className="text-white">Careers</h2>
+                        </div>
+                        <div className="col-md-3">
+                            <h2 className="text-white">Goods & Gift Cards</h2>
+                        </div>
+                        <div className="col-md-3">
+                            <h2 className="text-white">Fundraising</h2>
+                        </div>
+                    </div>
+                    <div className="row footer-sec-row">
+                        <div className="col-md-6">
+                            <h5 className="sec-row-heading text-white">ABOUT</h5>
+                            <div className="noo-links">
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Our Values</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">News and Events</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Investors</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Health and Safety</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Cultivate Foundation</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Pizzeria Locale</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">All Locations</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Sustainability</a>
+                                </div>
+                                <div className="footer-link-container link text">
+                                    <a href="#" className="link text-white">Do Not Sell My Information</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3">
+                            <h5 className="sec-row-heading text-white">CONNECT WITH US</h5>
+                            <div className="noo-links">
+                                <div className="footer-link-container link image">
+                                    <a href="#" className="link-container">
+                                        <img
+                                            src={facebook}
+                                            alt="" role="img" className="link image-social"/></a>
+                                </div>
+                                <div className="footer-link-container link image">
+                                    <a href="https://www.instagram.com/chipotle/" target="_self"
+                                       role="link" tabIndex="0" className="link-container">
+                                        <img
+                                            src={instagram}
+                                            alt="" role="img"
+                                            className="link image-social"/></a>
+                                </div>
+                                <div className="footer-link-container link image">
+                                    <a href="https://twitter.com/chipotletweets" className="link-container">
+                                        <img
+                                            src={twitter}
+                                            alt="" role="img"
+                                            className="link image-social"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-3">
+                            <h5 className="sec-row-heading text-white">DOWNLOAD OUR APP</h5>
+                            <div className="noo-links">
+                                <div className="footer-link-container link icon">
+                                    <a href="https://itunes.apple.com/us/app/chipotle/id327228455?mt=8"
+                                       className="link-container">
+                                        <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/apple-store.png"
+                                            alt="Apple App Store"
+                                            role="img"
+                                            className="link"/>
+                                    </a>
+                                </div>
+                                <div className="footer-link-container link icon mt-1">
+                                    <a href="#" className="link-container">
+                                        <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/google-play.png"
+                                            alt="Google Play" role="img" className="link"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row footer-third-row">
+                        <div className="country-area pointer">
+                            <img src="https://www.chipotle.com/content/dam/poc/order/images/icons/united-states-flag.png"
+                                                                                      alt="United States"
+                                                                                      aria-hidden="true" role="img"
+                                                                                      className="flag"/>
+                            <div className="country homepage text-white">United States</div>
+                        </div>
+                    </div>
+                    <div className="row footer-four-row">
+                        <div className="col-md-4">
+                            <p className="text-white">© 2022 EATOMG</p>
+                        </div>
+                        <div className="col-md-8">
+                            <div className="noo-links">
+                                <div className="footer-link-container link text text-end">
+                                    <a href="#" className="link-item text-white">Our Values</a>
+                                </div>
+                                <div className="footer-link-container link text text-end">
+                                    <a href="#" className="link-item text-white">News and Events</a>
+                                </div>
+                                <div className="footer-link-container link text text-end">
+                                    <a href="#" className="link-item text-white">Investors</a>
+                                </div>
+                                <div className="footer-link-container link text text-end">
+                                    <a href="#" className="link-item text-white">Privacy Policy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
