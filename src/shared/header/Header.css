@@ -337,3 +337,12 @@ img{
 .navlinksss{
     cursor: pointer;
 }
+.headlogin{
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    color: #57ab00;
+}
+.signtext{
+    padding-top: 15px;
+}

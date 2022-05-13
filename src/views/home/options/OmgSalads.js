@@ -1,12 +1,6 @@
 import React, {useState} from 'react'
 import chickenKebab from '../../../assets/images/foodItems/kebab.jpg'
 import lamb from '../../../assets/images/foodItems/lamb.jpg'
-import shawarma from '../../../assets/images/foodItems/shawarma.jpg'
-import falafel from '../../../assets/images/foodItems/falafel.jpg'
-import fish from '../../../assets/images/foodItems/fish.jpg'
-import meatBalls from '../../../assets/images/foodItems/meatBalls.jpg'
-import okra from '../../../assets/images/foodItems/okra.png'
-import steak from '../../../assets/images/foodItems/steak.jpg'
 
 const OmgSalad = () => {
 

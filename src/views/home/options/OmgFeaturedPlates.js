@@ -8,7 +8,7 @@ import meatBalls from '../../../assets/images/foodItems/meatBalls.jpg'
 import okra from '../../../assets/images/foodItems/okra.png'
 import steak from '../../../assets/images/foodItems/steak.jpg'
 
-const OmgPlate = () => {
+const OmgFeaturedPlates = () => {
 
     const [option, SetOption] = useState(0)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Order.css"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
+import { Link } from "react-router-dom"
 
 const Order = () => {
     return (
@@ -21,11 +22,12 @@ const Order = () => {
             <div itemID="order" className="container pb-5 pt-5">
                 <div className="row">
                         <div  className="top-level-menu">
-                            <div  className="menu-item">
+                            <Link to="/OmgTacos">
+                               <div  className="menu-item">
                                 <div className="thumbnail">
                                     <img src="https://www.chipotle.com/content/dam/chipotle/global/menu/meal-types/cmg-10001-burrito/web-desktop/order.png" alt="Burrito"/>
                                 </div>
-                                <div  className="text">
+                                <div  className="text2">
                                     <div  className="display-name mealBurrito">OMG PLATE</div>
                                     <div  className="order-cta">Order
                                         <div  className="arrow-right" ></div>
@@ -33,80 +35,91 @@ const Order = () => {
                                 </div>
 
                             </div>
+                            </Link>
                         </div>
                         <div  className="top-level-menu">
-                            <div  className="menu-item">
-                                <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
+                            <Link to="/OmgTacos">
+                                <div  className="menu-item">
+                                    <div className="thumbnail">
+                                        <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
 
-                                </div>
-                                <div  className="text">
-                                    <div  className="display-name mealBurrito">SANDWICH</div>
-                                    <div  className="order-cta">Order
-                                        <div  className="arrow-right" ></div>
                                     </div>
-                                </div>
+                                    <div  className="text2">
+                                        <div  className="display-name mealBurrito">SANDWICH</div>
+                                        <div  className="order-cta">Order
+                                            <div  className="arrow-right" ></div>
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                         <div  className="top-level-menu">
-                            <div  className="menu-item">
-                                <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito Bowl"/>
-                                </div>
-                                <div  className="text">
-                                    <div  className="display-name mealBurrito">FEATURED PLATES</div>
-                                    <div  className="order-cta">Order
-                                        <div  className="arrow-right" />
+                            <Link to="/OmgTacos">
+                                <div  className="menu-item">
+                                    <div className="thumbnail">
+                                        <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito Bowl"/>
                                     </div>
-                                </div>
+                                    <div  className="text2">
+                                        <div  className="display-name mealBurrito">FEATURED PLATES</div>
+                                        <div  className="order-cta">Order
+                                            <div  className="arrow-right" />
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                 </div>
                 <div className="row">
                         <div  className="top-level-menu">
-                            <div  className="menu-item" >
-                                <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito"/>
-                                </div>
-                                <div  className="text">
-                                    <div  className="display-name mealBurrito">SALADS</div>
-                                    <div  className="order-cta">Order
-                                        <div  className="arrow-right" ></div>
+                            <Link to="/OmgTacos">
+                                <div  className="menu-item" >
+                                    <div className="thumbnail">
+                                        <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito"/>
                                     </div>
-                                </div>
+                                    <div  className="text2">
+                                        <div  className="display-name mealBurrito">SALADS</div>
+                                        <div  className="order-cta">Order
+                                            <div  className="arrow-right" ></div>
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                         <div  className="top-level-menu">
-                            <div  className="menu-item">
-                                <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito Bowl"/>
+                            <Link to="/OmgTacos">
+                                <div  className="menu-item">
+                                    <div className="thumbnail">
+                                        <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png" alt="Burrito Bowl"/>
 
-                                </div>
-                                <div  className="text">
-                                    <div  className="display-name mealBurrito">SOUPS</div>
-                                    <div  className="order-cta">Order
-                                        <div  className="arrow-right" ></div>
                                     </div>
-                                </div>
+                                    <div  className="text2">
+                                        <div  className="display-name mealBurrito">SOUPS</div>
+                                        <div  className="order-cta">Order
+                                            <div  className="arrow-right" ></div>
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                         <div  className="top-level-menu">
-                            <div  className="menu-item">
-                                <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
-                                </div>
-                                <div  className="text">
-                                    <div  className="display-name mealBurrito">SIDES AND DRINKS</div>
-                                    <div  className="order-cta">Order
-                                        <div  className="arrow-right" />
+                            <Link to="/OmgTacos">
+                                <div  className="menu-item">
+                                    <div className="thumbnail">
+                                        <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg" alt="Burrito Bowl"/>
                                     </div>
-                                </div>
+                                    <div  className="text2">
+                                        <div  className="display-name mealBurrito">SIDES AND DRINKS</div>
+                                        <div  className="order-cta">Order
+                                            <div  className="arrow-right" />
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                 </div>
             </div>
