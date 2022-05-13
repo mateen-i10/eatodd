@@ -1,0 +1,87 @@
+.intro-para-container {
+    margin-left: -10em;
+    margin-top: 6em;
+    padding: 0;
+
+}
+
+.intro-para-container p{
+    color: #451400;
+    font-size: 1rem;
+    margin-top: 20px;
+    width: 75%;
+}
+
+.intro-para {
+    font-size: 1.3em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-family: Tahoma;
+}
+
+.section-area-heading {
+    margin-top: 3em;
+}
+
+.section-area-heading h1{
+    color: #451400;
+    font-size: 2em;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.section-area-heading h6{
+    color: #451400;
+    font-size: 1.2rem;
+}
+
+.Fooditems {
+    display: flex;
+    border: solid;
+    border-color: grey;
+    border-width: 1px;
+    margin-top: 20px;
+    padding: 0;
+    margin-right: 30px;
+}
+
+.Fooditems:hover{
+    border: solid;
+    border-color: #451400;
+    border-width: 2px;
+}
+
+.selected-food-item{
+    display: flex;
+    border: solid;
+    border-color: #a77821;
+    border-width: 1px;
+    margin-top: 20px;
+    padding: 0;
+    margin-right: 30px;
+}
+
+.modal-head{
+    text-transform: uppercase;
+    font-family: Tahoma;
+    font-size: 1.3em;
+    font-weight: bolder;
+    color: #451400;
+    padding-left: 1em;
+    padding-top: 2em;
+}
+
+.close-modal-button{
+    background-color: white;
+    border-color: white ;
+    justify-content: right;
+    margin-left: 10em;
+}
+
+.food-item-data h1{
+    color: #451400;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+

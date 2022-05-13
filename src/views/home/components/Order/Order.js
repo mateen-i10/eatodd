@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Order.css"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
+import Link from "react-router-dom/es/Link"
 
 const Order = () => {
     return (
@@ -20,7 +21,8 @@ const Order = () => {
             </div>
             <div itemID="order" className="container pb-5 pt-5">
                 <div className="row">
-                        <div  className="top-level-menu">
+                        <div className="top-level-menu">
+                            <Link to = '/OmgPlate'>
                             <div  className="menu-item">
                                 <div className="thumbnail">
                                     <img src="https://www.chipotle.com/content/dam/chipotle/global/menu/meal-types/cmg-10001-burrito/web-desktop/order.png" alt="Burrito"/>
@@ -31,8 +33,8 @@ const Order = () => {
                                         <div  className="arrow-right" ></div>
                                     </div>
                                 </div>
-
                             </div>
+                            </Link>
                         </div>
                         <div  className="top-level-menu">
                             <div  className="menu-item">

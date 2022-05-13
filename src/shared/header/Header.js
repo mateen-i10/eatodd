@@ -3,6 +3,7 @@ import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import Link from "react-router-dom/es/Link"
+
 export default function Header () {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
