@@ -1,0 +1,17 @@
+.food-items{
+    text-transform: uppercase;
+    color: #756456;
+    letter-spacing: 0;
+    font-weight: bolder;
+    margin-bottom: 0.8em;
+    margin-left: 200px;
+}
+
+.food-items:hover{
+    color: #451400;
+    text-decoration: underline;
+}
+
+.highlight:hover{
+    color: #a76721;
+}
