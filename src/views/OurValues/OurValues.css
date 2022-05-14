@@ -1,0 +1,206 @@
+*{
+    box-sizing: border-box;
+}
+
+.FoodHasThePower__power{
+    height: 100vh;
+    width: 100vw;
+    background-image: url("/src/views/OurValues/images/background-tile.jpg");
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+.FoodHasThePower__power img{
+    width: 75%;
+}
+.sr-only{
+    color: rgb(69 20 0);
+    line-height: 5rem;
+    font-size: 62px;
+    margin: 0 30% 0 30%;
+}
+.FoodHasThePower__subtext{
+    height: 150vh !important;
+    width: 90vw !important;
+    padding: 2.5rem 1.5rem 1.5rem;
+    text-align: left;
+    justify-self: start;
+    color: rgb(69 20 0);
+    font-family: Gotham-Medium, Arial, sans-serif;
+}
+.FoodHasThePower__bowl{
+    background-image: url("/src/views/OurValues/images/background-tile.jpg");
+}
+.FoodHasThePower__hero-bowl_img{
+    overflow: hidden;
+    margin: -10px 0px 0px -60px;
+}
+.FoodHasThePower__subtext_title{
+    height: auto;
+    max-width: 100%;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.FoodHasThePower__subtext_text{
+    margin-top: 1.3rem;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+
+}
+.FoodHasThePower__hero-burrito{
+    background-image: url("/src/views/OurValues/images/background-tile.jpg");
+
+}
+.FoodHasThePower__hero-burrito_img{
+    width: 125%;
+}
+.FoodHasThePower__thought-animation{
+    background-image: url("/src/views/OurValues/images/background-tile.jpg");
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.FoodHasThePower__thought-animation img{
+    width: 70%;
+
+}
+.VideoSection{
+    height: 150vh;
+    position: relative;
+}
+.VideoSection video{
+    border-bottom-style: none;
+}
+.FullWidthVideo{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+.VideoSection img{
+    position: relative;
+    color: whitesmoke;
+    font-size: 88px;
+    line-height: 6rem;
+    top: 17%;
+    left: 20%;
+}
+
+.VideoSection__text{
+    position: relative;
+    top: 30%;
+    left: 12%;
+}
+.FreshFood__text-area_text p{
+    color: whitesmoke;
+    font-size: 30px;
+    margin:0 20px 5px 20px;
+    text-align: left;
+    font-weight: 700;
+}
+.RealIngredients__intro_animation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.RealIngredients__intro_animation img{
+    width: 85%;
+
+}
+.RealIngredients__intro_subtitle{
+    font-family:Gotham-Medium, Arial, sans-serif;
+    color: rgb(69 20 0);
+    line-height: 2.2rem;
+    font-size: 1.5rem;
+    width: 32%;
+    text-align: center;
+    font-weight: 500;
+
+}
+.RealIngredients__intro_subtitle strong{
+    margin: 0 5px 0 5px;
+    font-weight: 800;
+}
+.RealIngredients__intro_hint{
+    color: rgb(120 98 89);
+    font-size: 1.3rem;
+    line-height: 2.125rem;
+    font-weight: 500;
+}
+
+.RealIngredients__ingredients_list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+.Ingredient{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.Ingredient__text{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgb(120 98 89);
+    visibility: hidden;
+
+}
+.Ingredient__img-container img {
+    height: 150px;
+    width: 150px;
+}
+.Ingredient__img-container:hover {
+    background-color: rgb(234 225 219);
+    border: none;
+    border-radius: 50%;
+}
+.Ingredient__img-container:hover ~.Ingredient__text{
+    visibility: visible;
+}
+.RealIngredients__see-all{
+    text-transform: uppercase;
+    color: rgb(69 20 0) !important;
+    font-family: "Trade Gothic LT Bold";
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+.RealIngredients__see-all:hover{
+    color: inherit;
+}
+.Realx3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 90px;
+    height: 100vh;
+}
+.Realx3__logo-for-real{
+    margin-top: 70px;
+}
+.Realx3__order-btn{
+    background-color: rgb(69 20 0)!important;
+    color: whitesmoke !important;
+    border: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    padding: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.Realx3__order-btn:hover {
+    cursor: pointer;
+    background-color: rgb(27 8 0) !important;
+}

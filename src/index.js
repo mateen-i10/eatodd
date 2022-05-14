@@ -27,6 +27,10 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** React Toastify
 import '@styles/react/libs/toastify/toastify.scss'
 
+// ** bootstrap
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 // ** Core styles
 import './@core/assets/fonts/feather/iconfont.css'
 import './@core/scss/core.scss'
