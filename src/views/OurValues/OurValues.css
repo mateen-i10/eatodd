@@ -4,7 +4,7 @@
 
 .FoodHasThePower__power{
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-image: url("/src/views/OurValues/images/background-tile.jpg");
     display: flex;
     flex: 1;
@@ -15,7 +15,7 @@
     width: 75%;
 }
 .sr-only{
-    color: rgb(69 20 0);
+    color: #57ab00;
     line-height: 5rem;
     font-size: 62px;
     margin: 0 30% 0 30%;
@@ -191,7 +191,7 @@ img {
     margin-top: 70px;
 }
 .Realx3__order-btn{
-    background-color: rgb(69 20 0)!important;
+    background-color: #57ab00 !important;
     color: whitesmoke !important;
     border: none;
     border-radius: 0;
