@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import { Link } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 
 export default function Header () {
     const [width, setWidth] = useState(window.innerWidth)
@@ -33,20 +33,22 @@ export default function Header () {
                             <img className="usericon" src={usericon}/>
                             <b className="signtext">Sign In</b>
                         </div>
-
                     </div>
                     <div className="head-sec-2">
-                        <Link to="/home"><h2>ORDER</h2></Link>
-                        <Link to="/about"><h2>CATERING</h2></Link>
-                        <Link to="/gallery"><h2>REWARDS</h2></Link>
-                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
-                        <Link to="/"><h2>NUTRITION</h2></Link>
+                        <NavLink to="/"><h2 className="menuitem">ORDER</h2></NavLink>
+                        <NavLink to="/menu"><h2 className="menuitem">CATERING</h2></NavLink>
+                        <NavLink to="/"><h2 className="menuitem">OMG WINE</h2></NavLink>
+                        <NavLink to="/reward"><h2 className="menuitem">REWARDS</h2></NavLink>
+                        <NavLink to="/ourvalues"><h2 className="menuitem">OUR VALUES</h2></NavLink>
+                        <NavLink to="/nutrtion"><h2 className="menuitem">NUTRITION</h2></NavLink>
                     </div>
                     <div className="head-sec-3">
                         <div className="eatOMG">
-                            <i className="ri-checkbox-blank-circle-fill"></i>
+                            <i style={{paddingRight:'10px'}} className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            <p>OMG WINE CLUB</p>
+                            <div style={{height:'65px'}}>
+                                <p>PICKUP FROM Address..</p>
+                            </div>
                         </div>
                         <i className="ri-shopping-bag-line cart"></i>
                     </div>
@@ -78,11 +80,12 @@ export default function Header () {
 
                 <nav className="nav">
                     <div className="nav-sec-1">
-                        <Link to="/home"><h2>ORDER</h2></Link>
-                        <Link to="/about"><h2>CATERING</h2></Link>
-                        <Link to="/gallery"><h2>REWARDS</h2></Link>
-                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
-                        <Link to="/"><h2>NUTRITION</h2></Link>
+                        <NavLink to="/home"><h2 className="menuitem">ORDER</h2></NavLink>
+                        <NavLink to="/menu"><h2 className="menuitem">CATERING</h2></NavLink>
+                        <NavLink to="/menu"><h2 className="menuitem">OMG WINE</h2></NavLink>
+                        <NavLink to="/reward"><h2 className="menuitem">REWARDS</h2></NavLink>
+                        <NavLink to="/ourvalues"><h2 className="menuitem">OUR VALUES</h2></NavLink>
+                        <NavLink to="/nutrtion"><h2 className="menuitem">NUTRITION</h2></NavLink>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">

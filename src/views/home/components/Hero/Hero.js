@@ -13,8 +13,9 @@ class Hero extends Component {
                          className="background-video" />
                 <div className="banner">
                     <div className="banner-content">
-                        <p className="banner-text">A fresh new flavor of chicken is hitting the grill, made with garlic, guajillo peppers, and fresh lime.</p>
-                        <div className="btn btn-danger hero-button">ORDER NOW</div>
+                        <p className="banner-text">Enjoy your favorite bottles of wine at VENDOR PRICES!</p>
+                        <p style={{color:'red', fontWeight:'bold'}}>Membership is only $9.99 per month!</p>
+                        <div className="btn btn-danger hero-button">JOIN NOW</div>
                     </div>
                 </div>
             </div>

@@ -35,9 +35,11 @@
 .banner-text {
     user-select: none;
     text-align: center;
+    color: red;
+    font-weight: bold;
     font-size: 20px;
     margin-top: 15%;
-    padding-bottom: 30px;
+    /*padding-bottom: 30px;*/
     line-height: 30px;
 }
 .hero-button{

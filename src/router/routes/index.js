@@ -79,7 +79,7 @@ const Routes = [
       layout: 'BlankLayout'
   },
   {
-    path: '/Nutrtion',
+    path: '/nutrtion',
     component: lazy(() => import('../../views/nutrtion/Nutrtion')),
     layout: 'BlankLayout'
   },

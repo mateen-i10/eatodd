@@ -1,160 +1,65 @@
-:root {
-    --blue-light: #5d5e82;
-    --beige: #f7f2ed;
-    --beige-dark: #eae1db;
-    --gold: #b68207;
-    --gold-light: #debf79;
-    --gold-dark: #976500;
-    --brown: #451400;
-    --brown-light: #786259;
-    --brown-xlight: #d4cbc7;
-    --brown-dark: #1b0800;
-    --red-light: #d0021b;
-    --red: #ad2118;
-    --red-dark: #88120a;
-    --green: #90a035;
-    --white: #fff;
-    --gray: #f0f0f0;
-    --gray-light: #f2f2f2;
-    --linen: #dfd9d3;
-    --green-dark: #417505;
-    --pink: #96436a;
-    --green-xdark: #5f6b19;
-    --grey-xlight: #917b6b;
-    --grey-dim: #eae7df;
-    --grey-light: #eee9e7;
-    --red-brick: #ff3d3d;
-    --primary: #451400;
-    --secondary: #88120a;
-    --success: #90a035;
-    --info: #451400;
-    --warning: #ad2118;
-    --danger: #ad2118;
-    --light: #f0f0f0;
-    --dark: #343a40;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --font-family-sans-serif: "Nunito", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+.unlock-img-2 {
+    flex: 0 0 auto;
+    height: 34px;
+    margin: 5px;
 }
-.container {
-  display: flex;
+.col-content{
+    display: flex;
+    align-items: center;
 }
-.row-test{
-  margin-right:auto;
+.leftside {
+    position: relative;
+    z-index: 20;
+    padding-top: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 520px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
 }
-.row-left{
-
-
- }
-
-
-.test{
-       font-family: inherit;
-       color: #AD2118;
-       font-size: 32px;
-       line-height: 35px;
-       font-weight: 500;
-       letter-spacing: 5px;
-       width: 100%;
-       margin-bottom: 21px;
+.hero---small-headline {
+    margin-bottom: 21px;
+    color: #ad2118;
+    font-size: 32px;
+    line-height: 35px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    width: 100%;
 }
-.test2{
-       font-family: inherit;
-       color: #AD2118;
-       font-size: 32px;
-       line-height: 35px;
-       font-weight: 500;
-       letter-spacing: 2px;
-       width: 100%;
-       text-align: center;
+.hero__headline-static {
+    display: inline;
+    width: 520px;
+    max-width: none;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+    font-size: 50px;
+    line-height: 55px;
+    letter-spacing: 0px;
+    white-space: nowrap;
+    margin-bottom: 0px;
+    width: 100%;
+    font-family: Gotham-Black;
+    font-weight: normal;
 }
-.test2d{
-   padding-bottom:10px;
-}
-
-.Headline{
-      font-family: Gotham-Bold;
-      color: #000000;
-      font-size:55;
-}
-.para{
+.div-block-paragraphs {
     margin-top: 15px;
     margin-bottom: 24px;
     max-width: 450px;
-    color: #000000;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
     font-weight: normal;
-    font-family: sans-serif;
-    font-size: 1rem;
-    text-align: left;
-}
-.btn{
-
-       background-color: rgb(173, 33, 24);
-       text-decoration: none;
-       border: 1px solid;
-       border: none;
-       color: white;
-       padding: 14px 40px;
-       border-radius: 2px;
-       font-size: 12px;
-       width:250px;
-       text-align:left;
-}
-.btn:hover{
-  background-color:#555555;
-  color:black;
-}
-.img{
-
-         padding-right: 90px;
-         padding-left: 50px;
-         width: 10px;
-         height:50px;
-         margin-right:auto;
-         margin-left:auto;
-
-
-}
-.img-2{
-   transform-style: preserve-3d;
-   opacity: 1;
-   display: block;
-   margin: auto;
-   width: 250px;
-   height:auto;
-
-}
-.c-colum{
- display:flex;
- justify-content:center;
-
-}
-.flex-colum{
-    width:1;
-    order:0;
-}
-.flex-colum1{
-     width:1;
-     order:0;
-}
-.container-flex{
- display:flex;
-}
-.container-flex1{
- display:flex;
-}
-.p1{
-  color:black;
-}
-.txt{
-    text-align:center;
-    font-size:20px;
-    color:rgb(69,20,0);
-    font-family: Gotham-Black
-
+    font-family: inherit;
 }
