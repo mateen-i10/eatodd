@@ -2,7 +2,34 @@
     box-sizing: border-box;
 }
 
+.main-container{
+    margin-top: 0% !important;
+    overflow: hidden;
+    padding: 0px
+}
+@media only screen and (max-width: 767px) {
+    .main-container{
+        margin: -13% -2.5% 0 !important;
+        overflow: hidden;
+        padding: 0px
+    }
+}
+@media only screen and (min-width: 375px) and (max-width: 475px) {
+    .main-container{
+        margin: -24% -4.9% 0 !important;
+        overflow: hidden;
+        padding: 0;
+    }
+}
+@media only screen and (min-width: 476px) and (max-width: 575px) {
+    .main-container{
+        margin: -19% -3.9% 0 !important;
+        overflow: hidden;
+        padding: 0;
+    }
+}
 .FoodHasThePower__power{
+
     height: 100vh;
     width: 100%;
     background-image: url("/src/views/OurValues/images/background-tile.jpg");
@@ -11,8 +38,9 @@
     align-items: center;
     justify-content: center;
 }
-.FoodHasThePower__power img{
-    width: 75%;
+.FoodHasThePower__power_img{
+    width: 92%;
+    height: 90%;
 }
 .sr-only{
     color: #57ab00;
@@ -21,8 +49,7 @@
     margin: 0 30% 0 30%;
 }
 .FoodHasThePower__subtext{
-    height: 150vh !important;
-    width: 90vw !important;
+    height: auto !important;
     padding: 2.5rem 1.5rem 1.5rem;
     text-align: left;
     justify-self: start;
@@ -31,14 +58,16 @@
 }
 .FoodHasThePower__bowl{
     background-image: url("/src/views/OurValues/images/background-tile.jpg");
+    /*width: 99.77vw;*/
 }
+
 .FoodHasThePower__hero-bowl_img{
-    overflow: hidden;
-    margin: -10px 0px 0px -60px;
+    height: auto;
+    width: 100%;
 }
 .FoodHasThePower__subtext_title{
     height: auto;
-    max-width: 100%;
+    width: 100%;
 }
 img {
     vertical-align: middle;
@@ -50,12 +79,9 @@ img {
     line-height: 2.1rem;
 
 }
-.FoodHasThePower__hero-burrito{
-    background-image: url("/src/views/OurValues/images/background-tile.jpg");
 
-}
 .FoodHasThePower__hero-burrito_img{
-    width: 125%;
+    width: 100%;
 }
 .FoodHasThePower__thought-animation{
     background-image: url("/src/views/OurValues/images/background-tile.jpg");
@@ -66,41 +92,46 @@ img {
 }
 .FoodHasThePower__thought-animation img{
     width: 70%;
-
 }
 .VideoSection{
-    height: 150vh;
-    position: relative;
+    width: 100%;
+    height: 110vh;
 }
-.VideoSection video{
-    border-bottom-style: none;
-}
-.FullWidthVideo{
+
+.VideoSection-video{
     height: 100%;
     width: 100%;
+    /*margin-left: -1.2%;*/
     object-fit: cover;
-    position: absolute;
 }
 .VideoSection img{
-    position: relative;
+    margin-top: 5%;
     color: whitesmoke;
-    font-size: 88px;
-    line-height: 6rem;
-    top: 17%;
-    left: 20%;
+    height: 22em;
 }
 
 .VideoSection__text{
-    position: relative;
-    top: 30%;
-    left: 12%;
+    /*margin-left: -20%;*/
+    /*margin-right: -20%;*/
+    margin-bottom: 20%;
+
 }
+.FreshFood__text-area_img{
+    /*margin-top: 5%;*/
+    margin-right: 5px;
+    margin-bottom: 9px;
+    color: whitesmoke;
+    height: 6em !important;
+}
+
 .FreshFood__text-area_text p{
     color: whitesmoke;
-    font-size: 30px;
-    margin:0 20px 5px 20px;
+    font-size: 2rem;
+    line-height: 1.7rem;
+    margin-top: 2px;
     text-align: left;
     font-weight: 700;
+
 }
 .RealIngredients__intro_animation{
     display: flex;
@@ -156,9 +187,34 @@ img {
     visibility: hidden;
 
 }
-.Ingredient__img-container img {
-    height: 150px;
-    width: 150px;
+.Ingredient__img-container img{
+    height: 145px;
+    width: 145px;
+}
+@media only screen and (max-width: 598px) {
+    .Ingredient__img-container img{
+        height: 103px;
+        width: 103px;
+    }
+    .Ingredient__text{
+        font-size: 1rem;
+        font-weight: 500;
+        color: rgb(120 98 89);
+        visibility: hidden;
+
+    }
+}
+@media only screen and (max-width: 523px) {
+    .Ingredient__img-container img{
+        height: 70px;
+        width: 70px;
+    }
+    .Ingredient__text{
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: rgb(120 98 89);
+        visibility: hidden;
+    }
 }
 .Ingredient__img-container:hover {
     background-color: rgb(234 225 219);
@@ -168,12 +224,14 @@ img {
 .Ingredient__img-container:hover ~.Ingredient__text{
     visibility: visible;
 }
+
 .RealIngredients__see-all{
     text-transform: uppercase;
     color: rgb(69 20 0) !important;
     font-family: "Trade Gothic LT Bold";
     font-weight: 700;
     font-size: 1.3rem;
+
 }
 .RealIngredients__see-all:hover{
     color: inherit;
@@ -184,12 +242,25 @@ img {
     justify-content: center;
     align-items: center;
     align-content: center;
-    margin-top: 90px;
+    margin-top: 70px;
     height: 100vh;
+}
+.Realx3__headlines{
+    /*height: 10em;*/
 }
 .Realx3__logo-for-real{
     margin-top: 70px;
 }
+@media only screen and (max-width: 523px) {
+    .Realx3__logo-for-real{
+        margin-top: 70px;
+        width: 75%
+    }
+    .Realx3__headlines{
+        width: 75%
+    }
+}
+
 .Realx3__order-btn{
     background-color: #57ab00 !important;
     color: whitesmoke !important;
