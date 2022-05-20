@@ -25,7 +25,7 @@ export default function Header () {
 
     if (width > breakpoint) {
         return (
-            <div>
+            <div className="navbar-full-container">
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo} />
@@ -57,7 +57,7 @@ export default function Header () {
         )
     }
     return (
-        <div>
+        <div className="navbar-full-container g-0">
             <header className="header2">
                 <div className="logo-toggle">
                     <button  className="nav-toggle" onClick={ () => setIsOpen(!isOpen)} aria-label="toggle navigation">

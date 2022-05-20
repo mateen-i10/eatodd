@@ -7,7 +7,7 @@ class Hero extends Component {
     render() {
         return (
             <div className="hero-container">
-                <video   id="cmg-hero-video" autoPlay="autoplay" muted="muted"
+                <video autoPlay="autoplay" muted="muted"
                          loop="loop"
                          src={headervideo}
                          className="background-video" />
