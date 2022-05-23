@@ -22,7 +22,7 @@ const Order = () => {
             <div itemID="order" className="container pb-5 pt-5">
                 <div className="row">
                         <div  className="top-level-menu">
-                            <Link to="/OmgTacos">
+                            <Link to="/OmgPlate">
                                <div  className="menu-item">
                                 <div className="thumbnail">
                                     <img src="https://www.chipotle.com/content/dam/chipotle/global/menu/meal-types/cmg-10001-burrito/web-desktop/order.png" alt="Burrito"/>

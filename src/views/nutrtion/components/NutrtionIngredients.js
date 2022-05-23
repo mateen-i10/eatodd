@@ -36,14 +36,14 @@ const NutrtionIngredients = () => {
                 </p>
                 <hr style={{color:'#451400'}} />
                 <div>
-                    <h3 style={{paddingTop:20, paddingBottom: 20, color:'#451400'}}>See how these 53 Real ingredients make our recipie <PlusCircle /></h3>
+                    <h3 className='highlight' style={{paddingTop:20, paddingBottom: 20}}>See how these 53 Real ingredients make our recipie <PlusCircle /></h3>
                 </div>
             </div>
             <div style={{display:'flex', justifyContent:'center', marginTop: 80}}>
             {list.map(e => (
-                    <div key={e.title} className='highlight' style={{marginRight:20, marginLeft:20, textAlign:'center'}}>
+                    <div className='highlight' key={e.title} style={{marginRight:20, marginLeft:20, textAlign:'center'}}>
                         <div><img className='rounded-circle' src={e.image} width='170' /></div>
-                        <div style={{marginTop:10, fontSize:'1.4em', color:'#451400'}}>{e.title}</div>
+                        <div style={{marginTop:10, fontWeight:'bolder'}}>{e.title}</div>
                     </div>
             ))}
             </div>

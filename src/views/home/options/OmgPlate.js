@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import img1 from '../../../assets/images/foodItems/bowl.jpg'
 import img2 from '../../../assets/images/foodItems/kebab.jpg'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
-import {CheckCircle, Plus, Minus, List, MoreVertical} from 'react-feather'
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap'
+import {CheckCircle, Plus, Minus, List, MoreVertical, X} from 'react-feather'
 import './components/Plate.css'
 
 const OmgPlate = () => {
     const [basicModal, setBasicModal] = useState(false)
+    const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [plantBased, SetplantBased] = useState(0)
     const [lifeStyle, SetLifeStyle] = useState(0)
     const [avoiding, SetAvoiding] = useState(0)
@@ -77,9 +78,9 @@ const OmgPlate = () => {
 
     const Beans = [
         {
-          image: img2,
-          title: 'Black Beans',
-          cal: 130
+            image: img2,
+            title: 'Black Beans',
+            cal: 130
         },
         {
             image: img2,
@@ -142,15 +143,15 @@ const OmgPlate = () => {
     }
 
     const handleLifeStyle1 = () => {
-       if (lifeStyle === 0) {
-           SetLifeStyle(1)
-       } else if (lifeStyle === 1) {
-           SetLifeStyle(0)
-       } else if (lifeStyle === 2) {
-           SetLifeStyle(1)
-       } else if (lifeStyle === 3) {
-           SetLifeStyle(1)
-       }
+        if (lifeStyle === 0) {
+            SetLifeStyle(1)
+        } else if (lifeStyle === 1) {
+            SetLifeStyle(0)
+        } else if (lifeStyle === 2) {
+            SetLifeStyle(1)
+        } else if (lifeStyle === 3) {
+            SetLifeStyle(1)
+        }
     }
 
     const handleLifeStyle2 = () => {
@@ -233,14 +234,37 @@ const OmgPlate = () => {
         }
     }
 
+    const RenderMealNameModal = () => {
+        return (
+            <div className='basic-modal'>
+                <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
+                    <div toggle={() => setBasicNameFoodModal(!basicNameFoodModal)} className='name-meal-model' ><p>give this meal a name</p></div>
+                    <ModalBody>
+                        <div className='col-8' style={{marginLeft:80}}>
+                            <Input type='text' placeholder='Enter Meal Name' style={{color:'#451400'}} />
+                        </div>
+                    </ModalBody>
+                    <ModalFooter style={{justifyContent:'center', marginBottom:20, marginTop:30}}>
+                        <Button color='primary' onClick={() => setBasicNameFoodModal(!basicNameFoodModal)}>
+                            Cancel
+                        </Button>
+                        <Button color='primary' onClick={() => setBasicNameFoodModal(!basicNameFoodModal)}>
+                            Save
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
+        )
+    }
+
     const RenderModal = () => {
         return (
             <div className='basic-modal'>
                 <Modal isOpen={basicModal} toggle={() => setBasicModal(!basicModal)}>
                     <h1 className="modal-head">
-                            Nutrition Preferences
-                        <button className='close-modal-button' onClick={() => setBasicModal(!basicModal)}>X</button>
-                        </h1>
+                        Nutrition Preferences
+                        <X className='close-modal-button' onClick={() => setBasicModal(!basicModal)} />
+                    </h1>
                     <hr/>
                     <ModalBody style={{paddingRight:50, paddingLeft:50}}>
                         <h5 style={{color:"#451400"}}>Set these tags for now or Sign In to keep them saved for later.</h5>
@@ -390,7 +414,7 @@ const OmgPlate = () => {
 
                 {protienQuantity === 'chicken Kebab' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
@@ -402,19 +426,25 @@ const OmgPlate = () => {
 
                 {protienQuantity === 'Chicken Shawarma' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
                 {protienQuantity === 'MeatBalls' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:360, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
                 {protienQuantity === 'Fish' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:515, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                    </div>
+                ) : []}
+
+                {protienQuantity === 'Falafel' ?  (
+                    <div>
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:360, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
@@ -426,7 +456,7 @@ const OmgPlate = () => {
 
                 {protienQuantity === 'Steak' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:515, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
@@ -460,7 +490,7 @@ const OmgPlate = () => {
 
                 {riceQuantity === 'White Rice' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
@@ -472,7 +502,7 @@ const OmgPlate = () => {
 
                 {riceQuantity === 'No Rice' ? (
                     <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:160, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
+                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
                     </div>
                 ) : []}
 
@@ -615,7 +645,7 @@ const OmgPlate = () => {
                         <h6 style={{color:'#451400'}}>Select a protein or vegie to get started</h6>
                     </div>
                     <div className="col" style={{textAlign:'right', paddingRight: 140}}>
-                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#451400', color:'white'}}>
+                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#451400', color:'white'}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >
                             ADD TO BAG
                         </button>
                     </div>
@@ -623,9 +653,10 @@ const OmgPlate = () => {
             </div>
 
             {RenderModal()}
+            {RenderMealNameModal()}
 
         </div>
-)
+    )
 }
 
 export default OmgPlate

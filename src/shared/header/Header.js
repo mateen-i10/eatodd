@@ -3,10 +3,13 @@ import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import { Link } from "react-router-dom"
+import FoodCart from "./components/FoodCart"
+import {ShoppingBag} from "react-feather"
 
 export default function Header () {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
+    const [openDrawer, SetOpenDrawer] = useState(false)
 
     const breakpoint = 1200
     useEffect(() => {
@@ -48,12 +51,27 @@ export default function Header () {
                             <span className="seprator"></span>
                             <p>OMG WINE CLUB</p>
                         </div>
-                        <i className="ri-shopping-bag-line cart"></i>
+
+                        <ShoppingBag onClick={() => {
+                                SetOpenDrawer(true)
+                        }} />
+
+                        {openDrawer && (<div>
+                            <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer} />
+                        </div>
+                            )}
+
+                        {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
+                        {/*    <div>*/}
+                        {/*        <FoodCart setCanvasPlacement='start' setCanvasOpen={true} />*/}
+                        {/*    </div>*/}
+                        {/*)}></i>*/}
                     </div>
                 </header>
             </div>
         )
     }
+
     return (
         <div>
             <header className="header2">
@@ -66,7 +84,6 @@ export default function Header () {
                         <img className="logo" src={logo} />
                     </div>
                 </div>
-
 
                 <div className="eatOMG">
                     <i className="ri-checkbox-blank-circle-fill"></i>

@@ -10,6 +10,14 @@
 .food-items:hover{
     color: #451400;
     text-decoration: underline;
+    image-rendering: auto;
+}
+
+.highlight{
+    margin-top: 0.5em;
+    font-size: 1.4em;
+    font-weight: bolder;
+    color: #451400;
 }
 
 .highlight:hover{
