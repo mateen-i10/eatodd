@@ -1,7 +1,13 @@
 .footer-top-row{
     padding-top: 20px;
     margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
 }
+/*.top-row-text{*/
+
+/*}*/
 .footer-sec-row{
     margin-bottom: 40px
 }
@@ -20,9 +26,17 @@
             flex-wrap: nowrap;
         }
  }
+.footer-link-container{
+}
 .noo-links {
             display: flex;
             flex-wrap: wrap;
+}
+.image-social{
+    margin: .4rem
+}
+.social-icon-container{
+    margin-bottom: -10px !important;
 }
 @media (min-width: 1200px){
 .link.text {
@@ -38,6 +52,9 @@
     }
 .sec-row-heading{
     padding-bottom: 20px;
+    font-size: 1rem;
+    font-weight: 700;
+
 }
 @media (min-width: 1200px){
    .link.image{

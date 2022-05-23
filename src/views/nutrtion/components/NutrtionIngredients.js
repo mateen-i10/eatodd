@@ -4,11 +4,12 @@ import {PlusCircle} from "react-feather"
 import '../stylesheet/Nutrition.css'
 import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
-import chipotleChilli from "../../OurValues/images/ChipotleChile-md.png"
-import blackBeans from "../../OurValues/images/BlackBeans-sm.png"
-import tomatoPaste from "../../OurValues/images/TomatoPaste-sm.png"
-import romanLattuce from "../../OurValues/images/RomainLettuce-sm.png"
-import redChilli from "../../OurValues/images/RedChili-sm.png"
+//
+// import chipotleChilli from "../../../../public/assets/images/ChipotleChile-md.png"
+// import blackBeans from "../../../../public/assets/images/BlackBeans-sm.png"
+// import tomatoPaste from "../../../../public/assets/images/TomatoPaste-sm.png"
+// import romanLattuce from "../../../../public/assets/images/RomainLettuce-sm.png"
+// import redChilli from "../../../../public/assets/images/RedChili-sm.png"
 const NutrtionIngredients = () => {
 
     // const list = [

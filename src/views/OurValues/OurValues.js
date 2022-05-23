@@ -4,7 +4,6 @@ import './OurValues.css'
 import heroBowlsm from './images/hero-bowl-sm.png'
 import heroBowltext from './images/subtitle-01-lg.svg'
 import heroBurritolg from './images/hero-burrito-lg.png'
-// import foodThoughtimg from './images/foodthought.png'
 import freshfoodVideo from './video/food_sequence_xlarge.mp4'
 import no1lg from './images/no-01-lg.svg'
 import no2 from "./images/no-02.svg"

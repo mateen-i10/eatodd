@@ -11,21 +11,21 @@ export default function Footer() {
                 <div className="container-fluid">
                     <div className="row footer-top-row">
                         <div className="col-md-3">
-                            <h2 className="text-white">Contact Support</h2>
+                            <div className="text-white top-row-text">Contact Support</div>
                         </div>
                         <div className="col-md-3">
-                            <h2 className="text-white">Careers</h2>
+                            <div className="text-white top-row-text">Careers</div>
                         </div>
                         <div className="col-md-3">
-                            <h2 className="text-white">Goods & Gift Cards</h2>
+                            <div className="text-white top-row-text">Goods & Gift Cards</div>
                         </div>
                         <div className="col-md-3">
-                            <h2 className="text-white">Fundraising</h2>
+                            <div className="text-white top-row-text">Fundraising</div>
                         </div>
                     </div>
                     <div className="row footer-sec-row">
                         <div className="col-md-6">
-                            <h5 className="sec-row-heading text-white">ABOUT</h5>
+                            <div className="sec-row-heading text-white">ABOUT</div>
                             <div className="noo-links">
                                 <div className="footer-link-container link text">
                                     <a href="#" className="link text-white">Our Values</a>
@@ -57,51 +57,51 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="col-md-3">
-                            <h5 className="sec-row-heading text-white">CONNECT WITH US</h5>
-                            <div className="noo-links">
+                            <h5 className="sec-row-heading text-white mt-1">CONNECT WITH US</h5>
+                            <div className="noo-links social-icon-container">
                                 <div className="footer-link-container link image">
                                     <a href="#" className="link-container">
                                         <img
                                             src={facebook}
                                             alt="" role="img" className="link image-social"/></a>
                                 </div>
-                                <div className="footer-link-container link image">
+                                <div className="footer-link-container link image ">
                                     <a href="https://www.instagram.com/chipotle/" target="_self"
                                        role="link" tabIndex="0" className="link-container">
                                         <img
                                             src={instagram}
                                             alt="" role="img"
-                                            className="link image-social"/></a>
+                                            className="link image-social "/></a>
                                 </div>
                                 <div className="footer-link-container link image">
                                     <a href="https://twitter.com/chipotletweets" className="link-container">
                                         <img
                                             src={twitter}
                                             alt="" role="img"
-                                            className="link image-social"/></a>
+                                            className="link image-social "/></a>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-3">
-                            <h5 className="sec-row-heading text-white">DOWNLOAD OUR APP</h5>
-                            <div className="noo-links d-inline-flex">
-                                <div className="footer-link-container link icon">
-                                    <a href="https://itunes.apple.com/us/app/chipotle/id327228455?mt=8"
-                                       className="link-container">
-                                        <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/apple-store.png"
-                                            alt="Apple App Store"
-                                            role="img"
-                                            className="link"/>
-                                    </a>
-                                </div>
-                                <div className="footer-link-container link icon mt-1">
-                                    <a href="#" className="link-container">
-                                        <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/google-play.png"
-                                            alt="Google Play" role="img" className="link"/>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-md-3">*/}
+                        {/*    <h5 className="sec-row-heading text-white">DOWNLOAD OUR APP</h5>*/}
+                        {/*    <div className="noo-links d-inline-flex">*/}
+                        {/*        <div className="footer-link-container link icon">*/}
+                        {/*            <a href="https://itunes.apple.com/us/app/chipotle/id327228455?mt=8"*/}
+                        {/*               className="link-container">*/}
+                        {/*                <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/apple-store.png"*/}
+                        {/*                    alt="Apple App Store"*/}
+                        {/*                    role="img"*/}
+                        {/*                    className="link"/>*/}
+                        {/*            </a>*/}
+                        {/*        </div>*/}
+                        {/*        <div className="footer-link-container link icon mt-1">*/}
+                        {/*            <a href="#" className="link-container">*/}
+                        {/*                <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/brand/icons/app/google-play.png"*/}
+                        {/*                    alt="Google Play" role="img" className="link"/>*/}
+                        {/*            </a>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
                     <div className="row footer-third-row">
                         <div className="country-area pointer">
@@ -109,26 +109,28 @@ export default function Footer() {
                                                                                       alt="United States"
                                                                                       aria-hidden="true" role="img"
                                                                                       className="flag"/>
-                            <div className="country homepage text-white">United States</div>
+                            <div className="country homepage text-white mt-0">United States</div>
                         </div>
                     </div>
-                    <div className="row footer-four-row">
-                        <div className="col-md-4">
-                            <p className="text-white">© 2022 EATOMG</p>
-                        </div>
-                        <div className="col-md-8">
-                            <div className="noo-links">
-                                <div className="footer-link-container link text text-end">
-                                    <a href="#" className="link-item text-white">Our Values</a>
-                                </div>
-                                <div className="footer-link-container link text text-end">
-                                    <a href="#" className="link-item text-white">News and Events</a>
-                                </div>
-                                <div className="footer-link-container link text text-end">
-                                    <a href="#" className="link-item text-white">Investors</a>
-                                </div>
-                                <div className="footer-link-container link text text-end">
-                                    <a href="#" className="link-item text-white">Privacy Policy</a>
+                    <div className="container-fluid">
+                        <div className="row footer-four-row align-items-center justify-content-center ">
+                            <div className="col-12">
+                                <p className="text-white">© 2022 EATOMG</p>
+                            </div>
+                            <div className="col-12 ">
+                                <div className="noo-links">
+                                    <div className="footer-link-container link text text-start">
+                                        <a href="#" className="link-item text-white">Our Values</a>
+                                    </div>
+                                    <div className="footer-link-container link text text-start">
+                                        <a href="#" className="link-item text-white">News and Events</a>
+                                    </div>
+                                    <div className="footer-link-container link text text-start">
+                                        <a href="#" className="link-item text-white">Investors</a>
+                                    </div>
+                                    <div className="footer-link-container link text text-start">
+                                        <a href="#" className="link-item text-white">Privacy Policy</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
