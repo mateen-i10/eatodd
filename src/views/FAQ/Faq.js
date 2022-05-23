@@ -29,7 +29,7 @@ const Reward = () => {
                       <p> OMG Event Clients will be grandfathered into annual memberships, and will be able to take advantage of wholesale pricing for 12 months after the event when they order off the OMG Food Menu</p>
                       </div>
                         <div className="ig">
-                           <img className="grp" style={{ width:'550px',height:'450px'}} src={win}/>
+                           <img className="grp" style={{ width:'550px', height:'450px'}} src={win}/>
                         </div>
                     </div>
                  </div>

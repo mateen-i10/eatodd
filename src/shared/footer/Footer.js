@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <div>
             <div className="container-fluid footer-1">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row footer-top-row">
                         <div className="col-md-3">
                             <h2 className="text-white">Contact Support</h2>
@@ -84,7 +84,7 @@ export default function Footer() {
                         </div>
                         <div className="col-md-3">
                             <h5 className="sec-row-heading text-white">DOWNLOAD OUR APP</h5>
-                            <div className="noo-links">
+                            <div className="noo-links d-inline-flex">
                                 <div className="footer-link-container link icon">
                                     <a href="https://itunes.apple.com/us/app/chipotle/id327228455?mt=8"
                                        className="link-container">

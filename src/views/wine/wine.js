@@ -21,7 +21,7 @@ const Reward = () => {
                    </div>
 
                    <div className="col-md-6">
-                       <img className="styl1" style={{ width: '100px',height:'20'}} src={styll}/>
+                       <img className="styl1" style={{ width: '100px', height:'20'}} src={styll}/>
                        <p className="content">The OMG Wine Club was created to make you say OMG at your savings!
                         We are the 1st wine club that was created to SAVE YOU MONEY!
                         We appreciate you and your loyalty to OMG. As our way to say THANK YOU,
@@ -42,10 +42,10 @@ const Reward = () => {
                              <div className="row">
                               <div className="col-md-6">
                               <a href="https://north-avenue.ninetofab.com/order-now/">
-                              <img className="gayms" style={{ width: '280px',height:'20'}} src={gaym}/></a>
+                              <img className="gayms" style={{ width: '280px', height:'20'}} src={gaym}/></a>
                               </div>
                               <div className="col-md-6">
-                                <img className="gwine1" style={{ width: '400px',height:'400px'}} src={wne}/>
+                                <img className="gwine1" style={{ width: '400px', height:'400px'}} src={wne}/>
                               </div>
                               </div>
                               <div className="row">
@@ -67,7 +67,7 @@ const Reward = () => {
                     <div className="col-md-4">
                        <h3 className="neww">OMG WINE CLUB</h3>
                        <h3 className="nm2">FEATURED WINES</h3>
-                       <img className="styl1" style={{ width: '100px',height:'20'}} src={styll}/>
+                       <img className="styl1" style={{ width: '100px', height:'20'}} src={styll}/>
                          <ul className="hero-style">
                          <li>
                          <a className="colr" href="#1641866197217-05ffc30d-7174">Sparkling</a>

@@ -218,15 +218,15 @@ const Order = () => {
                 </div>
             </div>
 
-            <div className="large-order-promo ">
-                <h1 className="title">CROWD PLEASERS</h1>
-                <div className="lg-order-container container-fluid ms-md-3 ms-0">
-                    <div className="row ms-lg-2 ms-1 me-lg-4 me-1 justify-content-center align-items-center align-self-center ">
-                        <div className="col-md-6 ">
+            <div className="large-order-promo container-fluid justify-content-center align-items-center">
+                <h1 className="title col-12 text-center">CROWD PLEASERS</h1>
+                <div className=" col-12 lg-order-container container-fluid ms-md-3 ms-0">
+                    <div className="row ms-lg-1 ms-1 me-lg-5 me-1 justify-content-center align-items-center align-self-center ">
+                        <div className="col-md-6">
                             <div className="large-order-card">
-                                <h1 className="cat-title">CATERING</h1>
+                                <h1 className="cat-title text-center ">CATERING</h1>
                                 <div className="details pt-2">
-                                    <ul className="inline-list" tabIndex='-1'>
+                                    <ul className="inline-list" >
                                         <li>From 6 to 200 people</li>
                                         <li>Starting at $15.00 / person</li>
                                         <li>Build Your Own</li>
@@ -236,8 +236,8 @@ const Order = () => {
                                     </ul>
                                 </div>
                                 <div className="type-ordering-primary">
-                                    <div className="cat-content">
-                                        <div className="cta-wrapper mb-1">Explore Catering
+                                    <div className="cat-content text-center">
+                                        <div className="cta-wrapper btn btn-primary mb-1">Explore Catering
                                         </div>
                                     </div>
                                 </div>
@@ -245,9 +245,9 @@ const Order = () => {
                         </div>
                         <div className="col-md-6 ">
                             <div className="large-order-card">
-                                <h1 className="cat-title">GROUP ORDER</h1>
+                                <h1 className="cat-title text-center">GROUP ORDER</h1>
                                 <div className="details pt-2">
-                                    <ul className="inline-list" tabIndex='-1'>
+                                    <ul className="inline-list" >
                                         <li>Invite up to 20 people</li>
                                         <li>Normal menu pricing</li>
                                         <li>Full menu</li>
@@ -256,8 +256,8 @@ const Order = () => {
                                         <li><b>Order and eat today</b></li>
                                     </ul>
                                 </div>
-                                <div className="type-ordering-primary">
-                                    <div className="cta-wrapper mb-1">Start Order</div>
+                                <div className="type-ordering-primary text-center">
+                                    <div className="cta-wrapper btn btn-primary mb-1 ">Start Order</div>
                                 </div>
                             </div>
                         </div>

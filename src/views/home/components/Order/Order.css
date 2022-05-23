@@ -161,65 +161,19 @@
 }
 
 .banner-subtitle{
-    color: #57ab00;
-/*    margin-bottom: 10px;*/
-/*    font-size: 1rem;*/
-/*    line-height: 20px;*/
-/*    padding-left: 10px;*/
-/*    font-weight: 400;*/
-/*    text-align: left;*/
-}
-/*.banner-subtitle >p {*/
-/*    font-size: 1rem;*/
-/*    line-height: 20px;*/
-/*    display: block;*/
-/*    margin-top: 7px;*/
-/*}*/
+    color: #57ab00; }
 
-/*@media screen and (max-width: 576px) {*/
-/*    .text-container {*/
-/*        margin-top: 0px;*/
-/*    }*/
-/*    .banner-subtitle >p {*/
-/*        font-size: 1rem;*/
-/*        line-height: 15px;*/
-/*        display: block;*/
-/*        margin-top: 12px;*/
-/*    }*/
-/*    .banner-title{*/
-/*        font-size: 1.2rem;*/
-/*        line-height: 1.2rem;*/
-/*        text-transform: uppercase;*/
-/*        font-weight: bolder;*/
-/*        text-align: left;*/
-/*        color: #57ab00;*/
-/*    }*/
-/*}*/
 .slot-wrapper{
-/*    margin-top: 12px;*/
-/*    line-height: 10px;*/
-/*    user-select: none;*/
-/*    cursor: pointer;*/
     text-transform: uppercase;
-/*    font-size: 0.7rem;*/
     font-weight: 600;
     color: white;
     background-color: #57ab00 !important;
-/*    width: 80%;*/
-/*    margin-left: 10px;*/
+
 }
-
-
 .img-container {
     margin-right: -9% !important;
     object-fit: cover;
-/*    border: none;*/
-/*    display: block;*/
-/*    height: 100%;*/
-/*    width: 50%;*/
     margin-left: 14px;
-/*    text-align: center;*/
-/*    min-height: 155px;*/
 }
 .featured-container-full{
     height: 200% ;
@@ -293,9 +247,6 @@
     object-fit: cover;
     z-index: 10;
 }
-/*.meal-info{*/
-/*    height: 10% !important;*/
-/*}*/
 .meal-name{
     background: linear-gradient(180deg,rgb(255 255 255) 320px,rgb(0 0 0 / 0%) 0);
     width: 100%;
@@ -311,95 +262,96 @@
 
 
 
-.large-order-promo{
-    background-color: rgb(255, 255, 255);
-    padding: 30px 0;
-    text-align: center;
-    max-width: 100%;
-}
-
-.title{
-    color: #57ab00;
-    font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-    text-transform: uppercase;
-    font-size: 2.2rem;
-    line-height: 1.5em;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-}
-.card-container{
-    width: 100%;
-    text-align: center;
-
-}
-.large-order-card {
-    background-image: url(https://www.chipotle.com/content/dam/poc/order/images/large-order-promo/A_Catering-Tile_570x190@2x.jpg);
-    background-size: 100% 190px;
-    min-height: 488px;
-    padding: 80px 0 0 0;
-    max-width: 90%;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 14px 2px rgb(0 0 0 / 20%);
-    background-color: rgb(255 255 255);
-    margin-bottom: 5%;
-    font-size: 1em;
-
-}
-.cat-title{
-    color: rgb(255 255 255);
-    font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 2.1rem;
-    line-height: 1em;
-
-}
-.details{
-    font-size: 17px;
-    line-height: 1.67;
-    padding-left: 1.4em;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: normal;
-    color: rgb(120 98 89);
-    word-wrap: break-word;
-    padding-top: 0.4em;
-    text-align: left;
-    margin-top: 60px;
-
-}
-
-.type-ordering-primary{
-    width: 241px;
-    margin-top: 1em;
-    padding: 0;
-    border: #57ab00;
-    background-color: #57ab00;
-    color: rgb(255 255 255);
-    height: 2em;
-    user-select: none;
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.cta-wrapper{
-    color: rgb(255 255 255);
-    user-select: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 12px;
-}
-@media only screen and (max-width: 578px) {
-    .lg-order-container{
-        width: 100vw;
+    .large-order-promo{
+        background-color: rgb(255, 255, 255);
+        padding: 30px 0;
+        /*text-align: center;*/
+        max-width: 100%;
     }
-}
+
+    .title{
+        color: #57ab00;
+        font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        text-transform: uppercase;
+        font-size: 2rem;
+        line-height: 1.5em;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+    .card-container{
+        width: 100%;
+    }
+    .large-order-card {
+        background-image: url(https://www.chipotle.com/content/dam/poc/order/images/large-order-promo/A_Catering-Tile_570x190@2x.jpg);
+        background-size: 100% 190px;
+        min-height:85%;
+        padding: 80px 0 0 0;
+        max-width: 96%;
+        background-repeat: no-repeat;
+        box-shadow: 0 0 14px 2px rgb(0 0 0 / 20%);
+        background-color: rgb(255 255 255);
+        margin-bottom: 5%;
+        font-size: 1rem;
+
+
+    }
+    .cat-title{
+        color: rgb(255 255 255);
+        font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 2.1rem;
+        line-height: 1em;
+
+    }
+    .details{
+        font-size: 14px;
+        line-height: 1.5;
+        padding-left: 1.4em;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: normal;
+        color: rgb(120 98 89);
+        word-wrap: break-word;
+        padding-top: 0.4em;
+        text-align: left;
+        margin-top: 65px;
+
+    }
+
+    .type-ordering-primary{
+        /*width: 45%;*/
+    /*    margin-top: 1em;*/
+    /*    padding: 0;*/
+    /*    border: #57ab00;*/
+    /*    background-color: #57ab00;*/
+        /*color: rgb(255 255 255) !important;*/
+        /*height: 4% !important;*/
+        user-select: none;
+        cursor: pointer;
+        /*display: inline-flex;*/
+        /*justify-content: center;*/
+        /*align-items: center;*/
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .cta-wrapper{
+        background-color: #57ab00 !important;
+        border: none !important;
+        border-radius: 0px;
+        color: rgb(255 255 255);
+        user-select: none;
+    /*    cursor: pointer;*/
+    /*    text-transform: uppercase;*/
+    /*    font-size: 1.2rem;*/
+        font-weight: 500;
+        text-align: center;
+        margin-top: 12px;
+    }
+    /*@media only screen and (max-width: 578px) {*/
+    /*    .lg-order-container{*/
+    /*        width: 100vw;*/
+    /*    }*/
+    /*}*/
