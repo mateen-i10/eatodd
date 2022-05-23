@@ -6,26 +6,26 @@ import {Link} from "react-router-dom"
 const Order = () => {
     return (
         <div className="order-main">
-            <div className="unlock-section d-flex flex-md-nowrap flex-wrap justify-content-center align-items-center gap-1">
-                <div className="unlock-img-section d-inline-flex align-items-center ms-2 w-sm-50">
-                    <img className="unlock-img d-md-inline d-none" src={icon} alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
-                    <h2 className="loyalty-text ">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</h2>
-                </div>
-                <div className="account d-inline-flex flex-nowrap me-md-2 w-sm-50">
-                    <div className="content d-inline-flex ">
-                        <div className="create-an-account">
-                            <div>Create an Account</div>
+            <div className="unlock-section container-fluid">
+                <div className="unlock-section-1 row fs-4 justify-content-center align-items-center g-md-0">
+                    <div className="unlock-img-section col-12 col-md-6 justify-content-md-end me-md-0 d-inline-flex mt-2 justify-content-center align-items-center mb-md-2" >
+                        <img className="unlock-img d-md-inline-flex d-none" src={icon} alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
+                        <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
+                    </div>
+                    <div className="account col-12 col-md-6 justify-content-md-start d-inline-flex justify-content-center align-items-center">
+                        <div className="content d-inline-flex mb-1">
+                            <div className="create-an-account">
+                                <div>Create an Account</div>
+                            </div>
+                            <div className="unlock-or">OR</div>
+                            <div className="sign-in fs-5">Sign In</div>
                         </div>
-                        <h2 className="unlock-or">OR</h2>
-                        <div className="sign-in">Sign In</div>
                     </div>
                 </div>
-
             </div>
-
             <div className="menu-list container-fluid pb-5 pt-5 ">
-                <div className="row ms-4 me-4">
-                    <div className="col-md-4 col-sm-5  col-5 top-level-menu">
+                <div className="row ms-0 me-1 ">
+                    <div className="col-md-4 col-sm-5  col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -39,11 +39,10 @@ const Order = () => {
                                         <div className="arrow-right"></div>
                                     </div>
                                 </div>
-
                             </div>
                         </Link>
                     </div>
-                    <div className="col-md-4 col-sm-5 col-5 top-level-menu">
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -59,7 +58,7 @@ const Order = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="col-md-4 col-sm-5 col-5 top-level-menu">
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -77,7 +76,7 @@ const Order = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="col-md-4 col-sm-5 col-5 top-level-menu">
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -95,7 +94,7 @@ const Order = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="col-md-4 col-sm-5 col-5 top-level-menu">
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -113,7 +112,7 @@ const Order = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="col-md-4 col-sm-5 col-5 top-level-menu">
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
@@ -135,33 +134,41 @@ const Order = () => {
                 </div>
             </div>
 
-            <div className="promo-banner d-md-inline-flex justify-content-around gap-3 m-3 " >
-                <div className="promo ">
-                    <div className="text-container">
-                        <h1 className="banner-title ms-2">CATER YOUR NEXT PARTY</h1>
-                        <div className="banner-subtitle">
-                            <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so your
-                                guests can enjoy taste and flavor that happens to be healthy!.</p>
-                        </div>
-                        <div className="slot-wrapper btn btn-primary">ORDER CATERING</div>
+            <div className="promo-banner container-fluid  " >
+                <div className="row align-items-center justify-content-center">
+                    <div className="promo col-12 col-md-5 container-fluid">
+                            <div className="row">
+                                <div className="text-container col-6">
+                                    <h1 className="banner-title  mt-1">CATER YOUR NEXT PARTY</h1>
+                                    <div className="banner-subtitle">
+                                        <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so your
+                                            guests can enjoy taste and flavor that happens to be healthy!.</p>
+                                    </div>
+                                    <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
 
+                                </div>
+                                <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
+                                     className="img-container col-6"/>
+                            </div>
                     </div>
-                    <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
-                        className="img-container"/>
-                </div>
-                <div className="promo ">
-                    <div className="text-container">
-                        <h1 className="banner-title ms-2">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
-                        <div className="banner-subtitle">
-                            <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club benefits
-                                include vendor pricing on all offered wines!</p>
-                        </div>
-                        <div className="slot-wrapper btn btn-primary">ORDER CATERING</div>
+                    <div className="promo col-12 col-md-5 container-fluid ">
+                            <div className="row ">
+                                <div className="text-container col-6">
+                                    <h1 className="banner-title mt-1">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
+                                    <div className="banner-subtitle">
+                                        <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club benefits
+                                            include vendor pricing on all offered wines!</p>
+                                    </div>
+                                    <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                </div>
+                                <video autoPlay="autoplay" muted="muted" loop="loop"
+                                       src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
+                                       className="img-container col-6"></video>
+                            </div>
                     </div>
-                    <video autoPlay="autoplay" muted="muted" loop="loop"
-                           src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
-                           className="img-container"></video>
+
                 </div>
+
             </div>
 
 
@@ -230,7 +237,7 @@ const Order = () => {
                                 </div>
                                 <div className="type-ordering-primary">
                                     <div className="cat-content">
-                                        <div className="cta-wrapper">Explore Catering
+                                        <div className="cta-wrapper mb-1">Explore Catering
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +257,7 @@ const Order = () => {
                                     </ul>
                                 </div>
                                 <div className="type-ordering-primary">
-                                    <div className="cta-wrapper">Start Order</div>
+                                    <div className="cta-wrapper mb-1">Start Order</div>
                                 </div>
                             </div>
                         </div>
