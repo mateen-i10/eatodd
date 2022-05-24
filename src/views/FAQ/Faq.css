@@ -1,0 +1,69 @@
+.btn{
+        padding: 17px 48px;
+        color: rgb(255, 255, 255);
+        background-color: #ad2118;
+        max-width: 100%;
+        display: inline-block;
+        border: 1px solid;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        text-align:center;
+        font-size: 30px;
+        font-family: Rubik;
+        position: relative;
+        transform: translate(-100%, -150%);
+        -ms-transform: translate(-50%, -50%);
+        left: 20%;
+
+}
+.btn:hover{
+  background-color:#000000;
+  border: 2px solid #000000;
+  opacity: 0.6
+}
+.container{
+  text-align:center;
+}
+.end{
+   background-color:#000000;
+   padding-top:75px;
+   padding-bottom:75px;
+   text-align:center;
+}
+.ig{
+   display:flex;
+}
+.hero-txt{
+  text-align:left;
+}
+.main{
+   display:flex;
+   padding-top:40px;
+   padding-bottom:40px;
+}
+.clubs{
+     padding-top:40px;
+     width: 100%;
+     height: 380px;
+}
+.txt{
+       font-size: 20px;
+       margin: 0 0 15px;
+       color: #444;
+       text-transform: none;
+       font-weight: bolder;
+       display: inline;
+       font-family: Rubik;
+       line-height: 30px;
+       letter-spacing: 1.1px;
+       margin-bottom: 25px;
+}
+.prg{
+     font-family: Rubik;
+     line-height: 26px;
+     font-weight: 400;
+     font-style: normal;
+     color: #898989;
+     font-size: 16px;
+}
+

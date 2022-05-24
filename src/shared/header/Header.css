@@ -2,10 +2,13 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    margin:0;
+    padding: 0;
 }
 /*=======================
 ******* Header 1  *******
 ===========================*/
+
 
 .header1{
     display: flex;
@@ -95,10 +98,11 @@ img{
     /*border: 2px solid brown;*/
     justify-content: space-around;
     align-items: center;
-    width:30%
+    width:25%
 }
 
 .head-sec-3 .eatOMG{
+    max-height: 50px;
     display: flex;
     background-color: #57ab00;
     width: 65%;
@@ -109,7 +113,7 @@ img{
     /*align-items: center;*/
     align-items: center;
     border-radius: 25px;
-
+    border: 1px solid #57ab00;
 }
 .head-sec-3 .eatOMG p{
     margin-top: 12px;
@@ -118,7 +122,7 @@ img{
 
 .head-sec-3 .eatOMG .seprator{
     margin-left: 1px;
-    margin-right: 2px;
+    margin-right: 10px;
     height: 21px;
     width: 1px;
     border-right: 1px solid rgb(255 255 255);
@@ -345,4 +349,11 @@ img{
 }
 .signtext{
     padding-top: 15px;
+}
+.menuitem:hover{
+    color: black;
+    text-decoration: underline;
+}
+a.active{
+    color: black;
 }

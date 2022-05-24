@@ -77,12 +77,22 @@ const Routes = [
       path: '/reward',
       component: lazy(() => import('../../views/Reward/Reward')),
       layout: 'BlankLayout'
-    },
+  },
   {
-    path: '/Nutrtion',
+    path: '/nutrtion',
     component: lazy(() => import('../../views/nutrtion/Nutrtion')),
     layout: 'BlankLayout'
   },
+  {
+        path: '/wine',
+        component: lazy(() => import('../../views/wine/wine')),
+        layout: 'BlankLayout'
+    },
+    {
+            path: '/Faq',
+            component: lazy(() => import('../../views/FAQ/Faq')),
+            layout: 'BlankLayout'
+        },
   {
     path: '/NutrtionIngredients',
     component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
