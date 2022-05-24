@@ -7,27 +7,27 @@
     overflow: hidden;
     padding: 0px
 }
-@media only screen and (max-width: 767px) {
-    .main-container{
-        margin: -13% -2.5% 0 !important;
-        overflow: hidden;
-        padding: 0px
-    }
-}
-@media only screen and (min-width: 375px) and (max-width: 475px) {
-    .main-container{
-        margin: -24% -4.9% 0 !important;
-        overflow: hidden;
-        padding: 0;
-    }
-}
-@media only screen and (min-width: 476px) and (max-width: 575px) {
-    .main-container{
-        margin: -19% -3.9% 0 !important;
-        overflow: hidden;
-        padding: 0;
-    }
-}
+/*@media only screen and (max-width: 767px) {*/
+/*    .main-container{*/
+/*        margin: -13% -2.5% 0 !important;*/
+/*        overflow: hidden;*/
+/*        padding: 0px*/
+/*    }*/
+/*}*/
+/*@media only screen and (min-width: 375px) and (max-width: 475px) {*/
+/*    .main-container{*/
+/*        margin: -24% -4.9% 0 !important;*/
+/*        overflow: hidden;*/
+/*        padding: 0;*/
+/*    }*/
+/*}*/
+/*@media only screen and (min-width: 476px) and (max-width: 575px) {*/
+/*    .main-container{*/
+/*        margin: -19% -3.9% 0 !important;*/
+/*        overflow: hidden;*/
+/*        padding: 0;*/
+/*    }*/
+/*}*/
 .FoodHasThePower__power{
 
     height: 100vh;
@@ -243,7 +243,7 @@ img {
     align-items: center;
     align-content: center;
     margin-top: 70px;
-    height: 100vh;
+    height: 100%;
 }
 .Realx3__headlines{
     /*height: 10em;*/
