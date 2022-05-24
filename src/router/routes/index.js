@@ -4,7 +4,7 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - EatOMG'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/WineClub'
 
 // ** Merge Routes
 const Routes = [
@@ -96,6 +96,11 @@ const Routes = [
   {
     path: '/NutrtionIngredients',
     component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
+    layout: 'BlankLayout'
+  },
+  {
+    path: '/WineClub',
+    component: lazy(() => import('../../views/WineShop')),
     layout: 'BlankLayout'
   }
 ]
