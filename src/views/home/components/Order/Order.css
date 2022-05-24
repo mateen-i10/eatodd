@@ -263,18 +263,18 @@
 
 
 
-    .large-order-promo{
-        background-color: rgb(255, 255, 255);
-        padding: 30px 0;
-        /*text-align: center;*/
-        max-width: 100%;
-    }
+.large-order-promo{
+    background-color: rgb(255, 255, 255);
+    padding: 30px 0;
+    /*text-align: center;*/
+    width: 100%;
+}
 
     .title{
         color: #57ab00;
         font-family: Trade Gothic LT Bold,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
         text-transform: uppercase;
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 1.5em;
         font-weight: 700;
         margin-bottom: 30px;

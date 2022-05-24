@@ -136,9 +136,9 @@ const Order = () => {
 
             <div className="promo-banner container-fluid  " >
                 <div className="row align-items-center justify-content-center">
-                    <div className="promo col-12 col-md-5 container-fluid">
+                    <div className="promo col-11 col-md-5 container-fluid">
                             <div className="row">
-                                <div className="text-container col-6">
+                                <div className="text-container col-md-6 col-6">
                                     <h1 className="banner-title  mt-1">CATER YOUR NEXT PARTY</h1>
                                     <div className="banner-subtitle">
                                         <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so your
@@ -148,12 +148,12 @@ const Order = () => {
 
                                 </div>
                                 <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
-                                     className="img-container col-6"/>
+                                     className="img-container col-md-6 col-6"/>
                             </div>
                     </div>
-                    <div className="promo col-12 col-md-5 container-fluid ">
+                    <div className="promo col-11 col-md-5 container-fluid ">
                             <div className="row ">
-                                <div className="text-container col-6">
+                                <div className="text-container col-md-6 col-6">
                                     <h1 className="banner-title mt-1">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
                                     <div className="banner-subtitle">
                                         <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club benefits
@@ -163,7 +163,7 @@ const Order = () => {
                                 </div>
                                 <video autoPlay="autoplay" muted="muted" loop="loop"
                                        src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
-                                       className="img-container col-6"></video>
+                                       className="img-container col-md-6 col-6"></video>
                             </div>
                     </div>
 
@@ -219,8 +219,8 @@ const Order = () => {
             </div>
 
             <div className="large-order-promo container-fluid justify-content-center align-items-center">
-                <div className="row">
-                    <h1 className="title col-12 text-center">CROWD PLEASERS</h1>
+                <div className="row w-100">
+                    <div className="title col-12 text-center">CROWD PLEASERS</div>
                     <div className=" col-11 lg-order-container container-fluid ">
                         <div className="row justify-content-center align-items-center ms-md-1 ms-0">
                             <div className="col-md-5">
