@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
-import img1 from '../../../assets/images/foodItems/bowl.jpg'
+import img1 from '../../../assets/images/my-images/background.jpg'
 import img2 from '../../../assets/images/foodItems/kebab.jpg'
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap'
 import {CheckCircle, Plus, Minus, List, MoreVertical, X} from 'react-feather'
 import './components/Plate.css'
+import FoodItemAdder from "./components/FoodItemAdder"
+import FoodCheckItem from "./components/FoodCheckItem"
 
-const OmgPlate = () => {
+const Plate = () => {
     const [basicModal, setBasicModal] = useState(false)
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [plantBased, SetplantBased] = useState(0)
@@ -14,7 +16,7 @@ const OmgPlate = () => {
 
     const [riceQuantity, SetriceQuantity] = useState('')
     const [increment, SetIncrement] = useState('')
-    const [counter, SetCounter] = useState(0)
+
     const [protienQuantity, SetProteinQuantity] = useState('')
 
     const protein = [
@@ -381,6 +383,14 @@ const OmgPlate = () => {
     const handleSideSectionClick = (e) => {
         if (e.title === 'Garlic Sauce') {
             SetIncrement('Garlic Sauce')
+        } else if (e.title === 'Baba Ghanoush') {
+            SetIncrement('Baba Ghanoush')
+        } else if (e.title === 'Red Hot Sauce') {
+            SetIncrement('Red Hot Sauce')
+        } else if (e.title === 'Hummus') {
+            SetIncrement('Hummus')
+        } else if (e.title === 'Zhoug Sauce') {
+            SetIncrement('Zhoug Sauce')
         }
     }
 
@@ -412,54 +422,9 @@ const OmgPlate = () => {
                     </div>
                 </div>
 
-                {protienQuantity === 'chicken Kebab' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
+                {protienQuantity.length !== 0 ? (
+                    <FoodCheckItem proteinName={protienQuantity} />
                 ) : []}
-
-                {protienQuantity === 'Lamb' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'Chicken Shawarma' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'MeatBalls' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:360, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'Fish' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:515, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'Falafel' ?  (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:360, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'Okra Stew' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {protienQuantity === 'Steak' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:515, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
 
                 <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
                     <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
@@ -588,26 +553,8 @@ const OmgPlate = () => {
 
                 <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Side</h1>
 
-                {increment === 'Garlic Sauce' ? (
-                    <div style={{position: 'absolute', marginTop:60, marginLeft:130}}>
-                        <div className='rounded-circle' style={{backgroundColor: '#b8a12c', color: 'white', maxWidth:30, marginLeft: 20, textAlign: 'center'}}>
-                            <label className='rounded-circle' style={{fontSize: 25}}>{counter}</label>
-                        </div>
-                        <div style={{display:'flex'}}>
-                            <div>
-                                <Minus onClick={() => {
-                                    SetCounter(counter - 1)
-                                    if (counter === 0) {
-                                        SetIncrement('')
-                                        SetCounter(0)
-                                    }
-                                }} className="rounded-circle" style={{backgroundColor:'white'}} />
-                            </div>
-                            <div style={{marginLeft:20}}>
-                                <Plus onClick={() => SetCounter(counter + 1)} className="rounded-circle" style={{backgroundColor:'white'}} />
-                            </div>
-                        </div>
-                    </div>
+                {increment.length !== 0 ? (
+                    <FoodItemAdder ResetFoodItemName={SetIncrement} FoodItemName={increment}/>
                 ) : []}
 
                 <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
@@ -659,4 +606,4 @@ const OmgPlate = () => {
     )
 }
 
-export default OmgPlate
+export default Plate
