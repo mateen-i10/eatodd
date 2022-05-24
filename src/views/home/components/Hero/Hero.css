@@ -1,15 +1,25 @@
-* {
+* *::before *::after {
     box-sizing: border-box;
+    margin: 0;
 }
 .hero-container {
     position:relative;
     top: 0;
     left: 0;
 }
+@media only screen and (min-width: 375px) and (max-width: 767px){
+    .hero-container{
+        margin: 0px !important;
+        overflow: hidden;
+        padding: 0;
+    }
+}
 
 .background-video {
-
-    height: 520px;
+    /*position: absolute;*/
+    /*top:0;*/
+    /*left: 0;*/
+    height: 80vh;
     width: 100% ;
     object-fit: cover;
     min-height: 450px;
@@ -30,19 +40,22 @@
     justify-content: center;
     align-content: center;
     color: white;
-    margin: 0 30%;
+    margin: 0 20%;
 }
 .banner-text {
     user-select: none;
     text-align: center;
+    color: red;
+    font-weight: bold;
     font-size: 20px;
     margin-top: 15%;
-    padding-bottom: 30px;
+    /*padding-bottom: 30px;*/
     line-height: 30px;
+    width: 100%;
 }
 .hero-button{
     cursor: pointer;
-    width: 300px;
+    width: 40%;
     background-color: rgb(173, 33, 24) !important;
     border: none;
 }
