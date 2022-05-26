@@ -1,0 +1,15 @@
+.header-offCanvas{
+    color: #a76721;
+    font-size: 18px;
+    font-weight: bolder;
+    text-decoration: underline;
+    margin-top: 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+.header-offCanvas:hover{
+    color: #e08d31;
+}
+

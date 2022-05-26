@@ -2,11 +2,14 @@ import React, {useState, useEffect} from 'react'
 import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import { NavLink, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+import FoodCart from "./components/FoodCart"
+import {ShoppingBag} from "react-feather"
 
 export default function Header () {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
+    const [openDrawer, SetOpenDrawer] = useState(false)
 
     const breakpoint = 1200
     useEffect(() => {
@@ -25,7 +28,7 @@ export default function Header () {
 
     if (width > breakpoint) {
         return (
-            <div className="navbar-full-container">
+            <div>
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo} />
@@ -33,31 +36,44 @@ export default function Header () {
                             <img className="usericon" src={usericon}/>
                             <b className="signtext">Sign In</b>
                         </div>
+
                     </div>
                     <div className="head-sec-2">
-                        <NavLink to="/"><h2 className="menuitem">ORDER</h2></NavLink>
-                        <NavLink to="/menu"><h2 className="menuitem">CATERING</h2></NavLink>
-                        <NavLink to="/"><h2 className="menuitem">OMG WINE</h2></NavLink>
-                        <NavLink to="/reward"><h2 className="menuitem">REWARDS</h2></NavLink>
-                        <NavLink to="/ourvalues"><h2 className="menuitem">OUR VALUES</h2></NavLink>
-                        <NavLink to="/nutrtion"><h2 className="menuitem">NUTRITION</h2></NavLink>
+                        <Link to="/home"><h2>ORDER</h2></Link>
+                        <Link to="/about"><h2>CATERING</h2></Link>
+                        <Link to="/gallery"><h2>REWARDS</h2></Link>
+                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
+                        <Link to="/"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="head-sec-3">
                         <div className="eatOMG">
-                            <i style={{paddingRight:'10px'}} className="ri-checkbox-blank-circle-fill"></i>
+                            <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            <div style={{height:'65px'}}>
-                                <p>PICKUP FROM Address..</p>
-                            </div>
+                            <p>OMG WINE CLUB</p>
                         </div>
-                        <i className="ri-shopping-bag-line cart"></i>
+
+                        <ShoppingBag onClick={() => {
+                                SetOpenDrawer(true)
+                        }} />
+
+                        {openDrawer && (<div>
+                            <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer} />
+                        </div>
+                            )}
+
+                        {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
+                        {/*    <div>*/}
+                        {/*        <FoodCart setCanvasPlacement='start' setCanvasOpen={true} />*/}
+                        {/*    </div>*/}
+                        {/*)}></i>*/}
                     </div>
                 </header>
             </div>
         )
     }
+
     return (
-        <div className="navbar-full-container g-0">
+        <div>
             <header className="header2">
                 <div className="logo-toggle">
                     <button  className="nav-toggle" onClick={ () => setIsOpen(!isOpen)} aria-label="toggle navigation">
@@ -69,7 +85,6 @@ export default function Header () {
                     </div>
                 </div>
 
-
                 <div className="eatOMG">
                     <i className="ri-checkbox-blank-circle-fill"></i>
                     <span className="seprator"></span>
@@ -80,12 +95,11 @@ export default function Header () {
 
                 <nav className="nav">
                     <div className="nav-sec-1">
-                        <NavLink to="/home"><h2 className="menuitem">ORDER</h2></NavLink>
-                        <NavLink to="/menu"><h2 className="menuitem">CATERING</h2></NavLink>
-                        <NavLink to="/menu"><h2 className="menuitem">OMG WINE</h2></NavLink>
-                        <NavLink to="/reward"><h2 className="menuitem">REWARDS</h2></NavLink>
-                        <NavLink to="/ourvalues"><h2 className="menuitem">OUR VALUES</h2></NavLink>
-                        <NavLink to="/nutrtion"><h2 className="menuitem">NUTRITION</h2></NavLink>
+                        <Link to="/home"><h2>ORDER</h2></Link>
+                        <Link to="/about"><h2>CATERING</h2></Link>
+                        <Link to="/gallery"><h2>REWARDS</h2></Link>
+                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
+                        <Link to="/"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">
