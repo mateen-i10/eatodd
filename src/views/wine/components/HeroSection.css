@@ -3,16 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
 }
-#faqs-page {
-    background-image: url("/src/assets/images/pages/wine/about/kamil-unsplash.jpg");
-}
-.faq-page{
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 300;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: rgb(40 48 52);
-}
+
 .page-hero-section {
     width: 100%;
     background-repeat: no-repeat;
@@ -72,52 +63,4 @@ h2 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #57ab00 !important;
-}
-.wide-100 {
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-@media (max-width: 767px) {
-    .wide-100 {
-        padding-top: 80px;
-        padding-bottom: 80px;
-    }
-}
-@media (min-width: 321px) and (max-width: 413.95px) {
-    .questions-wrapper, .faqs-1-questions {
-        padding: 0;
-    }
-}
-.question {
-    margin-bottom: 30px;
-}
-.h5-xs{
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    color: #57ab00;
-    line-height: 1.6rem;
-}
-@media (min-width: 321px) and (max-width: 413.95px) {
-    h5.h5-xs {
-        font-size: 1.4rem;
-    }
-}
-@media (min-width: 321px) and (max-width: 413.95px) {
-    .question h5 {
-        margin-bottom: 1.4rem;
-    }
-}
-p {
-    font-size: 1.0625rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-.more-questions-btn {
-    margin-top: 35px;
-}
-.btn-green {
-    color: rgb(255 255 255)!important;
-    background-color: #57ab00 !important;
-    border-color: #57ab00 !important;
 }

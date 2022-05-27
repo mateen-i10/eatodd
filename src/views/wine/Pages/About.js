@@ -20,7 +20,7 @@ const About = () => {
                                                     <nav aria-label="breadcrumb">
                                                         <ol className="breadcrumb d-flex flex-wrap">
                                                             <li className="breadcrumb-item d-flex"><a
-                                                                href="demo-1.html">wine</a></li>
+                                                                href="#">wine</a></li>
                                                             <li className="breadcrumb-item active"
                                                                 aria-current="page">About Us
                                                             </li>
@@ -85,7 +85,7 @@ const About = () => {
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
                             <div className="col-lg-8 ">
                                 <div className="about-1-txt text-center">
-                                    <h2><span className="green-color">Burgers…</span> what else?</h2>
+                                    <h2><span className="green-color">omg…</span> what else?</h2>
                                     <p className="p-xl grey-color">Porta semper lacus cursus, feugiat primis ultrice a
                                         ligula risus auctor an
                                         tempus feugiat dolor lacinia cubilia curae integer orci congue and metus
@@ -99,49 +99,49 @@ const About = () => {
                                                 <div className="abox-1 mb-40">
 
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-burger"></span></div>
-                                                    <h6 className="h6-xl">Burgers</h6>
+                                                        className="fas fa-wine-bottle"></span></div>
+                                                    <h6 className="h6-xl">Wine</h6>
 
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-french-fries"></span></div>
-                                                    <h6 className="h6-xl">Fries</h6>
+                                                        className="fas fa-wine-glass"></span></div>
+                                                    <h6 className="h6-xl">Premium</h6>
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-fried-chicken"></span></div>
-                                                    <h6 className="h6-xl">Chicken</h6>
+                                                        className="fas fa-wine-glass-alt"></span></div>
+                                                    <h6 className="h6-xl">Party Pack</h6>
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-salad"></span></div>
-                                                    <h6 className="h6-xl">Salads</h6>
+                                                        className="fas fa-wine-glass-alt"></span></div>
+                                                    <h6 className="h6-xl">Candle Light</h6>
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-donut"></span></div>
+                                                        className="fas fa-wine-glass-alt"></span></div>
                                                     <h6 className="h6-xl">Desserts</h6>
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
                                                     <div className="abox-1-ico grey-color"><span
-                                                        className="flaticon-drinks"></span></div>
+                                                        className="fas fa-wine-bottle"></span></div>
                                                     <h6 className="h6-xl">Drinks</h6>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                        <a href="menu-3.html" className="btn btn-md btn-green tra-red-hover">Explore Full
+                                        <a href="#" className="btn btn-md btn-green tra-red-hover">Explore Full
                                         Menu</a>
                                 </div>
                             </div>
@@ -160,12 +160,12 @@ const About = () => {
                                         tempus feugiat dolor lacinia cubilia a curae integer orci congue and metus
                                         mollislorem primis
                                     </p>
-                                    <img className="img-fluid" src="images/img-10.jpg" alt="about-image"/>
+                                    <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-430.jpg").default} alt="about-image"/>
                                 </div>
                             </div>
                             <div className="col-md-5 col-lg-5">
                                 <div className="about-4-img mb-40">
-                                    <img className="img-fluid" src="images/img-15.jpg" alt="about-image"/>
+                                    <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/aesop-wines-unsplash-450.jpg").default} alt="about-image"/>
                                         <p className="p-md grey-color">Porta semper lacus cursus, feugiat primis ultrice
                                             and ligula risus auctor orci
                                             tempus feugiat dolor lacinia cubilia integer
@@ -182,10 +182,9 @@ const About = () => {
                             <div className="col-md-4 col-lg-3">
                                 <div id="pb-1-1" className="pbox-1 bg-fixed">
                                     <div className="pbox-1-txt white-color">
-
                                         <h3 className="h3-sm">Careers</h3>
                                         <p className="p-lg">Want to join our team?</p>
-                                        <a href="team.html" className="btn btn-green tra-white-hover">Learn More</a>
+                                        <a href="#" className="btn btn-green tra-white-hover">Learn More</a>
 
                                     </div>
                                 </div>
@@ -196,7 +195,7 @@ const About = () => {
 
                                         <h3 className="h3-sm">Order Now</h3>
                                         <p className="p-lg">Enjoy Testo Burgers at home</p>
-                                        <a href="menu-3.html" className="btn btn-green tra-white-hover">Learn More</a>
+                                        <a href="#" className="btn btn-green tra-white-hover">Learn More</a>
 
                                     </div>
                                 </div>
@@ -207,7 +206,7 @@ const About = () => {
 
                                         <h3 className="h3-sm">Gift Cards</h3>
                                         <p className="p-lg">Give the gift of Yummy!</p>
-                                        <a href="gift-cards.html" className="btn btn-green tra-white-hover">Learn More</a>
+                                        <a href="#" className="btn btn-green tra-white-hover">Learn More</a>
 
                                     </div>
                                 </div>
@@ -235,12 +234,12 @@ const About = () => {
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src="images/blog/img-01.jpg"
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}
                                                  alt="blog-post-image"/>
                                         </div>
                                     </div>
                                     <div className="blog-post-txt">
-                                        <h5 className="h5-lg"><a href="single-post.html">Quaerat neque purus ipsum neque
+                                        <h5 className="h5-lg"><a href="#">Quaerat neque purus ipsum neque
                                             dolor</a></h5>
                                         <p className="grey-color">Quaerat neque purus ipsum neque dolor primis tempus
                                             impedit</p>
@@ -251,12 +250,12 @@ const About = () => {
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src="images/blog/img-02.jpg"
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}
                                                  alt="blog-post-image" />
                                         </div>
                                     </div>
                                     <div className="blog-post-txt">
-                                        <h5 className="h5-lg"><a href="single-post.html">Tempor blandit sapien at
+                                        <h5 className="h5-lg"><a href="#">Tempor blandit sapien at
                                             gravida donec ipsum</a></h5>
                                         <p className="grey-color">Neque dolor primis libero tempus impedit tempor sapien
                                             gravida</p>
@@ -267,12 +266,12 @@ const About = () => {
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src="images/blog/img-03.jpg"
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}
                                                  alt="blog-post-image"/>
                                         </div>
                                     </div>
                                     <div className="blog-post-txt">
-                                        <h5 className="h5-lg"><a href="single-post.html">Neque dolor primis a libero
+                                        <h5 className="h5-lg"><a href="#">Neque dolor primis a libero
                                             tempus a tempor</a></h5>
                                         <p className="grey-color">Impedit tempor at donec sapien ipsum a neque dolor
                                             primis libero</p>
