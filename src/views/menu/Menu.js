@@ -1,15 +1,16 @@
-import {Card, InputGroup, Input, Button} from 'reactstrap'
+import {Card, InputGroup, Input, Button, Tooltip} from 'reactstrap'
 import {ArrowRight} from "react-feather"
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import logo from './components/assests/images/bbb.png'
 import food from './components/assests/images/bbb-2.png'
-import logo2 from './components/assests/images/bbb-3.gif'
 import './components/stylesheet/Menu.css'
 import Link from "react-router-dom/es/Link"
-import React from "react"
+import React, {useState} from "react"
 
 const Menu = () => {
+    const [tooltipOpen, setTooltipOpen] = useState(false)
+
     return (
         <div>
             <Header/>
@@ -30,74 +31,88 @@ const Menu = () => {
                     </ul>
                 </Card>
 
-                <div className="container-fluid" style={{backgroundColor:'white', marginTop: -30}}>
-                    <div className="row" style={{marginLeft: 50, marginRight: 100, paddingTop: 50, paddingBottom: 30}}>
-                        <div className="col-sm">
-                            <img src = {logo} width='350' height='270' align='right' />
-                        </div>
-                        <div className="col-sm">
-                            <div>
-                                <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BURRITOS</h1>
-                                <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 350, letterSpacing: -2, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BY THE BOX</h1>
+                <section id="banner-3" className="bg-yellow banner-section division">
+                    <div className="container">
+                        <div className="row d-flex align-items-center">
+
+                            <div className="col-md-7 col-lg-6">
+                                <div className="banner-3-img" style={{textAlign:'left', paddingLeft:135}}>
+                                    <div>
+                                        <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BURRITOS</h1>
+                                        <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 350, letterSpacing: -2, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BY THE BOX</h1>
+                                        <h6 style={{color:'#57ab00', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 6 people</h6>
+                                        <Link to = "/EventDetails">
+                                            <button type="button" className="col-md-10 btn but" id='condition' style={{height:50, marginBottom: 30, marginTop: 30}}>
+                                                START A BURRITO BOX
+                                                <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
+                                            </button>
+                                        </Link>
+                                        <div style={{ color: '#786259', fontSize:10, fontFamily: 'Helvetica' }}>
+                                            <p>Please place your order at least 24 hours in advance, so we can coordinate making it along with all of the food we prepare fresh every day.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h6 style={{ color:'#9d8d80', fontSize:16, fontFamily: 'Helvetica' }}>Minimum 6 people</h6>
-                                <h6 style={{ color:'#57ab00', fontSize:12, marginTop: 40, fontFamily: 'Helvetica' }}>/persons*</h6>
+
+                            <div className="col-md-5 col-lg-6">
+                                <div id='ControlledExample' style={{paddingLeft :100}}>
+                                    <img src = {logo} width='350' height='270' />
+                                </div>
+                                <Tooltip
+                                    placement='top'
+                                    isOpen={tooltipOpen}
+                                    target='condition'
+                                    style={{backgroundColor:'white'}}
+                                    toggle={() => setTooltipOpen(!tooltipOpen)}
+                                >
+                                    <div style={{color: '#736357', fontSize: 12}}>
+                                        <p>*Pricing & availability vary by location.</p>
+                                    </div>
+                                </Tooltip>
                             </div>
-                            <Link to = "/EventDetails">
-                                <button type="button" className="col-sm-10 btn but" style={{height:50}}>
-                                    START A BURRITO BOX
-                                    <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
-                                </button>
-                            </Link>
-                            <h6 style={{ color:'#736357', marginTop: 20, fontSize:12 }}>*Pricing & availability vary by location.</h6>
-                        </div>
-                        <div className="col-sm-3" style={{ color: '#786259', marginTop: 200, fontSize:10, align:'left', fontFamily: 'Helvetica', marginLeft: -70 }}>
-                            <p>Please place your order at least 24 hours in advance, so we can coordinate making it along with all of the food we prepare fresh every day.</p>
+
                         </div>
                     </div>
-                </div>
+                </section>
 
+                <section id="banner-3" className="bg-yellow banner-section division" style={{backgroundColor: '#f2f2f1'}}>
+                    <div className="container">
+                        <div className="row d-flex align-items-center">
 
-                <div className="container-fluid" style={{backgroundColor: '#f2f2f1'}}>
-                    <div className="row" style={{paddingTop:30, paddingBottom: 30, marginLeft: 100, marginRight:100}}>
-                        <div className="col-sm align-right">
-                            <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>BUILD</h1>
-                            <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>YOUR</h1>
-                            <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>OWN</h1>
-                            <h6 style={{color:'#57ab00', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 10 people</h6>
-                        </div>
-                        <div className="col-sm-2" style={{ marginTop: 150, color: '#736357', fontSize: 12, marginLeft:-60 }}>
-                            <p>*Pricing & availability vary by location.</p>
-                        </div>
-                        <div className="col-sm">
-                            <img src = {food} width='380' height='200' />
-                            <button type="button" className="col-sm-11 btn but" style={{height:50, marginBottom: 30, marginTop: 30}}>
-                                START A BURRITO BOX
-                                <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
-                            </button>
-                            <h6 style={{color:'#786259', fontSize:10}}>Please place your order at least 24 hours in advance, so we can coordinate making it along with all of the food we prepare fresh every day.</h6>
+                            <div className="col-md-7 col-lg-6" style={{border:'solid', borderLeft:0, borderTop:0, borderBottom:0, borderColor:'#57ab00'}}>
+                                <div id='ControlledExample' style={{textAlign:'center'}}>
+                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>BUILD</h1>
+                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>YOUR</h1>
+                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>OWN</h1>
+                                    <h6 style={{color:'#57ab00', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 10 people</h6>
+                                </div>
+                            </div>
+
+                            <div className="col-md-5 col-lg-6">
+                                <div className="banner-3-img" style={{textAlign:'center'}}>
+                                    <img src = {food} width='400' height='250' style={{marginLeft:80}} />
+                                    <button type="button" className="col-md-8 btn but" id='condition' style={{height:50, marginBottom: 30, marginTop: 30}}>
+                                        START A BURRITO BOX
+                                        <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
+                                    </button>
+                                    <h6 style={{color:'#786259', fontSize:10}}>Please place your order at least 24 hours in advance, so we can<br /> coordinate making it along with all of the food we prepare fresh every day.</h6>
+                                </div>
+                                <Tooltip
+                                    placement='top'
+                                    isOpen={tooltipOpen}
+                                    target='condition'
+                                    style={{backgroundColor:'white'}}
+                                    toggle={() => setTooltipOpen(!tooltipOpen)}
+                                >
+                                    <div style={{color: '#736357', fontSize: 12}}>
+                                        <p>*Pricing & availability vary by location.</p>
+                                    </div>
+                                </Tooltip>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-
-                <div className="container-fluid" style={{backgroundColor: '#e8e8e5'}}>
-                    <div className="row" style={{paddingTop:30, paddingBottom: 30, paddingLeft:70, marginLeft: 100, marginRight:100}}>
-                        <div className="col-sm align-right">
-                            <h1 style={{color:'#57ab00', fontSize: 60, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700, width: '100%'}}>CHIPS & DIPS</h1>
-                            <h6 style={{color:'#786259', fontFamily: 'Helvetica,Arial,sans-serif', marginTop:10}}>Serves 10-15</h6>
-                            <h6 style={{color:'#736357', fontFamily: 'Helvetica,Arial,sans-serif', marginTop:30}}>$*</h6>
-                            <button type="button" className="col-sm-11 btn but" style={{width:'50%', height:50, marginTop: 30}}>
-                                GET CHIPS AND DIPS
-                                <ArrowRight style={{ marginTop: -3, marginLeft: 6, color: 'white'}} size={16} />
-                            </button>
-                            <p style={{marginTop:20, fontSize:12}}>*Pricing & availability vary by location.</p>
-                        </div>
-                        <div className="col-sm">
-                            <img src = {logo2} width='400' height='350' align='center' />
-                        </div>
-                    </div>
-                </div>
+                </section>
 
                 <div className="container-fluid">
                     <div className="row" style={{textAlign:'center', paddingTop: 120}}>

@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import img1 from '../../../assets/images/my-images/background.jpg'
 import img2 from '../../../assets/images/foodItems/kebab.jpg'
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap'
-import {CheckCircle, Plus, Minus, List, MoreVertical, X} from 'react-feather'
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Tooltip} from 'reactstrap'
+import {CheckCircle, Plus, Minus, List, MoreVertical, X, ArrowRight} from 'react-feather'
 import './components/Plate.css'
 import FoodItemAdder from "./components/FoodItemAdder"
 import FoodCheckItem from "./components/FoodCheckItem"
@@ -397,16 +397,29 @@ const Plate = () => {
     return (
         <div style={{backgroundColor: 'white'}}>
             <div className="container">
-                <div className="row" style={{marginBottom: 60}}>
-                    <div className="col" style={{marginTop:30}}>
-                        <img src={img1} width={500} height={300}/>
+                <section id="banner-3" className="bg-yellow banner-section division" style={{paddingTop:30}}>
+                    <div className="container">
+                        <div className="row d-flex align-items-center">
+
+                            <div className="col-md-7 col-lg-6">
+                                <div className="banner-3-img" style={{textAlign:'left'}}>
+                                    <div style={{marginLeft:30}}>
+                                        <img src={img1} width={500} height={300}/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-md-5 col-lg-6">
+                                <div style={{paddingLeft :50}}>
+                                    <h5 className='intro-para' style={{ color: '#786259'}}>Build your</h5>
+                                    <h1 className='intro-para' style={{fontSize:'4em', color: '#451400', marginTop:-2}}>Burritto</h1>
+                                    <p style={{color: '#451400'}}>Your choice of freshly grilled meat or sofritas served in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese.</p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div className="col intro-para-container">
-                        <h5 className='intro-para' style={{ color: '#786259'}}>Build your</h5>
-                        <h1 className='intro-para' style={{fontSize:'4em', color: '#451400', marginTop:-2}}>Burritto</h1>
-                        <p style={{color: '#451400'}}>Your choice of freshly grilled meat or sofritas served in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese.</p>
-                    </div>
-                </div>
+                </section>
 
                 <hr style={{color:'black'}} />
 
@@ -417,7 +430,7 @@ const Plate = () => {
                             <h6>Choose up to two</h6>
                         </div>
                         <div className="col" style={{textAlign:'right'}}>
-                            <h5 style={{textTransform: 'uppercase', color: '#a77821', fontWeight: 'bolder'}}>Nutrtion Preferences <List onClick={() => setBasicModal((!basicModal))} color='#a77821' /></h5>
+                            <h5 style={{textTransform: 'uppercase', color: '#a77821', fontWeight: 'bolder'}}>Nutrtion Preferences <a href="#"><List onClick={() => setBasicModal((!basicModal))} color='#a77821' /></a></h5>
                         </div>
                     </div>
                 </div>
