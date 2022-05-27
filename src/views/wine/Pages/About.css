@@ -1,0 +1,358 @@
+* ::before ::after{
+    margin:0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.about-page{
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(40 48 52);
+}
+#about-page {
+    background-image:url("/src/assets/images/pages/wine/about/nadya-filatova-unsplash.jpg");
+}
+.page-hero-section {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll!important;
+    padding-top: 110px;
+    padding-bottom: 120px;
+}
+.breadcrumb {
+    padding: 0;
+    margin-bottom: 0;
+    background-color: rgb(0 0 0 / 0%);
+    border-radius: 0;
+    width: 100%;
+    list-style: none;
+}
+.breadcrumb-item a {
+    color: rgb(9, 11, 12) !important;
+    text-decoration: underline;
+}
+.breadcrumb-item {
+    color: rgb(9, 11, 12) !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    /*font-size: 1.3rem;*/
+    display: inline-block;
+    padding-right: 3px;
+    /*color: rgb(9, 11, 12) !important;*/
+    content: "" !important;
+}
+h2 {
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.3;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+.page-hero-section h2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #57ab00 !important;
+}
+.wide-60 {
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+.about-section {
+    background-color: #f7fafa;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.about-3-img {
+}
+.about-3-txt {
+    padding: 0 30px;
+}
+.about-3-txt h2{
+    margin-bottom: 25px;
+    font-size: 2.65rem;
+    letter-spacing: 0;
+    font-width: 700 !important;
+}
+h2.h2-sm {
+    font-size: 3.25rem;
+    color: #57ab00;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    .about-3-txt h2, .about-4-txt h2, .about-5-txt h2, .about-6-txt h2 {
+        margin-bottom: 20px;
+    }
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    h2.h2-sm {
+        font-size: 2rem;
+    }
+}
+p.p-md {
+    font-size: 1.125rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    p.p-md {
+        font-size: 1.1rem;
+    }
+}
+.green-color{
+    color: #57ab00;
+}
+
+/*.p-md{*/
+/*    font-size: 1.15rem;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+.bg-fixed, .bg-scroll {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.wide-100 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.about-1-txt h2 {
+    font-size: 3.25rem;
+    padding: 0;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.about-1-txt p, .about-2-txt p {
+    padding: 0 5%;
+    margin-bottom: 45px;
+}
+p.p-xl {
+    font-size: 1.25rem;
+}
+.abox-1-wrapper {
+    padding: 0;
+    margin-bottom: 10px;
+}
+.abox-1-ico{
+    font-size: 1.9rem;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    .abox-1-wrapper {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+}
+.grey-color {
+    color: rgb(117 117 117);
+}
+/*.flaticon-burger:before {*/
+/*    content: "\f108";*/
+/*    font-family: Flaticon;*/
+/*    line-height: 1!important;*/
+/*    font-style: normal;*/
+/*    margin-left: 0;*/
+/*}*/
+.abox-1 h6, .abox-2 h6, .abox-3 h6 {
+    line-height: 1;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+h6.h6-xl {
+    font-size: 1.3rem;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    h6.h6-xl {
+        font-size: 1.2rem;
+    }
+}
+h1, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.3;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+.btn.btn-md {
+    font-size: 17px;
+    padding: 15px 38px;
+}
+.btn-green{
+    color: rgb(255 255 255)!important;
+    background-color: #57ab00 !important;
+    border-color: #57ab00 !important;
+}
+.btn-green:hover{
+    color: #57ab00;
+    background-color: transparent;
+}
+.about-4-txt {
+    padding: 50px 30px 0;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.h2-sm {
+    font-size: 2rem;
+}
+.about-4-txt p {
+    margin-bottom: 40px;
+}
+p.p-md {
+    font-size: 1.125rem;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    p.p-md {
+        font-size: 1.1rem;
+    }
+}
+.about-4-img p {
+    padding-left: 20px;
+    padding-right: 30%;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    .about-4-img p {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 30px;
+    }
+}
+.pbox-1 {
+    text-align: center;
+}
+@media (min-width: 992px) and (max-width: 1199.95px)  {
+    .pbox-1 {
+        padding-top: 15px;
+    }
+}
+#pb-1-1 {
+    margin-bottom: 30px;
+    /*background-image: url("none");*/
+    }
+@media (min-width: 321px) and (max-width: 413.95px) {
+    #pb-1-1, #pb-1-2 {
+        margin-bottom: 30px;
+    }
+}
+.pbox-1-txt {
+    padding: 50px 0;
+    border-radius: 0 0 6px 6px;
+    background-image: -webkit-linear-gradient(bottom, rgb(0 0 0 / 80%), rgb(0 0 0 / 2%));
+
+}
+.pbox-1-txt p {
+    font-weight: 400;
+}
+h3.h3-sm{
+    font-size: 2.62rem;
+    color: #57ab00 !important;
+}
+p.p-lg {
+    font-size: 1.1875rem;
+}
+#pb-1-1 {
+    background-image: url("/src/assets/images/pages/wine/about/caroline-attwood-unsplash-700.jpg");
+    margin-bottom: 30px;
+}
+#pb-1-2 {
+     background-image: url("/src/assets/images/pages/wine/about/tim-collins-unsplash-800.jpg");
+
+    margin-bottom: 30px;
+}
+#pb-1-3 {
+    margin-bottom: 30px;
+    background-image: url("/src/assets/images/pages/wine/about/chuttersnap-unsplash-700.jpg");
+
+}
+.mb-60 {
+    margin-bottom: 60px;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    .section-title.mb-60 {
+        margin-bottom: 45px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199.95px) {
+    h2.h2-xl {
+        font-size: 3.35rem;
+    }
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    h2.h2-xl {
+        font-size: 2.3rem;
+    }
+}
+.h2-xl{
+    color: #57ab00;
+}
+.wide-60 {
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+.section-title {
+    position: relative;
+}
+.h2-xl {
+    font-size: 3.75rem;
+}
+.section-title p {
+    color: rgb(136 136 136);
+    padding: 0 18%;
+    margin: 12px 0 0;
+}
+.blog-post {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.hover-overlay {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+hover-overlay img {
+    transform: scale(1);
+    overflow: hidden;
+    transition: transform 400ms;
+}
+.blog-post-txt {
+    padding: 0 8%;
+}
+.blog-post-txt h5 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    h5.h5-lg {
+        font-size: 1.6rem;
+    }
+}
+.h5-lg {
+    font-size: 1.6rem;
+}
+a {
+    color: rgb(51 51 51);
+    text-decoration: none;
+    transition: all 400ms ease-in-out;
+}
+@media (min-width: 321px) and (max-width: 413.95px) {
+    p {
+        font-size: 1.0625rem;
+    }
+}
+
+.blog-post-txt p {
+    font-size: 0.975rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}

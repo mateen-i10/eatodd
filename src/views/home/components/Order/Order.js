@@ -23,6 +23,7 @@ const Order = () => {
                     </div>
                 </div>
             </div>
+
             <div className="menu-list container-fluid pb-5 pt-5 ">
                 <div className="row ms-0 me-1 ">
                     <div className="col-md-4 col-sm-5  col-6 top-level-menu">
@@ -170,7 +171,6 @@ const Order = () => {
                 </div>
 
             </div>
-
 
             <div className="featured-container-full">
                 <div className="featured-container container ">
