@@ -36,6 +36,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+
                 <section id="about-3" className="wide-60 about-section division">
                     <div className="container-fluid ">
                         <div className="row d-flex align-items-center justify-content-center ">
@@ -47,7 +48,7 @@ const About = () => {
                             <div className="col-md-7 col-lg-5">
                                 <div className="about-3-txt mb-40">
 
-                                    <h2 className="h2-sm mb-lg-3 mt-1">Nothing brings people together like a good burger</h2>
+                                    <h2 className="h2-sm mb-lg-3 mt-1">Nothing brings people together like a good Wine</h2>
                                     <p className="p-md">The OMG Wine Club was created to make you say OMG at your savings!
                                         We are the 1st wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty to OMG.
                                         As our way to say THANK YOU, we are extending you the opportunity to purchase your favorite wines AT COST!
@@ -154,7 +155,7 @@ const About = () => {
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
                             <div className="col-md-7 col-lg-5">
                                 <div className="about-4-txt mb-40">
-                                    <h2 className="h2-sm">Discover the new taste of the burger</h2>
+                                    <h2 className="h2-sm">Discover the new taste of the Wine</h2>
                                     <p className="p-md grey-color">Porta semper lacus cursus, feugiat primis ultrice and
                                         ligula risus auctor an
                                         tempus feugiat dolor lacinia cubilia a curae integer orci congue and metus
@@ -194,7 +195,7 @@ const About = () => {
                                     <div className="pbox-1-txt white-color">
 
                                         <h3 className="h3-sm">Order Now</h3>
-                                        <p className="p-lg">Enjoy Testo Burgers at home</p>
+                                        <p className="p-lg">Enjoy Wine at home</p>
                                         <a href="#" className="btn btn-green tra-white-hover">Learn More</a>
 
                                     </div>
