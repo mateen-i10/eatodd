@@ -91,7 +91,7 @@ h2 {
 .question {
     margin-bottom: 30px;
 }
-.h5-xs{
+h5.h5-xs{
     font-family: inherit;
     font-size: 1.2rem;
     text-transform: uppercase;
