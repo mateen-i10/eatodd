@@ -62,9 +62,9 @@ const Nutrition = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='col rounded-circle' style={{backgroundColor: 'white', maxWidth: 150, height: 150, marginLeft:300, marginTop: -150}}>
+                        <div className='col rounded-circle' style={{backgroundColor: 'white', width: 150, height: 150, marginLeft:300, marginTop: -150}}>
                         </div>
-                        <div className='col rounded-circle' style={{backgroundColor: '#e3e3e3', maxWidth: 100, height: 100, marginLeft:325, marginTop: -125}} />
+                        <div className='col rounded-circle' style={{backgroundColor: '#e3e3e3', width: 100, height: 100, marginLeft:325, marginTop: -125}} />
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@ const Nutrition = () => {
 
                 {FoodItems.map((e) => (
                     <div>
-                        <h3 className='food-items'>{e.title}</h3>
+                        <a href="#"><h3 className='food-items'>{e.title}</h3></a>
                     </div>
                 ))}
             </div>

@@ -6,6 +6,7 @@ import {CheckCircle, Plus, Minus, List, MoreVertical, X, ArrowRight} from 'react
 import './components/Plate.css'
 import FoodItemAdder from "./components/FoodItemAdder"
 import FoodCheckItem from "./components/FoodCheckItem"
+import Header from "../../../shared/header/Header"
 
 const Plate = () => {
     const [basicModal, setBasicModal] = useState(false)
@@ -395,7 +396,9 @@ const Plate = () => {
     }
 
     return (
-        <div style={{backgroundColor: 'white'}}>
+        <div>
+            <Header />
+        <div style={{backgroundColor: 'white', paddingTop:20}}>
             <div className="container">
                 <section id="banner-3" className="bg-yellow banner-section division" style={{paddingTop:30}}>
                     <div className="container">
@@ -455,7 +458,9 @@ const Plate = () => {
                                         </div>
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
+                                        <a href="#">
                                         <MoreVertical />
+                                        </a>
                                     </div>
                                 </div>
                             ))
@@ -500,7 +505,7 @@ const Plate = () => {
                                         </div>
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <MoreVertical />
+                                        <a href="#"><MoreVertical /></a>
                                     </div>
                                 </div>
                             ))
@@ -528,7 +533,7 @@ const Plate = () => {
                                         </div>
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <MoreVertical />
+                                        <a href="#"><MoreVertical /></a>
                                     </div>
                                 </div>
                             ))
@@ -555,7 +560,7 @@ const Plate = () => {
                                         </div>
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <MoreVertical />
+                                        <a href=""><MoreVertical /></a>
                                     </div>
                                 </div>
                             ))
@@ -586,7 +591,7 @@ const Plate = () => {
                                         </div>
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <MoreVertical />
+                                        <a href="#"><MoreVertical /></a>
                                     </div>
                                 </div>
                             ))
@@ -615,6 +620,7 @@ const Plate = () => {
             {RenderModal()}
             {RenderMealNameModal()}
 
+        </div>
         </div>
     )
 }

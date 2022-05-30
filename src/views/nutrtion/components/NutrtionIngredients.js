@@ -1,32 +1,13 @@
 import React from 'react'
 import {PlusCircle} from "react-feather"
-import img from '../../../assets/images/foodItems/kebab.jpg'
 import '../stylesheet/Nutrition.css'
+import chipotleChilli from "../../OurValues/images/ChipotleChile-md.png"
+import blackBeans from "../../OurValues/images/BlackBeans-sm.png"
+import tomatoPaste from "../../OurValues/images/TomatoPaste-sm.png"
+import romanLattuce from "../../OurValues/images/RomainLettuce-sm.png"
+import '../../OurValues/OurValues.css'
 
 const NutrtionIngredients = () => {
-
-    const list = [
-        {
-            image : img,
-            title: 'Avacado'
-        },
-        {
-            image : img,
-            title: 'Bay Leaf'
-        },
-        {
-            image : img,
-            title: 'Black Beans'
-        },
-        {
-            image : img,
-            title: 'Beef'
-        },
-        {
-            image : img,
-            title: 'Bell Pepper'
-        }
-    ]
 
     return (
         <div>
@@ -36,16 +17,37 @@ const NutrtionIngredients = () => {
                 </p>
                 <hr style={{color:'#451400'}} />
                 <div>
-                    <h3 className='highlight' style={{paddingTop:20, paddingBottom: 20}}>See how these 53 Real ingredients make our recipie <PlusCircle /></h3>
+                    <a href="#"><h3 className='highlight' style={{paddingTop:20, paddingBottom: 20}}>See how these 53 Real ingredients make our recipie <PlusCircle /></h3></a>
                 </div>
             </div>
-            <div style={{display:'flex', justifyContent:'center', marginTop: 80}}>
-            {list.map(e => (
-                    <div className='highlight' key={e.title} style={{marginRight:20, marginLeft:20, textAlign:'center'}}>
-                        <div><img className='rounded-circle' src={e.image} width='170' /></div>
-                        <div style={{marginTop:10, fontWeight:'bolder'}}>{e.title}</div>
+
+            <div className="RealIngredients__ingredients" style={{marginTop:40}}>
+                <div className="RealIngredients__ingredients_list">
+                    <div className="Ingredient">
+                        <div className="Ingredient__img-container">
+                            <img className="" src={chipotleChilli} alt="Black Beans"/>
+                        </div>
+                        <span className="mt-1 Ingredient__text">Black Beans</span>
                     </div>
-            ))}
+                    <div className="Ingredient">
+                        <div className="Ingredient__img-container">
+                            <img src={blackBeans} alt="Black Beans"/>
+                        </div>
+                        <span className="mt-1 Ingredient__text">Black Beans</span>
+                    </div>
+                    <div className=" Ingredient">
+                        <div className="Ingredient__img-container">
+                            <img src={tomatoPaste} alt="Black Beans"/>
+                        </div>
+                        <span className="mt-1 Ingredient__text">Black Beans</span>
+                    </div>
+                    <div className="Ingredient">
+                        <div className="Ingredient__img-container">
+                            <img src={romanLattuce} alt="Black Beans"/>
+                        </div>
+                        <span className="mt-1 Ingredient__text">Black Beans</span>
+                    </div>
+                </div>
             </div>
 
         </div>
