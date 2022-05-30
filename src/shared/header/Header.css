@@ -9,7 +9,37 @@
 ******* Header 1  *******
 ===========================*/
 
-
+.dropdown-toggle::after{
+    display: none!important;
+}
+.wine-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.wine-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: #57ab00;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.wine-menu a {
+    color: #57ab00;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
+}
+.wine-menu a:hover {
+    background-color:#57ab00;
+    color: whitesmoke;
+}
+.wine-dropdown:hover .wine-menu {
+    display: block;
+}
 .header1{
     display: flex;
     justify-content: space-between;
