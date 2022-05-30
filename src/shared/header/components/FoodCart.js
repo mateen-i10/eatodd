@@ -56,7 +56,7 @@ const OffCanvasPlacement = (props) => {
                 <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 30, justifyContent: 'center'}}>
                     <div style={{display:'flex'}}>
                         <UserPlus  style={{marginRight:10, color:'#e08d31', marginTop:2}} />
-                        <h6 className='header-offCanvas' onClick={() => SetModelOpen(true)} >Make It a group Order.</h6>
+                        <a href="#"><h6 className='header-offCanvas' onClick={() => SetModelOpen(true)} >Make It a group Order.</h6></a>
                     </div>
                 </OffcanvasHeader>
 
@@ -87,11 +87,11 @@ const OffCanvasPlacement = (props) => {
                                 <p style={{marginTop:10, color:'#451400'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>
                             </div>
                             <div>
-                                <div className="row" style={{color:'#451400', fontWeight:'bolder', textTransform: 'uppercase', textDecoration:'underline', fontSize:13, justifyContent:'left'}}>
+                                <a href="#"><div className="row" style={{color:'#451400', fontWeight:'bolder', textTransform: 'uppercase', textDecoration:'underline', fontSize:13, justifyContent:'left'}}>
                                     <div className="col">remove</div>
                                     <div className="col" style={{marginLeft:-190}}>edit</div>
                                     <div className="col" style={{marginLeft:-220}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >duplicate</div>
-                                </div>
+                                </div></a>
                             </div>
                         </div>
 
@@ -161,6 +161,7 @@ const OffCanvasPlacement = (props) => {
                             <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>$1.00</div>
                         </div>
 
+                        <a href="#">
                         <div className="row">
                             <div className="col-md-10" style={{fontWeight: 500, color:'#451400'}} onClick={() => {
                                 if (taxDropDown === true) {
@@ -173,6 +174,7 @@ const OffCanvasPlacement = (props) => {
                                 taxDropDown && <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>$2.94</div>
                             }
                         </div>
+                        </a>
 
                         {
                             taxDropDown === false ? <div style={{ textAlign:'left'}}>
