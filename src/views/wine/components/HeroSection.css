@@ -3,7 +3,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
-
+#faqs-page {
+    background-image: url("/src/assets/images/pages/wine/about/kamil-unsplash.jpg");
+}
 .page-hero-section {
     width: 100%;
     background-repeat: no-repeat;
@@ -53,7 +55,7 @@
     content: "" !important;
 }
 h2 {
-    font-family: 'Oswald', sans-serif;
+    font-family: inherit;
     line-height: 1.3;
     font-weight: 500;
     text-transform: uppercase;
