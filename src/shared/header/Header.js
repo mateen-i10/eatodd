@@ -47,9 +47,9 @@ export default function Header () {
                                 <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
                             </h2>
                             <div className="wine-menu">
-                                <Link to="/wine/about" className="" href="#">About</Link>
-                                <Link to ="/wine/faq" className="" href="#">F.A.Q's</Link>
-                                <Link to="/wine/shop" className="" href="#">Shop</Link>
+                                <Link to="/wine/about" >About</Link>
+                                <Link to ="/wine/faq" >F.A.Q's</Link>
+                                <Link to="/wine/shop">Shop</Link>
                             </div>
                         </div></Link>
                         <Link to="/gallery"><h2>REWARDS</h2></Link>
@@ -108,6 +108,17 @@ export default function Header () {
                     <div className="nav-sec-1">
                         <Link to="/home"><h2>ORDER</h2></Link>
                         <Link to="/about"><h2>CATERING</h2></Link>
+                        <Link><div className="wine-dropdown">
+                            <h2>
+                                WINE
+                                <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
+                            </h2>
+                            <div className="wine-menu">
+                                <Link to="/wine/about" >About</Link>
+                                <Link to ="/wine/faq" >F.A.Q's</Link>
+                                <Link to="/wine/shop" >Shop</Link>
+                            </div>
+                        </div></Link>
                         <Link to="/gallery"><h2>REWARDS</h2></Link>
                         <Link to="/menu"><h2>OUR VALUES</h2></Link>
                         <Link to="/"><h2>NUTRITION</h2></Link>
