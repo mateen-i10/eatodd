@@ -6,11 +6,12 @@
 }
 
 .newsletter-section{
-    font-family: 'Oswald', sans-serif;
+    font-family: inherit;
     font-weight: 300;
     font-size: 1rem;
     line-height: 1.5;
     color: rgb(40 48 52);
+    margin-top: 20px;
 }
 .mb-20 {
     margin-bottom: 20px !important;
@@ -104,11 +105,13 @@ input::placeholder{
     }
 }
 
-.btn {
+.btn-green {
     line-height: 1;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: 1px solid rgb(0 0 0 / 0%)!important;
     border-radius: 0;
+    background-color: #57ab00;
+    color: whitesmoke;
 }

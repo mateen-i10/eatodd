@@ -10,11 +10,10 @@
     max-width: 100vw;
     max-height: 100%;
 }
-.hero-section{
+hero-section-wine{
     height: 100%;
-
 }
-.hero-txt h2{
+.hero-txt-wine h2{
     /*position: relative;*/
     margin-top: 10%;
     color: #57ab00;
@@ -29,7 +28,7 @@
     text-transform: uppercase;
 }
 @media only screen and (max-width: 567px) {
-    .hero-txt h2{
+    .hero-txt-wine h2{
         font-size: 3rem;
         text-shadow: rgb(69 20 0) 2px 2px 0, rgb(69 20 0)  -2px -2px 0, rgb(69 20 0) -2px 2px 0, rgb(69 20 0) 2px -2px 0;
     }
@@ -38,7 +37,7 @@
 
     /*}*/
 }
-.hero-txt p{
+.hero-txt-wine p{
     color: #57ab00;
     font-size: 1.1rem;
     font-weight: 500;
@@ -69,7 +68,7 @@
 .hover-overlay:hover{
     transform: translate(0, -10px);
 }
-h4 {
+.select_link > h4 {
     margin-top: .5rem;
     font-family: inherit;
     text-transform: uppercase;
@@ -79,7 +78,7 @@ h4 {
     color: #57ab00;
     margin-bottom: 0.5rem;
 }
-p{
+.select_link > p{
     margin-top: .2rem;
     text-transform: uppercase;
     line-height: 1;

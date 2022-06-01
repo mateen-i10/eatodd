@@ -47,6 +47,7 @@ export default function Header () {
                                 <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
                             </h2>
                             <div className="wine-menu">
+                                <Link to="/wine/membership">Membership</Link>
                                 <Link to="/wine/about" >About</Link>
                                 <Link to ="/wine/faq" >F.A.Q's</Link>
                                 <Link to="/wine/shop">Shop</Link>
@@ -114,6 +115,7 @@ export default function Header () {
                                 <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
                             </h2>
                             <div className="wine-menu">
+                                <Link to="/wine/membership">Membership</Link>
                                 <Link to="/wine/about" >About</Link>
                                 <Link to ="/wine/faq" >F.A.Q's</Link>
                                 <Link to="/wine/shop" >Shop</Link>
