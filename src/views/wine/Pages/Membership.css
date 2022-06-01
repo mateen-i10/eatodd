@@ -28,9 +28,9 @@
     background-color: #57ab00;
     color: whitesmoke;
 }
-.btn-green:hover {
-    color: whitesmoke !important;
-}
+    /*.btn-green:hover {*/
+    /*    color: whitesmoke !important;*/
+    /*}*/
 .member-card{
     background-color: white;
     border-radius: 0.528rem;
@@ -49,7 +49,9 @@
     color: whitesmoke;
 }
 .member-card:hover .btn-green {
-    border: 2px solid whitesmoke !important;
+    background-color: whitesmoke !important;
+    color: #57ab00;
+    /*border: 2px solid whitesmoke !important;*/
 }
 .member-price{
     font-size: 200%;
