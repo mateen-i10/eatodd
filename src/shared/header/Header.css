@@ -134,16 +134,17 @@ img{
 .head-sec-3 .eatOMG{
     max-height: 50px;
     display: flex;
-    background-color: #57ab00;
+    /*background-color: #57ab00;*/
     width: 65%;
     justify-content: space-evenly;
-    padding:0 .25em;
+    padding:0 1.25em;
     letter-spacing: 1px;
     color:white;
     /*align-items: center;*/
     align-items: center;
     border-radius: 25px;
     border: 1px solid #57ab00;
+    color: #57ab00;
 }
 .head-sec-3 .eatOMG p{
     margin-top: 12px;

@@ -14,7 +14,7 @@ class Hero extends Component {
                 <div className="banner">
                     <div className="banner-content">
                         <p className="banner-text">Enjoy your favorite bottles of wine at VENDOR PRICES!</p>
-                        <p className="text-center" style={{color:'red', fontWeight:'bold'}}>Membership is only $9.99 per month!</p>
+                        <p className="text-center" style={{fontWeight:'bold'}}>Membership is only $9.99 per month!</p>
                         <div className="btn btn-danger hero-button">JOIN NOW</div>
                     </div>
                 </div>

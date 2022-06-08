@@ -39,8 +39,8 @@ export default function Header () {
 
                     </div>
                     <div className="head-sec-2">
-                        <Link to="/home"><h2>ORDER</h2></Link>
-                        <Link to="/about"><h2>CATERING</h2></Link>
+                        <Link to="/"><h2>ORDER</h2></Link>
+                        <Link to="/menu"><h2>CATERING</h2></Link>
                         <Link><div className="wine-dropdown">
                             <h2>
                                 WINE
@@ -53,15 +53,15 @@ export default function Header () {
                                 <Link to="/wine/shop">Shop</Link>
                             </div>
                         </div></Link>
-                        <Link to="/gallery"><h2>REWARDS</h2></Link>
-                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
-                        <Link to="/"><h2>NUTRITION</h2></Link>
+                        <Link to="/reward"><h2>REWARDS</h2></Link>
+                        <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
+                        <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="head-sec-3">
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            <p>OMG WINE CLUB</p>
+                            <p>Delivery address</p>
                         </div>
 
                         <ShoppingBag onClick={() => {
@@ -108,7 +108,7 @@ export default function Header () {
                 <nav className="nav">
                     <div className="nav-sec-1">
                         <Link to="/home"><h2>ORDER</h2></Link>
-                        <Link to="/about"><h2>CATERING</h2></Link>
+                        <Link to="/menu"><h2>CATERING</h2></Link>
                         <Link><div className="wine-dropdown">
                             <h2>
                                 WINE
@@ -121,9 +121,9 @@ export default function Header () {
                                 <Link to="/wine/shop" >Shop</Link>
                             </div>
                         </div></Link>
-                        <Link to="/gallery"><h2>REWARDS</h2></Link>
-                        <Link to="/menu"><h2>OUR VALUES</h2></Link>
-                        <Link to="/"><h2>NUTRITION</h2></Link>
+                        <Link to="/reward"><h2>REWARDS</h2></Link>
+                        <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
+                        <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">

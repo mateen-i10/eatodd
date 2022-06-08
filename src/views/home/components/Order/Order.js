@@ -1,29 +1,49 @@
 import React from 'react'
 import "./Order.css"
+import foodicon from "../../../../assets/images/icons/food.png"
+import qualityicon from "../../../../assets/images/icons/quality.png"
+import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
 
 const Order = () => {
     return (
         <div className="order-main">
-            <div className="unlock-section container-fluid">
-                <div className="unlock-section-1 row fs-4 justify-content-center align-items-center g-md-0">
-                    <div className="unlock-img-section col-12 col-md-6 justify-content-md-end me-md-0 d-inline-flex mt-2 justify-content-center align-items-center mb-md-2" >
-                        <img className="unlock-img d-md-inline-flex d-none" src={icon} alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
-                        <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
-                    </div>
-                    <div className="account col-12 col-md-6 justify-content-md-start d-inline-flex justify-content-center align-items-center">
-                        <div className="content d-inline-flex mb-1">
-                            <div className="create-an-account">
-                                <div>Create an Account</div>
-                            </div>
-                            <div className="unlock-or">OR</div>
-                            <div className="sign-in fs-5">Sign In</div>
+            <div className="container-fluid unlock-section">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8" style={{display: 'flex', paddingTop: '12px'}}>
+                            <img className="unlock-img d-md-inline-flex d-none" src={icon}
+                                 alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
+                            <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
+                        <div className="col-md-4" style={{paddingTop: '12px'}}>
+                            <div className="content d-inline-flex mb-1">
+                                <div className="create-an-account">
+                                    <div>Create an Account</div>
+                                </div>
+                                <div className="unlock-or">OR</div>
+                                <div className="sign-in fs-5">Sign In</div>
+                            </div>
+                        </div>
+                        {/*<div className="col-md-12">*/}
+                        {/*    <div style={{ margin: 'auto'}}>*/}
+                        {/*        <img className="unlock-img d-md-inline-flex d-none" src={icon} alt="JOIN THE OMG WINE CLUB. UNLOCK"/>*/}
+                        {/*        <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-md-12">*/}
+                        {/*            <div className="content d-inline-flex mb-1">*/}
+                        {/*                <div className="create-an-account">*/}
+                        {/*                    <div>Create an Account</div>*/}
+                        {/*                </div>*/}
+                        {/*                <div className="unlock-or">OR</div>*/}
+                        {/*                <div className="sign-in fs-5">Sign In</div>*/}
+                        {/*            </div>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
-
             <div className="menu-list container-fluid pb-5 pt-5 ">
                 <div className="row ms-0 me-1 ">
                     <div className="col-md-4 col-sm-5  col-6 top-level-menu">
@@ -73,7 +93,6 @@ const Order = () => {
                                         <div className="arrow-right"/>
                                     </div>
                                 </div>
-
                             </div>
                         </Link>
                     </div>
@@ -91,7 +110,6 @@ const Order = () => {
                                         <div className="arrow-right"/>
                                     </div>
                                 </div>
-
                             </div>
                         </Link>
                     </div>
@@ -109,7 +127,6 @@ const Order = () => {
                                         <div className="arrow-right"/>
                                     </div>
                                 </div>
-
                             </div>
                         </Link>
                     </div>
@@ -127,97 +144,100 @@ const Order = () => {
                                         <div className="arrow-right"/>
                                     </div>
                                 </div>
-
                             </div>
                         </Link>
                     </div>
-
                 </div>
             </div>
-
-            <div className="promo-banner container-fluid  " >
+            <div className="promo-banner container-fluid  ">
                 <div className="row align-items-center justify-content-center">
                     <div className="promo col-11 col-md-5 container-fluid">
-                            <div className="row">
-                                <div className="text-container col-md-6 col-6">
-                                    <h1 className="banner-title  mt-1">CATER YOUR NEXT PARTY</h1>
-                                    <div className="banner-subtitle">
-                                        <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so your
-                                            guests can enjoy taste and flavor that happens to be healthy!.</p>
-                                    </div>
-                                    <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
-
+                        <div className="row">
+                            <div className="text-container col-md-6 col-6">
+                                <h1 className="banner-title  mt-1">CATER YOUR NEXT PARTY</h1>
+                                <div className="banner-subtitle">
+                                    <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so
+                                        your
+                                        guests can enjoy taste and flavor that happens to be healthy!.</p>
                                 </div>
-                                <img src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
-                                     className="img-container col-md-6 col-6"/>
+                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                             </div>
+                            <img
+                                src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
+                                className="img-container col-md-6 col-6"/>
+                        </div>
                     </div>
                     <div className="promo col-11 col-md-5 container-fluid ">
-                            <div className="row ">
-                                <div className="text-container col-md-6 col-6">
-                                    <h1 className="banner-title mt-1">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
-                                    <div className="banner-subtitle">
-                                        <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club benefits
-                                            include vendor pricing on all offered wines!</p>
-                                    </div>
-                                    <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                        <div className="row ">
+                            <div className="text-container col-md-6 col-6">
+                                <h1 className="banner-title mt-1">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
+                                <div className="banner-subtitle">
+                                    <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club
+                                        benefits
+                                        include vendor pricing on all offered wines!</p>
                                 </div>
-                                <video autoPlay="autoplay" muted="muted" loop="loop"
-                                       src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
-                                       className="img-container col-md-6 col-6"></video>
+                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                             </div>
+                            <video autoPlay="autoplay" muted="muted" loop="loop"
+                                   src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
+                                   className="img-container col-md-6 col-6"></video>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-
             <div className="featured-container-full">
                 <div className="featured-container container ">
                     <div className=" row">
-                        <div className="header col-12 d-flex flex-column align-items-center justify-content-center mt-4">
+                        <div
+                            className="header col-12 d-flex flex-column align-items-center justify-content-center mt-4">
                             <h2 className="card-title ">1-Tap Orders</h2>
                             <div className="sub-header-text">Sometimes it's hard to choose. We made it
                                 easy with these favorites.
                             </div>
                             <div className="find-slot-wrapper btn ">FIND A CHIPOTLE</div>
                         </div>
-                        <div className="universal-pce col-12">
-                            <div className="universal-cards  d-md-inline-flex flex-row">
-                                <div className="meal-card">
-                                    <img
-                                        src="https://chipotlestrgprdcentral.blob.core.windows.net/assets/menuinnovation/pcms/d11d3e83-c301-4512-bcb7-22fda59a01d7/934feeaf-3905-45ce-8860-af18d945c280.jpg"
-                                        alt="Meal Image"
-                                        className="meal-img"/>
-                                    <div className="meal-info">
-                                        <div className="meal-name">Karl Jacobs Burrito</div>
+                        <div className="universal-pce">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <div className="meal-card">
+                                            <img
+                                                src="https://jthemes.net/themes/html/testo/files/images/offer-5.jpg"
+                                                alt="Meal Image"
+                                                className="meal-img"/>
+                                            <div className="meal-info">
+                                                <div className="meal-name">Meal Name 1</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="meal-card" >
-                                    <img
-                                        src="https://chipotlestrgprdcentral.blob.core.windows.net/assets/menuinnovation/pcms/e5af0cbc-518a-484c-9759-1c90b29ec5c7/0b375e9b-3f33-4a97-a290-2c7e50186800.jpg"
-                                        alt="Meal Image"
-                                        className="meal-img"/>
-                                    <div className="meal-info">
-                                        <div className="meal-name">Aidan Hutchinson Bowl</div>
+                                    <div className="col-md-4">
+                                        <div className="meal-card">
+                                            <img
+                                                src="https://jthemes.net/themes/html/testo/files/images/offer-11.jpg"
+                                                alt="Meal Image"
+                                                className="meal-img"/>
+                                            <div className="meal-info">
+                                                <div className="meal-name">Meal Name 2</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="meal-card">
-                                    <img
-                                        src="https://chipotlestrgprdcentral.blob.core.windows.net/assets/menuinnovation/pcms/ea792bef-9e27-4737-8a5b-2d8e0881d538/bbe9246e-8852-41c0-8fac-82309527de43.jpg"
-                                        alt="Meal Image"
-                                        className="meal-img "/>
-                                    <div className="meal-info">
-                                        <div className="meal-name">Kyle Hamilton Burrito</div>
+                                    <div className="col-md-4">
+                                        <div className="meal-card col-md-4">
+                                            <img
+                                                src="https://jthemes.net/themes/html/testo/files/images/offer-7.jpg"
+                                                alt="Meal Image"
+                                                className="meal-img "/>
+                                            <div className="meal-info">
+                                                <div className="meal-name">Meal Name 3</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <div className="large-order-promo container-fluid justify-content-center align-items-center">
                 <div className="row w-100">
                     <div className="title col-12 text-center">CROWD PLEASERS</div>
@@ -227,7 +247,7 @@ const Order = () => {
                                 <div className="large-order-card">
                                     <h1 className="cat-title text-center ">CATERING</h1>
                                     <div className="details pt-2">
-                                        <ul className="inline-list" >
+                                        <ul className="inline-list">
                                             <li>From 6 to 200 people</li>
                                             <li>Starting at $15.00 / person</li>
                                             <li>Build Your Own</li>
@@ -248,7 +268,7 @@ const Order = () => {
                                 <div className="large-order-card">
                                     <h1 className="cat-title text-center">GROUP ORDER</h1>
                                     <div className="details pt-2">
-                                        <ul className="inline-list" >
+                                        <ul className="inline-list">
                                             <li>Invite up to 20 people</li>
                                             <li>Normal menu pricing</li>
                                             <li>Full menu</li>
@@ -266,6 +286,54 @@ const Order = () => {
                     </div>
                 </div>
             </div>
+            {/*about section*/}
+            <section id="about-7" className="about-section division">
+                <div className="container">
+                    <div className="abox-4-wrapper ico-80">
+                        <div className="row">
+                            <div className="col-md-4 col-lg-4">
+                                <div className="abox-4 text-center mb-40 coffee-color">
+                                    <div className="abox-4-ico">
+                                        <img className="img-center" src={foodicon}/>
+                                    </div>
+                                    <h5 className="h5-lg text-uppercase">Original Recipes</h5>
+                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
+                                        feugiat dolor impedit
+                                        felis magna dolor vitae
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-lg-4">
+                                <div className="abox-4 text-center mb-40 coffee-color">
+                                    <div className="abox-4-ico">
+                                        <img className="img-center" src={qualityicon}/>
+                                    </div>
+                                    <h5 className="h5-lg text-uppercase">Qualty Foods</h5>
+                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
+                                        feugiat dolor impedit
+                                        felis magna dolor vitae
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-lg-4">
+                                <div className="abox-4 text-center mb-40 coffee-color">
+                                    <div className="abox-4-ico">
+                                        <img className="img-center" src={deliveryicon}/>
+                                    </div>
+                                    <h5 className="h5-lg text-uppercase">Fastest Delivery</h5>
+                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
+                                        feugiat dolor impedit
+                                        felis magna dolor vitae
+                                    </p>
+                                </div>
+                            </div>
+                            {/* eslint-disable-next-line no-tabs */}
+                        </div>
+                    </div>
+                    {/* eslint-disable-next-line no-tabs */}
+                </div>
+            </section>
+            {/*about section end*/}
         </div>
     )
 }

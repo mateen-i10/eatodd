@@ -15,7 +15,7 @@
 
 .unlock-img {
     height: 50px;
-    margin: 2px 0px 2px 5px;
+    margin: -10px 0px 2px 5px;
 }
 .loyalty-text {
     padding: 3px;
@@ -237,16 +237,19 @@
 }
 @media only screen and (max-width: 768px){
     .meal-card{
-
         margin-left: 0px;
-
     }
 }
 .meal-img{
-    height: 274px;
+    height: auto;
     width: 100%;
     object-fit: cover;
     z-index: 10;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.meal-img:hover{
+   border: 1px solid #57ab00;
 }
 .meal-name{
     background: linear-gradient(180deg,rgb(255 255 255) 320px,rgb(0 0 0 / 0%) 0);
@@ -356,3 +359,27 @@
     /*        width: 100vw;*/
     /*    }*/
     /*}*/
+#about-7 {
+    padding-top: 70px;
+    padding-bottom: 30px;
+    background: beige;
+}
+.coffee-color{
+    color: #000000;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.abox-4 h5 {
+    line-height: 1;
+    letter-spacing: 0.5px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.h5-lg{
+    font-size: 1.625rem;
+    color:#57ab00;
+}
+.img-center{
+    margin: auto;
+}

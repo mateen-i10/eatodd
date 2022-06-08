@@ -3,6 +3,16 @@
     height: 34px;
     margin: 5px;
 }
+.test{
+    color: #57ab00;
+}
+.test2{
+    text-align: center;
+    color: #57ab00;
+}
+.Headline{
+   color: #57ab00;
+}
 .col-content{
     display: flex;
     align-items: center;
@@ -86,7 +96,7 @@
       color: rgb(69, 20, 0);
       font-size: 50px;
       line-height: 35px;
-      font-weight: 500px;
+      /*font-weight: 500px;*/
       letter-spacing: 2px;
       width: 520px;
       font-family: Gotham-Black;

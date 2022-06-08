@@ -4,7 +4,7 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - EatOMG'
 
 // ** Default Route
-const DefaultRoute = '/WineClub'
+const DefaultRoute = '/home'
 
 // ** Merge Routes
 const Routes = [
@@ -60,8 +60,7 @@ const Routes = [
   },
   {
     path: '/gallery',
-    component:lazy(() => import('../../views/gallery/Gallery')),
-    layout: 'BlankLayout'
+    component:lazy(() => import('../../views/gallery/Gallery'))
   },
   {
     path: '/EventDetails',
@@ -74,9 +73,9 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
-      path: '/reward',
-      component: lazy(() => import('../../views/Reward/Reward')),
-      layout: 'BlankLayout'
+    path: '/reward',
+    component: lazy(() => import('../../views/Reward/Reward')),
+    layout: 'BlankLayout'
   },
   {
     path: '/nutrtion',
@@ -109,16 +108,6 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
-        path: '/wine',
-        component: lazy(() => import('../../views/wine/wine')),
-        layout: 'BlankLayout'
-    },
-    {
-            path: '/Faq',
-            component: lazy(() => import('../../views/FAQ/Faq')),
-            layout: 'BlankLayout'
-        },
-  {
     path: '/NutrtionIngredients',
     component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
     layout: 'BlankLayout'
@@ -127,7 +116,13 @@ const Routes = [
     path: '/WineClub',
     component: lazy(() => import('../../views/wineShop/WineShop')),
     layout: 'BlankLayout'
+  },
+  {
+    path: '/Dashboard',
+    component: lazy(() => import('../../views/admin/Dashboard')),
+    layout: 'VerticalLayout'
   }
+
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }

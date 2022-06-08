@@ -347,7 +347,7 @@ html {
       margin-left: 0; // not using in both cases
       // overflow-x hidden, overflow for y in sm screen issue resolved default
       &.app-content {
-        overflow: overlay;
+        //overflow: overlay;
         overflow-x: hidden;
         padding: 0 !important;
         transition: none;
@@ -425,10 +425,10 @@ html {
 }
 
 @include media-breakpoint-down(md) {
-  html body .app-content {
-    //padding: calc(#{$content-padding} - 0.8rem + #{$navbar-height} + #{$floating-nav-margin})
-    //  calc(#{$content-padding} - 0.8rem) 0 calc(#{$content-padding} - 0.8rem) !important; // - 0.8rem to reduce padding in small screen
-  }
+  //html body .app-content {
+  //  padding: calc(#{$content-padding} - 0.8rem + #{$navbar-height} + #{$floating-nav-margin})
+  //    calc(#{$content-padding} - 0.8rem) 0 calc(#{$content-padding} - 0.8rem) !important; // - 0.8rem to reduce padding in small screen
+  //}
 
   // For static navbar
   html body.navbar-static .app-content {
