@@ -1,5 +1,4 @@
 import {Box, Clipboard, DollarSign, Grid, Home, List, Mail, Menu, PlusSquare, UserPlus} from 'react-feather'
-import { Mail, Home, UserPlus } from 'react-feather'
 
 export default [
     {
@@ -69,7 +68,7 @@ export default [
                 navLink: '/dashboard/inventory'
             }
         ]
-    }
+    },
 
   {
     id: 'Administrator',
