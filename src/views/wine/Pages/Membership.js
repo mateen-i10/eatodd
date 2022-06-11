@@ -4,8 +4,10 @@ import HeroSection from "../components/HeroSection"
 import NewsLetter from "../components/NewsLetter"
 import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
+import {store} from "../../../redux/store"
 
 const Membership = () => {
+    console.log(store.getState())
     return (
         <div>
             <Header />
@@ -56,7 +58,6 @@ const Membership = () => {
                     </div>
                 </div>
             </div>
-
             <NewsLetter />
             <Footer />
         </div>
