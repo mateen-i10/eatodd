@@ -121,6 +121,41 @@ const Routes = [
     path: '/Dashboard',
     component: lazy(() => import('../../views/admin/Dashboard')),
     layout: 'VerticalLayout'
+  },
+  {
+    path: '/Users',
+    component: lazy(() => import('../../views/Pages/Users')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/AddUser',
+    component: lazy(() => import('../../views/Pages/AddUserForm')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/Restaurant',
+    component: lazy(() => import('../../views/Pages/restaurant/Restaurant')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/Facebook',
+    component: lazy(() => import('../../views/Pages/facebookAutoPost/FaceBookAuto')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/Customers',
+    component: lazy(() => import('../../views/Pages/customers/Customers')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/CrmEmails',
+    component: lazy(() => import('../../views/Pages/crmEmails/CrmEmail')),
+    layout: 'VerticalLayout'
+  },
+  {
+    path: '/CrmSms',
+    component: lazy(() => import('../../views/Pages/crmSms/CrmSms')),
+    layout: 'VerticalLayout'
   }
 
 ]
