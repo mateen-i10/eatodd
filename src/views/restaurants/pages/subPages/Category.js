@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Inventory = () => {
+const Category = () => {
     return (
         <div>
-            Inventory
+            Category
         </div>
     )
 }
 
-export default Inventory
+export default Category

@@ -12,7 +12,7 @@ const Orders = () => {
                 </Col>
                 <Col xs='12'>
                     <Tables/>
-                    <table>here is table</table>
+                    {/*<PaginatedItems itemsPerPage={5}/>*/}
                 </Col>
             </Row>
         </div>
