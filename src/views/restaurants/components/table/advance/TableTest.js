@@ -12,7 +12,7 @@ import {ChevronDown} from "react-feather"
 import {Card, CardHeader, CardTitle, Col, Input, Label, Row} from "reactstrap"
 import {getOrderData} from "../../../fakeData"
 
-const DataTableServerSide = () => {
+const TableTest = () => {
 
     // // ** States
     const items = getOrderData()
@@ -156,4 +156,4 @@ const DataTableServerSide = () => {
     )
 }
 
-export default memo(DataTableServerSide)
+export default memo(TableTest)

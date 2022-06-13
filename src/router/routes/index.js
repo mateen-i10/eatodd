@@ -171,8 +171,26 @@ const Routes = [
         exact: true
     },
     {
-        path: '/dashboard/inventory',
-        component: lazy(() => import('../../views/restaurants/pages/Inventory')),
+        path: '/dashboard/inventory/distributor',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/dashboard/inventory/item',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Item')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/dashboard/inventory/recipe',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Recipe')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/dashboard/inventory/category',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Category')),
         layout: 'VerticalLayout',
         exact: true
     },
