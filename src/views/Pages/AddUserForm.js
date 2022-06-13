@@ -83,7 +83,7 @@ const EditUserExample = () => {
                 <Link to="/Users">
                 <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 </Link>
-                <ModalBody className='px-sm-5 mx-50 pb-5'>
+                <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New User</h1>
                     </div>

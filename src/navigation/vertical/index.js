@@ -1,17 +1,73 @@
-import {Box, Clipboard, DollarSign, Grid, Home, List, Mail, Menu, PlusSquare, UserPlus} from 'react-feather'
+import {
+    Archive,
+    Box,
+    Clipboard, Clock,
+    Coffee,
+    DollarSign, Facebook,
+    Grid,
+    Home,
+    List,
+    Mail,
+    Menu, MessageSquare,
+    PlusSquare, User,
+    UserPlus,
+    Users
+} from 'react-feather'
 
 export default [
     {
         id: 'Dashboard',
         title: 'Dashboard',
-        icon: <Home size={20}/>,
+        icon: <Home size={20} />,
         navLink: '/dashboard'
     },
     {
-        id: 'Products',
-        title: 'Products',
-        icon: <Mail size={20}/>,
-        navLink: '/dashboard/home'
+        id: 'Users',
+        title: 'Users',
+        icon: <Users size={20} />,
+        navLink: '/Users'
+    },
+    {
+        id: 'Restaurants',
+        title: 'Restaurants',
+        icon: <Coffee size={20} />,
+        navLink: '/Restaurant'
+    },
+    {
+        id: 'FaceBookAutoPost',
+        title: 'FaceBook Auto Post',
+        icon: <Facebook size={20} />,
+        navLink: '/Facebook'
+    },
+    {
+        id: 'Customers',
+        title: 'Customers',
+        icon: <User size={20} />,
+        navLink: '/Customers'
+    },
+    {
+        id: 'CRMemails',
+        title: 'CRM (Emails)',
+        icon: <Mail size={20} />,
+        navLink: '/CrmEmails'
+    },
+    {
+        id: 'CRMsms',
+        title: 'CRM (SMS)',
+        icon: <MessageSquare size={20} />,
+        navLink: '/CrmSms'
+    },
+    {
+        id: 'Bussiness Details',
+        title: 'Bussiness Details',
+        icon: <Archive size={20} />,
+        navLink: '/CrmSms'
+    },
+    {
+        id: 'Login History',
+        title: 'Login History',
+        icon: <Clock size={20} />,
+        navLink: '/CrmSms'
     },
     {
         id: 'northave',
@@ -68,72 +124,5 @@ export default [
                 navLink: '/dashboard/inventory'
             }
         ]
-    },
-
-  {
-    id: 'Administrator',
-    title: 'Administrator',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        icon: <Home size={20} />,
-        navLink: '/dashboard'
-      },
-      {
-        id: 'Users',
-        title: 'Users',
-        icon: <UserPlus size={20} />,
-        navLink: '/Users'
-      },
-      {
-        id: 'Restaurants',
-        title: 'Restaurants',
-        icon: <UserPlus size={20} />,
-        navLink: '/Restaurant'
-      },
-      {
-        id: 'FaceBookAutoPost',
-        title: 'FaceBook Auto Post',
-        icon: <UserPlus size={20} />,
-        navLink: '/Facebook'
-      },
-      {
-        id: 'Customers',
-        title: 'Customers',
-        icon: <UserPlus size={20} />,
-        navLink: '/Customers'
-      },
-      {
-        id: 'CRMemails',
-        title: 'CRM (Emails)',
-        icon: <UserPlus size={20} />,
-        navLink: '/CrmEmails'
-      },
-      {
-        id: 'CRMsms',
-        title: 'CRM (SMS)',
-        icon: <UserPlus size={20} />,
-        navLink: '/CrmSms'
-      },
-      {
-        id: 'Bussiness Details',
-        title: 'Bussiness Details',
-        icon: <UserPlus size={20} />,
-        navLink: ''
-      },
-      {
-        id: 'Login History',
-        title: 'Login History',
-        icon: <UserPlus size={20} />,
-        navLink: ''
-      }
-    ]
-  },
-  {
-    id: 'Products',
-    title: 'Products',
-    icon: <Mail size={20} />,
-    navLink: '/home'
-  }
+    }
 ]
