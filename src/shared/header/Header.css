@@ -20,13 +20,13 @@
     display: none;
     position: absolute;
     background-color: white;
-    color: #57ab00;
+    color: #81be41;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 .wine-menu a {
-    color: #57ab00;
+    color: #81be41;
     padding: 12px 16px;
     text-decoration: none;
     font-size: 1rem;
@@ -34,7 +34,7 @@
     display: block;
 }
 .wine-menu a:hover {
-    background-color:#57ab00;
+    background-color:#81be41;
     color: whitesmoke;
 }
 .wine-dropdown:hover .wine-menu {
@@ -71,7 +71,7 @@ img{
     display: flex;
     align-self: center;
     justify-content: space-between;
-    color: #57ab00;
+    color: #81be41;
     padding-top: 12px;
 }
 
@@ -116,7 +116,7 @@ img{
     padding: .5em;
     font-size: 18px;
     font-weight: bolder;
-    color: #57ab00;
+    color: #81be41;
 }
 
 /*==================
@@ -134,7 +134,7 @@ img{
 .head-sec-3 .eatOMG{
     max-height: 50px;
     display: flex;
-    /*background-color: #57ab00;*/
+    /*background-color: #81be41;*/
     width: 65%;
     justify-content: space-evenly;
     padding:0 1.25em;
@@ -143,8 +143,8 @@ img{
     /*align-items: center;*/
     align-items: center;
     border-radius: 25px;
-    border: 1px solid #57ab00;
-    color: #57ab00;
+    border: 1px solid #81be41;
+    color: #81be41;
 }
 .head-sec-3 .eatOMG p{
     margin-top: 12px;
@@ -161,7 +161,7 @@ img{
 
 .head-sec-3 .cart{
     font-size:30px;
-    color:#57ab00;
+    color:#81be41;
 }
 
 /*=======================
@@ -186,7 +186,7 @@ img{
 
 .header2 .eatOMG{
     display: flex;
-    background-color: #57ab00;
+    background-color: #81be41;
     width: 200px;
     justify-content: space-evenly;
     padding:0 .25em;
@@ -213,7 +213,7 @@ img{
 
 .header2 .cart{
     font-size:30px;
-    color:#57ab00;
+    color:#81be41;
     align-self: center;
 }
 
@@ -276,7 +276,7 @@ img{
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-    background: #57ab00;
+    background: #81be41;
     width: 2em;
     height: 3px;
     border-radius: 1em;
@@ -303,7 +303,7 @@ img{
 }
 
 .nav-sec-2 h2 , .nav-sec-1 h2{
-    color: #57ab00;
+    color: #81be41;
     font-weight: bolder;
 }
 
@@ -325,7 +325,7 @@ img{
 
 .nav-sec-2 .create-account-btn{
     border: none;
-    background-color: #57ab00;
+    background-color: #81be41;
     padding: 1em;
     width: 70%;
 }
@@ -340,7 +340,7 @@ img{
 .nav-sec-2 .sign-in p {
     font-size: 1.25rem;
     font-weight: bolder;
-    color: #57ab00;
+    color: #81be41;
 }
 
 .nav-sec-2 .sign-in a{
@@ -376,7 +376,7 @@ img{
     display: flex;
     align-self: center;
     justify-content: space-between;
-    color: #57ab00;
+    color: #81be41;
 }
 .signtext{
     padding-top: 15px;

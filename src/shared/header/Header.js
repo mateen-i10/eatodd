@@ -34,25 +34,14 @@ export default function Header () {
                         <img className="logo" src={logo} />
                         <div className="headlogin">
                             <img className="usericon" src={usericon}/>
-                            <b className="signtext">Sign In</b>
+                            <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>
 
                     </div>
                     <div className="head-sec-2">
                         <Link to="/"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
-                        <Link><div className="wine-dropdown">
-                            <h2>
-                                WINE
-                                <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
-                            </h2>
-                            <div className="wine-menu">
-                                <Link to="/wine/membership">Membership</Link>
-                                <Link to="/wine/about" >About</Link>
-                                <Link to ="/wine/faq" >F.A.Q's</Link>
-                                <Link to="/wine/shop">Shop</Link>
-                            </div>
-                        </div></Link>
+                        <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from "../../../shared/header/Header"
+import Headerwine from "../../../shared/wine-header/Header-wine"
 import Footer from "../../../shared/footer/Footer"
 import HeroSection from "../components/HeroSection"
 import "./Shop.css"
@@ -7,7 +7,7 @@ import "./Shop.css"
 const Shop = () => {
     return (
         <div>
-            <Header />
+            <Headerwine />
             <HeroSection />
             <div className="shop-page">
                 <section id="menu-8" className="wide-70 menu-section division">
