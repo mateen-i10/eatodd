@@ -59,13 +59,13 @@ export default [
         id: 'Bussiness Details',
         title: 'Bussiness Details',
         icon: <Archive size={20} />,
-        navLink: '/CrmSms'
+        navLink: '/BussinessDetails'
     },
     {
         id: 'Login History',
         title: 'Login History',
         icon: <Clock size={20} />,
-        navLink: '/CrmSms'
+        navLink: '/LoginHistory'
     },
     {
         id: 'northave',

@@ -357,6 +357,21 @@ const Routes = [
         path: '/wine/homepage',
         component: lazy(() => import('../../views/wine/Pages/Homepage')),
         layout: 'BlankLayout'
+    },
+    {
+        path: '/BussinessDetails',
+        component: lazy(() => import('../../views/Pages/bussinessDetails/BussinessDetails')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/BussinessForm',
+        component: lazy(() => import('../../views/Pages/bussinessDetails/BussinessDetailsForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/LoginHistory',
+        component: lazy(() => import('../../views/Pages/loghistory/LoginHistory')),
+        layout: 'VerticalLayout'
     }
 
 ]
