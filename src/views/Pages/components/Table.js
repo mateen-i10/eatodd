@@ -15,9 +15,15 @@ const DataTablesBasic = (props) => {
         <Card className='overflow-hidden'>
             <CardHeader>
                 <CardTitle tag='h4'>{props.tabletitle}</CardTitle>
-                <Link to = '/AddUser'>
-                    <Button.Ripple color='primary'>Add a new User</Button.Ripple>
-                </Link>
+                {
+                    props.tabletitle === 'Users' ? <Link to = '/AddUser'>
+                        <Button.Ripple color='primary'>Add a new User</Button.Ripple>
+                    </Link> : props.tabletitle === 'FaceBook Auto Post' ? <Link to = '/AddFacebookPost'>
+                        <Button.Ripple color='primary'>Add a new Post</Button.Ripple>
+                    </Link> : props.tabletitle === 'Scheduled Sms' ? <Link to = '/SechduledSms'>
+                        <Button.Ripple color='primary'>Schedule a New Sms</Button.Ripple>
+                    </Link> : []
+                }
             </CardHeader>
 
             <hr/>

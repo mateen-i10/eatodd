@@ -50,7 +50,7 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const EditUserExample = () => {
+const AddUserExample = () => {
     // ** States
     const [show, setShow] = useState(true)
 
@@ -88,27 +88,10 @@ const EditUserExample = () => {
                         <h1 className='mb-1'>Add a New User</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='firstName'>
-                                Name
-                            </Label>
-                            <Controller
-                                control={control}
-                                name='firstName'
-                                render={({ field }) => {
-                                    return (
-                                        <Input
-                                            {...field}
-                                            id='firstName'
-                                            placeholder='John'
-                                            value={field.value}
-                                            invalid={errors.firstName && true}
-                                        />
-                                    )
-                                }}
-                            />
-                            {errors.firstName && <FormFeedback>Please enter a valid First Name</FormFeedback>}
-                        </Col>
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
                                 Email
@@ -189,4 +172,4 @@ const EditUserExample = () => {
     )
 }
 
-export default EditUserExample
+export default AddUserExample

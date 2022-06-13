@@ -328,6 +328,11 @@ const Routes = [
     component: lazy(() => import('../../views/Pages/facebookAutoPost/FaceBookAuto')),
     layout: 'VerticalLayout'
   },
+    {
+        path: '/AddFacebookPost',
+        component: lazy(() => import('../../views/Pages/facebookAutoPost/AddFacebookPostForm')),
+        layout: 'VerticalLayout'
+    },
   {
     path: '/Customers',
     component: lazy(() => import('../../views/Pages/customers/Customers')),
@@ -343,6 +348,11 @@ const Routes = [
     component: lazy(() => import('../../views/Pages/crmSms/CrmSms')),
     layout: 'VerticalLayout'
   },
+    {
+        path: '/SechduledSms',
+        component: lazy(() => import('../../views/Pages/crmSms/ScheduleSms')),
+        layout: 'VerticalLayout'
+    },
     {
         path: '/homepage',
         component: lazy(() => import('../../views/wine/Pages/Homepage')),
