@@ -1,9 +1,10 @@
 import React from 'react'
+import InvDistributorTable from "../../components/table/tables/subTable/InvDistributorTable"
 
 const Distributor = () => {
     return (
         <div>
-            Distributor
+            <InvDistributorTable/>
         </div>
     )
 }

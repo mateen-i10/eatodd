@@ -1,7 +1,9 @@
 import React from 'react'
 import {Col, Row} from 'reactstrap'
 import StatsCard from "../../../ui-elements/Cards/StatsCard"
-import Tables from "../components/table/advance"
+import Tables from "../components/table/tables"
+// ** Styles
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 const Orders = () => {
     return (

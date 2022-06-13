@@ -1,21 +1,20 @@
 // ** React Imports
 import {Fragment, memo, useState} from 'react'
-
 // ** Table Columns
-import {orderColumns} from "../tableColumns"
+import {menuItemColumns} from "../tableColumns"
 // ** data from datatable
+import {getMenuItem} from "../../../fakeData"
 // ** Third Party Components
 import ReactPaginate from "react-paginate"
 import DataTable from "react-data-table-component"
 import {ChevronDown} from "react-feather"
 // ** Reactstrap Imports
 import {Card, CardHeader, CardTitle, Col, Input, Label, Row} from "reactstrap"
-import {getOrderData} from "../../../fakeData"
 
-const TableTest = () => {
+const MenuitemsTable = () => {
 
     // // ** States
-    const items = getOrderData()
+    const items = getMenuItem()
     const [currentPage, setCurrentPage] = useState(1)
     const [rowsPerPage, setRowsPerPage] = useState(7)
     const [searchValue, setSearchValue] = useState('')
@@ -97,14 +96,14 @@ const TableTest = () => {
         <Fragment>
             <Card>
                 <CardHeader className='border-bottom'>
-                    <CardTitle tag='h4'>Server Side</CardTitle>
+                    <CardTitle tag='h4'>Menu Items</CardTitle>
                 </CardHeader>
                 <Row className='mx-0 mt-1 mb-50'>
                     <Col sm="6">
                         <div className="d-flex align-items-center">
-                            <Label for="sort-select">show</Label>
+                            <Label for="sort-select" className="m-1">show</Label>
                             <Input
-                                className="dataTable-select"
+                                className="dataTable-select w-25"
                                 type="select"
                                 id="sort-select"
                                 value={rowsPerPage}
@@ -117,7 +116,7 @@ const TableTest = () => {
                                 <option value={75}>75</option>
                                 <option value={100}>100</option>
                             </Input>
-                            <Label for="sort-select">entries</Label>
+                            <Label for="sort-select" className="m-1">entries</Label>
                         </div>
                     </Col>
                     <Col
@@ -143,7 +142,7 @@ const TableTest = () => {
                         pagination
                         // paginationServer
                         className='react-dataTable'
-                        columns={orderColumns}
+                        columns={menuItemColumns}
                         sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
                         data={dataToRender()}
@@ -156,4 +155,4 @@ const TableTest = () => {
     )
 }
 
-export default memo(TableTest)
+export default memo(MenuitemsTable)

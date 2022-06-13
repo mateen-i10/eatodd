@@ -14,6 +14,72 @@ export default [
         navLink: '/dashboard/home'
     },
     {
+        id: 'Administrator',
+        title: 'Administrator',
+        children: [
+            {
+                id: 'Dashboard',
+                title: 'Dashboard',
+                icon: <Home size={20}/>,
+                navLink: '/dashboard'
+            },
+            {
+                id: 'Users',
+                title: 'Users',
+                icon: <UserPlus size={20}/>,
+                navLink: '/Users'
+            },
+            {
+                id: 'Restaurants',
+                title: 'Restaurants',
+                icon: <UserPlus size={20}/>,
+                navLink: '/Restaurant'
+            },
+            {
+                id: 'FaceBookAutoPost',
+                title: 'FaceBook Auto Post',
+                icon: <UserPlus size={20}/>,
+                navLink: '/Facebook'
+            },
+            {
+                id: 'Customers',
+                title: 'Customers',
+                icon: <UserPlus size={20}/>,
+                navLink: '/Customers'
+            },
+            {
+                id: 'CRMemails',
+                title: 'CRM (Emails)',
+                icon: <UserPlus size={20}/>,
+                navLink: '/CrmEmails'
+            },
+            {
+                id: 'CRMsms',
+                title: 'CRM (SMS)',
+                icon: <UserPlus size={20}/>,
+                navLink: '/CrmSms'
+            },
+            {
+                id: 'Bussiness Details',
+                title: 'Bussiness Details',
+                icon: <UserPlus size={20}/>,
+                navLink: ''
+            },
+            {
+                id: 'Login History',
+                title: 'Login History',
+                icon: <UserPlus size={20}/>,
+                navLink: ''
+            }
+        ]
+    },
+    {
+        id: 'Products',
+        title: 'Products',
+        icon: <Mail size={20}/>,
+        navLink: '/home'
+    },
+    {
         id: 'northave',
         title: 'North Ave',
         // badge: 'light-warning',
@@ -94,71 +160,166 @@ export default [
             }
         ]
     },
-
-  {
-    id: 'Administrator',
-    title: 'Administrator',
-    children: [
-      {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        icon: <Home size={20} />,
-        navLink: '/dashboard'
-      },
-      {
-        id: 'Users',
-        title: 'Users',
-        icon: <UserPlus size={20} />,
-        navLink: '/Users'
-      },
-      {
-        id: 'Restaurants',
-        title: 'Restaurants',
-        icon: <UserPlus size={20} />,
-        navLink: '/Restaurant'
-      },
-      {
-        id: 'FaceBookAutoPost',
-        title: 'FaceBook Auto Post',
-        icon: <UserPlus size={20} />,
-        navLink: '/Facebook'
-      },
-      {
-        id: 'Customers',
-        title: 'Customers',
-        icon: <UserPlus size={20} />,
-        navLink: '/Customers'
-      },
-      {
-        id: 'CRMemails',
-        title: 'CRM (Emails)',
-        icon: <UserPlus size={20} />,
-        navLink: '/CrmEmails'
-      },
-      {
-        id: 'CRMsms',
-        title: 'CRM (SMS)',
-        icon: <UserPlus size={20} />,
-        navLink: '/CrmSms'
-      },
-      {
-        id: 'Bussiness Details',
-        title: 'Bussiness Details',
-        icon: <UserPlus size={20} />,
-        navLink: ''
-      },
-      {
-        id: 'Login History',
-        title: 'Login History',
-        icon: <UserPlus size={20} />,
-        navLink: ''
-      }
-    ]
-  },
-  {
-    id: 'Products',
-    title: 'Products',
-    icon: <Mail size={20} />,
-    navLink: '/home'
-  }
+    {
+        id: 'vanBuren',
+        title: 'VAN BUREN',
+        // badge: 'light-warning',
+        // badgeText: '2',
+        children: [
+            {
+                id: 'orders',
+                title: 'Orders',
+                icon: <Clipboard size={20}/>,
+                navLink: '/dashboard/orders'
+            },
+            {
+                id: 'menuitems',
+                title: 'Menu Items',
+                icon: <Menu size={12}/>,
+                navLink: '/dashboard/menuitems'
+            },
+            {
+                id: 'category',
+                title: 'Category',
+                icon: <Grid size={12}/>,
+                navLink: '/dashboard/category'
+            },
+            {
+                id: 'modifier',
+                title: 'Modifier',
+                icon: <List size={12}/>,
+                navLink: '/dashboard/modifier'
+            },
+            {
+                id: 'addon',
+                title: 'Addon',
+                icon: <PlusSquare size={12}/>,
+                navLink: '/dashboard/addon'
+            },
+            {
+                id: 'promotion',
+                title: 'Promotion',
+                icon: <DollarSign size={12}/>,
+                navLink: '/dashboard/promotion'
+            },
+            {
+                id: 'customer',
+                title: 'Customer',
+                icon: <UserPlus size={12}/>,
+                navLink: '/dashboard/customer'
+            },
+            {
+                id: 'inventory',
+                title: 'Inventory',
+                icon: <Box size={12}/>,
+                children: [
+                    {
+                        id: 'item',
+                        title: 'Item',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/item'
+                    },
+                    {
+                        id: 'category',
+                        title: 'Category',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/category'
+                    },
+                    {
+                        id: 'distributor',
+                        title: 'Distributor',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/distributor'
+                    },
+                    {
+                        id: 'recipe',
+                        title: 'Recipe',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/recipe'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'frenchMarket',
+        title: 'FRENCH MARKET',
+        // badge: 'light-warning',
+        // badgeText: '2',
+        children: [
+            {
+                id: 'orders',
+                title: 'Orders',
+                icon: <Clipboard size={20}/>,
+                navLink: '/dashboard/orders'
+            },
+            {
+                id: 'menuitems',
+                title: 'Menu Items',
+                icon: <Menu size={12}/>,
+                navLink: '/dashboard/menuitems'
+            },
+            {
+                id: 'category',
+                title: 'Category',
+                icon: <Grid size={12}/>,
+                navLink: '/dashboard/category'
+            },
+            {
+                id: 'modifier',
+                title: 'Modifier',
+                icon: <List size={12}/>,
+                navLink: '/dashboard/modifier'
+            },
+            {
+                id: 'addon',
+                title: 'Addon',
+                icon: <PlusSquare size={12}/>,
+                navLink: '/dashboard/addon'
+            },
+            {
+                id: 'promotion',
+                title: 'Promotion',
+                icon: <DollarSign size={12}/>,
+                navLink: '/dashboard/promotion'
+            },
+            {
+                id: 'customer',
+                title: 'Customer',
+                icon: <UserPlus size={12}/>,
+                navLink: '/dashboard/customer'
+            },
+            {
+                id: 'inventory',
+                title: 'Inventory',
+                icon: <Box size={12}/>,
+                children: [
+                    {
+                        id: 'item',
+                        title: 'Item',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/item'
+                    },
+                    {
+                        id: 'category',
+                        title: 'Category',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/category'
+                    },
+                    {
+                        id: 'distributor',
+                        title: 'Distributor',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/distributor'
+                    },
+                    {
+                        id: 'recipe',
+                        title: 'Recipe',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/recipe'
+                    }
+                ]
+            }
+        ]
+    }
 ]

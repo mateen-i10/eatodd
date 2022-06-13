@@ -136,7 +136,29 @@ const menuItemData = [
         modifier: "Healthy spread",
         addon: "",
         prices: '$23896.35',
-        action: ''
+        actions: ''
+
+    }, {
+        responsive_id: '',
+        id: 2,
+        images: "",
+        name: "Korrie O'Crevy",
+        category: "Build your own plate",
+        modifier: "Healthy spread",
+        addon: "",
+        prices: '$23896.35',
+        actions: ''
+
+    }, {
+        responsive_id: '',
+        id: 3,
+        images: "",
+        name: "Korrie O'Crevy",
+        category: "Build your own plate",
+        modifier: "Healthy spread",
+        addon: "",
+        prices: '$23896.35',
+        actions: ''
 
     }
 ]
