@@ -78,8 +78,7 @@ const AddUserExample = () => {
 
     return (
         <Fragment>
-            {show === false ? <Link to="/users" /> : []}
-            <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
                 <Link to="/Users">
                 <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 </Link>
