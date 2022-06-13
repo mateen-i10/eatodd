@@ -66,7 +66,7 @@ const AddFaceBookpost = () => {
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
-                        <h1 className='mb-1'>Add a New User</h1>
+                        <h1 className='mb-1'>Add a New Post</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-3">

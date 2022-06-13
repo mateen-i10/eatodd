@@ -58,14 +58,13 @@ const ScheduleSms = () => {
 
     return (
         <Fragment>
-            {show === false ? <Link to="/users" /> : []}
             <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered modal-lg'>
-                <Link to="/Users">
+                <Link to="/CrmSms">
                     <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
-                        <h1 className='mb-1'>Add a New User</h1>
+                        <h1 className='mb-1'>Add a New Scheduled SMS</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-3">
