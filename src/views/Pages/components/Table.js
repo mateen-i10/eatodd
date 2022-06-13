@@ -1,5 +1,4 @@
 import DataTable from 'react-data-table-component'
-
 // ** Reactstrap Imports
 import {Button, Card, CardHeader, CardTitle, Input} from 'reactstrap'
 import {ChevronDown} from "react-feather"
@@ -17,7 +16,7 @@ const DataTablesBasic = (props) => {
             <CardHeader>
                 <CardTitle tag='h4'>{props.tabletitle}</CardTitle>
                 <Link to = '/AddUser'>
-                    <Button class="btn-primary">Add a new User</Button>
+                    <Button.Ripple color='primary'>Add a new User</Button.Ripple>
                 </Link>
             </CardHeader>
 

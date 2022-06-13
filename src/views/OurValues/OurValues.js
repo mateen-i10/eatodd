@@ -4,7 +4,6 @@ import './OurValues.css'
 import heroBowlsm from './images/hero-bowl-sm.png'
 import heroBowltext from './images/subtitle-01-lg.svg'
 import heroBurritolg from './images/hero-burrito-lg.png'
-import freshfoodVideo from './video/food_sequence_xlarge.mp4'
 import no1lg from './images/no-01-lg.svg'
 import no2 from "./images/no-02.svg"
 import freshFood from "./images/freshfood.svg"
@@ -62,9 +61,7 @@ class OurValues extends Component {
                    <img className="w-sm-auto h-sm-auto" src={foodThought} alt="This isn't just food for thought, it's thought for food" />
                </div>
                 <div className="position-relative top-0 start-0 container-fluid VideoSection">
-                    <video className="position-absolute top-0 start-0 VideoSection-video" muted loop playsInline autoPlay >
-                        <source src={freshfoodVideo} type="video/mp4"/>
-                    </video>
+                    {/*video removed from here*/}
                     <img className="position-absolute top-0 start-50 translate-middle-x w-75" src={freshFood} alt="Being real means making food fresh every day"/>
                     <div className="position-absolute bottom-0 start-50 translate-middle-x w-50">
                     <div className="VideoSection__text">

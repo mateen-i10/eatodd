@@ -14,6 +14,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/login',
+        component: lazy(() => import('../../views/Login')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
         layout: 'BlankLayout'
@@ -337,7 +342,12 @@ const Routes = [
     path: '/CrmSms',
     component: lazy(() => import('../../views/Pages/crmSms/CrmSms')),
     layout: 'VerticalLayout'
-  }
+  },
+    {
+        path: '/homepage',
+        component: lazy(() => import('../../views/wine/Pages/Homepage')),
+        layout: 'BlankLayout'
+    }
 
 ]
 
