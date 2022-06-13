@@ -1,12 +1,12 @@
 import React from 'react'
 import './SinglePage.css'
-import Header from "../../../shared/header/Header"
+import Headerwine from "../../../shared/wine-header/Header-wine"
 import Footer from "../../../shared/footer/Footer"
 
 const SinglePage = () => {
     return (
         <div>
-            <Header />
+            <Headerwine />
             <div className="single-page">
                 <section id="product-1" className="pt-100 single-product division">
                     <div className="container-sm">

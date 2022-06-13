@@ -1,5 +1,4 @@
-import {
-    Archive,
+import { Archive,
     Box,
     Clipboard, Clock,
     Coffee,
@@ -11,8 +10,7 @@ import {
     Menu, MessageSquare,
     PlusSquare, User,
     UserPlus,
-    Users
-} from 'react-feather'
+    Users} from 'react-feather'
 
 export default [
     {
@@ -121,32 +119,7 @@ export default [
                 id: 'inventory',
                 title: 'Inventory',
                 icon: <Box size={12}/>,
-                children: [
-                    {
-                        id: 'item',
-                        title: 'Item',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/item'
-                    },
-                    {
-                        id: 'category',
-                        title: 'Category',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/category'
-                    },
-                    {
-                        id: 'distributor',
-                        title: 'Distributor',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/distributor'
-                    },
-                    {
-                        id: 'recipe',
-                        title: 'Recipe',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/recipe'
-                    }
-                ]
+                navLink: '/dashboard/inventory'
             }
         ]
     }

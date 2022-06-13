@@ -1,13 +1,13 @@
 import React from 'react'
 import './Faq.css'
-import Header from "../../../shared/header/Header"
+import Headerwine from "../../../shared/wine-header/Header-wine"
 import NewsLetter from "../components/NewsLetter"
 import Footer from "../../../shared/footer/Footer"
 
 const Faq = () => {
     return (
         <div>
-            <Header/>
+            <Headerwine/>
             <div className="faq-page">
                 <div id="faqs-page" className="page-hero-section division">
                     <div className="container-fluid">

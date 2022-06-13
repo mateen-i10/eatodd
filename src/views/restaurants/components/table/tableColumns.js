@@ -6,13 +6,13 @@ import {Edit, Trash} from "react-feather"
 // ** Vars
 // const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
-const status = {
-    1: {title: 'Current', color: 'light-primary'},
-    2: {title: 'Professional', color: 'light-success'},
-    3: {title: 'Rejected', color: 'light-danger'},
-    4: {title: 'Resigned', color: 'light-warning'},
-    5: {title: 'Applied', color: 'light-info'}
-}
+// const status = {
+//     1: {title: 'Current', color: 'light-primary'},
+//     2: {title: 'Professional', color: 'light-success'},
+//     3: {title: 'Rejected', color: 'light-danger'},
+//     4: {title: 'Resigned', color: 'light-warning'},
+//     5: {title: 'Applied', color: 'light-info'}
+// }
 export const orderColumns = [
     {
         sortable: true,
@@ -58,7 +58,8 @@ export const menuItemColumns = [
         name: 'Images',
         minWidth: '200px',
         selector: row => row.images,
-        cell: row => <img height="84px" width="56px" alt={row.name} src={row.posterUrl}/>
+        cell: row => <img height="84px" width="56px" alt={row.name}
+                          src={require("../../../../assets/images/pages/wine/wine-gift.jpg").default}/>
     },
     {
         sortable: true,
@@ -79,8 +80,8 @@ export const menuItemColumns = [
         selector: row => row.modifier,
         cell: row => {
             return (
-                <Badge color={status[row.status].color} pill>
-                    {status[row.status].title}
+                <Badge pill>
+                    {row.modifier}
                 </Badge>
             )
         }
@@ -90,11 +91,12 @@ export const menuItemColumns = [
         name: 'Addon',
         minWidth: '150px',
         selector: row => row.addon,
-        cell: row => {
+        cell: (row) => {
             return (
-                <Badge color={status[row.status].color} pill>
-                    {status[row.status].title}
-                </Badge>
+                <div>
+                    <Badge>{row.name}
+                    </Badge>
+                </div>
             )
         }
     },
@@ -102,7 +104,7 @@ export const menuItemColumns = [
         sortable: true,
         name: 'Price',
         minWidth: '150px',
-        selector: row => row.price
+        selector: row => row.prices
     },
     {
         sortable: true,
@@ -110,9 +112,9 @@ export const menuItemColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -144,9 +146,9 @@ export const categoryColumns = [
         minWidth: '150px',
         selector: row => row.action,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -171,11 +173,12 @@ export const modifierColumns = [
         name: 'Options',
         minWidth: '250px',
         selector: row => row.options,
-        cell: row => {
+        cell: (row) => {
             return (
-                <Badge color={status[row.status].color} pill>
-                    {status[row.status].title}
-                </Badge>
+                <div>
+                    <Badge>{row.name}
+                    </Badge>
+                </div>
             )
         }
     },
@@ -185,9 +188,9 @@ export const modifierColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -212,11 +215,12 @@ export const addonColumns = [
         name: 'Options',
         minWidth: '250px',
         selector: row => row.options,
-        cell: row => {
+        cell: (row) => {
             return (
-                <Badge color={status[row.status].color} pill>
-                    {status[row.status].title}
-                </Badge>
+                <div>
+                    <Badge>{row.name}
+                    </Badge>
+                </div>
             )
         }
     },
@@ -226,9 +230,9 @@ export const addonColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -241,11 +245,12 @@ export const promotionColumns = [
         name: 'Status',
         minWidth: '225px',
         selector: row => row.status,
-        cell: row => {
+        cell: (row) => {
             return (
-                <Badge color={status[row.status].color} pill>
-                    {status[row.status].title}
-                </Badge>
+                <div>
+                    <Badge>{row.name}
+                    </Badge>
+                </div>
             )
         }
     },
@@ -279,9 +284,9 @@ export const promotionColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -401,9 +406,9 @@ export const itemColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -430,9 +435,9 @@ export const invCategoryColumns = [
         minWidth: '250px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -482,9 +487,9 @@ export const distributorColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }
@@ -516,9 +521,9 @@ export const recipeColumns = [
         minWidth: '150px',
         selector: row => row.actions,
         cell: () => {
-            return (<div className="d-flex flex-row m-1">
-                    <span className="btn btn-warning"><Trash size={15}/> </span>
-                    <span className="btn btn-danger"><Edit size={15}/></span>
+            return (<div className="d-flex flex-row">
+                    <span className="btn  btn-danger m-1"><Trash size={15}/> </span>
+                    <span className="btn  btn-warning m-1"><Edit size={15}/></span>
                 </div>
             )
         }

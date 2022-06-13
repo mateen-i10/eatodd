@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "../header/Header.css"
+import { Button } from 'reactstrap'
 import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import { Link } from "react-router-dom"
@@ -34,35 +35,21 @@ const Headerwine = () => {
                         <img className="logo" src={logo} />
                         <div className="headlogin">
                             <img className="usericon" src={usericon}/>
-                            <b className="signtext">Sign In</b>
+                            <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>
 
                     </div>
                     <div className="head-sec-2">
                         <Link to="/"><h2>Home</h2></Link>
-                        <Link to="//wine/about"><h2>About</h2></Link>
-                        <Link><div className="wine-dropdown">
-                            <h2>
-                                WINE
-                                <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
-                            </h2>
-                            <div className="wine-menu">
-                                <Link to="/wine/membership">Membership</Link>
-                                <Link to="/wine/about" >About</Link>
-                                <Link to ="/wine/faq" >F.A.Q's</Link>
-                                <Link to="/wine/shop">Shop</Link>
-                            </div>
-                        </div></Link>
+                        <Link to="/wine/about"><h2>About</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/shop"><h2>Shop</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
                     <div className="head-sec-3">
-                        <div className="eatOMG">
-                            <i className="ri-checkbox-blank-circle-fill"></i>
-                            <span className="seprator"></span>
-                            <p>Delivery address</p>
-                        </div>
+                        <Link to="/home">
+                            <Button.Ripple color='primary'>EATOMG</Button.Ripple>
+                        </Link>
 
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
@@ -107,23 +94,11 @@ const Headerwine = () => {
 
                 <nav className="nav">
                     <div className="nav-sec-1">
-                        <Link to="/home"><h2>ORDER</h2></Link>
-                        <Link to="/menu"><h2>CATERING</h2></Link>
-                        <Link><div className="wine-dropdown">
-                            <h2>
-                                WINE
-                                <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
-                            </h2>
-                            <div className="wine-menu">
-                                <Link to="/wine/membership">Membership</Link>
-                                <Link to="/wine/about" >About</Link>
-                                <Link to ="/wine/faq" >F.A.Q's</Link>
-                                <Link to="/wine/shop" >Shop</Link>
-                            </div>
-                        </div></Link>
-                        <Link to="/reward"><h2>REWARDS</h2></Link>
-                        <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
-                        <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
+                        <Link to="/wine/homepage"><h2>Home</h2></Link>
+                        <Link to="/wine/about"><h2>About</h2></Link>
+                        <Link to="/wine/membership"><h2>Membership</h2></Link>
+                        <Link to="/wine/shop"><h2>Shop</h2></Link>
+                        <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">

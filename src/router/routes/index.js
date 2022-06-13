@@ -354,7 +354,7 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
-        path: '/homepage',
+        path: '/wine/homepage',
         component: lazy(() => import('../../views/wine/Pages/Homepage')),
         layout: 'BlankLayout'
     }

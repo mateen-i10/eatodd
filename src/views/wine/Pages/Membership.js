@@ -2,7 +2,7 @@ import React from 'react'
 import './Membership.css'
 import HeroSection from "../components/HeroSection"
 import NewsLetter from "../components/NewsLetter"
-import Header from "../../../shared/header/Header"
+import Headerwine from "../../../shared/wine-header/Header-wine"
 import Footer from "../../../shared/footer/Footer"
 import {store} from "../../../redux/store"
 
@@ -10,7 +10,7 @@ const Membership = () => {
     console.log(store.getState())
     return (
         <div>
-            <Header />
+            <Headerwine />
             <HeroSection />
             <div className="container-sm membership-page">
                 <div className="row align-items-center justify-content-center">

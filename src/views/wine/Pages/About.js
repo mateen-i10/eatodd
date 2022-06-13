@@ -1,13 +1,13 @@
 import React from 'react'
 import './About.css'
-import Header from "../../../shared/header/Header"
+import Headerwine from "../../../shared/wine-header/Header-wine"
 import Footer from "../../../shared/footer/Footer"
 import NewsLetter from "../components/NewsLetter"
 
 const About = () => {
         return (
             <div>
-                <Header />
+                <Headerwine />
                 <div className="about-page">
                     <div id="about-page" className="page-hero-section division">
                         <div className="container-fluid">
