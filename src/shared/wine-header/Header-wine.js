@@ -37,10 +37,9 @@ const Headerwine = () => {
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>
-
                     </div>
                     <div className="head-sec-2">
-                        <Link to="/"><h2>Home</h2></Link>
+                        <Link to="/wine/homepage"><h2>Home</h2></Link>
                         <Link to="/wine/about"><h2>About</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/shop"><h2>Shop</h2></Link>

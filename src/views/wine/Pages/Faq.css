@@ -71,7 +71,7 @@ h2 {
 .page-hero-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #57ab00 !important;
+    color: #81be41 !important;
 }
 .wide-100 {
     padding-top: 100px;
@@ -95,7 +95,7 @@ h5.h5-xs{
     font-family: inherit;
     font-size: 1.2rem;
     text-transform: uppercase;
-    color: #57ab00;
+    color: #81be41;
     line-height: 1.6rem;
 }
 @media (min-width: 321px) and (max-width: 413.95px) {
@@ -118,6 +118,6 @@ p {
 }
 .btn-green {
     color: rgb(255 255 255)!important;
-    background-color: #57ab00 !important;
-    border-color: #57ab00 !important;
+    background-color: #81be41 !important;
+    border-color: #81be41 !important;
 }

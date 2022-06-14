@@ -6,7 +6,7 @@
 }
 
 .intro-para-container p{
-    color: #451400;
+    color: #81be41;
     font-size: 1rem;
     margin-top: 20px;
     width: 75%;
@@ -24,14 +24,14 @@
 }
 
 .section-area-heading h1{
-    color: #451400;
+    color: #81be41;
     font-size: 2em;
     font-weight: bolder;
     text-transform: uppercase;
 }
 
 .section-area-heading h6{
-    color: #451400;
+    color: #81be41;
     font-size: 1.2rem;
 }
 
@@ -47,7 +47,7 @@
 
 .Fooditems:hover{
     border: solid;
-    border-color: #451400;
+    border-color: #81be41;
     border-width: 2px;
 }
 
@@ -66,7 +66,7 @@
     font-family: Tahoma;
     font-size: 1.3em;
     font-weight: bolder;
-    color: #451400;
+    color: #81be41;
     padding-left: 1em;
     padding-top: 2em;
 }

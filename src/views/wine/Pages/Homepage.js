@@ -1,8 +1,11 @@
 import React from 'react'
+import "./Shop.css"
+import { Button } from 'reactstrap'
 import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import './About.css'
 import Footer from "../../../shared/footer/Footer"
+import {Link} from "react-router-dom"
 const Homepage = () => {
     return (
         <>
@@ -14,13 +17,12 @@ const Homepage = () => {
                         <div className="row d-flex align-items-center justify-content-center ">
                             <div className="col-md-5 col-lg-5">
                                 <div className="about-3-img text-center mb-40">
-                                    <img className="img-fluid"  style={{width:"100%", height:"100%"}} src={require('../../../assets/images/pages/wine/about/brett-jordan-unsplash.jpg').default} alt="about-image"/>
+                                    <img className="img-fluid"  style={{width:"100%", height:"100%"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
                                 </div>
                             </div>
                             <div className="col-md-7 col-lg-5">
                                 <div className="about-3-txt mb-40">
-
-                                    <h2 className="h2-sm mb-lg-3 mt-1">Nothing brings people together like a good Wine</h2>
+                                    {/*<h2 className="h2-sm mb-lg-3 mt-1">Nothing brings people together like a good Wine</h2>*/}
                                     <p className="p-md">The OMG Wine Club was created to make you say OMG at your savings!
                                         We are the 1st wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty to OMG.
                                         As our way to say THANK YOU, we are extending you the opportunity to purchase your favorite wines AT COST!
@@ -28,18 +30,15 @@ const Homepage = () => {
                                         we just want you to EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
                                     </p>
                                     <ul className="txt-list">
-
                                         <li className="list-item">
                                             <p className="p-md">Fringilla risus, luctus mauris orci auctor purus euismod
                                                 pretium
                                                 purus pretium ligula rutrum tempor sapien
                                             </p>
                                         </li>
-
                                         <li className="list-item">
                                             <p className="p-md">Quaerat sodales sapien euismod purus blandit</p>
                                         </li>
-
                                         <li className="list-item">
                                             <p className="p-md">Nemo ipsam egestas volute turpis dolores ut aliquam
                                                 quaerat sodales
@@ -57,7 +56,8 @@ const Homepage = () => {
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
                             <div className="col-lg-8 ">
                                 <div className="about-1-txt text-center">
-                                    <h2><span className="green-color">omg…</span> what else?</h2>
+                                    <h2><span className="green-color">Sommelier’s Selection</span></h2>
+                                    <h3>WINE OF THE WEEK</h3>
                                     <p className="p-xl grey-color">Porta semper lacus cursus, feugiat primis ultrice a
                                         ligula risus auctor an
                                         tempus feugiat dolor lacinia cubilia curae integer orci congue and metus
@@ -69,11 +69,9 @@ const Homepage = () => {
                                         <div className="row d-flex flex-wrap">
                                             <div className="col-6 col-sm-4 col-md-2">
                                                 <div className="abox-1 mb-40">
-
                                                     <div className="abox-1-ico grey-color"><span
                                                         className="fas fa-wine-bottle"></span></div>
                                                     <h6 className="h6-xl">Wine</h6>
-
                                                 </div>
                                             </div>
                                             <div className="col-6 col-sm-4 col-md-2">
@@ -113,39 +111,197 @@ const Homepage = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" className="btn btn-md btn-green tra-red-hover">Explore Full
-                                        Menu</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section id="about-4" className="wide-60 about-section division">
-                    <div className="container-fluid">
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center">
-                            <div className="col-md-7 col-lg-5">
-                                <div className="about-4-txt mb-40">
-                                    <h2 className="h2-sm">Discover the new taste of the Wine</h2>
-                                    <p className="p-md grey-color">Porta semper lacus cursus, feugiat primis ultrice and
-                                        ligula risus auctor an
-                                        tempus feugiat dolor lacinia cubilia a curae integer orci congue and metus
-                                        mollislorem primis
-                                    </p>
-                                    <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-430.jpg").default} alt="about-image"/>
+                <div className="container">
+                    <div id="tabs-content">
+                        {/*// <!-- TAB-1 CONTENT -->*/}
+                        <div id="tab-1" className="tab-content current">
+                            <div className="row d-flex flex-wrap">
+
+                                {/*// <!-- MENU ITEM #1 -->*/}
+                                <div className="col-sm-6 col-lg-3">
+                                    <div className="menu-7-item">
+
+                                        <div className="menu-7-img rel">
+
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default} alt="menu-image"/>
+
+                                            {/*// <!-- Price -->*/}
+                                            <div className="menu-7-price bg-coffee">
+                                                <h5 className="h5-xs yellow-color">$8.95</h5>
+                                            </div>
+
+                                            {/*// <!-- Rating -->*/}
+                                            <div className="item-rating">
+                                                <div className="stars-rating stars-lg">
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+
+                                            {/*// <!-- Like Icon -->*/}
+                                            <div className="like-ico ico-20">
+                                                <a href="#"><span className="far fas-heart"></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="menu-7-txt rel">
+
+                                            <h5 className="h5-sm">Crispy Chicken</h5>
+
+                                            {/*<p className="grey-color">Fried chicken breast, chilli sauce, tomatoes,*/}
+                                            {/*    pickles, coleslaw</p>*/}
+
+                                            <a href="product-single.html"
+                                               className="btn btn-sm btn-tra-grey yellow-hover">
+                                                <span className="fas fa-shopping-cart"></span> Add to Cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*// <!-- MENU ITEM #2 -->*/}
+                                <div className="col-sm-6 col-lg-3">
+                                    <div className="menu-7-item">
+
+                                        {/*Image*/}
+                                        <div className="menu-7-img rel">
+
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+
+                                            <div className="menu-7-price bg-coffee">
+                                                <h5 className="h5-xs yellow-color">$9.99</h5>
+                                            </div>
+
+                                            <div className="item-rating">
+                                                <div className="stars-rating stars-lg">
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="far fa-star"></i>
+                                                </div>
+                                            </div>
+
+                                            <div className="like-ico ico-20">
+                                                <a href="#"><span className="flaticon-heart"></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="menu-7-txt rel">
+
+                                            <h5 className="h5-sm">Ultimate Bacon</h5>
+
+                                            {/*<p className="grey-color">House beef patty, cheddar cheese, bacon, onion,*/}
+                                            {/*    mustard</p>*/}
+
+                                            <a href="product-single.html"
+                                               className="btn btn-sm btn-tra-grey yellow-hover">
+                                                <span className="fas fa-shopping-cart"></span> Add to Cart
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {/*// <!-- MENU ITEM #3 -->*/}
+                                <div className="col-sm-6 col-lg-3">
+                                    <div className="menu-7-item">
+
+                                        <div className="menu-7-img rel">
+
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default} alt="menu-image"/>
+
+                                            <div className="menu-7-price bg-coffee">
+                                                <h5 className="h5-xs yellow-color">$7.99</h5>
+                                            </div>
+
+                                            <div className="item-rating">
+                                                <div className="stars-rating stars-lg">
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="far fa-star"></i>
+                                                </div>
+                                            </div>
+
+                                            <div className="like-ico ico-20">
+                                                <a href="#"><span className="flaticon-heart"></span></a>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="menu-7-txt rel">
+
+                                            <h5 className="h5-sm">Smokey House</h5>
+
+                                            {/*<p className="grey-color">Beef patty, cheddar cheese, onion, lettuce,*/}
+                                            {/*    tomatoes, pickles</p>*/}
+                                            <a href="product-single.html"
+                                               className="btn btn-sm btn-tra-grey yellow-hover">
+                                                <span className="fas fa-shopping-cart"></span> Add to Cart
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {/*// <!-- MENU ITEM #4 -->*/}
+                                <div className="col-sm-6 col-lg-3">
+                                    <div className="menu-7-item">
+                                        <div className="menu-7-img rel">
+                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+
+                                            <div className="menu-7-price bg-coffee">
+                                                <h5 className="h5-xs yellow-color">$8.30</h5>
+                                            </div>
+
+                                            <div className="item-rating">
+                                                <div className="stars-rating stars-lg">
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star"></i>
+                                                    <i className="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                            <div className="like-ico ico-20">
+                                                <a href="#"><span className="flaticon-heart"></span></a>
+                                            </div>
+                                        </div>
+                                        <div className="menu-7-txt rel">
+                                            <h5 className="h5-sm">Turkey Burger</h5>
+                                            {/*<p className="grey-color">Turkey, cheddar cheese, onion, lettuce, tomatoes,*/}
+                                            {/*    pickles</p>*/}
+                                            <a href="product-single.html"
+                                               className="btn btn-sm btn-tra-grey yellow-hover">
+                                                <span className="fas fa-shopping-cart"></span> Add to Cart
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-md-5 col-lg-5">
-                                <div className="about-4-img mb-40">
-                                    <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/aesop-wines-unsplash-450.jpg").default} alt="about-image"/>
-                                    <p className="p-md grey-color">Porta semper lacus cursus, feugiat primis ultrice
-                                        and ligula risus auctor orci
-                                        tempus feugiat dolor lacinia cubilia integer
-                                    </p>
-                                </div>
+                            {/*// <!-- End row -->*/}
+                            <div className="about-1-txt text-center">
+                                <Link to="/wine/shop">
+                                    <Button.Ripple color='primary' outline>
+                                        Explore Full Menu
+                                    </Button.Ripple>
+                                </Link>
                             </div>
                         </div>
+                        {/*// <!-- END TAB-1 CONTENT -->*/}
                     </div>
-                </section>
+                </div>
                 <section id="blog-1" className="wide-60 blog-section division">
                     <div className="container-fluid">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">

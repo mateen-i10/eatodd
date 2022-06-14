@@ -12,7 +12,7 @@
 }
 
 .card-body-sec h2 {
-    color: #57ab00;
+    color: #81be41;
 }
 
 .card-body-sec p {
@@ -25,7 +25,7 @@
     letter-spacing: 0.5px;
     border: 1px solid rgb(0 0 0 / 0%)!important;
     border-radius: 0.528rem !important;
-    background-color: #57ab00;
+    background-color: #81be41;
     color: whitesmoke;
 }
     .btn-green:hover {
@@ -36,7 +36,7 @@
     border-radius: 0.528rem;
 }
 .member-card:hover {
-    background-color: #57ab00;
+    background-color: #81be41;
     color: whitesmoke;
 }
 .member-card:hover h2{
@@ -55,7 +55,7 @@
 }
 .member-price{
     font-size: 200%;
-    color: #57ab00;
+    color: #81be41;
 }
 .doller-sign{
     padding-top: -10px;

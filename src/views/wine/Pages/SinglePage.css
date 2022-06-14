@@ -156,7 +156,7 @@ button, input {
     transition: all 500ms ease-in-out;
 }
 .bg-green {
-    background-color: #57ab00;
+    background-color: #81be41;
 }
 .add-to-cart-btn >a {
     color: whitesmoke;
@@ -212,7 +212,7 @@ p.p-sm {
     }
 }
 #product-1-data .tabs-1 li.current {
-    background-color: #57ab00;
+    background-color: #81be41;
 }
 .tab-link.current >h5{
     color: whitesmoke !important;

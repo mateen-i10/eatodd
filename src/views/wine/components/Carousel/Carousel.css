@@ -1,0 +1,12 @@
+.banner-text2 {
+    user-select: none;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 25px;
+    color: #81be41;
+    margin-top: 8%;
+    /*padding-bottom: 30px;*/
+    line-height: 30px;
+    width: 100%;
+}

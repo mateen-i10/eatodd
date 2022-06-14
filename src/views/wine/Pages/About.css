@@ -57,7 +57,7 @@ h2 {
 .page-hero-section h2 {
     font-size: 2.5rem;
     font-weight: 500;
-    color: #57ab00 !important;
+    color: #81be41 !important;
 }
 .wide-60 {
     padding-top: 100px;
@@ -82,7 +82,7 @@ h2 {
 }
 h2.h2-sm {
     font-size: 3.25rem;
-    color: #57ab00;
+    color: #81be41;
 }
 @media (min-width: 321px) and (max-width: 413.95px) {
     .about-3-txt h2, .about-4-txt h2, .about-5-txt h2, .about-6-txt h2 {
@@ -105,7 +105,7 @@ p.p-md {
     }
 }
 .green-color{
-    color: #57ab00;
+    color: #81be41;
 }
 
 /*.p-md{*/
@@ -185,11 +185,11 @@ h1, h3, h4, h5, h6 {
 }
 .btn-green{
     color: rgb(255 255 255)!important;
-    background-color: #57ab00 !important;
-    border-color: #57ab00 !important;
+    background-color: #81be41 !important;
+    border-color: #81be41 !important;
 }
 .btn-green:hover{
-    color: #57ab00;
+    color: #81be41;
     background-color: transparent;
 }
 .about-4-txt {
@@ -254,7 +254,7 @@ p.p-md {
 }
 h3.h3-sm{
     font-size: 2.62rem;
-    color: #57ab00 !important;
+    color: #81be41 !important;
 }
 p.p-lg {
     font-size: 1.1875rem;
@@ -292,7 +292,7 @@ p.p-lg {
     }
 }
 .h2-xl{
-    color: #57ab00;
+    color: #81be41;
 }
 .wide-60 {
     padding-top: 80px;

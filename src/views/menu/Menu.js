@@ -38,9 +38,9 @@ const Menu = () => {
                             <div className="col-md-7 col-lg-6">
                                 <div className="banner-3-img" style={{textAlign:'left', paddingLeft:135}}>
                                     <div>
-                                        <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BURRITOS</h1>
-                                        <h1 style={{color:'#57ab00', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 350, letterSpacing: -2, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BY THE BOX</h1>
-                                        <h6 style={{color:'#57ab00', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 6 people</h6>
+                                        <h1 style={{color:'#81be41', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 300, letterSpacing: -1, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BURRITOS</h1>
+                                        <h1 style={{color:'#81be41', verticalAlign: 'middle', fontWeight: 700, fontSize: 60, textAlign:'left', width: 350, letterSpacing: -2, lineHeight:.9, fontFamily: 'Helvetica, TradeGothic'}}>BY THE BOX</h1>
+                                        <h6 style={{color:'#81be41', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 6 people</h6>
                                         <Link to = "/EventDetails">
                                             <button type="button" className="col-md-10 btn but" id='condition' style={{height:50, marginBottom: 30, marginTop: 30}}>
                                                 START A BURRITO BOX
@@ -79,12 +79,12 @@ const Menu = () => {
                     <div className="container">
                         <div className="row d-flex align-items-center">
 
-                            <div className="col-md-7 col-lg-6" style={{border:'solid', borderLeft:0, borderTop:0, borderBottom:0, borderColor:'#57ab00'}}>
+                            <div className="col-md-7 col-lg-6" style={{border:'solid', borderLeft:0, borderTop:0, borderBottom:0, borderColor:'#81be41'}}>
                                 <div id='ControlledExample' style={{textAlign:'center'}}>
-                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>BUILD</h1>
-                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>YOUR</h1>
-                                    <h1 style={{color:'#57ab00', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>OWN</h1>
-                                    <h6 style={{color:'#57ab00', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 10 people</h6>
+                                    <h1 style={{color:'#81be41', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>BUILD</h1>
+                                    <h1 style={{color:'#81be41', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>YOUR</h1>
+                                    <h1 style={{color:'#81be41', fontSize:110, lineHeight:.92, fontFamily:'TradeGothicLTCom,TradeGothic,sans-serif', display:'block', letterSpacing:-5, fontWeight:700}}>OWN</h1>
+                                    <h6 style={{color:'#81be41', fontFamily: 'Helvetica,Arial,sans-serif'}}>Minimum 10 people</h6>
                                 </div>
                             </div>
 

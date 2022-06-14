@@ -15,7 +15,7 @@ h1 h3 h4 h5 h6 {
     font-family: inherit;
     font-size: 1.2rem;
     text-transform: uppercase;
-    color: #57ab00;
+    color: #81be41;
     line-height: 1.6rem;
 }
 
@@ -70,7 +70,7 @@ ul {
     z-index: 997;
 }
 .tabs-1.red-tabs li.current span {
-    color: #57ab00;
+    color: #81be41;
 }
 @media (min-width: 321px) and (max-width: 413.95px) {
     .tabs-1 li span {
@@ -161,7 +161,7 @@ h5.h5-xs{
     margin-bottom: 5px;
 }
 .bg-coffee {
-    background-color: #57ab00;
+    background-color: #81be41;
 }
 @media (min-width: 321px) and (max-width: 413.95px) {
     .menu-7-img .item-rating, .pbox-14-img .item-rating {
@@ -263,7 +263,7 @@ a {
 }
 .btn-tra-grey, .white-color .btn-tra-grey {
     color: whitesmoke;
-    background-color: #57ab00;
+    background-color: #81be41;
     border-color: rgb(221 221 221)!important;
 }
 .btn {
