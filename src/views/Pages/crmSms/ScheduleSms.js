@@ -58,7 +58,7 @@ const ScheduleSms = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
                 <Link to="/CrmSms">
                     <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 </Link>
