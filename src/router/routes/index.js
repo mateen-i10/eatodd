@@ -49,11 +49,6 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/about',
-        component: lazy(() => import('../../views/about/About')),
-        layout: 'BlankLayout'
-    },
-    {
         path: '/build',
         component: lazy(() => import('../../views/build/Build')),
         layout: 'BlankLayout'
@@ -115,11 +110,6 @@ const Routes = [
     {
         path: '/NutrtionIngredients',
         component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/WineClub',
-        component: lazy(() => import('../../views/wineShop/WineShop')),
         layout: 'BlankLayout'
     },
     {
@@ -230,11 +220,6 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/about',
-    component:lazy(() => import('../../views/about/About')),
-    layout: 'BlankLayout'
-  },
-  {
     path: '/build',
     component:lazy(() => import('../../views/build/Build')),
     layout: 'BlankLayout'
@@ -296,11 +281,6 @@ const Routes = [
   {
     path: '/NutrtionIngredients',
     component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
-    layout: 'BlankLayout'
-  },
-  {
-    path: '/WineClub',
-    component: lazy(() => import('../../views/wineShop/WineShop')),
     layout: 'BlankLayout'
   },
   {
