@@ -352,6 +352,11 @@ const Routes = [
         path: '/LoginHistory',
         component: lazy(() => import('../../views/Pages/loghistory/LoginHistory')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/members',
+        component: lazy(() => import('../../views/Pages/WineClubMembers/Members')),
+        layout: 'VerticalLayout'
     }
 
 ]

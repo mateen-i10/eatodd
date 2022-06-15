@@ -11,7 +11,19 @@ export const data = [
         salary: '$23896.35',
         age: '61',
         experience: '1 Year',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -25,7 +37,19 @@ export const data = [
         salary: '$13633.69',
         age: '63',
         experience: '3 Years',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -39,7 +63,19 @@ export const data = [
         salary: '$13076.28',
         age: '66',
         experience: '6 Years',
-        status: 5
+        status: 5,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -53,7 +89,19 @@ export const data = [
         salary: '$12336.17',
         age: '22',
         experience: '2 Years',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -67,7 +115,19 @@ export const data = [
         salary: '$10909.52',
         age: '33',
         experience: '3 Years',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -81,7 +141,19 @@ export const data = [
         salary: '$17803.80',
         age: '61',
         experience: '1 Year',
-        status: 1
+        status: 1,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -95,7 +167,19 @@ export const data = [
         salary: '$18991.67',
         age: '59',
         experience: '9 Years',
-        status: 3
+        status: 3,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -109,7 +193,19 @@ export const data = [
         salary: '$19230.13',
         age: '55',
         experience: '5 Years',
-        status: 3
+        status: 3,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -123,7 +219,19 @@ export const data = [
         salary: '$11677.32',
         age: '39',
         experience: '9 Years',
-        status: 5
+        status: 5,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        description: 'some description',
+        image: 'some Image',
+        published: 'Published',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -137,7 +245,16 @@ export const data = [
         salary: '$15939.52',
         age: '23',
         experience: '3 Years',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -151,7 +268,16 @@ export const data = [
         salary: '$19252.12',
         age: '30',
         experience: '0 Year',
-        status: 4
+        status: 4,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -165,7 +291,16 @@ export const data = [
         salary: '$16745.47',
         age: '22',
         experience: '2 Years',
-        status: 4
+        status: 4,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -179,7 +314,16 @@ export const data = [
         salary: '$15488.53',
         age: '36',
         experience: '6 Years',
-        status: 4
+        status: 4,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State',
+        schedule: 'Schedule',
+        sms:'Sms',
+        filter: 'some Filter'
     },
     {
         responsive_id: '',
@@ -193,7 +337,13 @@ export const data = [
         salary: '$18442.34',
         age: '43',
         experience: '3 Years',
-        status: 2
+        status: 2,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State'
     },
     {
         responsive_id: '',
@@ -207,7 +357,13 @@ export const data = [
         salary: '$13304.45',
         age: '19',
         experience: '9 Years',
-        status: 5
+        status: 5,
+        phone: '090078601',
+        role: 'role',
+        restaurant: 'restaurant',
+        address: 'Some Address',
+        dob: 'date of birth',
+        state: 'State'
     },
     {
         responsive_id: '',
@@ -221,7 +377,9 @@ export const data = [
         salary: '$11953.08',
         age: '66',
         experience: '6 Years',
-        status: 5
+        status: 5,
+        dob: 'date of birth',
+        state: 'State'
     },
     {
         responsive_id: '',
@@ -235,7 +393,9 @@ export const data = [
         salary: '$20484.44',
         age: '64',
         experience: '4 Years',
-        status: 1
+        status: 1,
+        dob: 'date of birth',
+        state: 'State'
     },
     {
         responsive_id: '',

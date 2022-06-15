@@ -87,10 +87,6 @@ const AddUserExample = () => {
                         <h1 className='mb-1'>Add a New User</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
-                        <div className="mb-3">
-                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
                                 Email
