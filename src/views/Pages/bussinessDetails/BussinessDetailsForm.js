@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, CardBody, CardHeader} from "reactstrap"
 
 const BussinessDetailsForm = (props) => {
+
     return (
         <>
             <Card>
