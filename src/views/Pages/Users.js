@@ -112,6 +112,7 @@ const Users = (props) => {
     }
     const handleFilter = e => {
         const value = e.target.value
+        console.log('the searchbar value', value)
         let updatedData = []
         setSearchValue(value)
 
@@ -149,6 +150,7 @@ const Users = (props) => {
                     return includes
                 } else return null
             })
+            console.log('updatedData', updatedData)
             setFilteredData(updatedData)
             setSearchValue(value)
         }

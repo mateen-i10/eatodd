@@ -23,7 +23,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -49,7 +54,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -75,7 +85,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -101,7 +116,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -127,7 +147,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -153,7 +178,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -179,7 +209,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -205,7 +240,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -231,7 +271,12 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        tempName: 'Template',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -254,7 +299,11 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -277,7 +326,11 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -300,7 +353,11 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',
@@ -323,7 +380,11 @@ export const data = [
         state: 'State',
         schedule: 'Schedule',
         sms:'Sms',
-        filter: 'some Filter'
+        filter: 'some Filter',
+        subject: 'some subject',
+        username: 'some username',
+        datetime: 'date/time',
+        device: 'device name'
     },
     {
         responsive_id: '',

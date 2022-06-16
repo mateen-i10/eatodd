@@ -7,28 +7,23 @@ import FormModal from '../../../components/FormModal'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import Avatar from '../../../@core/components/avatar'
-import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown} from 'react-feather'
 import {
     Card,
     CardHeader,
     CardTitle,
-    Button,
     Input,
-    Label,
     Row,
-    Col, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, CardBody
+    Col, Badge
 } from 'reactstrap'
-import {loadCustomers} from "../../../redux/member/actions"
+import {loadCustomers} from "../../../redux/customer/actions"
 import {useDispatch, useSelector} from "react-redux"
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import Joi from "joi-browser"
-import {setCustomer} from "../../../redux/member/reducer"
+import {setCustomer} from "../../../redux/customer/reducer"
 
 const Members = () => {
-    const customerList = useSelector(state => state.member.list)
-    const formInitialState = useSelector(state => state.member.object)
-    const isEdit = useSelector(state => state.member.isEdit)
+    const customerList = useSelector(state => state.customer.list)
+    const formInitialState = useSelector(state => state.customer.object)
+    const isEdit = useSelector(state => state.customer.isEdit)
     const dispatch = useDispatch()
 
     // ** local States

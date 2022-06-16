@@ -268,7 +268,10 @@ const Restaurant = (props) => {
         <Fragment>
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <CardTitle tag='h4'>Restaurant</CardTitle>
+                    <div>
+                        <CardTitle tag='h4'>Restaurant</CardTitle>
+                        <h6>Friday June 10, 2022, 08:10 AM</h6>
+                    </div>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='mt-1' md='12' sm='12'>

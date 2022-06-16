@@ -8,6 +8,8 @@ import user from "./user/reducer"
 import restaurant from "./restaurant/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
+import customer from "./customer/reducer"
+import crmReducer from "./crmEmail/reducer"
 
 const rootReducer = {
     auth,
@@ -18,7 +20,10 @@ const rootReducer = {
     user,
     restaurant,
     facebookPost,
-    crmSms
+    crmSms,
+    customer,
+    crmReducer
+
 }
 
 export default rootReducer
