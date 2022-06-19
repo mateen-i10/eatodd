@@ -70,12 +70,8 @@
 
           // closable alert
           .btn-close {
-            background: transparent
-              str-replace(str-replace(escape-svg($btn-close-bg), 'currentColor', $color_value), '#', '%23')
-              center /
-              $btn-close-width
-              auto
-              no-repeat;
+            background: transparent str-replace(str-replace(escape-svg($btn-close-bg), 'currentColor', $color_value), '#', '%23') center /
+              $btn-close-width auto no-repeat;
             color: $color_value !important;
           }
         }
@@ -237,6 +233,7 @@
               background-color: color-function($color_name, 'lighten-1');
             }
           }
+
           &:active,
           &.active,
           &:focus {
@@ -246,6 +243,7 @@
           &:hover {
             color: $white;
           }
+
           &:active,
           &.active {
             outline: none;
@@ -266,9 +264,11 @@
             background-color: rgba($color: $color_value, $alpha: 0.04);
             color: $color_value;
           }
+
           &:not(:disabled):not(.disabled):active:focus {
             box-shadow: none;
           }
+
           &:not(:disabled):not(.disabled):active,
           &:not(:disabled):not(.disabled).active,
           &:not(:disabled):not(.disabled):focus {
@@ -279,6 +279,7 @@
           &.dropdown-toggle::after {
             background-image: url(str-replace(str-replace($chevron-down, 'currentColor', $color_value), '#', '%23'));
           }
+
           // split toggle have show class
           // .show > &.dropdown-toggle {
           &.show.dropdown-toggle {
@@ -304,11 +305,11 @@
           &.waves-effect {
             .waves-ripple {
               background: radial-gradient(
-                rgba($color_value, 0.2) 0,
-                rgba($color_value, 0.3) 40%,
-                rgba($color_value, 0.4) 50%,
-                rgba($color_value, 0.5) 60%,
-                rgba($white, 0) 70%
+                              rgba($color_value, 0.2) 0,
+                              rgba($color_value, 0.3) 40%,
+                              rgba($color_value, 0.4) 50%,
+                              rgba($color_value, 0.5) 60%,
+                              rgba($white, 0) 70%
               );
             }
           }
@@ -332,13 +333,10 @@
               .modal-title {
                 color: $color_value;
               }
+
               .btn-close {
-                background: $white
-                  str-replace(str-replace(escape-svg($btn-close-bg), 'currentColor', $color_value), '#', '%23')
-                  center /
-                  $btn-close-width
-                  auto
-                  no-repeat !important;
+                background: $white str-replace(str-replace(escape-svg($btn-close-bg), 'currentColor', $color_value), '#', '%23') center /
+                  $btn-close-width auto no-repeat !important;
                 color: $color_value !important;
               }
             }
@@ -346,7 +344,7 @@
         }
       }
 
-      // For Pagination
+      // For PaginatedDataTable
       @if ($color_name != 'light' and $color_name != 'black' and $color_name != 'white' and $color_name != 'dark') {
         .pagination-#{$color-name} {
           .page-item {
@@ -374,6 +372,7 @@
                 color: $white;
               }
             }
+
             &.next-item,
             &.next {
               .page-link {
@@ -381,14 +380,15 @@
                 &:hover {
                   &:after {
                     background-image: url(str-replace(
-                      str-replace($chevron-right, 'currentColor', $color_value),
-                      '#',
-                      '%23'
+                                    str-replace($chevron-right, 'currentColor', $color_value),
+                                    '#',
+                                    '%23'
                     )) !important;
                   }
                 }
               }
             }
+
             &.prev-item,
             &.prev {
               .page-link {
@@ -396,9 +396,9 @@
                 &:hover {
                   &:before {
                     background-image: url(str-replace(
-                      str-replace($chevron-left, 'currentColor', $color_value),
-                      '#',
-                      '%23'
+                                    str-replace($chevron-left, 'currentColor', $color_value),
+                                    '#',
+                                    '%23'
                     )) !important;
                   }
                 }
@@ -448,6 +448,7 @@
 
             &.timeline-point-indicator {
               background-color: $color_value !important;
+
               &:before {
                 background: rgba($color: $color_value, $alpha: 0.12) !important;
               }
@@ -484,6 +485,7 @@
               border-color: $color_value;
               background-color: $color_value;
             }
+
             &:not(:disabled) {
               &:checked,
               &:focus {
@@ -492,6 +494,7 @@
               }
             }
           }
+
           // For switch
           // &.form-switch {
           //   .form-check-input {

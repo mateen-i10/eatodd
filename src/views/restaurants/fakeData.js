@@ -132,7 +132,7 @@ const menuItemData = [
         id: 1,
         images: "",
         name: "Korrie O'Crevy",
-        category: "Build your own plate",
+        category: "Environmental your own plate",
         modifier: "Healthy spread",
         addon: "",
         prices: '$23896.35',
@@ -144,7 +144,7 @@ const menuItemData = [
         images: "",
         name: "Korrie O'Crevy",
         category: "Build your own plate",
-        modifier: "Healthy spread",
+        modifier: "Lampuyang spread",
         addon: "",
         prices: '$23896.35',
         actions: ''

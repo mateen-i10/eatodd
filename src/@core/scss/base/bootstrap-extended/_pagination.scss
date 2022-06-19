@@ -1,4 +1,4 @@
-// Pagination
+// PaginatedDataTable
 
 // default look for page item, first and last item
 
@@ -20,6 +20,7 @@
     align-items: center;
     justify-content: center;
   }
+
   &.previous,
   &.prev,
   &.next,
@@ -59,21 +60,24 @@
         background: $pagination-hover-bg;
         color: $pagination-hover-color;
       }
+
       &:active,
       &:hover {
         background-color: $primary !important;
+
         &:before {
           background-image: url(str-replace(str-replace($chevron-left, 'currentColor', $white), '#', '%23')) !important;
         }
       }
     }
+
     &.disabled {
       .page-link {
         &:before {
           background-image: url(str-replace(
-            str-replace($chevron-left, 'currentColor', $pagination-disabled-color),
-            '#',
-            '%23'
+                          str-replace($chevron-left, 'currentColor', $pagination-disabled-color),
+                          '#',
+                          '%23'
           ));
         }
       }
@@ -82,6 +86,7 @@
     & ~ .page-item:nth-child(2) {
       border-top-left-radius: 5rem;
       border-bottom-left-radius: 5rem;
+
       .page-link {
         border-top-left-radius: 5rem !important;
         border-bottom-left-radius: 5rem !important;
@@ -91,6 +96,7 @@
     & ~ .page-item:nth-last-child(2) {
       border-top-right-radius: 5rem;
       border-bottom-right-radius: 5rem;
+
       .page-link {
         border-top-right-radius: 5rem !important;
         border-bottom-right-radius: 5rem !important;
@@ -118,25 +124,28 @@
         background: $pagination-hover-bg;
         color: $pagination-hover-color;
       }
+
       &:active,
       &:hover {
         background-color: $primary !important;
+
         &:after {
           background-image: url(str-replace(
-            str-replace($chevron-right, 'currentColor', $white),
-            '#',
-            '%23'
+                          str-replace($chevron-right, 'currentColor', $white),
+                          '#',
+                          '%23'
           )) !important;
         }
       }
     }
+
     &.disabled {
       .page-link {
         &:after {
           background-image: url(str-replace(
-            str-replace($chevron-right, 'currentColor', $pagination-disabled-color),
-            '#',
-            '%23'
+                          str-replace($chevron-right, 'currentColor', $pagination-disabled-color),
+                          '#',
+                          '%23'
           ));
         }
       }
@@ -157,29 +166,32 @@
         height: 18px;
         content: '';
       }
+
       // &:active,
       &:hover {
         &:before {
           background-image: url(str-replace(
-            str-replace($chevron-left, 'currentColor', $pagination-active-color),
-            '#',
-            '%23'
+                          str-replace($chevron-left, 'currentColor', $pagination-active-color),
+                          '#',
+                          '%23'
           )) !important;
         }
       }
     }
+
     &.disabled {
       .page-link {
         &:before {
           background-image: url(str-replace(
-            str-replace($chevron-left, 'currentColor', $pagination-disabled-color),
-            '#',
-            '%23'
+                          str-replace($chevron-left, 'currentColor', $pagination-disabled-color),
+                          '#',
+                          '%23'
           ));
         }
       }
     }
   }
+
   &.next {
     .page-link {
       &:after {
@@ -192,24 +204,26 @@
         height: 18px;
         content: '';
       }
+
       // &:active,
       &:hover {
         &:after {
           background-image: url(str-replace(
-            str-replace($chevron-right, 'currentColor', $primary),
-            '#',
-            '%23'
+                          str-replace($chevron-right, 'currentColor', $primary),
+                          '#',
+                          '%23'
           )) !important;
         }
       }
     }
+
     &.disabled {
       .page-link {
         &:after {
           background-image: url(str-replace(
-            str-replace($chevron-right, 'currentColor', $pagination-disabled-color),
-            '#',
-            '%23'
+                          str-replace($chevron-right, 'currentColor', $pagination-disabled-color),
+                          '#',
+                          '%23'
           ));
         }
       }
@@ -229,6 +243,7 @@
     margin-left: 0;
     font-size: 1rem;
     min-width: 2.286rem;
+
     &:focus {
       box-shadow: none;
     }
@@ -258,10 +273,12 @@
     &.active {
       border-top-left-radius: 1.428rem;
       border-bottom-left-radius: 1.428rem;
+
       .page-link {
         border-radius: 5rem;
       }
     }
+
     .page-link {
       border-top-left-radius: 1.428rem;
       border-bottom-left-radius: 1.428rem;
@@ -272,10 +289,12 @@
     &.active {
       border-top-right-radius: 1.428rem;
       border-bottom-right-radius: 1.428rem;
+
       .page-link {
         border-radius: 5rem;
       }
     }
+
     .page-link {
       border-top-right-radius: 1.428rem;
       border-bottom-right-radius: 1.428rem;
@@ -283,9 +302,9 @@
   }
 }
 
-// For Pagination Font sizes
+// For PaginatedDataTable Font sizes
 .pagination {
-  // For Pagination lg
+  // For PaginatedDataTable lg
   &.pagination-lg {
     .page-item {
       .page-link {
@@ -294,7 +313,8 @@
       }
     }
   }
-  // For Pagination sm
+
+  // For PaginatedDataTable sm
   &.pagination-sm {
     .page-item {
       .page-link {

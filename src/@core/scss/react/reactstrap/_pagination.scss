@@ -1,4 +1,4 @@
-// Component Pagination
+// Component PaginatedDataTable
 // ========================================================================
 .pagination {
   &.react-paginate {
@@ -14,6 +14,7 @@
         margin-top: 1px;
       }
     }
+
     &.pagination-sm {
       .page-item.prev,
       .page-item.next {
@@ -23,6 +24,7 @@
         }
       }
     }
+
     &.pagination-lg {
       .page-item.prev,
       .page-item.next {
