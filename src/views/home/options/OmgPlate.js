@@ -79,22 +79,6 @@ const Plate = () => {
         }
     ]
 
-    const Beans = [
-        {
-            image: img2,
-            title: 'Black Beans',
-            cal: 130
-        },
-        {
-            image: img2,
-            title: 'Pinto Beans',
-            cal: 130
-        },
-        {
-            title: 'No Beans'
-        }
-    ]
-
     const Side = [
         {
             image: img2,
@@ -506,61 +490,6 @@ const Plate = () => {
                                     </div>
                                     <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
                                         <a href="#"><MoreVertical /></a>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                    </div>
-                </div>
-
-
-                <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Beans</h1>
-
-                <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
-                    <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
-                        {
-                            Beans.map(e => (
-                                <div className="col-md-5 Fooditems" onClick={() => handleRiceSectionClick(e)}>
-                                    <div>
-                                        <img src={e.image} style={{width: 100, height: 130}} />
-                                    </div>
-                                    <div style={{marginTop: 40, marginLeft: 20}} className='food-item-data'>
-                                        <h1>{e.title}</h1>
-                                        <div style={{display: 'flex'}}>
-                                            <h6>{e.price}</h6>
-                                            <h6 style={{marginLeft:20}}>cals</h6>
-                                        </div>
-                                    </div>
-                                    <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <a href="#"><MoreVertical /></a>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                    </div>
-                </div>
-
-                <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Healthy Spread</h1>
-
-                <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
-                    <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
-                        {
-                            Rice.map(e => (
-                                <div className="col-md-5 Fooditems" onClick={() => handleRiceSectionClick(e)}>
-                                    <div>
-                                        <img src={e.image} style={{width: 100, height: 130}} />
-                                    </div>
-                                    <div style={{marginTop: 40, marginLeft: 20}} className='food-item-data'>
-                                        <h1>{e.title}</h1>
-                                        <div style={{display: 'flex'}}>
-                                            <h6>{e.price}</h6>
-                                            <h6 style={{marginLeft:20}}>cals</h6>
-                                        </div>
-                                    </div>
-                                    <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <a href=""><MoreVertical /></a>
                                     </div>
                                 </div>
                             ))

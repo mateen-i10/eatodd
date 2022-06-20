@@ -73,21 +73,21 @@ const OffCanvasPlacement = (props) => {
                             <Input type='text' placeholder='Meal Name' style={{borderRadius:0, borderTop:0, borderRight:0, borderColor:'#451400',  borderLeft:0, borderWidth:2, marginBottom:10, padding:0, fontSize:16, fontWeight:'bolder', color:'#451400'}} />
                         </div>
                         <div className='col-md-2' style={{marginLeft:-15}}>
-                            <h6 style={{fontSize:20, marginLeft:-15, fontWeight:'bolder', color:'#451400' }}>$13.05</h6>
+                            <h6 style={{fontSize:20, marginLeft:-15, fontWeight:'bolder', color:'primary' }}>$13.05</h6>
                         </div>
                     </div>
 
                     <div>
                         <div className="row">
-                            <div className="col-md-9" style={{fontSize:15, fontWeight:'bolder', color:'#451400'}}>Pollo Asado Burrito</div>
-                            <div className="col-md" style={{fontSize:15, fontWeight:'bolder', color:'#451400'}}>$13.05</div>
+                            <div className="col-md-9" style={{fontSize:15, fontWeight:'bolder', color:'primary'}}>Pollo Asado Burrito</div>
+                            <div className="col-md" style={{fontSize:15, fontWeight:'bolder', color:'primary'}}>$13.05</div>
                         </div>
                         <div>
                             <div className='col-md-12'>
-                                <p style={{marginTop:10, color:'#451400'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>
+                                <p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>
                             </div>
                             <div>
-                                <a href="#"><div className="row" style={{color:'#451400', fontWeight:'bolder', textTransform: 'uppercase', textDecoration:'underline', fontSize:13, justifyContent:'left'}}>
+                                <a href="#"><div className="row" style={{color:'primary', fontWeight:'bolder', textTransform: 'uppercase', textDecoration:'underline', fontSize:13, justifyContent:'left'}}>
                                     <div className="col">remove</div>
                                     <div className="col" style={{marginLeft:-190}}>edit</div>
                                     <div className="col" style={{marginLeft:-220}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >duplicate</div>
@@ -130,8 +130,8 @@ const OffCanvasPlacement = (props) => {
 
                     <div style={{backgroundColor:'#e3e3e3', marginLeft:-20, marginRight:-20, padding:20}}>
                         <div className="row">
-                            <div className="col-md-10" style={{fontWeight: 500, color:'#451400'}}>Bag Total</div>
-                            <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>$14.20</div>
+                            <div className="col-md-10" style={{fontWeight: 500, color:'primary'}}>Bag Total</div>
+                            <div className="col-md-2" style={{fontWeight: 500, color:'primary'}}>$14.20</div>
                         </div>
 
                         <Button
@@ -140,30 +140,30 @@ const OffCanvasPlacement = (props) => {
                             onClick={() => SetModelOpen(true)}
                             style={{marginBottom:20, marginTop:30, borderRadius:0}}
                             {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? { block: true } : {})}
-                        >
+                            >
                             sign in to use rewards
                         </Button>
 
                         <div className="row" style={{marginBottom:-10}}>
                             <div className="col-md-10" style={{fontWeight: 500}}>Enter a Promo Code</div>
-                            <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>apply</div>
+                            <div className="col-md-2" style={{fontWeight: 500, color:'primary'}}>apply</div>
                         </div>
 
                         <hr style={{color:'#451400'}} />
 
                         <div className="row">
-                            <div className="col-md-10" style={{fontWeight: 700, color:'#451400'}}>Subtotal</div>
-                            <div className="col-md-2" style={{fontWeight: 700, color:'#451400'}}>14.20</div>
+                            <div className="col-md-10" style={{fontWeight: 700, color:'primary'}}>Subtotal</div>
+                            <div className="col-md-2" style={{fontWeight: 700, color:'primary'}}>14.20</div>
                         </div>
 
                         <div className="row">
-                            <div className="col-md-10" style={{fontWeight: 500, color:'#451400'}}>Delivery Fee</div>
-                            <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>$1.00</div>
+                            <div className="col-md-10" style={{fontWeight: 500, color:'primary'}}>Delivery Fee</div>
+                            <div className="col-md-2" style={{fontWeight: 500, color:'primary'}}>$1.00</div>
                         </div>
 
                         <a href="#">
                         <div className="row">
-                            <div className="col-md-10" style={{fontWeight: 500, color:'#451400'}} onClick={() => {
+                            <div className="col-md-10" style={{fontWeight: 500, color:'primary'}} onClick={() => {
                                 if (taxDropDown === true) {
                                     SetTaxDropdown(false)
                                 } else {
@@ -171,7 +171,7 @@ const OffCanvasPlacement = (props) => {
                                 }
                             }}>Tax & Fees {taxDropDown ? <ChevronDown size={18} /> : <ChevronUp size={18} />}</div>
                             {
-                                taxDropDown && <div className="col-md-2" style={{fontWeight: 500, color:'#451400'}}>$2.94</div>
+                                taxDropDown && <div className="col-md-2" style={{fontWeight: 500, color:'primary'}}>$2.94</div>
                             }
                         </div>
                         </a>
@@ -179,24 +179,24 @@ const OffCanvasPlacement = (props) => {
                         {
                             taxDropDown === false ? <div style={{ textAlign:'left'}}>
                                 <div className="row">
-                                    <div className="col" style={{paddingLeft: 60, color:'#451400'}}>Tax</div>
-                                    <div className="col" style={{paddingLeft: 235, color:'#451400'}}>$1.44</div>
+                                    <div className="col" style={{paddingLeft: 60, color:'primary'}}>Tax</div>
+                                    <div className="col" style={{paddingLeft: 235, color:'primary'}}>$1.44</div>
                                 </div>
                                 <div className="row">
-                                    <div className="col" style={{paddingLeft: 60, color:'#451400'}}>Service Fee</div>
-                                    <div className="col" style={{ maxWidth: 70, paddingLeft:16, color:'#451400'}}>$1.34</div>
+                                    <div className="col" style={{paddingLeft: 60, color:'primary'}}>Service Fee</div>
+                                    <div className="col" style={{ maxWidth: 70, paddingLeft:16, color:'primary'}}>$1.34</div>
                                 </div>
                             </div> : []
                         }
 
-                        <hr style={{color:'#451400'}} />
+                        <hr style={{color:'primary'}} />
 
                         <div className="row">
-                            <div className="col-md-9" style={{fontWeight: 'bolder', color:'#451400', fontSize:20}}>Total</div>
-                            <div className="col-md-2" style={{fontWeight: 'bolder', color:'#451400', fontSize:20}}>$18.14</div>
+                            <div className="col-md-9" style={{fontWeight: 'bolder', color:'primary', fontSize:20}}>Total</div>
+                            <div className="col-md-2" style={{fontWeight: 'bolder', color:'primary', fontSize:20}}>$18.14</div>
                         </div>
 
-                        <p style={{color:'#451400', marginTop:20}}>Delivery includes higher menu prices and additional fees to help offset the costs of delivery.</p>
+                        <p style={{color:'primary', marginTop:20}}>Delivery includes higher menu prices and additional fees to help offset the costs of delivery.</p>
 
                     </div>
 
