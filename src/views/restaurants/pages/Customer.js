@@ -1,10 +1,9 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import {getCustomerData} from "../fakeData"
+import {getCustomerData} from "../../../tempData/fakeData"
 import {Card, CardHeader, CardTitle, Col, Row} from "reactstrap"
 import PageItemsInput from "../components/table/tables/PageItemsInput"
 import SearchBox from "../components/table/tables/SearchBox"
 import PaginatedDataTable from "../components/table/tables/PaginatedDataTable"
-import {customerColumns} from "../components/table/tableColumns"
 
 const Customer = () => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -14,7 +13,7 @@ const Customer = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const customerData = getCustomerData()
     const [getPageData, setPageData] = useState(customerData)
- 
+
     const handlePerPage = e => {
         return (setItemsPerPage(parseInt(e.target.value)))
     }
@@ -53,6 +52,58 @@ const Customer = () => {
         setPageData(searchValue.length > 0 ? filteredData : customerData)
         setPageCount(searchValue.length > 0 ? Math.ceil(filteredData.length / itemsPerPage) : Math.ceil(getPageData.length / itemsPerPage))
     }, [itemsPerPage, searchValue])
+
+    // ** Table for customer page
+    const customerColumns = [
+        {
+            sortable: true,
+            name: 'Name',
+            minWidth: '225px',
+            selector: row => row.name
+        },
+        {
+            sortable: true,
+            name: 'Email',
+            minWidth: '250px',
+            selector: row => row.email
+        },
+        {
+            sortable: true,
+            name: 'Phone',
+            minWidth: '250px',
+            selector: row => row.phone
+        },
+        {
+            sortable: true,
+            name: 'Has Register',
+            minWidth: '150px',
+            selector: row => row.has_register
+        },
+        {
+            sortable: true,
+            name: 'DOB',
+            minWidth: '150px',
+            selector: row => row.dob
+        },
+        {
+            sortable: true,
+            name: 'Address',
+            minWidth: '150px',
+            selector: row => row.address
+        },
+        {
+            sortable: true,
+            name: 'City',
+            minWidth: '150px',
+            selector: row => row.city
+        },
+        {
+            sortable: true,
+            name: 'State',
+            minWidth: '150px',
+            selector: row => row.state
+        }
+    ]
     return (
         <Fragment>
             <Card>

@@ -3,11 +3,10 @@ import {Card, CardHeader, CardTitle, Col, Row} from 'reactstrap'
 import StatsCard from "../../../ui-elements/Cards/StatsCard"
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import {getOrderData} from "../fakeData"
+import {getOrderData} from "../../../tempData/fakeData"
 import PaginatedDataTable from "../components/table/tables/PaginatedDataTable"
 import PageItemsInput from "../components/table/tables/PageItemsInput"
 import SearchBox from "../components/table/tables/SearchBox"
-import {orderColumns} from "../components/table/tableColumns"
 
 
 const Orders = () => {
@@ -58,6 +57,44 @@ const Orders = () => {
         setPageCount(searchValue.length > 0 ? Math.ceil(filteredData.length / itemsPerPage) : Math.ceil(getPageData.length / itemsPerPage))
     }, [itemsPerPage, searchValue])
 
+    const orderColumns = [
+        {
+            sortable: true,
+            name: 'Full Name',
+            minWidth: '225px',
+            selector: row => row.full_name
+        },
+        {
+            sortable: true,
+            name: 'Email',
+            minWidth: '250px',
+            selector: row => row.email
+        },
+        {
+            sortable: true,
+            name: 'Position',
+            minWidth: '250px',
+            selector: row => row.post
+        },
+        {
+            sortable: true,
+            name: 'Office',
+            minWidth: '150px',
+            selector: row => row.city
+        },
+        {
+            sortable: true,
+            name: 'Start Date',
+            minWidth: '150px',
+            selector: row => row.start_date
+        },
+        {
+            sortable: true,
+            name: 'Salary',
+            minWidth: '150px',
+            selector: row => row.salary
+        }
+    ]
 
     return (
         <Fragment>
