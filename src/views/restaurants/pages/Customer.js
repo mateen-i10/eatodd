@@ -1,9 +1,9 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {getCustomerData} from "../../../tempData/fakeData"
 import {Card, CardHeader, CardTitle, Col, Row} from "reactstrap"
-import PageItemsInput from "../components/table/tables/PageItemsInput"
-import SearchBox from "../components/table/tables/SearchBox"
-import PaginatedDataTable from "../components/table/tables/PaginatedDataTable"
+import PageItemsInput from "../components/tables/PageItemsInput"
+import SearchBox from "../components/tables/SearchBox"
+import PaginatedDataTable from "../components/tables/PaginatedDataTable"
 
 const Customer = () => {
     const [itemsPerPage, setItemsPerPage] = useState(7)

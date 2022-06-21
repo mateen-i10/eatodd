@@ -2,7 +2,6 @@
 import navbar from './navbar'
 import layout from './layout'
 import auth from './authentication'
-import dataTables from '../views/restaurants/components/table/store'
 import member from "./member/reducer"
 import user from "./user/reducer"
 import restaurant from "./restaurant/reducer"
@@ -24,7 +23,6 @@ const rootReducer = {
     auth,
     navbar,
     layout,
-    dataTables,
     member,
     user,
     restaurant,

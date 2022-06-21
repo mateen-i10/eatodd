@@ -4,9 +4,9 @@ import StatsCard from "../../../ui-elements/Cards/StatsCard"
 // ** Styles
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import {getOrderData} from "../../../tempData/fakeData"
-import PaginatedDataTable from "../components/table/tables/PaginatedDataTable"
-import PageItemsInput from "../components/table/tables/PageItemsInput"
-import SearchBox from "../components/table/tables/SearchBox"
+import PaginatedDataTable from "../components/tables/PaginatedDataTable"
+import PageItemsInput from "../components/tables/PageItemsInput"
+import SearchBox from "../components/tables/SearchBox"
 
 
 const Orders = () => {

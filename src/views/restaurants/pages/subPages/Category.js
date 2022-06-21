@@ -11,9 +11,9 @@ import {
     Row,
     UncontrolledDropdown
 } from "reactstrap"
-import PageItemsInput from "../../components/table/tables/PageItemsInput"
-import SearchBox from "../../components/table/tables/SearchBox"
-import PaginatedDataTable from "../../components/table/tables/PaginatedDataTable"
+import PageItemsInput from "../../components/tables/PageItemsInput"
+import SearchBox from "../../components/tables/SearchBox"
+import PaginatedDataTable from "../../components/tables/PaginatedDataTable"
 import {useDispatch, useSelector} from "react-redux"
 import {FieldTypes} from "../../../../utility/enums/FieldType"
 import Joi from "joi-browser"
@@ -262,4 +262,3 @@ const Category = (props) => {
 }
 
 export default Category
- 
