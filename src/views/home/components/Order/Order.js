@@ -10,15 +10,15 @@ const Order = () => {
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
-                <div className="container">
-                    <div className="row">
+                <div className="container-sm">
+                    <div className="row align-items-center justify-content-center">
                         <div className="col-md-8" style={{display: 'flex', paddingTop: '12px'}}>
-                            <img className="unlock-img d-md-inline-flex d-none" src={icon}
+                            <img className="unlock-img d-md-inline-flex d-none me-2" src={icon}
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
-                            <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
+                            <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        <div className="col-md-4" style={{paddingTop: '12px'}}>
-                            <div className="content d-inline-flex mb-1">
+                        <div className="col-md-4 col-12" style={{paddingTop: '12px'}}>
+                            <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
                                     <div>Create an Account</div>
                                 </div>
@@ -26,21 +26,6 @@ const Order = () => {
                                 <div className="sign-in fs-5">Sign In</div>
                             </div>
                         </div>
-                        {/*<div className="col-md-12">*/}
-                        {/*    <div style={{ margin: 'auto'}}>*/}
-                        {/*        <img className="unlock-img d-md-inline-flex d-none" src={icon} alt="JOIN THE OMG WINE CLUB. UNLOCK"/>*/}
-                        {/*        <div className="loyalty-text ms-2">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-md-12">*/}
-                        {/*            <div className="content d-inline-flex mb-1">*/}
-                        {/*                <div className="create-an-account">*/}
-                        {/*                    <div>Create an Account</div>*/}
-                        {/*                </div>*/}
-                        {/*                <div className="unlock-or">OR</div>*/}
-                        {/*                <div className="sign-in fs-5">Sign In</div>*/}
-                        {/*            </div>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </div>
@@ -197,7 +182,7 @@ const Order = () => {
                             <div className="find-slot-wrapper btn ">FIND A CHIPOTLE</div>
                         </div>
                         <div className="universal-pce">
-                            <div className="container">
+                            <div className="container-sm">
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="meal-card">
@@ -238,16 +223,16 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-            <div className="large-order-promo container-fluid justify-content-center align-items-center">
-                <div className="row w-100">
-                    <div className="title col-12 text-center">CROWD PLEASERS</div>
-                    <div className=" col-11 lg-order-container container-fluid ">
-                        <div className="row justify-content-center align-items-center ms-md-1 ms-0">
-                            <div className="col-md-5">
+            <div className="large-order-promo container-sm h-100">
+                <div className="row w-100 justify-content-center align-items-center">
+                    <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
+                    <div className=" container-fluid ms-2">
+                        <div className="row justify-content-center align-items-center mt-2 mb-3">
+                            <div className="col-xxl-4 col-md-6 col-9">
                                 <div className="large-order-card">
-                                    <h1 className="cat-title text-center ">CATERING</h1>
-                                    <div className="details pt-2">
-                                        <ul className="inline-list">
+                                    <h1 className="pleaser-card-title text-center">CATERING</h1>
+                                    <div className="details">
+                                        <ul className="pleaser-list">
                                             <li>From 6 to 200 people</li>
                                             <li>Starting at $15.00 / person</li>
                                             <li>Build Your Own</li>
@@ -257,18 +242,18 @@ const Order = () => {
                                         </ul>
                                     </div>
                                     <div className="type-ordering-primary">
-                                        <div className="cat-content text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-1">Explore Catering
+                                        <div className="text-center">
+                                            <div className="cta-wrapper btn btn-primary mb-2 ">Explore Catering
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-5 ">
+                            <div className="col-xxl-4 col-md-6 col-9">
                                 <div className="large-order-card">
-                                    <h1 className="cat-title text-center">GROUP ORDER</h1>
-                                    <div className="details pt-2">
-                                        <ul className="inline-list">
+                                    <h1 className="pleaser-card-title text-center">GROUP ORDER</h1>
+                                    <div className="details ">
+                                        <ul className="pleaser-list">
                                             <li>Invite up to 20 people</li>
                                             <li>Normal menu pricing</li>
                                             <li>Full menu</li>
@@ -277,8 +262,10 @@ const Order = () => {
                                             <li><b>Order and eat today</b></li>
                                         </ul>
                                     </div>
-                                    <div className="type-ordering-primary text-center">
-                                        <div className="cta-wrapper btn btn-primary mb-1 ">Start Order</div>
+                                    <div className="type-ordering-primary">
+                                        <div className="text-center">
+                                            <div className="cta-wrapper btn btn-primary mb-2 ">Start Order</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -288,11 +275,11 @@ const Order = () => {
             </div>
             {/*about section*/}
             <section id="about-7" className="about-section division">
-                <div className="container">
+                <div className="container-sm">
                     <div className="abox-4-wrapper ico-80">
                         <div className="row">
                             <div className="col-md-4 col-lg-4">
-                                <div className="abox-4 text-center mb-40 coffee-color">
+                                <div className=" text-center  coffee-color">
                                     <div className="abox-4-ico">
                                         <img className="img-center" src={foodicon}/>
                                     </div>
@@ -304,7 +291,7 @@ const Order = () => {
                                 </div>
                             </div>
                             <div className="col-md-4 col-lg-4">
-                                <div className="abox-4 text-center mb-40 coffee-color">
+                                <div className=" text-center  coffee-color">
                                     <div className="abox-4-ico">
                                         <img className="img-center" src={qualityicon}/>
                                     </div>
@@ -316,7 +303,7 @@ const Order = () => {
                                 </div>
                             </div>
                             <div className="col-md-4 col-lg-4">
-                                <div className="abox-4 text-center mb-40 coffee-color">
+                                <div className="text-center coffee-color">
                                     <div className="abox-4-ico">
                                         <img className="img-center" src={deliveryicon}/>
                                     </div>

@@ -245,7 +245,7 @@ const Distributor = (props) => {
         <Fragment>
             <Card>
                 <CardHeader className="border-bottom">
-                    <CardTitle tag="h4">Modifier</CardTitle>
+                    <CardTitle tag="h4">Distributors</CardTitle>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
