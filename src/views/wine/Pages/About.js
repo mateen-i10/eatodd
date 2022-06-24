@@ -192,7 +192,7 @@ const About = () => {
                     </div>
                 </section>
 
-                <section id="promo-1" className="promo-section division">
+                <section id="promo-1" className="promo-section division about-mb-60">
                     <div className="container-fluid">
                         <div className="row d-flex flex-wrap align-items-center">
                             <div className="col-md-4 col-lg-3">
@@ -232,7 +232,7 @@ const About = () => {
                 </section>
 
                 <section id="blog-1" className="about-wide-60 blog-section division">
-                    <div className="container-sm">
+                    <div className="container-fluid">
                         <div className="row d-flex flex-wrap">
                             <div className=" col-12 ">
                                 <div className="section-title about-mb-60 text-center">
