@@ -247,7 +247,7 @@ const About = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center">
+                        <div className="row d-flex flex-wrap align-items-center justify-content-center ">
                             <div className="col-md-6 col-lg-3 col-8">
                                 <div className="about-blog-post">
                                     <div className="blog-post-img">
