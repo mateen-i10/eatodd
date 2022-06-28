@@ -153,8 +153,6 @@ const Members = () => {
     }
 
     // ** Table Common Column
-    const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
-
     const status = {
         1: { title: 'Current', color: 'light-primary' },
         2: { title: 'Professional', color: 'light-success' },
