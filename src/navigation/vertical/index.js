@@ -168,25 +168,25 @@ export default [
                 id: 'Membershiptype',
                 title: 'Membership Types',
                 icon: <UserCheck size={20}/>,
-                navLink: '/'
+                navLink: '/membershipTypes'
             },
             {
                 id: 'wine-Promotions',
                 title: 'Promotions',
                 icon: <Volume size={20}/>,
-                navLink: '/'
+                navLink: '/promotions'
             },
             {
                 id: 'crmEmail',
                 title: 'CRM (Email)',
                 icon: <Mail size={20}/>,
-                navLink: '/'
+                navLink: '/CrmEmails'
             },
             {
                 id: 'crmSms',
                 title: 'CRM (Sms)',
                 icon: <Send size={20}/>,
-                navLink: '/'
+                navLink: '/CrmSms'
             }
         ]
     }

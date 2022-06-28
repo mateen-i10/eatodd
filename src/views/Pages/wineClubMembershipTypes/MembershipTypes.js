@@ -19,14 +19,14 @@ import {
     Row,
     Col, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
-import {deleteCustomer, loadCustomers} from "../../../redux/member/actions"
+import {deleteCustomer, getCustomer, loadCustomers} from "../../../redux/member/actions"
 import {useDispatch, useSelector} from "react-redux"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
 import {setCustomer} from "../../../redux/member/reducer"
 import Swal from "sweetalert2"
 
-const Members = () => {
+const MembershipTypes = (props) => {
     const customerList = useSelector(state => state.member.list)
     const formInitialState = useSelector(state => state.member.object)
     const isEdit = useSelector(state => state.member.isEdit)
@@ -39,7 +39,7 @@ const Members = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
-    const [modalTitle] = useState('Add Customer')
+    const [modalTitle, setModalTitle] = useState('Add Customer')
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
@@ -76,6 +76,11 @@ const Members = () => {
     //     setModalTitle('Add Customer')
     //     toggle()
     // }
+    const editClick = (id) => {
+        toggle()
+        dispatch(getCustomer(id, true))
+        setModalTitle('Edit Customer')
+    }
     const deleteClick = (id, e) => {
         e.preventDefault()
         // show sweet alert here
@@ -92,6 +97,11 @@ const Members = () => {
                 dispatch(deleteCustomer(id))
             }
         })
+    }
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        console.log('call', props)
+        props.history.push(`/customers/detail/${id}`)
     }
     const handleSubmit = (event) => {
         console.log("formState on submit", formState)
@@ -153,15 +163,7 @@ const Members = () => {
     }
 
     // ** Table Common Column
-    const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
-    const status = {
-        1: { title: 'Current', color: 'light-primary' },
-        2: { title: 'Professional', color: 'light-success' },
-        3: { title: 'Rejected', color: 'light-danger' },
-        4: { title: 'Resigned', color: 'light-warning' },
-        5: { title: 'Applied', color: 'light-info' }
-    }
     const columns = [
         {
             name: 'Name',
@@ -170,11 +172,6 @@ const Members = () => {
             minWidth: '250px',
             cell: row => (
                 <div className='d-flex align-items-center'>
-                    {row.avatar === '' ? (
-                        <Avatar color={`light-${states[row.status]}`} content={row.full_name} initials />
-                    ) : (
-                        <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-                    )}
                     <div className='user-info text-truncate ms-1'>
                         <span className='d-block font-weight-bold text-truncate'>{row.full_name}</span>
                         <small>{row.post}</small>
@@ -183,41 +180,16 @@ const Members = () => {
             )
         },
         {
-            name: 'Email',
-            selector: (row) => row.email,
+            name: 'Price',
+            selector: (row) => row.price,
             sortable: true,
             minWidth: '250px'
-        },
-        {
-            name: 'Type',
-            selector: (row) => row.type,
-            sortable: true,
-            minWidth: '150px'
         },
         {
             name: 'Status',
             selector: (row) => row.status,
             sortable: true,
-            minWidth: '150px',
-            cell: row => {
-                return (
-                    <Badge color={status[row.status].color} pill>
-                        {status[row.status].title}
-                    </Badge>
-                )
-            }
-        },
-        {
-            name: 'Period',
-            selector: (row) => row.age,
-            sortable: true,
-            minWidth: '100px'
-        },
-        {
-            name: 'Gift Membership',
-            selector: (row) => row.age,
-            sortable: true,
-            minWidth: '100px'
+            minWidth: '150px'
         },
         {
             name: 'Actions',
@@ -225,9 +197,22 @@ const Members = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                                <div tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
                                     <Trash size={15} />
-                                </div>
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -262,7 +247,7 @@ const Members = () => {
         <Fragment>
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <CardTitle tag='h4'>Members</CardTitle>
+                    <CardTitle tag='h4'>Membership Types</CardTitle>
                     <div className='d-flex mt-md-0 mt-1'>
                     </div>
                 </CardHeader>
@@ -308,4 +293,4 @@ const Members = () => {
     )
 }
 
-export default Members
+export default MembershipTypes

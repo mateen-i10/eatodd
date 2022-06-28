@@ -357,6 +357,16 @@ const Routes = [
         path: '/members',
         component: lazy(() => import('../../views/Pages/WineClubMembers/Members')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/membershipTypes',
+        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/MembershipTypes')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/promotions',
+        component: lazy(() => import('../../views/Pages/wineClubPromotions/Promotions')),
+        layout: 'VerticalLayout'
     }
 
 ]

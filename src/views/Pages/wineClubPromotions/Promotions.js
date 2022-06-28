@@ -19,14 +19,14 @@ import {
     Row,
     Col, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
-import {deleteCustomer, loadCustomers} from "../../../redux/member/actions"
+import {deleteCustomer, getCustomer, loadCustomers} from "../../../redux/member/actions"
 import {useDispatch, useSelector} from "react-redux"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
 import {setCustomer} from "../../../redux/member/reducer"
 import Swal from "sweetalert2"
 
-const Members = () => {
+const Promotions = (props) => {
     const customerList = useSelector(state => state.member.list)
     const formInitialState = useSelector(state => state.member.object)
     const isEdit = useSelector(state => state.member.isEdit)
@@ -39,14 +39,13 @@ const Members = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
-    const [modalTitle] = useState('Add Customer')
+    const [modalTitle, setModalTitle] = useState('Add Customer')
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'full_name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Email, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Email, label: 'Status', placeholder: 'Enter Status', name:'status', isRequired:false, fieldGroupClasses: 'col-6'}
+        {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter Email', name:'email', isRequired:false, fieldGroupClasses: 'col-6'}
     ])
 
     // ** schema for validations
@@ -76,6 +75,11 @@ const Members = () => {
     //     setModalTitle('Add Customer')
     //     toggle()
     // }
+    const editClick = (id) => {
+        toggle()
+        dispatch(getCustomer(id, true))
+        setModalTitle('Edit Customer')
+    }
     const deleteClick = (id, e) => {
         e.preventDefault()
         // show sweet alert here
@@ -92,6 +96,11 @@ const Members = () => {
                 dispatch(deleteCustomer(id))
             }
         })
+    }
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        console.log('call', props)
+        props.history.push(`/customers/detail/${id}`)
     }
     const handleSubmit = (event) => {
         console.log("formState on submit", formState)
@@ -153,16 +162,14 @@ const Members = () => {
     }
 
     // ** Table Common Column
-    const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
-    const status = {
-        1: { title: 'Current', color: 'light-primary' },
-        2: { title: 'Professional', color: 'light-success' },
-        3: { title: 'Rejected', color: 'light-danger' },
-        4: { title: 'Resigned', color: 'light-warning' },
-        5: { title: 'Applied', color: 'light-info' }
-    }
     const columns = [
+        {
+            name: 'Status',
+            selector: (row) => row.status,
+            sortable: true,
+            minWidth: '250px'
+        },
         {
             name: 'Name',
             selector: (row) => row.full_name,
@@ -170,11 +177,6 @@ const Members = () => {
             minWidth: '250px',
             cell: row => (
                 <div className='d-flex align-items-center'>
-                    {row.avatar === '' ? (
-                        <Avatar color={`light-${states[row.status]}`} content={row.full_name} initials />
-                    ) : (
-                        <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-                    )}
                     <div className='user-info text-truncate ms-1'>
                         <span className='d-block font-weight-bold text-truncate'>{row.full_name}</span>
                         <small>{row.post}</small>
@@ -183,8 +185,8 @@ const Members = () => {
             )
         },
         {
-            name: 'Email',
-            selector: (row) => row.email,
+            name: 'Code',
+            selector: (row) => row.code,
             sortable: true,
             minWidth: '250px'
         },
@@ -195,29 +197,10 @@ const Members = () => {
             minWidth: '150px'
         },
         {
-            name: 'Status',
-            selector: (row) => row.status,
+            name: 'Amount',
+            selector: (row) => row.amount,
             sortable: true,
-            minWidth: '150px',
-            cell: row => {
-                return (
-                    <Badge color={status[row.status].color} pill>
-                        {status[row.status].title}
-                    </Badge>
-                )
-            }
-        },
-        {
-            name: 'Period',
-            selector: (row) => row.age,
-            sortable: true,
-            minWidth: '100px'
-        },
-        {
-            name: 'Gift Membership',
-            selector: (row) => row.age,
-            sortable: true,
-            minWidth: '100px'
+            minWidth: '150px'
         },
         {
             name: 'Actions',
@@ -225,9 +208,22 @@ const Members = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                                <div tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
                                     <Trash size={15} />
-                                </div>
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -262,7 +258,7 @@ const Members = () => {
         <Fragment>
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <CardTitle tag='h4'>Members</CardTitle>
+                    <CardTitle tag='h4'>Promotions</CardTitle>
                     <div className='d-flex mt-md-0 mt-1'>
                     </div>
                 </CardHeader>
@@ -308,4 +304,4 @@ const Members = () => {
     )
 }
 
-export default Members
+export default Promotions
