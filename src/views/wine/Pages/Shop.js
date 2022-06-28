@@ -7,8 +7,8 @@ import "./Shop.css"
 const Shop = () => {
     return (
         <div>
-            <Headerwine />
-            <HeroSection />
+            <Headerwine/>
+            <HeroSection/>
             <div className="shop-page">
                 <section id="menu-8" className="wide-70 menu-section division">
                     <div className="container-sm">
@@ -45,14 +45,15 @@ const Shop = () => {
                             {/*// <!-- TAB-1 CONTENT -->*/}
                             <div id="tab-1" className="tab-content current">
                                 <div className="row d-flex flex-wrap">
-
                                     {/*// <!-- MENU ITEM #1 -->*/}
                                     <div className="col-sm-6 col-lg-3">
                                         <div className="menu-7-item">
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 {/*// <!-- Price -->*/}
                                                 <div className="menu-7-price bg-coffee">
@@ -99,7 +100,9 @@ const Shop = () => {
                                             {/*Image*/}
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$9.99</h5>
@@ -144,7 +147,9 @@ const Shop = () => {
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$7.99</h5>
@@ -189,7 +194,9 @@ const Shop = () => {
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$8.30</h5>
@@ -234,7 +241,9 @@ const Shop = () => {
                                         <div className="menu-7-item">
 
                                             <div className="menu-7-img rel">
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default}
+                                                     alt="menu-image"/>
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$9.15</h5>
                                                 </div>
@@ -277,7 +286,9 @@ const Shop = () => {
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$8.35</h5>
@@ -321,7 +332,9 @@ const Shop = () => {
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$6.89</h5>
@@ -368,7 +381,9 @@ const Shop = () => {
 
                                             <div className="menu-7-img rel">
 
-                                                <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default} alt="menu-image"/>
+                                                <img className="img-fluid"
+                                                     src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default}
+                                                     alt="menu-image"/>
 
                                                 <div className="menu-7-price bg-coffee">
                                                     <h5 className="h5-xs yellow-color">$7.79</h5>
@@ -417,9 +432,9 @@ const Shop = () => {
                     </div>
                 </section>
             </div>
-            <Footer />
+            <Footer/>
         </div>
 
     )
 }
-export  default Shop
+export default Shop

@@ -1,70 +1,76 @@
-import { Archive,
+import {
+    Archive,
     Box,
-    Clipboard, Clock,
+    Clipboard,
+    Clock,
     Coffee,
-    DollarSign, Facebook,
+    DollarSign,
+    Facebook,
     Grid,
     Home,
     List,
     Mail,
-    Menu, MessageSquare,
-    PlusSquare, User,
+    Menu,
+    MessageSquare,
+    PlusSquare, Send,
+    User, UserCheck,
     UserPlus,
-    Users} from 'react-feather'
+    Users, Volume
+} from 'react-feather'
 
 export default [
     {
         id: 'Dashboard',
         title: 'Dashboard',
-        icon: <Home size={20} />,
+        icon: <Home size={20}/>,
         navLink: '/dashboard'
     },
     {
         id: 'Users',
         title: 'Users',
-        icon: <Users size={20} />,
+        icon: <Users size={20}/>,
         navLink: '/Users'
     },
     {
         id: 'Restaurants',
         title: 'Restaurants',
-        icon: <Coffee size={20} />,
+        icon: <Coffee size={20}/>,
         navLink: '/Restaurant'
     },
     {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
-        icon: <Facebook size={20} />,
+        icon: <Facebook size={20}/>,
         navLink: '/Facebook'
     },
     {
         id: 'Customers',
         title: 'Customers',
-        icon: <User size={20} />,
+        icon: <User size={20}/>,
         navLink: '/Customers'
     },
     {
         id: 'CRMemails',
         title: 'CRM (Emails)',
-        icon: <Mail size={20} />,
+        icon: <Mail size={20}/>,
         navLink: '/CrmEmails'
     },
     {
         id: 'CRMsms',
         title: 'CRM (SMS)',
-        icon: <MessageSquare size={20} />,
+        icon: <MessageSquare size={20}/>,
         navLink: '/CrmSms'
     },
     {
         id: 'Bussiness Details',
         title: 'Bussiness Details',
-        icon: <Archive size={20} />,
+        icon: <Archive size={20}/>,
         navLink: '/BussinessDetails'
     },
     {
         id: 'Login History',
         title: 'Login History',
-        icon: <Clock size={20} />,
+        icon: <Clock size={20}/>,
         navLink: '/LoginHistory'
     },
     {
@@ -119,7 +125,68 @@ export default [
                 id: 'inventory',
                 title: 'Inventory',
                 icon: <Box size={12}/>,
-                navLink: '/dashboard/inventory'
+                children: [
+                    {
+                        id: 'items',
+                        title: 'Items',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/item'
+                    },
+                    {
+                        id: 'distributor',
+                        title: 'Distributor',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/distributor'
+                    },
+                    {
+                        id: 'category',
+                        title: 'Category',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/category'
+                    },
+                    {
+                        id: 'Recipe',
+                        title: 'recipe',
+                        icon: <Clipboard size={20}/>,
+                        navLink: '/dashboard/inventory/recipe'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'Wineclub',
+        title: 'Wineclub',
+        children: [
+            {
+                id: 'Members',
+                title: 'Members',
+                icon: <UserCheck size={20}/>,
+                navLink: '/members'
+            },
+            {
+                id: 'Membershiptype',
+                title: 'Membership Types',
+                icon: <UserCheck size={20}/>,
+                navLink: '/'
+            },
+            {
+                id: 'wine-Promotions',
+                title: 'Promotions',
+                icon: <Volume size={20}/>,
+                navLink: '/'
+            },
+            {
+                id: 'crmEmail',
+                title: 'CRM (Email)',
+                icon: <Mail size={20}/>,
+                navLink: '/'
+            },
+            {
+                id: 'crmSms',
+                title: 'CRM (Sms)',
+                icon: <Send size={20}/>,
+                navLink: '/'
             }
         ]
     }

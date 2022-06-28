@@ -171,6 +171,24 @@ const categoryData = [
         pairing: 'Nuclear Power Engineer',
         action: 'Krasnosilka'
 
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        priority: 'Korrie',
+        name: "Keven peterson",
+        pairing: 'Software Engineer',
+        action: 'Krasnosilka'
+
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        priority: 'Korrie',
+        name: "Kyle O'Crevy",
+        pairing: 'Electric Power Engineer',
+        action: 'Krasnosilka'
+
     }
 ]
 const modifierData = [
@@ -179,6 +197,22 @@ const modifierData = [
         id: 1,
         name: "Korrie O'Crevy",
         instruction: 'Nuclear Power Engineer',
+        options: 'Krasnosilka',
+        actions: '$23896.35'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        name: "Kevan PeterSon",
+        instruction: 'Software Engineer',
+        options: 'Krasnosilka',
+        actions: '$23896.35'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        name: "Kyle O'Crevy",
+        instruction: 'Electrical Power Engineer',
         options: 'Krasnosilka',
         actions: '$23896.35'
     }
@@ -191,6 +225,22 @@ const addonData = [
         instruction: 'Nuclear Power Engineer',
         options: 'Krasnosilka',
         actions: '$23896.35'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        name: "kavin peterson",
+        instruction: 'software Engineer',
+        options: 'Krasnosilka',
+        actions: '$23896.35'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        name: "Kyle hood",
+        instruction: 'Electricl Engineer',
+        options: 'Krasnosilka',
+        actions: '$23896.35'
     }
 ]
 const promotionData = [
@@ -200,6 +250,26 @@ const promotionData = [
         status: 'like',
         name: "Korrie O'Crevy",
         code: 'Nuclear Power Engineer',
+        type: 'Krasnosilka',
+        amount: '$23896.35',
+        actions: 'djf'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        status: 'like',
+        name: "kavin peterson",
+        code: 'Software Engineer',
+        type: 'Krasnosilka',
+        amount: '$23896.35',
+        actions: 'djf'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        status: 'like',
+        name: "kyle O'Crevy",
+        code: 'Electrical Engineer',
         type: 'Krasnosilka',
         amount: '$23896.35',
         actions: 'djf'
@@ -233,6 +303,32 @@ const InvItemData = [
         stock: 2,
         distributor: 'Korrie',
         actions: 'true'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        code: '223',
+        description: 'Nuclear Power Engineer',
+        unit: '61',
+        price: '$23896.35',
+        unit_item: "Korrie O'Crevy",
+        qty_item: 'Krasnosilka',
+        stock: 2,
+        distributor: 'Korrie',
+        actions: 'true'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        code: '223',
+        description: 'Nuclear Power Engineer',
+        unit: '61',
+        price: '$23896.35',
+        unit_item: "Korrie O'Crevy",
+        qty_item: 'Krasnosilka',
+        stock: 2,
+        distributor: 'Korrie',
+        actions: 'true'
     }
 ]
 const InvCategoryData = [
@@ -241,12 +337,44 @@ const InvCategoryData = [
         id: 1,
         name: "Korrie O'Crevy",
         actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        name: "Korrie O'Crevy",
+        actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        name: "Korrie O'Crevy",
+        actions: 'Nuclear Power Engineer'
     }
 ]
 const InvDistributorData = [
     {
         responsive_id: '',
         id: 1,
+        name: "Korrie O'Crevy",
+        abbreviation: 'Nuclear Power Engineer',
+        contact_person: '223344233',
+        email: 'kocrevy0@thetimes.co.uk',
+        phone: '33225533',
+        actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        name: "Korrie O'Crevy",
+        abbreviation: 'Nuclear Power Engineer',
+        contact_person: '223344233',
+        email: 'kocrevy0@thetimes.co.uk',
+        phone: '33225533',
+        actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 3,
         name: "Korrie O'Crevy",
         abbreviation: 'Nuclear Power Engineer',
         contact_person: '223344233',
@@ -262,6 +390,20 @@ const InvRecipeData = [
         item: 'build plate',
         recipe_item: "Korrie O'Crevy",
         actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 2,
+        item: 'build plate',
+        recipe_item: "Kyle",
+        actions: 'Nuclear Power Engineer'
+    },
+    {
+        responsive_id: '',
+        id: 3,
+        item: 'build plate',
+        recipe_item: "Korrie O'Crevy",
+        actions: 'Nuclear Power Engineer'
     }
 ]
 
@@ -273,7 +415,7 @@ export function getMenuItem() {
     return menuItemData
 }
 
-export function getCategory() {
+export function getCategoryData() {
     return categoryData
 }
 

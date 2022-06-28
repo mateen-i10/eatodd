@@ -1,9 +1,10 @@
-* ::before ::after{
-    margin:0px;
+* ::before ::after {
+    margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
-.membership-page{
+
+.membership-page {
     font-family: inherit;
     font-weight: 300;
     font-size: 1rem;
@@ -11,52 +12,62 @@
     color: rgb(40 48 52)
 }
 
-.card-body-sec h2 {
+.card-body-sec > h2 {
     color: #81be41;
 }
 
-.card-body-sec p {
+.card-body-sec > p {
     font-size: 1rem;
 }
+
 .btn-green {
     line-height: 1;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border: 1px solid rgb(0 0 0 / 0%)!important;
+    border: 1px solid rgb(0 0 0 / 0%) !important;
     border-radius: 0.528rem !important;
     background-color: #81be41;
     color: whitesmoke;
 }
-    .btn-green:hover {
-        color: whitesmoke !important;
-    }
-.member-card{
+
+.btn-green:hover {
+    color: whitesmoke !important;
+}
+
+.member-card {
     background-color: white;
     border-radius: 0.528rem;
 }
+
 .member-card:hover {
     background-color: #81be41;
     color: whitesmoke;
 }
-.member-card:hover h2{
+
+.member-card:hover h2 {
     color: whitesmoke;
 }
-.member-card:hover h4{
+
+.member-card:hover h4 {
     color: whitesmoke;
 }
+
 .member-card:hover .member-price {
     color: whitesmoke;
 }
+
 .member-card:hover .btn-green {
     /*background-color: whitesmoke !important;*/
     /*color: #57ab00;*/
     border: 2px solid whitesmoke !important;
 }
-.member-price{
+
+.member-price {
     font-size: 200%;
     color: #81be41;
 }
-.doller-sign{
+
+.doller-sign {
     padding-top: -10px;
 }

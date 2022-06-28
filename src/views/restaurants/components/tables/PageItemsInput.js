@@ -6,9 +6,9 @@ const PageItemsInput = (props) => {
     return (
         <Fragment>
             <div className="d-flex align-items-center">
-                <Label for="sort-select " className=" m-1 ">show</Label>
+                <Label for="sort-select" className="m-1">show</Label>
                 <Input
-                    className=" w-25"
+                    className="w-25"
                     type="select"
                     id="sort-select"
                     value={itemsPerPage}
@@ -21,7 +21,7 @@ const PageItemsInput = (props) => {
                     <option value={75}>75</option>
                     <option value={100}>100</option>
                 </Input>
-                <Label for="sort-select" className=" m-1 ">entries</Label>
+                <Label for="sort-select" className="m-1">entries</Label>
             </div>
         </Fragment>
     )
