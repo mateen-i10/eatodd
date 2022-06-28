@@ -501,7 +501,7 @@ const Plate = () => {
                 <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Side</h1>
 
                 {increment.length !== 0 ? (
-                    <FoodItemAdder ResetFoodItemName={SetIncrement} FoodItemName={increment}/>
+                    <FoodItemAdder ResetFoodItemName={SetIncrement} FoodItemName={increment} />
                 ) : []}
 
                 <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
