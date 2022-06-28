@@ -170,11 +170,6 @@ const Members = () => {
             minWidth: '250px',
             cell: row => (
                 <div className='d-flex align-items-center'>
-                    {row.avatar === '' ? (
-                        <Avatar color={`light-${states[row.status]}`} content={row.full_name} initials />
-                    ) : (
-                        <Avatar img={require(`@src/assets/images/portrait/small/avatar-s-${row.avatar}`).default} />
-                    )}
                     <div className='user-info text-truncate ms-1'>
                         <span className='d-block font-weight-bold text-truncate'>{row.full_name}</span>
                         <small>{row.post}</small>
