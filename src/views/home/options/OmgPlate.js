@@ -1,24 +1,25 @@
-import React, {useState} from 'react'
-import img1 from '../../../assets/images/my-images/background.jpg'
-import img2 from '../../../assets/images/foodItems/kebab.jpg'
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Tooltip} from 'reactstrap'
-import {CheckCircle, Plus, Minus, List, MoreVertical, X, ArrowRight} from 'react-feather'
-import './components/Plate.css'
-import FoodItemAdder from "./components/FoodItemAdder"
-import FoodCheckItem from "./components/FoodCheckItem"
+import React, {useEffect, useState} from 'react'
+import {Button, Card} from "reactstrap"
+import TopShelf from "./components/TopShelf"
+import img from '../../../assets/images/images/image2.png'
+import img2 from '../../../assets/images/images/images.jpg'
+import NutrtionPrefModel from "./components/NutrtionPrefModel"
+import MenuItem from "./components/MenuItem"
+import SideOrderCounter from "./components/SideOrderCounter"
+import Footer from "./components/Footer"
+import { useDispatch} from "react-redux"
+import {setCrmEmail} from "../../../redux/test/reducer"
 import Header from "../../../shared/header/Header"
+// import {useHistory} from "react-router-dom"
 
-const Plate = () => {
-    const [basicModal, setBasicModal] = useState(false)
-    const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-    const [plantBased, SetplantBased] = useState(0)
-    const [lifeStyle, SetLifeStyle] = useState(0)
-    const [avoiding, SetAvoiding] = useState(0)
+const Menu = (props) => {
 
-    const [riceQuantity, SetriceQuantity] = useState('')
-    const [increment, SetIncrement] = useState('')
+    // const testData = useSelector(state => state.testReducer.testData)
+    // const isLoading = useSelector(state => state.testReducer.isLoading)
+    const dispatch = useDispatch()
+    // const history = useHistory()
 
-    const [protienQuantity, SetProteinQuantity] = useState('')
+    const img = props.image
 
     const protein = [
         {
@@ -63,22 +64,6 @@ const Plate = () => {
         }
     ]
 
-    const Rice = [
-        {
-            image:  img2,
-            title: 'White Rice',
-            cal: 210
-        },
-        {
-            image:  img2,
-            title: 'Brown Rice',
-            cal: 210
-        },
-        {
-            title: 'No Rice'
-        }
-    ]
-
     const Side = [
         {
             image: img2,
@@ -107,451 +92,82 @@ const Plate = () => {
         }
     ]
 
-    const handlePlantBased1 = () => {
-        console.log("the vegan button is being clicked on")
+    const [currentItem, setCurrentItem] = useState('')
+    const [arr, setArr] = useState([])
 
-        if (plantBased === 0) {
-            SetplantBased(1)
-        } else if (plantBased === 1) {
-            SetplantBased(0)
-        } else if (plantBased === 2) {
-            SetplantBased(1)
-        }
-    }
+    useEffect(() => {
+        console.log('arr', arr)
+        dispatch(setCrmEmail([...arr]))
+        // if (isLoading) {
+        //
+        // }
 
-    const handlePlantBased2 = () =>  {
-        if (plantBased === 0) {
-            SetplantBased(2)
-        } else if (plantBased === 2) {
-            SetplantBased(0)
-        } else if (plantBased === 1) {
-            SetplantBased(2)
-        }
-    }
+    }, [arr])
 
-    const handleLifeStyle1 = () => {
-        if (lifeStyle === 0) {
-            SetLifeStyle(1)
-        } else if (lifeStyle === 1) {
-            SetLifeStyle(0)
-        } else if (lifeStyle === 2) {
-            SetLifeStyle(1)
-        } else if (lifeStyle === 3) {
-            SetLifeStyle(1)
-        }
-    }
 
-    const handleLifeStyle2 = () => {
-        if (lifeStyle === 0) {
-            SetLifeStyle(2)
-        } else if (lifeStyle === 1) {
-            SetLifeStyle(2)
-        } else if (lifeStyle === 2) {
-            SetLifeStyle(0)
-        } else if (lifeStyle === 3) {
-            SetLifeStyle(2)
-        }
-    }
+    const handleClick = (element) => {
+        // dispatch(setCrmEmail({name: [element.title]}))
+        console.log(element)
+        setCurrentItem(element)
+        if (arr.title === null) setArr(element)
+        else setArr(arr => [...arr, element.title])
 
-    const handleLifeStyle3 = () => {
-        if (lifeStyle === 0) {
-            SetLifeStyle(3)
-        } else if (lifeStyle === 1) {
-            SetLifeStyle(3)
-        } else if (lifeStyle === 2) {
-            SetLifeStyle(3)
-        } else if (lifeStyle === 3) {
-            SetLifeStyle(0)
-        }
-    }
-
-    const handleAvoiding1 = () => {
-        if (avoiding === 0) {
-            SetAvoiding(1)
-        } else if (avoiding === 1) {
-            SetAvoiding(0)
-        } else if (avoiding === 2) {
-            SetAvoiding(1)
-        } else if (avoiding === 3) {
-            SetAvoiding(1)
-        } else if (avoiding === 4) {
-            SetAvoiding(1)
-        }
-    }
-
-    const handleAvoiding2 = () => {
-        if (avoiding === 0) {
-            SetAvoiding(2)
-        } else if (avoiding === 1) {
-            SetAvoiding(2)
-        } else if  (avoiding === 2) {
-            SetAvoiding(0)
-        } else if (avoiding === 3) {
-            SetAvoiding(2)
-        } else if (avoiding === 4) {
-            SetAvoiding(2)
-        }
-    }
-
-    const handleAvoiding3 = () => {
-        if (avoiding === 0) {
-            SetAvoiding(3)
-        } else if (avoiding === 1) {
-            SetAvoiding(3)
-        } else if  (avoiding === 2) {
-            SetAvoiding(3)
-        } else if (avoiding === 3) {
-            SetAvoiding(0)
-        } else if (avoiding === 4) {
-            SetAvoiding(3)
-        }
-    }
-
-    const handleAvoiding4 = () => {
-        if (avoiding === 0) {
-            SetAvoiding(4)
-        } else if (avoiding === 1) {
-            SetAvoiding(4)
-        } else if  (avoiding === 2) {
-            SetAvoiding(4)
-        } else if (avoiding === 3) {
-            SetAvoiding(4)
-        } else if (avoiding === 4) {
-            SetAvoiding(0)
-        }
-    }
-
-    const RenderMealNameModal = () => {
-        return (
-            <div className='basic-modal'>
-                <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
-                    <div toggle={() => setBasicNameFoodModal(!basicNameFoodModal)} className='name-meal-model' ><p>give this meal a name</p></div>
-                    <ModalBody>
-                        <div className='col-8' style={{marginLeft:80}}>
-                            <Input type='text' placeholder='Enter Meal Name' style={{color:'#451400'}} />
-                        </div>
-                    </ModalBody>
-                    <ModalFooter style={{justifyContent:'center', marginBottom:20, marginTop:30}}>
-                        <Button color='primary' onClick={() => setBasicNameFoodModal(!basicNameFoodModal)}>
-                            Cancel
-                        </Button>
-                        <Button color='primary' onClick={() => setBasicNameFoodModal(!basicNameFoodModal)}>
-                            Save
-                        </Button>
-                    </ModalFooter>
-                </Modal>
-            </div>
-        )
-    }
-
-    const RenderModal = () => {
-        return (
-            <div className='basic-modal'>
-                <Modal isOpen={basicModal} toggle={() => setBasicModal(!basicModal)}>
-                    <h1 className="modal-head">
-                        Nutrition Preferences
-                        <X className='close-modal-button' onClick={() => setBasicModal(!basicModal)} />
-                    </h1>
-                    <hr/>
-                    <ModalBody style={{paddingRight:50, paddingLeft:50}}>
-                        <h5 style={{color:"#451400"}}>Set these tags for now or Sign In to keep them saved for later.</h5>
-                        <div style={{display:'flex', marginTop:20}}>
-                            <div className='badge rounded-pill' style={{backgroundColor:'#6e7c1b'}} >
-                                V
-                            </div>
-                            <div style={{color: '#6e7c1b', marginLeft:10}}>Plant based</div>
-                        </div>
-                        <div style={{marginTop:10}}>
-                            <div className="badge rounded-pill" onClick={handlePlantBased1} style={plantBased === 1 ? {border:'solid', borderWidth:1, borderColor: '#6e7c1b', backgroundColor: '#6e7c1b', color:'white'} : {border:'solid', borderWidth:1, borderColor: '#6e7c1b', color: '#6e7c1b'}}>
-                                Vegetarian
-                            </div>
-                            <div className="badge rounded-pill" onClick={handlePlantBased2} style={plantBased === 2 ? {border:'solid', borderWidth:1, borderColor: '#6e7c1b', backgroundColor: '#6e7c1b', color:'white', marginLeft:10, marginBottom: 10} : {border:'solid', borderWidth:1, borderColor: '#6e7c1b', color: '#6e7c1b', marginLeft:10, marginBottom: 10}}>
-                                Vegan
-                            </div>
-                        </div>
-
-                        <div style={{display:'flex', marginTop:10}}>
-                            <div className='badge rounded-pill' style={{backgroundColor: '#786259'}}>
-                                L
-                            </div>
-                            <div style={{color: '#786259', marginLeft:10}}>Lifestyle</div>
-                        </div>
-                        <div style={{marginTop:10}}>
-                            <div className="badge rounded-pill" onClick={handleLifeStyle1} style={lifeStyle === 1 ? {border:'solid', borderWidth:1, borderColor: '#786259', backgroundColor: '#786259', color: 'white'} : {border:'solid', borderWidth:1, borderColor: '#786259', color: '#786259'}}>
-                                Paleo
-                            </div>
-                            <div className="badge rounded-pill" onClick={handleLifeStyle2} style={lifeStyle === 2 ? {border:'solid', borderWidth:1, borderColor: '#786259', backgroundColor: '#786259', marginLeft:10, marginBottom: 10, color: 'white'} : {border:'solid', borderWidth:1, borderColor: '#786259', color: '#786259', marginLeft:10, marginBottom: 10}}>
-                                Keto
-                            </div>
-                            <div className="badge rounded-pill" onClick={handleLifeStyle3} style={lifeStyle === 3 ? {border:'solid', borderWidth:1, borderColor: '#786259', backgroundColor: '#786259', color:'white', marginLeft:10, marginBottom: 10} : {border:'solid', borderWidth:1, borderColor: '#786259', color: '#786259', marginLeft:10, marginBottom: 10}}>
-                                Whole30
-                            </div>
-                        </div>
-                        <div style={{display:'flex', marginTop:10}}>
-                            <div className='badge rounded-pill' style={{backgroundColor:'#ad2118'}}>
-                                !
-                            </div>
-                            <div style={{color: '#ad2118', marginLeft:10}}>I'm Avoiding</div>
-                        </div>
-
-                        <h6 style={{marginTop:10, color:'#786259'}}>Tagged items contain your selection.</h6>
-
-                        <div style={{marginTop:10, marginBottom:20}}>
-                            <div className="badge rounded-pill" onClick={handleAvoiding1} style={avoiding === 1 ? {border:'solid', borderWidth:1, borderColor: '#ad2118', backgroundColor: '#ad2118', color:'white'} : {border:'solid', borderWidth:1, borderColor: '#ad2118', color: '#ad2118'}}>
-                                Gluten
-                            </div>
-                            <div className="badge rounded-pill" onClick={handleAvoiding2} style={avoiding === 2 ? {border:'solid', borderWidth:1, borderColor: '#ad2118', backgroundColor: '#ad2118', color:'white', marginLeft:10, marginBottom: 10} : {border:'solid', borderWidth:1, borderColor: '#ad2118', color: '#ad2118', marginLeft:10, marginBottom: 10}}>
-                                Dairy
-                            </div>
-                            <div className="badge rounded-pill" onClick={handleAvoiding3} style={avoiding === 3 ? {border:'solid', borderWidth:1, borderColor: '#ad2118', backgroundColor: '#ad2118', color:'white', marginLeft:10, marginBottom: 10} : {border:'solid', borderWidth:1, borderColor: '#ad2118', color: '#ad2118', marginLeft:10, marginBottom: 10}}>
-                                Soy
-                            </div>
-                            <div className="badge rounded-pill" onClick={handleAvoiding4} style={avoiding === 4 ? {border:'solid', borderWidth:1, borderColor: '#ad2118', backgroundColor: '#ad2118', color:'white', marginLeft:10, marginBottom: 10} :  {border:'solid', borderWidth:1, borderColor: '#ad2118', color: '#ad2118', marginLeft:10, marginBottom: 10}}>
-                                Sulphites
-                            </div>
-                        </div>
-
-                        <h5 style={{color:'#786259'}}>We do not use eggs, mustard, peanuts, tree nuts, sesame, shellfish, or fish as ingredients.</h5>
-                    </ModalBody>
-                    <ModalFooter style={{justifyContent:'center'}}>
-                        <button style={{backgroundColor:'#451400', color : 'white', alignText: 'center', paddingLeft: 60, paddingRight: 60, paddingTop:10, paddingBottom:10, marginBottom: 30}} onClick={() => setBasicModal(!basicModal)}>
-                            Apply
-                        </button>
-                    </ModalFooter>
-                </Modal>
-            </div>
-        )
-    }
-
-    const handleRiceSectionClick = (e) => {
-        if (riceQuantity === '') {
-            SetriceQuantity(e.title)
-        } else if (riceQuantity === 'White Rice') {
-            SetriceQuantity(e.title)
-        } else if (riceQuantity === 'Brown Rice') {
-            SetriceQuantity(e.title)
-        } else if (riceQuantity === 'No Rice') {
-            SetriceQuantity(e.title)
-        }
-    }
-
-    const ProteinQuantity = (e) => {
-        if (protienQuantity === '') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'chicken Kebab') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Lamb') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Chicken Shawarma') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Okra Stew') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Falafel') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'MeatBalls') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Fish') {
-            SetProteinQuantity(e.title)
-
-        } else if (protienQuantity === 'Steak') {
-            SetProteinQuantity(e.title)
-        }
-    }
-
-    const handleSideSectionClick = (e) => {
-        if (e.title === 'Garlic Sauce') {
-            SetIncrement('Garlic Sauce')
-        } else if (e.title === 'Baba Ghanoush') {
-            SetIncrement('Baba Ghanoush')
-        } else if (e.title === 'Red Hot Sauce') {
-            SetIncrement('Red Hot Sauce')
-        } else if (e.title === 'Hummus') {
-            SetIncrement('Hummus')
-        } else if (e.title === 'Zhoug Sauce') {
-            SetIncrement('Zhoug Sauce')
-        }
     }
 
     return (
-        <div>
+        <>
             <Header />
-        <div style={{backgroundColor: 'white', paddingTop:20}}>
-            <div className="container">
-                <section id="banner-3" className="bg-yellow banner-section division" style={{paddingTop:30}}>
+            <Card style={{marginBottom: -50}}>
+                <div className="container">
+                    <TopShelf image={img} fooditem='Burritto'/>
+
+                    <hr style={{color:'black'}}/>
+
+                    <NutrtionPrefModel />
+
                     <div className="container">
-                        <div className="row d-flex align-items-center">
+                        <div className="container">
 
-                            <div className="col-md-7 col-lg-6">
-                                <div className="banner-3-img" style={{textAlign:'left'}}>
-                                    <div style={{marginLeft:30}}>
-                                        <img src={img1} width={500} height={300}/>
-                                    </div>
-                                </div>
+                            <div className='text-center'>
+                                <h1>Protein or Vegie</h1>
+                                <h4>Choose up to two</h4>
                             </div>
 
-                            <div className="col-md-5 col-lg-6">
-                                <div style={{paddingLeft :50}}>
-                                    <h5 className='intro-para' style={{ color: '#786259'}}>Build your</h5>
-                                    <h1 className='intro-para' style={{fontSize:'4em', color: '#451400', marginTop:-2}}>Burritto</h1>
-                                    <p style={{color: '#451400'}}>Your choice of freshly grilled meat or sofritas served in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese.</p>
-                                </div>
+                            <div className="row">
+                                {protein.map((element) => {
+                                    return <div className="col-md-6" key={element.title} onClick={() => handleClick(element)}>
+                                        <MenuItem foodImage={element.image} title={element.title} price={element.price} currentTitle={currentItem} />
+                                    </div>
+                                })}
+                            </div>
+
+                            <div className='text-center'>
+                                <h1>Side</h1>
+                            </div>
+                            {/*<Button type='button' onClick={(e) => {*/}
+                            {/*    e.preventDefault()*/}
+                            {/*    history.push('home')*/}
+                            {/*}}>gooooo</Button>*/}
+
+                            <div className="row">
+                                {Side.map((element) => {
+                                    return <div className="col-md-6" key={element.title} onClick={() => handleClick(element)}>
+                                        <SideOrderCounter foodImage={element.image} title={element.title} price={element.price} currentTitle={currentItem} />
+                                    </div>
+                                })}
                             </div>
 
                         </div>
                     </div>
-                </section>
-
-                <hr style={{color:'black'}} />
-
-                <div className="container" style={{paddingLeft: 115}}>
-                    <div className="row">
-                        <div className="col section-area-heading">
-                            <h1>Protein or vegie</h1>
-                            <h6>Choose up to two</h6>
-                        </div>
-                        <div className="col" style={{textAlign:'right'}}>
-                            <h5 style={{textTransform: 'uppercase', color: '#a77821', fontWeight: 'bolder'}}>Nutrtion Preferences <a href="#"><List onClick={() => setBasicModal((!basicModal))} color='#a77821' /></a></h5>
-                        </div>
-                    </div>
                 </div>
-
-                {protienQuantity.length !== 0 ? (
-                    <FoodCheckItem proteinName={protienQuantity} />
-                ) : []}
-
-                <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
-                    <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
-                        {
-                            protein.map(e => (
-                                <div onClick = {() => ProteinQuantity(e)} className = "col-md-5 Fooditems">
-                                    <div>
-                                        <img src={e.image} style={{width: 100, height: 130}} />
-                                    </div>
-                                    <div style={{marginTop: 40, marginLeft: 20}} className='food-item-data'>
-                                        <h1>{e.title}</h1>
-                                        <div style={{display: 'flex'}}>
-                                            <h6>{e.price}</h6>
-                                            <h6 style={{marginLeft:20}}>{e.cal}</h6>
-                                        </div>
-                                    </div>
-                                    <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <a href="#">
-                                        <MoreVertical />
-                                        </a>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                    </div>
-                </div>
-
-                <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Rice</h1>
-
-                {riceQuantity === 'White Rice' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {riceQuantity === 'Brown Rice' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:60, marginLeft:640, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                {riceQuantity === 'No Rice' ? (
-                    <div>
-                        <CheckCircle className='rounded-circle' size={50} style={{position:'absolute', marginTop:210, marginLeft:155, backgroundColor:'#8f6901', borderColor: 'white', borderWidth:1, color:'white'}} />
-                    </div>
-                ) : []}
-
-                <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
-                    <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
-                        {
-                            Rice.map(e => (
-                                <div className="col-md-5 Fooditems" onClick={() => handleRiceSectionClick(e)}>
-                                    <div>
-                                        <img src={e.image} style={{width: 100, height: 130}} />
-                                    </div>
-                                    <div style={{marginTop: 40, marginLeft: 20}} className='food-item-data'>
-                                        <h1>{e.title}</h1>
-                                        <div style={{display: 'flex'}}>
-                                            <h6>{e.price}</h6>
-                                            <h6 style={{marginLeft:20}}>cals</h6>
-                                        </div>
-                                    </div>
-                                    <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <a href="#"><MoreVertical /></a>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                    </div>
-                </div>
-
-                <h1 className="container" style={{paddingLeft: 115, color:'#451400', textTransform:'uppercase', fontWeight: 'bolder'}}>Side</h1>
-
-                {increment.length !== 0 ? (
-                    <FoodItemAdder ResetFoodItemName={SetIncrement} FoodItemName={increment} />
-                ) : []}
-
-                <div className="container" style={{backgroundColor: 'white', marginBottom: 80}}>
-                    <div className="row" style={{display:'flex', justifyContent: 'left', marginLeft:100, marginRight:-50}}>
-                        {
-                            Side.map(e => (
-                                <div className="col-md-5 Fooditems" onClick={() => handleSideSectionClick(e)}>
-                                    <div>
-                                        <img src={e.image} style={{width: 100, height: 130}} />
-                                    </div>
-                                    <div style={{marginTop: 40, marginLeft: 20}} className='food-item-data'>
-                                        <h1>{e.title}</h1>
-                                        <div style={{display: 'flex'}}>
-                                            <h6>{e.price}</h6>
-                                            <h6 style={{marginLeft:20}}>cals</h6>
-                                        </div>
-                                    </div>
-                                    <div style={{flex:1, textAlign:'right', marginTop: 50, marginRight: 15}}>
-                                        <a href="#"><MoreVertical /></a>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div className="container-fluid navbar-sticky" style={{backgroundColor: '#d4cfcb', padding:20, marginTop: 50 }}>
-                <div className="row">
-                    <div className="col" style={{paddingLeft:140}}>
-                        <h1 style={{color:'#451400'}}>Your Menu Items</h1>
-                        <h6 style={{color:'#451400'}}>Select a protein or vegie to get started</h6>
-                    </div>
-                    <div className="col" style={{textAlign:'right', paddingRight: 140}}>
-                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#451400', color:'white'}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >
-                            ADD TO BAG
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {RenderModal()}
-            {RenderMealNameModal()}
-
-        </div>
-        </div>
+            </Card>
+            <Footer />
+        </>
     )
 }
 
-export default Plate
+export default Menu
+
+Menu.defaultProps = {
+    image: img
+}
