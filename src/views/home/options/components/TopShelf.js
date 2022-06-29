@@ -5,8 +5,8 @@ const TopShelf = (props) => {
         <>
             <div className="container">
                 <div className="row my-5">
-                    <div className="col text-center">
-                        <img src={props.image} alt="..." style={{width:400, borderRadius:'2rem'}} />
+                    <div className="col">
+                        <img src={props.image} alt="..." style={{width:400, borderRadius:'2rem', marginLeft:80}} />
                     </div>
                     <div className="col my-4" style={{textTransform:'uppercase'}}>
                         <h4>build your</h4>

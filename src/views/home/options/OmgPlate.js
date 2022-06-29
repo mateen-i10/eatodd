@@ -128,7 +128,7 @@ const Menu = (props) => {
                     <div className="container">
                         <div className="container">
 
-                            <div className='text-center'>
+                            <div className='text-center my-2'>
                                 <h1>Protein or Vegie</h1>
                                 <h4>Choose up to two</h4>
                             </div>
@@ -141,7 +141,7 @@ const Menu = (props) => {
                                 })}
                             </div>
 
-                            <div className='text-center'>
+                            <div className='text-center my-2'>
                                 <h1>Side</h1>
                             </div>
                             {/*<Button type='button' onClick={(e) => {*/}

@@ -67,7 +67,7 @@ const Footer = () => {
                         <h6 style={{color:'#451400'}}>Select a protein or vegie to get started</h6>
                     </div>
                     <div className="col" style={{textAlign:'right', paddingRight: 140}}>
-                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#451400', color:'white'}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >
+                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#81be41', color:'white'}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >
                             ADD TO BAG
                         </button>
                     </div>

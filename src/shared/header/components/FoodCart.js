@@ -92,7 +92,7 @@ const OffCanvasPlacement = (props) => {
                             <div className='col-md-12'>
                                 <ul>
                                     {testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}
-                                    {console.log('testData', testData)}
+                                    {testData.length ? console.log('testData', testData) : "**Please Select some food**"}
                                 </ul>
                                 {/*<p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>*/}
                             </div>
