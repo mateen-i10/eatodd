@@ -1,5 +1,5 @@
 // ** React Imports
-import {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Form Modal Component for Add and Update
 import FormModal from '../../../components/FormModal'
@@ -25,6 +25,7 @@ import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
 import {setRestaurant} from "../../../redux/restaurant/reducer"
 import Swal from "sweetalert2"
+import Link from "react-router-dom/es/Link"
 
 const Restaurant = (props) => {
     const customerList = useSelector(state => state.restaurant.list)
@@ -47,7 +48,9 @@ const Restaurant = (props) => {
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'full_name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Phone', placeholder: 'Enter Phone', name:'phone', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'URL', placeholder: 'Enter Url', name:'url', isRequired:false, fieldGroupClasses: 'col-6'}
+        {type:FieldTypes.Text, label: 'URL', placeholder: 'Enter Url', name:'url', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Priority', placeholder: 'Enter priority', name:'priority', isRequired:false, fieldGroupClasses: 'col-6'}
     ])
 
     // ** schema for validations
@@ -272,6 +275,9 @@ const Restaurant = (props) => {
                         <CardTitle tag='h4'>Restaurant</CardTitle>
                         <h6>Friday June 10, 2022, 08:10 AM</h6>
                     </div>
+                    <Link to = '/addRestaurant'>
+                        <Button.Ripple bsSize='sm' color='primary'>Add a new Resturant</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='mt-1' md='12' sm='12'>

@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getAddonData} from "../../../tempData/fakeData"
 import {
-    Badge,
+    Badge, Button,
     Card,
     CardHeader,
     CardTitle,
@@ -22,6 +22,7 @@ import Swal from "sweetalert2"
 import Joi from "joi-browser"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
+import Link from "react-router-dom/es/Link"
 
 const Addon = (props) => {
     // const customerList = useSelector(state => state.crmSms.list)
@@ -239,6 +240,9 @@ const Addon = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Addon</CardTitle>
+                    <Link to = '/addAddon'>
+                        <Button.Ripple color='primary'>Add a new addon</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
