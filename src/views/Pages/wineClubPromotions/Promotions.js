@@ -1,5 +1,5 @@
 // ** React Imports
-import {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Form Modal Component for Add and Update
 import FormModal from '../../../components/FormModal'
@@ -25,6 +25,7 @@ import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
 import {setCustomer} from "../../../redux/member/reducer"
 import Swal from "sweetalert2"
+import Link from "react-router-dom/es/Link"
 
 const Promotions = (props) => {
     const customerList = useSelector(state => state.member.list)
@@ -259,8 +260,9 @@ const Promotions = (props) => {
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                     <CardTitle tag='h4'>Promotions</CardTitle>
-                    <div className='d-flex mt-md-0 mt-1'>
-                    </div>
+                    <Link to = '/Addpromotions'>
+                        <Button.Ripple color='primary'>Add a new Promotion</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='d-flex align-items-center justify-content-end mt-1' md='12' sm='12'>

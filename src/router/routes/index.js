@@ -369,6 +369,11 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/Addpromotions',
+        component: lazy(() => import('../../views/Pages/wineClubPromotions/AddPromotion')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/addRestaurant',
         component: lazy(() => import('../../views/Pages/restaurant/AddRestaurant')),
         layout: 'VerticalLayout'
@@ -376,6 +381,16 @@ const Routes = [
     {
         path: '/addAddon',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addAddon',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addMembershipType',
+        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/AddMembershipTypeForm')),
         layout: 'VerticalLayout'
     }
 
