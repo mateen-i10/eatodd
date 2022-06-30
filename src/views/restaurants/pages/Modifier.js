@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getModifierData} from "../../../tempData/fakeData"
 import {
-    Badge,
+    Badge, Button,
     Card,
     CardHeader,
     CardTitle,
@@ -22,6 +22,7 @@ import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
 import Swal from "sweetalert2"
 import {deleteModifier, getModifier, loadModifier, setModifier} from "../../../redux/restaurantPages/modifierReducer"
+import Link from "react-router-dom/es/Link"
 
 const Modifier = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -234,6 +235,9 @@ const Modifier = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Modifier</CardTitle>
+                    <Link to = '/addModifier'>
+                        <Button.Ripple color='primary'>Add a new Modifier</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">

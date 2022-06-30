@@ -30,13 +30,22 @@ import { useForm, Controller } from 'react-hook-form'
 import '@styles/react/libs/react-select/_react-select.scss'
 import Link from "react-router-dom/es/Link"
 
+const BranchOptions = [
+    { value: 'forklift', label: 'Forklift' },
+    { value: 'amedicano', label: 'Amedicano' },
+    { value: 'north eve', label: 'North Eve' },
+    { value: 'vab buren', label: 'Vab Buren' },
+    { value: 'catering', label: 'Catering' },
+    { value: 'french market', label: 'French Market' }
+]
+
 const defaultValues = {
     firstName: 'Bob',
     lastName: 'Barton',
     username: 'bob.dev'
 }
 
-const Addaddon = () => {
+const AddModifier = () => {
     // ** States
     const [show, setShow] = useState(true)
 
@@ -62,12 +71,12 @@ const Addaddon = () => {
     return (
         <Fragment>
             <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/Dashboard/addon">
+                <Link to="/dashboard/modifier">
                     <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
-                        <h1 className='mb-1'>Add a New Add on</h1>
+                        <h1 className='mb-1'>Add a New Modifier</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' >
                         <Col md={6} xs={12}>
@@ -98,7 +107,7 @@ const Addaddon = () => {
                         <AddingFeilds />
 
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/Dashboard/addon">
+                            <Link to="/dashboard/modifier">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Create Add on
                                 </Button>
@@ -114,4 +123,4 @@ const Addaddon = () => {
     )
 }
 
-export default Addaddon
+export default AddModifier

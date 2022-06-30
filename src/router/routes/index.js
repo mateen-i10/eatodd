@@ -392,6 +392,21 @@ const Routes = [
         path: '/addMembershipType',
         component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/AddMembershipTypeForm')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/addmenuitem',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddMenuItem')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addCategory',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddCategory')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addModifier',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddModifier')),
+        layout: 'VerticalLayout'
     }
 
 ]

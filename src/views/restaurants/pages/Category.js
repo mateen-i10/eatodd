@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getCategoryData} from "../../../tempData/fakeData"
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
@@ -21,6 +22,7 @@ import Joi from "joi-browser"
 import Swal from "sweetalert2"
 import FormModal from "../../../components/FormModal"
 import {deleteCategory, getCategory, loadCategory, setCategory} from "../../../redux/restaurantPages/categoryReducer"
+import Link from "react-router-dom/es/Link"
 
 const Category = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -224,6 +226,9 @@ const Category = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Category</CardTitle>
+                    <Link to = '/addCategory'>
+                        <Button.Ripple color='primary'>Add a new Category</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
