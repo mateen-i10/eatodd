@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
@@ -26,6 +27,7 @@ import {
     loadInvDistributor,
     setInvDistributor
 } from "../../../../redux/restaurantPages/Inventory/distributerReducer"
+import Link from "react-router-dom/es/Link"
 
 const Distributor = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -246,6 +248,9 @@ const Distributor = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Distributors</CardTitle>
+                    <Link to = '/addDistributor'>
+                        <Button.Ripple color='primary'>Add a new distributor</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">

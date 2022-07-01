@@ -407,6 +407,31 @@ const Routes = [
         path: '/addModifier',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddModifier')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/addnorthPromotion',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddPromotion')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addInventoryItem',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddInventoryItemForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addDistributor',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddDistributor')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addCategorySubInventory',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddCategorySubInvenotry')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addRecipe',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddRecipe')),
+        layout: 'VerticalLayout'
     }
 
 ]

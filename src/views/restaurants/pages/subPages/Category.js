@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getInvCategory} from "../../../../tempData/fakeData"
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
@@ -26,6 +27,7 @@ import {
     loadInvCategory,
     setInvCategory
 } from "../../../../redux/restaurantPages/Inventory/InvCategoryReducer"
+import Link from "react-router-dom/es/Link"
 
 const Category = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -225,6 +227,9 @@ const Category = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Inventory Category</CardTitle>
+                    <Link to = '/addCategorySubInventory'>
+                        <Button.Ripple color='primary'>Add a new Category</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
