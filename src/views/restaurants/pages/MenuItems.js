@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {
-    Badge,
+    Badge, Button,
     Card,
     CardHeader,
     CardTitle,
@@ -22,6 +22,7 @@ import Joi from "joi-browser"
 import Swal from "sweetalert2"
 import FormModal from "../../../components/FormModal"
 import {deleteMenuItem, getMenuItemSt, loadMenuItem, setMenuItem} from "../../../redux/restaurantPages/menuItemReducer"
+import Link from "react-router-dom/es/Link"
 
 
 const MenuItems = (props) => {
@@ -46,6 +47,16 @@ const MenuItems = (props) => {
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
+
+    const BranchOptions = [
+        { value: 'forklift', label: 'Forklift' },
+        { value: 'amedicano', label: 'Amedicano' },
+        { value: 'north eve', label: 'North Eve' },
+        { value: 'vab buren', label: 'Vab Buren' },
+        { value: 'catering', label: 'Catering' },
+        { value: 'french market', label: 'French Market' }
+    ]
+
     const [formData] = useState([
         {
             type: FieldTypes.Text,
@@ -57,9 +68,17 @@ const MenuItems = (props) => {
         },
         {
             type: FieldTypes.Text,
-            label: 'Category',
-            placeholder: 'Enter category',
-            name: 'category',
+            label: 'Description',
+            placeholder: 'Enter description',
+            name: 'description',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Text,
+            label: 'price',
+            placeholder: 'Enter price',
+            name: 'price',
             isRequired: false,
             fieldGroupClasses: 'col-6'
         }
@@ -263,6 +282,9 @@ const MenuItems = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Menu Items</CardTitle>
+                    <Link to = '/addmenuitem'>
+                        <Button.Ripple color='primary'>Add a new MenuItem</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">

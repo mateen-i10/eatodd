@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getPromotionData} from "../../../tempData/fakeData"
 import {
-    Badge,
+    Badge, Button,
     Card,
     CardHeader,
     CardTitle,
@@ -27,6 +27,7 @@ import {
     loadPromotion,
     setPromotion
 } from "../../../redux/restaurantPages/promotionsReducer"
+import Link from "react-router-dom/es/Link"
 
 
 const Promotion = (props) => {
@@ -250,6 +251,9 @@ const Promotion = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Promotions</CardTitle>
+                    <Link to = '/addnorthPromotion'>
+                        <Button.Ripple color='primary'>Add a new promotion</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">

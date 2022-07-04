@@ -362,6 +362,81 @@ const Routes = [
         path: '/members',
         component: lazy(() => import('../../views/Pages/WineClubMembers/Members')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/membershipTypes',
+        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/MembershipTypes')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/promotions',
+        component: lazy(() => import('../../views/Pages/wineClubPromotions/Promotions')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/Addpromotions',
+        component: lazy(() => import('../../views/Pages/wineClubPromotions/AddPromotion')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addRestaurant',
+        component: lazy(() => import('../../views/Pages/restaurant/AddRestaurant')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addAddon',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addAddon',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addMembershipType',
+        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/AddMembershipTypeForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addmenuitem',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddMenuItem')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addCategory',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddCategory')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addModifier',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddModifier')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addnorthPromotion',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddPromotion')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addInventoryItem',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddInventoryItemForm')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addDistributor',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddDistributor')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addCategorySubInventory',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddCategorySubInvenotry')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/addRecipe',
+        component: lazy(() => import('../../views/restaurants/pages/forms/AddRecipe')),
+        layout: 'VerticalLayout'
     }
 
 ]

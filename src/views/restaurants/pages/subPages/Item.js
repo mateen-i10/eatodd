@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {getInvItemData} from "../../../../tempData/fakeData"
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
@@ -26,6 +27,7 @@ import {
     loadInvItem,
     setInvItem
 } from "../../../../redux/restaurantPages/Inventory/itemReducer"
+import Link from "react-router-dom/es/Link"
 
 const Item = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -270,6 +272,9 @@ const Item = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Items</CardTitle>
+                    <Link to = '/addInventoryItem'>
+                        <Button.Ripple color='primary'>Add a new inventory</Button.Ripple>
+                    </Link>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">

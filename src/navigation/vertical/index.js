@@ -12,10 +12,10 @@ import {
     Mail,
     Menu,
     MessageSquare,
-    PlusSquare,
-    User,
+    PlusSquare, Send,
+    User, UserCheck,
     UserPlus,
-    Users
+    Users, Volume
 } from 'react-feather'
 
 export default [
@@ -151,6 +151,42 @@ export default [
                         navLink: '/dashboard/inventory/recipe'
                     }
                 ]
+            }
+        ]
+    },
+    {
+        id: 'Wineclub',
+        title: 'Wineclub',
+        children: [
+            {
+                id: 'Members',
+                title: 'Members',
+                icon: <UserCheck size={20}/>,
+                navLink: '/members'
+            },
+            {
+                id: 'Membershiptype',
+                title: 'Membership Types',
+                icon: <UserCheck size={20}/>,
+                navLink: '/membershipTypes'
+            },
+            {
+                id: 'wine-Promotions',
+                title: 'Promotions',
+                icon: <Volume size={20}/>,
+                navLink: '/promotions'
+            },
+            {
+                id: 'crmEmail',
+                title: 'CRM (Email)',
+                icon: <Mail size={20}/>,
+                navLink: '/CrmEmails'
+            },
+            {
+                id: 'crmSms',
+                title: 'CRM (Sms)',
+                icon: <Send size={20}/>,
+                navLink: '/CrmSms'
             }
         ]
     }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
     Button,
     Offcanvas,
@@ -13,6 +13,8 @@ import {
 import {UserPlus, ChevronDown, ChevronUp} from "react-feather"
 import './FoodCart.css'
 import LoginModal from "./loginModal/LoginModal"
+import {useDispatch, useSelector} from "react-redux"
+import {setCrmEmail} from "../../../redux/test/reducer"
 
 const OffCanvasPlacement = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -20,6 +22,10 @@ const OffCanvasPlacement = (props) => {
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [openModel, SetModelOpen] = useState(false)
     const [taxDropDown, SetTaxDropdown] = useState(true)
+
+    const meal = useSelector(state => state.testReducer.mealname)
+    const testData = useSelector(state => state.testReducer.testData)
+    const dispatch = useDispatch()
 
     const toggleCanvasStart = () => {
         setCanvasPlacement('start')
@@ -70,7 +76,7 @@ const OffCanvasPlacement = (props) => {
                 <OffcanvasBody style={{paddingBottom:0}}>
                     <div className="row">
                         <div className='col-md-10'>
-                            <Input type='text' placeholder='Meal Name' style={{borderRadius:0, borderTop:0, borderRight:0, borderColor:'#451400',  borderLeft:0, borderWidth:2, marginBottom:10, padding:0, fontSize:16, fontWeight:'bolder', color:'#451400'}} />
+                            <Input type='text' placeholder='Meal Name' value={meal.mealName} style={{borderRadius:0, borderTop:0, borderRight:0, borderColor:'#451400',  borderLeft:0, borderWidth:2, marginBottom:10, padding:0, fontSize:16, fontWeight:'bolder', color:'#451400'}} />
                         </div>
                         <div className='col-md-2' style={{marginLeft:-15}}>
                             <h6 style={{fontSize:20, marginLeft:-15, fontWeight:'bolder', color:'primary' }}>$13.05</h6>
@@ -84,11 +90,15 @@ const OffCanvasPlacement = (props) => {
                         </div>
                         <div>
                             <div className='col-md-12'>
-                                <p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>
+                                <ul>
+                                    {testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}
+                                    {testData.length ? console.log('testData', testData) : "**Please Select some food**"}
+                                </ul>
+                                {/*<p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>*/}
                             </div>
                             <div>
                                 <a href="#"><div className="row" style={{color:'primary', fontWeight:'bolder', textTransform: 'uppercase', textDecoration:'underline', fontSize:13, justifyContent:'left'}}>
-                                    <div className="col">remove</div>
+                                    <div className="col" onClick={() => dispatch(setCrmEmail(''))}>remove</div>
                                     <div className="col" style={{marginLeft:-190}}>edit</div>
                                     <div className="col" style={{marginLeft:-220}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >duplicate</div>
                                 </div></a>

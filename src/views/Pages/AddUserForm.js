@@ -89,6 +89,19 @@ const AddUserExample = () => {
                     <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
+                                Name
+                            </Label>
+                            <Controller
+                                name='Name'
+                                control={control}
+                                render={({ field }) => (
+                                    <Input {...field} id='name' placeholder='jane' invalid={errors.lastName && true} />
+                                )}
+                            />
+                            {errors.lastName && <FormFeedback>Please enter a valid Name</FormFeedback>}
+                        </Col>
+                        <Col md={6} xs={12}>
+                            <Label className='form-label' for='lastName'>
                                 Email
                             </Label>
                             <Controller

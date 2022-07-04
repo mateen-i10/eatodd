@@ -28,7 +28,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -59,7 +63,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -90,7 +98,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -121,7 +133,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -152,7 +168,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -183,7 +203,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -214,7 +238,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -245,7 +273,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -276,7 +308,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -303,7 +339,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -330,7 +370,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -357,7 +401,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
@@ -384,7 +432,11 @@ export const data = [
         subject: 'some subject',
         username: 'some username',
         datetime: 'date/time',
-        device: 'device name'
+        device: 'device name',
+        code:'some code',
+        type: 'some type',
+        amount: 'some amount',
+        price:'some price'
     },
     {
         responsive_id: '',
