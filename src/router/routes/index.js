@@ -59,6 +59,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/gmap',
+        component: lazy(() => import('../../views/GoogleMap/index')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/gallery',
         component: lazy(() => import('../../views/gallery/Gallery'))
     },
