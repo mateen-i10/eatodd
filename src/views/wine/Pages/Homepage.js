@@ -1,33 +1,41 @@
 import React from 'react'
 import "./Shop.css"
-import { Button } from 'reactstrap'
+import {Button} from 'reactstrap'
 import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import './About.css'
 import Footer from "../../../shared/footer/Footer"
 import {Link} from "react-router-dom"
+
 const Homepage = () => {
     return (
         <>
             <Headerwine/>
             <VideoHero/>
             <div className="about-page">
-                <section id="about-3" className="wide-60 about-section division">
+                <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-fluid ">
                         <div className="row d-flex align-items-center justify-content-center ">
-                            <div className="col-md-5 col-lg-5">
-                                <div className="about-3-img text-center mb-40">
-                                    <img className="img-fluid"  style={{width:"100%", height:"100%"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
+                            <div className="col-md-5 col-lg-5 h-75">
+                                <div className="about-3-img text-center mb-40 ">
+                                    <img className="img-fluid" style={{width: "100%", height: "95%"}}
+                                         src={require('../../../assets/images/my-images/wine1.jpg').default}
+                                         alt="about-image"/>
                                 </div>
                             </div>
-                            <div className="col-md-7 col-lg-5">
+                            <div className="col-md-7 col-lg-5 h-75">
                                 <div className="about-3-txt mb-40">
                                     {/*<h2 className="h2-sm mb-lg-3 mt-1">Nothing brings people together like a good Wine</h2>*/}
-                                    <p className="p-md">The OMG Wine Club was created to make you say OMG at your savings!
-                                        We are the 1st wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty to OMG.
-                                        As our way to say THANK YOU, we are extending you the opportunity to purchase your favorite wines AT COST!
-                                        Since wine pairs PERFECTLY with our food, we figured why not let YOU PAY WHAT WE PAY?! We are not complicated;
-                                        we just want you to EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
+                                    <p className="p-md">The OMG Wine Club was created to make you say OMG at your
+                                        savings!
+                                        We are the 1st wine club that was created to SAVE YOU MONEY! We appreciate you
+                                        and your loyalty to OMG.
+                                        As our way to say THANK YOU, we are extending you the opportunity to purchase
+                                        your favorite wines AT COST!
+                                        Since wine pairs PERFECTLY with our food, we figured why not let YOU PAY WHAT WE
+                                        PAY?! We are not complicated;
+                                        we just want you to EAT. LIVE. LOVE – now with your favorite glass of wine.
+                                        Cheers Friends!
                                     </p>
                                     <ul className="txt-list">
                                         <li className="list-item">
@@ -51,12 +59,12 @@ const Homepage = () => {
                         </div>
                     </div>
                 </section>
-                <section id="about-1" className="bg-fixed wide-100 about-section division">
+                <section id="about-1" className="bg-fixed wide-100 about-section division mt-4">
                     <div className="container-fluid">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
                             <div className="col-lg-8 ">
                                 <div className="about-1-txt text-center">
-                                    <h2><span className="green-color">Sommelier’s Selection</span></h2>
+                                    <h2><span className="green-color text-uppercase">Sommelier’s Selection</span></h2>
                                     <h3>WINE OF THE WEEK</h3>
                                     <p className="p-xl grey-color">Porta semper lacus cursus, feugiat primis ultrice a
                                         ligula risus auctor an
@@ -116,7 +124,7 @@ const Homepage = () => {
                         </div>
                     </div>
                 </section>
-                <div className="container">
+                <div className="container mt-4">
                     <div id="tabs-content">
                         {/*// <!-- TAB-1 CONTENT -->*/}
                         <div id="tab-1" className="tab-content current">
@@ -128,7 +136,9 @@ const Homepage = () => {
 
                                         <div className="menu-7-img rel">
 
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default} alt="menu-image"/>
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/shop/j-mckinney-unsplash-184.jpg").default}
+                                                 alt="menu-image"/>
 
                                             {/*// <!-- Price -->*/}
                                             <div className="menu-7-price bg-coffee">
@@ -174,7 +184,9 @@ const Homepage = () => {
                                         {/*Image*/}
                                         <div className="menu-7-img rel">
 
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default}
+                                                 alt="menu-image"/>
 
                                             <div className="menu-7-price bg-coffee">
                                                 <h5 className="h5-xs yellow-color">$9.99</h5>
@@ -218,7 +230,9 @@ const Homepage = () => {
 
                                         <div className="menu-7-img rel">
 
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default} alt="menu-image"/>
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/shop/nati-melnychuk-unsplash-185.jpg").default}
+                                                 alt="menu-image"/>
 
                                             <div className="menu-7-price bg-coffee">
                                                 <h5 className="h5-xs yellow-color">$7.99</h5>
@@ -259,7 +273,9 @@ const Homepage = () => {
                                 <div className="col-sm-6 col-lg-3">
                                     <div className="menu-7-item">
                                         <div className="menu-7-img rel">
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default} alt="menu-image"/>
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/shop/joseph-costa-nsplash-184.jpg").default}
+                                                 alt="menu-image"/>
 
                                             <div className="menu-7-price bg-coffee">
                                                 <h5 className="h5-xs yellow-color">$8.30</h5>
@@ -302,13 +318,14 @@ const Homepage = () => {
                         {/*// <!-- END TAB-1 CONTENT -->*/}
                     </div>
                 </div>
-                <section id="blog-1" className="wide-60 blog-section division">
+                <section id="blog-1" className="wide-60 blog-section division mt-4">
                     <div className="container-fluid">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
                             <div className="col-lg-8 ">
                                 <div className="section-title mb-60 text-center">
-                                    <h2 className="h2-xl">Events &amp; Catering</h2>
-                                    <p className="p-xl">Aliquam a augue suscipit, luctus neque purus ipsum neque undo
+                                    <h2 className="h2-xl text-uppercase">Events &amp; Catering</h2>
+                                    <p className="p-xl fs-4">Aliquam a augue suscipit, luctus neque purus ipsum neque
+                                        undo
                                         dolor
                                         primis libero tempus, blandit a cursus varius magna
                                     </p>
@@ -316,12 +333,13 @@ const Homepage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center">
+                        <div className="row d-flex flex-wrap align-items-center justify-content-center mt-4">
                             <div className="col-md-6 col-lg-3">
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}
                                                  alt="blog-post-image"/>
                                         </div>
                                     </div>
@@ -337,8 +355,9 @@ const Homepage = () => {
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}
-                                                 alt="blog-post-image" />
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}
+                                                 alt="blog-post-image"/>
                                         </div>
                                     </div>
                                     <div className="blog-post-txt">
@@ -353,12 +372,13 @@ const Homepage = () => {
                                 <div className="blog-post">
                                     <div className="blog-post-img">
                                         <div className="hover-overlay">
-                                            <img className="img-fluid" src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}
+                                            <img className="img-fluid"
+                                                 src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}
                                                  alt="blog-post-image"/>
                                         </div>
                                     </div>
                                     <div className="blog-post-txt">
-                                        <h5 className="h5-lg"><a href="#">Neque dolor primis a libero
+                                        <h5 className="h5-lg "><a href="#">Neque dolor primis a libero
                                             tempus a tempor</a></h5>
                                         <p className="grey-color">Impedit tempor at donec sapien ipsum a neque dolor
                                             primis libero</p>
