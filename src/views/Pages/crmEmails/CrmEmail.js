@@ -18,12 +18,12 @@ import {
 } from 'reactstrap'
 import {loadCustomers} from "../../../redux/customer/actions"
 import {useDispatch, useSelector} from "react-redux"
-import {setCustomer} from "../../../redux/customer/reducer"
 import {getFP} from "../../../redux/facebookPosts/actions"
+import {getCrmEmails} from "../../../redux/crmEmail/actions"
+import AddCrmSchduledEmailForm from "./AddCrmSchduledEmailForm"
 
 const CrmEmail = () => {
     const customerList = useSelector(state => state.customer.list)
-    const formInitialState = useSelector(state => state.customer.object)
     const isEdit = useSelector(state => state.customer.isEdit)
     const dispatch = useDispatch()
 
@@ -31,17 +31,15 @@ const CrmEmail = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
+    const [isModal, setModal] = useState(false)
+    const [editData, setEditData] = useState(0)
 
+    const toggle = () => {
+        setModal(!isModal)
+    }
 
     useEffect(() => {
         dispatch(loadCustomers())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setCustomer({
-                full_name: '', email: ''
-            }))
-        }
     }, [isEdit])
 
     const handleFilter = e => {
@@ -93,9 +91,21 @@ const CrmEmail = () => {
         setCurrentPage(page.selected)
     }
 
+    const addClick = (e) => {
+        e.preventDefault()
+        toggle()
+    }
+
     const UseTemplate = (id) => {
         console.log('id => ', id)
         dispatch(getFP(id, true))
+    }
+
+    const editClick = (data) => {
+        toggle()
+        dispatch(getCrmEmails(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
 
     // ** Table Common Column
@@ -170,7 +180,7 @@ const CrmEmail = () => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -253,6 +263,7 @@ const CrmEmail = () => {
                         <CardTitle tag='h4'>Scheduled Emails</CardTitle>
                         {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                     </div>
+                    <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a New Scheduled Emails</Button.Ripple>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='mt-1' md='12' sm='12'>
@@ -280,6 +291,8 @@ const CrmEmail = () => {
                 />
 
             </Card>
+
+            <AddCrmSchduledEmailForm isShow={isModal} setShow={toggle} data={editData} />
 
         </Fragment>
     )

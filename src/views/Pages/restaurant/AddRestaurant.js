@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -35,9 +35,9 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddRestaurant = () => {
+const AddRestaurant = (props) => {
     // ** States
-    const [show, setShow] = useState(true)
+    // const [show, setShow] = useState(true)
 
     const weekData = [
         {
@@ -101,9 +101,9 @@ const AddRestaurant = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
                 <Link to="/Restaurant">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
@@ -118,10 +118,9 @@ const AddRestaurant = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='restname' placeholder='Restaurant Name' />
+                                    <Input {...field} id='restname' value={props.data.restaurant} placeholder='Restaurant Name' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Restaurant Name</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
@@ -131,10 +130,9 @@ const AddRestaurant = () => {
                                 name='description'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='description' placeholder='description' />
+                                    <Input {...field} id='description' value={props.data.description} placeholder='description' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid description</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
@@ -144,10 +142,9 @@ const AddRestaurant = () => {
                                 name='address'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='address' placeholder='Address' />
+                                    <Input {...field} id='address' value={props.data.address} placeholder='Address' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Address</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
@@ -157,10 +154,9 @@ const AddRestaurant = () => {
                                 name='phone'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='phone' placeholder='phone' />
+                                    <Input {...field} id='phone' value={props.data.phone} placeholder='phone' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Phone</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
@@ -173,7 +169,6 @@ const AddRestaurant = () => {
                                     <Input {...field} id='storeUrl' placeholder='Store Url' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Store Url</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label' for='lastName'>
@@ -234,14 +229,12 @@ const AddRestaurant = () => {
                         </table>
 
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/Restaurant">
-                                <Button type='submit' className='me-1' color='primary'>
+                                <Button type='submit' className='me-1' color='primary' onClick={() => props.setShow(!props.isShow)}>
                                     Submit
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -50,37 +50,35 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddUserExample = () => {
-    // ** States
-    const [show, setShow] = useState(true)
-
+const AddUserExample = (props) => {
     // ** Hooks
     const {
         control,
-        setError,
         handleSubmit,
         formState: { errors }
     } = useForm({ defaultValues })
 
     const onSubmit = data => {
-        if (Object.values(data).every(field => field.length > 0)) {
-            return null
-        } else {
-            for (const key in data) {
-                if (data[key].length === 0) {
-                    setError(key, {
-                        type: 'manual'
-                    })
-                }
-            }
-        }
+        console.log('data', data)
+        // if (Object.values(data).every(field => field.length > 0)) {
+        //     return null
+        // } else {
+        //     for (const key in data) {
+        //         if (data[key].length === 0) {
+        //             setError(key, {
+        //                 type: 'manual'
+        //             })
+        //         }
+        //     }
+        // }
     }
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
+
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
                 <Link to="/Users">
-                <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
+                <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
@@ -95,26 +93,24 @@ const AddUserExample = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='jane' invalid={errors.lastName && true} />
+                                    <Input {...field} id='name' value={props.data.full_name} placeholder='jane' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Name</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
+                            <Label className='form-label'>
                                 Email
                             </Label>
                             <Controller
                                 name='lastName'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='lastName' placeholder='Doe' invalid={errors.lastName && true} />
+                                    <Input {...field} value={props.data.email} id='lastName' placeholder='Doe' />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Last Name</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
-                            <Label className='form-label' for='status'>
+                            <Label className='form-label'>
                                 Role:
                             </Label>
                             <Select
@@ -142,7 +138,7 @@ const AddUserExample = () => {
                             />
                         </Col>
                         <Col md={6} xs={12}>
-                            <Label className='form-label' for='firstName'>
+                            <Label className='form-label'>
                                 Password
                             </Label>
                             <Controller
@@ -164,14 +160,12 @@ const AddUserExample = () => {
                             {errors.firstName && <FormFeedback>Please enter a valid First Name</FormFeedback>}
                         </Col>
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/Users">
-                            <Button type='submit' className='me-1' color='primary'>
+                            <Button type='submit' className='me-1' color='primary' onClick={() => props.setShow(!props.isShow)}>
                                 Submit
                             </Button>
-                            <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                            <Button type='submit' color='secondary' onClick={() => props.setShow(!props.isShow)}>
                                 Discard
                             </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

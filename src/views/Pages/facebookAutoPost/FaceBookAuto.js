@@ -1,5 +1,5 @@
 // ** React Imports
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 
 // ** Form Modal Component for Add and Update
 import FormModal from '../../../components/FormModal'
@@ -20,62 +20,41 @@ import {
 } from 'reactstrap'
 import {deleteFP, getFP, loadFPs} from "../../../redux/facebookPosts/actions"
 import {useDispatch, useSelector} from "react-redux"
-import {FieldTypes} from "../../../utility/enums/FieldType"
 import Joi from "joi-browser"
-import {setFP} from "../../../redux/facebookPosts/reducer"
 import Swal from "sweetalert2"
-import Link from "react-router-dom/es/Link"
+import AddFacebookPostForm from "./AddFacebookPostForm"
 
 const FacebookPost = (props) => {
     const customerList = useSelector(state => state.facebookPost.list)
-    const formInitialState = useSelector(state => state.facebookPost.object)
     const isEdit = useSelector(state => state.facebookPost.isEdit)
     const dispatch = useDispatch()
-
-    // ** refs
-    const formModalRef = useRef(null)
 
     // ** local States
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Image', placeholder: 'Enter Image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Published', placeholder: 'Enter Published', name:'published', isRequired:false, fieldGroupClasses: 'col-6'}
-    ])
-
+    const [editData, setEditData] = useState(0)
     // ** schema for validations
-    const schema = Joi.object({
-        full_name: Joi.string().required().label("Name"),
-        email: Joi.string().required().label("Email")
-    })
 
 
     useEffect(() => {
         dispatch(loadFPs())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setFP({
-                full_name: '', email: ''
-            }))
-        }
     }, [isEdit])
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getFP(id, true))
-        setModalTitle('Edit FacebookPost Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getFP(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -98,16 +77,6 @@ const FacebookPost = (props) => {
         e.preventDefault()
         console.log('call', props)
         props.history.push(`/customers/detail/${id}`)
-    }
-    const handleSubmit = (event) => {
-        console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
     }
     const handleFilter = e => {
         const value = e.target.value
@@ -204,7 +173,7 @@ const FacebookPost = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -243,9 +212,7 @@ const FacebookPost = (props) => {
                         <CardTitle tag='h4'>FacebookPost</CardTitle>
                         <h6>Friday June 10, 2022, 08:10 AM</h6>
                     </div>
-                    <Link to = '/AddFacebookPost'>
-                        <Button.Ripple color='primary'>Add a new Post</Button.Ripple>
-                    </Link>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Post</Button.Ripple>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='mt-1' md='12' sm='12'>
@@ -272,19 +239,7 @@ const FacebookPost = (props) => {
                     data={searchValue.length ? filteredData : customerList}
                 />
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+            <AddFacebookPostForm isShow={isModal} setShow={toggle} data={editData} />
         </Fragment>
     )
 }

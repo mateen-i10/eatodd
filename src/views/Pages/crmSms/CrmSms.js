@@ -1,8 +1,6 @@
 // ** React Imports
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 
-// ** Form Modal Component for Add and Update
-import FormModal from '../../../components/FormModal'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -14,67 +12,44 @@ import {
     CardTitle,
     Button,
     Input,
-    Label,
     Row,
     Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
 import {deleteCrmSms, getCrmSms, loadCrmSms} from "../../../redux/crmSMS/actions"
 import {useDispatch, useSelector} from "react-redux"
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import Joi from "joi-browser"
-import {setCrmSms} from "../../../redux/crmSMS/reducer"
 import Swal from "sweetalert2"
-import Link from "react-router-dom/es/Link"
+import ScheduleSms from "./ScheduleSms"
 
 const CrmSms = (props) => {
     const customerList = useSelector(state => state.crmSms.list)
-    const formInitialState = useSelector(state => state.crmSms.object)
     const isEdit = useSelector(state => state.crmSms.isEdit)
     const dispatch = useDispatch()
-
-    // ** refs
-    const formModalRef = useRef(null)
 
     // ** local States
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Schedule', placeholder: 'Enter Schedule', name:'schedule', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'SMS', placeholder: 'Enter SMS', name:'sms', isRequired:false, fieldGroupClasses: 'col-6'}
-    ])
-
-    // ** schema for validations
-    const schema = Joi.object({
-        full_name: Joi.string().required().label("Name"),
-        email: Joi.string().required().label("Email")
-    })
+    const [editData, setEditData] = useState(0)
 
 
     useEffect(() => {
         dispatch(loadCrmSms())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setCrmSms({
-                full_name: '', email: ''
-            }))
-        }
     }, [isEdit])
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getCrmSms(id, true))
-        setModalTitle('Edit CrmSms Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getCrmSms(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -98,16 +73,16 @@ const CrmSms = (props) => {
         console.log('call', props)
         props.history.push(`/customers/detail/${id}`)
     }
-    const handleSubmit = (event) => {
-        console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
+    // const handleSubmit = (event) => {
+    //     console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
     const handleFilter = e => {
         const value = e.target.value
         let updatedData = []
@@ -203,7 +178,7 @@ const CrmSms = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -242,9 +217,7 @@ const CrmSms = (props) => {
                         <CardTitle tag='h4'>CrmSms</CardTitle>
                         <h6>Friday June 10, 2022, 08:10 AM</h6>
                     </div>
-                    <Link to = '/SechduledSms'>
-                        <Button.Ripple bsSize='sm' color='primary'>Schedule a new SMS</Button.Ripple>
-                    </Link>
+                        <Button.Ripple bsSize='sm' color='primary' onClick={(e) => addClick(e)}>Schedule a new SMS</Button.Ripple>
                 </CardHeader>
                 <Row className='mx-0'>
                     <Col className='mt-1' md='12' sm='12'>
@@ -271,19 +244,9 @@ const CrmSms = (props) => {
                     data={searchValue.length ? filteredData : customerList}
                 />
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <ScheduleSms isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }

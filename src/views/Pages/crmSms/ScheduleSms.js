@@ -1,21 +1,14 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
-    Card,
     Row,
     Col,
     Modal,
-    Input,
-    Label,
     Button,
-    CardBody,
-    CardText,
-    CardTitle,
     ModalBody,
-    ModalHeader,
-    FormFeedback
+    ModalHeader
 } from 'reactstrap'
 
 // ** Third Party Components
@@ -32,9 +25,7 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const ScheduleSms = () => {
-    // ** States
-    const [show, setShow] = useState(true)
+const ScheduleSms = (props) => {
 
     // ** Hooks
     const {
@@ -58,9 +49,9 @@ const ScheduleSms = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
                 <Link to="/CrmSms">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
@@ -104,11 +95,9 @@ const ScheduleSms = () => {
                         </div>
 
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/CrmSms">
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' onClick={() => props.setShow(!props.isShow)}>
                                     Schedule SMS
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>
