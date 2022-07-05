@@ -21,13 +21,11 @@ import {
 import {deleteUser, getUser, loadUsers} from "../../redux/user/actions"
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
-import Link from "react-router-dom/es/Link"
 import AddUserExample from "./AddUserForm"
 
 
 const Users = (props) => {
     const userList = useSelector(state => state.user.list)
-    const isEdit = useSelector(state => state.user.isEdit)
     const dispatch = useDispatch()
 
     // ** local States
@@ -39,7 +37,7 @@ const Users = (props) => {
 
     useEffect(() => {
         dispatch(loadUsers())
-    }, [isEdit])
+    }, [])
 
     // ** Function to handle filter
     const toggle = () => {

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -46,16 +46,13 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddPromotion = () => {
-    // ** States
-    const [show, setShow] = useState(true)
-
+const AddPromotion = (props) => {
     // ** Hooks
     const {
         control,
         setError,
         handleSubmit,
-        formState: { errors }
+        formState: { }
     } = useForm({ defaultValues })
 
     const onSubmit = data => {
@@ -74,10 +71,8 @@ const AddPromotion = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/promotions">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.Show)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Promotion</h1>
@@ -91,10 +86,9 @@ const AddPromotion = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='jane' invalid={errors.lastName && true} />
+                                    <Input {...field} id='name' placeholder='jane' value={props.data.full_name} />
                                 )}
                             />
-                            {errors.lastName && <FormFeedback>Please enter a valid Name</FormFeedback>}
                         </Col>
                         <Col md={6} xs={12}>
                             <Label className='form-label'>
@@ -104,7 +98,7 @@ const AddPromotion = () => {
                                 name='price'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='code' placeholder='Code' />
+                                    <Input {...field} id='code' placeholder='Code' value={props.data.code}/>
                                 )}
                             />
                         </Col>
@@ -130,7 +124,7 @@ const AddPromotion = () => {
                                 name='Amount'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='Amount' placeholder='Amount' />
+                                    <Input {...field} id='Amount' placeholder='Amount' value={props.data.amount} />
                                 )}
                             />
                         </Col>
@@ -149,14 +143,12 @@ const AddPromotion = () => {
                             />
                         </Col>
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/promotions">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Submit
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

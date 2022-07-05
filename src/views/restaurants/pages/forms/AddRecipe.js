@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -74,10 +74,7 @@ const BranchOptions = [
     { value: 'Spicy Ground Beef', label: 'Spicy Ground Beef' }
 ]
 
-const AddRecipe = () => {
-    // ** States
-    const [show, setShow] = useState(true)
-
+const AddRecipe = (props) => {
     // ** Hooks
     const {
         // eslint-disable-next-line no-unused-vars
@@ -100,10 +97,8 @@ const AddRecipe = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/dashboard/inventory/recipe">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Recipie</h1>
@@ -131,7 +126,7 @@ const AddRecipe = () => {
                                 <Button type='submit' className='me-1' color='primary'>
                                     Create Add on
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
                             </Link>

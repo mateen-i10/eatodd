@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -36,9 +36,8 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const Addaddon = () => {
+const Addaddon = (props) => {
     // ** States
-    const [show, setShow] = useState(true)
 
     // ** Hooks
     const {
@@ -61,9 +60,9 @@ const Addaddon = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
                 <Link to="/Dashboard/addon">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
@@ -78,7 +77,7 @@ const Addaddon = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='addon-plate' />
+                                    <Input {...field} id='name' value={props.data.name} placeholder='addon-plate' />
                                 )}
                             />
                         </Col>
@@ -90,7 +89,7 @@ const Addaddon = () => {
                                 name='instructions'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='instructions' placeholder='Please Select an Addon' />
+                                    <Input {...field} id='instructions' value={props.data.instruction} placeholder='Please Select an Addon' />
                                 )}
                             />
                         </Col>
@@ -98,14 +97,12 @@ const Addaddon = () => {
                         <AddingFeilds />
 
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/Dashboard/addon">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Create Add on
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

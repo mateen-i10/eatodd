@@ -1,5 +1,5 @@
 // ** React Imports
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 
 // ** Form Modal Component for Add and Update
 import FormModal from '../../../components/FormModal'
@@ -21,66 +21,39 @@ import {
 } from 'reactstrap'
 import {deleteCustomer, getCustomer, loadCustomers} from "../../../redux/member/actions"
 import {useDispatch, useSelector} from "react-redux"
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import Joi from "joi-browser"
-import {setCustomer} from "../../../redux/member/reducer"
 import Swal from "sweetalert2"
-import Link from "react-router-dom/es/Link"
+import AddMembershipTypeForm from "./AddMembershipTypeForm"
 
 const MembershipTypes = (props) => {
     const customerList = useSelector(state => state.member.list)
-    const formInitialState = useSelector(state => state.member.object)
     const isEdit = useSelector(state => state.member.isEdit)
     const dispatch = useDispatch()
 
-    // ** refs
-    const formModalRef = useRef(null)
 
     // ** local States
     const [currentPage, setCurrentPage] = useState(0)
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
-    const [modalTitle, setModalTitle] = useState('Add Customer')
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'full_name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Email, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Email, label: 'Status', placeholder: 'Enter Status', name:'status', isRequired:false, fieldGroupClasses: 'col-6'}
-    ])
-
-    // ** schema for validations
-    const schema = Joi.object({
-        full_name: Joi.string().required().label("Name"),
-        email: Joi.string().required().label("Email")
-    })
-
+    const [editData, setEditData] = useState(0)
 
     useEffect(() => {
         dispatch(loadCustomers())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setCustomer({
-                full_name: '', email: ''
-            }))
-        }
     }, [isEdit])
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    // const addClick = () => {
-    //     setModalTitle('Add Customer')
-    //     toggle()
-    // }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getCustomer(id, true))
-        setModalTitle('Edit Customer')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getCustomer(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -104,16 +77,16 @@ const MembershipTypes = (props) => {
         console.log('call', props)
         props.history.push(`/customers/detail/${id}`)
     }
-    const handleSubmit = (event) => {
-        console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
+    // const handleSubmit = (event) => {
+    //     console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
     const handleFilter = e => {
         const value = e.target.value
         let updatedData = []
@@ -213,7 +186,7 @@ const MembershipTypes = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -249,9 +222,7 @@ const MembershipTypes = (props) => {
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                     <CardTitle tag='h4'>Membership Types</CardTitle>
-                        <Link to = '/addMembershipType'>
-                            <Button.Ripple color='primary'>Add a new Membership Type</Button.Ripple>
-                        </Link>
+                            <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Membership Type</Button.Ripple>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='d-flex align-items-center justify-content-end mt-1' md='12' sm='12'>
@@ -278,19 +249,9 @@ const MembershipTypes = (props) => {
                     data={searchValue.length ? filteredData : customerList}
                 />
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <AddMembershipTypeForm isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }

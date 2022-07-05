@@ -77,9 +77,7 @@ const AddUserExample = (props) => {
         <Fragment>
 
             <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
-                <Link to="/Users">
                 <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
-                </Link>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New User</h1>

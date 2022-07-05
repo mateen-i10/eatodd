@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -37,10 +37,7 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddInventoryItems = () => {
-    // ** States
-    const [show, setShow] = useState(true)
-
+const AddInventoryItems = (props) => {
     // ** Hooks
     const {
         control,
@@ -65,10 +62,8 @@ const AddInventoryItems = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/dashboard/inventory/item">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Inventory</h1>
@@ -82,7 +77,7 @@ const AddInventoryItems = () => {
                                 name='Code'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='code' placeholder='Code' />
+                                    <Input {...field} id='code' placeholder='Code' value={props.data.code} />
                                 )}
                             />
                         </Col>
@@ -94,7 +89,7 @@ const AddInventoryItems = () => {
                                 name='description'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='description' placeholder='description' />
+                                    <Input {...field} id='description' placeholder='description' value={props.data.description} />
                                 )}
                             />
                         </Col>
@@ -106,7 +101,7 @@ const AddInventoryItems = () => {
                                 name='Unit'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='unit' placeholder='Unit' />
+                                    <Input {...field} id='unit' placeholder='Unit' value={props.data.unit} />
                                 )}
                             />
                         </Col>
@@ -118,7 +113,7 @@ const AddInventoryItems = () => {
                                 name='Price'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='Price' placeholder='Price' />
+                                    <Input {...field} id='Price' placeholder='Price' value={props.data.price}/>
                                 )}
                             />
                         </Col>
@@ -130,7 +125,7 @@ const AddInventoryItems = () => {
                                 name='unit/item'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='unit/item' placeholder='unit/item' />
+                                    <Input {...field} id='unit/item' placeholder='unit/item' value={props.data.unit_item} />
                                 )}
                             />
                         </Col>
@@ -142,7 +137,7 @@ const AddInventoryItems = () => {
                                 name='quantity/item'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='quantity/item' placeholder='quantity/item' />
+                                    <Input {...field} id='quantity/item' placeholder='quantity/item' value={props.data.qty_item} />
                                 )}
                             />
                         </Col>
@@ -154,7 +149,7 @@ const AddInventoryItems = () => {
                                 name='Stock'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='stock' placeholder='stock' />
+                                    <Input {...field} id='stock' placeholder='stock' value={props.data.stock} />
                                 )}
                             />
                         </Col>
@@ -178,7 +173,7 @@ const AddInventoryItems = () => {
                                 name='distributer'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='Distributer' placeholder='Distributer' />
+                                    <Input {...field} id='Distributer' placeholder='Distributer' value={props.data.distributor} />
                                 )}
                             />
                         </Col>

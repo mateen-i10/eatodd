@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {getInvCategory} from "../../../../tempData/fakeData"
 import {
     Button,
@@ -24,10 +24,9 @@ import FormModal from "../../../../components/FormModal"
 import {
     deleteInvCategory,
     getInvCategorySt,
-    loadInvCategory,
-    setInvCategory
+    loadInvCategory
 } from "../../../../redux/restaurantPages/Inventory/InvCategoryReducer"
-import Link from "react-router-dom/es/Link"
+import AddCategorySubInvenotry from "../forms/AddCategorySubInvenotry"
 
 const Category = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -38,67 +37,29 @@ const Category = (props) => {
     const InvCategoryData = getInvCategory()
     const [getPageData, setPageData] = useState(InvCategoryData)
 
-
-    // const customerList = useSelector(state => state.crmSms.list)
-    const formInitialState = useSelector(state => state.invCategoryReducer.object)
     const isEdit = useSelector(state => state.invCategoryReducer.isEdit)
     const dispatch = useDispatch()
 
-    console.log('formInitialState', formInitialState)
-    // ** refs
-    const formModalRef = useRef(null)
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading, setModalLoading] = useState(false)
-    const [formData] = useState([
-        {
-            type: FieldTypes.Text,
-            label: 'Name',
-            placeholder: 'Enter Name',
-            name: 'name',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Actions',
-            placeholder: 'Enter actions',
-            name: 'actions',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        }
-    ])
+    const [editData, setEditData] = useState(0)
 
-    // ** schema for validations
-    const schema = Joi.object({
-        name: Joi.string().required().label("Name"),
-        instruction: Joi.string().required().label("Email")
-    })
     useEffect(() => {
         dispatch(loadInvCategory())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setInvCategory({
-                name: '', instruction: ''
-            }))
-        }
     }, [isEdit])
-
-
-    console.log(formState)
-    console.log(modalTitle)
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getInvCategorySt(id, true))
-        setModalTitle('Edited Category Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getInvCategorySt(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -122,16 +83,16 @@ const Category = (props) => {
         console.log('call', props)
         props.history.push(`/Dashboard/inventory/category/${id}`)
     }
-    const handleSubmit = (event) => {
-        // console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
+    // const handleSubmit = (event) => {
+    //     // console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
 
 
     const handlePerPage = e => {
@@ -214,7 +175,7 @@ const Category = (props) => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <span onClick={() => {
-                            editClick(row.id)
+                            editClick(row)
                         }}><Edit size={15}/></span>
                     </div>
                 )
@@ -227,9 +188,7 @@ const Category = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Inventory Category</CardTitle>
-                    <Link to = '/addCategorySubInventory'>
-                        <Button.Ripple color='primary'>Add a new Category</Button.Ripple>
-                    </Link>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Category</Button.Ripple>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
@@ -249,19 +208,9 @@ const Category = (props) => {
                     currentPage={currentPage}
                     pageCount={pageCount}/>
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading={isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <AddCategorySubInvenotry isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }

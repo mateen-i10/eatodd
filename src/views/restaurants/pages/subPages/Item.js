@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {getInvItemData} from "../../../../tempData/fakeData"
 import {
     Button,
@@ -24,10 +24,10 @@ import Swal from "sweetalert2"
 import {
     deleteInvItem,
     getInvItem,
-    loadInvItem,
-    setInvItem
+    loadInvItem
 } from "../../../../redux/restaurantPages/Inventory/itemReducer"
 import Link from "react-router-dom/es/Link"
+import AddInventoryItemForm from "../forms/AddInventoryItemForm"
 
 const Item = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -38,67 +38,30 @@ const Item = (props) => {
     const InvItemData = getInvItemData()
     const [getPageData, setPageData] = useState(InvItemData)
 
-
-    // const customerList = useSelector(state => state.crmSms.list)
-    const formInitialState = useSelector(state => state.invItemReducer.object)
     const isEdit = useSelector(state => state.invItemReducer.isEdit)
     const dispatch = useDispatch()
 
-    console.log('formInitialState', formInitialState)
-    // ** refs
-    const formModalRef = useRef(null)
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading, setModalLoading] = useState(false)
-    const [formData] = useState([
-        {
-            type: FieldTypes.Text,
-            label: 'Description',
-            placeholder: 'Enter description',
-            name: 'description',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Unit Item',
-            placeholder: 'Enter Unit Item',
-            name: 'unit_item',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        }
-    ])
+    const [editData, setEditData] = useState(0)
 
-    // ** schema for validations
-    const schema = Joi.object({
-        name: Joi.string().required().label("Name"),
-        instruction: Joi.string().required().label("Email")
-    })
     useEffect(() => {
         dispatch(loadInvItem())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setInvItem({
-                name: '', instruction: ''
-            }))
-        }
     }, [isEdit])
 
-
-    console.log(formState)
-    console.log(modalTitle)
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getInvItem(id, true))
-        setModalTitle('Edited Menu Items Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getInvItem(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -122,16 +85,16 @@ const Item = (props) => {
         console.log('call', props)
         props.history.push(`/Dashboard/Inventory/item/${id}`)
     }
-    const handleSubmit = (event) => {
-        // console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
+    // const handleSubmit = (event) => {
+    //     // console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
 
 
     const handlePerPage = e => {
@@ -260,7 +223,7 @@ const Item = (props) => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <span onClick={() => {
-                            editClick(row.id)
+                            editClick(row)
                         }}><Edit size={15}/></span>
                     </div>
                 )
@@ -272,9 +235,7 @@ const Item = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Items</CardTitle>
-                    <Link to = '/addInventoryItem'>
-                        <Button.Ripple color='primary'>Add a new inventory</Button.Ripple>
-                    </Link>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new inventory</Button.Ripple>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
@@ -294,19 +255,9 @@ const Item = (props) => {
                     currentPage={currentPage}
                     pageCount={pageCount}/>
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading={isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <AddInventoryItemForm isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }

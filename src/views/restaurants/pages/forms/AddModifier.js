@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -45,9 +45,7 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddModifier = () => {
-    // ** States
-    const [show, setShow] = useState(true)
+const AddModifier = (props) => {
 
     // ** Hooks
     const {
@@ -70,10 +68,8 @@ const AddModifier = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/dashboard/modifier">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Modifier</h1>
@@ -87,7 +83,7 @@ const AddModifier = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='addon-plate' />
+                                    <Input {...field} id='name' value={props.data.name} placeholder='addon-plate' />
                                 )}
                             />
                         </Col>
@@ -99,7 +95,7 @@ const AddModifier = () => {
                                 name='instructions'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='instructions' placeholder='Please Select an Addon' />
+                                    <Input {...field} id='instructions' value={props.data.instruction} placeholder='Please Select an Addon' />
                                 )}
                             />
                         </Col>
@@ -107,14 +103,12 @@ const AddModifier = () => {
                         <AddingFeilds />
 
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/dashboard/modifier">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Create Add on
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {getPromotionData} from "../../../tempData/fakeData"
 import {
     Badge, Button,
@@ -24,11 +24,9 @@ import FormModal from "../../../components/FormModal"
 import {
     deletePromotion,
     getPromotion,
-    loadPromotion,
-    setPromotion
+    loadPromotion
 } from "../../../redux/restaurantPages/promotionsReducer"
-import Link from "react-router-dom/es/Link"
-
+import AddPromotion from "./forms/AddPromotion"
 
 const Promotion = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -39,66 +37,29 @@ const Promotion = (props) => {
     const promotionData = getPromotionData()
     const [getPageData, setPageData] = useState(promotionData)
 
-    // const customerList = useSelector(state => state.crmSms.list)
-    const formInitialState = useSelector(state => state.promotionReducer.object)
     const isEdit = useSelector(state => state.promotionReducer.isEdit)
     const dispatch = useDispatch()
 
-    console.log('formInitialState', formInitialState)
-    // ** refs
-    const formModalRef = useRef(null)
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading, setModalLoading] = useState(false)
-    const [formData] = useState([
-        {
-            type: FieldTypes.Text,
-            label: 'Name',
-            placeholder: 'Enter Name',
-            name: 'name',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Code',
-            placeholder: 'Enter code',
-            name: 'code',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        }
-    ])
+    const [editData, setEditData] = useState(0)
 
-    // ** schema for validations
-    const schema = Joi.object({
-        name: Joi.string().required().label("Name"),
-        instruction: Joi.string().required().label("Email")
-    })
     useEffect(() => {
         dispatch(loadPromotion())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setPromotion({
-                name: '', instruction: ''
-            }))
-        }
     }, [isEdit])
-
-
-    console.log(formState)
-    console.log(modalTitle)
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getPromotion(id, true))
-        setModalTitle('Edited Menu Items Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getPromotion(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -122,17 +83,16 @@ const Promotion = (props) => {
         console.log('call', props)
         props.history.push(`/Dashboard/promotion/${id}`)
     }
-    const handleSubmit = (event) => {
-        // console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
-
+    // const handleSubmit = (event) => {
+    //     // console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
 
     const handlePerPage = e => {
         return (setItemsPerPage(parseInt(e.target.value)))
@@ -238,7 +198,7 @@ const Promotion = (props) => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <span onClick={() => {
-                            editClick(row.id)
+                            editClick(row)
                         }}><Edit size={15}/></span>
                     </div>
                 )
@@ -251,9 +211,7 @@ const Promotion = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Promotions</CardTitle>
-                    <Link to = '/addnorthPromotion'>
-                        <Button.Ripple color='primary'>Add a new promotion</Button.Ripple>
-                    </Link>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new promotion</Button.Ripple>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
@@ -273,19 +231,9 @@ const Promotion = (props) => {
                     currentPage={currentPage}
                     pageCount={pageCount}/>
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading={isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <AddPromotion isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }

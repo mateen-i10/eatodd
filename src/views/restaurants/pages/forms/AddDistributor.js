@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -37,9 +37,7 @@ const defaultValues = {
     username: 'bob.dev'
 }
 
-const AddDistributor = () => {
-    // ** States
-    const [show, setShow] = useState(true)
+const AddDistributor = (props) => {
 
     // ** Hooks
     const {
@@ -65,10 +63,8 @@ const AddDistributor = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/dashboard/inventory/distributor">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Distributor</h1>
@@ -82,7 +78,7 @@ const AddDistributor = () => {
                                 name='name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='name' />
+                                    <Input {...field} id='name' placeholder='name' value={props.data.name} />
                                 )}
                             />
                         </Col>
@@ -94,7 +90,7 @@ const AddDistributor = () => {
                                 name='abbreviation'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='abbreviation' placeholder='Abbreviation' />
+                                    <Input {...field} id='abbreviation' placeholder='Abbreviation' value={props.data.abbreviation} />
                                 )}
                             />
                         </Col>
@@ -106,7 +102,7 @@ const AddDistributor = () => {
                                 name='Contactperson'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='Contactperson' placeholder='Contactperson' />
+                                    <Input {...field} id='Contactperson' placeholder='Contactperson' value={props.data.contact_person} />
                                 )}
                             />
                         </Col>
@@ -118,7 +114,7 @@ const AddDistributor = () => {
                                 name='Email'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='Email' placeholder='Email' />
+                                    <Input {...field} id='Email' placeholder='Email' value={props.data.email} />
                                 )}
                             />
                         </Col>
@@ -130,19 +126,17 @@ const AddDistributor = () => {
                                 name='Phone'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='phone' placeholder='Phone' />
+                                    <Input {...field} id='phone' placeholder='Phone' value={props.data.phone} />
                                 )}
                             />
                         </Col>
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/dashboard/inventory/distributor">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Submit
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

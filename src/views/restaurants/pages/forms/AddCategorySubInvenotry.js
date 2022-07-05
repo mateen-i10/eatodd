@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -29,21 +29,13 @@ import { useForm, Controller } from 'react-hook-form'
 import '@styles/react/libs/react-select/_react-select.scss'
 import Link from "react-router-dom/es/Link"
 
-const BranchOptions = [
-    { value: 'yes', label: 'Yes' },
-    { value: 'no', label: 'No' }
-]
-
 const defaultValues = {
     firstName: 'Bob',
     lastName: 'Barton',
     username: 'bob.dev'
 }
 
-const AddCategory = () => {
-    // ** State
-    const [show, setShow] = useState(true)
-
+const AddCategory = (props) => {
     // ** Hooks
     const {
         control,
@@ -68,10 +60,8 @@ const AddCategory = () => {
 
     return (
         <Fragment>
-            <Modal isOpen={show} className='modal-dialog-centered modal-lg'>
-                <Link to="/dashboard/inventory/category">
-                    <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                </Link>
+            <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
+                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Category Item</h1>
@@ -85,19 +75,17 @@ const AddCategory = () => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' placeholder='Bread' />
+                                    <Input {...field} id='name' placeholder='Bread' value={props.data.name} />
                                 )}
                             />
                         </Col>
                         <Col xs={12} className='text-center mt-2 pt-50'>
-                            <Link to="/dashboard/inventory/category">
                                 <Button type='submit' className='me-1' color='primary'>
                                     Submit
                                 </Button>
-                                <Button type='reset' color='secondary' outline onClick={() => setShow(false)}>
+                                <Button type='reset' color='secondary' outline onClick={() => props.setShow(props.isShow)}>
                                     Discard
                                 </Button>
-                            </Link>
                         </Col>
                     </Row>
                 </ModalBody>

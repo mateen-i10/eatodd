@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {
     Badge, Button,
     Card,
@@ -17,13 +17,9 @@ import PaginatedDataTable from "../components/tables/PaginatedDataTable"
 import {getMenuItem} from "../../../tempData/fakeData"
 import {Edit, FileText, MoreVertical, Trash} from "react-feather"
 import {useDispatch, useSelector} from "react-redux"
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import Joi from "joi-browser"
 import Swal from "sweetalert2"
-import FormModal from "../../../components/FormModal"
-import {deleteMenuItem, getMenuItemSt, loadMenuItem, setMenuItem} from "../../../redux/restaurantPages/menuItemReducer"
-import Link from "react-router-dom/es/Link"
-
+import {deleteMenuItem, getMenuItemSt, loadMenuItem} from "../../../redux/restaurantPages/menuItemReducer"
+import AddMenuItem from "./forms/AddMenuItem"
 
 const MenuItems = (props) => {
 
@@ -36,83 +32,30 @@ const MenuItems = (props) => {
     const [getPageData, setPageData] = useState(menuData)
 
     // const customerList = useSelector(state => state.crmSms.list)
-    const formInitialState = useSelector(state => state.menuItemReducer.object)
     const isEdit = useSelector(state => state.menuItemReducer.isEdit)
     const dispatch = useDispatch()
 
-    console.log('formInitialState', formInitialState)
     // ** refs
-    const formModalRef = useRef(null)
-    const [modalTitle, setModalTitle] = useState()
-    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading, setModalLoading] = useState(false)
+    const [editData, setEditData] = useState(0)
 
-    const BranchOptions = [
-        { value: 'forklift', label: 'Forklift' },
-        { value: 'amedicano', label: 'Amedicano' },
-        { value: 'north eve', label: 'North Eve' },
-        { value: 'vab buren', label: 'Vab Buren' },
-        { value: 'catering', label: 'Catering' },
-        { value: 'french market', label: 'French Market' }
-    ]
-
-    const [formData] = useState([
-        {
-            type: FieldTypes.Text,
-            label: 'Name',
-            placeholder: 'Enter Name',
-            name: 'name',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Description',
-            placeholder: 'Enter description',
-            name: 'description',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'price',
-            placeholder: 'Enter price',
-            name: 'price',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        }
-    ])
-
-    // ** schema for validations
-    const schema = Joi.object({
-        name: Joi.string().required().label("Name"),
-        instruction: Joi.string().required().label("Email")
-    })
     useEffect(() => {
         dispatch(loadMenuItem())
-        // in case of edit get item from backend
-        if (isEdit) setFormState({...formInitialState})
-        else {
-            dispatch(setMenuItem({
-                name: '', instruction: ''
-            }))
-        }
     }, [isEdit])
-
-
-    console.log(formState)
-    console.log(modalTitle)
 
     // ** Function to handle filter
     const toggle = () => {
         setModal(!isModal)
-        setFormState({...formInitialState})
     }
-    const editClick = (id) => {
+    const addClick = (e) => {
+        e.preventDefault()
         toggle()
-        dispatch(getMenuItemSt(id, true))
-        setModalTitle('Edited Menu Items Data')
+    }
+    const editClick = (data) => {
+        toggle()
+        dispatch(getMenuItemSt(data.id, true))
+        setEditData(data)
+        console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -136,16 +79,16 @@ const MenuItems = (props) => {
         console.log('call', props)
         props.history.push(`/Dashboard/menu/${id}`)
     }
-    const handleSubmit = (event) => {
-        // console.log("formState on submit", formState)
-        event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
-
-        // call api
-        setModalLoading(true)
-        console.log("form submitted")
-    }
+    // const handleSubmit = (event) => {
+    //     // console.log("formState on submit", formState)
+    //     event.preventDefault()
+    //     const isError = formModalRef.current.validate(formState)
+    //     if (isError) return
+    //
+    //     // call api
+    //     setModalLoading(true)
+    //     console.log("form submitted")
+    // }
 
 
     const handlePerPage = e => {
@@ -269,7 +212,7 @@ const MenuItems = (props) => {
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <span onClick={() => {
-                            editClick(row.id)
+                            editClick(row)
                         }}><Edit size={15}/></span>
                     </div>
                 )
@@ -282,9 +225,7 @@ const MenuItems = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Menu Items</CardTitle>
-                    <Link to = '/addmenuitem'>
-                        <Button.Ripple color='primary'>Add a new MenuItem</Button.Ripple>
-                    </Link>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Menu Item</Button.Ripple>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
@@ -304,19 +245,9 @@ const MenuItems = (props) => {
                     currentPage={currentPage}
                     pageCount={pageCount}/>
             </Card>
-            <FormModal ref={formModalRef}
-                       formState={formState}
-                       formData={formData}
-                       setFormState={setFormState}
-                       schema={schema}
-                       isModal={isModal}
-                       toggleModal={toggle}
-                       modalTitle={modalTitle}
-                       primaryBtnLabel='Save'
-                       secondaryBtnLabel='Cancel'
-                       isLoading={isModalLoading}
-                       handleSubmit={handleSubmit}
-            />
+
+            <AddMenuItem isShow={isModal} setShow={toggle} data={editData} />
+
         </Fragment>
     )
 }
