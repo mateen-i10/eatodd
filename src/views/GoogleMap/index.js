@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from "./Sidebar"
 import GoogleMap from "./component/GMap"
+import DeliveryLocationGMap from "./component/DeliveryLocactionGMap"
 
 const styles = {
     container: isRowBased => ({
@@ -18,6 +19,12 @@ const Gmaps = () => {
 
     const mediaMatch = window.matchMedia('(min-width: 768px)')
     const [matches, setMatches] = useState(mediaMatch.matches)
+    // const [childClicked, setChildClicked] = useState(null)
+    const [pickDelivery, setPickDelivery] = useState(true)
+    const [coordinates, setCoordinates] = useState({})
+
+
+    console.log(coordinates)
 
     useEffect(() => {
         const handler = e => setMatches(e.matches)
@@ -60,8 +67,16 @@ const Gmaps = () => {
 
     return (
         <div style={styles.container(matches)}>
-            <div className="col-md-4 col-12"><Sidebar/></div>
-            <div className="col-md-8 col-12" style={styles.height(matches)}><GoogleMap places={places}/></div>
+            <div className="col-md-4 col-12">
+                <Sidebar
+                    places={places}
+                    setPickDelivery={setPickDelivery}
+                    setCoordinates={setCoordinates}
+                /></div>
+            {pickDelivery ? <div className="col-md-8 col-12" style={styles.height(matches)}>
+                <GoogleMap places={places}
+                /></div> : <div className="col-md-8 col-12" style={styles.height(matches)}>
+                <DeliveryLocationGMap places={places}/></div>}
         </div>)
 }
 

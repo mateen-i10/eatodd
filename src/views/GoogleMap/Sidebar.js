@@ -3,15 +3,15 @@ import {Button, TabContent, TabPane} from "reactstrap"
 import DeliveryLocation from "./component/DeliveryLocation"
 import PickUpLocation from "./component/PickUpLocation"
 
-const Sidebar = () => {
+const Sidebar = ({places, setPickDelivery}) => {
     const [active, setActive] = useState('1')
     const [activeColor, setActiveColor] = useState("1")
-
     const showActiveColor = (selectedButton) => {
         setActiveColor(selectedButton)
     }
-    const toggle = tab => {
+    const toggle = (tab, gMapSelect) => {
         setActive(tab)
+        setPickDelivery(gMapSelect)
     }
     return (
         <>
@@ -46,7 +46,7 @@ const Sidebar = () => {
                             }}
                             active={active === '1'}
                             onClick={() => {
-                                toggle('1')
+                                toggle('1', true)
                                 showActiveColor("1")
                             }}>PickUp
                     </Button>
@@ -58,7 +58,7 @@ const Sidebar = () => {
                                 paddingTop: "12px"
                             }} active={active === '2'}
                             onClick={() => {
-                                toggle('2')
+                                toggle('2', false)
                                 showActiveColor("2")
                             }}
                     >delivery
@@ -71,10 +71,12 @@ const Sidebar = () => {
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
                             <div style={{borderRadius: "6px"}}>
-                                <DeliveryLocation/></div>
+                                <PickUpLocation places={places}/>
+                            </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <PickUpLocation/>
+                            <DeliveryLocation setCoordinates/>
+
                         </TabPane>
                     </TabContent>
                 </div>
