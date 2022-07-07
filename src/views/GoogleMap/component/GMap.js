@@ -11,12 +11,10 @@ const containerStyle = {
 }
 
 
-function GMap({places}) {
+function GMap({places, setSelectedSidebar, setMarkerClicked}) {
     const [activeMarker, setActiveMarker] = useState(null)
-    // const [gIcon, setGIcon] = useState({})
-    const handleActiveMarker = (marker) => {
-        // console.log(marker)
 
+    const handleActiveMarker = (marker) => {
         if (marker === activeMarker) {
             return
         }
@@ -81,7 +79,8 @@ function GMap({places}) {
                         onClick={() => {
 
                             handleActiveMarker(position)
-                            // setChildClicked(id)
+                            setSelectedSidebar(true)
+                            setMarkerClicked(id)
                         }}
                     >
                         {activeMarker === position ? (
