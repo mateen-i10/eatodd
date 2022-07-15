@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Sidebar from "./Sidebar"
-import GoogleMap from "./component/GMap"
-import DeliveryLocationGMap from "./component/DeliveryLocactionGMap"
+import PickUpGMap from "./component/PickUpGMap"
+import DeliveryGMap from "./component/DeliveryGMap"
 import DetailSidebar from "./component/DetailSidebar"
 
 const styles = {
@@ -23,20 +23,37 @@ const Gmaps = () => {
     const [pickDelivery, setPickDelivery] = useState(true)
     const [selectedSidebar, setSelectedSidebar] = useState(false)
     const [markerClicked, setMarkerClicked] = useState(null)
+    const [userLocation, setUserLocation] = useState(null)
+    const [autocomplete, setAutocomplete] = useState(null)
 
 
-    // console.log(coordinates)
+    // console.log(userLocation)
+
 
     useEffect(() => {
         const handler = e => setMatches(e.matches)
         mediaMatch.addEventListener('change', handler)
         return () => mediaMatch.removeEventListener('change', handler)
     })
+    const onLoad = (autoC) => setAutocomplete(autoC)
+
+    const onPlaceChanged = () => {
+        const place = autocomplete.getPlace()
+        if (!place) {
+            window.alert("Please enter valid place")
+        }
+        console.log(place)
+        const lat = place.geometry.location.lat()
+        const lng = place.geometry.location.lng()
+        console.log(autocomplete)
+        setUserLocation({position: {lat, lng}})
+    }
+
     const places = [
         {
             id: 1,
             name: "Olive Mediterranean Grill(N Clinton St)",
-            position: {lat: 41.884368455887184, lng: -87.64088918914914},
+            position: {lat: 41.884176754378224, lng: -87.64085700264113},
             address: "131 N Clinton St, Chicago, IL 60661",
             opens: "Mon-Fri 10:30 AM - 4PM"
         },
@@ -50,14 +67,14 @@ const Gmaps = () => {
         {
             id: 3,
             name: "Olive Mediterranean Grill (Illinois St)",
-            position: {lat: 41.89128095068051, lng: -87.63188029999294},
+            position: {lat: 41.89067380035631, lng: -87.6317488707196},
             address: "111 W Illinois St, Chicago, IL 60654, USA",
             opens: "Mon-Fri 10:30 AM - 4PM"
         },
         {
             id: 4,
             name: "Olive Mediterranean Grill(Van Buren)",
-            position: {lat: 41.877148702396454, lng: -87.63329308729737},
+            position: {lat: 41.87696893313858, lng: -87.63345543147736},
             address: "186 W Van Buren St, Chicago, IL 60605",
             opens: "Mon-Fri 10:30 AM - 4PM"
         },
@@ -83,14 +100,17 @@ const Gmaps = () => {
                 <Sidebar
                     places={places}
                     setPickDelivery={setPickDelivery}
+                    setUserLocation={setUserLocation}
+                    onPlaceChanged={onPlaceChanged}
+                    onLoad={onLoad}
                 /></div>}
             {pickDelivery ? <div className="col-md-8 col-12" style={styles.height(matches)}>
-                <GoogleMap
+                <PickUpGMap
                     places={places}
                     setSelectedSidebar={setSelectedSidebar}
                     setMarkerClicked={setMarkerClicked}
                 /></div> : <div className="col-md-8 col-12" style={styles.height(matches)}>
-                <DeliveryLocationGMap places={places}/></div>}
+                <DeliveryGMap places={places} userLocation={userLocation}/></div>}
         </div>)
 }
 

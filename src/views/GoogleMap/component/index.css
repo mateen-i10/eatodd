@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 
 .locationIcon:hover {
     cursor: pointer;

@@ -1,8 +1,8 @@
 import React from 'react'
-import {GoogleMap, LoadScript} from "@react-google-maps/api"
+import {GoogleMap, LoadScript, Marker} from "@react-google-maps/api"
 
 
-function DeliveryLocationGMap({places}) {
+function DeliveryGMap({places, userLocation}) {
     const containerStyle = {
         width: '100%',
         height: '100%'
@@ -13,10 +13,11 @@ function DeliveryLocationGMap({places}) {
         >
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={places[0].position}
-                zoom={5}
+                center={userLocation ? userLocation.position : places[0].position}
+                zoom={userLocation ? 12 : 9}
             >
                 { /* Child components, such as markers, info windows, etc. */}
+                {userLocation ? <Marker position={userLocation.position}/> : null}
             </GoogleMap>
         </LoadScript>
 
@@ -24,5 +25,5 @@ function DeliveryLocationGMap({places}) {
     )
 }
 
-export default React.memo(DeliveryLocationGMap)
+export default React.memo(DeliveryGMap)
 

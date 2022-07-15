@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 // import GoogleMapReact from "google-map-react"
 import {GoogleMap, InfoWindow, LoadScript, Marker} from '@react-google-maps/api'
-import "./GMap.css"
+import "./index.css"
 // import {HiLocationMarker} from "react-icons/all"
 
 
@@ -11,9 +11,16 @@ const containerStyle = {
 }
 
 
-function GMap({places, setSelectedSidebar, setMarkerClicked}) {
+function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
+    // const {isLoaded} = useJsApiLoader({
+    //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    //     libraries: ['places']
+    // })
     const [activeMarker, setActiveMarker] = useState(null)
 
+    // if (!isLoaded) {
+    //     return <div>Loading</div>
+    // }
     const handleActiveMarker = (marker) => {
         if (marker === activeMarker) {
             return
@@ -54,30 +61,22 @@ function GMap({places, setSelectedSidebar, setMarkerClicked}) {
 
         <LoadScript
             googleMapsApiKey="AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ"
+            libraries={["places"]}
         >
             <GoogleMap
                 onLoad={handleOnLoad}
                 onClick={() => setActiveMarker(null)}
-                // onResize={(e) => {
-                //     console.log(e)
-                // }}
                 mapContainerStyle={containerStyle}
-                center={places[0].position}
-                zoom={14}
+                defaultCenter={places[0].position}
+                // zoom={8}
             >
                 { /* Child components, such as markers, info windows, etc. */}
                 {places.map(({id, name, position}) => (
                     <Marker
                         key={id}
                         position={position}
-                        className="locationIcon"
-                        // icon={gIcon}
-                        // onMouseOver={(e) => {
-                        //     // setGIcon({})
-                        //     console.log(e)
-                        // }}
+                        // className="locationIcon"
                         onClick={() => {
-
                             handleActiveMarker(position)
                             setSelectedSidebar(true)
                             setMarkerClicked(id)
@@ -95,5 +94,5 @@ function GMap({places, setSelectedSidebar, setMarkerClicked}) {
     )
 }
 
-export default React.memo(GMap)
+export default React.memo(PickUpGMap)
 

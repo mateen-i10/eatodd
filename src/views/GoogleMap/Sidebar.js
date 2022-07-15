@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {Button, TabContent, TabPane} from "reactstrap"
-import DeliveryLocation from "./component/DeliveryLocation"
-import PickUpLocation from "./component/PickUpLocation"
+import DeliveryTab from "./component/DeliveryTab"
+import PickUpTab from "./component/PickUpTab"
 
-const Sidebar = ({places, setPickDelivery}) => {
+const Sidebar = ({places, setPickDelivery, setUserLocation, onPlaceChanged, onLoad}) => {
     const [active, setActive] = useState('1')
     const [activeColor, setActiveColor] = useState("1")
     const showActiveColor = (selectedButton) => {
@@ -12,6 +12,7 @@ const Sidebar = ({places, setPickDelivery}) => {
     const toggle = (tab, gMapSelect) => {
         setActive(tab)
         setPickDelivery(gMapSelect)
+        setUserLocation(null)
     }
     return (
         <>
@@ -28,7 +29,6 @@ const Sidebar = ({places, setPickDelivery}) => {
                     overflowY: "auto"
                 }}
             >
-
                 <div className="row align-items-center  justify-content-evenly text-center fs-5 " style={{
                     backgroundColor: "white",
                     height: "42px",
@@ -66,17 +66,16 @@ const Sidebar = ({places, setPickDelivery}) => {
                 </div>
                 <div className="row align-items-center  justify-content-evenly mt-2" style={{
                     minWidth: " 285px"
-
                 }}>
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
                             <div style={{borderRadius: "6px"}}>
-                                <PickUpLocation places={places}/>
+                                <PickUpTab places={places}/>
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <DeliveryLocation setCoordinates/>
-
+                            <DeliveryTab setUserLocation={setUserLocation} onPlaceChanged={onPlaceChanged}
+                                         onLoad={onLoad}/>
                         </TabPane>
                     </TabContent>
                 </div>
