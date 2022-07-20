@@ -11,7 +11,7 @@ import {
     List,
     Mail,
     Menu,
-    MessageSquare,
+    MessageSquare, PenTool,
     PlusSquare, Send,
     User, UserCheck,
     UserPlus,
@@ -53,7 +53,15 @@ export default [
         id: 'CRMemails',
         title: 'CRM (Emails)',
         icon: <Mail size={20}/>,
-        navLink: '/CrmEmails'
+        navLink: '/CrmEmails',
+        children: [
+            {
+                id: 'designer',
+                title: 'Designer',
+                icon: <PenTool size={20}/>,
+                navLink: '/designer'
+            }
+        ]
     },
     {
         id: 'CRMsms',
