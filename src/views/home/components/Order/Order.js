@@ -11,13 +11,13 @@ const Order = () => {
         <div className="order-main">
             <div className="container-fluid unlock-section">
                 <div className="container-sm">
-                    <div className="row align-items-center justify-content-center">
-                        <div className="col-md-8" style={{display: 'flex', paddingTop: '12px'}}>
+                    <div className="row align-items-center justify-content-center pt-1 pb-1">
+                        <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
                             <img className="unlock-img d-md-inline-flex d-none me-2" src={icon}
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
                             <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        <div className="col-md-4 col-12" style={{paddingTop: '12px'}}>
+                        <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
                                     <div>Create an Account</div>

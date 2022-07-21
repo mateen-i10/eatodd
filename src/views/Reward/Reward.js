@@ -52,35 +52,6 @@ const Reward = () => {
                     </div>
                 </div>
             </div>
-            {/*<div className="container">*/}
-            {/*    <div className="row">*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <img className="x2" src={mx}/>*/}
-            {/*            <p className="p1">Earn extra points and collect achievement badges.</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <img className="phn" src={iphn}/>*/}
-            {/*            <p className="p1">Early access to new menu items and merch.</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <img className="mail" src={mal}/>*/}
-            {/*            <p className="p1">Members get insider info first.</p>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className="container">*/}
-            {/*    <div className="row gx-10">*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <p className="txt">ONE APP, ALL THE WAYS TO EARN FREE CHIPOTLE</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <img className="store" src={str}/>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4">*/}
-            {/*            <img className="play" src={ply}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <Footer/>
         </div>
     )

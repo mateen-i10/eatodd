@@ -1,10 +1,15 @@
+.bgimg{
+    background-image: url("../../../assets/images/my-images/web-desktop.png");
+    background-position: center;
+    background-size: cover;
+}
 .food-items{
     text-transform: uppercase;
-    color: #756456;
+    color: #2f2f2f;
     letter-spacing: 0;
     font-weight: bolder;
     margin-bottom: 0.8em;
-    margin-left: 200px;
+    margin-left: 100px;
 }
 
 .food-items:hover{

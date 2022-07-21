@@ -218,9 +218,9 @@ const Members = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                                <div tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
-                                </div>
+                         <div tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                             <Trash size={15} />
+                         </div>
                     </div>
                 )
             }
