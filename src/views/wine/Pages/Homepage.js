@@ -14,7 +14,22 @@ const Homepage = () => {
     const [selectedCategory, setSelectedCategory] = useState("Sparkling")
     const [elHovered, setElHovered] = useState({})
     // const [itemColor, setItemColor] = useState("")
-    
+    // const [isMobile, setIsMobile] = useState(false)
+    // const [mdWidth, setMdWidth] = useState(window.innerWidth)
+
+    // useEffect(() => {
+    //     const handleResizeWindow = () => setMdWidth(window.innerWidth)
+    //     // subscribe to window resize event "onComponentDidMount"
+    //     window.addEventListener("resize", handleResizeWindow)
+    //     return () => {
+    //         // unsubscribe "onComponentDestroy"
+    //         window.removeEventListener("resize", handleResizeWindow)
+    //     }
+    // }, [])
+    // // console.log(mdWidth)
+    // if (mdWidth <= 768) {
+    //     setIsMobile(true)
+    // }
     const wineClubData = wineHomePgData
     const categories = [...new Set(wineClubData.map(o => o.category))]
     const sparkling = wineClubData.filter(item => item.category === "Sparkling")
@@ -26,6 +41,7 @@ const Homepage = () => {
             setSelectedCategory(item)
         }
     }
+    // console.log(itemColor)
     const showItems = () => {
         if (selectedCategory === "Sparkling") {
             return <Fragment>
@@ -235,15 +251,14 @@ const Homepage = () => {
                     <div className="row mt-3 justify-content-center">
                         <div className="col-md-4 col-sm-12 mt-4 mb-3 ">
                             <div style={{
-                                fontSize: "1.5rem",
-                                fontWeight: "700",
+
                                 borderRight: "6px solid rgb(129 190 65)"
 
                             }}>
                                 {categories.map((item, i) => (
                                     <div key={i}
                                          className={`fs-3 fw-bolder  ms-2 cursor-pointer  ${elHovered[i] ? "text-primary" : ""}  `}
-                                         style={{lineHeight: "40px"}}
+                                         style={{lineHeight: "35px"}}
                                          onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}
                                          onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}
                                          onClick={() => {
@@ -258,8 +273,12 @@ const Homepage = () => {
                             </div>
 
                         </div>
-
-                        <div className="col-md-7 col-sm-10">{showItems()}</div>
+                        {/*{isMobile ? */}
+                        {/*<div className="vh-100 overflow-auto row justify-content-center">*/}
+                        {/*    <div className=" col-sm-9 col-11 ">{showItems()}</div>*/}
+                        {/*</div>*/}
+                        {/* :*/}
+                        <div className="col-md-7 col-10 ">{showItems()}</div>
                     </div>
                 </div>
                 <section id="blog-1" className="wide-60 blog-section division mt-4 mb-4">
