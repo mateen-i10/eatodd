@@ -13,7 +13,8 @@ const Homepage = () => {
 
     const [selectedCategory, setSelectedCategory] = useState("Sparkling")
     const [elHovered, setElHovered] = useState({})
-
+    // const [itemColor, setItemColor] = useState("")
+    
     const wineClubData = wineHomePgData
     const categories = [...new Set(wineClubData.map(o => o.category))]
     const sparkling = wineClubData.filter(item => item.category === "Sparkling")
