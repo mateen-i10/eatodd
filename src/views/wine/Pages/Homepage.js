@@ -1,11 +1,12 @@
-import React, {Fragment, useState} from 'react'
+import React, {useState} from 'react'
 
-import {Button, Card, CardBody, CardImg, CardTitle, Col, Row} from 'reactstrap'
+import {Card, CardBody, CardText, Col, Row} from 'reactstrap'
 import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 
 import Footer from "../../../shared/footer/Footer"
 import {wineHomePgData} from "../../../tempData/wineClubData"
+import CategoryFilteredData from "../components/CategoryFilteredData"
 
 // import classnames from "classnames"
 
@@ -13,135 +14,19 @@ const Homepage = () => {
 
     const [selectedCategory, setSelectedCategory] = useState("Sparkling")
     const [elHovered, setElHovered] = useState({})
-    // const [itemColor, setItemColor] = useState("")
-    // const [isMobile, setIsMobile] = useState(false)
-    // const [mdWidth, setMdWidth] = useState(window.innerWidth)
 
-    // useEffect(() => {
-    //     const handleResizeWindow = () => setMdWidth(window.innerWidth)
-    //     // subscribe to window resize event "onComponentDidMount"
-    //     window.addEventListener("resize", handleResizeWindow)
-    //     return () => {
-    //         // unsubscribe "onComponentDestroy"
-    //         window.removeEventListener("resize", handleResizeWindow)
-    //     }
-    // }, [])
-    // // console.log(mdWidth)
-    // if (mdWidth <= 768) {
-    //     setIsMobile(true)
-    // }
     const wineClubData = wineHomePgData
     const categories = [...new Set(wineClubData.map(o => o.category))]
     const sparkling = wineClubData.filter(item => item.category === "Sparkling")
     const white = wineClubData.filter(item => item.category === "White")
     const rose = wineClubData.filter(item => item.category === "Rose")
     const red = wineClubData.filter(item => item.category === "Red")
+
+    const xl = "6"
+    const md = "6"
     const toggleList = item => {
         if (selectedCategory !== item) {
             setSelectedCategory(item)
-        }
-    }
-    // console.log(itemColor)
-    const showItems = () => {
-        if (selectedCategory === "Sparkling") {
-            return <Fragment>
-                <Row className="align-items-center  ">
-                    {sparkling.map(item => (
-                        <Col xl='6' md='6' key={item.id}>
-                            <Card className='mb-3  justify-content-center bg-transparent'>
-                                <CardImg top
-                                         src={item.image}
-                                         alt='card-top'
-                                         style={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
-                                />
-                                <CardBody>
-                                    <CardTitle tag='h4' className="text-start ">{item.title}</CardTitle>
-                                    <div className="fw-bolder fs-4 text-primary text-end mb-1">{item.price}</div>
-                                    <Col className='d-grid' sm='12'>
-                                        <Button color='primary'
-                                                className="text-uppercase fw-bolder">{item.addToCart}</Button>
-                                    </Col>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Fragment>
-        }
-        if (selectedCategory === "White") {
-            return <Fragment>
-                <Row className="align-items-center justify-content-center ">
-                    {white.map(item => (
-                        <Col xl='6' md='6' key={item.id}>
-                            <Card className='mb-3  justify-content-center bg-transparent'>
-                                <CardImg top
-                                         src={item.image}
-                                         alt='card-top'
-                                         style={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
-                                />
-                                <CardBody>
-                                    <CardTitle tag='h4' className="text-start ">{item.title}</CardTitle>
-                                    <div className="fw-bolder fs-4 text-primary text-end mb-1">{item.price}</div>
-                                    <Col className='d-grid' sm='12'>
-                                        <Button color='primary'
-                                                className="text-uppercase fw-bolder">{item.addToCart}</Button>
-                                    </Col>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Fragment>
-        }
-        if (selectedCategory === "Rose") {
-            return <Fragment>
-                <Row className="align-items-center justify-content-center ">
-                    {rose.map(item => (
-                        <Col xl='6' md='6' key={item.id}>
-                            <Card className='mb-3  justify-content-center bg-transparent'>
-                                <CardImg top
-                                         src={item.image}
-                                         alt='card-top'
-                                         style={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
-                                />
-                                <CardBody>
-                                    <CardTitle tag='h4' className="text-start ">{item.title}</CardTitle>
-                                    <div className="fw-bolder fs-4 text-primary text-end mb-1">{item.price}</div>
-                                    <Col className='d-grid' sm='12'>
-                                        <Button color='primary'
-                                                className="text-uppercase fw-bolder">{item.addToCart}</Button>
-                                    </Col>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Fragment>
-        }
-        if (selectedCategory === "Red") {
-            return <Fragment>
-                <Row className="align-items-center justify-content-center ">
-                    {red.map(item => (
-                        <Col xl='6' md='6' key={item.id}>
-                            <Card className='mb-3  justify-content-center bg-transparent'>
-                                <CardImg top
-                                         src={item.image}
-                                         alt='card-top'
-                                         style={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
-                                />
-                                <CardBody>
-                                    <CardTitle tag='h4' className="text-start ">{item.title}</CardTitle>
-                                    <div className="fw-bolder fs-4 text-primary text-end mb-1">{item.price}</div>
-                                    <Col className='d-grid' sm='12'>
-                                        <Button color='primary'
-                                                className="text-uppercase fw-bolder">{item.addToCart}</Button>
-                                    </Col>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Fragment>
         }
     }
 
@@ -263,7 +148,6 @@ const Homepage = () => {
                                          onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}
                                          onClick={() => {
                                              toggleList(item)
-
                                          }}
                                     >
                                         <div className="text-center">{item}</div>
@@ -273,12 +157,17 @@ const Homepage = () => {
                             </div>
 
                         </div>
-                        {/*{isMobile ? */}
-                        {/*<div className="vh-100 overflow-auto row justify-content-center">*/}
-                        {/*    <div className=" col-sm-9 col-11 ">{showItems()}</div>*/}
-                        {/*</div>*/}
-                        {/* :*/}
-                        <div className="col-md-7 col-10 ">{showItems()}</div>
+
+                        <div className="col-md-7 col-10 ">
+                            <CategoryFilteredData selectedCategory={selectedCategory}
+                                                  sparkling={sparkling}
+                                                  white={white}
+                                                  rose={rose}
+                                                  red={red}
+                                                  xl={xl}
+                                                  md={md}
+                            />
+                        </div>
                     </div>
                 </div>
                 <section id="blog-1" className="wide-60 blog-section division mt-4 mb-4">
@@ -296,61 +185,124 @@ const Homepage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center mt-4">
-                            <div className="col-md-6 col-lg-3">
-                                <div className="">
-                                    <div className="">
-                                        <div className="">
-                                            <img className="img-fluid"
-                                                 src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}
-                                                 alt="blog-post-image"/>
-                                        </div>
-                                    </div>
-                                    <div className=" mt-1">
-                                        <h5 className="text-center"><a href="#">Quaerat neque purus ipsum neque
-                                            dolor</a></h5>
-                                        <p className="text-center mt-1">Quaerat neque purus ipsum neque dolor primis
-                                            tempus impedit</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-3">
-                                <div className="">
-                                    <div className="">
-                                        <div className="">
-                                            <img className="img-fluid"
-                                                 src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}
-                                                 alt="blog-post-image"/>
-                                        </div>
-                                    </div>
-                                    <div className="">
-                                        <h5 className="text-center mt-1"><a href="#">Tempor blandit sapien at
-                                            gravida donec ipsum</a></h5>
-                                        <p className="text-center mt-1">Neque dolor primis libero tempus impedit tempor
-                                            sapien
-                                            gravida</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-3">
-                                <div className="">
-                                    <div className="">
-                                        <div className="">
-                                            <img className="img-fluid"
-                                                 src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}
-                                                 alt="blog-post-image"/>
-                                        </div>
-                                    </div>
-                                    <div className="">
-                                        <h5 className="text-center mt-1"><a href="#">Neque dolor primis a libero
-                                            tempus a tempor</a></h5>
-                                        <p className="text-center mt-1">Impedit tempor at donec sapien ipsum a neque
-                                            dolor
-                                            primis libero</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="  mt-4 ">
+                            <Row className="align-items-center justify-content-center">
+                                <Col md='6' lg='3' className=" cursor-pointer ">
+                                    <Card>
+                                        <img className='img-fluid'
+                                             src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}
+                                             alt='Card cap'/>
+                                        <CardBody>
+                                            <CardText>
+                                                Some quick example text to build on the card title and make up the
+                                                bulk
+
+                                            </CardText>
+                                            <CardText>
+                                                Cookie topping caramels jujubes gingerbread. Lollipop apple pie
+                                                cupcake
+
+                                            </CardText>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                                <Col md='6' lg='3' className=" cursor-pointer ">
+                                    <Card>
+                                        <img className='img-fluid'
+                                             src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}
+                                             alt='Card cap'/>
+                                        <CardBody>
+                                            <CardText>
+                                                Some quick example text to build on the card title and make up the
+                                                bulk
+
+                                            </CardText>
+                                            <CardText>
+                                                Cookie topping caramels jujubes gingerbread. Lollipop apple pie
+                                                cupcake
+
+
+                                            </CardText>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                                <Col md='6' lg='3' className=" cursor-pointer ">
+                                    <Card>
+                                        <img className='img-fluid'
+                                             src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}
+                                             alt='Card cap'/>
+                                        <CardBody>
+                                            <CardText>
+                                                Some quick example text to build on the card title and make up the
+                                                bulk
+
+                                            </CardText>
+                                            <CardText>
+                                                Cookie topping caramels jujubes gingerbread. Lollipop apple pie
+                                                cupcake
+                                                candy canes cookie ice cream.
+
+                                            </CardText>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
                         </div>
+                        {/*<div className="row d-flex flex-wrap align-items-center justify-content-center mt-4">*/}
+                        {/*    <div className="col-md-6 col-lg-3">*/}
+                        {/*        <div className="">*/}
+                        {/*            <div className="">*/}
+                        {/*                <div className="">*/}
+                        {/*                    <img className="img-fluid"*/}
+                        {/*                         src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}*/}
+                        {/*                         alt="blog-post-image"/>*/}
+                        {/*                </div>*/}
+                        {/*            </div>*/}
+                        {/*            <div className=" mt-1">*/}
+                        {/*                <h5 className="text-center"><a href="#">Quaerat neque purus ipsum neque*/}
+                        {/*                    dolor</a></h5>*/}
+                        {/*                <p className="text-center mt-1">Quaerat neque purus ipsum neque dolor primis*/}
+                        {/*                    tempus impedit</p>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="col-md-6 col-lg-3">*/}
+                        {/*        <div className="">*/}
+                        {/*            <div className="">*/}
+                        {/*                <div className="">*/}
+                        {/*                    <img className="img-fluid"*/}
+                        {/*                         src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}*/}
+                        {/*                         alt="blog-post-image"/>*/}
+                        {/*                </div>*/}
+                        {/*            </div>*/}
+                        {/*            <div className="">*/}
+                        {/*                <h5 className="text-center mt-1"><a href="#">Tempor blandit sapien at*/}
+                        {/*                    gravida donec ipsum</a></h5>*/}
+                        {/*                <p className="text-center mt-1">Neque dolor primis libero tempus impedit tempor*/}
+                        {/*                    sapien*/}
+                        {/*                    gravida</p>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="col-md-6 col-lg-3">*/}
+                        {/*        <div className="">*/}
+                        {/*            <div className="">*/}
+                        {/*                <div className="">*/}
+                        {/*                    <img className="img-fluid"*/}
+                        {/*                         src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}*/}
+                        {/*                         alt="blog-post-image"/>*/}
+                        {/*                </div>*/}
+                        {/*            </div>*/}
+                        {/*            <div className="">*/}
+                        {/*                <h5 className="text-center mt-1"><a href="#">Neque dolor primis a libero*/}
+                        {/*                    tempus a tempor</a></h5>*/}
+                        {/*                <p className="text-center mt-1">Impedit tempor at donec sapien ipsum a neque*/}
+                        {/*                    dolor*/}
+                        {/*                    primis libero</p>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
                 </section>
             </div>
