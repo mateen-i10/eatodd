@@ -32,7 +32,7 @@ const Menu = () => {
                 </Card>
 
                 <section id="banner-3" className="bg-yellow banner-section division">
-                    <div className="container">
+                    <div className="container-sm">
                         <div className="row d-flex align-items-center">
 
                             <div className="col-md-7 col-lg-6">
@@ -76,7 +76,7 @@ const Menu = () => {
                 </section>
 
                 <section id="banner-3" className="bg-yellow banner-section division" style={{backgroundColor: '#f2f2f1'}}>
-                    <div className="container">
+                    <div className="container-sm">
                         <div className="row d-flex align-items-center">
 
                             <div className="col-md-7 col-lg-6" style={{border:'solid', borderLeft:0, borderTop:0, borderBottom:0, borderColor:'#81be41'}}>

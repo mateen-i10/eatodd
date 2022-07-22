@@ -5,6 +5,9 @@ import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
+import Salad from "../../../../assets/images/ORDER/Med Salad.png"
+import Soup from "../../../../assets/images/ORDER/Soup with a twist.png"
+import plate from "../../../../assets/images/ORDER/OMG Plate (3) (2).png"
 
 const Order = () => {
     return (
@@ -36,8 +39,9 @@ const Order = () => {
                             <div className="menu-item">
                                 <div className="thumbnail">
                                     <img
-                                        src="https://www.chipotle.com/content/dam/chipotle/global/menu/meal-types/cmg-10001-burrito/web-desktop/order.png"
-                                        alt="Burrito"/>
+                                        src={plate}
+                                        alt="Burrito"
+                                    width={350}/>
                                 </div>
                                 <div className="text2">
                                     <div className="display-name">OMG PLATE</div>
@@ -86,11 +90,30 @@ const Order = () => {
                             <div className="menu-item">
                                 <div className="thumbnail">
                                     <img
-                                        src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png"
-                                        alt="Burrito Bowl"/>
+                                        src={Salad}
+                                        alt="Burrito Bowl"
+                                        width={200}/>
                                 </div>
                                 <div className="text2">
-                                    <div className="display-name mealBurrito">FEATURED PLATES</div>
+                                    <div className="display-name mealBurrito">SALAD</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        src={Soup}
+                                        alt="Burrito Bowl"
+                                    width={200}/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">SOUPS</div>
                                     <div className="order-cta">Order
                                         <div className="arrow-right"/>
                                     </div>
@@ -107,24 +130,7 @@ const Order = () => {
                                         alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
-                                    <div className="display-name mealBurrito">FEATURED PLATES</div>
-                                    <div className="order-cta">Order
-                                        <div className="arrow-right"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
-                        <Link to="/OmgPlate">
-                            <div className="menu-item">
-                                <div className="thumbnail">
-                                    <img
-                                        src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png"
-                                        alt="Burrito Bowl"/>
-                                </div>
-                                <div className="text2">
-                                    <div className="display-name mealBurrito">FEATURED PLATES</div>
+                                    <div className="display-name mealBurrito">SIDES AND DRINKS</div>
                                     <div className="order-cta">Order
                                         <div className="arrow-right"/>
                                     </div>
