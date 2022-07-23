@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../header/Header.css"
-import { Button } from 'reactstrap'
+import {Button} from 'reactstrap'
 import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import FoodCart from "../header/components/FoodCart"
 import {ShoppingBag} from "react-feather"
 
@@ -32,7 +32,7 @@ const Headerwine = () => {
             <div>
                 <header className="header1">
                     <div className="head-sec-1">
-                        <img className="logo" src={logo} />
+                        <img className="logo" src={logo}/>
                         <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
@@ -40,7 +40,7 @@ const Headerwine = () => {
                     </div>
                     <div className="head-sec-2">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
-                        <Link to="/wine/about"><h2>About</h2></Link>
+                        {/*<Link to="/wine/about"><h2>About</h2></Link>*/}
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/shop"><h2>Shop</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
@@ -52,10 +52,10 @@ const Headerwine = () => {
 
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
-                        }} />
+                        }}/>
 
                         {openDrawer && (<div>
-                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer} />
+                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
 
@@ -74,12 +74,12 @@ const Headerwine = () => {
         <div>
             <header className="header2">
                 <div className="logo-toggle">
-                    <button  className="nav-toggle" onClick={ () => setIsOpen(!isOpen)} aria-label="toggle navigation">
+                    <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="toggle navigation">
                         <span className="hamburger"></span>
                     </button>
 
                     <div style={{display: width > 540 ? "block" : "none"}}>
-                        <img className="logo" src={logo} />
+                        <img className="logo" src={logo}/>
                     </div>
                 </div>
 
@@ -94,14 +94,15 @@ const Headerwine = () => {
                 <nav className="nav">
                     <div className="nav-sec-1">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
-                        <Link to="/wine/about"><h2>About</h2></Link>
+                        {/*<Link to="/wine/about"><h2>About</h2></Link>*/}
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/shop"><h2>Shop</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">
-                            <h2> <span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span> <span>AND REDEEM REWARDS</span> </h2>
+                            <h2><span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span>
+                                <span>AND REDEEM REWARDS</span></h2>
                         </div>
                         <button className="create-account-btn">Create an Account</button>
                         <div className="sign-in">
