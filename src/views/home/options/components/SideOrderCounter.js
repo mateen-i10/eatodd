@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {CheckCircle, MoreHorizontal} from "react-feather"
+import {MoreVertical} from "react-feather"
 import Counter from "./Counter"
 
 const SideOrderCounter = (props) => {
@@ -8,22 +8,35 @@ const SideOrderCounter = (props) => {
 
     return (
         <>
-            <div className="card my-1 add" onClick={() => setValue(1)} style={value !== 1 ? {maxWidth: '540px', marginBottom:0} : {maxWidth: '540px', marginBottom:0, borderWidth:1, borderColor: '#81be41'}}>
+            <div className="card my-1 add" onClick={() => setValue(1)}
+                 style={value !== 1 ? {maxWidth: '540px', marginBottom: 0} : {
+                     maxWidth: '540px',
+                     marginBottom: 0,
+                     borderWidth: 1,
+                     borderColor: '#81be41'
+                 }}>
                 <div className="row g-0">
-                    <div className="col-md-4">
-                        {props.currentTitle.title === props.title && <div style={{position:'absolute', marginTop:25, marginLeft: 55}}><Counter /></div>}
+                    <div className="col-lg-4">
+                        {props.currentTitle.title === props.title &&
+                            <div style={{position: 'absolute', marginTop: 25, marginLeft: 55}}><Counter/></div>}
                         <div>
-                            <img src={props.foodImage} className="card-img-top img-thumbnail" alt="..." style={{width:250}} />
+                            <img src={props.foodImage} className="img-fluid rounded-start" alt="..."
+                                 style={{
+                                     width: "100%",
+                                     height: "148px",
+                                     objectFit: "cover"
+                                 }}/>
                         </div>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-lg-8">
                         <div className="card-body d-flex">
                             <div className='flex-fill'>
-                                <h4 className=''>{props.title}</h4>
-                                <h5>${props.price}</h5>
+                                <h5 className="card-title text-uppercase mt-0 mb-0 text-primary fw-bolder">{props.title}</h5>
+                                <p className="mb-0">{props.ingredient}</p>
                             </div>
                             <div>
-                                <a href="#"><MoreHorizontal /></a>
+                                <a href="#"><MoreVertical/></a>
+                                <h5 className="mt-4 fw-bolder text-primary">${props.price}</h5>
                             </div>
                         </div>
                     </div>

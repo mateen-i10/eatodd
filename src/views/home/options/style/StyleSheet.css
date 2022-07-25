@@ -1,7 +1,8 @@
 .add {
-    border-color: black;
+    border-color: lightgrey;
     border-width: 1px;
 }
+
 .add:hover {
     border-color: #81be41;
     border-width: 1px;

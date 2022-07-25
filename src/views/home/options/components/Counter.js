@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Plus, Minus} from "react-feather"
+import {Minus, Plus} from "react-feather"
 
 const Counter = () => {
 
@@ -7,18 +7,21 @@ const Counter = () => {
 
     return (
         <>
-            {value === -1 ? [] : <div className='container' style={{padding:0, maxWidth: 55}}>
-                <div className="rounded-circle border-dark mx-1 text-center" style={{backgroundColor:'rgb(212 241 79 / 80%)', width: 45}}>
-                    <h1 style={{color: 'black'}}>{value}</h1>
+            {value === -1 ? [] : <div className='container-fluid' style={{padding: 0, maxWidth: 55}}>
+                <div className="rounded-circle border-primary mx-1 text-center"
+                     style={{backgroundColor: 'rgb(220 220 220 / 80%)', width: 45}}>
+                    <h1 className="text-dark" style={{marginTop: 4}}>{value}</h1>
                 </div>
                 <div className="d-flex my-1">
-                    <div className='rounded-circle border-dark' style={{backgroundColor:'rgb(212 241 79 / 80%)'}}>
-                        <Plus color='black' onClick={() => setValue(value + 1)} />
+                    <div className='rounded-circle border-primary cursor-pointer '
+                         style={{backgroundColor: 'rgb(220 220 220 / 80%)'}}>
+                        <Plus color='black' onClick={() => setValue(value + 1)}/>
                     </div>
-                    <div className='rounded-circle border-dark mx-2' style={{backgroundColor:'rgb(212 241 79 / 80%)'}}>
+                    <div className='rounded-circle border-primary mx-2 cursor-pointer'
+                         style={{backgroundColor: 'rgb(220 220 220 / 80%)'}}>
                         <Minus color='black' onClick={() => {
                             return setValue(value - 1)
-                        }} />
+                        }}/>
                     </div>
                 </div>
             </div>

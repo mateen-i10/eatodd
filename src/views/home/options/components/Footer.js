@@ -1,6 +1,6 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react'
 import {Button, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {setMealName} from "../../../../redux/test/reducer"
 
 
@@ -23,8 +23,9 @@ const Footer = () => {
                 <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
                     <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
                     <ModalBody>
-                        <div className='col-8' style={{marginLeft:80}}>
-                            <Input type='text' placeholder='Enter Meal Name' style={{color:'#451400'}} value={menuName} onChange={e => setMenuName(e.target.value)} />
+                        <div className='col-8' style={{marginLeft: 80}}>
+                            <Input type='text' placeholder='Enter Meal Name' style={{color: '#81be41'}} value={menuName}
+                                   onChange={e => setMenuName(e.target.value)}/>
                         </div>
                         <div>
                             <h1>{meal.mealName}</h1>
@@ -34,16 +35,16 @@ const Footer = () => {
                             </ul>
                         </div>
                     </ModalBody>
-                    <ModalFooter style={{justifyContent:'center', marginBottom:20, marginTop:30}}>
+                    <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
                         <Button color='primary' onClick={() => {
-                            dispatch(setMealName({mealName:''}))
+                            dispatch(setMealName({mealName: ''}))
                             setBasicNameFoodModal(!basicNameFoodModal)
                         }}>
                             Cancel
                         </Button>
                         <Button color='primary' onClick={() => {
                             if (menuName !== '') {
-                                dispatch(setMealName({mealName:[menuName]}))
+                                dispatch(setMealName({mealName: [menuName]}))
                                 setMenuName('')
                             } else {
                                 alert('please enter something in the menu name')
@@ -60,14 +61,32 @@ const Footer = () => {
 
     return (
         <>
-            <div className="container-fluid navbar-sticky" style={{backgroundColor: '#d4cfcb', padding:20, marginTop: 50 }}>
-                <div className="row">
-                    <div className="col" style={{paddingLeft:140}}>
-                        <h1 style={{color:'#451400'}}>Your Menu Items</h1>
-                        <h6 style={{color:'#451400'}}>Select a protein or vegie to get started</h6>
+            <div className="container-fluid "
+                 style={{
+                     backgroundColor: 'whitesmoke',
+                     height: "130px",
+                     position: "sticky",
+                     bottom: 0,
+                     padding: 20,
+                     marginTop: 60,
+                     borderTop: "1px solid #81be41"
+
+                 }}>
+                <div className="row mt-2">
+                    <div className="col" style={{paddingLeft: 140}}>
+                        <h1 className="text-uppercase" style={{color: '#81be41'}}>Your Menu Items</h1>
+                        <h6 style={{color: '#81be41', fontSize: 18}}>Select a protein or vegie to get started</h6>
                     </div>
-                    <div className="col" style={{textAlign:'right', paddingRight: 140}}>
-                        <button type="button" style={{width:'50%', height:50, backgroundColor:'#81be41', color:'white'}} onClick={() => setBasicNameFoodModal((!basicNameFoodModal))} >
+                    <div className="col" style={{textAlign: 'right', paddingRight: 140}}>
+                        <button type="button"
+                                style={{
+                                    width: '50%',
+                                    height: 50,
+                                    backgroundColor: '#81be41',
+                                    border: "0px",
+                                    color: 'white'
+                                }}
+                                onClick={() => setBasicNameFoodModal((!basicNameFoodModal))}>
                             ADD TO BAG
                         </button>
                     </div>

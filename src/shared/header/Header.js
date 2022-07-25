@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import FoodCart from "./components/FoodCart"
 import {ShoppingBag} from "react-feather"
 
-export default function Header () {
+export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
@@ -31,7 +31,7 @@ export default function Header () {
             <div>
                 <header className="header1">
                     <div className="head-sec-1">
-                        <img className="logo" src={logo} />
+                        <img className="logo" src={logo}/>
                         <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
@@ -54,13 +54,13 @@ export default function Header () {
                         </div>
 
                         <ShoppingBag onClick={() => {
-                                SetOpenDrawer(true)
-                        }} />
+                            SetOpenDrawer(true)
+                        }}/>
 
                         {openDrawer && (<div>
-                            <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer} />
-                        </div>
-                            )}
+                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
+                            </div>
+                        )}
 
                         {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
                         {/*    <div>*/}
@@ -77,12 +77,12 @@ export default function Header () {
         <div>
             <header className="header2">
                 <div className="logo-toggle">
-                    <button  className="nav-toggle" onClick={ () => setIsOpen(!isOpen)} aria-label="toggle navigation">
+                    <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="toggle navigation">
                         <span className="hamburger"></span>
                     </button>
 
                     <div style={{display: width > 540 ? "block" : "none"}}>
-                        <img className="logo" src={logo} />
+                        <img className="logo" src={logo}/>
                     </div>
                 </div>
 
@@ -98,25 +98,27 @@ export default function Header () {
                     <div className="nav-sec-1">
                         <Link to="/home"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
-                        <Link><div className="wine-dropdown">
-                            <h2>
-                                WINE
-                                <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>
-                            </h2>
-                            <div className="wine-menu">
-                                <Link to="/wine/membership">Membership</Link>
-                                <Link to="/wine/about" >About</Link>
-                                <Link to ="/wine/faq" >F.A.Q's</Link>
-                                <Link to="/wine/shop" >Shop</Link>
-                            </div>
-                        </div></Link>
+                        <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
+                        {/*<Link><div className="wine-dropdown">*/}
+                        {/*    <h2>*/}
+                        {/*        WINE*/}
+                        {/*        <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>*/}
+                        {/*    </h2>*/}
+                        {/*    <div className="wine-menu">*/}
+                        {/*        <Link to="/wine/membership">Membership</Link>*/}
+                        {/*        <Link to="/wine/about" >About</Link>*/}
+                        {/*        <Link to ="/wine/faq" >F.A.Q's</Link>*/}
+                        {/*        <Link to="/wine/shop" >Shop</Link>*/}
+                        {/*    </div>*/}
+                        {/*</div></Link>*/}
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="nav-sec-2">
                         <div className="challanges">
-                            <h2> <span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span> <span>AND REDEEM REWARDS</span> </h2>
+                            <h2><span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span>
+                                <span>AND REDEEM REWARDS</span></h2>
                         </div>
                         <button className="create-account-btn">Create an Account</button>
                         <div className="sign-in">
