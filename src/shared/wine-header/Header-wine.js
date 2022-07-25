@@ -29,7 +29,7 @@ const Headerwine = () => {
 
     if (width > breakpoint) {
         return (
-            <div>
+            <div className="sticky-top">
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>

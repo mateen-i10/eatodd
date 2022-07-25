@@ -28,7 +28,7 @@ export default function Header() {
 
     if (width > breakpoint) {
         return (
-            <div>
+            <div className="sticky-top">
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>
@@ -74,7 +74,7 @@ export default function Header() {
     }
 
     return (
-        <div>
+        <div className="sticky-top">
             <header className="header2">
                 <div className="logo-toggle">
                     <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="toggle navigation">
@@ -94,7 +94,7 @@ export default function Header() {
 
                 <i className="ri-shopping-bag-line cart"></i>
 
-                <nav className="nav">
+                <nav className="nav sticky-top">
                     <div className="nav-sec-1">
                         <Link to="/home"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
