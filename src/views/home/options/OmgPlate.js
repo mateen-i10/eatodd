@@ -5,10 +5,10 @@ import img2 from '../../../assets/images/images/images.jpg'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import MenuItem from "./components/MenuItem"
 import SideOrderCounter from "./components/SideOrderCounter"
-import Footer from "./components/Footer"
 import {useDispatch} from "react-redux"
 import {setCrmEmail} from "../../../redux/test/reducer"
 import Header from "../../../shared/header/Header"
+import Footer from "./components/Footer"
 // import {useHistory} from "react-router-dom"
 
 const Menu = (props) => {
@@ -147,7 +147,7 @@ const Menu = (props) => {
 
                         <div className="row">
                             {protein.map((element) => {
-                                return <div className="col-md-6" key={element.title}
+                                return <div className="col-lg-6" key={element.title}
                                             onClick={() => handleClick(element)}>
                                     <MenuItem foodImage={element.image} title={element.title} price={element.price}
                                               currentTitle={currentItem} ingredient={element.ingredient}/>
@@ -165,7 +165,7 @@ const Menu = (props) => {
 
                         <div className="row">
                             {Side.map((element) => {
-                                return <div className="col-md-6" key={element.title}
+                                return <div className="col-lg-6" key={element.title}
                                             onClick={() => handleClick(element)}>
                                     <SideOrderCounter foodImage={element.image} title={element.title}
                                                       price={element.Price} currentTitle={currentItem}

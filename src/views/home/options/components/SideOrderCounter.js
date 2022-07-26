@@ -8,35 +8,39 @@ const SideOrderCounter = (props) => {
 
     return (
         <>
-            <div className="card my-1 add" onClick={() => setValue(1)}
-                 style={value !== 1 ? {maxWidth: '540px', marginBottom: 0} : {
-                     maxWidth: '540px',
-                     marginBottom: 0,
+            <div className="card add overflow-hidden" onClick={() => setValue(1)}
+                 style={value !== 1 ? {maxHeight: 130, marginBottom: 2} : {
+                     maxHeight: 130,
+                     marginBottom: 2,
                      borderWidth: 1,
                      borderColor: '#81be41'
                  }}>
                 <div className="row g-0">
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 col-3">
                         {props.currentTitle.title === props.title &&
-                            <div style={{position: 'absolute', marginTop: 25, marginLeft: 55}}><Counter/></div>}
+                            <div className="ms-md-4 ms-lg-3 ms-xl-5 m-0 mt-2" style={{
+                                position: 'absolute',
+                                backgroundColor: 'transparent'
+                            }}><Counter/>
+                            </div>}
                         <div>
                             <img src={props.foodImage} className="img-fluid rounded-start" alt="..."
                                  style={{
                                      width: "100%",
-                                     height: "148px",
+                                     height: 129,
                                      objectFit: "cover"
                                  }}/>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 col-9">
                         <div className="card-body d-flex">
                             <div className='flex-fill'>
                                 <h5 className="card-title text-uppercase mt-0 mb-0 text-primary fw-bolder">{props.title}</h5>
-                                <p className="mb-0">{props.ingredient}</p>
+                                <p className="mb-0" style={{textOverflow: "ellipsis"}}>{props.ingredient}</p>
                             </div>
                             <div>
-                                <a href="#"><MoreVertical/></a>
-                                <h5 className="mt-4 fw-bolder text-primary">${props.price}</h5>
+                                <a className="ms-5" href="#"><MoreVertical/></a>
+                                <h5 className="ms-3 mt-4 fw-bolder text-primary">${props.price}</h5>
                             </div>
                         </div>
                     </div>

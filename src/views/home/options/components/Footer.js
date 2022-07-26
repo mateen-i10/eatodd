@@ -19,7 +19,7 @@ const Footer = () => {
 
     const RenderMealNameModal = () => {
         return (
-            <div className='basic-modal'>
+            <div className='basic-modal '>
                 <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
                     <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
                     <ModalBody>
@@ -36,7 +36,7 @@ const Footer = () => {
                         </div>
                     </ModalBody>
                     <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
-                        <Button color='primary' onClick={() => {
+                        <Button color='danger' onClick={() => {
                             dispatch(setMealName({mealName: ''}))
                             setBasicNameFoodModal(!basicNameFoodModal)
                         }}>
@@ -61,30 +61,36 @@ const Footer = () => {
 
     return (
         <>
-            <div className="container-fluid "
+            <div className="container-fluid mt-2"
                  style={{
                      backgroundColor: 'whitesmoke',
-                     height: "130px",
+                     // height: "130px",
                      position: "sticky",
                      bottom: 0,
-                     padding: 20,
-                     marginTop: 60,
+                     // padding: 10,
+                     // marginTop: 60,
                      borderTop: "1px solid #81be41"
 
                  }}>
-                <div className="row mt-2">
-                    <div className="col" style={{paddingLeft: 140}}>
-                        <h1 className="text-uppercase" style={{color: '#81be41'}}>Your Menu Items</h1>
-                        <h6 style={{color: '#81be41', fontSize: 18}}>Select a protein or vegie to get started</h6>
+                <div className="row mb-2">
+                    <div className="col-lg-7 col-12 mt-1 mb-2 d-lg-block d-none" style={{}}>
+                        <div className="text-center text-uppercase fw-bolder"
+                             style={{color: '#81be41', fontSize: "1.6rem"}}>Your
+                            Menu Items
+                        </div>
+                        <div className="text-center fw-bolder" style={{color: '#81be41', fontSize: "1.3rem"}}>Select a
+                            protein or vegie to get started
+                        </div>
                     </div>
-                    <div className="col" style={{textAlign: 'right', paddingRight: 140}}>
+                    <div className="col-lg-5 col-12 mt-1 mb-1 mb-lg-0 " style={{textAlign: 'center'}}>
                         <button type="button"
                                 style={{
-                                    width: '50%',
-                                    height: 50,
+                                    width: '90%',
+                                    height: 60,
                                     backgroundColor: '#81be41',
                                     border: "0px",
-                                    color: 'white'
+                                    color: 'white',
+                                    borderRadius: "5px"
                                 }}
                                 onClick={() => setBasicNameFoodModal((!basicNameFoodModal))}>
                             ADD TO BAG
