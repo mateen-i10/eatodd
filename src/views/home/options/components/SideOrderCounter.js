@@ -26,10 +26,8 @@ const SideOrderCounter = (props) => {
                      borderWidth: 1,
                      borderColor: 'black'
                  }}>
-
                 <div className="row g-0 " onClick={() => onSideItemClicked(element)}>
                     <div className="col-lg-3 col-3">
-
                         <div>
                             <img src={foodImage} className="img-fluid rounded-start" alt="..."
                                  style={{
@@ -37,7 +35,6 @@ const SideOrderCounter = (props) => {
                                      height: 130,
                                      objectFit: "cover",
                                      userSelect: "none"
-
                                  }}/>
                         </div>
                     </div>

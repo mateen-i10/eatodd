@@ -127,16 +127,20 @@ const MenuItem = (props) => {
 
                                     <img src={foodImage} className="img-fluid rounded-start" alt="..."
                                          style={!value ? {
-                                             width: "95%",
-                                             height: 138,
-                                             objectFit: "cover"
+                                             width: "100%",
+                                             height: 180,
+                                             objectFit: "cover",
+                                             marginLeft: -8,
+                                             marginTop: -19
 
                                          } : {
-                                             width: "95%",
-                                             height: 138,
-                                             backgroundColor: 'black',
+                                             width: "100%",
+                                             height: 180,
+                                             backgroundColor: 'transparent',
                                              objectFit: "cover",
-                                             overflow: "hidden"
+                                             overflow: "hidden",
+                                             marginLeft: -8,
+                                             marginTop: -19
                                          }}/>
                                 </div>
                                 <div className="col-lg-8 col-md-8 col-7">

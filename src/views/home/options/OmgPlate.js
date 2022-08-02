@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import TopShelf from "./components/TopShelf"
 import img from '../../../assets/images/images/image2.png'
-import img2 from '../../../assets/images/images/images.jpg'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import MenuItem from "./components/MenuItem"
 import SideOrderCounter from "./components/SideOrderCounter"
@@ -13,12 +12,15 @@ import Footer from "./components/Footer"
 const Menu = (props) => {
 
     const img = props.image
+    const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
+    const vegies = require("../../../assets/images/Menu&Order/veg.png").default
+    const chips = require("../../../assets/images/Menu&Order/chips.png").default
 
     const protein = [
         {
             id: 1,
             title: 'chicken Kebab',
-            image: img2,
+            image: proteinImage,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 11.99,
             single: false,
@@ -28,7 +30,7 @@ const Menu = (props) => {
         {
             id: 2,
             title: 'Lamb',
-            image: img2,
+            image: proteinImage,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 14.99,
             single: false,
@@ -38,7 +40,7 @@ const Menu = (props) => {
         {
             id: 3,
             title: 'Chicken Shawarma',
-            image: img2,
+            image: proteinImage,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 11.99,
             single: false,
@@ -48,7 +50,7 @@ const Menu = (props) => {
         {
             id: 4,
             title: 'Okra Stew',
-            image: img2,
+            image: proteinImage,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 11.99,
             single: false,
@@ -58,7 +60,7 @@ const Menu = (props) => {
         {
             id: 5,
             title: 'Falafel',
-            image: img2,
+            image: proteinImage,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 10.99,
             single: false,
@@ -68,7 +70,7 @@ const Menu = (props) => {
         {
             id: 6,
             title: 'MeatBalls',
-            image: img2,
+            image: vegies,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 12.99,
             single: false,
@@ -78,7 +80,7 @@ const Menu = (props) => {
         {
             id: 7,
             title: 'Fish',
-            image: img2,
+            image: vegies,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
             price: 14.99,
             single: false,
@@ -88,7 +90,7 @@ const Menu = (props) => {
         {
             id: 8,
             title: 'Steak',
-            image: img2,
+            image: vegies,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 12.99,
             single: false,
@@ -99,31 +101,31 @@ const Menu = (props) => {
 
     const Side = [
         {
-            image: img2,
+            image: chips,
             title: 'Garlic Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 1.80
         },
         {
-            image: img2,
+            image: chips,
             title: 'Baba Ghanoush',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 5.99
         },
         {
-            image: img2,
+            image: chips,
             title: 'Red Hot Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and",
             Price: 7.80
         },
         {
-            image: img2,
+            image: chips,
             title: 'Hummus',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 5.99
         },
         {
-            image: img2,
+            image: chips,
             title: 'Zhoug Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 2.30
