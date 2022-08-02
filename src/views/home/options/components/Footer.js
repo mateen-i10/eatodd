@@ -31,7 +31,7 @@ const Footer = () => {
                             <h1>{meal.mealName}</h1>
                             <ul>
                                 {testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}
-                                {console.log('testData', testData)}
+                                {/*{console.log('testData', testData)}*/}
                             </ul>
                         </div>
                     </ModalBody>
@@ -69,16 +69,17 @@ const Footer = () => {
                      bottom: 0,
                      // padding: 10,
                      // marginTop: 60,
-                     borderTop: "1px solid #81be41"
+                     borderTop: "1px solid black",
+                     zIndex: 10
 
                  }}>
                 <div className="row mb-2">
                     <div className="col-lg-7 col-12 mt-1 mb-2 d-lg-block d-none" style={{}}>
                         <div className="text-center text-uppercase fw-bolder"
-                             style={{color: '#81be41', fontSize: "1.6rem"}}>Your
+                             style={{color: 'black', fontSize: "1.6rem"}}>Your
                             Menu Items
                         </div>
-                        <div className="text-center fw-bolder" style={{color: '#81be41', fontSize: "1.3rem"}}>Select a
+                        <div className="text-center fw-bolder" style={{color: 'black', fontSize: "1.3rem"}}>Select a
                             protein or vegie to get started
                         </div>
                     </div>

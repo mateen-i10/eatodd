@@ -1,73 +1,99 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import TopShelf from "./components/TopShelf"
 import img from '../../../assets/images/images/image2.png'
 import img2 from '../../../assets/images/images/images.jpg'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import MenuItem from "./components/MenuItem"
 import SideOrderCounter from "./components/SideOrderCounter"
-import {useDispatch} from "react-redux"
-import {setCrmEmail} from "../../../redux/test/reducer"
+
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
-// import {useHistory} from "react-router-dom"
+
 
 const Menu = (props) => {
-
-    // const testData = useSelector(state => state.testReducer.testData)
-    // const isLoading = useSelector(state => state.testReducer.isLoading)
-    const dispatch = useDispatch()
-    // const history = useHistory()
 
     const img = props.image
 
     const protein = [
         {
-            image: img2,
+            id: 1,
             title: 'chicken Kebab',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99
+            price: 11.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 2,
             title: 'Lamb',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 14.99
+            price: 14.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 3,
             title: 'Chicken Shawarma',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99
+            price: 11.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 4,
             title: 'Okra Stew',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 11.99
+            price: 11.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 5,
             title: 'Falafel',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 10.99
+            price: 10.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 6,
             title: 'MeatBalls',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99
+            price: 12.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 7,
             title: 'Fish',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
-            price: 14.99
+            price: 14.99,
+            single: false,
+            half: false,
+            doubled: false
         },
         {
-            image: img2,
+            id: 8,
             title: 'Steak',
+            image: img2,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99
+            price: 12.99,
+            single: false,
+            half: false,
+            doubled: false
         }
     ]
 
@@ -105,26 +131,32 @@ const Menu = (props) => {
     ]
 
     const [currentItem, setCurrentItem] = useState('')
-    const [arr, setArr] = useState([])
-
-    useEffect(() => {
-        console.log('arr', arr)
-        dispatch(setCrmEmail([...arr]))
-        // if (isLoading) {
-        //
-        // }
-
-    }, [arr])
+    const [selectedProVeg, setSelectedProVeg] = useState([])
+    const [doubled, setDoubled] = useState(false)
 
 
-    const handleClick = (element) => {
-        // dispatch(setCrmEmail({name: [element.title]}))
-        console.log(element)
+    const handleItemClick = (element) => {
+        if (selectedProVeg.length === 2) {
+            const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
+            // const selectedItems = rmSelected.map(item => ({...item, single: false, half: true}))
+
+            setSelectedProVeg(rmSelected)
+
+            // eslint-disable-next-line brace-style
+        } else if (selectedProVeg.length === 1) {
+            if (element.id === selectedProVeg[0].id) {
+                selectedProVeg.pop()
+            } else setSelectedProVeg([...selectedProVeg, {...element, single: true}])
+            // eslint-disable-next-line brace-style
+        } else setSelectedProVeg([...selectedProVeg, {...element, single: true}])
+
         setCurrentItem(element)
-        if (arr.title === null) setArr(element)
-        else setArr(arr => [...arr, element.title])
 
     }
+    const handleSidItemClicked = (element) => {
+        console.log("side item clicked", element)
+    }
+
 
     return (
         <>
@@ -132,52 +164,54 @@ const Menu = (props) => {
             {/*<Card style={{marginBottom: -50}}>*/}
             <div className="container-sm ">
                 <TopShelf image={img} fooditem='Burritto'/>
-
-                <hr className="text-primary"/>
-
+                <hr className="text-dark"/>
                 <NutrtionPrefModel/>
-
                 <div className="container-sm">
                     <div className="container-sm">
-
                         <div className='text-center text-uppercase text-primary fw-bolder my-2'>
                             <h1 className="text-primary">Protein or Vegie</h1>
-                            <h4 className="text-primary">Choose up to two</h4>
+                            <h4 className="text-dark">Choose up to two</h4>
                         </div>
-
-                        <div className="row">
+                        <div className="row align-items-center justify-content-center ">
                             {protein.map((element) => {
-                                return <div className="col-lg-6" key={element.title}
-                                            onClick={() => handleClick(element)}>
-                                    <MenuItem foodImage={element.image} title={element.title} price={element.price}
-                                              currentTitle={currentItem} ingredient={element.ingredient}/>
+                                return <div className="col-xl-5 col-lg-6" key={element.title}
+                                >
+                                    <MenuItem
+                                        itemId={element.id}
+                                        element={element}
+                                        foodImage={element.image}
+                                        title={element.title}
+                                        price={element.price}
+                                        ingredient={element.ingredient}
+                                        selectedProVeg={selectedProVeg}
+                                        doubled={doubled}
+                                        setDoubled={setDoubled}
+                                        onItemClick={handleItemClick}
+                                    />
                                 </div>
                             })}
                         </div>
-
                         <div className='text-center text-uppercase fw-bolder my-2'>
                             <h1 className="text-primary">Side</h1>
                         </div>
-                        {/*<Button type='button' onClick={(e) => {*/}
-                        {/*    e.preventDefault()*/}
-                        {/*    history.push('home')*/}
-                        {/*}}>gooooo</Button>*/}
-
-                        <div className="row">
+                        <div className="row justify-content-center ">
                             {Side.map((element) => {
-                                return <div className="col-lg-6" key={element.title}
-                                            onClick={() => handleClick(element)}>
-                                    <SideOrderCounter foodImage={element.image} title={element.title}
-                                                      price={element.Price} currentTitle={currentItem}
-                                                      ingredient={element.ingredient}/>
+                                return <div className="col-xl-5 col-lg-6" key={element.title}
+                                >
+                                    <SideOrderCounter
+                                        element={element}
+                                        foodImage={element.image}
+                                        title={element.title}
+                                        price={element.Price}
+                                        currentTitle={currentItem}
+                                        ingredient={element.ingredient}
+                                        onSideItemClicked={handleSidItemClicked}/>
                                 </div>
                             })}
                         </div>
-
                     </div>
                 </div>
             </div>
-            {/*</Card>*/}
             <Footer/>
         </>
     )

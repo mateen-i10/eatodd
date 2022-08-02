@@ -354,10 +354,10 @@ const NutrtionPrefModel = () => {
                         <a href="#"><h3
                             style={{
                                 textTransform: 'uppercase',
-                                color: 'rgb(129 190 65)',
+                                color: "black",
                                 fontWeight: 'bolder'
                             }}>Nutrtion
-                            Preferences <List onClick={() => setBasicModal((!basicModal))} color='rgb(129 190 65)'/>
+                            Preferences <List onClick={() => setBasicModal((!basicModal))} color="black"/>
                         </h3>
                         </a>
                     </div>

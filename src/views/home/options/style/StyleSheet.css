@@ -4,6 +4,31 @@
 }
 
 .add:hover {
-    border-color: #81be41;
+    border-color: black;
     border-width: 1px;
+}
+
+.showCard {
+    display: flex;
+}
+
+.hiddenCard {
+    display: none;
+}
+
+.doubleQty:hover {
+    background-color: rgba(129, 190, 65, .3);
+}
+
+.moreAddon:hover {
+    color: rgba(129, 190, 65, 1);
+
+}
+
+.showFilling {
+    display: flex;
+}
+
+.hideFilling {
+    display: none;
 }

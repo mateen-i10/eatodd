@@ -12,7 +12,7 @@ const TopShelf = (props) => {
                         <div className="text-primary fw-bolder "
                              style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>build your
                         </div>
-                        <div className="text-primary fw-bolder "
+                        <div className="text-dark fw-bolder "
                              style={{
                                  fontSize: "3.6rem",
                                  textTransform: 'uppercase'

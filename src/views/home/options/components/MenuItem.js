@@ -1,83 +1,179 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {MoreVertical} from "react-feather"
 import '../style/StyleSheet.css'
-import {FaCheck} from "react-icons/all"
+import {MdArrowBackIos} from "react-icons/all"
+import OneX from "./Utility/OneX"
+import Half from "./Utility/Half"
+import TwoX from "./Utility/TwoX"
+import CheckSign from "./Utility/CheckSign"
 
 const MenuItem = (props) => {
 
-    const [value, setValue] = useState(0)
-    // const [condition, setCond] = useState(false)
-    // const handleClick = (element) => {
-    //     console.log(element)
-    //
-    // }
+    const [value, setValue] = useState(false)
+    const [customize, setCustomize] = useState(false)
+    const [isProVegLength2, setIsProVegLength2] = useState(false)
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsProVegLength2(false)
+        }, 2000)
+    })
+
+    const {
+        itemId,
+        title,
+        element,
+        price,
+        foodImage,
+        ingredient,
+        selectedProVeg,
+        doubled,
+        setDoubled,
+        onItemClick
+    } = props
+    // console.log("proVeg length is 2", isProVegLength2)
+    // console.log("selected item", selectedProVeg.length)
     return (
         <>
-            <div className="card  add  overflow-hidden" onClick={() => {
-                if (value === 1) {
-                    setValue(0)
-                } else {
-                    setValue(1)
-                }
-            }} style={value !== 1 ? {marginBottom: 2, maxHeight: 130} : {
-                marginBottom: 2,
-                maxHeight: 130,
-                borderWidth: 1,
-                borderColor: '#81be41'
-            }}>
-                <div className="row g-0 ">
-                    <div className="col-lg-4 col-3">
-                        {props.currentTitle.title === props.title &&
-                            <FaCheck size={60} color='#81be41' className='rounded-circle ms-md-5 m-0' style={{
-                                position: 'absolute',
-                                // marginLeft: 3,
-                                top: 30,
-                                backgroundColor: 'transparent'
-                            }}/>}
-                        <div className="">
-                            <img src={props.foodImage} className="img-fluid rounded-start" alt="..."
-                                 style={value !== 1 ? {
-                                     width: "100%",
-                                     height: 129,
-                                     objectFit: "cover"
-
-                                 } : {
-                                     width: "100%",
-                                     height: 129,
-                                     backgroundColor: '#81be41',
-                                     objectFit: "cover",
-                                     overflow: "hidden"
-                                 }}/>
-                        </div>
-                    </div>
-                    <div className="col-lg-8 col-9">
-                        <div className="card-body d-flex">
-                            <div className='flex-fill'>
-                                <div className="card-title text-uppercase mt-0 mb-0 text-primary fw-bolder"
-                                     style={{fontSize: '1.1rem'}}>{props.title}</div>
-                                <p className="mb-0 text-dark  ">{props.ingredient}</p>
-
-                            </div>
-                            <div onClick={() => console.log('it works')}>
-                                <a className="ms-5" href="#"><MoreVertical/></a>
-                                <h4 className="ms-2 mt-4 fw-bolder text-primary">${props.price}</h4>
-                            </div>
-                        </div>
-                    </div>
+            <div className="card  add  overflow-hidden "
+                 style={!value ? {marginBottom: 25, maxHeight: 140} : {
+                     marginBottom: 25,
+                     maxHeight: 140,
+                     borderWidth: 1,
+                     borderColor: "black"
+                 }}>
+                <div className={isProVegLength2 ? "showFilling" : "hideFilling"} style={{
+                    position: "absolute",
+                    top: 30,
+                    zIndex: 1,
+                    backgroundColor: 'rgba(129, 190, 65, 1)',
+                    color: 'white',
+                    maxWidth: '50%',
+                    marginLeft: '30%',
+                    height: "35px",
+                    width: '300px',
+                    textAlign: "center",
+                    padding: '3px',
+                    fontSize: '1.4rem',
+                    fontWeight: 500,
+                    borderRadius: "3px"
+                }}>You can select only 2 fillings
                 </div>
+                {/* eslint-disable-next-line multiline-ternary */}
+                {customize ?
+                    <div
+                        className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}>
+                        <div className=" col-5 bg-primary text-center text-white cursor-pointer "
+                             style={{height: 130}} onClick={() => {
+                            setDoubled(false)
+                            setCustomize(false)
+                        }}>
+                            <div style={{marginTop: 42, fontSize: 26, fontWeight: 700}}
+                            >Normal
+                            </div>
+                        </div>
+                        <div className=" col-5 text-center text-dark doubleQty cursor-pointer" style={{height: 130}}
+                             onClick={() => {
+                                 setDoubled(true)
+                                 setCustomize(false)
+
+                             }}>
+                            <div style={{marginTop: 42, fontSize: 26, fontWeight: 700}}
+                            >Double
+                            </div>
+                        </div>
+                        <div className="col-2 text-center border-dark cursor-pointer" style={{height: 130}}
+                             onClick={() => setCustomize(!customize)}>
+                            <div className=" text-primary"
+                                 style={{marginTop: 42, fontSize: 30, fontWeight: 700}}
+                            ><MdArrowBackIos/>
+                            </div>
+                        </div>
+                    </div> : <div className="row g-0">
+                        <div className="col-md-10 col-10 " onClick={() => {
+                            onItemClick(element)
+                            setValue(!value)
+                            if (selectedProVeg.length === 2) {
+                                setIsProVegLength2(true)
+                                setValue(false)
+                            }
+                        }}>
+                            <div className="row g-0">
+                                <div className="col-lg-4  col-md-4 col-5">
+                                    {selectedProVeg.map(item => {
+                                        // eslint-disable-next-line multiline-ternary
+                                        if (selectedProVeg.length === 1 && doubled === false) {
+                                            // eslint-disable-next-line multiline-ternary
+                                            return (item.id === itemId ?
+                                                <CheckSign key={item.id}/> : "")
+                                        } else if (selectedProVeg.length === 1 && doubled === true) {
+                                            // eslint-disable-next-line multiline-ternary
+                                            return (item.id === itemId ?
+                                                <TwoX key={item.id}/> : "")
+                                        }
+                                        if (selectedProVeg.length === 2 && doubled === false) {
+
+                                            // eslint-disable-next-line multiline-ternary
+                                            return (item.id === itemId ?
+                                                <Half key={item.id}/> : "")
+                                        } else if (selectedProVeg.length === 2 && doubled === true) {
+
+                                            // eslint-disable-next-line multiline-ternary
+                                            return (item.id === itemId ?
+                                                <OneX key={item.id}/> : "")
+                                        }
+
+                                    })}
+
+                                    <img src={foodImage} className="img-fluid rounded-start" alt="..."
+                                         style={!value ? {
+                                             width: "95%",
+                                             height: 138,
+                                             objectFit: "cover"
+
+                                         } : {
+                                             width: "95%",
+                                             height: 138,
+                                             backgroundColor: 'black',
+                                             objectFit: "cover",
+                                             overflow: "hidden"
+                                         }}/>
+                                </div>
+                                <div className="col-lg-8 col-md-8 col-7">
+                                    <div className="card-body ">
+                                        <div className=''>
+                                            <div
+                                                className="card-title text-start text-uppercase mt-0 mb-0 text-primary fw-bolder"
+                                                style={{fontSize: '1.2rem'}}>{title}</div>
+                                            <p className="mb-0 text-dark  ">{ingredient}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-2 col-2 mt-2 text-end">
+                            <div className=" moreAddon cursor-pointer me-2 " id={itemId}
+                                 onClick={() => {
+                                     setCustomize(!customize)
+                                 }}>
+                                <MoreVertical size={34}/></div>
+                            {/*<UncontrolledTooltip placement='left' target={itemId}*/}
+                            {/*                     style={{fontSize: 16}}>*/}
+                            {/*    Click to Customize*/}
+                            {/*    <MdNavigateNext size={28} color="rgba(225, 225, 225, .3)"*/}
+                            {/*                    style={{marginLeft: 0}}/>*/}
+                            {/*    <MdNavigateNext size={28} color="rgba(225, 225, 225, .7)"*/}
+                            {/*                    style={{marginLeft: -17}}/>*/}
+                            {/*    <MdNavigateNext size={28} color="white" style={{marginLeft: -17}}/>*/}
+
+                            {/*</UncontrolledTooltip>*/}
+                            <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>${price}</h5>
+                        </div>
+                    </div>
+                }
             </div>
-            {/*<div className="card border-secondary text-center justify-content-center" style={{width: '18rem'}} onClick={handleClick(props.currentTitle.title)} >*/}
-            {/*    {props.currentTitle.title === props.title && <CheckCircle size={80} color='white' className='rounded-circle' style={{position:'absolute', marginLeft:80, top:80, backgroundColor:'black'}}/>}*/}
-            {/*    <div>*/}
-            {/*        <img src={props.foodImage} className="card-img-top img-thumbnail" alt="..." style={{width:250}} />*/}
-            {/*    </div>*/}
-            {/*        <div className="card-body">*/}
-            {/*            <h4>{props.title}</h4>*/}
-            {/*            <h5>${props.price}</h5>*/}
-            {/*            <a href="#"><MoreHorizontal /></a>*/}
-            {/*        </div>*/}
-            {/*</div>*/}
+
         </>
     )
 }
