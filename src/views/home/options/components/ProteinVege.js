@@ -7,7 +7,7 @@ import Half from "./Utility/Half"
 import TwoX from "./Utility/TwoX"
 import CheckSign from "./Utility/CheckSign"
 
-const MenuItem = (props) => {
+const ProteinVege = (props) => {
 
     const [value, setValue] = useState(false)
     const [customize, setCustomize] = useState(false)
@@ -182,4 +182,4 @@ const MenuItem = (props) => {
     )
 }
 
-export default MenuItem
+export default ProteinVege

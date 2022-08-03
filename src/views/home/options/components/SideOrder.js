@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Counter from "./Counter"
 
-const SideOrderCounter = (props) => {
+const SideOrder = (props) => {
 
-    const {element, foodImage, ingredient, onSideItemClicked, price, title} = props
+    const {foodImage, ingredient, price, title} = props
     const [selected, setSelected] = useState(false)
 
     return (
@@ -26,7 +26,7 @@ const SideOrderCounter = (props) => {
                      borderWidth: 1,
                      borderColor: 'black'
                  }}>
-                <div className="row g-0 " onClick={() => onSideItemClicked(element)}>
+                <div className="row g-0 ">
                     <div className="col-lg-3 col-3">
                         <div>
                             <img src={foodImage} className="img-fluid rounded-start" alt="..."
@@ -56,4 +56,4 @@ const SideOrderCounter = (props) => {
     )
 }
 
-export default SideOrderCounter
+export default SideOrder

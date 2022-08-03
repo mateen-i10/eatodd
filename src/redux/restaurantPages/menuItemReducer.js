@@ -46,7 +46,7 @@ const menuItemReducer = (state = initialState, action) => {
     }
 }
 
-// ** Get MenuItem Data
+// ** Get ProteinVege Data
 export const loadMenuItem = () => {
     return async dispatch => {
         dispatch(setLoading(true))

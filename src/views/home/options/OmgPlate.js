@@ -2,14 +2,20 @@ import React, {useState} from 'react'
 import TopShelf from "./components/TopShelf"
 import img from '../../../assets/images/images/image2.png'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
-import MenuItem from "./components/MenuItem"
-import SideOrderCounter from "./components/SideOrderCounter"
+import ProteinVege from "./components/ProteinVege"
+import SideOrder from "./components/SideOrder"
 
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
+import Rice from "./components/Rice"
+import Beans from "./components/Beans"
 
 
 const Menu = (props) => {
+    const [selectedProVeg, setSelectedProVeg] = useState([])
+    const [doubled, setDoubled] = useState(false)
+    const [selectedRice, setSelectedRice] = useState([])
+    const [selectedBeans, setSelectedBeans] = useState([])
 
     const img = props.image
     const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
@@ -99,7 +105,7 @@ const Menu = (props) => {
         }
     ]
 
-    const Side = [
+    const sideitems = [
         {
             image: chips,
             title: 'Garlic Sauce',
@@ -132,15 +138,43 @@ const Menu = (props) => {
         }
     ]
 
-    const [currentItem, setCurrentItem] = useState('')
-    const [selectedProVeg, setSelectedProVeg] = useState([])
-    const [doubled, setDoubled] = useState(false)
+    const rice = [
+        {
+            id: 1,
+            image: require("../../../assets/images/Menu&Order/whiteRice.png").default,
+            title: 'White Rice',
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
 
+        },
+        {
+            id: 2,
+            image: require("../../../assets/images/Menu&Order/brownRice.png").default,
+            title: 'Brown Rice',
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
+
+        }
+    ]
+
+    const beans = [
+        {
+            id: 1,
+            image: require("../../../assets/images/Menu&Order/blackBeans.png").default,
+            title: 'Black Beans',
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
+
+        },
+        {
+            id: 2,
+            image: require("../../../assets/images/Menu&Order/PintoBeans.png").default,
+            title: 'Pinto Beans',
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
+
+        }
+    ]
 
     const handleItemClick = (element) => {
         if (selectedProVeg.length === 2) {
             const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
-            // const selectedItems = rmSelected.map(item => ({...item, single: false, half: true}))
 
             setSelectedProVeg(rmSelected)
 
@@ -152,13 +186,39 @@ const Menu = (props) => {
             // eslint-disable-next-line brace-style
         } else setSelectedProVeg([...selectedProVeg, {...element, single: true}])
 
-        setCurrentItem(element)
+    }
+    console.log("selected bEans", selectedBeans)
+    console.log("selected Rice", selectedRice)
+    const handleSelectedRice = (element) => {
+
+        if (selectedRice.length === 1 && element.id === selectedRice[0].id) {
+            const rmSelected = selectedRice.filter(item => item.id !== element.id)
+            setSelectedRice(rmSelected)
+            // eslint-disable-next-line brace-style
+        } else if (selectedRice.length === 2) {
+            const rmSelected = selectedRice.filter(item => item.id !== element.id)
+
+            setSelectedRice(rmSelected)
+
+            // eslint-disable-next-line brace-style
+        } else setSelectedRice([...selectedRice, element])
+
 
     }
-    const handleSidItemClicked = (element) => {
-        console.log("side item clicked", element)
-    }
 
+    const handleSelectedBeans = (element) => {
+        console.log("element in handle bean fn ", element)
+        if (selectedBeans.length === 1 && element.id === selectedBeans[0].id) {
+            const rmSelected = selectedBeans.filter(item => item.id !== element.id)
+            setSelectedBeans(rmSelected)
+            // eslint-disable-next-line brace-style
+        } else if (selectedBeans.length === 2) {
+            const rmSelected = selectedBeans.filter(item => item.id !== element.id)
+            setSelectedBeans(rmSelected)
+            // eslint-disable-next-line brace-style
+        } else setSelectedBeans([...selectedBeans, element])
+
+    }
 
     return (
         <>
@@ -178,7 +238,7 @@ const Menu = (props) => {
                             {protein.map((element) => {
                                 return <div className="col-xl-5 col-lg-6" key={element.title}
                                 >
-                                    <MenuItem
+                                    <ProteinVege
                                         itemId={element.id}
                                         element={element}
                                         foodImage={element.image}
@@ -193,21 +253,62 @@ const Menu = (props) => {
                                 </div>
                             })}
                         </div>
+                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
+                            <h1 className="text-primary">Rice</h1>
+
+                        </div>
+                        <div className="row align-items-center justify-content-center ">
+
+                            {rice.map((element) => {
+                                return <div className="col-xl-5 col-lg-6" key={element.id}
+                                >
+                                    <Rice
+                                        element={element}
+                                        foodImage={element.image}
+                                        itemId={element.id}
+                                        title={element.title}
+                                        ingredient={element.ingredient}
+                                        selectedRice={selectedRice}
+                                        onRiceSelected={handleSelectedRice}
+
+                                    />
+                                </div>
+                            })}
+                        </div>
+                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
+                            <h1 className="text-primary">Beans</h1>
+                        </div>
+                        <div className="row align-items-center justify-content-center ">
+
+                            {beans.map((element) => {
+                                return <div className="col-xl-5 col-lg-6" key={element.id}
+                                >
+                                    <Beans
+                                        element={element}
+                                        foodImage={element.image}
+                                        itemId={element.id}
+                                        title={element.title}
+                                        ingredient={element.ingredient}
+                                        selectedBeans={selectedBeans}
+                                        onBeanSelected={handleSelectedBeans}
+
+                                    />
+                                </div>
+                            })}
+                        </div>
                         <div className='text-center text-uppercase fw-bolder my-2'>
                             <h1 className="text-primary">Side</h1>
                         </div>
                         <div className="row justify-content-center ">
-                            {Side.map((element) => {
+                            {sideitems.map((element) => {
                                 return <div className="col-xl-5 col-lg-6" key={element.title}
                                 >
-                                    <SideOrderCounter
-                                        element={element}
+                                    <SideOrder
                                         foodImage={element.image}
                                         title={element.title}
                                         price={element.Price}
-                                        currentTitle={currentItem}
                                         ingredient={element.ingredient}
-                                        onSideItemClicked={handleSidItemClicked}/>
+                                    />
                                 </div>
                             })}
                         </div>

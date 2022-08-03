@@ -20,6 +20,10 @@
     background-color: rgba(129, 190, 65, .3);
 }
 
+.hoveredItem:hover {
+    background-color: rgba(129, 190, 65, .3);
+}
+
 .moreAddon:hover {
     color: rgba(129, 190, 65, 1);
 
