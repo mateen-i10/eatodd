@@ -8,7 +8,7 @@ const Half = () => {
                 position: 'absolute',
                 height: 66,
                 width: 66,
-                fontSize: 22.7,
+                fontSize: 22,
                 fontWeight: 700,
                 top: 30,
                 backgroundColor: 'rgba(129, 190, 65, .9)'

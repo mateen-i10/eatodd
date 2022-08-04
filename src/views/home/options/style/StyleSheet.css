@@ -10,6 +10,7 @@
 
 .showCard {
     display: flex;
+    z-index: 4;
 }
 
 .hiddenCard {
@@ -31,6 +32,7 @@
 
 .showFilling {
     display: flex;
+
 }
 
 .hideFilling {
