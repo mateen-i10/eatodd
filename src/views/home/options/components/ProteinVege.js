@@ -35,7 +35,7 @@ const ProteinVege = (props) => {
     // console.log("selected item", selectedProVeg.length)
     return (
         <>
-            <div className="card  add  overflow-hidden "
+            <div className="card  add mb-lg-2 mb-1 overflow-hidden "
                  style={!value ? {marginBottom: 25, maxHeight: 140} : {
                      marginBottom: 25,
                      maxHeight: 140,

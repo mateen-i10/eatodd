@@ -3,7 +3,7 @@ import Counter from "./Counter"
 
 const SideOrder = (props) => {
 
-    const {foodImage, ingredient, price, title} = props
+    const {foodImage, ingredient, price, title, onSideSelect, element} = props
     const [selected, setSelected] = useState(false)
 
     return (
@@ -16,8 +16,9 @@ const SideOrder = (props) => {
                 }}><Counter/>
                 </div>}
 
-            <div className="card add overflow-hidden mb-2 cursor-pointer " onClick={() => {
+            <div className="card add overflow-hidden mb-lg-2 mb-1 cursor-pointer " onClick={() => {
                 setSelected(!selected)
+                onSideSelect(element)
 
             }}
                  style={!selected ? {maxHeight: 130, marginBottom: 7} : {
@@ -26,7 +27,8 @@ const SideOrder = (props) => {
                      borderWidth: 1,
                      borderColor: 'black'
                  }}>
-                <div className="row g-0 ">
+                <div className="row g-0 "
+                >
                     <div className="col-lg-3 col-3">
                         <div>
                             <img src={foodImage} className="img-fluid rounded-start" alt="..."

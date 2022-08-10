@@ -17,7 +17,7 @@ const ToppingThingOff = (props) => {
     return (
         <>
 
-            <div className="card add overflow-hidden mb-2 cursor-pointer "
+            <div className="card add overflow-hidden mb-lg-2 mb-1 cursor-pointer "
                  style={!selectedTopping ? {maxHeight: 130, marginBottom: 7} : {
                      maxHeight: 130,
                      marginBottom: 7,

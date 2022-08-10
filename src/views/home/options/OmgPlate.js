@@ -19,6 +19,8 @@ const Menu = (props) => {
     const [selectedRice, setSelectedRice] = useState([])
     const [selectedBeans, setSelectedBeans] = useState([])
     const [selectedTopping, setSelectedTopping] = useState([])
+    const [selectedSide, setSelectedSide] = useState([])
+    const [selectedDrinks, setSelectedDrinks] = useState([])
 
     const img = props.image
     const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
@@ -112,30 +114,35 @@ const Menu = (props) => {
 
     const sideitems = [
         {
+            id: 1,
             image: chips,
             title: 'Garlic Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 1.80
         },
         {
+            id: 2,
             image: chips,
             title: 'Baba Ghanoush',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 5.99
         },
         {
+            id: 3,
             image: chips,
             title: 'Red Hot Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and",
             Price: 7.80
         },
         {
+            id: 4,
             image: chips,
             title: 'Hummus',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             Price: 5.99
         },
         {
+            id: 5,
             image: chips,
             title: 'Zhoug Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
@@ -331,7 +338,7 @@ const Menu = (props) => {
     ]
 
 
-    const handleItemClick = (element) => {
+    const handleProVeg = (element) => {
         if (selectedProVeg.length === 2) {
             const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
 
@@ -380,33 +387,49 @@ const Menu = (props) => {
     }
 
     console.log("selected Toppoing", selectedTopping)
+
     const handleSelectedTopping = (element) => {
+        const arr = [...selectedTopping]
+        const index = arr.findIndex(item => item.id === element.id)
+        // const index = arr.map(item => item.id).indexOf(element.id)
+        // console.log("index", index)
+        if (arr.length > 0 && index > -1) {
+            arr.splice(index, 1)
+            setSelectedTopping(arr)
 
-        if (selectedTopping.length >= 1) {
-
-            const filteredItem = selectedTopping.map(item => {
-                if (element.id === item.id) {
-                    return selectedTopping.filter(i => i.id !== item.id)
-                }
-            })
-            setSelectedTopping(filteredItem)
+        } else {
+            setSelectedTopping([...selectedTopping, element])
         }
+    }
 
-        setSelectedTopping([...selectedTopping, element])
+    // console.log(selectedSide)
+    const handleSelectedSide = (element) => {
+        const arr = [...selectedSide]
+        const index = arr.findIndex(item => item.id === element.id)
+        // const index = arr.map(item => item.id).indexOf(element.id)
+        // console.log("index", index)
+        if (arr.length > 0 && index > -1) {
+            arr.splice(index, 1)
+            setSelectedSide(arr)
 
-        // if (selectedTopping.length > 0) {
-        //     const filteredItem = selectedTopping.map(item => {
-        //         if (item.id === element.id) {
-        //             const rmSelected = selectedTopping.filter(item => item.id !== element.id)
-        //             return rmSelected
-        //         }
-        //     })
-        //     setSelectedTopping(filteredItem)
-        // } else {
-        //     setSelectedTopping([...selectedTopping, element])
-        // }
+        } else {
+            setSelectedSide([...selectedSide, element])
+        }
+    }
 
+    // console.log(selectedDrinks)
+    const handleSelectedDrinks = (element) => {
+        const arr = [...selectedDrinks]
+        const index = arr.findIndex(item => item.id === element.id)
+        // const index = arr.map(item => item.id).indexOf(element.id)
+        // console.log("index", index)
+        if (arr.length > 0 && index > -1) {
+            arr.splice(index, 1)
+            setSelectedDrinks(arr)
 
+        } else {
+            setSelectedDrinks([...selectedDrinks, element])
+        }
     }
 
     return (
@@ -437,7 +460,7 @@ const Menu = (props) => {
                                         selectedProVeg={selectedProVeg}
                                         doubled={doubled}
                                         setDoubled={setDoubled}
-                                        onItemClick={handleItemClick}
+                                        onItemClick={handleProVeg}
                                     />
                                 </div>
                             })}
@@ -515,10 +538,12 @@ const Menu = (props) => {
                                 return <div className="col-xl-5 col-lg-6" key={element.title}
                                 >
                                     <SideOrder
+                                        element={element}
                                         foodImage={element.image}
                                         title={element.title}
                                         price={element.Price}
                                         ingredient={element.ingredient}
+                                        onSideSelect={handleSelectedSide}
                                     />
                                 </div>
                             })}
@@ -531,10 +556,12 @@ const Menu = (props) => {
                                 return <div className="col-xl-5 col-lg-6" key={element.title}
                                 >
                                     <Drinks
+                                        element={element}
                                         foodImage={element.image}
                                         title={element.title}
                                         price={element.price}
                                         ingredient={element.ingredient}
+                                        onDrinkSelect={handleSelectedDrinks}
                                     />
                                 </div>
                             })}

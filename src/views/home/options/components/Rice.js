@@ -25,12 +25,13 @@ const Rice = (props) => {
     } = props
 
     return (<>
-            <div className="card add overflow-hidden" style={!selected ? {marginBottom: 25, maxHeight: 140} : {
-                marginBottom: 25,
-                maxHeight: 140,
-                borderWidth: 1,
-                borderColor: "black"
-            }}>
+            <div className="card add overflow-hidden mb-lg-2 mb-1"
+                 style={!selected ? {marginBottom: 25, maxHeight: 140} : {
+                     marginBottom: 25,
+                     maxHeight: 140,
+                     borderWidth: 1,
+                     borderColor: "black"
+                 }}>
                 {customizeRice ? <div
                     className={customizeRice ? "row showCard justify-content-center align-items-center " : "hiddenCard"}>
                     <NormLightExSide

@@ -6,7 +6,7 @@ import {MoreVertical} from "react-feather"
 const Drinks = (props) => {
     const [selectedDrink, setSelectedDrink] = useState(false)
     const [customizeDrink, setCustomizeDrink] = useState(false)
-    const {foodImage, ingredient, price, title} = props
+    const {foodImage, ingredient, price, title, element, onDrinkSelect} = props
 
 
     return (
@@ -19,7 +19,7 @@ const Drinks = (props) => {
                 }}><Counter/>
                 </div>}
 
-            <div className="card add overflow-hidden mb-2 cursor-pointer "
+            <div className="card add overflow-hidden mb-lg-2 mb-1 cursor-pointer "
                  style={!selectedDrink ? {maxHeight: 130, marginBottom: 7} : {
                      maxHeight: 130,
                      marginBottom: 7,
@@ -57,6 +57,7 @@ const Drinks = (props) => {
                 </div> : <div className="row g-0">
                     <div className="col-10" onClick={() => {
                         setSelectedDrink(!selectedDrink)
+                        onDrinkSelect(element)
 
                     }}>
                         <div className="row g-0 ">
