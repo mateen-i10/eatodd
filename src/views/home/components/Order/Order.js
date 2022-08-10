@@ -5,9 +5,11 @@ import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
-import Salad from "../../../../assets/images/ORDER/Med Salad.png"
-import Soup from "../../../../assets/images/ORDER/Soup with a twist.png"
-import plate from "../../../../assets/images/ORDER/OMG Plate (3) (2).png"
+import Salad from "../../../../assets/images/ORDER/salad.png"
+import Soup from "../../../../assets/images/ORDER/soup.png"
+import plate from "../../../../assets/images/ORDER/omg-p1.png"
+import drinks from "../../../../assets/images/ORDER/cola.png"
+import Sandwich from "../../../../assets/images/ORDER/sabdwich.png"
 
 const Order = () => {
     return (
@@ -41,7 +43,7 @@ const Order = () => {
                                     <img
                                         src={plate}
                                         alt="Burrito"
-                                    width={350}/>
+                                    width={200}/>
                                 </div>
                                 <div className="text2">
                                     <div className="display-name">OMG PLATE</div>
@@ -56,7 +58,7 @@ const Order = () => {
                         <Link to="/OmgPlate">
                             <div className="menu-item">
                                 <div className="thumbnail">
-                                    <img src="https://www.chipotle.com/content/dam/poc/order/images/entrees/bowl.jpg"
+                                    <img width={200} src={Sandwich}
                                          alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
@@ -73,7 +75,8 @@ const Order = () => {
                             <div className="menu-item">
                                 <div className="thumbnail">
                                     <img
-                                        src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png"
+                                        width={200}
+                                        src={plate}
                                         alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
@@ -126,7 +129,8 @@ const Order = () => {
                             <div className="menu-item">
                                 <div className="thumbnail">
                                     <img
-                                        src="https://www.chipotle.com/content/dam/poc/order/images/entrees/lifestyle.png"
+                                        src={drinks}
+                                        width={200}
                                         alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
@@ -181,11 +185,10 @@ const Order = () => {
                     <div className=" row">
                         <div
                             className="header col-12 d-flex flex-column align-items-center justify-content-center mt-4">
-                            <h2 className="card-title ">1-Tap Orders</h2>
+                            <h2 className="card-title">1-Tap Orders</h2>
                             <div className="sub-header-text">Sometimes it's hard to choose. We made it
                                 easy with these favorites.
                             </div>
-                            <div className="find-slot-wrapper btn ">FIND A CHIPOTLE</div>
                         </div>
                         <div className="universal-pce">
                             <div className="container-sm">

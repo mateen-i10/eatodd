@@ -20,7 +20,7 @@ class Build extends Component {
                                     <div role="definition"
                                          className="heading mealbuilder-header-focus">BUILD YOUR
                                     </div>
-                                    <div className="name">Burrito
+                                    <div className="name">PLATE
                                     </div>
                                     <div className="description">Your
                                         choice of freshly grilled meat or sofritas wrapped in a warm flour tortilla with

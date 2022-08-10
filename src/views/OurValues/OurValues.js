@@ -30,7 +30,7 @@ class OurValues extends Component {
                 <div className="container-fluid FoodHasThePower__bowl">
                     <div className="row ">
                     <div className="col col-md-6 col-auto  FoodHasThePower__hero-bowl">
-                                <img className="FoodHasThePower__hero-bowl_img"
+                        <img className="FoodHasThePower__hero-bowl_img"
                                      src={heroBowlsm}
                                      alt="burrito bowl" />
                 </div>
@@ -48,13 +48,10 @@ class OurValues extends Component {
                         It may be the hard way to do things, but it’s the right way.
                     </p>
                     <div className="FoodHasThePower__hero-burrito ">
-
                             <img className="FoodHasThePower__hero-burrito_img"
-                                 src={heroBurritolg}
-                                 alt="burrito with a bite out of it" />
+                                 src={heroBurritolg} alt="burrito with a bite out of it" />
                     </div>
                 </div>
-
                </div>
                 </div>
                 <div className="container-fluid FoodHasThePower__thought-animation">
@@ -95,7 +92,6 @@ class OurValues extends Component {
                         <img className="mt-5" src={ingredients53} alt="Being real means we only use 53 ingredients you can pronounce"/>
                         <div className="RealIngredients__intro_animation_container" aria-hidden="true">
                             <div className="trigger" style={{top:360}}>
-
                         </div>
                     </div>
                     <p className="RealIngredients__intro_subtitle">

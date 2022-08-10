@@ -52,16 +52,13 @@ export default function Header() {
                             <span className="seprator"></span>
                             <p>Delivery address</p>
                         </div>
-
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
                         }}/>
-
                         {openDrawer && (<div>
                                 <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
-
                         {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
                         {/*    <div>*/}
                         {/*        <FoodCart setCanvasPlacement='start' setCanvasOpen={true} />*/}

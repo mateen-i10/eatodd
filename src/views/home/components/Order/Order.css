@@ -211,7 +211,7 @@
     text-align: center;
     margin-bottom: 5px;
     font-weight: 700;
-    color: #81be41;
+    color: #2a2a2a;
     text-transform: uppercase;
 
 }
@@ -219,7 +219,7 @@
 .sub-header-text {
     font-weight: 600;
     font-size: 1.3rem;
-    color: #81be41;
+    color: #262626;
     letter-spacing: normal;
     max-width: 80%;
     text-align: center;
@@ -381,7 +381,7 @@
 #about-7 {
     padding-top: 70px;
     padding-bottom: 30px;
-    background: beige;
+    background: #efffd5;
 }
 
 .coffee-color {
@@ -395,7 +395,7 @@
     margin-top: 30px;
     margin-bottom: 20px;
     font-size: 1.625rem;
-    color: #81be41;
+    color: #262626;
 }
 
 .img-center {
