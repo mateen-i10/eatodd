@@ -1,5 +1,6 @@
 import React from "react"
 import './Footer.css'
+import {Col, Row} from "reactstrap"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 
 export default function Footer() {
@@ -7,15 +8,15 @@ export default function Footer() {
         <div>
             <footer className="footer">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-xl-3">
+                    <Row>
+                        <Col md={3}>
                             <div className="footer-info mb-40">
                                 <div className="footer-logo"><img src={logo} alt="footer-logo"/></div>
                                 <p>An orci nullam tempor a sapien eget gravida and integer donec ipsum porta justo
                                     integer</p>
                             </div>
-                        </div>
-                        <div className="col-md-6 col-lg-4 col-xl-3">
+                        </Col>
+                        <Col md={3}>
                             <div className="footer-contacts mb-40">
                                 <h5 className="h5-sm">Order Now</h5>
                                 <p>8721 M Central Avenue,</p>
@@ -24,8 +25,8 @@ export default function Footer() {
                                     href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>
                                 <p><span className="yellow-color"><a href="tel:123456789">789-654-3210</a></span></p>
                             </div>
-                        </div>
-                        <div className="col-md-6 col-lg-4 col-xl-3">
+                        </Col>
+                        <Col md={3}>
                             <div className="footer-info mb-30">
                                 <h5 className="h5-sm">Working Hours</h5>
                                 <p>Quaerat neque purus ipsum at neque dolor primis tempus</p>
@@ -33,8 +34,8 @@ export default function Footer() {
                                 <p>Saturday: <span>10:00AM - 8:30PM</span></p>
                                 <p>Sunday: <span>12:00PM - 5:00PM</span></p>
                             </div>
-                        </div>
-                        <div className="col-md-12 col-lg-4 col-xl-3">
+                        </Col>
+                        <Col md={3}>
                             <div className="footer-img mb-40">
                                 <h5 className="h5-sm">Instagram Feed</h5>
                                 <ul className="text-center clearfix">
@@ -65,9 +66,8 @@ export default function Footer() {
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div className="bottom-footer">
+                        </Col>
+                        <div className="bottom-footer">
                         <div className="row d-flex align-items-center">
                             <div className="col-md-5 col-lg-6">
                                 <div className="footer-copyright">
@@ -100,6 +100,7 @@ export default function Footer() {
                             </div>
                         </div>
                     </div>
+                    </Row>
                 </div>
             </footer>
         </div>

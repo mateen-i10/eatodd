@@ -24,33 +24,8 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/OmgSandwhich',
-        component: lazy(() => import('../../views/home/options/OmgSandwhich')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgSalad',
-        component: lazy(() => import('../../views/home/options/OmgSalads')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgFeaturedPlates',
-        component: lazy(() => import('../../views/home/options/OmgFeaturedPlates')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgTacos',
-        component: lazy(() => import('../../views/home/options/OmgTacos')),
-        layout: 'BlankLayout'
-    },
-    {
         path: '/menu',
         component: lazy(() => import('../../views/menu/Menu')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/build',
-        component: lazy(() => import('../../views/build/Build')),
         layout: 'BlankLayout'
     },
     {
@@ -61,15 +36,6 @@ const Routes = [
     {
         path: '/gmap',
         component: lazy(() => import('../../views/GoogleMap/index')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/gallery',
-        component: lazy(() => import('../../views/gallery/Gallery'))
-    },
-    {
-        path: '/EventDetails',
-        component: lazy(() => import('../../views/menu/components/EventDetails')),
         layout: 'BlankLayout'
     },
     {
@@ -190,152 +156,53 @@ const Routes = [
         exact: true
     },
     {
-        path: '/home',
-        component: lazy(() => import('../../views/home/Home')),
-        layout: 'BlankLayout'
-    },
-    {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
         layout: 'BlankLayout'
     },
     {
-        path: '/OmgSandwhich',
-        component: lazy(() => import('../../views/home/options/OmgSandwhich')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgSalad',
-        component: lazy(() => import('../../views/home/options/OmgSalads')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgFeaturedPlates',
-        component: lazy(() => import('../../views/home/options/OmgFeaturedPlates')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/OmgTacos',
-        component: lazy(() => import('../../views/home/options/OmgTacos')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/menu',
-        component: lazy(() => import('../../views/menu/Menu')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/build',
-        component: lazy(() => import('../../views/build/Build')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/ourvalues',
-        component: lazy(() => import('../../views/OurValues/OurValues')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/gallery',
-        component: lazy(() => import('../../views/gallery/Gallery'))
-    },
-    {
-        path: '/EventDetails',
-        component: lazy(() => import('../../views/menu/components/EventDetails')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/LoginPage',
-        component: lazy(() => import('../../views/Login')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/reward',
-        component: lazy(() => import('../../views/Reward/Reward')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/nutrtion',
-        component: lazy(() => import('../../views/nutrtion/Nutrtion')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/wine/singlepage',
-        component: lazy(() => import('../../views/wine/Pages/SinglePage')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/wine/faq',
-        component: lazy(() => import('../../views/wine/Pages/Faq')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/wine/shop',
-        component: lazy(() => import('../../views/wine/Pages/Shop')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/wine/about',
-        component: lazy(() => import('../../views/wine/Pages/About')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/wine/membership',
-        component: lazy(() => import('../../views/wine/Pages/Membership')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/NutrtionIngredients',
-        component: lazy(() => import('../../views/nutrtion/components/NutrtionIngredients')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/Dashboard',
-        component: lazy(() => import('../../views/admin/Dashboard')),
-        layout: 'VerticalLayout'
-    },
-    {
         path: '/Users',
-        component: lazy(() => import('../../views/Pages/Users')),
+        component: lazy(() => import('../../views/admin/Users')),
         layout: 'VerticalLayout'
     },
     {
         path: '/AddUser',
-        component: lazy(() => import('../../views/Pages/AddUserForm')),
+        component: lazy(() => import('../../views/admin/AddUserForm')),
         layout: 'VerticalLayout'
     },
     {
         path: '/Restaurant',
-        component: lazy(() => import('../../views/Pages/restaurant/Restaurant')),
+        component: lazy(() => import('../../views/admin/Restaurant/Restaurant')),
         layout: 'VerticalLayout'
     },
     {
         path: '/Facebook',
-        component: lazy(() => import('../../views/Pages/facebookAutoPost/FaceBookAuto')),
+        component: lazy(() => import('../../views/admin/FacebookAutoPost/FaceBookAuto')),
         layout: 'VerticalLayout'
     },
     {
         path: '/AddFacebookPost',
-        component: lazy(() => import('../../views/Pages/facebookAutoPost/AddFacebookPostForm')),
+        component: lazy(() => import('../../views/admin/FacebookAutoPost/AddFacebookPostForm')),
         layout: 'VerticalLayout'
     },
     {
         path: '/Customers',
-        component: lazy(() => import('../../views/Pages/customers/Customers')),
+        component: lazy(() => import('../../views/admin/Customers/Customers')),
         layout: 'VerticalLayout'
     },
     {
         path: '/CrmEmails',
-        component: lazy(() => import('../../views/Pages/crmEmails/CrmEmail')),
+        component: lazy(() => import('../../views/admin/CrmEmails/CrmEmail')),
         layout: 'VerticalLayout'
     },
     {
         path: '/CrmSms',
-        component: lazy(() => import('../../views/Pages/crmSms/CrmSms')),
+        component: lazy(() => import('../../views/admin/CrmSms/CrmSms')),
         layout: 'VerticalLayout'
     },
     {
         path: '/SechduledSms',
-        component: lazy(() => import('../../views/Pages/crmSms/ScheduleSms')),
+        component: lazy(() => import('../../views/admin/CrmSms/ScheduleSms')),
         layout: 'VerticalLayout'
     },
     {
@@ -345,47 +212,42 @@ const Routes = [
     },
     {
         path: '/BussinessDetails',
-        component: lazy(() => import('../../views/Pages/bussinessDetails/BussinessDetails')),
+        component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetails')),
         layout: 'VerticalLayout'
     },
     {
         path: '/BussinessForm',
-        component: lazy(() => import('../../views/Pages/bussinessDetails/BussinessDetailsForm')),
+        component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetailsForm')),
         layout: 'VerticalLayout'
     },
     {
         path: '/LoginHistory',
-        component: lazy(() => import('../../views/Pages/loghistory/LoginHistory')),
+        component: lazy(() => import('../../views/admin/Loghistory/LoginHistory')),
         layout: 'VerticalLayout'
     },
     {
         path: '/members',
-        component: lazy(() => import('../../views/Pages/WineClubMembers/Members')),
+        component: lazy(() => import('../../views/admin/WineClubMembers/Members')),
         layout: 'VerticalLayout'
     },
     {
         path: '/membershipTypes',
-        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/MembershipTypes')),
+        component: lazy(() => import('../../views/admin/WineClubMembershipTypes/MembershipTypes')),
         layout: 'VerticalLayout'
     },
     {
         path: '/promotions',
-        component: lazy(() => import('../../views/Pages/wineClubPromotions/Promotions')),
+        component: lazy(() => import('../../views/admin/WineClubPromotions/Promotions')),
         layout: 'VerticalLayout'
     },
     {
         path: '/Addpromotions',
-        component: lazy(() => import('../../views/Pages/wineClubPromotions/AddPromotion')),
+        component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
         layout: 'VerticalLayout'
     },
     {
         path: '/addRestaurant',
-        component: lazy(() => import('../../views/Pages/restaurant/AddRestaurant')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/addAddon',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
+        component: lazy(() => import('../../views/admin/Restaurant/AddRestaurant')),
         layout: 'VerticalLayout'
     },
     {
@@ -395,7 +257,7 @@ const Routes = [
     },
     {
         path: '/addMembershipType',
-        component: lazy(() => import('../../views/Pages/wineClubMembershipTypes/AddMembershipTypeForm')),
+        component: lazy(() => import('../../views/admin/WineClubMembershipTypes/AddMembershipTypeForm')),
         layout: 'VerticalLayout'
     },
     {
@@ -440,7 +302,7 @@ const Routes = [
     },
     {
         path: '/designer',
-        component: lazy(() => import('../../views/Pages/crmEmails/Designer')),
+        component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
         layout: 'VerticalLayout'
     }
 

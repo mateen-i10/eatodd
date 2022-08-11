@@ -87,7 +87,7 @@ img{
     font-size: large;
     cursor: pointer;
 }
-.head-sec-2 h2 :hover{
+.head-sec-2 h2:hover{
     color: #81be41;
 }
 .head-sec-1 .sign-in p{
@@ -114,8 +114,6 @@ img{
     margin-top: 10px;
     justify-content: right;
     font-family: 'Oswald', sans-serif;
-
-
 }
 .head-sec-2 h2{
     padding: .3em;

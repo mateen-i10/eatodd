@@ -61,9 +61,7 @@ const ModalBasic = (props) => {
                                     <h5 style={{marginLeft:15, marginTop:5, color:'#451400'}}>United States</h5>
                                 </div>
                             </div>
-
                         </div>
-
                     </ModalBody>
                 </Modal>
             </div>
