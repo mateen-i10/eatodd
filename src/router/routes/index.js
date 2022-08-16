@@ -304,6 +304,11 @@ const Routes = [
         path: '/designer',
         component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/checkout',
+        component: lazy(() => import('../../views/checkoutpage/CheckOut')),
+        layout: 'BlankLayout'
     }
 
 ]
