@@ -19,6 +19,7 @@ import invDistributorReducer from "./restaurantPages/Inventory/distributerReduce
 import invRecipeReducer from "./restaurantPages/Inventory/recipeReducer"
 import invCategoryReducer from "./restaurantPages/Inventory/InvCategoryReducer"
 import testReducer from "./test/reducer"
+import CuisineReducer from "./cuisine/reducer"
 
 const rootReducer = {
     auth,
@@ -40,7 +41,8 @@ const rootReducer = {
     invDistributorReducer,
     invRecipeReducer,
     invCategoryReducer,
-    testReducer
+    testReducer,
+    CuisineReducer
 
 }
 

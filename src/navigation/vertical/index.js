@@ -38,6 +38,12 @@ export default [
         navLink: '/Restaurant'
     },
     {
+        id: 'Cuisine',
+        title: 'Cuisine',
+        icon: <PenTool size={20}/>,
+        navLink: '/cuisine'
+    },
+    {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
         icon: <Facebook size={20}/>,

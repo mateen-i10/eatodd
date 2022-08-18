@@ -59,37 +59,25 @@ const Cart = props => {
                                                             </div>
                                                         </Col>
                                                         <Col xl={5}>
-                                                            <div style={{paddingTop: "12px"}}>
+                                                            <div style={{paddingTop: "20px"}}>
                                                                 <div className='item-name mb-1'>
-                                                                    <h6 className='mb-0'>
-                                                                        <Link to="/">{e.name}</Link>
-                                                                    </h6>
+                                                                    <h2 className='mb-0' style={{paddingBottom: "20px"}}>
+                                                                        <Link to="/">{e.mealTitle}</Link>
+                                                                    </h2>
                                                                     <span className='card-text'>
-                                                                    Per Serving
+                                                                    {e.selectedItems}
                                                                     <a className='ms-25' href='/' onClick={e => e.preventDefault()}>
                                                                     {e.price}
                                                                     </a>
                                                                 </span>
                                                                 </div>
-                                                                <span className='text-success mb-1'>Select Quantity</span>
-                                                                <div className='item-quantity text-center' >
-                                                                    <InputNumber
-                                                                        min={1}
-                                                                        max={10}
-                                                                        upHandler={<Plus />}
-                                                                        className='cart-input'
-                                                                        defaultValue="1"
-                                                                        downHandler={<Minus />}
-                                                                    />
-                                                                </div>
-                                                                {/*<div className='delivery-date text-muted'>Order Day, {formatDate(String(Date()).padStart(2, '0'))}</div>*/}
                                                             </div>
                                                         </Col>
                                                         <Col xl={4} style={{padding:10}}>
                                                             <div className='item-options text-center'>
                                                                 <div className='item-wrapper'>
                                                                     <div className='item-cost'>
-                                                                        <h4 className='item-price'>price</h4>
+                                                                        <h4 className='item-price'>{e.totalPrice}</h4>
                                                                         <CardText className='shipping'>
                                                                             <Badge color='light-success' pill>
                                                                                 Free Delivery
@@ -127,10 +115,10 @@ const Cart = props => {
                                         <div className='price-details'>
                                             <h6 className='price-title'>All Price Details</h6>
                                                 {item.map(e => (
-                                                    <ul className='list-unstyled' key={e.name} >
+                                                    <ul className='list-unstyled' key={e.mealTitle} >
                                                         <li className='price-detail d-flex'>
-                                                        <div className='detail-title flex-fill'>{e.name}</div>
-                                                        <div className='detail-amt discount-amt text-success'>{e.price}</div>
+                                                        <div className='detail-title flex-fill'>{e.mealTitle}</div>
+                                                        <div className='detail-amt discount-amt text-success'>{e.totalPrice}</div>
                                                         </li>
                                                     </ul>), [])}
                                             <hr />
