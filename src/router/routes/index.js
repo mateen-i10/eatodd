@@ -14,11 +14,6 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/login',
-        component: lazy(() => import('../../views/Login')),
-        layout: 'BlankLayout'
-    },
-    {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
         layout: 'BlankLayout'
@@ -36,11 +31,6 @@ const Routes = [
     {
         path: '/gmap',
         component: lazy(() => import('../../views/GoogleMap/index')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/LoginPage',
-        component: lazy(() => import('../../views/Login')),
         layout: 'BlankLayout'
     },
     {
@@ -304,6 +294,26 @@ const Routes = [
         path: '/designer',
         component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/login',
+        component: lazy(() => import('../../views/authentication/Login')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/signup',
+        component: lazy(() => import('../../views/authentication/SignUp')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/forgotPassword',
+        component: lazy(() => import('../../views/authentication/ForgotPassword')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/user',
+        component: lazy(() => import('../../views/customer/index')),
+        layout: 'BlankLayout'
     },
     {
         path: '/checkout',

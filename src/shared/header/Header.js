@@ -5,6 +5,7 @@ import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import FoodCart from "./components/FoodCart"
 import {ShoppingBag} from "react-feather"
+// import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 
 export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
@@ -47,6 +48,7 @@ export default function Header() {
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="head-sec-3">
+                        {/*<UserDropdown/>*/}
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
@@ -64,7 +66,6 @@ export default function Header() {
             </div>
         )
     }
-
     return (
         <div className="sticky-top">
             <header className="header2">
@@ -72,20 +73,16 @@ export default function Header() {
                     <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="toggle navigation">
                         <span className="hamburger"></span>
                     </button>
-
                     <div style={{display: width > 540 ? "block" : "none"}}>
                         <img className="logo" src={logo}/>
                     </div>
                 </div>
-
                 <div className="eatOMG">
                     <i className="ri-checkbox-blank-circle-fill"></i>
                     <span className="seprator"></span>
                     <p>Find a EatOMG</p>
                 </div>
-
                 <i className="ri-shopping-bag-line cart"></i>
-
                 <nav className="nav sticky-top">
                     <div className="nav-sec-1">
                         <Link to="/"><h2>HOME</h2></Link>
