@@ -97,7 +97,7 @@ const NutTable = () => {
                             </td>
                             <td>Jack Obes</td>
                             <td>
-                               9
+                                9
                             </td>
                             <td>
                                 6

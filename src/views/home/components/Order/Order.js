@@ -134,7 +134,7 @@ const Order = () => {
                                         alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
-                                    <div className="display-name mealBurrito">SIDES AND DRINKS</div>
+                                    <div className="display-name mealBurrito">SIDES, DRINKS & WINE</div>
                                     <div className="order-cta">Order
                                         <div className="arrow-right"/>
                                     </div>

@@ -15,7 +15,6 @@ import './FoodCart.css'
 import LoginModal from "./loginModal/LoginModal"
 import {useDispatch, useSelector} from "react-redux"
 import {setCrmEmail} from "../../../redux/test/reducer"
-import { useHistory } from 'react-router-dom'
 
 const OffCanvasPlacement = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -24,18 +23,14 @@ const OffCanvasPlacement = (props) => {
     const [openModel, SetModelOpen] = useState(false)
     const [taxDropDown, SetTaxDropdown] = useState(true)
 
-    const history = useHistory()
-
     const meal = useSelector(state => state.testReducer.mealname)
     const testData = useSelector(state => state.testReducer.testData)
     const dispatch = useDispatch()
 
     const toggleCanvasStart = () => {
-        console.log("Check Button Here we have to add our new page!!")
         setCanvasPlacement('start')
         setCanvasOpen(!canvasOpen)
         props.openDrawer(!props.isOpenDrawer)
-        history.push("/checkout")
     }
 
     const RenderDuplicateModal = () => {
@@ -132,6 +127,7 @@ const OffCanvasPlacement = (props) => {
                         </div>
 
                     </div>
+
                     <Button
                         outline
                         color='secondary'

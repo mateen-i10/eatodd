@@ -5,7 +5,7 @@
 
 }
 
-.intro-para-container p{
+.intro-para-container p {
     color: #81be41;
     font-size: 1rem;
     margin-top: 20px;
@@ -23,14 +23,14 @@
     margin-top: 3em;
 }
 
-.section-area-heading h1{
+.section-area-heading h1 {
     color: #81be41;
     font-size: 2em;
     font-weight: bolder;
     text-transform: uppercase;
 }
 
-.section-area-heading h6{
+.section-area-heading h6 {
     color: #81be41;
     font-size: 1.2rem;
 }
@@ -45,13 +45,13 @@
     margin-right: 30px;
 }
 
-.Fooditems:hover{
+.Fooditems:hover {
     border: solid;
     border-color: #81be41;
     border-width: 2px;
 }
 
-.selected-food-item{
+.selected-food-item {
     display: flex;
     border: solid;
     border-color: #a77821;
@@ -61,7 +61,7 @@
     margin-right: 30px;
 }
 
-.modal-head{
+.modal-head {
     text-transform: uppercase;
     font-family: Tahoma;
     font-size: 1.3em;
@@ -71,21 +71,21 @@
     padding-top: 2em;
 }
 
-.close-modal-button{
+.close-modal-button {
     background-color: white;
-    border-color: white ;
+    border-color: white;
     justify-content: right;
     margin-left: 10em;
 }
 
-.food-item-data h1{
+.food-item-data h1 {
     color: #451400;
     text-transform: uppercase;
     font-size: 1.5em;
     font-weight: bolder;
 }
 
-.name-meal-model p{
+.name-meal-model p {
     font-weight: bolder;
     color: #451400;
     text-align: center;
@@ -95,13 +95,24 @@
     font-size: 1.5em;
 }
 
-body {
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #283034;
-    font-weight: 300;
+.hideNote {
+    display: none;
 }
-body {
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #283034;
-    font-weight: 300;
+
+.selectAtLeastOne {
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    bottom: 100px;
+    z-index: 3;
+    background-color: lightpink;
+    color: black;
+    font-size: 1.2rem;
+    margin-left: -18px;
 }
+
+.selectAtLeastOne:hover {
+    display: flex;
+
+}
+
