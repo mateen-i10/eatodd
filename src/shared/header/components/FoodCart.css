@@ -1,5 +1,4 @@
 .header-offCanvas {
-    color: #a76721;
     font-size: 18px;
     font-weight: bolder;
     text-decoration: underline;
@@ -9,7 +8,12 @@
 
 }
 
-.header-offCanvas:hover{
-    color: #e08d31;
+.header-offCanvas:hover {
+    color: rgb(129 190 65);
 }
+
+.button-hovered:hover {
+    color: rgb(129 190 65);
+}
+
 
