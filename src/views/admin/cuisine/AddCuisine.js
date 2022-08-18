@@ -12,17 +12,17 @@ import {
     ModalBody,
     ModalHeader
 } from 'reactstrap'
-
-// ** Third Party Components
-import Select from 'react-select'
-import { User, Check, X } from 'react-feather'
 import { useForm, Controller } from 'react-hook-form'
+
 
 // ** Utils
 
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import Link from "react-router-dom/es/Link"
+import {useDispatch} from "react-redux"
+import {addCuisine} from "../../../redux/cuisine/actions"
+
 
 const defaultValues = {
 }
@@ -37,8 +37,11 @@ const AddCuisine = (props) => {
         handleSubmit
     } = useForm({ defaultValues })
 
+    const dispatch = useDispatch()
+
     const onSubmit = data => {
         console.log("the data entered i am assuming it is?", data)
+        dispatch(addCuisine(data))
         if (Object.values(data).every(field => field.length > 0)) {
             return null
         } else {

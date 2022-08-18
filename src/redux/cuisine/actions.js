@@ -24,3 +24,7 @@ export const deleteCuisine = (id) => {
         console.log('deleted', id, dispatch)
     }
 }
+
+export const addCuisine = (newCuisine) => {
+    console.log("the new Cuisine coming from actions: ", newCuisine)
+}
