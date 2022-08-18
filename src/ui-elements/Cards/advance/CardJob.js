@@ -35,7 +35,7 @@ const CardJob = () => {
             </sup>
             <h2 className='d-inline me-25'>9,800</h2>
             <sub className='text-body'>
-              <small>/ month</small>
+              <small>/ Month</small>
             </sub>
           </div>
           <Badge color='light-primary' pill>

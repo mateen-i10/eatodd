@@ -1,9 +1,11 @@
 import React from 'react'
 import './stylesheet/Nutrition.css'
 import Link from "react-router-dom/es/Link"
+import NutTable from "./NutTable"
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
-
+// ** Third Party Components
+import Chart from 'react-apexcharts'
 const Nutrition = () => {
 
     const FoodItems = [
@@ -40,7 +42,89 @@ const Nutrition = () => {
             title: 'Kids Meal'
         }
     ]
-
+    const data = {
+        chart: {
+            toolbar: {
+                show: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        legend: { show: false },
+        comparedResult: [2, -3, 8],
+        labels: ['Fat', 'Protien', 'Carb'],
+        stroke: { width: 0 },
+        colors: ['#81be41', '#63852e', '#a1ba78'],
+        grid: {
+            padding: {
+                right: -20,
+                bottom: -8,
+                left: -20
+            }
+        },
+        plotOptions: {
+            pie: {
+                startAngle: -10,
+                donut: {
+                    labels: {
+                        show: true,
+                        name: {
+                            offsetY: 15
+                        },
+                        value: {
+                            offsetY: -15,
+                            formatter(val) {
+                                return `${parseInt(val)} %`
+                            }
+                        },
+                        total: {
+                            show: true,
+                            offsetY: 15,
+                            label: 'Fat',
+                            formatter() {
+                                return '52%'
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        responsive: [
+            {
+                breakpoint: 1325,
+                options: {
+                    chart: {
+                        height: 100
+                    }
+                }
+            },
+            {
+                breakpoint: 1200,
+                options: {
+                    chart: {
+                        height: 120
+                    }
+                }
+            },
+            {
+                breakpoint: 1065,
+                options: {
+                    chart: {
+                        height: 100
+                    }
+                }
+            },
+            {
+                breakpoint: 992,
+                options: {
+                    chart: {
+                        height: 120
+                    }
+                }
+            }
+        ]
+    }
     return (
         <div>
             <Header/>
@@ -48,57 +132,55 @@ const Nutrition = () => {
                 <div className="container-sm row">
                     <div className="col" style={{marginLeft: 180, marginTop: 60, marginBottom: 50}}>
                         <h5 style={{
-                            color: '#756456',
+                            color: '#2a2a2a',
                             fontSize: '1.3em',
                             textTransform: 'uppercase',
                             fontWeight: 'bolder',
                             letterSpacing: 4
-                        }}>calculate</h5>
+                        }}>Calculate</h5>
                         <h1 style={{
-                            color: '#57ab00',
+                            color: '#262626',
                             fontSize: '4em',
                             textTransform: 'uppercase',
                             fontWeight: 'bolder',
                             letterSpacing: 1
                         }}>Nutrtion</h1>
-                        <p style={{color: '#57ab00', fontWeight: 450}}>Build your calorie, carb and nutrition
+                        <p style={{color: '#6b6b6b', fontWeight: 450}}>Build your calorie, carb and nutrition
                             information based on your selected meal below using the nutrition calculator.</p>
                         <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
                             Statement</a>
                     </div>
                     <div className="col" style={{paddingTop: 100, paddingLeft: 70}}>
                         <div>
-                            <h1 style={{fontSize: '3em', fontWeight: 'bolder', color: '#57ab00'}}>00cal</h1>
+                            <h1 style={{fontSize: '3em', fontWeight: 'bolder', color: '#81be41'}}>00cal</h1>
                             <div style={{display: 'flex'}}>
                                 <div>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#57ab00'}}>0g</h3>
-                                    <h6>Fat</h6>
+                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                    <h5>Fat</h5>
                                 </div>
                                 <div style={{marginLeft: 40, marginRight: 40}}>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#57ab00'}}>0g</h3>
-                                    <h6>Protien</h6>
+                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                    <h5>Protien</h5>
                                 </div>
                                 <div>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#57ab00'}}>0g</h3>
-                                    <h6>Carbs</h6>
+                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                    <h5>Carbs</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col" style={{paddingTop: 100, paddingLeft: 70}}>
-                        <div style={{width: 160, height: 160, backgroundColor:'white', borderRadius: 85, position:'absolute', marginTop: -31}}>
-                            <div style={{width: 100, height: 100, backgroundColor:'#e3e3e3', borderRadius: '50%', position:'absolute', marginLeft: 30, marginTop: 30}}></div>
-                        </div>
+                    <div className="col" style={{paddingLeft: 70, paddingTop: 50}}>
+                        <Chart options={data} series={[53, 16, 31]} type='donut' height={200} />
                     </div>
                 </div>
             </div>
-            <div className='container-sm'>
+            <div className='container'>
                 <div className='row pb-5 pt-5'>
                     <h3 style={{
                         fontWeight: 'bolder',
                         color: '#57ab00',
-                        marginLeft: 100,
                         marginBottom: 40,
+                        paddingLeft:100,
                         textTransform: 'uppercase'
                     }}>Select Your Meal</h3>
                     {FoodItems.map((e) => (
@@ -108,7 +190,7 @@ const Nutrition = () => {
                     ))}
                 </div>
             </div>
-
+            <NutTable/>
             <div className='container-fluid bgimg'
                  style={{textAlign: 'center', paddingTop: '100px', paddingBottom: '100px'}}>
                 <div className='row'>

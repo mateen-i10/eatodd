@@ -36,9 +36,9 @@ export default function Header() {
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>
-
                     </div>
                     <div className="head-sec-2">
+                        <Link to="/"><h2>HOME</h2></Link>
                         <Link to="/"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
@@ -52,21 +52,13 @@ export default function Header() {
                             <span className="seprator"></span>
                             <p>Delivery address</p>
                         </div>
-
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
                         }}/>
-
                         {openDrawer && (<div>
                                 <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
-
-                        {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
-                        {/*    <div>*/}
-                        {/*        <FoodCart setCanvasPlacement='start' setCanvasOpen={true} />*/}
-                        {/*    </div>*/}
-                        {/*)}></i>*/}
                     </div>
                 </header>
             </div>
@@ -96,21 +88,10 @@ export default function Header() {
 
                 <nav className="nav sticky-top">
                     <div className="nav-sec-1">
-                        <Link to="/home"><h2>ORDER</h2></Link>
+                        <Link to="/"><h2>HOME</h2></Link>
+                        <Link to="/"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
-                        {/*<Link><div className="wine-dropdown">*/}
-                        {/*    <h2>*/}
-                        {/*        WINE*/}
-                        {/*        <i className="fas fa-solid fa-caret-down" style={{marginLeft:"4px"}}></i>*/}
-                        {/*    </h2>*/}
-                        {/*    <div className="wine-menu">*/}
-                        {/*        <Link to="/wine/membership">Membership</Link>*/}
-                        {/*        <Link to="/wine/about" >About</Link>*/}
-                        {/*        <Link to ="/wine/faq" >F.A.Q's</Link>*/}
-                        {/*        <Link to="/wine/shop" >Shop</Link>*/}
-                        {/*    </div>*/}
-                        {/*</div></Link>*/}
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
@@ -135,32 +116,3 @@ export default function Header() {
         </div>
     )
 }
-
-
-// <div>
-//     <header>
-//         <div className="head-sec-1">
-//             <img className="logo" src={logo} />
-//             <div className="sign-in">
-//                 <i className="ri-user-line"></i>
-//                 <p>Sign In</p>
-//             </div>
-//
-//         </div>
-//         <div className="head-sec-2">
-//             <h2>Order</h2>
-//             <h2>Catering</h2>
-//             <h2>Rewards</h2>
-//             <h2>Our Values</h2>
-//             <h2>Nutrition</h2>
-//         </div>
-//         <div className="head-sec-3">
-//             <div className="eatOMG">
-//                 <i className="ri-checkbox-blank-circle-fill"></i>
-//                 <span className="seprator"></span>
-//                 <p>Find a EatOMG</p>
-//             </div>
-//             <i className="ri-shopping-bag-line cart"></i>
-//         </div>
-//     </header>
-// </div>
