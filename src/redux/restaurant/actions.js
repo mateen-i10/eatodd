@@ -1,26 +1,90 @@
-import {setLoading, setRestaurants, setRestaurant, editRestaurant} from "./reducer"
-// ** Table Data & Columns
-import { data } from '../../tempData/data'
 
-// ** Get Restaurants Data
-export const loadRestaurants = () => {
+import {apiCall} from "../api/actions"
+
+import {
+    setLoading,
+    setRestaurants,
+    setRestaurant,
+    editRestaurant,
+    setDetailLoading,
+    setRequestCompleted, setIsRestaurantError, setIsRestaurantSuccess, setIsEdit
+} from "./reducer"
+/*import { data } from '../../tempData/data'*/
+const url = 'restaurant'
+
+
+// ** Get All Restaurants Data
+export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
-        dispatch(setRestaurants([...data]))
+        dispatch(apiCall({
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            data: {},
+            method: 'get',
+            onSuccess: setRestaurants.type
+        }))
     }
 }
-export const getRestaurant = (id, isEdit) => {
+export const getRestaurant = (id, isEdit = false) => {
     return async dispatch => {
-        dispatch(setLoading(true))
-        const found = data.find(d => d.id === id)
-        if (isEdit) dispatch(editRestaurant({...found}))
-        else {
-            dispatch(setRestaurant({...found}))
+        if (isEdit) {
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: editRestaurant.type
+            }))
+        } else {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setRestaurant.type
+            }))
         }
     }
 }
 export const deleteRestaurant = (id) => {
     return async dispatch => {
-        console.log('deleted', id, dispatch)
+        dispatch(apiCall({
+            url: `${url}/${id}`,
+            data: {},
+            method: 'delete',
+            isSuccessToast: true,
+            successMessage: 'Restaurant Deleted Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsRestaurantError.type,
+            isSuccess: setIsRestaurantSuccess.type
+        }))
+    }
+}
+export const addRestaurant = (data) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'post',
+            isSuccessToast: true,
+            successMessage: 'Restaurant Added Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsRestaurantError.type,
+            isSuccess: setIsRestaurantSuccess.type
+        }))
+    }
+}
+export const RestaurantEdit = (data) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Restaurant Updated Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsRestaurantError.type,
+            isSuccess: setIsRestaurantSuccess.type
+        }))
+        dispatch(setIsEdit(false))
     }
 }

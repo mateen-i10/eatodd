@@ -4,7 +4,7 @@ import {Button} from 'reactstrap'
 import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
-import FoodCart from "../header/components/FoodCart"
+import FoodCart from "../header/components/SideCart"
 import {ShoppingBag} from "react-feather"
 
 const Headerwine = () => {

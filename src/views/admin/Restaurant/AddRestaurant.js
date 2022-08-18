@@ -15,7 +15,7 @@ import {
     CardTitle,
     ModalBody,
     ModalHeader,
-    FormFeedback
+    FormFeedback, Form
 } from 'reactstrap'
 
 // ** Third Party Components
@@ -109,134 +109,136 @@ const AddRestaurant = (props) => {
                     <div className='text-center mb-2'>
                         <h1 className='mb-1'>Add a New Restaurant</h1>
                     </div>
-                    <Row tag='form' className='gy-1 pt-75' onSubmit={handleSubmit(onSubmit)}>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Name
-                            </Label>
-                            <Controller
-                                name='Name'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='restname' value={props.data.restaurant} placeholder='Restaurant Name' />
-                                )}
-                            />
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Description
-                            </Label>
-                            <Controller
-                                name='description'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='description' value={props.data.description} placeholder='description' />
-                                )}
-                            />
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Address
-                            </Label>
-                            <Controller
-                                name='address'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='address' value={props.data.address} placeholder='Address' />
-                                )}
-                            />
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Phone
-                            </Label>
-                            <Controller
-                                name='phone'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='phone' value={props.data.phone} placeholder='phone' />
-                                )}
-                            />
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Store Url
-                            </Label>
-                            <Controller
-                                name='storeUrl'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='storeUrl' placeholder='Store Url' />
-                                )}
-                            />
-                        </Col>
-                        <Col md={6} xs={12}>
-                            <Label className='form-label' for='lastName'>
-                                Priority
-                            </Label>
-                            <Controller
-                                name='priority'
-                                control={control}
-                                render={({ field }) => (
-                                    <Input {...field} id='priority' placeholder='priority' />
-                                )}
-                            />
-                            {errors.lastName && <FormFeedback>Please enter a valid priority</FormFeedback>}
-                        </Col>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                        <Row tag='form' className='gy-1 pt-75'>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='name'>
+                                    Name
+                                </Label>
+                                <Controller
+                                    name='name'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='name' value={props.data.restaurant} placeholder='Restaurant Name' />
+                                    )}
+                                />
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='description'>
+                                    Description
+                                </Label>
+                                <Controller
+                                    name='description'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='description' value={props.data.description} placeholder='description' />
+                                    )}
+                                />
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='address'>
+                                    Address
+                                </Label>
+                                <Controller
+                                    name='address'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='address' value={props.data.address} placeholder='Address' />
+                                    )}
+                                />
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='phoneNo'>
+                                    Phone
+                                </Label>
+                                <Controller
+                                    name='phoneNo'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='phoneNo' value={props.data.phone} placeholder='phone' />
+                                    )}
+                                />
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='storeUrl'>
+                                    Store Url
+                                </Label>
+                                <Controller
+                                    name='storeUrl'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='storeUrl' placeholder='Store Url' />
+                                    )}
+                                />
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Label className='form-label' for='priority'>
+                                    Priority
+                                </Label>
+                                <Controller
+                                    name='priority'
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Input {...field} id='priority' placeholder='priority' />
+                                    )}
+                                />
+                                {errors.priority && <FormFeedback>Please enter a valid priority</FormFeedback>}
+                            </Col>
 
-                        {/*<hr style={{color:'black'}} />*/}
-                        <div className="text-center">
-                            <h4>Hours Of Operation</h4>
-                        </div>
-                        <hr style={{color:'black'}} className='my-1' />
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Day</th>
-                                <th scope="col">Start Time</th>
-                                <th scope="col">End Time</th>
-                                <th scope="col">Closed</th>
-                                <th scope="col">24 hour open</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {weekData.map(element => {
-                                return <tr key = {element}>
-                                    <th scope="row">{element.day}</th>
-                                    <td>{element.starttime}</td>
-                                    <td>{element.endtime}</td>
-                                    <td>
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="checkbox" value=""
-                                                   id="flexCheckDefault" />
+                            {/*<hr style={{color:'black'}} />*/}
+                            <div className="text-center">
+                                <h4>Hours Of Operation</h4>
+                            </div>
+                            <hr style={{color:'black'}} className='my-1' />
+                            <table className="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Day</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Time</th>
+                                    <th scope="col">Closed</th>
+                                    <th scope="col">24 hour open</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {weekData.map(element => {
+                                    return <tr key = {element}>
+                                        <th scope="row">{element.day}</th>
+                                        <td>{element.starttime}</td>
+                                        <td>{element.endtime}</td>
+                                        <td>
+                                            <div className="form-check">
+                                                <input className="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault" />
                                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                                     Closed
                                                 </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="checkbox" value=""
-                                                   id="flexCheckDefault" />
-                                            <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                Open 24hours
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            })}
-                            </tbody>
-                        </table>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="form-check">
+                                                <input className="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault" />
+                                                <label className="form-check-label" htmlFor="flexCheckDefault">
+                                                    Open 24hours
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                })}
+                                </tbody>
+                            </table>
 
-                        <Col xs={12} className='text-center mt-2 pt-50'>
+                            <Col xs={12} className='text-center mt-2 pt-50'>
                                 <Button type='submit' className='me-1' color='primary' onClick={() => props.setShow(!props.isShow)}>
                                     Submit
                                 </Button>
                                 <Button type='reset' color='secondary' onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </Form>
                 </ModalBody>
             </Modal>
         </Fragment>

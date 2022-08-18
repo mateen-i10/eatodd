@@ -4,14 +4,14 @@ import img from '../../../assets/images/images/image2.png'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import ProteinVege from "./components/ProteinVege"
 import SideOrder from "./components/SideOrder"
-
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import Rice from "./components/Rice"
 import Beans from "./components/Beans"
 import Drinks from "./components/Drinks"
 import ToppingThingOff from "./components/ToppingThingOff"
-
+import {useDispatch} from "react-redux"
+import {itemAdded} from "../../../redux/cartItems/cartItemsReducer"
 
 const Menu = (props) => {
     const [selectedProVeg, setSelectedProVeg] = useState([])
@@ -21,6 +21,31 @@ const Menu = (props) => {
     const [selectedTopping, setSelectedTopping] = useState([])
     const [selectedSide, setSelectedSide] = useState([])
     const [selectedDrinks, setSelectedDrinks] = useState([])
+    const [selectedMenuItems, setSelectedMenuItems] = useState({})
+    const [mealName, setMealName] = useState("")
+
+    // console.log(mealName)
+    const dispatch = useDispatch()
+    // const {cartItems} = useSelector(state => state)
+    // const halfQty = () => {
+    //     if (selectedProVeg.length === 2 && doubled === false) {
+    //         const final = selectedProVeg.map(item => {
+    //             return {...item, title: `${item.title} (1/2)`}
+    //         })
+    //         setSelectedProVeg(final)
+    //     }
+    // // // }
+    // useEffect(() => {
+    //     console.log(selectedProVeg)
+    //     if (selectedProVeg.length === 2 && doubled === true) {
+    //
+    //         const final = selectedProVeg.map(item => {
+    //             return {...item, title: `${item.title} (1/2)`}
+    //         })
+    //         setSelectedProVeg(final)
+    //     }
+    // }, [selectedProVeg])
+
 
     const img = props.image
     const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
@@ -118,35 +143,35 @@ const Menu = (props) => {
             image: chips,
             title: 'Garlic Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            Price: 1.80
+            price: 3.80
         },
         {
             id: 2,
             image: chips,
             title: 'Baba Ghanoush',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            Price: 5.99
+            price: 5.99
         },
         {
             id: 3,
             image: chips,
             title: 'Red Hot Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and",
-            Price: 7.80
+            price: 7.80
         },
         {
             id: 4,
             image: chips,
             title: 'Hummus',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            Price: 5.99
+            price: 5.99
         },
         {
             id: 5,
             image: chips,
             title: 'Zhoug Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            Price: 2.30
+            price: 6.30
         }
     ]
 
@@ -272,85 +297,100 @@ const Menu = (props) => {
             id: 1,
             title: 'guacamule',
             image: proteinImage,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99,
-            customize: {
-                normal: "normal",
-                side: "side"
-            }
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
 
         },
         {
             id: 2,
             title: 'Fresh Tomato Salsa',
             image: proteinImage,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 14.99
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
         },
         {
             id: 3,
             title: 'Roasted Chilli Corn Salsa',
             image: proteinImage,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
 
         },
         {
             id: 4,
             title: 'Tomatillo green chilli salsa',
             image: proteinImage,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 11.99
-
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
         },
         {
             id: 5,
             title: 'Tomatillo Red chilli salsa',
             image: proteinImage,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 10.99
-
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
         },
         {
             id: 6,
             title: 'Sour Cream',
             image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99
-
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
         },
         {
             id: 7,
             title: 'Fajita Veggies',
             image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
-            price: 14.99
-
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and "
         },
         {
             id: 8,
             title: 'Chease',
             image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99
-
+            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
         }
     ]
 
-
+    // console.log("selected Menu Items pro veg", selectedMenuItems.selectedProVeg[0].title)
+    // console.log("selected Menu Items ", selectedMenuItems)
+    const handleAllMenuItems = () => {
+        setSelectedMenuItems({
+            ...selectedMenuItems,
+            mealName,
+            selectedProVeg,
+            selectedRice,
+            selectedSide,
+            selectedBeans,
+            selectedTopping,
+            selectedDrinks
+        })
+    }
+    const dispatchingItems = () => {
+        dispatch(itemAdded({
+                mealName,
+                selectedProVeg,
+                selectedRice,
+                selectedSide,
+                selectedBeans,
+                selectedTopping,
+                selectedDrinks
+            }
+        ))
+    }
+    // console.log(selectedProVeg.length)
+    // console.log(selectedProVeg)
     const handleProVeg = (element) => {
         if (selectedProVeg.length === 2) {
             const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
-
             setSelectedProVeg(rmSelected)
-
-            // eslint-disable-next-line brace-style
+            // if (rmSelected.length === 2 && !doubled) {
+            //     const final = selectedProVeg.map(item => {
+            //         return {...item, title: `${item.title} (1/2)`}
+            //     })
+            //     setSelectedProVeg(final)
+            // } else {
+            //     setSelectedProVeg(rmSelected)
+            // }
         } else if (selectedProVeg.length === 1) {
             if (element.id === selectedProVeg[0].id) {
-                selectedProVeg.pop()
-            } else setSelectedProVeg([...selectedProVeg, {...element, single: true}])
+                setSelectedProVeg(selectedProVeg.filter(item => item.id !== element.id))
+            } else setSelectedProVeg([...selectedProVeg, {...element}])
             // eslint-disable-next-line brace-style
-        } else setSelectedProVeg([...selectedProVeg, {...element, single: true}])
+        } else setSelectedProVeg([...selectedProVeg, {...element}])
 
     }
     // console.log("selected bEans", selectedBeans)
@@ -368,8 +408,6 @@ const Menu = (props) => {
 
             // eslint-disable-next-line brace-style
         } else setSelectedRice([...selectedRice, element])
-
-
     }
 
     const handleSelectedBeans = (element) => {
@@ -383,11 +421,8 @@ const Menu = (props) => {
             setSelectedBeans(rmSelected)
             // eslint-disable-next-line brace-style
         } else setSelectedBeans([...selectedBeans, element])
-
     }
-
-    console.log("selected Toppoing", selectedTopping)
-
+    // console.log("selected Toppoing", selectedTopping)
     const handleSelectedTopping = (element) => {
         const arr = [...selectedTopping]
         const index = arr.findIndex(item => item.id === element.id)
@@ -426,12 +461,10 @@ const Menu = (props) => {
         if (arr.length > 0 && index > -1) {
             arr.splice(index, 1)
             setSelectedDrinks(arr)
-
         } else {
             setSelectedDrinks([...selectedDrinks, element])
         }
     }
-
     return (
         <>
             <Header/>
@@ -541,7 +574,7 @@ const Menu = (props) => {
                                         element={element}
                                         foodImage={element.image}
                                         title={element.title}
-                                        price={element.Price}
+                                        price={element.price}
                                         ingredient={element.ingredient}
                                         onSideSelect={handleSelectedSide}
                                     />
@@ -569,11 +602,18 @@ const Menu = (props) => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer
+                selectedBeans={selectedBeans}
+                selectedRice={selectedRice}
+                selectedProVeg={selectedProVeg}
+                mealName={mealName}
+                addToBag={handleAllMenuItems}
+                dispatchingItems={dispatchingItems}
+                setMealName={setMealName}
+            />
         </>
     )
 }
-
 export default Menu
 
 Menu.defaultProps = {

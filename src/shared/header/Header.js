@@ -3,7 +3,7 @@ import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
-import FoodCart from "./components/FoodCart"
+import FoodCart from "./components/SideCart"
 import {ShoppingBag} from "react-feather"
 // import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 
