@@ -1,4 +1,6 @@
 // ** Checks if an object is empty (returns boolean)
+import {Roles} from "./Roles"
+
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
 // ** Returns K format from a number
@@ -60,9 +62,10 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  * @param {String} userRole Role of user
  */
 export const getHomeRouteForLoggedInUser = userRole => {
-  if (userRole === 'admin') return '/'
-  if (userRole === 'client') return '/access-control'
-  return '/login'
+  if (userRole === Roles.superAdmin) return '/dashboard'
+  if (userRole === Roles.customer) return '/dashboard/customer'
+  if (userRole === Roles.branchManager) return '/'
+  return '/'
 }
 
 // ** React Select Theme Colors

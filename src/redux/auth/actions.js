@@ -10,7 +10,7 @@ const url = 'auth/'
 export const login = (username, password, isDeviceLoginEnabled, history) => {
     return (dispatch) => {
         httpService
-            ._post(`${baseURL}/${url}login`, { username, password, isDeviceLoginEnabled })
+            ._post(`${baseURL}${url}login`, { username, password, isDeviceLoginEnabled })
             .then(res => {
                 dispatch(setRequestCompleted(true))
                 if (res.status === 200 && res.data.statusCode === 200) {
