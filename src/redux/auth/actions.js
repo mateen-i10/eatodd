@@ -4,7 +4,14 @@ import httpService, {baseURL} from "../../utility/http"
 import {push} from "react-router-redux"
 import {Roles} from "../../utility/Roles"
 import {getHomeRouteForLoggedInUser} from "../../utility/Utils"
-import {handleLogin, handleLogout, setRequestCompleted} from "./authentication"
+import {
+    handleLogin,
+    handleLogout,
+    setPasswordReset,
+    setRequestCompleted,
+    setTokenVerified,
+    setTokenVerifiedFalse
+} from "./authentication"
 
 const url = 'auth/'
 export const login = (username, password, isDeviceLoginEnabled, history) => {
@@ -35,12 +42,12 @@ export const login = (username, password, isDeviceLoginEnabled, history) => {
 export const register = (customer, history) => {
     return dispatch => {
         httpService
-            ._post(`${baseURL}${url}register`, {applicationUser:{...customer, passwordHash: customer.password}})
+            ._post(`${baseURL}${url}register`, {...customer, passwordHash: customer.password, permission: ""})
             .then(res => {
                 dispatch(setRequestCompleted(true))
                 if (res.status === 200 && res.data.statusCode === 200) {
-                    localStorage.setItem(customerEmail, customer.email)
-                    history.replace('/verification')
+                    localStorage.setItem("customerEmail", customer.email)
+                    history.replace('/auth/verification')
                 } else {
                     toast.error(res.data.message)
                 }

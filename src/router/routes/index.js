@@ -14,6 +14,21 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/auth/verification',
+        component: lazy(() => import('../../views/authentication/Verification')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/auth/email-verification',
+        component: lazy(() => import('../../views/authentication/EmailVerification')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/auth/resetPassword',
+        component: lazy(() => import('../../views/authentication/ResetPassword')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
         layout: 'BlankLayout'
