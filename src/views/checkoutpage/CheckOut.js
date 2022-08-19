@@ -22,12 +22,16 @@ const Checkout = () => {
 
     const newarr = [
         {
-            name: "Chicken",
-            price: "$30"
+            mealTitle: "Protein",
+            price: "$30",
+            selectedItems: "item1",
+            totalPrice: '100$'
         },
         {
-            name: "Flafel",
-            price: "$50"
+            mealTitle: "Carbohydrates",
+            price: "$30",
+            selectedItems: "item1",
+            totalPrice: '100$'
         }
     ]
 
@@ -71,8 +75,8 @@ const Checkout = () => {
                         linear: true
                     }}
                 />
+                <Footer />
             </div>
-            <Footer />
         </Fragment>
     )
 }
