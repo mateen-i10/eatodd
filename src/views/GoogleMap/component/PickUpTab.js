@@ -14,8 +14,7 @@ const PickUpTab = ({places}) => {
     // }
     return (
         <div style={{}}>
-            <div className=" mt-1">
-
+            <div className="mt-1">
                 <InputGroup className="bg-white input-group-merge">
                     <InputGroupText>
                         <Search className="cursor-pointer" size={20}/>
@@ -23,13 +22,12 @@ const PickUpTab = ({places}) => {
                     <Input color='primary' type='text'/>
                     {/*<InputGroupText><BiCurrentLocation className="cursor-pointer" size={20} onClick={onClick}/>*/}
                     {/*</InputGroupText>*/}
-
                 </InputGroup>
 
                 <div className=" align-items-center justify-content-center text-center">
                     <div className="col-12 mt-2">
                         <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
-                             alt="EatOMG-image" width="50px"
+                             alt="EatOMG-image" width="100px"
                              height="50px"
                              style={{color: "gray"}}
                         />
@@ -37,9 +35,7 @@ const PickUpTab = ({places}) => {
                     <div>
                         <Row className="align-items-center, justify-content-center mt-3 pickup-list">
                             <Col sm='12'>
-
                                 <Card>
-
                                     <CardHeader>
                                         <CardTitle tag='h5'
                                                    style={{color: "rgb(129 190 65)"}}>Near By</CardTitle>

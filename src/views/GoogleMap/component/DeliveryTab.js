@@ -46,8 +46,8 @@ const DeliveryTab = ({setUserLocation, onPlaceChanged, onLoad}) => {
                 <div className=" align-items-center justify-content-center text-center">
                     <div className="col-12 mt-2">
                         <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
-                             alt="EatOMG-image" width="70px"
-                             height="70px"
+                             alt="EatOMG-image" width="100px"
+                             height="50px"
                              style={{color: "gray"}}
                         />
                     </div>

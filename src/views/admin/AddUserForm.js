@@ -3,16 +3,12 @@ import { Fragment } from 'react'
 
 // ** Reactstrap Imports
 import {
-    Card,
     Row,
     Col,
     Modal,
     Input,
     Label,
     Button,
-    CardBody,
-    CardText,
-    CardTitle,
     ModalBody,
     ModalHeader,
     FormFeedback
@@ -91,7 +87,7 @@ const AddUserExample = (props) => {
                                 name='Name'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input {...field} id='name' value={props.data.full_name} placeholder='jane' />
+                                    <Input {...field} id='name' type='text' value={props.data.full_name} placeholder='jane' />
                                 )}
                             />
                         </Col>

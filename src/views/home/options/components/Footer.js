@@ -1,74 +1,69 @@
 import React, {useState} from 'react'
-import {Button, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
-import {useDispatch, useSelector} from "react-redux"
-import {setMealName} from "../../../../redux/test/reducer"
+import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
+import "./Plate.css"
 
+const Footer = (props) => {
 
-const Footer = () => {
+    const {addToBag, dispatchingItems, setMealName, mealName, selectedProVeg, selectedRice, selectedBeans} = props
+
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-    const [menuName, setMenuName] = useState('')
-    const dispatch = useDispatch()
 
-    const testData = useSelector(state => state.testReducer.testData)
-    const meal = useSelector(state => state.testReducer.mealname)
+    const proteinVege = selectedProVeg
+    const Rice = selectedRice
+    const Beans = selectedBeans
 
-    // useEffect(() => {
-    //     // setArr([...testData])
-    //     dispatch(loadData())
-    // }, [])
+
+    console.log(proteinVege, Rice, Beans)
 
     const RenderMealNameModal = () => {
         return (
             <div className='basic-modal '>
                 <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
                     <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
-                    <ModalBody>
-                        <div className='col-8' style={{marginLeft: 80}}>
-                            <Input type='text' placeholder='Enter Meal Name' style={{color: '#81be41'}} value={menuName}
-                                   onChange={e => setMenuName(e.target.value)}/>
-                        </div>
-                        <div>
-                            <h1>{meal.mealName}</h1>
-                            <ul>
-                                {testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}
-                                {/*{console.log('testData', testData)}*/}
-                            </ul>
-                        </div>
-                    </ModalBody>
-                    <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
-                        <Button color='danger' onClick={() => {
-                            dispatch(setMealName({mealName: ''}))
-                            setBasicNameFoodModal(!basicNameFoodModal)
-                        }}>
-                            Cancel
-                        </Button>
-                        <Button color='primary' onClick={() => {
-                            if (menuName !== '') {
-                                dispatch(setMealName({mealName: [menuName]}))
-                                setMenuName('')
-                            } else {
-                                alert('please enter something in the menu name')
-                            }
-                            setBasicNameFoodModal(!basicNameFoodModal)
-                        }}>
-                            Save
-                        </Button>
-                    </ModalFooter>
+                    <Form>
+                        <ModalBody>
+                            <FormGroup>
+                                <div className='col-8' style={{marginLeft: 80}}>
+                                    <Input type='text' placeholder='Enter Meal Name' invalid={mealName.length === 0}
+                                           style={{color: '#81be41'}}
+                                           value={mealName}
+                                           onChange={e => setMealName(e.target.value)}/>
+                                    <FormFeedback>
+                                        Meal Name is required
+                                    </FormFeedback>
+                                </div>
+                            </FormGroup>
+                        </ModalBody>
+                        <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
+                            <Button color='danger' onClick={() => {
+                                setBasicNameFoodModal(!basicNameFoodModal)
+                            }}>
+                                Cancel
+                            </Button>
+                            <Button color='primary' onClick={() => {
+                                if (mealName.length === 0) {
+                                    setBasicNameFoodModal(true)
+                                } else {
+                                    addToBag()
+                                    dispatchingItems()
+                                }
+                                setBasicNameFoodModal(!basicNameFoodModal)
+                            }}>
+                                Save
+                            </Button>
+                        </ModalFooter>
+                    </Form>
                 </Modal>
             </div>
         )
     }
-
     return (
         <>
             <div className="container-fluid mt-2"
                  style={{
                      backgroundColor: 'whitesmoke',
-                     // height: "130px",
                      position: "sticky",
                      bottom: 0,
-                     // padding: 10,
-                     // marginTop: 60,
                      borderTop: "1px solid black",
                      zIndex: 10
 
@@ -84,16 +79,24 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-lg-5 col-12 mt-1 mb-1 mb-lg-0 " style={{textAlign: 'center'}}>
-                        <button type="button"
-                                style={{
-                                    width: '90%',
-                                    height: 60,
-                                    backgroundColor: '#81be41',
-                                    border: "0px",
-                                    color: 'white',
-                                    borderRadius: "5px"
-                                }}
-                                onClick={() => setBasicNameFoodModal((!basicNameFoodModal))}>
+                        <div
+                            className={(!proteinVege.length || !Rice.length || !Beans.length) ? "selectAtLeastOne " : "hideNote"}>Please
+                            Select at least one item from<strong> Protein or
+                                vegetable,
+                                Beans and Rice</strong></div>
+                        <button
+                            type="button" disabled={!proteinVege.length || !Rice.length || !Beans.length}
+                            style={{
+                                width: '90%',
+                                height: 60,
+                                backgroundColor: '#81be41',
+                                border: "0px",
+                                color: 'white',
+                                borderRadius: "5px"
+                            }}
+                            onClick={() => {
+                                setBasicNameFoodModal((!basicNameFoodModal))
+                            }}>
                             ADD TO BAG
                         </button>
                     </div>

@@ -11,7 +11,7 @@ const ToppingThingOff = (props) => {
     const [extraTopping, setExtraTopping] = useState(false)
 
 
-    const {element, foodImage, ingredient, price, title, onItemSelect, toppingItems, itemId} = props
+    const {element, foodImage, ingredient, title, onItemSelect, toppingItems, itemId} = props
 
 
     return (
@@ -118,7 +118,7 @@ const ToppingThingOff = (props) => {
                         {/*    <MdNavigateNext size={28} color="white" style={{marginLeft: -17}}/>*/}
 
                         {/*</UncontrolledTooltip>*/}
-                        <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>${price}</h5>
+                        {/*<h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>${price}</h5>*/}
                     </div>
 
                 </div>
