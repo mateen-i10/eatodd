@@ -1,5 +1,7 @@
 import axios from 'axios'
 import jwtDefaultConfig from './jwtDefaultConfig'
+import {store} from "../../../redux/store"
+import {unAuthorize} from "../../../redux/auth/actions"
 
 export default class JwtService {
   // ** jwtConfig <= Will be used by this service
@@ -16,55 +18,33 @@ export default class JwtService {
 
     // ** Request Interceptor
     axios.interceptors.request.use(
-      config => {
-        // ** Get token from localStorage
-        const accessToken = this.getToken()
+        config => {
+          // ** Get token from localStorage
+          const accessToken = this.getToken()
 
-        // ** If token is present add it to request's Authorization Header
-        if (accessToken) {
-          // ** eslint-disable-next-line no-param-reassign
-          config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
-        }
-        return config
-      },
-      error => Promise.reject(error)
+          // ** If token is present add it to request's Authorization Header
+          if (accessToken) {
+            // ** eslint-disable-next-line no-param-reassign
+            const token = accessToken.replaceAll('"', "")
+            config.headers.Authorization = `${this.jwtConfig.tokenType} ${token}`
+          }
+          return config
+        },
+        error => Promise.reject(error)
     )
 
     // ** Add request/response interceptor
     axios.interceptors.response.use(
-      response => response,
-      error => {
-        // ** const { config, response: { status } } = error
-        const { config, response } = error
-        const originalRequest = config
+        response => response,
+        error => {
+          const { response } = error
 
-        // ** if (status === 401) {
-        if (response && response.status === 401) {
-          if (!this.isAlreadyFetchingAccessToken) {
-            this.isAlreadyFetchingAccessToken = true
-            this.refreshToken().then(r => {
-              this.isAlreadyFetchingAccessToken = false
-
-              // ** Update accessToken in localStorage
-              this.setToken(r.data.accessToken)
-              this.setRefreshToken(r.data.refreshToken)
-
-              this.onAccessTokenFetched(r.data.accessToken)
-            })
+          // ** if (status === 401) {
+          if (response && response.status === 401) {
+            store.dispatch(unAuthorize())
           }
-          const retryOriginalRequest = new Promise(resolve => {
-            this.addSubscriber(accessToken => {
-              // ** Make sure to assign accessToken according to your response.
-              // ** Check: https://pixinvent.ticksy.com/ticket/2413870
-              // ** Change Authorization header
-              originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
-              resolve(this.axios(originalRequest))
-            })
-          })
-          return retryOriginalRequest
+          return Promise.reject(error)
         }
-        return Promise.reject(error)
-      }
     )
   }
 

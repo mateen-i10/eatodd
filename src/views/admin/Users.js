@@ -1,9 +1,6 @@
 // ** React Imports
 import {Fragment, useEffect, useState} from 'react'
 
-// ** Form Modal Component for Add and Update
-import FormModal from '../../components/FormModal'
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'

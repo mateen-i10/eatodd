@@ -1,9 +1,9 @@
 // ** Reducers Imports
 import navbar from './navbar'
 import layout from './layout'
-import auth from './authentication'
+import auth from './auth/authentication'
+import user from './user/reducer'
 import member from "./member/reducer"
-import user from "./user/reducer"
 import restaurant from "./restaurant/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
@@ -27,10 +27,10 @@ const rootReducer = {
     navbar,
     layout,
     member,
-    user,
     restaurant,
     facebookPost,
     crmSms,
+    user,
     customer,
     crmReducer,
     addonReducer,

@@ -15,7 +15,11 @@ const initialUser = () => {
 export const authSlice = createSlice({
   name: 'authentication',
   initialState: {
-    userData: initialUser()
+    userData: initialUser(),
+    isLoading: false,
+    isRequestCompleted: false,
+    isTokenVerified: null,
+    isPasswordReset: false
   },
   reducers: {
     handleLogin: (state, action) => {
@@ -34,10 +38,22 @@ export const authSlice = createSlice({
       localStorage.removeItem('userData')
       localStorage.removeItem(config.storageTokenKeyName)
       localStorage.removeItem(config.storageRefreshTokenKeyName)
+    },
+    setRequestCompleted: (state, action) => {
+      state.isRequestCompleted = action.payload
+    },
+    setTokenVerified: (state, action) => {
+      state.isTokenVerified = action.payload
+    },
+    setTokenVerifiedFalse: state => {
+      state.isTokenVerified = false
+    },
+    setPasswordReset: (state, action) => {
+      state.isPasswordReset = action.payload
     }
   }
 })
 
-export const { handleLogin, handleLogout } = authSlice.actions
+export const { handleLogin, handleLogout, setPasswordReset, setRequestCompleted, setTokenVerified, setTokenVerifiedFalse } = authSlice.actions
 
 export default authSlice.reducer

@@ -1,20 +1,61 @@
 import { useSkin } from '@hooks/useSkin'
-import { Link } from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
-import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'reactstrap'
+import {Row, Col, CardTitle, CardText, Form, Label, Input, Button, FormFeedback} from 'reactstrap'
 import '@styles/react/pages/page-authentication.scss'
 import icon from '../../assets/images/logo/OMG_logo.png'
+import {useDispatch, useSelector} from "react-redux"
+import {useEffect, useState} from "react"
+import * as yup from "yup"
+import {Controller, useForm} from "react-hook-form"
+import {yupResolver} from "@hookform/resolvers/yup"
+import UILoader from "../../@core/components/ui-loader"
+import {setRequestCompleted} from "../../redux/auth/authentication"
+import {login} from "../../redux/auth/actions"
 
 const LoginCover = () => {
+    const isRequestCompleted = useSelector(state => state.auth.isRequestCompleted)
+
     const { skin } = useSkin()
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const  [rememberMe, setRememberMe] = useState(false)
+    const [isBlock, setBlock] = useState(false)
+
+    const LoginSchema = yup.object().shape({
+        email: yup.string().required(),
+        password: yup.string().required()
+    })
+
+    // ** Hooks
+    const {
+        control,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({ mode: 'onChange', resolver: yupResolver(LoginSchema) })
 
     const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
         source = require(`@src/assets/images/pages/${illustration}`).default
+    useEffect(() => {
+        if (isRequestCompleted) {
+            setBlock(false)
+            dispatch(setRequestCompleted(false))
+        }
+
+    }, [isRequestCompleted])
+    const onSubmit = () => {
+        if (errors && Object.keys(errors).length !== 1) {
+            const {email, password} = control._fields
+            setBlock(true)
+            dispatch(login(email._f.value, password._f.value, rememberMe, history))
+        }
+    }
 
     return (
+        <UILoader blocking={isBlock}>
         <div className='auth-wrapper auth-cover'>
-            <Row className='auth-inner m-0'>
+                <Row className='auth-inner m-0'>
                 <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
                     <img src={icon} style={{ width: '100px'}}/>
                     {/*<h2 className='brand-text text-primary ms-1' style={{ paddingTop:'10px'}}>EATOMG</h2>*/}
@@ -30,31 +71,47 @@ const LoginCover = () => {
                             Welcome to EATOMG! 👋
                         </CardTitle>
                         <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
-                        <Form className='auth-login-form mt-2' onSubmit={e => e.preventDefault()}>
+                        <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
                             <div className='mb-1'>
                                 <Label className='form-label' for='login-email'>
                                     Email
                                 </Label>
-                                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                                <Controller
+                                    id='login-email'
+                                    name='email'
+                                    defaultValue=''
+                                    control={control}
+                                    render={({ field }) => <Input type='email' {...field} placeholder='john@example.com' invalid={errors.email && true} />}
+                                />
+                                {errors.email && <FormFeedback>{errors.email.message}</FormFeedback>}
+                                {/* <Input type='email' value={email} onChange={e => setEmail(e.target.value)} id='login-email' placeholder='john@example.com' autoFocus />*/}
                             </div>
                             <div className='mb-1'>
                                 <div className='d-flex justify-content-between'>
                                     <Label className='form-label' for='login-password'>
                                         Password
                                     </Label>
-                                    <Link to='/pages/forgot-password-cover'>
+                                    <Link to='/forgotPassword'>
                                         <small>Forgot Password?</small>
                                     </Link>
                                 </div>
-                                <InputPasswordToggle className='input-group-merge' id='login-password' />
+                                <Controller
+                                    id='login-password'
+                                    name='password'
+                                    defaultValue=''
+                                    control={control}
+                                    render={({ field }) => <InputPasswordToggle className='input-group-merge' autoFocus {...field} invalid={errors.password && true} />}
+                                />
+                                {errors.password && <FormFeedback>{errors.password.message}</FormFeedback>}
+                                {/*<InputPasswordToggle value={password} onChange={e => setPassword(e.target.value)} className='input-group-merge' id='login-password' />*/}
                             </div>
                             <div className='form-check mb-1'>
-                                <Input type='checkbox' id='remember-me' />
+                                <Input type='checkbox' id='remember-me' value={rememberMe} onChange={e => setRememberMe(e.target.checked)} />
                                 <Label className='form-check-label' for='remember-me'>
                                     Remember Me
                                 </Label>
                             </div>
-                            <Button color='primary' tag={Link} block to='/dashboard'>
+                            <Button color='primary' block type= 'submit'>
                                 Sign in
                             </Button>
                         </Form>
@@ -85,6 +142,7 @@ const LoginCover = () => {
                 </Col>
             </Row>
         </div>
+        </UILoader>
     )
 }
 
