@@ -73,7 +73,7 @@ export const addRestaurant = (data) => {
         }))
     }
 }
-export const RestaurantEdit = (data) => {
+export const updateRestaurant = (data) => {
     return async dispatch => {
         dispatch(apiCall({
             url,

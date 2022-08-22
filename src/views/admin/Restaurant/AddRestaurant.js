@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -20,13 +20,18 @@ import { useForm, Controller } from 'react-hook-form'
 import '@styles/react/libs/react-select/_react-select.scss'
 // import Link from "react-router-dom/es/Link"
 import { Check } from 'react-feather'
-import { toast } from 'react-toastify'
+/*import { toast } from 'react-toastify'*/
 import {yupResolver} from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import Avatar from "../../../@core/components/avatar"
 import {selectThemeColors} from "../../../utility/Utils"
 import Select from "react-select"
 import Flatpickr from 'react-flatpickr'
+import {useDispatch, useSelector} from "react-redux"
+import {setIsRestaurantError} from "../../../redux/restaurant/reducer"
+import UILoader from "../../../@core/components/ui-loader"
+import useModalError from "../../../utility/customHooks/useModalError"
+import {updateRestaurant, addRestaurant} from "../../../redux/restaurant/actions"
 
 const availableForDelivery = [
     { value: 'Yes', label: 'Yes' },
@@ -44,6 +49,13 @@ const catering = [
 ]
 
 const AddRestaurant = (props) => {
+    // redux state
+    const formInitialState = useSelector(state => state.restaurant.object)
+    const isEdit = useSelector(state => state.restaurant.isEdit)
+    const isError = useSelector(state => state.restaurant.isError)
+
+    //local state
+    const [isModalLoading,  setModalLoading] = useState(false)
 
     const weekData = [
         {
@@ -74,15 +86,32 @@ const AddRestaurant = (props) => {
     })
 
     // ** Hooks
+    const dispatch = useDispatch()
     const {
-        //reset,
+        reset,
         control,
         handleSubmit,
         formState: { errors }
     } = useForm({mode: 'onChange', resolver: yupResolver(restaurantSchema) })
 
+    useModalError(isError, setModalLoading, setIsRestaurantError)
+    useEffect(() => {
+        if (isEdit) {
+            reset({
+                ...formInitialState
+            })
+        } else {
+            reset({
+                name: ''
+            })
+        }
+
+    }, [isEdit])
+
     const onSubmit = data => {
-        if (Object.values(data).every(field => field.length > 0)) {
+        console.log('data', data)
+        props.isEdit ? dispatch(updateRestaurant(data)) : dispatch(addRestaurant(data))
+       /* if (Object.values(data).every(field => field.length > 0)) {
             toast.success(
                 <Fragment>
                     <div className='toastify-header'>
@@ -94,26 +123,18 @@ const AddRestaurant = (props) => {
                 </Fragment>,
                 { icon: false, hideProgressBar: true }
             )
-        }
+        }*/
     }
-
-   /* const handleReset = () => {
-        reset({
-            name: ''
-        })
-    }*/
 
     return (
         <Fragment>
             <Modal isOpen={props.isShow} className='modal-dialog-centered modal-lg'>
-                {/*<Link to="/Restaurant">
-                    <ModalHeader className='bg-transparent' toggle={() => props.setShow(!props.isShow)}></ModalHeader>
-                </Link>*/}
-                <ModalBody className='mx-50 pb-5'>
+                <UILoader blocking={isModalLoading}>
+                    <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
-                        <h1 className='mb-1'>Add a New Restaurant</h1>
+                        <h1 className='mb-1'>{props.title}</h1>
                     </div>
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form onSubmit={ handleSubmit(onSubmit)}>
                         <Row tag='form' className='gy-1 pt-75'>
                             <Col md={6} xs={12}>
                                 <div className='mb-1'>
@@ -361,16 +382,15 @@ const AddRestaurant = (props) => {
                             </table>
 
                             <Col xs={12} className='text-center mt-2 pt-50'>
-                                <Button type='submit' className='me-1' color='primary'>
-                                    Submit
-                                </Button>
                                 <Button type='reset' color='secondary' onClick={() => props.setShow(!props.isShow)}>
                                     Discard
                                 </Button>
                             </Col>
                         </Row>
+                        <Input type='submit' className='me-1 btn btn-success'/>
                     </Form>
                 </ModalBody>
+                </UILoader>
             </Modal>
         </Fragment>
     )

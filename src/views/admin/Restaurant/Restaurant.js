@@ -22,36 +22,22 @@ import Swal from "sweetalert2"
 import AddRestaurant from "./AddRestaurant"
 import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
-import useEdit from "../../../utility/customHooks/useEdit"
-import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsEdit, setIsRestaurantError, setRestaurant} from "../../../redux/restaurant/reducer"
 
 const Restaurant = (props) => {
     const restaurantList = useSelector(state => state.restaurant.list)
-    const formInitialState = useSelector(state => state.restaurant.object)
     const miscData = useSelector(state => state.restaurant.miscData)
-    const isEdit = useSelector(state => state.restaurant.isEdit)
     const isLoading = useSelector(state => state.restaurant.isLoading)
-    const isError = useSelector(state => state.restaurant.isError)
     const isSuccess = useSelector(state => state.restaurant.isSuccess)
+    const isEdit = useSelector(state => state.restaurant.isEdit)
     const dispatch = useDispatch()
 
     // ** local States
-   /* const [currentPage, setCurrentPage] = useState(0)
-    const [searchValue, setSearchValue] = useState('')
-    const [filteredData, setFilteredData] = useState([])
-    const [isModal, setModal] = useState(false)
-    const [editData, setEditData] = useState(0)*/
-
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    /*const [filteredData, setFilteredData] = useState([])*/
-    //const [modalTitle, setModalTitle] = useState('Add Restaurant')
     const [edit, setEdit] = useState(false)
-    const [setFormState] = useState({})
+    const [modalTitle, setModalTitle] = useState("Add Restaurant")
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
 
     useEffect(() => {
         dispatch(loadRestaurants())
@@ -61,19 +47,13 @@ const Restaurant = (props) => {
     const toggle = () => {
         if (isModal) setEdit(false)
         setModal(!isModal)
-        setFormState({...formInitialState})
-        if (isModalLoading) setModalLoading(false)
     }
 
     // custom hooks
     useLoadData(isSuccess, loadRestaurants, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setRestaurant, {
-        name: ''
-    })
-    useModalError(isError, setModalLoading, setIsRestaurantError)
 
     const addClick = () => {
-        //setModalTitle('Add Restaurant')
+        setModalTitle('Add Restaurant')
         toggle()
     }
 
@@ -81,8 +61,8 @@ const Restaurant = (props) => {
         console.log("edit", id)
         toggle()
         dispatch(getRestaurant(id, true))
-       /* setModalTitle('Edit Customer')
-        setModalLoading(true)*/
+        setModalTitle('Edit Restaurant')
+        setEdit(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -243,7 +223,14 @@ const Restaurant = (props) => {
             </Card>
             </UILoader>
 
-            <AddRestaurant isShow={isModal} setShow={toggle} data={edit} />
+            <AddRestaurant
+                isShow={isModal}
+                setShow={toggle}
+                isEdit={edit}
+                setEdit={setEdit}
+                title={modalTitle}
+
+            />
 
         </Fragment>
     )
