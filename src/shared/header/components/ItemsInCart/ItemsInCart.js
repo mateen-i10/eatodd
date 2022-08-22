@@ -13,11 +13,12 @@ const ItemsInCart = (props) => {
     const additionalItems = [...foodItems.action.payload.selectedSide, ...foodItems.action.payload.selectedDrinks]
 
     let mainItemsPrice
-    if (mainItems.length === 2) {
+    if (foodItems.action.payload.selectedProVeg.length === 2) {
         mainItemsPrice = foodItems.action.payload.selectedProVeg[0].price > foodItems.action.payload.selectedProVeg[1].price ? foodItems.action.payload.selectedProVeg[0].price : foodItems.action.payload.selectedProVeg[1].price
     } else {
         mainItemsPrice = foodItems.action.payload.selectedProVeg[0].price
     }
+    // console.log(mainItemsPrice)
 
 
     let totalAddiItemsPrice = 0

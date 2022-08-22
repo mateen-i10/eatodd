@@ -15,6 +15,7 @@ import './FoodCart.css'
 import LoginModal from "./loginModal/LoginModal"
 import {useSelector} from "react-redux"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
+import {Link} from "react-router-dom"
 // import {default as chips} from "../../../assets/images/Menu&Order/chips.png";
 // import {default as drink1} from "../../../assets/images/Menu&Order/drink1.png";
 
@@ -398,20 +399,22 @@ const OffCanvasPlacement = (props) => {
 
                         </OffcanvasBody>
                         <CardFooter style={{padding: 0}}>
-                            <Button
-                                color='primary'
-                                onClick={toggleCanvasStart}
-                                style={{
-                                    marginBottom: 0,
-                                    height: 60,
-                                    borderRadius: 0,
-                                    fontSize: '2em',
-                                    textTransform: 'uppercase'
-                                }}
-                                {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
-                            >
-                                Checkout
-                            </Button>
+                            <Link to='/checkout'>
+                                <Button
+                                    color='primary'
+                                    onClick={toggleCanvasStart}
+                                    style={{
+                                        marginBottom: 0,
+                                        height: 60,
+                                        borderRadius: 0,
+                                        fontSize: '2em',
+                                        textTransform: 'uppercase'
+                                    }}
+                                    {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
+                                >
+                                    Checkout
+                                </Button>
+                            </Link>
                         </CardFooter>
                     </Offcanvas>
                     {RenderDuplicateModal()}

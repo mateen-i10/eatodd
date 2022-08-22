@@ -12,9 +12,6 @@ const Footer = (props) => {
     const Rice = selectedRice
     const Beans = selectedBeans
 
-
-    console.log(proteinVege, Rice, Beans)
-
     const RenderMealNameModal = () => {
         return (
             <div className='basic-modal '>
