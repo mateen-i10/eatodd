@@ -371,20 +371,24 @@ const Menu = (props) => {
             }
         ))
     }
+    // const assignHalf = (rmSelected) => {
+    //     if (rmSelected.length === 2) {
+    //         const final = selectedProVeg.map(item => {
+    //             return {...item, title: `${item.title} (1/2)`}
+    //         })
+    //         setSelectedProVeg(final)
+    //     } else {
+    //         setSelectedProVeg(rmSelected)
+    //     }
+    // }
     // console.log(selectedProVeg.length)
-    // console.log(selectedProVeg)
+    console.log(selectedProVeg)
     const handleProVeg = (element) => {
         if (selectedProVeg.length === 2) {
             const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
+            // setSelectedProVeg(doubled ? rmSelected : assignHalf(rmSelected))
             setSelectedProVeg(rmSelected)
-            // if (rmSelected.length === 2 && !doubled) {
-            //     const final = selectedProVeg.map(item => {
-            //         return {...item, title: `${item.title} (1/2)`}
-            //     })
-            //     setSelectedProVeg(final)
-            // } else {
-            //     setSelectedProVeg(rmSelected)
-            // }
+
         } else if (selectedProVeg.length === 1) {
             if (element.id === selectedProVeg[0].id) {
                 setSelectedProVeg(selectedProVeg.filter(item => item.id !== element.id))

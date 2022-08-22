@@ -8,17 +8,6 @@ import TwoX from "./Utility/TwoX"
 import CheckSign from "./Utility/CheckSign"
 
 const ProteinVege = (props) => {
-
-    const [value, setValue] = useState(false)
-    const [customize, setCustomize] = useState(false)
-    const [isProVegLength2, setIsProVegLength2] = useState(false)
-
-    useEffect(() => {
-        setTimeout(() => {
-            setIsProVegLength2(false)
-        }, 2000)
-    })
-
     const {
         itemId,
         title,
@@ -31,6 +20,17 @@ const ProteinVege = (props) => {
         setDoubled,
         onItemClick
     } = props
+
+    const [value, setValue] = useState(false)
+    const [customize, setCustomize] = useState(false)
+    const [isProVegLength2, setIsProVegLength2] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsProVegLength2(false)
+        }, 2000)
+    }, [isProVegLength2])
+
     // console.log("proVeg length is 2", isProVegLength2)
     // console.log("selected item", selectedProVeg.length)
     return (
@@ -101,26 +101,16 @@ const ProteinVege = (props) => {
                             <div className="row g-0">
                                 <div className="col-lg-4  col-md-4 col-5">
                                     {selectedProVeg.map(item => {
-                                        // eslint-disable-next-line multiline-ternary
                                         if (selectedProVeg.length === 1 && doubled === false) {
-                                            // eslint-disable-next-line multiline-ternary
-                                            return (item.id === itemId ?
-                                                <CheckSign key={item.id}/> : "")
+                                            return (item.id === itemId ? <CheckSign key={item.id}/> : "")
                                         } else if (selectedProVeg.length === 1 && doubled === true) {
-                                            // eslint-disable-next-line multiline-ternary
-                                            return (item.id === itemId ?
-                                                <TwoX key={item.id}/> : "")
+                                            return (item.id === itemId ? <TwoX key={item.id}/> : "")
                                         }
                                         if (selectedProVeg.length === 2 && doubled === false) {
-
-                                            // eslint-disable-next-line multiline-ternary
-                                            return (item.id === itemId ?
-                                                <Half key={item.id}/> : "")
+                                            return (item.id === itemId ? <Half key={item.id}/> : "")
                                         } else if (selectedProVeg.length === 2 && doubled === true) {
 
-                                            // eslint-disable-next-line multiline-ternary
-                                            return (item.id === itemId ?
-                                                <OneX key={item.id}/> : "")
+                                            return (item.id === itemId ? <OneX key={item.id}/> : "")
                                         }
 
                                     })}
