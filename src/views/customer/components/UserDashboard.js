@@ -12,12 +12,10 @@ const UserDashboard = () => {
                     <tr>
                         <th scope="row">username</th>
                         <td>user 1</td>
-
                     </tr>
                     <tr>
                         <th scope="row">Email Address</th>
                         <td>user@gmail.com</td>
-
                     </tr>
                     <tr>
                         <th scope="row">Phone Number</th>
@@ -29,7 +27,6 @@ const UserDashboard = () => {
                     </tr>
                     </tbody>
                 </table>
-
                 <div className="fs-3 fw-bold mt-5 mb-2">Recent Order</div>
                 <table className="table mb-5">
                     <thead>
