@@ -35,9 +35,10 @@ const RestaurantReducer = (state = initialState, action) => {
                 isSuccess: false
             }
         case setRestaurant.type:
+            const data = action.payload.data
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...data},
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
@@ -55,7 +56,7 @@ const RestaurantReducer = (state = initialState, action) => {
         case editRestaurant.type:
             return {
                 ...state,
-                object: action.payload,
+                object: action.payload.data,
                 isEdit: true
             }
         case setRequestCompleted.type:

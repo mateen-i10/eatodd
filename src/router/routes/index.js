@@ -250,11 +250,11 @@ const Routes = [
         component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
         layout: 'VerticalLayout'
     },
-    {
+   /* {
         path: '/addRestaurant',
         component: lazy(() => import('../../views/admin/Restaurant/AddRestaurant')),
         layout: 'VerticalLayout'
-    },
+    },*/
     {
         path: '/addAddon',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),

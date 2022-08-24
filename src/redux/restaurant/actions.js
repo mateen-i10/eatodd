@@ -26,6 +26,7 @@ export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = nul
     }
 }
 export const getRestaurant = (id, isEdit = false) => {
+    console.log("dataGet", isEdit)
     return async dispatch => {
         if (isEdit) {
             dispatch(apiCall({
@@ -60,6 +61,7 @@ export const deleteRestaurant = (id) => {
     }
 }
 export const addRestaurant = (data) => {
+    console.log('resData', data)
     return async dispatch => {
         dispatch(apiCall({
             url,

@@ -1,11 +1,10 @@
 // ** React Imports
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import Avatar from '../../../@core/components/avatar'
-import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -14,43 +13,267 @@ import {
     Input,
     Label,
     Row,
-    Col, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
-import {deleteRestaurant, getRestaurant, loadRestaurants} from "../../../redux/restaurant/actions"
+import {
+    addRestaurant,
+    deleteRestaurant,
+    getRestaurant,
+    loadRestaurants,
+    updateRestaurant
+} from "../../../redux/restaurant/actions"
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
-import AddRestaurant from "./AddRestaurant"
+import Joi from "joi-browser"
 import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
+import useEdit from "../../../utility/customHooks/useEdit"
+import useModalError from "../../../utility/customHooks/useModalError"
+import {setIsEdit, setIsRestaurantError, setRestaurant} from "../../../redux/restaurant/reducer"
+import FormModal from "../../../components/FormModal"
+import {FieldTypes} from "../../../utility/enums/FieldType"
+import '@styles/react/libs/flatpickr/flatpickr.scss'
+import Datetime from "react-datetime"
 
 const Restaurant = (props) => {
+
     const restaurantList = useSelector(state => state.restaurant.list)
+    const formInitialState = useSelector(state => state.restaurant.object)
     const miscData = useSelector(state => state.restaurant.miscData)
-    const isLoading = useSelector(state => state.restaurant.isLoading)
-    const isSuccess = useSelector(state => state.restaurant.isSuccess)
     const isEdit = useSelector(state => state.restaurant.isEdit)
+    const isLoading = useSelector(state => state.restaurant.isLoading)
+    const isError = useSelector(state => state.restaurant.isError)
+    const isSuccess = useSelector(state => state.restaurant.isSuccess)
     const dispatch = useDispatch()
 
-    // ** local States
+    // ** refs
+    const formModalRef = useRef(null)
+
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const [edit, setEdit] = useState(false)
-    const [modalTitle, setModalTitle] = useState("Add Restaurant")
-    const [isModal, setModal] = useState(false)
+    const resSchedules = [
+        {
+        name: 'Monday',
+        day: 1,
+        startDate: null,
+        endDate: null,
+        isClosed: false,
+        isTwentyFourHoursOpened: false
+    },
+        {
+            name: 'Tuesday',
+            day: 2,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
+        {
+            name: 'Wednesday',
+            day: 3,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
+        {
+            name: 'Thursday',
+            day: 4,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
+        {
+            name: 'Friday',
+            day: 5,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
+        {
+            name: 'Saturday',
+            day: 6,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
+        {
+            name: 'Sunday',
+            day: 0,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        }
+        ]
+    const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
 
     useEffect(() => {
-        dispatch(loadRestaurants())
+        if (formInitialState && formInitialState.restaurantSchedules) {
+            const final = formInitialState.restaurantSchedules.map((i, index) => {
+               return {...i, name : resSchedules[index].name}
+            })
+            setRestaurantSchedule([...final])
+        }
     }, [isEdit])
+
+    const onValueChange = (index, name, event) => {
+        console.log("event.target.checked", event.target.checked)
+        console.log("event.target", event.target)
+        const newArray = restaurantSchedule.map((element, i) => {
+            if (i === index) {
+                if (event.target.type === "checkbox") {
+                    element[name] = event.target.checked
+                }  else {
+                    element[name] = event.target.value
+                }
+            }
+            return element
+        })
+
+        setRestaurantSchedule(newArray)
+    }
+
+    const handleDateChange = (index, e, name) => {
+        if (typeof (e) === "object") {
+            const newArray = restaurantSchedule.map((element, i) => {
+                if (i === index) {
+                    element[name] = e.toDate()
+                }
+                return element
+            })
+
+            setRestaurantSchedule(newArray)
+        }
+
+    }
+
+    const child = () => {
+        return <div className='ms-1'>
+            <div className="text-center">
+                <h4>Hours Of Operation</h4>
+            </div>
+            <hr style={{color:'black'}} className='my-1' />
+
+            <table className="table">
+                <thead>
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Closed</th>
+                    <th scope="col">24 hour open</th>
+                </tr>
+                </thead>
+                <tbody>
+                {restaurantSchedule.map((r, index) => {
+                    return <tr key={r.day}>
+                        <td>{r.name}</td>
+                        <td>
+                            <Datetime
+                                locale="en-gb"
+                                initialViewMode={'time'}
+                                value={r.startDate}
+                                dateFormat={false}
+                                closeOnSelect={true}
+                                onChange={(e) => handleDateChange(index, e, 'startDate')}
+                            />
+                        </td>
+                        <td>
+                            <Datetime
+                                locale="en-gb"
+                                initialViewMode={'time'}
+                                value={r.endDate}
+                                dateFormat={false}
+                                closeOnSelect={true}
+                                onChange={(e) => handleDateChange(index, e, 'endDate')}
+                            />
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" value={r.isClosed}
+                                       onChange={(e) => onValueChange(index, 'isClosed', e)}
+                                       id={`isClosed${r.name}`} name={`isClosed${r.name}`}/>
+                                <label className="form-check-label" htmlFor={`isClosed${r.name}`}>
+                                    Closed
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox" value={r.isTwentyFourHoursOpened}
+                                    onChange={(e) => onValueChange(index, 'isTwentyFourHoursOpened', e)}
+                                    id={`isTwentyFourHoursOpened${r.name}`} name={`isTwentyFourHoursOpened${r.name}`} />
+                                <label className="form-check-label" htmlFor={`isTwentyFourHoursOpened${r.name}`}>
+                                    Open 24hours
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                })
+                }
+                </tbody>
+            </table>
+
+        </div>
+    }
+
+    // ** local States
+    const [modalTitle, setModalTitle] = useState('Add Restaurant')
+    const [edit, setEdit] = useState(false)
+    const [formState, setFormState] = useState({})
+    const [isModal, setModal] = useState(false)
+    const [isModalLoading,  setModalLoading] = useState(false)
+    const [formData] = useState([
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Restaurant Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'phone Number', placeholder: 'Enter Phone Number', name:'phoneNo', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Latitude', placeholder: 'Enter Latitude', name:'latitude', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Longitude', placeholder: 'Enter Longitude', name:'longitude', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.SwitchButton, label: 'Available For Delivery', name:'isAvailableForDelivery', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.SwitchButton, label: 'Vine Club Included', name:'isVineClub', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.SwitchButton, label: 'Catering Included', name:'isCatering', isRequired:false, fieldGroupClasses: 'col-6'}
+    ])
+
+   /* useEffect(() => {
+        dispatch(loadRestaurants())
+    }, [isEdit])*/
+
+    // ** schema for validations
+    const schema = Joi.object({
+        name: Joi.string().required().label("Name")
+    })
 
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
         setModal(!isModal)
+        setFormState({...formInitialState})
+        setRestaurantSchedule([...resSchedules])
+        if (isModalLoading) setModalLoading(false)
     }
 
     // custom hooks
     useLoadData(isSuccess, loadRestaurants, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setRestaurant, {
+        name: '',
+        description:'',
+        address: '',
+        phoneNo: '',
+        latitude: '',
+        longitude: '',
+        isAvailableForDelivery: false,
+        isVineClub: false,
+        isCatering: false
+    })
+    useModalError(isError, setModalLoading, setIsRestaurantError)
 
     const addClick = () => {
         setModalTitle('Add Restaurant')
@@ -84,8 +307,19 @@ const Restaurant = (props) => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        console.log('call', props)
         props.history.push(`/restaurant/detail/${id}`)
+    }
+
+    const handleSubmit = (event) => {
+        console.log('restaurantSchedule', restaurantSchedule)
+        const finalData = {...formState, restaurantSchedules: restaurantSchedule}
+        event.preventDefault()
+        const isError = formModalRef.current.validate(formState)
+        if (isError) return
+
+        // call api
+        setModalLoading(true)
+        edit ? dispatch(updateRestaurant(finalData)) : dispatch(addRestaurant(finalData))
     }
 
     const handleFilter = e => {
@@ -143,7 +377,7 @@ const Restaurant = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -195,7 +429,7 @@ const Restaurant = (props) => {
                         <CardTitle tag='h4'>Restaurant</CardTitle>
                         <h6>Friday June 10, 2022, 08:10 AM</h6>
                     </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Resturant</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
                 </CardHeader>
                 <Row className='justify-content-end mx-0'>
                     <Col className='mt-1' md='12' sm='12'>
@@ -222,14 +456,19 @@ const Restaurant = (props) => {
                 />
             </Card>
             </UILoader>
-
-            <AddRestaurant
-                isShow={isModal}
-                setShow={toggle}
-                isEdit={edit}
-                setEdit={setEdit}
-                title={modalTitle}
-
+            <FormModal ref={formModalRef}
+                       formState={formState}
+                       formData={formData}
+                       setFormState={setFormState}
+                       schema={schema}
+                       isModal={isModal}
+                       toggleModal={toggle}
+                       modalTitle={modalTitle}
+                       primaryBtnLabel='Save'
+                       secondaryBtnLabel='Cancel'
+                       isLoading = {isModalLoading}
+                       handleSubmit={handleSubmit}
+                       children={child()}
             />
 
         </Fragment>
