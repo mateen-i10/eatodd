@@ -51,7 +51,7 @@ const MyForm =  (props, ref) => {
         else props.setFormState({...props.formState, [key]: e.value})
     }
     const handleInputChange = (e, key) => {
-        if (e.target.checked) {
+        if (e.target.type === 'checkbox') {
             props.setFormState({...props.formState, [key]: e.target.checked})
         } else if (e.target.files) {
             props.setFormState({...props.formState, [key]:e.target.files[0]})
@@ -61,6 +61,7 @@ const MyForm =  (props, ref) => {
     }
     const renderInputGroup = (name, type, index, label, placeholder, options, isTime, rows, isMulti, isAsyncSelect = false, loadOptions, fieldGroupClasses = 'col-6', isRequired = false, isFormGroup = true) => {
         const html = <>{ type !== FieldTypes.CheckBox && type !== FieldTypes.Radio && type !== FieldTypes.SwitchButton && <><Label for={name}>{label}</Label> {isRequired && <span className="text-danger ml-1">*</span>}</>}
+            {console.log('yess', name, props.formState[name])}
             {type === FieldTypes.File ? <div className="custom-file">
                     <Input
                         type='file'
@@ -110,7 +111,7 @@ const MyForm =  (props, ref) => {
                             />
                             : type === FieldTypes.CheckBox ?
                                 <FormGroup check inline>
-                                    <Input type='checkbox' type="checkbox" name={name} id={`${name + index}`} value={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
+                                    <Input type='checkbox' type="checkbox" checked={props.formState[name]} name={name} id={`${name + index}`} value={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
                                     <Label for={`${name + index}`} check>{label}</Label> {isRequired && <span className="text-danger ml-1">*</span>}
                                 </FormGroup> :
                                 type === FieldTypes.Radio ?
@@ -121,7 +122,7 @@ const MyForm =  (props, ref) => {
                                     </FormGroup> :
                                     type === FieldTypes.SwitchButton ?
                                         <FormGroup switch inline>
-                                            <Input type='checkbox' type="checkbox" name={name} id={`${name + index}`} value={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
+                                            <Input type='checkbox' type="checkbox" name={name} id={`${name + index}`} value={props.formState[name]} checked={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
                                             <Label for={`${name + index}`} switch>{label}</Label>
                                         </FormGroup> :
                                         <Input

@@ -33,6 +33,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 // ** Core styles
 import './@core/assets/fonts/feather/iconfont.css'
+import "react-datetime/css/react-datetime.css"
 import './@core/scss/core.scss'
 import './assets/scss/style.scss'
 
