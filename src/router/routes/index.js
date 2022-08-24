@@ -196,6 +196,11 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/Customer',
+        component: lazy(() => import('../../views/customer/index')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/CrmEmails',
         component: lazy(() => import('../../views/admin/CrmEmails/CrmEmail')),
         layout: 'VerticalLayout'
