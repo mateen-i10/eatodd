@@ -6,13 +6,17 @@ import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
-    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    UncontrolledDropdown
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
@@ -22,14 +26,18 @@ import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsGenralProductEdit, setIsGenralProductError, setGenralProduct} from "../../../redux/genralProduct/reducer"
+import {setGenralProduct, setIsGenralProductEdit, setIsGenralProductError} from "../../../redux/genralProduct/reducer"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
-// import Datetime from "react-datetime"
-
 // my changes
-import {deleteGenralProduct, loadGenralProducts, getGenralProduct, addGenralProduct, updateGenralProduct} from "../../../redux/genralProduct/actions"
+import {
+    addGenralProduct,
+    deleteGenralProduct,
+    getGenralProduct,
+    loadGenralProducts,
+    updateGenralProduct
+} from "../../../redux/genralProduct/actions"
 
 const GenralProducts = () => {
 
@@ -54,15 +62,89 @@ const GenralProducts = () => {
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
-    ])
-
-    /* useEffect(() => {
-         dispatch(loadGenralProducts())
-     }, [isEdit])*/
+    const [isModalLoading, setModalLoading] = useState(false)
+    const formData = [
+        {
+            type: FieldTypes.Text,
+            label: 'Name',
+            placeholder: 'Enter Product Name',
+            name: 'name',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Text,
+            label: 'Description',
+            placeholder: 'Enter Description',
+            name: 'description',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Whole Price',
+            placeholder: 'Enter Whole Price',
+            name: 'wholePrice',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Retail Price',
+            placeholder: 'Enter Retail Price',
+            name: 'retailPrice',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Online Price',
+            placeholder: 'Enter Online Price',
+            name: 'onlinePrice',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Discount',
+            placeholder: 'Enter Discount',
+            name: 'discount',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Quantity',
+            placeholder: 'Enter Quantity',
+            name: 'quantity',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Tax Amount',
+            placeholder: 'Enter Tax Amount',
+            name: 'taxAmount',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Percentage',
+            placeholder: 'Enter Percentage',
+            name: 'percentage',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.File,
+            label: 'Image',
+            placeholder: 'Enter Attachment',
+            name: 'image',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        }
+    ]
 
     // ** schema for validations
     const schema = Joi.object({
@@ -74,7 +156,6 @@ const GenralProducts = () => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
-        // setGenralProductSchedule([...resSchedules])
         if (isModalLoading) setModalLoading(false)
     }
 
@@ -82,7 +163,7 @@ const GenralProducts = () => {
     useLoadData(isSuccess, loadGenralProducts, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsGenralProductEdit, setGenralProduct, {
         name: '',
-        description:''
+        description: ''
     })
     useModalError(isError, setModalLoading, setIsGenralProductError)
 
@@ -122,14 +203,14 @@ const GenralProducts = () => {
     }
 
     const handleSubmit = (event) => {
-        const finalData = {...formState}
+        // const finalData = {...formState}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(() => updateGenralProduct(finalData)) : dispatch(() => addGenralProduct(finalData))
+        edit ? dispatch(updateGenralProduct(formState)) : dispatch(addGenralProduct(formState))
     }
 
     const handleFilter = e => {
@@ -150,12 +231,54 @@ const GenralProducts = () => {
     const columns = [
         {
             name: 'Name',
-            selector: (row) => row.full_name,
+            selector: (row) => row.name,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'Description',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'WholePrice',
+            selector: (row) => row.wholePrice,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'RetailPrice',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'OnlinePrice',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Discount',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Quantity',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'TaxAmount',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'TaxPercentage',
             selector: (row) => row.description,
             sortable: true,
             minWidth: '50px'
@@ -168,20 +291,23 @@ const GenralProducts = () => {
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1' tag='span'>
-                                <MoreVertical size={15} />
+                                <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
+                                <DropdownItem tag='a' href='/' className='w-100'
+                                              onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
+                                    <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => {
+                            editClick(row.id)
+                        }}><Edit size={15}/></span>
                     </div>
                 )
             }
@@ -219,7 +345,7 @@ const GenralProducts = () => {
     const dataToRender = () => {
         if (productList.length > 0) {
             return productList
-        }  else {
+        } else {
             return productList.slice(0, pageSize)
         }
     }
@@ -228,12 +354,14 @@ const GenralProducts = () => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                    <CardHeader
+                        className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Genral Products</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Genral Product</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Genral
+                            Product</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -254,7 +382,7 @@ const GenralProducts = () => {
                         paginationServer
                         className='react-dataTable'
                         columns={columns}
-                        sortIcon={<ChevronDown size={10} />}
+                        sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
                         data={dataToRender()}
                     />
@@ -270,7 +398,7 @@ const GenralProducts = () => {
                        modalTitle={modalTitle}
                        primaryBtnLabel='Save'
                        secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
+                       isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
             />
 

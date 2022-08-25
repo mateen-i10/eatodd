@@ -1,19 +1,22 @@
 import {apiCall} from "../../api/actions"
 
 import {
-    setLoading,
-    setCategorys,
-    setCategory,
     editCategory,
+    setCategory,
+    setCategorys,
     setDetailLoading,
-    setRequestCompleted, setIsCategoryError, setIsCategorySuccess, setIsEdit
+    setIsCategoryError,
+    setIsCategorySuccess,
+    setIsEdit,
+    setLoading,
+    setRequestCompleted
 } from "./reducer"
 
 const url = 'Category'
 
 
 // ** Get All Categorys Data
-export const loadCategorys = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCategorys = (pageIndex = 1, pageSize = 12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({

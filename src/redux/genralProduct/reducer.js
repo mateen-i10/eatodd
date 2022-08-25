@@ -10,10 +10,10 @@ const initialState = {
     isError: false,
     isSuccess: false
 }
-
 export const setGenralProducts = createAction("GenralProductReducer/setGenralProducts")
 export const setGenralProduct = createAction("GenralProductReducer/setGenralProduct")
 export const setLoading = createAction("GenralProductReducer/setLoading")
+export const setDetailLoading = createAction("GenralProductReducer/setDetailLoading")
 export const editGenralProduct = createAction("GenralProductReducer/editGenralProduct")
 export const setIsGenralProductEdit = createAction("GenralProductReducer/setIsGenralProductEdit")
 export const setGenralProductRequestCompleted = createAction("GenralProductReducer/setRequestCompleted")
@@ -25,16 +25,21 @@ const GenralProductReducer = (state = initialState, action) => {
         case setGenralProducts.type:
             return {
                 ...state,
-                list: action.payload,
+                list: action.payload.data,
                 miscData: action.payload.miscData,
                 isLoading: false,
-                isEdit: false
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
             }
         case setGenralProduct.type:
             return {
                 ...state,
-                object: action.payload,
-                isLoading: false
+                object: action.payload.data,
+                isEdit: false,
+                isLoading: false,
+                isDetailLoading: false
             }
         case setGenralProductRequestCompleted.type:
             return {
@@ -49,8 +54,9 @@ const GenralProductReducer = (state = initialState, action) => {
         case editGenralProduct.type:
             return {
                 ...state,
-                object: action.payload,
-                isEdit: true
+                object: action.payload.data,
+                isEdit: true,
+                subCategoryId: 1
             }
         case setIsGenralProductError.type:
             return {
@@ -61,6 +67,11 @@ const GenralProductReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isEdit: action.payload
+            }
+        case setIsGenralProductSuccess.type:
+            return {
+                ...state,
+                isSuccess: action.payload
             }
         default:
             return state
