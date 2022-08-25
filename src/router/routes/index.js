@@ -281,6 +281,11 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/subCategory',
+        component: lazy(() => import('../../views/admin/subCategory/subcategory')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/addModifier',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddModifier')),
         layout: 'VerticalLayout'

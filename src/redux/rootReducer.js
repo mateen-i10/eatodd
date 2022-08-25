@@ -23,6 +23,7 @@ import cartItems from "./cartItems/cartItemsReducer"
 import product from "./products/reducer"
 import genralProduct from "./genralProduct/reducer"
 import category from "./restaurantPages/category/reducer"
+import subCategory from "./subcategory/reducer"
 
 const rootReducer = {
     auth,
@@ -48,6 +49,7 @@ const rootReducer = {
     product,
     genralProduct,
     category,
+    subCategory,
     cartItems
 }
 

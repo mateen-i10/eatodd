@@ -15,7 +15,7 @@ import {
     PlusSquare, Send,
     User, UserCheck,
     UserPlus,
-    Users, Volume, Package
+    Users, Volume, Package, Copy
 } from 'react-feather'
 
 export default [
@@ -42,6 +42,18 @@ export default [
         title: 'Cuisine',
         icon: <PenTool size={20} />,
         navLink: '/cuisine'
+    },
+    {
+        id: 'category',
+        title: 'Category',
+        icon: <Grid size={12} />,
+        navLink: '/dashboard/category'
+    },
+    {
+        id: 'subCategory',
+        title: 'SubCategory',
+        icon: <Copy size={12} />,
+        navLink: '/subCategory'
     },
     {
         id: 'Product',
@@ -116,12 +128,6 @@ export default [
                 title: 'Menu Items',
                 icon: <Menu size={12}/>,
                 navLink: '/dashboard/menuitems'
-            },
-            {
-                id: 'category',
-                title: 'Category',
-                icon: <Grid size={12}/>,
-                navLink: '/dashboard/category'
             },
             {
                 id: 'modifier',
