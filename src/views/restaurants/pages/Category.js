@@ -6,13 +6,17 @@ import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
-    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    UncontrolledDropdown
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
@@ -22,14 +26,19 @@ import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsEdit, setIsCategoryError, setCategory} from "../../../redux/restaurantPages/category/reducer"
+import {setCategory, setIsCategoryError, setIsEdit} from "../../../redux/restaurantPages/category/reducer"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
-
 // my changes
-import {deleteCategory, loadCategorys, getCategory, addCategory, updateCategory} from "../../../redux/restaurantPages/category/actions"
+import {
+    addCategory,
+    deleteCategory,
+    getCategory,
+    loadCategorys,
+    updateCategory
+} from "../../../redux/restaurantPages/category/actions"
 
 const Category = () => {
 
@@ -54,7 +63,7 @@ const Category = () => {
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
+    const [isModalLoading, setModalLoading] = useState(false)
     const [formData, setFormData] = useState([])
 
     /* useEffect(() => {
@@ -78,15 +87,36 @@ const Category = () => {
     useLoadData(isSuccess, loadCategorys, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCategory, {
         name: '',
-        description:''
+        description: ''
     })
     useModalError(isError, setModalLoading, setIsCategoryError)
 
     const addClick = () => {
         setFormData([
-            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+            {
+                type: FieldTypes.Text,
+                label: 'Name',
+                placeholder: 'Enter Category Name',
+                name: 'name',
+                isRequired: true,
+                fieldGroupClasses: 'col-6'
+            },
+            {
+                type: FieldTypes.Text,
+                label: 'Description',
+                placeholder: 'Enter Description',
+                name: 'description',
+                isRequired: false,
+                fieldGroupClasses: 'col-6'
+            },
+            {
+                type: FieldTypes.File,
+                label: 'Image',
+                placeholder: 'Enter Attachment',
+                name: 'image',
+                isRequired: false,
+                fieldGroupClasses: 'col-6'
+            }
         ])
         setModalTitle('Add Category')
         toggle()
@@ -95,8 +125,22 @@ const Category = () => {
     const editClick = (id) => {
         console.log("edit", id)
         setFormData([
-            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
+            {
+                type: FieldTypes.Text,
+                label: 'Name',
+                placeholder: 'Enter Category Name',
+                name: 'name',
+                isRequired: true,
+                fieldGroupClasses: 'col-6'
+            },
+            {
+                type: FieldTypes.Text,
+                label: 'Description',
+                placeholder: 'Enter Description',
+                name: 'description',
+                isRequired: false,
+                fieldGroupClasses: 'col-6'
+            }
         ])
 
         setSchema(Joi.object({
@@ -177,20 +221,23 @@ const Category = () => {
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1' tag='span'>
-                                <MoreVertical size={15} />
+                                <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
+                                <DropdownItem tag='a' href='/' className='w-100'
+                                              onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
+                                    <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => {
+                            editClick(row.id)
+                        }}><Edit size={15}/></span>
                     </div>
                 )
             }
@@ -228,7 +275,7 @@ const Category = () => {
     const dataToRender = () => {
         if (categoryList.length > 0) {
             return categoryList
-        }  else {
+        } else {
             return categoryList.slice(0, pageSize)
         }
     }
@@ -237,12 +284,14 @@ const Category = () => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                    <CardHeader
+                        className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Category</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Category</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new
+                            Category</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -263,7 +312,7 @@ const Category = () => {
                         paginationServer
                         className='react-dataTable'
                         columns={columns}
-                        sortIcon={<ChevronDown size={10} />}
+                        sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
                         data={dataToRender()}
                     />
@@ -279,7 +328,7 @@ const Category = () => {
                        modalTitle={modalTitle}
                        primaryBtnLabel='Save'
                        secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
+                       isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
             />
 
