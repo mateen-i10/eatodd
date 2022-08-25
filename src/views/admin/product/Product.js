@@ -22,24 +22,24 @@ import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsEdit, setIsCuisineError, setCuisine} from "../../../redux/cuisine/reducer"
+import {setIsProductEdit, setIsProductError, setProduct} from "../../../redux/products/reducer"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
 
 // my changes
-import {deleteCuisine, loadCuisines, getCuisine, addCuisine, updateCuisine} from "../../../redux/cuisine/actions"
+import {deleteProduct, loadProducts, getProduct, addProduct, updateProduct} from "../../../redux/products/actions"
 
-const Cuisine = () => {
+const Product = () => {
 
-    const cuisineList = useSelector(state => state.cuisine.list)
-    const formInitialState = useSelector(state => state.cuisine.object)
-    const miscData = useSelector(state => state.cuisine.miscData)
-    const isEdit = useSelector(state => state.cuisine.isEdit)
-    const isLoading = useSelector(state => state.cuisine.isLoading)
-    const isError = useSelector(state => state.cuisine.isError)
-    const isSuccess = useSelector(state => state.cuisine.isSuccess)
+    const productList = useSelector(state => state.product.list)
+    const formInitialState = useSelector(state => state.product.object)
+    const miscData = useSelector(state => state.product.miscData)
+    const isEdit = useSelector(state => state.product.isEdit)
+    const isLoading = useSelector(state => state.product.isLoading)
+    const isError = useSelector(state => state.product.isError)
+    const isSuccess = useSelector(state => state.product.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
@@ -50,18 +50,18 @@ const Cuisine = () => {
     const [searchValue, setSearchValue] = useState('')
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Cuisine')
+    const [modalTitle, setModalTitle] = useState('Add Product')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Cuisine Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
     ])
 
     /* useEffect(() => {
-         dispatch(loadCuisines())
+         dispatch(loadProducts())
      }, [isEdit])*/
 
     // ** schema for validations
@@ -74,28 +74,29 @@ const Cuisine = () => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
+        // setProductSchedule([...resSchedules])
         if (isModalLoading) setModalLoading(false)
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadCuisines, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCuisine, {
+    useLoadData(isSuccess, loadProducts, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsProductEdit, setProduct, {
         name: '',
         description:''
     })
-    useModalError(isError, setModalLoading, setIsCuisineError)
+    useModalError(isError, setModalLoading, setIsProductError)
 
     const addClick = () => {
-        setModalTitle('Add Cuisine')
+        setModalTitle('Add Product')
         toggle()
     }
 
     const editClick = (id) => {
         console.log("edit", id)
         toggle()
-        dispatch(getCuisine(id, true))
-        setModalTitle('Edit Cuisine')
-        setModalLoading(true)
+        dispatch(getProduct(id, true))
+        setModalTitle('Edit Product')
+        setEdit(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -110,7 +111,7 @@ const Cuisine = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteCuisine(id))
+                dispatch(deleteProduct(id))
             }
         })
     }
@@ -121,34 +122,35 @@ const Cuisine = () => {
     }
 
     const handleSubmit = (event) => {
+        const finalData = {...formState}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateCuisine(formState)) : dispatch(addCuisine(formState))
+        edit ? dispatch(() => updateProduct(finalData)) : dispatch(() => addProduct(finalData))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadCuisines(currentPage + 1, pageSize, value))
+            dispatch(loadProducts(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadCuisines(page.selected + 1, pageSize, searchValue))
+        dispatch(loadProducts(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
     const columns = [
         {
             name: 'Name',
-            selector: (row) => row.name,
+            selector: (row) => row.full_name,
             sortable: true,
             minWidth: '50px'
         },
@@ -215,10 +217,10 @@ const Cuisine = () => {
     }
 
     const dataToRender = () => {
-        if (cuisineList.length > 0) {
-            return cuisineList
+        if (productList.length > 0) {
+            return productList
         }  else {
-            return cuisineList.slice(0, pageSize)
+            return productList.slice(0, pageSize)
         }
     }
 
@@ -228,10 +230,10 @@ const Cuisine = () => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Cuisine</CardTitle>
+                            <CardTitle tag='h4'>Product</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Cuisine</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -276,4 +278,4 @@ const Cuisine = () => {
     )
 }
 
-export default Cuisine
+export default Product

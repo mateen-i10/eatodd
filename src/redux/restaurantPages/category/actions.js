@@ -1,31 +1,31 @@
-import {apiCall} from "../api/actions"
+import {apiCall} from "../../api/actions"
 
 import {
     setLoading,
-    setRestaurants,
-    setRestaurant,
-    editRestaurant,
+    setCategorys,
+    setCategory,
+    editCategory,
     setDetailLoading,
-    setRequestCompleted, setIsRestaurantError, setIsRestaurantSuccess, setIsEdit
+    setRequestCompleted, setIsCategoryError, setIsCategorySuccess, setIsEdit
 } from "./reducer"
-/*import { data } from '../../tempData/data'*/
-const url = 'restaurant'
+
+const url = 'Category'
 
 
-// ** Get All Restaurants Data
-export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+// ** Get All Categorys Data
+export const loadCategorys = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
             method: 'get',
-            onSuccess: setRestaurants.type
+            onSuccess: setCategorys.type
         }))
     }
 }
 
-export const getRestaurant = (id, isEdit = false) => {
+export const getCategory = (id, isEdit = false) => {
     console.log("dataGet", isEdit)
     return async dispatch => {
         if (isEdit) {
@@ -33,7 +33,7 @@ export const getRestaurant = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: editRestaurant.type
+                onSuccess: editCategory.type
             }))
         } else {
             dispatch(setDetailLoading(true))
@@ -41,26 +41,26 @@ export const getRestaurant = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: setRestaurant.type
+                onSuccess: setCategory.type
             }))
         }
     }
 }
-export const deleteRestaurant = (id) => {
+export const deleteCategory = (id) => {
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'Restaurant Deleted Successfully',
+            successMessage: 'Category Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsRestaurantError.type,
-            isSuccess: setIsRestaurantSuccess.type
+            onError: setIsCategoryError.type,
+            isSuccess: setIsCategorySuccess.type
         }))
     }
 }
-export const addRestaurant = (data) => {
+export const addCategory = (data) => {
     console.log('resData', data)
     return async dispatch => {
         dispatch(apiCall({
@@ -68,24 +68,26 @@ export const addRestaurant = (data) => {
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Restaurant Added Successfully',
+            successMessage: 'Category Added Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsRestaurantError.type,
-            isSuccess: setIsRestaurantSuccess.type
+            onError: setIsCategoryError.type,
+            isSuccess: setIsCategorySuccess.type,
+            isFormData: true
         }))
     }
 }
-export const updateRestaurant = (data) => {
+export const updateCategory = (data) => {
+    console.log('updated data', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Restaurant Updated Successfully',
+            successMessage: 'Category Updated Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsRestaurantError.type,
-            isSuccess: setIsRestaurantSuccess.type
+            onError: setIsCategoryError.type,
+            isSuccess: setIsCategorySuccess.type
         }))
         dispatch(setIsEdit(false))
     }

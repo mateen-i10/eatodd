@@ -1,63 +1,112 @@
-import React, {Fragment, useEffect, useState} from 'react'
-import {getCategoryData} from "../../../tempData/fakeData"
+// ** React Imports
+import React, {Fragment, useRef, useState} from 'react'
+
+// ** Third Party Components
+import ReactPaginate from 'react-paginate'
+import DataTable from 'react-data-table-component'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
-    Button,
     Card,
     CardHeader,
     CardTitle,
-    Col,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
+    Button,
+    Input,
     Row,
-    UncontrolledDropdown
-} from "reactstrap"
-import PageItemsInput from "../components/tables/PageItemsInput"
-import SearchBox from "../components/tables/SearchBox"
-import PaginatedDataTable from "../components/tables/PaginatedDataTable"
-import {Edit, FileText, MoreVertical, Trash} from "react-feather"
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap'
+
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
-import {deleteCategory, getCategory, loadCategory} from "../../../redux/restaurantPages/categoryReducer"
-import AddCategory from "./forms/AddCategory"
+import Joi from "joi-browser"
+import UILoader from "../../../@core/components/ui-loader"
+import useLoadData from "../../../utility/customHooks/useLoadData"
+import useEdit from "../../../utility/customHooks/useEdit"
+import useModalError from "../../../utility/customHooks/useModalError"
+import {setIsEdit, setIsCategoryError, setCategory} from "../../../redux/restaurantPages/category/reducer"
+import FormModal from "../../../components/FormModal"
+import {FieldTypes} from "../../../utility/enums/FieldType"
+import '@styles/react/libs/flatpickr/flatpickr.scss'
+// import Datetime from "react-datetime"
 
-const Category = (props) => {
-    const [itemsPerPage, setItemsPerPage] = useState(7)
-    const [searchValue, setSearchValue] = useState('')
-    const [filteredData, setFilteredData] = useState([])
-    const [pageCount, setPageCount] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
-    const categoryData = getCategoryData()
-    const [getPageData, setPageData] = useState(categoryData)
+// my changes
+import {deleteCategory, loadCategorys, getCategory, addCategory, updateCategory} from "../../../redux/restaurantPages/category/actions"
 
-    //here we go again
+const Category = () => {
 
-    // const customerList = useSelector(state => state.crmSms.list)
-    const isEdit = useSelector(state => state.categoryReducer.isEdit)
+    const categoryList = useSelector(state => state.category.list)
+    const formInitialState = useSelector(state => state.category.object)
+    const miscData = useSelector(state => state.category.miscData)
+    const isEdit = useSelector(state => state.category.isEdit)
+    const isLoading = useSelector(state => state.category.isLoading)
+    const isError = useSelector(state => state.category.isError)
+    const isSuccess = useSelector(state => state.category.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
+    const formModalRef = useRef(null)
+
+    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [pageSize] = useState(10)
+    const [searchValue, setSearchValue] = useState('')
+
+    // ** local States
+    const [modalTitle, setModalTitle] = useState('Add Category')
+    const [edit, setEdit] = useState(false)
+    const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [editData, setEditData] = useState(0)
+    const [isModalLoading,  setModalLoading] = useState(false)
+    const [formData, setFormData] = useState([])
 
-    useEffect(() => {
-        dispatch(loadCategory())
-    }, [isEdit])
+    /* useEffect(() => {
+         dispatch(loadCategorys())
+     }, [isEdit])*/
 
+    // ** schema for validations
+    const [schema, setSchema] = useState(Joi.object({
+        name: Joi.string().required().label("Name")
+    }))
 
     // ** Function to handle filter
     const toggle = () => {
+        if (isModal) setEdit(false)
         setModal(!isModal)
+        setFormState({...formInitialState})
+        if (isModalLoading) setModalLoading(false)
     }
-    const addClick = (e) => {
-        e.preventDefault()
+
+    // custom hooks
+    useLoadData(isSuccess, loadCategorys, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCategory, {
+        name: '',
+        description:''
+    })
+    useModalError(isError, setModalLoading, setIsCategoryError)
+
+    const addClick = () => {
+        setFormData([
+            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+        ])
+        setModalTitle('Add Category')
         toggle()
     }
-    const editClick = (data) => {
+
+    const editClick = (id) => {
+        console.log("edit", id)
+        setFormData([
+            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
+        ])
+
+        setSchema(Joi.object({
+            name: Joi.string().required().label("Name")
+        }))
+
         toggle()
-        dispatch(getCategory(data.id, true))
-        setEditData(data)
-        console.log('id of the user', data.id, data.full_name)
+        dispatch(getCategory(id, true))
+        setModalTitle('Edit Category')
+        setModalLoading(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -67,7 +116,7 @@ const Category = (props) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#7367f0',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
@@ -76,141 +125,164 @@ const Category = (props) => {
             }
         })
     }
+
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        console.log('call', props)
-        props.history.push(`/Dashboard/category/${id}`)
+        // props.history.push(`/restaurant/detail/${id}`)
     }
-    // const handleSubmit = (event) => {
-    //     // console.log("formState on submit", formState)
-    //     event.preventDefault()
-    //     const isError = formModalRef.current.validate(formState)
-    //     if (isError) return
-    //
-    //     // call api
-    //     setModalLoading(true)
-    //     console.log("form submitted")
-    // }
 
-    const handlePerPage = e => {
-        return (setItemsPerPage(parseInt(e.target.value)))
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const isError = formModalRef.current.validate(formState)
+        if (isError) return
+
+        // call api
+        setModalLoading(true)
+        edit ? dispatch(updateCategory(formState)) : dispatch(addCategory(formState))
     }
-    const handlePagination = e => {
-        return (setCurrentPage(e.selected))
-    }
-    // ** Function to handle filter
+
     const handleFilter = e => {
+        console.log('e.keyCode', e.keyCode)
         const value = e.target.value
-        let updatedData = []
-        setSearchValue(value)
-        if (value.length) {
-            updatedData = categoryData.filter(item => {
-                const startsWith =
-                    item.name.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.priority.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.pairing.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.action.toLowerCase().startsWith(value.toLowerCase())
-
-                const includes =
-                    item.name.toLowerCase().includes(value.toLowerCase()) ||
-                    item.priority.toLowerCase().includes(value.toLowerCase()) ||
-                    item.pairing.toLowerCase().includes(value.toLowerCase()) ||
-                    item.action.toLowerCase().includes(value.toLowerCase())
-                if (startsWith) {
-                    return startsWith
-                } else if (!startsWith && includes) {
-                    return includes
-                } else return null
-            })
-            setFilteredData(updatedData)
-            setSearchValue(value)
+        if (e.keyCode === 13) {
+            dispatch(loadCategorys(currentPage + 1, pageSize, value))
         }
+        setSearchValue(value)
     }
-    useEffect(() => {
-        setPageData(searchValue.length > 0 ? filteredData : categoryData)
-        setPageCount(searchValue.length > 0 ? Math.ceil(filteredData.length / itemsPerPage) : Math.ceil(getPageData.length / itemsPerPage))
-    }, [itemsPerPage, searchValue])
 
+    // ** Function to handle Pagination
+    const handlePagination = page => {
+        dispatch(loadCategorys(page.selected + 1, pageSize, searchValue))
+        setCurrentPage(page.selected + 1)
+    }
 
-    // ** Table for  category page
-    const categoryColumns = [
+    const columns = [
         {
-            sortable: true,
-            name: 'Priority',
-            minWidth: '225px',
-            selector: row => row.priority
-        },
-        {
-            sortable: true,
             name: 'Name',
-            minWidth: '250px',
-            selector: row => row.name
+            selector: (row) => row.name,
+            sortable: true,
+            minWidth: '50px'
         },
         {
+            name: 'Description',
+            selector: (row) => row.description,
             sortable: true,
-            name: 'Pairing',
-            minWidth: '250px',
-            selector: row => row.pairing
+            minWidth: '50px'
         },
         {
-            sortable: true,
-            name: 'Action',
-            minWidth: '150px',
-            selector: row => row.action,
-            cell: (row) => {
+            name: 'Actions',
+            allowOverflow: true,
+            cell: row => {
                 return (
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1' tag='span'>
-                                <MoreVertical size={15}/>
+                                <MoreVertical size={15} />
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100'
-                                              onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15}/>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
-                                <DropdownItem tag='a' href='/' className='w-100'
-                                              onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15}/>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                    <Trash size={15} />
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => {
-                            editClick(row)
-                        }}><Edit size={15}/></span>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
         }
     ]
+
+    // ** Custom Pagination
+    const CustomPagination = () => {
+        const count = miscData?.totalPages ?? 0
+
+        return <ReactPaginate
+            previousLabel={''}
+            nextLabel={''}
+            breakLabel='...'
+            pageCount={count || 1}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            activeClassName='active'
+            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+            onPageChange={page => handlePagination(page)}
+            pageClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            nextClassName={'page-item next'}
+            previousClassName={'page-item prev'}
+            previousLinkClassName={'page-link'}
+            pageLinkClassName={'page-link'}
+            breakClassName='page-item'
+            breakLinkClassName='page-link'
+            containerClassName={
+                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            }
+        />
+    }
+
+    const dataToRender = () => {
+        if (categoryList.length > 0) {
+            return categoryList
+        }  else {
+            return categoryList.slice(0, pageSize)
+        }
+    }
+
     return (
         <Fragment>
-            <Card>
-                <CardHeader className="border-bottom">
-                    <CardTitle tag="h4">Category</CardTitle>
-                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Category</Button.Ripple>
-                </CardHeader>
-                <Row className="mx-0 mt-1 mb-50">
-                    <Col sm="6">
-                        <PageItemsInput itemsPerPage={itemsPerPage} onPageChange={handlePerPage}/>
-                    </Col>
-                    <Col
-                        className="d-flex align-items-center justify-content-sm-end mt-sm-0 "
-                        sm="6">
-                        <SearchBox searchValue={searchValue} handleFilter={handleFilter}/>
-                    </Col>
-                </Row>
-                <PaginatedDataTable
-                    data={getPageData}
-                    itemsPerPage={itemsPerPage}
-                    handlePageClick={handlePagination}
-                    columns={categoryColumns}
-                    currentPage={currentPage}
-                    pageCount={pageCount}/>
-            </Card>
-            <AddCategory isShow={isModal} setShow={toggle} data={editData} />
+            <UILoader blocking={isLoading}>
+                <Card>
+                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <div>
+                            <CardTitle tag='h4'>Category</CardTitle>
+                            <h6>Friday June 10, 2022, 08:10 AM</h6>
+                        </div>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Category</Button.Ripple>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                type='text'
+                                placeholder='Search'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10} />}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
+            </UILoader>
+            <FormModal ref={formModalRef}
+                       formState={formState}
+                       formData={formData}
+                       setFormState={setFormState}
+                       schema={schema}
+                       isModal={isModal}
+                       toggleModal={toggle}
+                       modalTitle={modalTitle}
+                       primaryBtnLabel='Save'
+                       secondaryBtnLabel='Cancel'
+                       isLoading = {isModalLoading}
+                       handleSubmit={handleSubmit}
+            />
+
         </Fragment>
     )
 }

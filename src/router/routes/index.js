@@ -344,6 +344,16 @@ const Routes = [
         path: '/cuisine',
         component: lazy(() => import('../../views/admin/cuisine/Cuisine')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/products',
+        component: lazy(() => import('../../views/admin/product/Product')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/genralProducts',
+        component: lazy(() => import('../../views/admin/genralproduct/GenralProduct')),
+        layout: 'VerticalLayout'
     }
 
 ]

@@ -11,19 +11,19 @@ const initialState = {
     isSuccess: false
 }
 
-export const setCuisines = createAction("CuisineReducer/setCuisines")
-export const setCuisine = createAction("CuisineReducer/setCuisine")
-export const setLoading = createAction("CuisineReducer/setLoading")
-export const editCuisine = createAction("CuisineReducer/editCuisine")
-export const setDetailLoading = createAction("CuisineReducer/setDetailLoading")
-export const setIsEdit = createAction("CuisineReducer/setIsEdit")
-export const setIsCuisineError = createAction("CuisineReducer/setIsCuisineError")
-export const setIsCuisineSuccess = createAction("CuisineReducer/setIsCuisineSuccess")
-export const setRequestCompleted = createAction("CuisineReducer/setRequestCompleted")
+export const setCategorys = createAction("CategoryReducer/setCategorys")
+export const setCategory = createAction("CategoryReducer/setCategory")
+export const setLoading = createAction("CategoryReducer/setLoading")
+export const editCategory = createAction("CategoryReducer/editCategory")
+export const setDetailLoading = createAction("CategoryReducer/setDetailLoading")
+export const setIsEdit = createAction("CategoryReducer/setIsEdit")
+export const setIsCategoryError = createAction("CategoryReducer/setIsCategoryError")
+export const setIsCategorySuccess = createAction("CategoryReducer/setIsCategorySuccess")
+export const setRequestCompleted = createAction("CategoryReducer/setRequestCompleted")
 
-const CuisineReducer = (state = initialState, action) => {
+const CategoryReducer = (state = initialState, action) => {
     switch (action.type) {
-        case setCuisines.type:
+        case setCategorys.type:
             return {
                 ...state,
                 list: action.payload.data,
@@ -34,7 +34,7 @@ const CuisineReducer = (state = initialState, action) => {
                 isError: false,
                 isSuccess: false
             }
-        case setCuisine.type:
+        case setCategory.type:
             return {
                 ...state,
                 object: action.payload.data,
@@ -52,7 +52,7 @@ const CuisineReducer = (state = initialState, action) => {
                 ...state,
                 isDetailLoading: action.payload
             }
-        case editCuisine.type:
+        case editCategory.type:
             return {
                 ...state,
                 object: action.payload.data,
@@ -68,12 +68,12 @@ const CuisineReducer = (state = initialState, action) => {
                 ...state,
                 isEdit: action.payload
             }
-        case setIsCuisineError.type:
+        case setIsCategoryError.type:
             return {
                 ...state,
                 isError: action.payload
             }
-        case setIsCuisineSuccess.type:
+        case setIsCategorySuccess.type:
             return {
                 ...state,
                 isSuccess: action.payload
@@ -83,4 +83,4 @@ const CuisineReducer = (state = initialState, action) => {
     }
 }
 
-export default CuisineReducer
+export default CategoryReducer
