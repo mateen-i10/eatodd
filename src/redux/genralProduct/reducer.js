@@ -55,8 +55,7 @@ const GenralProductReducer = (state = initialState, action) => {
             return {
                 ...state,
                 object: action.payload.data,
-                isEdit: true,
-                subCategoryId: 1
+                isEdit: true
             }
         case setIsGenralProductError.type:
             return {

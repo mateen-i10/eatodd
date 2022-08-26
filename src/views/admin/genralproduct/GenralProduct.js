@@ -38,6 +38,8 @@ import {
     loadGenralProducts,
     updateGenralProduct
 } from "../../../redux/genralProduct/actions"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const GenralProducts = () => {
 
@@ -49,6 +51,26 @@ const GenralProducts = () => {
     const isError = useSelector(state => state.genralProduct.isError)
     const isSuccess = useSelector(state => state.genralProduct.isSuccess)
     const dispatch = useDispatch()
+
+    // select subCategory
+
+    const subCategories = async (input) => {
+        return httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log("respSubCategory*******", response)
+                    return response.data.data.map(d => {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
 
     // ** refs
     const formModalRef = useRef(null)
@@ -130,10 +152,10 @@ const GenralProducts = () => {
         },
         {
             type: FieldTypes.Number,
-            label: 'Percentage',
+            label: 'Tax Percentage',
             placeholder: 'Enter Percentage',
-            name: 'percentage',
-            isRequired: false,
+            name: 'taxPercentage',
+            isRequired: true,
             fieldGroupClasses: 'col-6'
         },
         {
@@ -143,6 +165,17 @@ const GenralProducts = () => {
             name: 'image',
             isRequired: false,
             fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Category',
+            placeholder: 'Select Category',
+            name: 'category',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            loadOptions: subCategories,
+            isAsyncSelect: true,
+            isMulti: false
         }
     ]
 
@@ -150,6 +183,7 @@ const GenralProducts = () => {
     const schema = Joi.object({
         name: Joi.string().required().label("Name")
     })
+
 
     // ** Function to handle filter
     const toggle = () => {
@@ -177,7 +211,7 @@ const GenralProducts = () => {
         toggle()
         dispatch(getGenralProduct(id, true))
         setModalTitle('Edit Product')
-        setEdit(true)
+        setModalLoading(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -203,14 +237,17 @@ const GenralProducts = () => {
     }
 
     const handleSubmit = (event) => {
-        // const finalData = {...formState}
+        console.log('formState', formState)
+        const finalData = {...formState, subCategoryId: formState.category?.value}
         event.preventDefault()
-        const isError = formModalRef.current.validate(formState)
+        const isError = formModalRef.current.validate(finalData)
         if (isError) return
+
+        console.log(finalData, "testing")
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateGenralProduct(formState)) : dispatch(addGenralProduct(formState))
+        edit ? dispatch(updateGenralProduct({...finalData})) : dispatch(addGenralProduct(formState))
     }
 
     const handleFilter = e => {
@@ -249,37 +286,43 @@ const GenralProducts = () => {
         },
         {
             name: 'RetailPrice',
-            selector: (row) => row.description,
+            selector: (row) => row.retailPrice,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'OnlinePrice',
-            selector: (row) => row.description,
+            selector: (row) => row.onlinePrice,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'Discount',
-            selector: (row) => row.description,
+            selector: (row) => row.discount,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'Quantity',
-            selector: (row) => row.description,
+            selector: (row) => row.quantity,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'TaxAmount',
-            selector: (row) => row.description,
+            selector: (row) => row.taxAmount,
             sortable: true,
             minWidth: '50px'
         },
         {
             name: 'TaxPercentage',
-            selector: (row) => row.description,
+            selector: (row) => row.taxPercentage,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Image',
+            selector: (row) => row.image,
             sortable: true,
             minWidth: '50px'
         },

@@ -15,42 +15,6 @@ import {apiCall} from "../api/actions"
 
 const url = 'generalProduct'
 
-// ** Get GenralProduct Data
-// export const loadGeneralProducts = () => {
-//     return async dispatch => {
-//         dispatch(setLoading(true))
-//         dispatch(apiCall({
-//             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
-//             data: {},
-//             method: 'get',
-//             onSuccess: setCategorys.type
-//         }))
-//         dispatch(setGenralProducts([...data]))
-//     }
-// }
-// export const getGeneralProduct = (id, isEdit) => {
-//     return async dispatch => {
-//         dispatch(setLoading(true))
-//         const found = data.find(d => d.id === id)
-//         if (isEdit) dispatch(editGenralProduct({...found}))
-//         else {
-//             dispatch(setGenralProduct({...found}))
-//         }
-//     }
-// }
-// export const deleteGenralProduct = (id) => {
-//     return async dispatch => {
-//         console.log('deleted', id, dispatch)
-//     }
-// }
-//
-// export const addGenralProduct = (newGenralProduct) => {
-//     console.log("add GenralProduct", newGenralProduct)
-// }
-//
-// export const updateGenralProduct = (newGenralProduct) => {
-//     console.log("update GenralProduct", newGenralProduct)
-// }
 
 // ** Get All general Product Data
 export const loadGenralProducts = (pageIndex = 1, pageSize = 12, searchQuery = null) => {
@@ -118,6 +82,11 @@ export const addGenralProduct = (data) => {
 }
 export const updateGenralProduct = (data) => {
     console.log('updated data', data)
+    delete data.AttachmentId
+    delete data.modifiedById
+    delete data.modifiedDate
+    delete data.category
+
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -127,8 +96,8 @@ export const updateGenralProduct = (data) => {
             successMessage: 'Category Updated Successfully',
             requestCompleted: setGenralProductRequestCompleted.type,
             onError: setIsGenralProductError.type,
-            isSuccess: setIsGenralProductSuccess.type
-            // isFormData: true
+            isSuccess: setIsGenralProductSuccess.type,
+            isFormData: true
         }))
         dispatch(setIsGenralProductEdit(false))
     }
