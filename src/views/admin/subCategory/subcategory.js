@@ -139,6 +139,7 @@ const SubCategory = () => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
+        console.log(id, "id of the selected page")
         // props.history.push(`/restaurant/detail/${id}`)
     }
 

@@ -30,6 +30,8 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 // my changes
 import {deleteProduct, loadProducts, getProduct, addProduct, updateProduct} from "../../../redux/products/actions"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const Product = () => {
 
@@ -49,6 +51,60 @@ const Product = () => {
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
 
+    const subCategories = async (input) => {
+        return httpService._get(`${baseURL}SubCategory?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log(response, "resp")
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const generalProduct = async (input) => {
+        return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log(response, "genral product resp")
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const Restaurant = async (input) => {
+        return httpService._get(`${baseURL}Restaurant?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log(response, "Restaurant resp")
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
     const [edit, setEdit] = useState(false)
@@ -57,7 +113,18 @@ const Product = () => {
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'RetailPrice', placeholder: 'Enter RetailPrice', name:'retailPrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'OnlinePrice', placeholder: 'Enter OnlinePrice', name:'onlinePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subCategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'GeneralProduct', placeholder: 'Select GeneralProduct', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
     ])
 
     /* useEffect(() => {
