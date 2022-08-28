@@ -22,18 +22,18 @@ import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsProductEdit, setIsProductError, setProduct} from "../../../redux/products/reducer"
+import {setIsEdit, setIsproductError, setproduct} from "../../../redux/products/reducer"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
 
 // my changes
-import {deleteProduct, loadProducts, getProduct, addProduct, updateProduct} from "../../../redux/products/actions"
+import {deleteproduct, loadproducts, getproduct, addproduct, updateproduct} from "../../../redux/products/actions"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
-const Product = () => {
+const Product = (props) => {
 
     const productList = useSelector(state => state.product.list)
     const formInitialState = useSelector(state => state.product.object)
@@ -122,13 +122,13 @@ const Product = () => {
         {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subCategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subcategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'GeneralProduct', placeholder: 'Select GeneralProduct', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
     ])
 
     /* useEffect(() => {
-         dispatch(loadProducts())
+         dispatch(loadproducts())
      }, [isEdit])*/
 
     // ** schema for validations
@@ -141,17 +141,17 @@ const Product = () => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
-        // setProductSchedule([...resSchedules])
+        // setproductSchedule([...resSchedules])
         if (isModalLoading) setModalLoading(false)
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadProducts, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsProductEdit, setProduct, {
+    useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
         name: '',
         description:''
     })
-    useModalError(isError, setModalLoading, setIsProductError)
+    useModalError(isError, setModalLoading, setIsproductError)
 
     const addClick = () => {
         setModalTitle('Add Product')
@@ -161,7 +161,7 @@ const Product = () => {
     const editClick = (id) => {
         console.log("edit", id)
         toggle()
-        dispatch(getProduct(id, true))
+        dispatch(getproduct(id, true))
         setModalTitle('Edit Product')
         setEdit(true)
     }
@@ -178,46 +178,46 @@ const Product = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteProduct(id))
+                dispatch(deleteproduct(id))
             }
         })
     }
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        // props.history.push(`/restaurant/detail/${id}`)
+        props.history.push(`/productsDetail/${id}`)
     }
 
     const handleSubmit = (event) => {
-        const finalData = {...formState}
+        const finalData = {...formState, subCategoryId: formState.subcategory?.value, generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value }
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(() => updateProduct(finalData)) : dispatch(() => addProduct(finalData))
+        edit ? dispatch(updateproduct(finalData)) : dispatch(addproduct(finalData))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadProducts(currentPage + 1, pageSize, value))
+            dispatch(loadproducts(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadProducts(page.selected + 1, pageSize, searchValue))
+        dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
     const columns = [
         {
             name: 'Name',
-            selector: (row) => row.full_name,
+            selector: (row) => row.name,
             sortable: true,
             minWidth: '50px'
         },

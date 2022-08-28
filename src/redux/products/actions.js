@@ -1,34 +1,97 @@
-import {setLoading, setProducts, setProduct, editProduct} from "./reducer"
-// ** Table Data & Columns
-import { data } from '../../tempData/data'
+import {apiCall} from "../api/actions"
 
-// ** Get Product Data
-export const loadProducts = () => {
+import {
+    setLoading,
+    setproducts,
+    setproduct,
+    editproduct,
+    setDetailLoading,
+    setRequestCompleted, setIsproductError, setIsproductSuccess, setIsEdit
+} from "./reducer"
+
+const url = 'product'
+
+
+// ** Get All products Data
+export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
-        dispatch(setProducts([...data]))
+        dispatch(apiCall({
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            data: {},
+            method: 'get',
+            onSuccess: setproducts.type
+        }))
     }
 }
-export const getProduct = (id, isEdit) => {
+
+export const getproduct = (id, isEdit = false) => {
+    console.log("dataGet", isEdit)
     return async dispatch => {
-        dispatch(setLoading(true))
-        const found = data.find(d => d.id === id)
-        if (isEdit) dispatch(editProduct({...found}))
-        else {
-            dispatch(setProduct({...found}))
+        if (isEdit) {
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: editproduct.type
+            }))
+        } else {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setproduct.type
+            }))
         }
     }
 }
-export const deleteProduct = (id) => {
+export const deleteproduct = (id) => {
     return async dispatch => {
-        console.log('deleted', id, dispatch)
+        dispatch(apiCall({
+            url: `${url}/${id}`,
+            data: {},
+            method: 'delete',
+            isSuccessToast: true,
+            successMessage: 'product Deleted Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsproductError.type,
+            isSuccess: setIsproductSuccess.type
+        }))
     }
 }
-
-export const addProduct = (newProduct) => {
-    console.log("add Product", newProduct)
+export const addproduct = (data) => {
+    console.log('resData', data)
+    delete data.attachmentId
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'post',
+            isSuccessToast: true,
+            successMessage: 'product Added Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsproductError.type,
+            isSuccess: setIsproductSuccess.type,
+            isFormData: true
+        }))
+    }
 }
-
-export const updateProduct = (newProduct) => {
-    console.log("update Product", newProduct)
+export const updateproduct = (data) => {
+    console.log('updated data', data)
+    delete data.attachmentId
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'product Updated Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsproductError.type,
+            isSuccess: setIsproductSuccess.type,
+            isFormData: true
+        }))
+        dispatch(setIsEdit(false))
+    }
 }

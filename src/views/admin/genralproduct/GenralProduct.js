@@ -41,7 +41,7 @@ import {
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
-const GenralProducts = () => {
+const GenralProducts = (props) => {
 
     const productList = useSelector(state => state.genralProduct.list)
     const formInitialState = useSelector(state => state.genralProduct.object)
@@ -233,7 +233,7 @@ const GenralProducts = () => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        // props.history.push(`/restaurant/detail/${id}`)
+        props.history.push(`/genralProductsDetail/${id}`)
     }
 
     const handleSubmit = (event) => {

@@ -356,8 +356,18 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/productsDetail/:id',
+        component: lazy(() => import('../../views/admin/product/componenets/ProductDetails')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/genralProducts',
         component: lazy(() => import('../../views/admin/genralproduct/GenralProduct')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/genralProductsDetail/:id',
+        component: lazy(() => import('../../views/admin/genralproduct/components/GenralProductDetail')),
         layout: 'VerticalLayout'
     }
 
