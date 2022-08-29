@@ -4,6 +4,7 @@ import {
     Clipboard,
     Clock,
     Coffee,
+    Copy,
     DollarSign,
     Facebook,
     Grid,
@@ -11,84 +12,89 @@ import {
     List,
     Mail,
     Menu,
-    MessageSquare, PenTool,
-    PlusSquare, Send,
-    User, UserCheck,
+    MessageSquare,
+    Package,
+    PenTool,
+    PlusSquare,
+    Send,
+    User,
+    UserCheck,
     UserPlus,
-    Users, Volume, Package, Copy
+    Users,
+    Volume
 } from 'react-feather'
 
 export default [
     {
         id: 'Dashboard',
         title: 'Dashboard',
-        icon: <Home size={20} />,
+        icon: <Home size={20}/>,
         navLink: '/dashboard'
     },
     {
         id: 'Users',
         title: 'Users',
-        icon: <Users size={20} />,
+        icon: <Users size={20}/>,
         navLink: '/Users'
     },
     {
         id: 'Restaurants',
         title: 'Restaurants',
-        icon: <Coffee size={20} />,
+        icon: <Coffee size={20}/>,
         navLink: '/Restaurant'
     },
     {
         id: 'Cuisine',
         title: 'Cuisine',
-        icon: <PenTool size={20} />,
+        icon: <PenTool size={20}/>,
         navLink: '/cuisine'
     },
     {
         id: 'category',
         title: 'Category',
-        icon: <Grid size={12} />,
+        icon: <Grid size={12}/>,
         navLink: '/dashboard/category'
     },
     {
         id: 'subCategory',
         title: 'SubCategory',
-        icon: <Copy size={12} />,
+        icon: <Copy size={12}/>,
         navLink: '/subCategory'
     },
     {
         id: 'Product',
         title: 'Product',
-        icon: <Package size={20} />,
+        icon: <Package size={20}/>,
         navLink: '/products'
     },
     {
         id: 'Genral Product',
         title: 'Genral Product',
-        icon: <Package size={20} />,
+        icon: <Package size={20}/>,
         navLink: '/genralProducts'
     },
     {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
-        icon: <Facebook size={20} />,
+        icon: <Facebook size={20}/>,
         navLink: '/Facebook'
     },
     {
         id: 'Customers',
         title: 'Customers',
-        icon: <User size={20} />,
+        icon: <User size={20}/>,
         navLink: '/Customers'
     },
     {
         id: 'CRMemails',
         title: 'CRM (Emails)',
-        icon: <Mail size={20} />,
+        icon: <Mail size={20}/>,
         navLink: '/CrmEmails',
         children: [
             {
                 id: 'designer',
                 title: 'Designer',
-                icon: <PenTool size={20} />,
+                icon: <PenTool size={20}/>,
                 navLink: '/designer'
             }
         ]
@@ -96,19 +102,19 @@ export default [
     {
         id: 'CRMsms',
         title: 'CRM (SMS)',
-        icon: <MessageSquare size={20} />,
+        icon: <MessageSquare size={20}/>,
         navLink: '/CrmSms'
     },
     {
         id: 'Bussiness Details',
         title: 'Bussiness Details',
-        icon: <Archive size={20} />,
+        icon: <Archive size={20}/>,
         navLink: '/BussinessDetails'
     },
     {
         id: 'Login History',
         title: 'Login History',
-        icon: <Clock size={20} />,
+        icon: <Clock size={20}/>,
         navLink: '/LoginHistory'
     },
     {
@@ -120,12 +126,12 @@ export default [
             {
                 id: 'orders',
                 title: 'Orders',
-                icon: <Clipboard size={20} />,
+                icon: <Clipboard size={20}/>,
                 navLink: '/dashboard/orders'
             },
             {
                 id: 'menuitems',
-                title: 'Menu Items',
+                title: 'Catering Items',
                 icon: <Menu size={12}/>,
                 navLink: '/dashboard/menuitems'
             },

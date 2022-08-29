@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {
-    Badge, Button,
+    Badge,
+    Button,
     Card,
     CardHeader,
     CardTitle,
@@ -131,7 +132,7 @@ const MenuItems = (props) => {
     }, [itemsPerPage, searchValue])
 
 
-// ** Table for Menu item page
+// ** Table for Catering item page
     const menuItemColumns = [
         {
             sortable: true,
@@ -225,7 +226,7 @@ const MenuItems = (props) => {
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Menu Items</CardTitle>
-                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Menu Item</Button.Ripple>
+                    <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Menu Item</Button.Ripple>
                 </CardHeader>
                 <Row className="mx-0 mt-1 mb-50">
                     <Col sm="6">
@@ -246,7 +247,7 @@ const MenuItems = (props) => {
                     pageCount={pageCount}/>
             </Card>
 
-            <AddMenuItem isShow={isModal} setShow={toggle} data={editData} />
+            <AddMenuItem isShow={isModal} setShow={toggle} data={editData}/>
 
         </Fragment>
     )

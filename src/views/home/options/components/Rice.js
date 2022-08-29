@@ -95,7 +95,7 @@ const Rice = (props) => {
                                      style={!selected ? {
                                          width: "100%",
                                          height: 200,
-                                         objectFit: "cover",
+                                         objectFit: "contain",
                                          marginLeft: -7,
                                          marginTop: -29
 
@@ -103,7 +103,7 @@ const Rice = (props) => {
                                          width: "100%",
                                          height: 200,
                                          backgroundColor: 'transparent',
-                                         objectFit: "cover",
+                                         objectFit: "contain",
                                          overflow: "hidden",
                                          marginLeft: -7,
                                          marginTop: -29
