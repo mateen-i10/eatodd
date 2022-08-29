@@ -84,11 +84,11 @@ const ToppingThingOff = (props) => {
                                     <img src={foodImage} className="img-fluid rounded-start" alt="..."
                                          style={{
                                              width: "100%",
-                                             height: 180,
-                                             objectFit: "cover",
+                                             height: 120,
+                                             objectFit: "fill",
                                              userSelect: "none",
-                                             objectPosition: "70% 100%",
-                                             marginTop: -30
+                                             // objectPosition: "100% 100%"
+                                             marginTop: 0
                                          }}/>
                                 </div>
                             </div>

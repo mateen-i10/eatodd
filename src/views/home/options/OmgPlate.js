@@ -48,9 +48,9 @@ const Menu = (props) => {
 
 
     const img = props.image
-    const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
+    // const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
     const vegies = require("../../../assets/images/Menu&Order/veg.png").default
-    const chips = require("../../../assets/images/Menu&Order/chips.png").default
+    // const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
     const drink2 = require("../../../assets/images/Menu&Order/drink2.png").default
 
@@ -58,7 +58,7 @@ const Menu = (props) => {
         {
             id: 1,
             title: 'chicken Kebab',
-            image: proteinImage,
+            image: require("../../../assets/images/eatOmg pics 100size/Chicken Kebob.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 11.99,
             single: false,
@@ -68,7 +68,7 @@ const Menu = (props) => {
         {
             id: 2,
             title: 'Lamb',
-            image: proteinImage,
+            image: require("../../../assets/images/eatOmg pics 100size/Lamb Sandwich.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 14.99,
             single: false,
@@ -78,7 +78,7 @@ const Menu = (props) => {
         {
             id: 3,
             title: 'Chicken Shawarma',
-            image: proteinImage,
+            image: require("../../../assets/images/eatOmg pics 100size/Chicken Shawarma.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 11.99,
             single: false,
@@ -88,7 +88,7 @@ const Menu = (props) => {
         {
             id: 4,
             title: 'Okra Stew',
-            image: proteinImage,
+            image: require("../../../assets/images/eatOmg pics 100size/Okra Stew.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 11.99,
             single: false,
@@ -98,7 +98,7 @@ const Menu = (props) => {
         {
             id: 5,
             title: 'Falafel',
-            image: proteinImage,
+            image: require("../../../assets/images/eatOmg pics 100size/Falafel.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
             price: 10.99,
             single: false,
@@ -108,7 +108,7 @@ const Menu = (props) => {
         {
             id: 6,
             title: 'MeatBalls',
-            image: vegies,
+            image: require("../../../assets/images/eatOmg pics 100size/Turkish Meatballs.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 12.99,
             single: false,
@@ -118,7 +118,7 @@ const Menu = (props) => {
         {
             id: 7,
             title: 'Fish',
-            image: vegies,
+            image: require("../../../assets/images/eatOmg pics 100size/Beef Dish.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
             price: 14.99,
             single: false,
@@ -128,7 +128,7 @@ const Menu = (props) => {
         {
             id: 8,
             title: 'Steak',
-            image: vegies,
+            image: require("../../../assets/images/eatOmg pics 100size/Steak Kabsa.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 12.99,
             single: false,
@@ -140,35 +140,35 @@ const Menu = (props) => {
     const sideitems = [
         {
             id: 1,
-            image: chips,
+            image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
             title: 'Garlic Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 3.80
         },
         {
             id: 2,
-            image: chips,
+            image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
             title: 'Baba Ghanoush',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 5.99
         },
         {
             id: 3,
-            image: chips,
+            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
             title: 'Red Hot Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and",
             price: 7.80
         },
         {
             id: 4,
-            image: chips,
+            image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
             title: 'Hummus',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 5.99
         },
         {
             id: 5,
-            image: chips,
+            image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
             title: 'Zhoug Sauce',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
             price: 6.30
@@ -178,14 +178,14 @@ const Menu = (props) => {
     const rice = [
         {
             id: 1,
-            image: require("../../../assets/images/Menu&Order/whiteRice.png").default,
+            image: require("../../../assets/images/eatOmg pics 100size/White Rice.jpg").default,
             title: 'White Rice',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
 
         },
         {
             id: 2,
-            image: require("../../../assets/images/Menu&Order/brownRice.png").default,
+            image: require("../../../assets/images/eatOmg pics 100size/yellow rice.jpg").default,
             title: 'Brown Rice',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
 
@@ -195,15 +195,15 @@ const Menu = (props) => {
     const beans = [
         {
             id: 1,
-            image: require("../../../assets/images/Menu&Order/blackBeans.png").default,
-            title: 'Black Beans',
+            image: require("../../../assets/images/eatOmg pics 100size/chickpea option.jpg").default,
+            title: 'Chick Pea',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
 
         },
         {
             id: 2,
-            image: require("../../../assets/images/Menu&Order/PintoBeans.png").default,
-            title: 'Pinto Beans',
+            image: require("../../../assets/images/eatOmg pics 100size/Tabboili.jpg").default,
+            title: 'Tebboili',
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
 
         }
@@ -249,80 +249,80 @@ const Menu = (props) => {
             single: false,
             half: false,
             doubled: false
-        },
-        {
-            id: 5,
-            title: 'Fountain Drink',
-            image: drink2,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 10.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 6,
-            title: 'Maxican CocaCola',
-            image: drink1,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 7,
-            title: 'Maxican Sprite',
-            image: drink2,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
-            price: 14.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 8,
-            title: 'Tractor organic black tea',
-            image: drink1,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99,
-            single: false,
-            half: false,
-            doubled: false
         }
+        // {
+        //     id: 5,
+        //     title: 'Fountain Drink',
+        //     image: drink2,
+        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
+        //     price: 10.99,
+        //     single: false,
+        //     half: false,
+        //     doubled: false
+        // },
+        // {
+        //     id: 6,
+        //     title: 'Maxican CocaCola',
+        //     image: drink1,
+        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+        //     price: 12.99,
+        //     single: false,
+        //     half: false,
+        //     doubled: false
+        // },
+        // {
+        //     id: 7,
+        //     title: 'Maxican Sprite',
+        //     image: drink2,
+        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
+        //     price: 14.99,
+        //     single: false,
+        //     half: false,
+        //     doubled: false
+        // },
+        // {
+        //     id: 8,
+        //     title: 'Tractor organic black tea',
+        //     image: drink1,
+        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+        //     price: 12.99,
+        //     single: false,
+        //     half: false,
+        //     doubled: false
+        // }
     ]
 
     const toppings = [
         {
             id: 1,
-            title: 'guacamule',
-            image: proteinImage,
+            title: 'baba ganoush',
+            image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
 
         },
         {
             id: 2,
-            title: 'Fresh Tomato Salsa',
-            image: proteinImage,
+            title: 'Persian Yogurt',
+            image: require("../../../assets/images/eatOmg pics 100size/Persian Yogurt.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
         },
         {
             id: 3,
-            title: 'Roasted Chilli Corn Salsa',
-            image: proteinImage,
+            title: "Hummus",
+            image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
 
         },
         {
             id: 4,
-            title: 'Tomatillo green chilli salsa',
-            image: proteinImage,
+            title: 'Roasted Red Papper Dip',
+            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
         },
         {
             id: 5,
-            title: 'Tomatillo Red chilli salsa',
-            image: proteinImage,
+            title: 'lebneh',
+            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
         },
         {
@@ -330,19 +330,8 @@ const Menu = (props) => {
             title: 'Sour Cream',
             image: vegies,
             ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
-        },
-        {
-            id: 7,
-            title: 'Fajita Veggies',
-            image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and "
-        },
-        {
-            id: 8,
-            title: 'Chease',
-            image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
         }
+
     ]
 
     // console.log("selected Catering Items pro veg", selectedMenuItems.selectedProVeg[0].title)
@@ -546,7 +535,8 @@ const Menu = (props) => {
                             })}
                         </div>
                         <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-                            <h1 className="text-primary">Topping Thing Off</h1>
+                            <h1 className="text-primary">Topping Thing Off HEALTHY SPREAD
+                            </h1>
                         </div>
                         <div className="row align-items-center justify-content-center ">
 
