@@ -19,6 +19,7 @@ const Catering = () => {
     return (
         <div>
             <Header/>
+            <div className="fs-1 fw-bolder text-primary mb-3 mt-5 text-center">Build for your love one's</div>
             <div className='bg-white'>
                 <div className="container-sm mb-3">
                     <div className="row mt-3  justify-content-center">
@@ -41,11 +42,8 @@ const Catering = () => {
                                         <div className="text-start">{item.title}</div>
                                     </div>
                                 ))}
-
                             </div>
-
                         </div>
-
                         <div className="col-md-7 col-10 ">
                             <DetailsMenuPage selectedCategory={selectedCategory}
                                              xl={xl}

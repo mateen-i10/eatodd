@@ -16,7 +16,7 @@ const OmgCorporate = (props) => {
                                          height: 170,
                                          objectFit: "cover",
                                          marginLeft: -16,
-                                         marginTop: -10,
+                                         marginTop: -14,
                                          overflow: "hidden"
                                      }}/>
                             </div>
