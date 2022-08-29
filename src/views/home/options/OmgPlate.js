@@ -345,8 +345,8 @@ const Menu = (props) => {
         }
     ]
 
-    // console.log("selected Menu Items pro veg", selectedMenuItems.selectedProVeg[0].title)
-    // console.log("selected Menu Items ", selectedMenuItems)
+    // console.log("selected Catering Items pro veg", selectedMenuItems.selectedProVeg[0].title)
+    // console.log("selected Catering Items ", selectedMenuItems)
     const handleAllMenuItems = () => {
         setSelectedMenuItems({
             ...selectedMenuItems,

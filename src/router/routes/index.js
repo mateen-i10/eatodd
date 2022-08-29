@@ -35,7 +35,7 @@ const Routes = [
     },
     {
         path: '/menu',
-        component: lazy(() => import('../../views/catering/Menu')),
+        component: lazy(() => import('../../views/catering/Catering')),
         layout: 'BlankLayout'
     },
     {
@@ -255,7 +255,7 @@ const Routes = [
         component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
         layout: 'VerticalLayout'
     },
-   {
+    {
         path: '/restaurantDetail/:id',
         component: lazy(() => import('../../views/admin/Restaurant/components/RestaurantDetail')),
         layout: 'VerticalLayout'
