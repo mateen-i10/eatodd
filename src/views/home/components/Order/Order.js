@@ -10,6 +10,7 @@ import Soup from "../../../../assets/images/ORDER/soup.png"
 import plate from "../../../../assets/images/ORDER/omg-p1.png"
 import drinks from "../../../../assets/images/ORDER/cola.png"
 import Sandwich from "../../../../assets/images/ORDER/sabdwich.png"
+import wine from '../../../../assets/images/ORDER/VCine.png'
 
 const Order = () => {
     return (
@@ -35,7 +36,7 @@ const Order = () => {
                 </div>
             </div>
             <div className="menu-list container-fluid pb-5 pt-5 ">
-                <div className="row ms-0 me-1 ">
+                <div className="row ms-0 me-1">
                     <div className="col-md-4 col-sm-5  col-6 top-level-menu">
                         <Link to="/OmgPlate">
                             <div className="menu-item">
@@ -134,13 +135,33 @@ const Order = () => {
                                         alt="Burrito Bowl"/>
                                 </div>
                                 <div className="text2">
-                                    <div className="display-name mealBurrito">SIDES, DRINKS & WINE</div>
+                                    <div className="display-name mealBurrito">SIDES, DRINKS</div>
                                     <div className="order-cta">Order
                                         <div className="arrow-right"/>
                                     </div>
                                 </div>
                             </div>
                         </Link>
+                    </div>
+                    <div className='row' >
+                        <div className="col-md-4 col-sm-5 col-6 top-level-menu mx-auto">
+                            <Link to="/OmgPlate">
+                                <div className="menu-item">
+                                    <div className="thumbnail">
+                                        <img
+                                            src={wine}
+                                            width={200}
+                                            alt="Burrito Bowl"/>
+                                    </div>
+                                    <div className="text2">
+                                        <div className="display-name mealBurrito">WINE</div>
+                                        <div className="order-cta">Order
+                                            <div className="arrow-right"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
