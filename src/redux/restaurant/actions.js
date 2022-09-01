@@ -9,7 +9,6 @@ import {
     setDetailLoading,
     setRequestCompleted, setIsRestaurantError, setIsRestaurantSuccess, setIsEdit
 } from "./reducer"
-/*import { data } from '../../tempData/data'*/
 const url = 'restaurant'
 
 
@@ -76,6 +75,7 @@ export const addRestaurant = (data) => {
     }
 }
 export const updateRestaurant = (data) => {
+    console.log('datares', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
