@@ -131,7 +131,7 @@ img{
     /*border: 2px solid brown;*/
     justify-content: space-around;
     align-items: center;
-    width:25%
+    width:30%
 }
 
 .head-sec-3 .eatOMG{
@@ -391,4 +391,14 @@ img{
 }
 a.active{
     color: black;
+}
+.head-sec-3 > ul > li > a {
+    display: flex;
+    align-items: center;
+}
+.head-sec-3 > ul > li > a > .user-nav > .user-status{
+    display: none;
+}
+.head-sec-3 > ul > li > a > .user-nav {
+    margin-right: 0.8rem;
 }

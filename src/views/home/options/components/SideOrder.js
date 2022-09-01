@@ -34,8 +34,8 @@ const SideOrder = (props) => {
                             <img src={foodImage} className="img-fluid rounded-start" alt="..."
                                  style={{
                                      width: "100%",
-                                     height: 130,
-                                     objectFit: "cover",
+                                     height: 137,
+                                     objectFit: "contain",
                                      userSelect: "none"
                                  }}/>
                         </div>

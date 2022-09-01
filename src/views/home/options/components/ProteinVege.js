@@ -119,7 +119,7 @@ const ProteinVege = (props) => {
                                          style={!value ? {
                                              width: "100%",
                                              height: 180,
-                                             objectFit: "cover",
+                                             objectFit: "contain",
                                              marginLeft: -8,
                                              marginTop: -19
 
@@ -127,7 +127,7 @@ const ProteinVege = (props) => {
                                              width: "100%",
                                              height: 180,
                                              backgroundColor: 'transparent',
-                                             objectFit: "cover",
+                                             objectFit: "contain",
                                              overflow: "hidden",
                                              marginLeft: -8,
                                              marginTop: -19

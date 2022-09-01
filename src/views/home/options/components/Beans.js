@@ -87,7 +87,7 @@ const Beans = (props) => {
                                      style={!selected ? {
                                          width: "100%",
                                          height: 150,
-                                         objectFit: "cover",
+                                         objectFit: "contain",
                                          marginLeft: -10,
                                          marginTop: -11
 

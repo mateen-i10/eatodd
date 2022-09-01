@@ -1,16 +1,14 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Input, InputGroup, InputGroupText} from "reactstrap"
 import {Search} from "react-feather"
 import {BiCurrentLocation} from "react-icons/all"
 import {Autocomplete, useLoadScript} from "@react-google-maps/api"
+import NearByPlaces from "./NearByPlaces"
 
-// const libraries = ['places']
-
-const DeliveryTab = ({setUserLocation, onPlaceChanged, onLoad}) => {
-    const [libraries] = useState(['places'])
+const DeliveryTab = ({setUserLocation, onPlaceChanged, onLoad, places, isLoading}) => {
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: "AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ",
-        libraries
+        libraries: ['places']
     })
     if (!isLoaded) {
         return <div>Loading</div>
@@ -26,24 +24,20 @@ const DeliveryTab = ({setUserLocation, onPlaceChanged, onLoad}) => {
         })
     }
     return (
-        <div style={{}}>
+        <div>
             <div className=" mt-1">
-                {/*<LoadScript*/}
-                {/*    googleMapsApiKey="AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ"*/}
-                {/*    libraries={["places"]}*/}
-                {/*>*/}
                 <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                     <InputGroup className="bg-white input-group-merge">
                         <InputGroupText>
                             <Search className="cursor-pointer" size={20}/>
                         </InputGroupText>
-                        <Input color='primary' type='text'/>
+                        <Input color='primary' type='text' />
                         <InputGroupText><BiCurrentLocation className="cursor-pointer" size={20} onClick={onClick}/>
                         </InputGroupText>
                     </InputGroup>
                 </Autocomplete>
                 {/*</LoadScript>*/}
-                <div className=" align-items-center justify-content-center text-center">
+                {places && places.length > 0 ? <NearByPlaces places={places} isLoading={isLoading}/> : <div className=" align-items-center justify-content-center text-center">
                     <div className="col-12 mt-2">
                         <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
                              alt="EatOMG-image" width="100px"
@@ -69,6 +63,7 @@ const DeliveryTab = ({setUserLocation, onPlaceChanged, onLoad}) => {
                         </div>
                     </div>
                 </div>
+                }
 
             </div>
 

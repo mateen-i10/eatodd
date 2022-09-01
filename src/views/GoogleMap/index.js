@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar"
 import PickUpGMap from "./component/PickUpGMap"
 import DeliveryGMap from "./component/DeliveryGMap"
 import DetailSidebar from "./component/DetailSidebar"
+import {toast} from "react-toastify"
 
 const styles = {
     container: isRowBased => ({
@@ -25,10 +26,8 @@ const Gmaps = () => {
     const [markerClicked, setMarkerClicked] = useState(null)
     const [userLocation, setUserLocation] = useState(null)
     const [autocomplete, setAutocomplete] = useState(null)
-
-
-    // console.log(userLocation)
-
+    const [nearestPlaces, setNearestPlaces] = useState([])
+    const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
         const handler = e => setMatches(e.matches)
@@ -36,18 +35,6 @@ const Gmaps = () => {
         return () => mediaMatch.removeEventListener('change', handler)
     })
     const onLoad = (autoC) => setAutocomplete(autoC)
-
-    const onPlaceChanged = () => {
-        const place = autocomplete.getPlace()
-        if (!place) {
-            window.alert("Please enter valid place")
-        }
-        console.log(place)
-        const lat = place.geometry.location.lat()
-        const lng = place.geometry.location.lng()
-        console.log(autocomplete)
-        setUserLocation({position: {lat, lng}})
-    }
 
     const places = [
         {
@@ -87,6 +74,47 @@ const Gmaps = () => {
         }
     ]
 
+    const onPlaceChanged = async () => {
+        setLoading(true)
+        const place = autocomplete.getPlace()
+        if (!place) {
+            window.alert("Please enter valid place")
+            setNearestPlaces([])
+            setLoading(false)
+            return
+        }
+
+        const lat = place.geometry.location.lat()
+        const lng = place.geometry.location.lng()
+        if (places && places.length > 0) {
+            const origin = new google.maps.LatLng(lat, lng)
+            let nearest = {}
+            let distance = 0
+            const directionsService = new google.maps.DirectionsService()
+            try {
+                for (const p of places) {
+                    if (p.address && p.address !== '') {
+                        const res = await directionsService.route({
+                            origin,
+                            destination: p.address,
+                            travelMode: google.maps.TravelMode.DRIVING
+                        })
+                        if ((distance === 0) || (distance > res.routes[0].legs[0].distance.text)) {
+                            distance = res.routes[0].legs[0].distance.text
+                            nearest = p
+                        }
+                    }
+                }
+                setNearestPlaces([{...nearest}])
+                setLoading(false)
+                } catch (e) {
+                    setNearestPlaces([])
+                    setLoading(false)
+                    toast.error(e)
+                }
+            }
+        setUserLocation({position: {lat, lng}})
+    }
 
     return (
         <div style={styles.container(matches)}>
@@ -98,7 +126,9 @@ const Gmaps = () => {
 
                 /></div> : <div className="col-md-4 col-12">
                 <Sidebar
+                    isLoading={isLoading}
                     places={places}
+                    nearPlaces={nearestPlaces}
                     setPickDelivery={setPickDelivery}
                     setUserLocation={setUserLocation}
                     onPlaceChanged={onPlaceChanged}
@@ -110,7 +140,10 @@ const Gmaps = () => {
                     setSelectedSidebar={setSelectedSidebar}
                     setMarkerClicked={setMarkerClicked}
                 /></div> : <div className="col-md-8 col-12" style={styles.height(matches)}>
-                <DeliveryGMap places={places} userLocation={userLocation}/></div>}
+                <DeliveryGMap
+                    places={places}
+                    userLocation={userLocation}
+                /></div>}
         </div>)
 }
 

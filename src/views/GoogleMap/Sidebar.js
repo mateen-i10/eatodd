@@ -3,7 +3,7 @@ import {Button, TabContent, TabPane} from "reactstrap"
 import DeliveryTab from "./component/DeliveryTab"
 import PickUpTab from "./component/PickUpTab"
 
-const Sidebar = ({places, setPickDelivery, setUserLocation, onPlaceChanged, onLoad}) => {
+const Sidebar = ({places, setPickDelivery, setUserLocation, onPlaceChanged, onLoad, nearPlaces, isLoading}) => {
     const [active, setActive] = useState('1')
     const [activeColor, setActiveColor] = useState("1")
     const showActiveColor = (selectedButton) => {
@@ -74,8 +74,12 @@ const Sidebar = ({places, setPickDelivery, setUserLocation, onPlaceChanged, onLo
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <DeliveryTab setUserLocation={setUserLocation} onPlaceChanged={onPlaceChanged}
-                                         onLoad={onLoad}/>
+                            <DeliveryTab
+                                setUserLocation={setUserLocation}
+                                onPlaceChanged={onPlaceChanged}
+                                onLoad={onLoad}
+                                places = {nearPlaces}
+                                isLoading= {isLoading}/>
                         </TabPane>
                     </TabContent>
                 </div>

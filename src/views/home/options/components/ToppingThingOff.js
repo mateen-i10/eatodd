@@ -18,8 +18,8 @@ const ToppingThingOff = (props) => {
         <>
 
             <div className="card add overflow-hidden mb-lg-2 mb-1 cursor-pointer "
-                 style={!selectedTopping ? {maxHeight: 130, marginBottom: 7} : {
-                     maxHeight: 130,
+                 style={!selectedTopping ? {maxHeight: 120, marginBottom: 7} : {
+                     maxHeight: 120,
                      marginBottom: 7,
                      borderWidth: 1,
                      borderColor: 'black'
@@ -50,7 +50,7 @@ const ToppingThingOff = (props) => {
                     <div className="col-2 text-center  cursor-pointer hoveredItem" style={{height: 130}}
                          onClick={() => setCustomizeTopping(!customizeTopping)}>
                         <div className=" text-primary"
-                             style={{marginTop: 42, fontSize: 30, fontWeight: 700}}
+                             style={{marginTop: 34, fontSize: 30, fontWeight: 700}}
                         ><MdArrowBackIos/>
                         </div>
                     </div>
@@ -84,11 +84,11 @@ const ToppingThingOff = (props) => {
                                     <img src={foodImage} className="img-fluid rounded-start" alt="..."
                                          style={{
                                              width: "100%",
-                                             height: 180,
-                                             objectFit: "cover",
+                                             height: 120,
+                                             objectFit: "fill",
                                              userSelect: "none",
-                                             objectPosition: "70% 100%",
-                                             marginTop: -30
+                                             // objectPosition: "100% 100%"
+                                             marginTop: 0
                                          }}/>
                                 </div>
                             </div>

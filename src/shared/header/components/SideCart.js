@@ -16,8 +16,8 @@ import LoginModal from "./loginModal/LoginModal"
 import {useSelector} from "react-redux"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {Link} from "react-router-dom"
-// import {default as chips} from "../../../assets/images/Menu&Order/chips.png";
-// import {default as drink1} from "../../../assets/images/Menu&Order/drink1.png";
+// import {default as chips} from "../../../assets/images/Catering&Order/chips.png";
+// import {default as drink1} from "../../../assets/images/Catering&Order/drink1.png";
 
 const OffCanvasPlacement = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')

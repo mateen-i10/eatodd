@@ -12,15 +12,8 @@ const containerStyle = {
 
 
 function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
-    // const {isLoaded} = useJsApiLoader({
-    //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    //     libraries: ['places']
-    // })
     const [activeMarker, setActiveMarker] = useState(null)
 
-    // if (!isLoaded) {
-    //     return <div>Loading</div>
-    // }
     const handleActiveMarker = (marker) => {
         if (marker === activeMarker) {
             return
@@ -35,30 +28,6 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
     }
 
     return (
-        // <GoogleMapReact
-        //     bootstrapURLKeys={{key: "AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ"}}
-        //     defaultCenter={places[0].position}
-        //     center={places[0].position}
-        //     defaultZoom={9}
-        //     margin={[50, 50, 50, 50]}
-        //     // options={{zoomControl: true}}
-        //     onChange={(e) => {
-        //         console.log(e)
-        //         // setCoords({ lat: e.center.lat, lng: e.center.lng });
-        //         // setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
-        //     }}
-        //     // onChildClick={(child) => setChildClicked(child)}
-        // >
-        //     {places.length && places.map((place, i) => (
-        //         <HiLocationMarker className="locationIcon" size={48} lat={Number(place.position.lat)}
-        //                           lng={Number(place.position.lng)}
-        //                           key={i}/>
-        //
-        //
-        //     ))}
-
-        // </GoogleMapReact>
-
         <LoadScript
             googleMapsApiKey="AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ"
             libraries={["places"]}

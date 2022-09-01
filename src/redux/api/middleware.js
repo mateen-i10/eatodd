@@ -4,8 +4,19 @@ import {apiCall} from "./actions"
 
 const apiMiddleware = ({dispatch}) => (next) => (action) => {
     if (action.type !== apiCall.type) return next(action)
+    const { url, onSuccess, onError, method, data : semiFinal, isSuccessToast, requestCompleted, successMessage, isSuccess, isFormData} = action.payload
 
-    const { url, onSuccess, onError, method, data, isSuccessToast, requestCompleted, successMessage, isSuccess} = action.payload
+    let data = null
+    // to pass form-data
+    if (isFormData) {
+        const entries = Object.entries(semiFinal)
+        data = new FormData()
+        for (const [key, value] of entries) {
+            data.append(key, value)
+        }
+    } else {
+        data = semiFinal
+    }
     console.log('api mid', url, onSuccess, onError, method, data)
     httpService._request({ baseURL, url, method, data })
         .then(response => {
