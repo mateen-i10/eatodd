@@ -6,6 +6,7 @@ import {FieldTypes} from "../utility/enums/FieldType"
 import Select from "react-select"
 import AsyncSelect from 'react-select/async'
 import Datetime from "react-datetime"
+import SingleFileUploader from "./SingleFileUploader"
 
 const MyForm =  (props, ref) => {
     const [errors, setErrors] = useState({})
@@ -72,6 +73,9 @@ const MyForm =  (props, ref) => {
 
                     />
                 </div> :
+                type === FieldTypes.UppyFileSingle ?
+                    <SingleFileUploader/>
+                    :
                 type === FieldTypes.Date ?
                     <Datetime
                         locale="en-gb"
@@ -111,7 +115,7 @@ const MyForm =  (props, ref) => {
                             />
                             : type === FieldTypes.CheckBox ?
                                 <FormGroup check inline>
-                                    <Input type='checkbox' type="checkbox" checked={props.formState[name]} name={name} id={`${name + index}`} value={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
+                                    <Input type='checkbox' checked={props.formState[name]} name={name} id={`${name + index}`} value={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
                                     <Label for={`${name + index}`} check>{label}</Label> {isRequired && <span className="text-danger ml-1">*</span>}
                                 </FormGroup> :
                                 type === FieldTypes.Radio ?
@@ -122,7 +126,7 @@ const MyForm =  (props, ref) => {
                                     </FormGroup> :
                                     type === FieldTypes.SwitchButton ?
                                         <FormGroup switch inline>
-                                            <Input type='checkbox' type="checkbox" name={name} id={`${name + index}`} value={props.formState[name]} checked={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
+                                            <Input type='checkbox' name={name} id={`${name + index}`} value={props.formState[name]} checked={props.formState[name]} onChange={(e) => handleInputChange(e, name)} />
                                             <Label for={`${name + index}`} switch>{label}</Label>
                                         </FormGroup> :
                                         <Input

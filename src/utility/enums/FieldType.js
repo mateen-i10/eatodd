@@ -13,5 +13,7 @@ export const FieldTypes = {
     Password: 12,
     Email: 13,
     Time: 14,
-    DateTime: 15
+    DateTime: 15,
+    UppyFileSingle: 17,
+    UppyFileMultiple: 18
 }
