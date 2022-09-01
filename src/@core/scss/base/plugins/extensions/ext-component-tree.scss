@@ -1,4 +1,5 @@
-@import '../../bootstrap-extended/include'; // Bootstrap includes
+@import '../../bootstrap-extended/include';
+// Bootstrap includes
 @import '../../components/include'; // Components includes
 
 .jstree > .jstree-container-ul .jstree-loading > .jstree-ocl,
@@ -56,16 +57,19 @@
   .jstree-container-ul {
     .jstree-anchor {
       color: $body-color;
+
       &.jstree-clicked,
       &.jstree-hovered {
         background: transparent;
         box-shadow: none;
       }
     }
+
     .jstree-node {
       .jstree-wholerow-clicked {
         background: rgba($color: $primary, $alpha: 0.1);
       }
+
       .jstree-wholerow-hovered:not(.jstree-wholerow-clicked) {
         background: transparent;
       }
@@ -73,45 +77,53 @@
   }
 }
 
-// Context Menu Styling
+// Context Catering Styling
 .vakata-context.jstree-contextmenu {
   background: $white;
   border: 0;
   box-shadow: 0px 0px 50px 0px rgba($black, 0.1);
+
   li {
     a {
       color: $body-color;
       padding: 0 1.5rem;
       text-shadow: none;
+
       i {
         display: none;
       }
     }
+
     &.vakata-context-hover > a {
       background-color: $body-bg;
       box-shadow: none;
     }
+
     &.vakata-context-separator {
       a {
         margin: 0;
         border-color: $border-color;
       }
     }
+
     &.vakata-contextmenu-disabled {
       a {
         color: $text-muted;
       }
+
       &.vakata-context-hover a {
         background-color: transparent !important;
         cursor: default;
       }
     }
+
     ul {
       background: $white;
       border: 0;
       box-shadow: 0px 0px 50px 0px rgba($black, 0.1);
     }
   }
+
   .vakata-contextmenu-sep {
     display: none;
   }
@@ -128,23 +140,28 @@
     }
   }
 
-  // Context Menu Styling
+  // Context Catering Styling
   .vakata-context.jstree-contextmenu {
     background: $theme-dark-card-bg;
     box-shadow: $theme-dark-box-shadow;
+
     li {
       a {
         color: $theme-dark-body-color;
       }
+
       &.vakata-context-hover > a {
         background-color: $theme-dark-body-bg;
       }
+
       &.vakata-context-separator a {
         border-color: $theme-dark-border-color;
       }
+
       &.vakata-contextmenu-disabled a {
         color: $theme-dark-text-muted-color;
       }
+
       ul {
         background: $theme-dark-card-bg;
         box-shadow: $theme-dark-box-shadow;

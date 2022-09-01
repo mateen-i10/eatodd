@@ -4,6 +4,7 @@ import {
     Clipboard,
     Clock,
     Coffee,
+    Copy,
     DollarSign,
     Facebook,
     Grid,
@@ -11,11 +12,16 @@ import {
     List,
     Mail,
     Menu,
-    MessageSquare, PenTool,
-    PlusSquare, Send,
-    User, UserCheck,
+    MessageSquare,
+    Package,
+    PenTool,
+    PlusSquare,
+    Send,
+    User,
+    UserCheck,
     UserPlus,
-    Users, Volume
+    Users,
+    Volume
 } from 'react-feather'
 
 export default [
@@ -42,6 +48,30 @@ export default [
         title: 'Cuisine',
         icon: <PenTool size={20}/>,
         navLink: '/cuisine'
+    },
+    {
+        id: 'category',
+        title: 'Category',
+        icon: <Grid size={12}/>,
+        navLink: '/dashboard/category'
+    },
+    {
+        id: 'subCategory',
+        title: 'SubCategory',
+        icon: <Copy size={12}/>,
+        navLink: '/subCategory'
+    },
+    {
+        id: 'Product',
+        title: 'Product',
+        icon: <Package size={20}/>,
+        navLink: '/products'
+    },
+    {
+        id: 'Genral Product',
+        title: 'Genral Product',
+        icon: <Package size={20}/>,
+        navLink: '/genralProducts'
     },
     {
         id: 'FaceBookAutoPost',
@@ -101,15 +131,9 @@ export default [
             },
             {
                 id: 'menuitems',
-                title: 'Menu Items',
+                title: 'Catering Items',
                 icon: <Menu size={12}/>,
                 navLink: '/dashboard/menuitems'
-            },
-            {
-                id: 'category',
-                title: 'Category',
-                icon: <Grid size={12}/>,
-                navLink: '/dashboard/category'
             },
             {
                 id: 'modifier',

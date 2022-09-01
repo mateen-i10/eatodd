@@ -1,4 +1,3 @@
-
 import {apiCall} from "../api/actions"
 
 import {
@@ -25,6 +24,7 @@ export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = nul
         }))
     }
 }
+
 export const getRestaurant = (id, isEdit = false) => {
     console.log("dataGet", isEdit)
     return async dispatch => {

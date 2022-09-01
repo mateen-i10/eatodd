@@ -10,11 +10,11 @@ const FormModal =  (props, ref) => {
         props.toggleModal(null)
     }
     const renderModal = () => {
-        return <Modal isOpen={props.isModal}  fade={true} size="lg" backdrop="static" toggle={onModalToggle}>
+        return <Modal isOpen={props.isModal} fade={true} size="lg" backdrop="static" toggle={onModalToggle}>
             <UILoader blocking={props.isLoading}>
                 <ModalHeader toggle={onModalToggle}>{props.modalTitle}</ModalHeader>
                 <ModalBody className="px-4">
-                    <MyForm {...props} ref={ref}/>
+                    <MyForm {...props} ref={ref} />
                 </ModalBody>
             </UILoader>
         </Modal>

@@ -14,8 +14,10 @@
   .select__input {
     color: $body-color !important;
   }
+
   &.select__control--is-disabled {
     border-color: $border-color;
+
     .select__indicator-separator {
       background-color: $border-color;
     }
@@ -35,6 +37,7 @@
   .select__indicator-separator {
     display: none;
   }
+
   .select__single-value {
     color: $body-color;
   }
@@ -44,7 +47,7 @@
   }
 }
 
-// Select Menu
+// Select Catering
 .select__menu,
 .react-select__menu {
   .select__menu-list,
@@ -104,6 +107,7 @@
     svg {
       height: 0.85rem;
       width: 0.85rem;
+
       &:hover {
         cursor: pointer;
       }
@@ -115,6 +119,7 @@
 .select-borderless {
   .select__control {
     border: 0;
+
     .select__indicators {
       display: none;
     }
@@ -142,14 +147,17 @@
 
     .select__multi-value {
       background-color: rgba($color: $primary, $alpha: 0.12);
+
       .select__multi-value__label {
         color: $primary;
       }
     }
+
     .select__multi-value__remove {
       svg {
         fill: $primary;
       }
+
       &:hover {
         background-color: transparent !important;
       }
@@ -163,6 +171,7 @@
       opacity: 0.5;
     }
   }
+
   .select__menu-list,
   .react-select__menu-list {
     .select__group {
@@ -171,6 +180,7 @@
       }
     }
   }
+
   .select__menu {
     background-color: $theme-dark-card-bg;
   }

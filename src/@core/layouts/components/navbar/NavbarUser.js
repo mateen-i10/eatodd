@@ -5,31 +5,31 @@ import { Fragment } from 'react'
 import UserDropdown from './UserDropdown'
 
 // ** Third Party Components
-import { Sun, Moon } from 'react-feather'
+// import { Sun, Moon } from 'react-feather'
 
 // ** Reactstrap Imports
-import { NavItem, NavLink } from 'reactstrap'
+import { NavItem } from 'reactstrap'
 
-const NavbarUser = props => {
+const NavbarUser = () => {
   // ** Props
-  const { skin, setSkin } = props
+  // const { skin, setSkin } = props
 
   // ** Function to toggle Theme (Light/Dark)
-  const ThemeToggler = () => {
-    if (skin === 'dark') {
-      return <Sun className='ficon' onClick={() => setSkin('light')} />
-    } else {
-      return <Moon className='ficon' onClick={() => setSkin('dark')} />
-    }
-  }
+  // const ThemeToggler = () => {
+  //   if (skin === 'dark') {
+  //     return <Sun className='ficon' onClick={() => setSkin('light')} />
+  //   } else {
+  //     return <Moon className='ficon' onClick={() => setSkin('dark')} />
+  //   }
+  // }
 
   return (
     <Fragment>
       <div className='bookmark-wrapper d-flex align-items-center'>
         <NavItem className='d-none d-lg-block'>
-          <NavLink className='nav-link-style'>
-            <ThemeToggler />
-          </NavLink>
+          {/*<NavLink className='nav-link-style'>*/}
+          {/*  <ThemeToggler />*/}
+          {/*</NavLink>*/}
         </NavItem>
       </div>
       <ul className='nav navbar-nav align-items-center ms-auto'>

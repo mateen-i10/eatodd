@@ -1,11 +1,10 @@
 // ** React Imports
-import React, {Fragment, useEffect, useState} from 'react'
-
+import React, {Fragment, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -13,43 +12,90 @@ import {
     Button,
     Input,
     Row,
-    Col, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
+
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
-import AddCuisine from "./AddCuisine"
-import {deleteCuisine, loadCuisines, getCuisine} from "../../../redux/cuisine/actions"
+import Joi from "joi-browser"
+import UILoader from "../../../@core/components/ui-loader"
+import useLoadData from "../../../utility/customHooks/useLoadData"
+import useEdit from "../../../utility/customHooks/useEdit"
+import useModalError from "../../../utility/customHooks/useModalError"
+import {setIsEdit, setIsCuisineError, setCuisine} from "../../../redux/cuisine/reducer"
+import FormModal from "../../../components/FormModal"
+import {FieldTypes} from "../../../utility/enums/FieldType"
+import '@styles/react/libs/flatpickr/flatpickr.scss'
+// import Datetime from "react-datetime"
 
-const Cuisine = (props) => {
-    const cuisineList = useSelector(state => state.CuisineReducer.list)
-    const isEdit = useSelector(state => state.CuisineReducer.isEdit)
+// my changes
+import {deleteCuisine, loadCuisines, getCuisine, addCuisine, updateCuisine} from "../../../redux/cuisine/actions"
+
+const Cuisine = () => {
+
+    const cuisineList = useSelector(state => state.cuisine.list)
+    const formInitialState = useSelector(state => state.cuisine.object)
+    const miscData = useSelector(state => state.cuisine.miscData)
+    const isEdit = useSelector(state => state.cuisine.isEdit)
+    const isLoading = useSelector(state => state.cuisine.isLoading)
+    const isError = useSelector(state => state.cuisine.isError)
+    const isSuccess = useSelector(state => state.cuisine.isSuccess)
     const dispatch = useDispatch()
 
-    // ** local States
-    const [currentPage, setCurrentPage] = useState(0)
-    const [searchValue, setSearchValue] = useState('')
-    const [filteredData, setFilteredData] = useState([])
-    const [isModal, setModal] = useState(false)
-    const [editData, setEditData] = useState(0)
+    // ** refs
+    const formModalRef = useRef(null)
 
-    useEffect(() => {
-        dispatch(loadCuisines())
-    }, [isEdit])
+    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [pageSize] = useState(10)
+    const [searchValue, setSearchValue] = useState('')
+
+    // ** local States
+    const [modalTitle, setModalTitle] = useState('Add Cuisine')
+    const [edit, setEdit] = useState(false)
+    const [formState, setFormState] = useState({})
+    const [isModal, setModal] = useState(false)
+    const [isModalLoading,  setModalLoading] = useState(false)
+    const [formData] = useState([
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Cuisine Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'}
+    ])
+
+    /* useEffect(() => {
+         dispatch(loadCuisines())
+     }, [isEdit])*/
+
+    // ** schema for validations
+    const schema = Joi.object({
+        name: Joi.string().required().label("Name")
+    })
 
     // ** Function to handle filter
     const toggle = () => {
+        if (isModal) setEdit(false)
         setModal(!isModal)
+        setFormState({...formInitialState})
+        if (isModalLoading) setModalLoading(false)
     }
-    const addClick = (e) => {
-        e.preventDefault()
-        setEditData("")
+
+    // custom hooks
+    useLoadData(isSuccess, loadCuisines, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCuisine, {
+        name: '',
+        description:''
+    })
+    useModalError(isError, setModalLoading, setIsCuisineError)
+
+    const addClick = () => {
+        setModalTitle('Add Cuisine')
         toggle()
     }
-    const editClick = (data) => {
+
+    const editClick = (id) => {
+        console.log("edit", id)
         toggle()
-        dispatch(getCuisine(data.id, true))
-        setEditData(data)
-        console.log('id of the user', data.id, data.full_name)
+        dispatch(getCuisine(id, true))
+        setModalTitle('Edit Cuisine')
+        setModalLoading(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -59,7 +105,7 @@ const Cuisine = (props) => {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#7367f0',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
@@ -68,87 +114,49 @@ const Cuisine = (props) => {
             }
         })
     }
+
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        console.log('call', props)
-        props.history.push(`/customers/detail/${id}`)
+        // props.history.push(`/restaurant/detail/${id}`)
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const isError = formModalRef.current.validate(formState)
+        if (isError) return
+
+        // call api
+        setModalLoading(true)
+        edit ? dispatch(updateCuisine(formState)) : dispatch(addCuisine(formState))
     }
 
     const handleFilter = e => {
+        console.log('e.keyCode', e.keyCode)
         const value = e.target.value
-        let updatedData = []
+        if (e.keyCode === 13) {
+            dispatch(loadCuisines(currentPage + 1, pageSize, value))
+        }
         setSearchValue(value)
-
-        const status = {
-            1: { title: 'Current', color: 'light-primary' },
-            2: { title: 'Professional', color: 'light-success' },
-            3: { title: 'Rejected', color: 'light-danger' },
-            4: { title: 'Resigned', color: 'light-warning' },
-            5: { title: 'Applied', color: 'light-info' }
-        }
-
-        if (value.length) {
-            updatedData = data.filter(item => {
-                const startsWith =
-                    item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.email.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.age.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
-                    status[item.status].title.toLowerCase().startsWith(value.toLowerCase())
-
-                const includes =
-                    item.full_name.toLowerCase().includes(value.toLowerCase()) ||
-                    item.post.toLowerCase().includes(value.toLowerCase()) ||
-                    item.email.toLowerCase().includes(value.toLowerCase()) ||
-                    item.age.toLowerCase().includes(value.toLowerCase()) ||
-                    item.salary.toLowerCase().includes(value.toLowerCase()) ||
-                    item.start_date.toLowerCase().includes(value.toLowerCase()) ||
-                    status[item.status].title.toLowerCase().includes(value.toLowerCase())
-
-                if (startsWith) {
-                    return startsWith
-                } else if (!startsWith && includes) {
-                    return includes
-                } else return null
-            })
-            setFilteredData(updatedData)
-            setSearchValue(value)
-        }
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        setCurrentPage(page.selected)
+        dispatch(loadCuisines(page.selected + 1, pageSize, searchValue))
+        setCurrentPage(page.selected + 1)
     }
 
     const columns = [
         {
-            name: 'Id',
-            selector: (row) => row.id,
+            name: 'Name',
+            selector: (row) => row.name,
             sortable: true,
             minWidth: '50px'
-        },
-        {
-            name: 'Name',
-            selector: (row) => row.full_name,
-            sortable: true,
-            minWidth: '250px',
-            cell: row => (
-                <div className='d-flex align-items-center'>
-                    <div className='user-info text-truncate'>
-                        <span className='d-block font-weight-bold text-truncate'>{row.full_name}</span>
-                        {/*<small>{row.post}</small>*/}
-                    </div>
-                </div>
-            )
         },
         {
             name: 'Description',
             selector: (row) => row.description,
             sortable: true,
-            minWidth: '500px'
+            minWidth: '50px'
         },
         {
             name: 'Actions',
@@ -171,7 +179,7 @@ const Cuisine = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span onClick={() => { editClick(row) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -179,66 +187,90 @@ const Cuisine = (props) => {
     ]
 
     // ** Custom Pagination
-    const CustomPagination = () => (
-        <ReactPaginate
-            previousLabel=''
-            nextLabel=''
-            forcePage={currentPage}
-            onPageChange={page => handlePagination(page)}
-            pageCount={searchValue.length ? filteredData.length / 7 : cuisineList.length / 7 || 1}
+    const CustomPagination = () => {
+        const count = miscData?.totalPages ?? 0
+
+        return <ReactPaginate
+            previousLabel={''}
+            nextLabel={''}
             breakLabel='...'
-            pageRangeDisplayed={2}
+            pageCount={count || 1}
             marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
             activeClassName='active'
-            pageClassName='page-item'
+            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+            onPageChange={page => handlePagination(page)}
+            pageClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            nextClassName={'page-item next'}
+            previousClassName={'page-item prev'}
+            previousLinkClassName={'page-link'}
+            pageLinkClassName={'page-link'}
             breakClassName='page-item'
             breakLinkClassName='page-link'
-            nextLinkClassName='page-link'
-            nextClassName='page-item next'
-            previousClassName='page-item prev'
-            previousLinkClassName='page-link'
-            pageLinkClassName='page-link'
-            containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            containerClassName={
+                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            }
         />
-    )
+    }
+
+    const dataToRender = () => {
+        if (cuisineList.length > 0) {
+            return cuisineList
+        }  else {
+            return cuisineList.slice(0, pageSize)
+        }
+    }
 
     return (
         <Fragment>
-            <Card>
-                <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <div>
-                        <CardTitle tag='h4'>Cuisine</CardTitle>
-                        <h6>Friday June 10, 2022, 08:10 AM</h6>
-                    </div>
-                    <Button.Ripple bsSize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Cuisine</Button.Ripple>
-                </CardHeader>
-                <Row className='justify-content-end mx-0'>
-                    <Col className='mt-1' md='12' sm='12'>
-                        <Input
-                            className='dataTable-filter mb-50'
-                            type='text'
-                            PlaceHolder='Search'
-                            bsSize='sm'
-                            id='search-input'
-                            value={searchValue}
-                            onChange={handleFilter}
-                        />
-                    </Col>
-                </Row>
-                <DataTable
-                    noHeader
-                    pagination
-                    columns={columns}
-                    paginationPerPage={7}
-                    className='react-dataTable'
-                    sortIcon={<ChevronDown size={10} />}
-                    paginationDefaultPage={currentPage + 1}
-                    paginationComponent={CustomPagination}
-                    data={searchValue.length ? filteredData : cuisineList}
-                />
-            </Card>
-
-            <AddCuisine isShow={isModal} setShow={toggle} data={editData} />
+            <UILoader blocking={isLoading}>
+                <Card>
+                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <div>
+                            <CardTitle tag='h4'>Cuisine</CardTitle>
+                            <h6>Friday June 10, 2022, 08:10 AM</h6>
+                        </div>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Cuisine</Button.Ripple>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                type='text'
+                                placeholder='Search'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10} />}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
+            </UILoader>
+            <FormModal ref={formModalRef}
+                       formState={formState}
+                       formData={formData}
+                       setFormState={setFormState}
+                       schema={schema}
+                       isModal={isModal}
+                       toggleModal={toggle}
+                       modalTitle={modalTitle}
+                       primaryBtnLabel='Save'
+                       secondaryBtnLabel='Cancel'
+                       isLoading = {isModalLoading}
+                       handleSubmit={handleSubmit}
+            />
 
         </Fragment>
     )

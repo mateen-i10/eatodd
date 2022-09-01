@@ -11,7 +11,6 @@ import {
     CardTitle,
     Button,
     Input,
-    Label,
     Row,
     Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
@@ -307,7 +306,7 @@ const Restaurant = (props) => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/restaurant/detail/${id}`)
+        props.history.push(`/restaurantDetail/${id}`)
     }
 
     const handleSubmit = (event) => {
