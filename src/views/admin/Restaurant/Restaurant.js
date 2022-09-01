@@ -33,6 +33,8 @@ import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import Datetime from "react-datetime"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const Restaurant = (props) => {
 
@@ -110,6 +112,24 @@ const Restaurant = (props) => {
         }
         ]
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
+
+    const Cuisines = async (input) => {
+        return httpService._get(`${baseURL}cuisine?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log(response, "Restaurant resp")
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
 
     useEffect(() => {
         if (formInitialState && formInitialState.restaurantSchedules) {
@@ -236,6 +256,7 @@ const Restaurant = (props) => {
         {type:FieldTypes.Text, label: 'phone Number', placeholder: 'Enter Phone Number', name:'phoneNo', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Latitude', placeholder: 'Enter Latitude', name:'latitude', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Longitude', placeholder: 'Enter Longitude', name:'longitude', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Cuisines', placeholder: 'Select Cuisines', name:'cuisines', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Cuisines, isAsyncSelect: true, isMulti:true},
         {type:FieldTypes.SwitchButton, label: 'Available For Delivery', name:'isAvailableForDelivery', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.SwitchButton, label: 'Vine Club Included', name:'isVineClub', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.SwitchButton, label: 'Catering Included', name:'isCatering', isRequired:false, fieldGroupClasses: 'col-6'}
@@ -312,6 +333,7 @@ const Restaurant = (props) => {
     const handleSubmit = (event) => {
         console.log('restaurantSchedule', restaurantSchedule)
         const finalData = {...formState, restaurantSchedules: restaurantSchedule}
+        console.log(finalData, "final data")
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return

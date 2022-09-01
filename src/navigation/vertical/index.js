@@ -21,7 +21,8 @@ import {
     UserCheck,
     UserPlus,
     Users,
-    Volume
+    Volume,
+    Award
 } from 'react-feather'
 
 export default [
@@ -60,12 +61,6 @@ export default [
         title: 'SubCategory',
         icon: <Copy size={12}/>,
         navLink: '/subCategory'
-    },
-    {
-        id: 'Product',
-        title: 'Product',
-        icon: <Package size={20}/>,
-        navLink: '/products'
     },
     {
         id: 'Genral Product',
@@ -128,6 +123,12 @@ export default [
                 title: 'Orders',
                 icon: <Clipboard size={20}/>,
                 navLink: '/dashboard/orders'
+            },
+            {
+                id: 'Product',
+                title: 'Product',
+                icon: <Package size={20}/>,
+                navLink: '/products'
             },
             {
                 id: 'menuitems',
@@ -196,6 +197,12 @@ export default [
         id: 'Wineclub',
         title: 'Wineclub',
         children: [
+            {
+                id: 'wines',
+                title: 'Wines',
+                icon: <Award size={20}/>,
+                navLink: '/members'
+            },
             {
                 id: 'Members',
                 title: 'Members',

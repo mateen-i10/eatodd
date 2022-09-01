@@ -5,6 +5,10 @@ import React, {Fragment, useState} from "react"
 import {Col, Row, TabContent, TabPane} from "reactstrap"
 import Tabs from "./components/Tabs"
 import ProfileDetails from "./components/ProfileDetails"
+import BillingPlans from "./components/BillingPlans"
+import BillingAddress from "./components/BillingAddress"
+import SecurityTab from "./components/ChangePassword"
+import MyOrder from "./components/MyOrders"
 
 const data = {
     accountSetting: {
@@ -58,23 +62,6 @@ const data = {
 
 const Customer = () => {
     const [activeTab, setActiveTab] = useState('1')
-    // const [selectedOption, setSelectedOption] = useState({id: 1, title: "DashBoard", category: "dashboard"})
-    // const customerDashboard = [
-    //     {id: 1, title: "DashBoard", category: "dashboard"},
-    //     {id: 2, title: "My Order", category: "my_order"},
-    //     {id: 3, title: "Edit Profile", category: "edit_profile"},
-    //     {id: 4, title: "Shipping Details", category: "shipping_details"},
-    //     {id: 5, title: "Billing Detail", category: "billing_detail"},
-    //     {id: 6, title: "Change Password", category: "change_password"},
-    //     {id: 7, title: "Logout", category: "logout"}
-    // ]
-    // methods
-    // const toggleList = item => {
-    //     if (selectedOption !== item) {
-    //         setSelectedOption(item)
-    //     }
-    // }
-    // console.log(selectedOption)
     const toggleTab = tab => {
         setActiveTab(tab)
     }
@@ -92,20 +79,24 @@ const Customer = () => {
                                 </div>
                             </TabPane>
                             <TabPane tabId='2'>
-                                2
-                                {/*<SecurityTabContent/>*/}
+                                <div className="row justify-content-center">
+                                    <div className="col-md-11 mt-4"><BillingPlans data={data}/></div>
+                                </div>
                             </TabPane>
                             <TabPane tabId='3'>
-                                3
-                                {/*<BillingTabContent/>*/}
+                                <div className="row justify-content-center">
+                                    <div className="col-md-11 mt-4"><BillingAddress data={data}/></div>
+                                </div>
                             </TabPane>
                             <TabPane tabId='4'>
-                                4
-                                {/*<NotificationsTabContent/>*/}
+                                <div className="row justify-content-center">
+                                    <div className="col-md-11 mt-4"><SecurityTab data={data}/></div>
+                                </div>
                             </TabPane>
                             <TabPane tabId='5'>
-                                5
-                                {/*<ConnectionsTabContent/>*/}
+                                <div className="row justify-content-center">
+                                    <div className="col-md-11 mt-4"><MyOrder data={data}/></div>
+                                </div>
                             </TabPane>
                         </TabContent>
                     </Col>
