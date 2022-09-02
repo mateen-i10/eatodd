@@ -196,6 +196,16 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/employees',
+        component: lazy(() => import('../../views/admin/Employee/employee')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/employee/:id',
+        component: lazy(() => import('../../views/admin/Employee/employeeDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/Customer',
         component: lazy(() => import('../../views/customer/index')),
         layout: 'BlankLayout'
@@ -257,7 +267,7 @@ const Routes = [
     },
     {
         path: '/restaurantDetail/:id',
-        component: lazy(() => import('../../views/admin/Restaurant/components/RestaurantDetail')),
+        component: lazy(() => import('../../views/admin/Restaurant/RestaurantDetail')),
         layout: 'VerticalLayout'
     },
     {

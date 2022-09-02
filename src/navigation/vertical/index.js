@@ -38,6 +38,12 @@ export default [
         navLink: '/Users'
     },
     {
+        id: 'Employees',
+        title: 'Employees',
+        icon: <Users size={20}/>,
+        navLink: '/employees'
+    },
+    {
         id: 'Restaurants',
         title: 'Restaurants',
         icon: <Coffee size={20}/>,

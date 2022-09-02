@@ -3,10 +3,10 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
 // ** Styles
-import '../../../../@core/scss/base/pages/app-invoice.scss'
-import tempimg from '../../../../../src/assets/images/images/images.jpg'
-import UILoader from "../../../../@core/components/ui-loader"
-import {getRestaurant} from "../../../../redux/restaurant/actions"
+import '../../../@core/scss/base/pages/app-invoice.scss'
+import tempimg from '../../../assets/images/images/images.jpg'
+import UILoader from "../../../@core/components/ui-loader"
+import {getRestaurant} from "../../../redux/restaurant/actions"
 
 const RestaurantDetail = ({match}) => {
     const id = match.params.id
