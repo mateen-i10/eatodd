@@ -201,7 +201,7 @@ export default [
                 id: 'wines',
                 title: 'Wines',
                 icon: <Award size={20}/>,
-                navLink: '/members'
+                navLink: '/wines'
             },
             {
                 id: 'Members',
