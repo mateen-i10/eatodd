@@ -25,6 +25,7 @@ import genralProduct from "./genralProduct/reducer"
 import category from "./restaurantPages/category/reducer"
 import subCategory from "./subcategory/reducer"
 import wines from "./wines/reducer"
+import employee from "./employee/reducer"
 
 const rootReducer = {
     auth,
@@ -52,7 +53,8 @@ const rootReducer = {
     category,
     subCategory,
     wines,
-    cartItems
+    cartItems,
+    employee
 }
 
 export default rootReducer
