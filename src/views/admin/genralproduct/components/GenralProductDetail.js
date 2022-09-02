@@ -25,26 +25,26 @@ const ProductDetail = ({match}) => {
             <UILoader blocking={isLoading}>
                 <Card>
                     <Row className='p-2'>
-                        <Col className='d-flex align-items-center justify-content-center mb-1 mb-md-0' md='5' xs='12'>
-                            <div className='d-flex align-items-center justify-content-center'>
-                                <img className='img-fluid genralProduct-img' src={tempimg} alt="User Profile Image" style={{padding: 25}} />
+                        <Col className='d-flex' md='3' xs='12'>
+                            <div className='d-flex'>
+                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />
                             </div>
                         </Col>
-                        <Col md='7' xs='12'>
-                            <CardBody>
-                                <h2 className='mb-75'>General Product Details</h2>
+                        <Col md='9' xs='12'>
+                            <CardBody style={{maxHeight: 450}}>
+                                <h2 className='mb-75'>Genral Product Details</h2>
                                 <Row>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Product Name:</h5>
+                                                <h5 className='mb-75'>Name:</h5>
                                             </div>
                                             <div className='col-7'>
                                                 <CardText className="text-capitalize">{genralProduct.name}</CardText>
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Description:</h5>
@@ -54,27 +54,7 @@ const ProductDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Online Price:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.onlinePrice}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Quantity :</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.quantity}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Retail Price:</h5>
@@ -84,7 +64,37 @@ const ProductDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-5'>
+                                                <h5 className='mb-75'>Discount:</h5>
+                                            </div>
+                                            <div className='col-7'>
+                                                <CardText>{genralProduct.discount}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={6}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-5'>
+                                                <h5 className='mb-75'>Quantity:</h5>
+                                            </div>
+                                            <div className='col-7'>
+                                                <CardText>{genralProduct.quantity}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={6}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-5'>
+                                                <h5 className='mb-75'>Online Price:</h5>
+                                            </div>
+                                            <div className='col-7'>
+                                                <CardText>{genralProduct.onlinePrice}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Tax Amount:</h5>
@@ -94,33 +104,13 @@ const ProductDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Tax Percentage:</h5>
                                             </div>
                                             <div className='col-7'>
                                                 <CardText>{genralProduct.taxPercentage}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Whole Price:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.wholePrice}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Discount:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.discount}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -135,3 +125,4 @@ const ProductDetail = ({match}) => {
 }
 
 export default ProductDetail
+

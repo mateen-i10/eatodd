@@ -221,7 +221,7 @@ const Product = (props) => {
         event.preventDefault()
        if (formFeilds === 1) {
            // eslint-disable-next-line no-var
-           var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant.value}
+           var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value}
        } else {
            // eslint-disable-next-line no-var
            var finalData = {...formState, generalProductId: formState.generalProduct?.value }
