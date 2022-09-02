@@ -76,8 +76,7 @@ export const addWine = (data) => {
             requestCompleted: setRequestCompleted.type,
             onError: setIswineError.type,
             isSuccess: setIswineSuccess.type,
-            isFormData: true,
-            isWine: true
+            isFormData: true
         }))
     }
 }
@@ -94,8 +93,7 @@ export const updateWine = (data) => {
             requestCompleted: setRequestCompleted.type,
             onError: setIswineError.type,
             isSuccess: setIswineSuccess.type,
-            isFormData: true,
-            isWine: true
+            isFormData: true
         }))
         dispatch(setIsEdit(false))
     }
