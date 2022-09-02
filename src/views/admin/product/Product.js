@@ -218,6 +218,7 @@ const Product = (props) => {
     }
 
     const handleSubmit = (event) => {
+        event.preventDefault()
        if (formFeilds === 1) {
            // eslint-disable-next-line no-var
            var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant.value}
@@ -226,7 +227,6 @@ const Product = (props) => {
            var finalData = {...formState, generalProductId: formState.generalProduct?.value }
        }
         console.log(finalData, "lets see")
-        event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 

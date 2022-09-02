@@ -66,6 +66,7 @@ export const deleteWine = (id) => {
 export const addWine = (data) => {
     console.log('resData', data)
     delete data.attachmentId
+    delete data.restaurantId
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -83,6 +84,11 @@ export const addWine = (data) => {
 export const updateWine = (data) => {
     console.log('updated data', data)
     delete data.attachmentId
+    delete data.createdById
+    delete data.generalProductId
+    delete data.modifiedById
+    delete data.modifiedDate
+    delete data.restaurantId
     return async dispatch => {
         dispatch(apiCall({
             url,
