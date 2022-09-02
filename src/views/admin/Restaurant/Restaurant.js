@@ -35,6 +35,7 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 import Datetime from "react-datetime"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
+import moment from "moment"
 
 const Restaurant = (props) => {
 
@@ -113,29 +114,12 @@ const Restaurant = (props) => {
         ]
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
 
-    const Cuisines = async (input) => {
-        return httpService._get(`${baseURL}cuisine?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    console.log(response, "Restaurant resp")
-                    return response.data.data.map(d =>  {
-                        return {label: `${d.name}`, value: d.id}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
-    }
-
     useEffect(() => {
         if (formInitialState && formInitialState.restaurantSchedules) {
             const final = formInitialState.restaurantSchedules.map((i, index) => {
                return {...i, name : resSchedules[index].name}
             })
+            console.log('final', final)
             setRestaurantSchedule([...final])
         }
     }, [isEdit])
@@ -161,7 +145,7 @@ const Restaurant = (props) => {
         if (typeof (e) === "object") {
             const newArray = restaurantSchedule.map((element, i) => {
                 if (i === index) {
-                    element[name] = e.toDate()
+                    element[name] = moment(e.toDate()).format()
                 }
                 return element
             })
@@ -196,7 +180,7 @@ const Restaurant = (props) => {
                             <Datetime
                                 locale="en-gb"
                                 initialViewMode={'time'}
-                                value={r.startDate}
+                                value={r.startDate ? new Date(r.startDate) : null}
                                 dateFormat={false}
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'startDate')}
@@ -206,7 +190,7 @@ const Restaurant = (props) => {
                             <Datetime
                                 locale="en-gb"
                                 initialViewMode={'time'}
-                                value={r.endDate}
+                                value={r.endDate ? new Date(r.endDate) : null}
                                 dateFormat={false}
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'endDate')}
@@ -214,7 +198,7 @@ const Restaurant = (props) => {
                         </td>
                         <td>
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value={r.isClosed}
+                                <input className="form-check-input" type="checkbox" checked={r.isClosed}
                                        onChange={(e) => onValueChange(index, 'isClosed', e)}
                                        id={`isClosed${r.name}`} name={`isClosed${r.name}`}/>
                                 <label className="form-check-label" htmlFor={`isClosed${r.name}`}>
@@ -226,7 +210,8 @@ const Restaurant = (props) => {
                             <div className="form-check">
                                 <input
                                     className="form-check-input"
-                                    type="checkbox" value={r.isTwentyFourHoursOpened}
+                                    type="checkbox"
+                                    checked={r.isTwentyFourHoursOpened}
                                     onChange={(e) => onValueChange(index, 'isTwentyFourHoursOpened', e)}
                                     id={`isTwentyFourHoursOpened${r.name}`} name={`isTwentyFourHoursOpened${r.name}`} />
                                 <label className="form-check-label" htmlFor={`isTwentyFourHoursOpened${r.name}`}>
@@ -243,6 +228,24 @@ const Restaurant = (props) => {
         </div>
     }
 
+    const cuisines = async (input) => {
+        return httpService._get(`${baseURL}cuisine?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                console.log('response', response)
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Restaurant')
     const [edit, setEdit] = useState(false)
@@ -252,23 +255,31 @@ const Restaurant = (props) => {
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Restaurant Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'phone Number', placeholder: 'Enter Phone Number', name:'phoneNo', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Latitude', placeholder: 'Enter Latitude', name:'latitude', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Longitude', placeholder: 'Enter Longitude', name:'longitude', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Cuisines', placeholder: 'Select Cuisines', name:'cuisines', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Cuisines, isAsyncSelect: true, isMulti:true},
+        {type:FieldTypes.Select, label: 'Cuisine', placeholder: 'Select Cuisine', name:'cuisines', isRequired:false, fieldGroupClasses: 'col-12', loadOptions:cuisines, isAsyncSelect: true, isMulti:true},
         {type:FieldTypes.SwitchButton, label: 'Available For Delivery', name:'isAvailableForDelivery', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.SwitchButton, label: 'Vine Club Included', name:'isVineClub', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.SwitchButton, label: 'Catering Included', name:'isCatering', isRequired:false, fieldGroupClasses: 'col-6'}
     ])
 
-   /* useEffect(() => {
-        dispatch(loadRestaurants())
-    }, [isEdit])*/
+    const [date, setDate] = useState(new Date())
+
+    //for get current date and time
+    useEffect(() => {
+        const timer = setInterval(() => setDate(new Date()), 1000)
+        return function cleanup() {
+            clearInterval(timer)
+        }
+
+    })
 
     // ** schema for validations
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        address: Joi.string().required().label("Address")
     })
 
     // ** Function to handle filter
@@ -289,6 +300,8 @@ const Restaurant = (props) => {
         phoneNo: '',
         latitude: '',
         longitude: '',
+        cuisines: [],
+        restaurantSchedule:[],
         isAvailableForDelivery: false,
         isVineClub: false,
         isCatering: false
@@ -305,7 +318,7 @@ const Restaurant = (props) => {
         toggle()
         dispatch(getRestaurant(id, true))
         setModalTitle('Edit Restaurant')
-        setEdit(true)
+        setModalLoading(true)
     }
     const deleteClick = (id, e) => {
         e.preventDefault()
@@ -332,8 +345,9 @@ const Restaurant = (props) => {
 
     const handleSubmit = (event) => {
         console.log('restaurantSchedule', restaurantSchedule)
-        const finalData = {...formState, restaurantSchedules: restaurantSchedule}
-        console.log(finalData, "final data")
+        console.log('formState', formState)
+        const finalData = {...formState, restaurantSchedules: restaurantSchedule, cuisines: formState.cuisines.map(e => { return {cuisineId: e.value} })}
+        console.log('finalData', finalData)
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
@@ -448,7 +462,7 @@ const Restaurant = (props) => {
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                     <div>
                         <CardTitle tag='h4'>Restaurant</CardTitle>
-                        <h6>Friday June 10, 2022, 08:10 AM</h6>
+                        <h6 className='mt-1'>{date.toLocaleTimeString('en-us', { weekday:"long", month:"long", year:"numeric", day:"numeric"})}</h6>
                     </div>
                         <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
                 </CardHeader>

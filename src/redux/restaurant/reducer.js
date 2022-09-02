@@ -36,6 +36,7 @@ const RestaurantReducer = (state = initialState, action) => {
             }
         case setRestaurant.type:
             const data = action.payload.data
+            console.log('redData', data)
             return {
                 ...state,
                 object: {...data},
@@ -56,7 +57,11 @@ const RestaurantReducer = (state = initialState, action) => {
         case editRestaurant.type:
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...action.payload.data,
+                    cuisines: action.payload.data.cuisines?.map(i => {
+                            return {label: i.cuisine?.name, value: i.cuisine.id}
+                        }
+                    )},
                 isEdit: true
             }
         case setRequestCompleted.type:
