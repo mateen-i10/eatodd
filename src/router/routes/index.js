@@ -50,7 +50,7 @@ const Routes = [
     },
     {
         path: '/reward',
-        component: lazy(() => import('../../views/Reward/Reward')),
+        component: lazy(() => import('../../views/reward/Reward')),
         layout: 'BlankLayout'
     },
     {
