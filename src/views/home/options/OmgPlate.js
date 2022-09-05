@@ -10,7 +10,7 @@ import Rice from "./components/Rice"
 import Beans from "./components/Beans"
 import Drinks from "./components/Drinks"
 import ToppingThingOff from "./components/ToppingThingOff"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {itemAdded} from "../../../redux/cartItems/cartItemsReducer"
 
 const Menu = (props) => {
@@ -24,6 +24,8 @@ const Menu = (props) => {
     const [selectedMenuItems, setSelectedMenuItems] = useState({})
     const [mealName, setMealName] = useState("")
 
+    const {cartItems} = useSelector(state => state)
+    console.log(cartItems)
     // console.log(mealName)
     const dispatch = useDispatch()
     // const {cartItems} = useSelector(state => state)

@@ -9,10 +9,14 @@ const slice = createSlice({
             cartItem.push({
                 action
             })
-
+        },
+        itemSelected: (cartItem, action) => {
+            cartItem.push({
+                mainItem: action
+            })
         }
     }
 })
 
-export const {itemAdded} = slice.actions
+export const {itemAdded, itemSelected} = slice.actions
 export default slice.reducer

@@ -1,8 +1,14 @@
 import {Button, Card, CardBody, CardHeader, CardTitle, Col, Row} from "reactstrap"
 import React from "react"
 import UILoader from "../../../@core/components/ui-loader"
+import {useDispatch} from "react-redux"
+import {locationAdded} from "../../../redux/restaurantLocation/restaurantLocation"
+import {Link} from "react-router-dom"
 
 const NearByPlaces = ({places, isLoading}) => {
+
+    const dispatch = useDispatch()
+
     return <UILoader blocking={isLoading}>
         <Row className="align-items-center, justify-content-center mt-3 pickup-list">
             <Col sm='12'>
@@ -21,9 +27,11 @@ const NearByPlaces = ({places, isLoading}) => {
                                         <small>{place.address}</small>
                                     </div>
                                 </div>
-                                <Button className='text-uppercase mt-1' color='primary' outline>
+                                <Link to="/OmgPlate"> <Button className='text-uppercase mt-1' color='primary' outline
+                                                              onClick={() => dispatch(locationAdded(place))}>
                                     Select
                                 </Button>
+                                </Link>
                             </div>
                         </CardBody>
                     ))}
