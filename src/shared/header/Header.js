@@ -5,14 +5,12 @@ import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import FoodCart from "./components/SideCart"
 import {ShoppingBag} from "react-feather"
-import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
-import {isUserLoggedIn} from "../../auth/utils"
+// import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 
 export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
-    const [isuserlogedin, setuserloginedin] = useState(false)
 
     const breakpoint = 1200
     useEffect(() => {
@@ -24,12 +22,7 @@ export default function Header() {
             window.removeEventListener("resize", handleResizeWindow)
         }
     }, [])
-    //** ComponentDidMount
-    useEffect(() => {
-        if (isUserLoggedIn() !== null) {
-            setuserloginedin(true)
-        }
-    }, [isuserlogedin])
+
     useEffect(() => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
@@ -40,25 +33,22 @@ export default function Header() {
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>
-                        {isuserlogedin ? null : <div className="headlogin">
+                        <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
-                        </div>}
+                        </div>
                     </div>
                     <div className="head-sec-2">
-                        {/*{isuserlogedin ? 'currently' : 'not'}*/}
                         <Link to="/"><h2>HOME</h2></Link>
                         <Link to="/"><h2>ORDER</h2></Link>
                         <Link to="/menu"><h2>CATERING</h2></Link>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
-                        {/*<Link to="/ourvalues"><h2>OUR VALUES</h2></Link>*/}
+                        <Link to="/ourvalues"><h2>OUR VALUES</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
                     <div className="head-sec-3">
-                        {isuserlogedin ? <ul>
-                            <UserDropdown />
-                        </ul> : null}
+                        {/*<UserDropdown/>*/}
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>

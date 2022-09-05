@@ -69,6 +69,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/wines',
+        component: lazy(() => import('../../views/admin/wines/Wines')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/wine/shop',
         component: lazy(() => import('../../views/wine/Pages/Shop')),
         layout: 'BlankLayout'

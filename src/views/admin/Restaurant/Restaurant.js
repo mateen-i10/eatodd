@@ -56,13 +56,13 @@ const Restaurant = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const resSchedules = [
         {
-        name: 'Monday',
-        day: 1,
-        startDate: null,
-        endDate: null,
-        isClosed: false,
-        isTwentyFourHoursOpened: false
-    },
+            name: 'Monday',
+            day: 1,
+            startDate: null,
+            endDate: null,
+            isClosed: false,
+            isTwentyFourHoursOpened: false
+        },
         {
             name: 'Tuesday',
             day: 2,
@@ -111,13 +111,13 @@ const Restaurant = (props) => {
             isClosed: false,
             isTwentyFourHoursOpened: false
         }
-        ]
+    ]
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
 
     useEffect(() => {
         if (formInitialState && formInitialState.restaurantSchedules) {
             const final = formInitialState.restaurantSchedules.map((i, index) => {
-               return {...i, name : resSchedules[index].name}
+                return {...i, name : resSchedules[index].name}
             })
             console.log('final', final)
             setRestaurantSchedule([...final])
@@ -459,37 +459,37 @@ const Restaurant = (props) => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <div>
-                        <CardTitle tag='h4'>Restaurant</CardTitle>
-                        <h6 className='mt-1'>{date.toLocaleTimeString('en-us', { weekday:"long", month:"long", year:"numeric", day:"numeric"})}</h6>
-                    </div>
+                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <div>
+                            <CardTitle tag='h4'>Restaurant</CardTitle>
+                            <h6 className='mt-1'>{date.toLocaleTimeString('en-us', { weekday:"long", month:"long", year:"numeric", day:"numeric"})}</h6>
+                        </div>
                         <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
-                </CardHeader>
-                <Row className='justify-content-end mx-0'>
-                    <Col className='mt-1' md='12' sm='12'>
-                        <Input
-                            className='dataTable-filter mb-50'
-                            type='text'
-                            placeholder='Search'
-                            bsSize='sm'
-                            id='search-input'
-                            value={searchValue}
-                            onChange={handleFilter}
-                        />
-                    </Col>
-                </Row>
-                <DataTable
-                    noHeader
-                    pagination
-                    paginationServer
-                    className='react-dataTable'
-                    columns={columns}
-                    sortIcon={<ChevronDown size={10} />}
-                    paginationComponent={CustomPagination}
-                    data={dataToRender()}
-                />
-            </Card>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                type='text'
+                                placeholder='Search'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10} />}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
             </UILoader>
             <FormModal ref={formModalRef}
                        formState={formState}

@@ -22,26 +22,26 @@ import UILoader from "../../../@core/components/ui-loader"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {setIsEdit, setIsproductError, setproduct} from "../../../redux/products/reducer"
+import {setIsEdit, setIswineError, setwine} from "../../../redux/wines/reducer"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
 
 // my changes
-import {deleteproduct, loadproducts, getproduct, addproduct, updateproduct} from "../../../redux/products/actions"
+import {deleteWine, loadWines, getWine, addWine, updateWine} from "../../../redux/wines/actions"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
-const Product = (props) => {
+const Wines = (props) => {
 
-    const productList = useSelector(state => state.product.list)
-    const formInitialState = useSelector(state => state.product.object)
-    const miscData = useSelector(state => state.product.miscData)
-    const isEdit = useSelector(state => state.product.isEdit)
-    const isLoading = useSelector(state => state.product.isLoading)
-    const isError = useSelector(state => state.product.isError)
-    const isSuccess = useSelector(state => state.product.isSuccess)
+    const WineList = useSelector(state => state.wines.list)
+    const formInitialState = useSelector(state => state.wines.object)
+    const miscData = useSelector(state => state.wines.miscData)
+    const isEdit = useSelector(state => state.wines.isEdit)
+    const isLoading = useSelector(state => state.wines.isLoading)
+    const isError = useSelector(state => state.wines.isError)
+    const isSuccess = useSelector(state => state.wines.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
@@ -52,29 +52,11 @@ const Product = (props) => {
     const [searchValue, setSearchValue] = useState('')
 
     const subCategories = async (input) => {
-        return httpService._get(`${baseURL}SubCategory?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+        return httpService._get(`${baseURL}SubCategory/GetWineSubCategories?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     console.log(response, "resp")
-                    return response.data.data.map(d =>  {
-                        return {label: `${d.name}`, value: d.id}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
-    }
-
-    const generalProduct = async (input) => {
-        return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    console.log(response, "genral product resp")
                     return response.data.data.map(d =>  {
                         return {label: `${d.name}`, value: d.id}
                     })
@@ -106,63 +88,45 @@ const Product = (props) => {
     }
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Product')
+    const [modalTitle, setModalTitle] = useState('Add Wines')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData, setFormData] = useState([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false}])
-    const [formFeilds, setFormFeilds] = useState(0)
+    const formData = [
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Wines Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'RetailPrice', placeholder: 'Enter RetailPrice', name:'retailPrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'OnlinePrice', placeholder: 'Enter OnlinePrice', name:'onlinePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subcategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
+    ]
 
-    const AddNewData = () => {
-        setFormData([
-            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'RetailPrice', placeholder: 'Enter RetailPrice', name:'retailPrice', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'OnlinePrice', placeholder: 'Enter OnlinePrice', name:'onlinePrice', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subcategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
-            {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
-        ])
-
-        setFormFeilds(1)
-    }
-
-    const AddFromExistingData = () => {
-        setFormData([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false}])
-
-        setFormFeilds(0)
-    }
-
-
-    const child = () => {
-        return (
-            <>
-                {formFeilds === 0 && (
-                    <div className='col-md-6 mt-2 text-end'>
-                        <Button type="button" color='primary' onClick={AddNewData}>Add new</Button>
-                    </div>
-                )}
-                {formFeilds === 1 && (
-                    <div className='col-md-12 mt-2 text-center mb-3'>
-                        <h5 className='mb-3' color='primary'>Or</h5>
-                        <Button type="button" color='primary' onClick={AddFromExistingData}>Choose from existing one</Button>
-                    </div>
-                )}
-            </>
-            )
-
-    }
+    // const child = () => {
+    //     return (
+    //         <>
+    //             <div className='col-md-6 mt-2 text-end'>
+    //                     <Button type="button" color='primary' onClick={AddNewData}>Add new</Button>
+    //             </div>
+    //             <div className='col-md-12 mt-2 text-center mb-3'>
+    //                 <h5 className='mb-3' color='primary'>Or</h5>
+    //                 <Button type="button" color='primary' onClick={AddFromExistingData}>Choose from existing one</Button>
+    //                 </div>
+    //         </>
+    //     )
+    //
+    // }
 
 
     // ** schema for validations
     const schema = Joi.object({
-        //name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name")
     })
 
     // ** Function to handle filter
@@ -174,23 +138,23 @@ const Product = (props) => {
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
+    useLoadData(isSuccess, loadWines, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setwine, {
         name: '',
         description:''
     })
-    useModalError(isError, setModalLoading, setIsproductError)
+    useModalError(isError, setModalLoading, setIswineError)
 
     const addClick = () => {
-        setModalTitle('Add Product')
+        setModalTitle('Add Wines')
         toggle()
     }
 
     const editClick = (id) => {
         console.log("edit", id)
         toggle()
-        dispatch(getproduct(id, true))
-        setModalTitle('Edit Product')
+        dispatch(getWine(id, true))
+        setModalTitle('Edit Wines')
         setEdit(true)
     }
 
@@ -207,46 +171,40 @@ const Product = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteproduct(id))
+                dispatch(deleteWine(id))
             }
         })
     }
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/productsDetail/${id}`)
+        props.history.push(`/WinesDetail/${id}`)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-       if (formFeilds === 1) {
-           // eslint-disable-next-line no-var
-           var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value}
-       } else {
-           // eslint-disable-next-line no-var
-           var finalData = {...formState, generalProductId: formState.generalProduct?.value }
-       }
+        const finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value, isWine: true}
         console.log(finalData, "lets see")
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateproduct(finalData)) : dispatch(addproduct(finalData))
+        edit ? dispatch(updateWine(finalData)) : dispatch(addWine(finalData))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadproducts(currentPage + 1, pageSize, value))
+            dispatch(loadWines(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
+        dispatch(loadWines(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
@@ -320,10 +278,10 @@ const Product = (props) => {
     }
 
     const dataToRender = () => {
-        if (productList.length > 0) {
-            return productList
+        if (WineList.length > 0) {
+            return WineList
         }  else {
-            return productList.slice(0, pageSize)
+            return WineList.slice(0, pageSize)
         }
     }
 
@@ -333,10 +291,10 @@ const Product = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Product</CardTitle>
+                            <CardTitle tag='h4'>Wines</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={() => addClick()}>Add a new Wines</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -375,11 +333,10 @@ const Product = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading = {isModalLoading}
                        handleSubmit={handleSubmit}
-                       children={child()}
             />
 
         </Fragment>
     )
 }
 
-export default Product
+export default Wines

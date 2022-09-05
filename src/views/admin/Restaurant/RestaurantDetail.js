@@ -3,10 +3,11 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
 // ** Styles
-import '../../../@core/scss/base/pages/app-invoice.scss'
-import tempimg from '../../../assets/images/images/images.jpg'
-import UILoader from "../../../@core/components/ui-loader"
-import {getRestaurant} from "../../../redux/restaurant/actions"
+import '../../../../@core/scss/base/pages/app-invoice.scss'
+import tempimg from '../../../../../src/assets/images/images/images.jpg'
+import UILoader from "../../../../@core/components/ui-loader"
+import {getRestaurant} from "../../../../redux/restaurant/actions"
+import {WeekDays} from "../../../../utility/enums/WeekDays"
 
 const RestaurantDetail = ({match}) => {
     const id = match.params.id
@@ -25,26 +26,26 @@ const RestaurantDetail = ({match}) => {
             <UILoader blocking={isLoading}>
                 <Card>
                     <Row className='p-2'>
-                        <Col className='d-flex align-items-center justify-content-center mb-1 mb-md-0' md='5' xs='12'>
-                            <div className='d-flex align-items-center justify-content-center'>
-                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25}} />
+                        <Col className='d-flex' md='3' xs='12'>
+                            <div className='d-flex'>
+                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />
                             </div>
                         </Col>
-                        <Col md='7' xs='12'>
+                        <Col md='9' xs='12'>
                             <CardBody style={{maxHeight: 450}}>
                                 <h2 className='mb-75'>Restaurant Details</h2>
                                 <Row>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Restaurant Name:</h5>
+                                                <h5 className='mb-75'>Name:</h5>
                                             </div>
                                             <div className='col-7'>
                                                 <CardText className="text-capitalize">{restaurant.name}</CardText>
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Description:</h5>
@@ -54,7 +55,7 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Address:</h5>
@@ -64,7 +65,7 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Phone Number:</h5>
@@ -74,7 +75,7 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Latitude:</h5>
@@ -84,7 +85,7 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Longitude:</h5>
@@ -94,7 +95,7 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
-                                    <Col xl={12}>
+                                    <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
                                                 <h5 className='mb-75'>Status:</h5>
@@ -131,7 +132,7 @@ const RestaurantDetail = ({match}) => {
                                         <tbody key={i.id}>
                                         <tr>
                                             <td>{i.restaurantId}</td>
-                                            <td>{i.day}</td>
+                                            <td>{WeekDays[i.day]}</td>
                                             <td>{i.endDate}</td>
                                             <td>{i.startDate}</td>
                                             <td>{i.isClosed ? "Closed" : "Not Closed"}</td>

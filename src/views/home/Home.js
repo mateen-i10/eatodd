@@ -3,7 +3,6 @@ import Hero from "./components/Hero/Hero"
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import Catering from "./components/Catering/Catering"
-import React from "react"
 
 const Home = () => {
   return (

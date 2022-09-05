@@ -5,46 +5,11 @@ import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
-// import drinks from "../../../../assets/images/ORDER/cola.png"
-// import wine from '../../../../assets/images/ORDER/VCine.png'
-
-const mainMenu = [
-    {
-        id: 1,
-        title: "omg Plate",
-        image: require("../../../../assets/images/ORDER/omg-p1.png").default
-    },
-    {
-        id: 2,
-        title: "sandwich",
-        image: require("../../../../assets/images/ORDER/sabdwich.png").default
-    },
-    {
-        id: 3,
-        title: "featured plate",
-        image: require("../../../../assets/images/ORDER/omg-p1.png").default
-    },
-    {
-        id: 4,
-        title: "salad",
-        image: require("../../../../assets/images/ORDER/salad.png").default
-    },
-    {
-        id: 5,
-        title: "soup",
-        image: require("../../../../assets/images/ORDER/soup.png").default
-    },
-    {
-        id: 6,
-        title: "drinks",
-        image: require("../../../../assets/images/ORDER/cola.png").default
-    },
-    {
-        id: 7,
-        title: "wine",
-        image: require('../../../../assets/images/ORDER/VCine.png').default
-    }
-]
+import Salad from "../../../../assets/images/ORDER/salad.png"
+import Soup from "../../../../assets/images/ORDER/soup.png"
+import plate from "../../../../assets/images/ORDER/omg-p1.png"
+import drinks from "../../../../assets/images/ORDER/cola.png"
+import Sandwich from "../../../../assets/images/ORDER/sabdwich.png"
 
 const Order = () => {
     return (
@@ -70,155 +35,113 @@ const Order = () => {
                 </div>
             </div>
             <div className="menu-list container-fluid pb-5 pt-5 ">
-                <div className="row ms-0 me-1">
-                    {
-                        mainMenu.map(item => (
-                            <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
-                                <Link to="/OmgPlate">
-                                    <div className="menu-item">
-                                        <div className="thumbnail">
-                                            <img
-                                                src={item.image}
-                                                alt="Burrito"
-                                                width={200}/>
-                                        </div>
-                                        <div className="text2">
-                                            <div className="display-name">{item.title}</div>
-                                            <div className="order-cta">Order
-                                                <div className="arrow-right"></div>
-                                            </div>
-                                        </div>
+                <div className="row ms-0 me-1 ">
+                    <div className="col-md-4 col-sm-5  col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        src={plate}
+                                        alt="Burrito"
+                                    width={200}/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name">OMG PLATE</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"></div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
-                        ))
-                    }
-                    {/*<div className="col-md-4 col-sm-5  col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img*/}
-                    {/*                    src={plate}*/}
-                    {/*                    alt="Burrito"*/}
-                    {/*                    width={200}/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name">OMG PLATE</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"></div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-4 col-sm-5 col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img width={200} src={Sandwich}*/}
-                    {/*                     alt="Burrito Bowl"/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name mealBurrito">SANDWICH</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"></div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-4 col-sm-5 col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img*/}
-                    {/*                    width={200}*/}
-                    {/*                    src={plate}*/}
-                    {/*                    alt="Burrito Bowl"/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name mealBurrito">FEATURED PLATES</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"/>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-4 col-sm-5 col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img*/}
-                    {/*                    src={Salad}*/}
-                    {/*                    alt="Burrito Bowl"*/}
-                    {/*                    width={200}/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name mealBurrito">SALAD</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"/>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-4 col-sm-5 col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img*/}
-                    {/*                    src={Soup}*/}
-                    {/*                    alt="Burrito Bowl"*/}
-                    {/*                    width={200}/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name mealBurrito">SOUPS</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"/>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-4 col-sm-5 col-6 top-level-menu">*/}
-                    {/*    <Link to="/OmgPlate">*/}
-                    {/*        <div className="menu-item">*/}
-                    {/*            <div className="thumbnail">*/}
-                    {/*                <img*/}
-                    {/*                    src={drinks}*/}
-                    {/*                    width={200}*/}
-                    {/*                    alt="Burrito Bowl"/>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="text2">*/}
-                    {/*                <div className="display-name mealBurrito">SIDES, DRINKS</div>*/}
-                    {/*                <div className="order-cta">Order*/}
-                    {/*                    <div className="arrow-right"/>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className='row'>*/}
-                    {/*    <div className="col-md-4 col-sm-5 col-6 top-level-menu mx-auto">*/}
-                    {/*        <Link to="/OmgPlate">*/}
-                    {/*            <div className="menu-item">*/}
-                    {/*                <div className="thumbnail">*/}
-                    {/*                    <img*/}
-                    {/*                        src={wine}*/}
-                    {/*                        width={200}*/}
-                    {/*                        alt="Burrito Bowl"/>*/}
-                    {/*                </div>*/}
-                    {/*                <div className="text2">*/}
-                    {/*                    <div className="display-name mealBurrito">WINE</div>*/}
-                    {/*                    <div className="order-cta">Order*/}
-                    {/*                        <div className="arrow-right"/>*/}
-                    {/*                    </div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </Link>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img width={200} src={Sandwich}
+                                         alt="Burrito Bowl"/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">SANDWICH</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        width={200}
+                                        src={plate}
+                                        alt="Burrito Bowl"/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">FEATURED PLATES</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        src={Salad}
+                                        alt="Burrito Bowl"
+                                        width={200}/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">SALAD</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        src={Soup}
+                                        alt="Burrito Bowl"
+                                    width={200}/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">SOUPS</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 col-sm-5 col-6 top-level-menu">
+                        <Link to="/OmgPlate">
+                            <div className="menu-item">
+                                <div className="thumbnail">
+                                    <img
+                                        src={drinks}
+                                        width={200}
+                                        alt="Burrito Bowl"/>
+                                </div>
+                                <div className="text2">
+                                    <div className="display-name mealBurrito">SIDES, DRINKS & WINE</div>
+                                    <div className="order-cta">Order
+                                        <div className="arrow-right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className="promo-banner container-fluid  ">
