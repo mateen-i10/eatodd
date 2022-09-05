@@ -31,7 +31,7 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                                 <Link to="/OmgPlate"> <Button className='text-uppercase mt-1' color='primary' outline
                                                               onClick={() => {
                                                                   dispatch(locationAdded(place))
-                                                                  dispatch(userLocationAdded(userLocation))
+                                                                  if (userLocation !== null) dispatch(userLocationAdded(userLocation))
                                                               }}>
                                     Select
                                 </Button>

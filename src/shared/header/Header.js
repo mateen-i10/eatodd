@@ -55,7 +55,7 @@ export default function Header() {
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            {userLocation.length ? <p>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</p> : <p>Delivery address</p>}
+                            {userLocation.length ? <p className="text-capitalize">{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</p> : <p>Delivery address</p>}
                         </div>
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)

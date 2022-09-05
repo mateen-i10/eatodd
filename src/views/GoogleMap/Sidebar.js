@@ -79,7 +79,7 @@ const Sidebar = ({
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
                             <div style={{borderRadius: "6px"}}>
-                                <PickUpTab places={places}/>
+                                <PickUpTab places={places} userLocation={userLocation}/>
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
