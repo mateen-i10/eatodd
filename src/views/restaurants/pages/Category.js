@@ -4,19 +4,15 @@ import React, {Fragment, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Edit, Trash} from 'react-feather'
 import {
     Button,
     Card,
     CardHeader,
     CardTitle,
     Col,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
     Input,
-    Row,
-    UncontrolledDropdown
+    Row
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
@@ -65,10 +61,6 @@ const Category = () => {
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
     const [formData, setFormData] = useState([])
-
-    /* useEffect(() => {
-         dispatch(loadCategorys())
-     }, [isEdit])*/
 
     // ** schema for validations
     const [schema, setSchema] = useState(Joi.object({
@@ -140,6 +132,14 @@ const Category = () => {
                 name: 'description',
                 isRequired: false,
                 fieldGroupClasses: 'col-6'
+            },
+            {
+                type: FieldTypes.File,
+                label: 'Image',
+                placeholder: 'Enter Attachment',
+                name: 'image',
+                isRequired: false,
+                fieldGroupClasses: 'col-6'
             }
         ])
 
@@ -168,11 +168,6 @@ const Category = () => {
                 dispatch(deleteCategory(id))
             }
         })
-    }
-
-    const detailOptClick = (id, e) => {
-        e.preventDefault()
-        // props.history.push(`/restaurant/detail/${id}`)
     }
 
     const handleSubmit = (event) => {
@@ -219,25 +214,8 @@ const Category = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
-                                <MoreVertical size={15}/>
-                            </DropdownToggle>
-                            <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100'
-                                              onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15}/>
-                                    <span className='align-middle ms-50'>Details</span>
-                                </DropdownItem>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15}/>
-                                    <span className='align-middle ms-50'>Delete</span>
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => {
-                            editClick(row.id)
-                        }}><Edit size={15}/></span>
+                        <span className='cursor-pointer' onClick={e => deleteClick(row.id, e)}><Trash size={15}/></span>
+                        <span className='cursor-pointer mx-1' onClick={() => editClick(row.id)}><Edit size={15}/></span>
                     </div>
                 )
             }

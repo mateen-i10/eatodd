@@ -81,6 +81,9 @@ export const addCategory = (data) => {
 }
 export const updateCategory = (data) => {
     console.log('updated data', data)
+    delete data.cateringId
+    delete data.modifiedById
+    delete data.modifiedDate
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -90,7 +93,8 @@ export const updateCategory = (data) => {
             successMessage: 'Category Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsCategoryError.type,
-            isSuccess: setIsCategorySuccess.type
+            isSuccess: setIsCategorySuccess.type,
+            isFormData: true
         }))
         dispatch(setIsEdit(false))
     }

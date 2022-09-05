@@ -137,12 +137,6 @@ const SubCategory = () => {
         })
     }
 
-    const detailOptClick = (id, e) => {
-        e.preventDefault()
-        console.log(id, "id of the selected page")
-        // props.history.push(`/restaurant/detail/${id}`)
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault()
         const finalData = {...formState, categoryId: formState.category?.value}
@@ -189,22 +183,8 @@ const SubCategory = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
-                                <MoreVertical size={15} />
-                            </DropdownToggle>
-                            <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
-                                    <span className='align-middle ms-50'>Details</span>
-                                </DropdownItem>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
-                                    <span className='align-middle ms-50'>Delete</span>
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={e => deleteClick(row.id, e)}><Trash size={15} /></span>
+                        <span className='cursor-pointer mx-1' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }

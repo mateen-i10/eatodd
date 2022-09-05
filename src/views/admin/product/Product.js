@@ -177,7 +177,7 @@ const Product = (props) => {
     useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
         name: '',
-        description:''
+        description:'',
     })
     useModalError(isError, setModalLoading, setIsproductError)
 
@@ -222,6 +222,7 @@ const Product = (props) => {
        if (formFeilds === 1) {
            // eslint-disable-next-line no-var
            var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value}
+           console.log("Hello", finalData)
        } else {
            // eslint-disable-next-line no-var
            var finalData = {...formState, generalProductId: formState.generalProduct?.value }
