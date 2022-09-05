@@ -52,7 +52,7 @@ export const deleteEmployee = (id) => {
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'Emmployee Deleted Successfully',
+            successMessage: 'Employee Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsEmployeeError.type,
             isSuccess: setIsEmployeeSuccess.type
@@ -67,7 +67,7 @@ export const addEmployee = (data) => {
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Restaurant Added Successfully',
+            successMessage: 'Employee Added Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsEmployeeError.type,
             isSuccess: setIsEmployeeSuccess.type
@@ -83,7 +83,7 @@ export const updateEmployee = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Restaurant Updated Successfully',
+            successMessage: 'Employee Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsEmployeeError.type,
             isSuccess: setIsEmployeeSuccess.type
