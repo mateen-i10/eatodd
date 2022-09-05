@@ -177,7 +177,7 @@ const Product = (props) => {
     useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
         name: '',
-        description:'',
+        description:''
     })
     useModalError(isError, setModalLoading, setIsproductError)
 
