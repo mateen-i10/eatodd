@@ -7,20 +7,20 @@ const Tabs = ({toggleTab}) => {
             <section>
                 <div className="container-sm">
                     <Row>
-                        <Col>
+                        <Col xl={2}>
                             <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('1')}>Account</Button.Ripple>
                         </Col>
-                        <Col>
-                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('2')}>Billing & Planess</Button.Ripple>
+                        <Col xl={2}>
+                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('2')}>Billing</Button.Ripple>
                         </Col>
-                        <Col>
-                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('3')}>Billing Address</Button.Ripple>
+                        <Col xl={2}>
+                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('3')}>Address</Button.Ripple>
                         </Col>
-                        <Col>
+                        <Col xl={2}>
                             <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('4')}>Security</Button.Ripple>
                         </Col>
-                        <Col>
-                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('5')}>Order History</Button.Ripple>
+                        <Col xl={2}>
+                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('5')}>History</Button.Ripple>
                         </Col>
                     </Row>
                 </div>

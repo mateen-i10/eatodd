@@ -11,7 +11,6 @@ import {
     CardTitle,
     Button,
     Input,
-    Label,
     Row,
     Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
