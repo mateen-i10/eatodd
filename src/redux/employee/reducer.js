@@ -38,7 +38,7 @@ const employeeReducer = (state = initialState, action) => {
         case setEmployee.type:
             return {
                 ...state,
-                object: {...action.payload.data, ...action.payload.data.applicationUser},
+                object: action.payload.data,
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
@@ -56,7 +56,13 @@ const employeeReducer = (state = initialState, action) => {
         case editEmployee.type:
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...action.payload.data,
+                    ...action.payload.data.applicationUser,
+                    restaurants: action.payload.data.restaurants?.map(i => {
+                            return {label: i.restaurant.name, value: i.restaurant.id}
+                        }
+                    )
+                },
                 isEdit: true
             }
         case setRequestCompleted.type:

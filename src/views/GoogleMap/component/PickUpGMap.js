@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 // import GoogleMapReact from "google-map-react"
 import {GoogleMap, InfoWindow, LoadScript, Marker} from '@react-google-maps/api'
 import "./index.css"
+import {useSelector} from "react-redux"
 // import {HiLocationMarker} from "react-icons/all"
 
 
@@ -14,6 +15,8 @@ const containerStyle = {
 function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
     const [activeMarker, setActiveMarker] = useState(null)
 
+    const {restaurantLocation} = useSelector(state => state)
+    console.log("restaurantLocation", restaurantLocation)
     const handleActiveMarker = (marker) => {
         if (marker === activeMarker) {
             return

@@ -5,6 +5,7 @@ import auth from './auth/authentication'
 import user from './user/reducer'
 import member from "./member/reducer"
 import restaurant from "./restaurant/reducer"
+import employee from "./employee/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
@@ -24,14 +25,13 @@ import product from "./products/reducer"
 import genralProduct from "./genralProduct/reducer"
 import category from "./restaurantPages/category/reducer"
 import subCategory from "./subcategory/reducer"
-import wines from "./wines/reducer"
-import employee from "./employee/reducer"
 
 const rootReducer = {
     auth,
     navbar,
     layout,
     member,
+    employee,
     restaurant,
     facebookPost,
     crmSms,
@@ -52,9 +52,7 @@ const rootReducer = {
     genralProduct,
     category,
     subCategory,
-    wines,
-    cartItems,
-    employee
+    cartItems
 }
 
 export default rootReducer

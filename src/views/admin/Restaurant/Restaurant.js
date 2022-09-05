@@ -255,7 +255,7 @@ const Restaurant = (props) => {
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Restaurant Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address1', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'phone Number', placeholder: 'Enter Phone Number', name:'phoneNo', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Latitude', placeholder: 'Enter Latitude', name:'latitude', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Longitude', placeholder: 'Enter Longitude', name:'longitude', isRequired:false, fieldGroupClasses: 'col-6'},
@@ -279,7 +279,7 @@ const Restaurant = (props) => {
     // ** schema for validations
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
-        address: Joi.string().required().label("Address")
+        address1: Joi.string().required().label("Address")
     })
 
     // ** Function to handle filter
@@ -296,12 +296,10 @@ const Restaurant = (props) => {
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setRestaurant, {
         name: '',
         description:'',
-        address: '',
+        address: {},
         phoneNo: '',
-        latitude: '',
-        longitude: '',
         cuisines: [],
-        restaurantSchedule:[],
+        restaurantSchedules:[],
         isAvailableForDelivery: false,
         isVineClub: false,
         isCatering: false
@@ -346,7 +344,11 @@ const Restaurant = (props) => {
     const handleSubmit = (event) => {
         console.log('restaurantSchedule', restaurantSchedule)
         console.log('formState', formState)
-        const finalData = {...formState, restaurantSchedules: restaurantSchedule, cuisines: formState.cuisines.map(e => { return {cuisineId: e.value} })}
+        const finalData = {...formState,
+            address: {address1: formState.address1, longitude: formState.longitude, latitude: formState.latitude},
+            restaurantSchedules: restaurantSchedule,
+            cuisines: formState.cuisines.map(e => { return {cuisineId: e.value} })
+        }
         console.log('finalData', finalData)
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
@@ -387,7 +389,7 @@ const Restaurant = (props) => {
         },
         {
             name: 'Address',
-            selector: (row) => row.address,
+            selector: (row) => row.address?.address1,
             sortable: true,
             minWidth: '250px'
         },

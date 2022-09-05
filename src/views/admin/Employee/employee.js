@@ -49,7 +49,6 @@ const Employees = (props) => {
     const restaurants = async (input) => {
         return httpService._get(`${baseURL}restaurant?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
-                console.log('response', response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response.data.data.map(d =>  {
@@ -70,240 +69,267 @@ const Employees = (props) => {
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
-        {type:FieldTypes.Text, label: 'First Name', placeholder: 'Enter First Name', name:'firstName', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Contact Number', placeholder: 'Enter Contact Number', name:'contactNo', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:false}
-    ])
+    const [formData, setFormData] = useState([])
 
-    // ** schema for validations
-    const schema = Joi.object({
+    const [schema, setSchema] = useState(Joi.object({
         firstName: Joi.string().required().label("First Name"),
-        restaurants: Joi.object({label: Joi.string().required(), value: Joi.number().required() }).error(() => {
+        lastName: Joi.string().required().label("Last Name"),
+        password: Joi.string().required().label("Password"),
+        email: Joi.string().required().label("Email"),
+        restaurants: Joi.array().min(1).error(() => {
             return {
                 message: '"Restaurants" is required'
             }
         })
-})
+    }))
 
-// ** Function to handle filter
-const toggle = () => {
-if (isModal) setEdit(false)
-setModal(!isModal)
-setFormState({...formInitialState})
-if (isModalLoading) setModalLoading(false)
-}
+    // ** Function to handle filter
+    const toggle = () => {
+    if (isModal) setEdit(false)
+    setModal(!isModal)
+    setFormState({...formInitialState})
+    if (isModalLoading) setModalLoading(false)
+    }
 
-// custom hooks
-useLoadData(isSuccess, loadEmployees, isModal, toggle, currentPage, pageSize, searchValue)
-useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setEmployee, {
-firstName: '',
-lastName: '',
-contactNo:'',
-address: '',
-phoneNo: '',
-restaurants: {}
-})
-useModalError(isError, setModalLoading, setIsEmployeeError)
+    // custom hooks
+    useLoadData(isSuccess, loadEmployees, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setEmployee, {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    contactNo:'',
+    address: '',
+    phoneNo: '',
+    restaurants: []
+    })
+    useModalError(isError, setModalLoading, setIsEmployeeError)
 
-const addClick = () => {
-setModalTitle('Add Employee')
-toggle()
-}
+    const addClick = () => {
+        setFormData([
+            {type:FieldTypes.Text, label: 'First Name', placeholder: 'Enter First Name', name:'firstName', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter email', name:'email', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Password, label: 'Password', placeholder: 'Enter password', name:'password', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Contact Number', placeholder: 'Enter Contact Number', name:'contactNo', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true}
+        ])
+        setModalTitle('Add Employee')
+        toggle()
+    }
 
-const editClick = (id) => {
-console.log("edit", id)
-toggle()
-dispatch(getEmployee(id, true))
-setModalTitle('Edit Employee')
-setModalLoading(true)
-}
-const deleteClick = (id, e) => {
-e.preventDefault()
-// show sweet alert here
-Swal.fire({
-   title: 'Are you sure?',
-   text: "You won't be able to revert this!",
-   icon: 'warning',
-   showCancelButton: true,
-   confirmButtonColor: '#7367f0',
-   cancelButtonColor: '#d33',
-   confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-   if (result.isConfirmed) {
-       dispatch(deleteEmployee(id))
-   }
-})
-}
+    const editClick = (id) => {
+        setFormData([
+            {type:FieldTypes.Text, label: 'First Name', placeholder: 'Enter First Name', name:'firstName', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter email', name:'email', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Contact Number', placeholder: 'Enter Contact Number', name:'contactNo', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true}
+        ])
+        setSchema(Joi.object({
+            firstName: Joi.string().required().label("First Name"),
+            lastName: Joi.string().required().label("Last Name"),
+            password: Joi.string().required().label("Password"),
+            email: Joi.string().required().label("Email"),
+            restaurants: Joi.array().min(1).error(() => {
+                return {
+                    message: '"Restaurants" is required'
+                }
+            })
+        }))
+        toggle()
+        dispatch(getEmployee(id, true))
+        setModalTitle('Edit Employee')
+        setModalLoading(true)
+    }
 
-const detailOptClick = (id, e) => {
-e.preventDefault()
-props.history.push(`/employee/${id}`)
-}
+    const deleteClick = (id, e) => {
+    e.preventDefault()
+    // show sweet alert here
+    Swal.fire({
+       title: 'Are you sure?',
+       text: "You won't be able to revert this!",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#7367f0',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+       if (result.isConfirmed) {
+           dispatch(deleteEmployee(id))
+       }
+    })
+    }
 
-const handleSubmit = (event) => {
-console.log('formState', formState)
-event.preventDefault()
-const isError = formModalRef.current.validate(formState)
-if (isError) return
+    const detailOptClick = (id, e) => {
+    e.preventDefault()
+    props.history.push(`/employee/${id}`)
+    }
 
-// call api
-setModalLoading(true)
-    const finalData = {...formState, Id: formState.restaurants.value }
-    console.log('finalData', finalData)
-edit ? dispatch(updateEmployee(finalData)) : dispatch(addEmployee(finalData))
-}
+    const handleSubmit = (event) => {
+    console.log('formState', formState)
+    event.preventDefault()
+    const isError = formModalRef.current.validate(formState)
+    if (isError) return
 
-const handleFilter = e => {
-console.log('e.keyCode', e.keyCode)
-const value = e.target.value
-if (e.keyCode === 13) {
-   dispatch(loadEmployees(currentPage + 1, pageSize, value))
-}
-setSearchValue(value)
-}
+       const final = {applicationUser: {...formState, permission: "Manage All", passwordHash: formState.password, username: formState.email},
+           restaurants: formState.restaurants.map(r => {
+           return { restaurantId: r.value }
+           })}
+    // call api
+    setModalLoading(true)
+    edit ? dispatch(updateEmployee(final)) : dispatch(addEmployee(final))
+    }
 
-// ** Function to handle Pagination
-const handlePagination = page => {
-dispatch(loadEmployees(page.selected + 1, pageSize, searchValue))
-setCurrentPage(page.selected + 1)
-}
+    const handleFilter = e => {
+    console.log('e.keyCode', e.keyCode)
+    const value = e.target.value
+    if (e.keyCode === 13) {
+       dispatch(loadEmployees(currentPage + 1, pageSize, value))
+    }
+    setSearchValue(value)
+    }
 
-const columns = [
-{
-   name: 'First Name',
-   selector: (row) => row.firstName,
-   sortable: true,
-   minWidth: '50px'
-},
-{
-   name: 'Last Name',
-   selector: (row) => row.lastName,
-   sortable: true,
-   minWidth: '50px'
-},
-{
-   name: 'Contact No',
-   selector: (row) => row.contactNo,
-   sortable: true,
-   minWidth: '50px'
-},
-{
-   name: 'Actions',
-   allowOverflow: true,
-   cell: row => {
-       return (
-           <div className='d-flex'>
-               <UncontrolledDropdown>
-                   <DropdownToggle className='pe-1' tag='span'>
-                       <MoreVertical size={15} />
-                   </DropdownToggle>
-                   <DropdownMenu end>
-                       <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                           <FileText size={15} />
-                           <span className='align-middle ms-50'>Details</span>
-                       </DropdownItem>
-                       <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                           <Trash size={15} />
-                           <span className='align-middle ms-50'>Delete</span>
-                       </DropdownItem>
-                   </DropdownMenu>
-               </UncontrolledDropdown>
-               <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
-           </div>
-       )
-   }
-}
-]
+    // ** Function to handle Pagination
+    const handlePagination = page => {
+    dispatch(loadEmployees(page.selected + 1, pageSize, searchValue))
+    setCurrentPage(page.selected + 1)
+    }
 
-// ** Custom Pagination
-const CustomPagination = () => {
-const count = miscData?.totalPages ?? 0
+    const columns = [
+        {
+           name: 'User Name',
+           selector: (row) => `${row.applicationUser?.firstName} ${row.applicationUser?.lastName}`,
+           sortable: true,
+           minWidth: '50px'
+        },
+        {
+            name: 'Email',
+            selector: (row) => row.applicationUser?.email,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+           name: 'Contact No',
+           selector: (row) => row.applicationUser?.contactNo,
+           sortable: true,
+           minWidth: '50px'
+        },
+        {
+           name: 'Actions',
+           allowOverflow: true,
+           cell: row => {
+               return (
+                   <div className='d-flex'>
+                       <UncontrolledDropdown>
+                           <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
+                               <MoreVertical size={15} />
+                           </DropdownToggle>
+                           <DropdownMenu end>
+                               <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                   <FileText size={15} />
+                                   <span className='align-middle ms-50'>Details</span>
+                               </DropdownItem>
+                               <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                   <Trash size={15} />
+                                   <span className='align-middle ms-50'>Delete</span>
+                               </DropdownItem>
+                           </DropdownMenu>
+                       </UncontrolledDropdown>
+                       <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                   </div>
+               )
+           }
+        }
+    ]
 
-return <ReactPaginate
-   previousLabel={''}
-   nextLabel={''}
-   breakLabel='...'
-   pageCount={count || 1}
-   marginPagesDisplayed={2}
-   pageRangeDisplayed={2}
-   activeClassName='active'
-   forcePage={currentPage !== 0 ? currentPage - 1 : 0}
-   onPageChange={page => handlePagination(page)}
-   pageClassName={'page-item'}
-   nextLinkClassName={'page-link'}
-   nextClassName={'page-item next'}
-   previousClassName={'page-item prev'}
-   previousLinkClassName={'page-link'}
-   pageLinkClassName={'page-link'}
-   breakClassName='page-item'
-   breakLinkClassName='page-link'
-   containerClassName={
-       'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
-   }
-/>
-}
+    // ** Custom Pagination
+    const CustomPagination = () => {
+    const count = miscData?.totalPages ?? 0
 
-const dataToRender = () => {
-if (employeeList.length > 0) {
-   return employeeList
-}  else {
-   return employeeList.slice(0, pageSize)
-}
-}
+    return <ReactPaginate
+       previousLabel={''}
+       nextLabel={''}
+       breakLabel='...'
+       pageCount={count || 1}
+       marginPagesDisplayed={2}
+       pageRangeDisplayed={2}
+       activeClassName='active'
+       forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+       onPageChange={page => handlePagination(page)}
+       pageClassName={'page-item'}
+       nextLinkClassName={'page-link'}
+       nextClassName={'page-item next'}
+       previousClassName={'page-item prev'}
+       previousLinkClassName={'page-link'}
+       pageLinkClassName={'page-link'}
+       breakClassName='page-item'
+       breakLinkClassName='page-link'
+       containerClassName={
+           'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+       }
+    />
+    }
 
-return (
-<Fragment>
-   <UILoader blocking={isLoading}>
-       <Card>
-           <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-               <div>
-                   <CardTitle tag='h4'>Employees</CardTitle>
-               </div>
-               <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Employee</Button.Ripple>
-           </CardHeader>
-           <Row className='justify-content-end mx-0'>
-               <Col className='mt-1' md='12' sm='12'>
-                   <Input
-                       className='dataTable-filter mb-50'
-                       type='text'
-                       placeholder='Search'
-                       bsSize='sm'
-                       id='search-input'
-                       value={searchValue}
-                       onChange={handleFilter}
-                   />
-               </Col>
-           </Row>
-           <DataTable
-               noHeader
-               pagination
-               paginationServer
-               className='react-dataTable'
-               columns={columns}
-               sortIcon={<ChevronDown size={10} />}
-               paginationComponent={CustomPagination}
-               data={dataToRender()}
-           />
-       </Card>
-   </UILoader>
-   <FormModal ref={formModalRef}
-              formState={formState}
-              formData={formData}
-              setFormState={setFormState}
-              schema={schema}
-              isModal={isModal}
-              toggleModal={toggle}
-              modalTitle={modalTitle}
-              primaryBtnLabel='Save'
-              secondaryBtnLabel='Cancel'
-              isLoading = {isModalLoading}
-              handleSubmit={handleSubmit}
-   />
+    const dataToRender = () => {
+    if (employeeList.length > 0) {
+       return employeeList
+    }  else {
+       return employeeList.slice(0, pageSize)
+    }
+    }
 
-</Fragment>
-)
-}
+    return (
+    <Fragment>
+       <UILoader blocking={isLoading}>
+           <Card>
+               <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                   <div>
+                       <CardTitle tag='h4'>Employees</CardTitle>
+                   </div>
+                   <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Employee</Button.Ripple>
+               </CardHeader>
+               <Row className='justify-content-end mx-0'>
+                   <Col className='mt-1' md='12' sm='12'>
+                       <Input
+                           className='dataTable-filter mb-50'
+                           type='text'
+                           placeholder='Search'
+                           bsSize='sm'
+                           id='search-input'
+                           value={searchValue}
+                           onChange={handleFilter}
+                       />
+                   </Col>
+               </Row>
+               <DataTable
+                   noHeader
+                   pagination
+                   paginationServer
+                   className='react-dataTable'
+                   columns={columns}
+                   sortIcon={<ChevronDown size={10} />}
+                   paginationComponent={CustomPagination}
+                   data={dataToRender()}
+               />
+           </Card>
+       </UILoader>
+       <FormModal ref={formModalRef}
+                  formState={formState}
+                  formData={formData}
+                  setFormState={setFormState}
+                  schema={schema}
+                  isModal={isModal}
+                  toggleModal={toggle}
+                  modalTitle={modalTitle}
+                  primaryBtnLabel='Save'
+                  secondaryBtnLabel='Cancel'
+                  isLoading = {isModalLoading}
+                  handleSubmit={handleSubmit}
+       />
+
+    </Fragment>
+    )
+    }
 
 export default Employees
