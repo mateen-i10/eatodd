@@ -38,7 +38,7 @@ const employeeReducer = (state = initialState, action) => {
         case setEmployee.type:
             return {
                 ...state,
-                object: {...action.payload.data, ...action.payload.data.applicationUser},
+                object: action.payload.data,
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
