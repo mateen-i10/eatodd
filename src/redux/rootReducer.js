@@ -5,6 +5,7 @@ import auth from './auth/authentication'
 import user from './user/reducer'
 import member from "./member/reducer"
 import restaurant from "./restaurant/reducer"
+import employee from "./employee/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
@@ -30,6 +31,7 @@ const rootReducer = {
     navbar,
     layout,
     member,
+    employee,
     restaurant,
     facebookPost,
     crmSms,

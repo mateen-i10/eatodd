@@ -73,7 +73,7 @@ const employeeReducer = (state = initialState, action) => {
         case setIsEdit.type:
             return {
                 ...state,
-                isEdit: action.payload.data
+                isEdit: action.payload
             }
         case setIsEmployeeError.type:
             return {
