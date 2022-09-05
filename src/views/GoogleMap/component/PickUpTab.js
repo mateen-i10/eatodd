@@ -4,7 +4,7 @@ import {Search} from 'react-feather'
 import "./index.css"
 import NearByPlaces from "./NearByPlaces"
 
-const PickUpTab = ({places}) => {
+const PickUpTab = ({places, userLocation}) => {
     return (
         <div style={{}}>
             <div className="mt-1">
@@ -26,7 +26,7 @@ const PickUpTab = ({places}) => {
                         />
                     </div>
                     <div>
-                        <NearByPlaces places={places}/>
+                        <NearByPlaces places={places} userLocation={userLocation}/>
                     </div>
                 </div>
 

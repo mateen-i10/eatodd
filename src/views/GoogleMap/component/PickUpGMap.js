@@ -17,6 +17,7 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
 
     const {restaurantLocation} = useSelector(state => state)
     console.log("restaurantLocation", restaurantLocation)
+
     const handleActiveMarker = (marker) => {
         if (marker === activeMarker) {
             return

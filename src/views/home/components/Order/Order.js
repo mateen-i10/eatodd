@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
-import {useDispatch} from "react-redux"
-import {itemSelected} from "../../../../redux/cartItems/cartItemsReducer"
-import httpService, {baseURL} from "../../../../utility/http"
+// import {useDispatch} from "react-redux"
+// import {itemSelected} from "../../../../redux/cartItems/cartItemsReducer"
+// import httpService, {baseURL} from "../../../../utility/http"
 // import drinks from "../../../../assets/images/ORDER/cola.png"
 // import wine from '../../../../assets/images/ORDER/VCine.png'
 
@@ -78,21 +78,21 @@ const mainMenu = [
 
 const Order = () => {
 
-    const [category, setCategory] = useState(null)
-    useEffect(() => {
-        httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=1`)
-            .then(response => {
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    // console.log("respSubCategory*******", response)
-                    setCategory(response)
-                }
-            })
+    // const [category, setCategory] = useState(null)
+    // useEffect(() => {
+    //     httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=1`)
+    //         .then(response => {
+    //             // success case
+    //             if (response.status === 200 && response.data.statusCode === 200) {
+    //                 // console.log("respSubCategory*******", response)
+    //                 setCategory(response)
+    //             }
+    //         })
+    //
+    // }, [])
 
-    }, [])
-
-    console.log(category)
-    const dispatch = useDispatch()
+    // console.log(category)
+    // const dispatch = useDispatch()
     // const {cartItems} = useSelector(state => state)
     // console.log(cartItems)
     return (
@@ -123,9 +123,11 @@ const Order = () => {
                         mainMenu.map(item => (
                             <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
                                 <Link to="/gmap">
-                                    <div className="menu-item" onClick={() => (
-                                        dispatch(itemSelected({name: item.title, description: item.description}))
-                                    )}>
+                                    <div className="menu-item"
+                                        //      onClick={() => (
+                                        //     dispatch(itemSelected({name: item.title, description: item.description}))
+                                        // )}
+                                    >
                                         <div className="thumbnail">
                                             <img
                                                 src={item.image}
