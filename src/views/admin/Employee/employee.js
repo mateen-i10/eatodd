@@ -49,7 +49,6 @@ const Employees = (props) => {
     const restaurants = async (input) => {
         return httpService._get(`${baseURL}restaurant?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
-                console.log('rest', response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response.data.data.map(d =>  {
@@ -76,12 +75,12 @@ const Employees = (props) => {
         firstName: Joi.string().required().label("First Name"),
         lastName: Joi.string().required().label("Last Name"),
         password: Joi.string().required().label("Password"),
-        email: Joi.string().required().label("Email")
-        /*restaurants: Joi.string().required().error(() => {
+        email: Joi.string().required().label("Email"),
+        restaurants: Joi.array().min(1).error(() => {
             return {
-                message: '"Employee Type" is required'
+                message: '"Restaurants" is required'
             }
-        })*/
+        })
     }))
 
     // ** Function to handle filter
@@ -131,12 +130,12 @@ const Employees = (props) => {
             firstName: Joi.string().required().label("First Name"),
             lastName: Joi.string().required().label("Last Name"),
             password: Joi.string().required().label("Password"),
-            email: Joi.string().required().label("Email")
-        /*    restaurants: Joi.string().required().error(() => {
+            email: Joi.string().required().label("Email"),
+            restaurants: Joi.array().min(1).error(() => {
                 return {
-                    message: '"Employee Type" is required'
+                    message: '"Restaurants" is required'
                 }
-            })*/
+            })
         }))
         toggle()
         dispatch(getEmployee(id, true))

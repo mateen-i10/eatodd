@@ -58,10 +58,14 @@ const RestaurantReducer = (state = initialState, action) => {
             return {
                 ...state,
                 object: {...action.payload.data,
+                    address1: action.payload.data.address.address1,
+                    latitude: action.payload.data.address.latitude,
+                    longitude: action.payload.data.address.longitude,
                     cuisines: action.payload.data.cuisines?.map(i => {
                             return {label: i.cuisine?.name, value: i.cuisine.id}
                         }
-                    )},
+                    )
+                },
                 isEdit: true
             }
         case setRequestCompleted.type:
