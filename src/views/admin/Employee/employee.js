@@ -129,7 +129,6 @@ const Employees = (props) => {
         setSchema(Joi.object({
             firstName: Joi.string().required().label("First Name"),
             lastName: Joi.string().required().label("Last Name"),
-            password: Joi.string().required().label("Password"),
             email: Joi.string().required().label("Email"),
             restaurants: Joi.array().min(1).error(() => {
                 return {
@@ -172,7 +171,9 @@ const Employees = (props) => {
     const isError = formModalRef.current.validate(formState)
     if (isError) return
 
-       const final = {applicationUser: {...formState, permission: "Manage All", passwordHash: formState.password, username: formState.email},
+       const final = {
+            id: formState.id,
+           applicationUser: {...formState, id: formState.applicationUserId, permission: "Manage All", passwordHash: formState.password, username: formState.email},
            restaurants: formState.restaurants.map(r => {
            return { restaurantId: r.value }
            })}

@@ -54,10 +54,14 @@ const employeeReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editEmployee.type:
+            const id = action.payload.data.id
+            console.log('id', id)
             return {
                 ...state,
                 object: {...action.payload.data,
                     ...action.payload.data.applicationUser,
+                    applicationUserId : action.payload.data.applicationUser.id,
+                    id,
                     restaurants: action.payload.data.restaurants?.map(i => {
                             return {label: i.restaurant.name, value: i.restaurant.id}
                         }
