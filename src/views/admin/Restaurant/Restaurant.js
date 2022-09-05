@@ -400,7 +400,7 @@ const Restaurant = (props) => {
                 return (
                     <div className='d-flex'>
                         <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
                                 <MoreVertical size={15} />
                             </DropdownToggle>
                             <DropdownMenu end>

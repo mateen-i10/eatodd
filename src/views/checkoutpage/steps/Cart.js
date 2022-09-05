@@ -5,12 +5,13 @@ import {Button, Card, CardBody, Col, Input, InputGroup, InputGroupText, Row} fro
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import Items from "./component/Items"
+import {useSelector} from "react-redux"
 
 const Cart = props => {
 
     const {stepper} = props
 
-    // const {cartItems} = useSelector(state => state)
+    const {cartItems} = useSelector(state => state)
     // console.log(cartItems)
     // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
     //     if (!value) return value
