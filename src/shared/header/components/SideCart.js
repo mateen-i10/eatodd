@@ -27,7 +27,7 @@ const OffCanvasPlacement = (props) => {
     // const [taxDropDown, SetTaxDropdown] = useState(true)
 
     const {cartItems} = useSelector(state => state)
-    console.log(cartItems)
+    console.log("cartitemssss l", cartItems)
     const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
 

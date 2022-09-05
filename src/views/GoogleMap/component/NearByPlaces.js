@@ -4,8 +4,9 @@ import UILoader from "../../../@core/components/ui-loader"
 import {useDispatch} from "react-redux"
 import {locationAdded} from "../../../redux/restaurantLocation/restaurantLocation"
 import {Link} from "react-router-dom"
+import {userLocationAdded} from "../../../redux/userLocation/userLocation"
 
-const NearByPlaces = ({places, isLoading}) => {
+const NearByPlaces = ({places, isLoading, userLocation}) => {
 
     const dispatch = useDispatch()
 
@@ -28,7 +29,10 @@ const NearByPlaces = ({places, isLoading}) => {
                                     </div>
                                 </div>
                                 <Link to="/OmgPlate"> <Button className='text-uppercase mt-1' color='primary' outline
-                                                              onClick={() => dispatch(locationAdded(place))}>
+                                                              onClick={() => {
+                                                                  dispatch(locationAdded(place))
+                                                                  dispatch(userLocationAdded(userLocation))
+                                                              }}>
                                     Select
                                 </Button>
                                 </Link>

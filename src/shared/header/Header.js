@@ -5,12 +5,15 @@ import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import FoodCart from "./components/SideCart"
 import {ShoppingBag} from "react-feather"
+import {useSelector} from "react-redux"
 // import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 
 export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
+    const {userLocation} = useSelector(state => state)
+    // console.log("userLocation", userLocation)
 
     const breakpoint = 1200
     useEffect(() => {
@@ -52,7 +55,7 @@ export default function Header() {
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            <p>Delivery address</p>
+                            {userLocation.length ? <p>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</p> : <p>Delivery address</p>}
                         </div>
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
