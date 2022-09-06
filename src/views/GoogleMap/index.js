@@ -52,8 +52,8 @@ const Gmaps = () => {
                     setPlaces(response.data.data.map(place => ({
                         id: place.id,
                         name: place.name,
-                        address: place.address,
-                        position: {lat: Number(place.latitude), lng: Number(place.longitude)}
+                        address: place.address.address1,
+                        position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)}
                     })))
                 }
             })
