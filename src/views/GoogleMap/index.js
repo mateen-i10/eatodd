@@ -64,6 +64,7 @@ const Gmaps = () => {
     console.log("placesssssss", places)
     console.log("userLocation", userLocation)
 
+    // const places = []
 
     // const places = [
     //     {
@@ -147,7 +148,7 @@ const Gmaps = () => {
         // setUserLocation({position: {lat, lng}})
         setUserLocation(place)
     }
-    if (!places.length) return <div>loading...</div>
+    // if (!places.length) return <div>loading...</div>
     return (
         <div style={styles.container(matches)}>
             {selectedSidebar ? <div className="col-md-4 col-12">

@@ -24,11 +24,34 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
         }
         setActiveMarker(marker)
     }
+    const defaultPlaces = [
+        {
+            id: 1,
+            name: "Olive Mediterranean Grill(N Clinton St)",
+            position: {lat: 41.884176754378224, lng: -87.64085700264113},
+            address: "131 N Clinton St, Chicago, IL 60661",
+            opens: "Mon-Fri 10:30 AM - 4PM"
+        },
+        {
+            id: 5,
+            name: "Olive Mediterranean Grill (Sherman Ave)",
+            position: {lat: 42.04962135098707, lng: -87.68193880078313},
+            address: "1726 Sherman Ave, Evanston, IL 60201, USA",
+            opens: "Mon-Fri 10:30 AM - 4PM"
+        }
+
+    ]
     const handleOnLoad = (map) => {
         const bounds = new google.maps.LatLngBounds()
 
-        places.forEach(({position}) => bounds.extend(position))
+        if (places.length) {
+            places.forEach(({position}) => bounds.extend(position))
+        } else {
+            defaultPlaces.forEach(({position}) => bounds.extend(position))
+        }
+        
         map.fitBounds(bounds)
+
     }
 
     return (
@@ -40,7 +63,10 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
                 onLoad={handleOnLoad}
                 onClick={() => setActiveMarker(null)}
                 mapContainerStyle={containerStyle}
-                defaultCenter={places[0].position}
+                defaultCenter={places.length ? places[0].position : {
+                    lat: 41.884176754378224,
+                    lng: -87.64085700264113
+                }}
                 // zoom={8}
             >
                 { /* Child components, such as markers, info windows, etc. */}
