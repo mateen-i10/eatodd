@@ -5,19 +5,19 @@ import React, {Fragment, useEffect, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, RefreshCcw} from 'react-feather'
+import {ChevronDown} from 'react-feather'
 import {
     Card,
     CardHeader,
     CardTitle,
     Input,
     Row,
-    Col, UncontrolledTooltip
+    Col
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import {loadReorderHistory} from "../../../redux/reorderhistory/actions"
 
-const ReorderHistory = () => {
+const OrderHistory = () => {
     const reorderList = useSelector(state => state.reorderHistory.list)
     const isEdit = useSelector(state => state.reorderHistory.isEdit)
     const dispatch = useDispatch()
@@ -98,20 +98,6 @@ const ReorderHistory = () => {
             selector: (row) => row.filter,
             sortable: true,
             minWidth: '150px'
-        },
-        {
-            name: 'Actions',
-            allowOverflow: true,
-            cell: row => {
-                return (
-                    <div className='d-flex cursor-pointer'>
-                        <span id='refresh' onClick={() => { console.log('reorderd the order under the id: ', row.id) }}><RefreshCcw size={15} /></span>
-                        <UncontrolledTooltip placement='top' target='refresh'>
-                            Re Order
-                        </UncontrolledTooltip>
-                    </div>
-                )
-            }
         }
     ]
 
@@ -144,7 +130,7 @@ const ReorderHistory = () => {
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                     <div>
-                        <CardTitle tag='h4'>ReOrder From History</CardTitle>
+                        <CardTitle tag='h4'>Order History</CardTitle>
                     </div>
                 </CardHeader>
                 <Row className='mx-0'>
@@ -177,4 +163,4 @@ const ReorderHistory = () => {
     )
 }
 
-export default ReorderHistory
+export default OrderHistory
