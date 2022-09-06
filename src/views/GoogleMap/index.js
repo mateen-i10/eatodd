@@ -47,13 +47,15 @@ const Gmaps = () => {
                 if (response.status === 200 && response.data.statusCode === 200) {
                     setResList(response)
 
-                    setPlaces(response.data.data.map(place => ({
-                        id: place.id,
-                        name: place.name,
-                        address: place.address.address1,
-                        position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)}
-                        // position: {lat: 41.884176754378224, lng: -87.64085700264113}
-                    })))
+                    setPlaces(
+                        response.data.data.map(place => ({
+                            id: place.id,
+                            name: place.name,
+                            address: place.address.address1,
+                            position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)}
+                            // position: {lat: 41.884176754378224, lng: -87.64085700264113}
+                        }))
+                    )
                 }
             })
 
@@ -148,7 +150,7 @@ const Gmaps = () => {
         // setUserLocation({position: {lat, lng}})
         setUserLocation(place)
     }
-    // if (!places.length) return <div>loading...</div>
+    // if (!places.length) setLoading(true)
     return (
         <div style={styles.container(matches)}>
             {selectedSidebar ? <div className="col-md-4 col-12">
