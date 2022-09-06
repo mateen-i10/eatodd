@@ -11,23 +11,20 @@ import {
     OffcanvasHeader
 } from 'reactstrap'
 import {UserPlus} from "react-feather"
-import './FoodCart.css'
+import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import {useSelector} from "react-redux"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {Link} from "react-router-dom"
-// import {default as chips} from "../../../assets/images/Catering&Order/chips.png";
-// import {default as drink1} from "../../../assets/images/Catering&Order/drink1.png";
 
-const OffCanvasPlacement = (props) => {
+const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
     const [canvasOpen, setCanvasOpen] = useState(true)
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [openModel, SetModelOpen] = useState(false)
-    // const [taxDropDown, SetTaxDropdown] = useState(true)
 
     const {cartItems} = useSelector(state => state)
-    console.log("cartitemssss l", cartItems)
+    console.log("cartitemssss", cartItems)
     const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
 
@@ -65,8 +62,6 @@ const OffCanvasPlacement = (props) => {
         }
         return Number(totalBagPrice.toFixed(2))
     }
-    // console.log(bagPrice())
-
 
     const toggleCanvasStart = () => {
         setCanvasPlacement('start')
@@ -113,9 +108,7 @@ const OffCanvasPlacement = (props) => {
     const taxAmount = Number((bagPrice() * (16 / 100)).toFixed(2))
     return (
         <>
-            {/* eslint-disable-next-line multiline-ternary */}
-            {cartItems.length === 0 ? <div
-                    className='demo-inline-spacing'>
+            {cartItems.length === 0 ? <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart}
@@ -170,8 +163,7 @@ const OffCanvasPlacement = (props) => {
                         </CardFooter>
                     </Offcanvas>
 
-                </div> :
-                <div className='demo-inline-spacing'>
+                </div> : <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 30, justifyContent: 'center'}}>
@@ -364,4 +356,4 @@ const OffCanvasPlacement = (props) => {
     )
 }
 
-export default OffCanvasPlacement
+export default Cart
