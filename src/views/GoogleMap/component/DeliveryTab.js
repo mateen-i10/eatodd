@@ -8,6 +8,7 @@ import {useDispatch} from "react-redux"
 import {Link} from "react-router-dom"
 
 const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) => {
+    const dispatch = useDispatch()
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: "AIzaSyD7O5Uv69qzHpX7OaZEfE5mla2FuJBXehQ",
         libraries: ['places']
@@ -18,7 +19,7 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
     if (loadError) {
         return <div>Please enter valid name</div>
     }
-    const dispatch = useDispatch()
+
     // const onClick = () => {
     //
     //     navigator.geolocation.getCurrentPosition(function (position) {
@@ -76,7 +77,6 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
                                     </div>
                                 </div>
                             </div>}
-
                     </div>
                 }
 

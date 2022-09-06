@@ -46,14 +46,13 @@ const Gmaps = () => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     setResList(response)
-                    // if (response.data.data.length !== 0) {
-                    //     setPlaces(response.data.data)
-                    // }
+
                     setPlaces(response.data.data.map(place => ({
                         id: place.id,
                         name: place.name,
-                        address: place.address,
-                        position: {lat: Number(place.latitude), lng: Number(place.longitude)}
+                        address: place.address.address1,
+                        position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)}
+                        // position: {lat: 41.884176754378224, lng: -87.64085700264113}
                     })))
                 }
             })
@@ -65,14 +64,7 @@ const Gmaps = () => {
     console.log("placesssssss", places)
     console.log("userLocation", userLocation)
 
-    // const places = resList !== null ? resList.data.data.map(place => ({
-    //     id: place.id,
-    //     name: place.name,
-    //     address: place.address,
-    //     position: {lat: place.latitude, long: place.longitude}
-    // })) : null
-    // console.log(places)
-
+    // const places = []
 
     // const places = [
     //     {
@@ -156,7 +148,7 @@ const Gmaps = () => {
         // setUserLocation({position: {lat, lng}})
         setUserLocation(place)
     }
-    if (!places.length) return <div>loading...</div>
+    // if (!places.length) return <div>loading...</div>
     return (
         <div style={styles.container(matches)}>
             {selectedSidebar ? <div className="col-md-4 col-12">

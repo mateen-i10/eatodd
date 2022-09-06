@@ -18,7 +18,7 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                         <CardTitle tag='h5'
                                    style={{color: "rgb(129 190 65)"}}>Near By</CardTitle>
                     </CardHeader>
-                    {places.map((place, i) => (
+                    {places.length ? places.map((place, i) => (
                         <CardBody key={i}>
                             <div className='justify-content-center align-items-center'>
                                 <div className='d-flex'>
@@ -38,7 +38,7 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                                 </Link>
                             </div>
                         </CardBody>
-                    ))}
+                    )) : ""}
                 </Card>
             </Col>
         </Row>
