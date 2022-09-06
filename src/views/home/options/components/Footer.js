@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
 import "./Plate.css"
+import {Link} from "react-router-dom"
 
 const Footer = (props) => {
 
@@ -37,7 +38,7 @@ const Footer = (props) => {
                             }}>
                                 Cancel
                             </Button>
-                            <Button color='primary' onClick={() => {
+                            <Link to="/"><Button color='primary' onClick={() => {
                                 if (mealName.length === 0) {
                                     setBasicNameFoodModal(true)
                                 } else {
@@ -47,7 +48,7 @@ const Footer = (props) => {
                                 setBasicNameFoodModal(!basicNameFoodModal)
                             }}>
                                 Save
-                            </Button>
+                            </Button></Link>
                         </ModalFooter>
                     </Form>
                 </Modal>
