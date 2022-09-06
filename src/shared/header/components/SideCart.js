@@ -254,7 +254,7 @@ const OffCanvasPlacement = (props) => {
 
                             </div>
 
-                            <Button
+                            <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
@@ -269,6 +269,7 @@ const OffCanvasPlacement = (props) => {
                             >
                                 Add Another menu item
                             </Button>
+                            </Link>
 
                             <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
                                 <div className="row">
