@@ -28,6 +28,7 @@ import genralProduct from "./genralProduct/reducer"
 import category from "./restaurantPages/category/reducer"
 import subCategory from "./subcategory/reducer"
 import reorderHistory from "./reorderhistory/reducer"
+import wines from "./wines/reducer"
 
 const rootReducer = {
     auth,
@@ -58,7 +59,8 @@ const rootReducer = {
     reorderHistory,
     cartItems,
     restaurantLocation,
-    userLocation
+    userLocation,
+    wines
 }
 
 export default rootReducer

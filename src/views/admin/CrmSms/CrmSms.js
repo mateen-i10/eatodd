@@ -217,15 +217,15 @@ const CrmSms = (props) => {
                         <CardTitle tag='h4'>CrmSms</CardTitle>
                         <h6>Friday June 10, 2022, 08:10 AM</h6>
                     </div>
-                        <Button.Ripple bsSize='sm' color='primary' onClick={(e) => addClick(e)}>Schedule a new SMS</Button.Ripple>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Schedule a new SMS</Button.Ripple>
                 </CardHeader>
                 <Row className='mx-0'>
                     <Col className='mt-1' md='12' sm='12'>
                         <Input
                             className='dataTable-filter mb-50'
                             type='text'
-                            bsSize='sm'
-                            PlaceHolder='search'
+                            size='sm'
+                            placeholder='search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}
