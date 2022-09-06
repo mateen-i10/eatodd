@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 import FoodCart from "../header/components/SideCart"
 import {ShoppingBag} from "react-feather"
 
-const Headerwine = () => {
+const HeaderWine = () => {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
@@ -119,4 +119,4 @@ const Headerwine = () => {
         </div>
     )
 }
-export default Headerwine
+export default HeaderWine

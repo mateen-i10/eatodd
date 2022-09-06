@@ -198,12 +198,6 @@ const OffCanvasPlacement = (props) => {
                                         {cartItems.map((foodItems, id) => (
                                             <ItemsInCart key={id} foodItems={foodItems}/>
                                         ))}
-                                        {/*<ul>*/}
-
-                                        {/*{testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}*/}
-                                        {/*{testData.length ? console.log('testData', testData) : "**Please Select some food**"}*/}
-                                        {/*</ul>*/}
-                                        {/*<p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>*/}
                                     </div>
 
                                 </div>
@@ -297,16 +291,6 @@ const OffCanvasPlacement = (props) => {
                                     sign in to use rewards
                                 </Button>
 
-                                {/*<div className="row" style={{marginBottom: -10}}>*/}
-                                {/*    <div className="col-md-10" style={{fontWeight: 500, fontSize: "1.2rem"}}>Enter a Promo*/}
-                                {/*        Code*/}
-                                {/*    </div>*/}
-                                {/*    <div className="col-md-2"*/}
-                                {/*         style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>apply*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-
-                                {/*<hr style={{color: '#451400'}}/>*/}
 
                                 <div className="row">
                                     <div className="col-9 text-uppercase"
@@ -329,50 +313,6 @@ const OffCanvasPlacement = (props) => {
                                          }}>$ {taxAmount}
                                     </div>
                                 </div>
-
-                                {/*<a href="#">*/}
-                                {/*    <div className="row">*/}
-                                {/*        <div className="col-md-10"*/}
-                                {/*             style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}} onClick={() => {*/}
-                                {/*            if (taxDropDown === true) {*/}
-                                {/*                SetTaxDropdown(false)*/}
-                                {/*            } else {*/}
-                                {/*                SetTaxDropdown(true)*/}
-                                {/*            }*/}
-                                {/*        }}>Tax & Fees {taxDropDown ? <ChevronDown size={18}/> : <ChevronUp size={18}/>}</div>*/}
-                                {/*        {*/}
-                                {/*            taxDropDown &&*/}
-                                {/*            <div className="col-md-2"*/}
-                                {/*                 style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>$2.94</div>*/}
-                                {/*        }*/}
-                                {/*    </div>*/}
-                                {/*</a>*/}
-
-                                {/*{*/}
-                                {/*    taxDropDown === false ? <div style={{textAlign: 'left'}}>*/}
-                                {/*        <div className="row">*/}
-                                {/*            <div className="col"*/}
-                                {/*                 style={{paddingLeft: 60, color: 'primary', fontSize: "1.2rem"}}>Tax*/}
-                                {/*            </div>*/}
-                                {/*            <div className="col text-end"*/}
-                                {/*                 style={{paddingLeft: 235, color: 'primary', fontSize: "1.2rem"}}>$1.44*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className="row ">*/}
-                                {/*            <div className="col"*/}
-                                {/*                 style={{paddingLeft: 60, color: 'primary', fontSize: "1.2rem"}}>Service Fee*/}
-                                {/*            </div>*/}
-                                {/*            <div className="col text-end"*/}
-                                {/*                 style={{*/}
-                                {/*                     maxWidth: 70,*/}
-                                {/*                     paddingLeft: 16,*/}
-                                {/*                     color: 'primary',*/}
-                                {/*                     fontSize: "1.2rem"*/}
-                                {/*                 }}>$1.34*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*    </div> : []*/}
-                                {/*}*/}
 
                                 <hr style={{color: 'primary'}}/>
 
