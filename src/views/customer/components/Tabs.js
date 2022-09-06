@@ -20,7 +20,10 @@ const Tabs = ({toggleTab}) => {
                             <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('4')}>Security</Button.Ripple>
                         </Col>
                         <Col xl={2}>
-                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('5')}>History</Button.Ripple>
+                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('5')}>Meals</Button.Ripple>
+                        </Col>
+                        <Col xl={2}>
+                            <Button.Ripple color='primary' className="fs-4 fw-bolder" onClick={() => toggleTab('6')}>History</Button.Ripple>
                         </Col>
                     </Row>
                 </div>

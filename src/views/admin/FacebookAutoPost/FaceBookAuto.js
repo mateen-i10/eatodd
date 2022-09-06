@@ -219,7 +219,7 @@ const FacebookPost = (props) => {
                         <Input
                             className='dataTable-filter mb-50'
                             type='text'
-                            PlaceHolder='Search'
+                            placeholder='Search'
                             bsSize='sm'
                             id='search-input'
                             value={searchValue}

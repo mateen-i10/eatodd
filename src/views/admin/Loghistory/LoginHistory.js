@@ -159,8 +159,8 @@ const LoginHistory = () => {
                         <Input
                             className='dataTable-filter mb-50'
                             type='text'
-                            bsSize='sm'
-                            PlaceHolder='Search'
+                            size='sm'
+                            placeholder='Search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}
