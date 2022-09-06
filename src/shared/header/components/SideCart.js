@@ -254,7 +254,7 @@ const OffCanvasPlacement = (props) => {
 
                             </div>
 
-                            <Link to="/home#order"><Button
+                            <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
