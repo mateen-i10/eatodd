@@ -1,7 +1,6 @@
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import React, {Fragment, useState} from "react"
-// import MainComponent from "./components/MainComponent"
 import {Col, Row, TabContent, TabPane} from "reactstrap"
 import Tabs from "./components/Tabs"
 import ProfileDetails from "./components/ProfileDetails"
@@ -9,6 +8,7 @@ import BillingPlans from "./components/BillingPlans"
 import BillingAddress from "./components/BillingAddress"
 import SecurityTab from "./components/ChangePassword"
 import MyOrder from "./components/MyOrders"
+import OrderHistory from "./components/OrderHistory"
 
 const data = {
     accountSetting: {
@@ -96,6 +96,11 @@ const Customer = () => {
                             <TabPane tabId='5'>
                                 <div className="row justify-content-center">
                                     <div className="col-md-11 mt-4"><MyOrder data={data}/></div>
+                                </div>
+                            </TabPane>
+                            <TabPane tabId='6'>
+                                <div className="row justify-content-center">
+                                    <div className="col-md-11 mt-4"><OrderHistory data={data}/></div>
                                 </div>
                             </TabPane>
                         </TabContent>

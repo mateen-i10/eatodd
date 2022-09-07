@@ -77,7 +77,6 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
                                     </div>
                                 </div>
                             </div>}
-
                     </div>
                 }
 

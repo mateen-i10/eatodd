@@ -5,6 +5,7 @@ import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
+import {useSelector} from "react-redux"
 // import {useDispatch} from "react-redux"
 // import {itemSelected} from "../../../../redux/cartItems/cartItemsReducer"
 // import httpService, {baseURL} from "../../../../utility/http"
@@ -77,6 +78,7 @@ const mainMenu = [
 ]
 
 const Order = () => {
+    const {userLocation} = useSelector(state => state)
 
     // const [category, setCategory] = useState(null)
     // useEffect(() => {
@@ -122,7 +124,7 @@ const Order = () => {
                     {
                         mainMenu.map(item => (
                             <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
-                                <Link to="/omgPlate">
+                                <Link to={userLocation.length ? "/OmgPlate" : "/gmap"}>
                                     <div className="menu-item"
                                         //      onClick={() => (
                                         //     dispatch(itemSelected({name: item.title, description: item.description}))

@@ -3,6 +3,7 @@ import {Input, InputGroup, InputGroupText} from 'reactstrap'
 import {Search} from 'react-feather'
 import "./index.css"
 import NearByPlaces from "./NearByPlaces"
+import UILoader from "../../../@core/components/ui-loader"
 
 const PickUpTab = ({places, userLocation}) => {
     return (
@@ -16,20 +17,20 @@ const PickUpTab = ({places, userLocation}) => {
                     {/*<InputGroupText><BiCurrentLocation className="cursor-pointer" size={20} onClick={onClick}/>*/}
                     {/*</InputGroupText>*/}
                 </InputGroup>
-
-                <div className=" align-items-center justify-content-center text-center">
-                    <div className="col-12 mt-2">
-                        <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
-                             alt="EatOMG-image" width="100px"
-                             height="50px"
-                             style={{color: "gray"}}
-                        />
+                <UILoader blocking={!places.length}>
+                    <div className=" align-items-center justify-content-center text-center">
+                        <div className="col-12 mt-2">
+                            <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
+                                 alt="EatOMG-image" width="100px"
+                                 height="50px"
+                                 style={{color: "gray"}}
+                            />
+                        </div>
+                        <div>
+                            <NearByPlaces places={places} userLocation={userLocation}/>
+                        </div>
                     </div>
-                    <div>
-                        <NearByPlaces places={places} userLocation={userLocation}/>
-                    </div>
-                </div>
-
+                </UILoader>
             </div>
 
         </div>
