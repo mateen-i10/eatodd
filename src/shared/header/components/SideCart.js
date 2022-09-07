@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Button,
     CardFooter,
@@ -13,49 +13,56 @@ import {
 import {UserPlus} from "react-feather"
 import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
-import {useSelector} from "react-redux"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {Link} from "react-router-dom"
+import {getCartData, isObjEmpty, removeMealFromCart} from "../../../utility/Utils"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
     const [canvasOpen, setCanvasOpen] = useState(true)
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [openModel, SetModelOpen] = useState(false)
-
-    const {cartItems} = useSelector(state => state)
-    console.log("cartitemssss", cartItems)
+    const [cartItems, setCartItems] = useState()
+    const [isMealDeleted, setMealDeleted] = useState(false)
     const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
 
+    useEffect(() => {
+        setCartItems({...getCartData()})
+    }, [isMealDeleted])
+
 // methods
+    const handleRemoveMeal = (index) => {
+        const result = removeMealFromCart(index)
+        setMealDeleted(result)
+    }
     const bagPrice = () => {
         let pricesArr = []
-        if (cartItems.length > 0) {
-            pricesArr = cartItems.map(cartItem => {
-                const mainItems = [...cartItem.action.payload.selectedProVeg, ...cartItem.action.payload.selectedRice, ...cartItem.action.payload.selectedTopping, ...cartItem.action.payload.selectedBeans]
+        if (cartItems && cartItems.meals.length > 0) {
+            pricesArr = cartItems.meals.map(meal => {
+                if (!isObjEmpty(meal)) {
 
-                const additionalItems = [...cartItem.action.payload.selectedSide, ...cartItem.action.payload.selectedDrinks]
+                    const mainItems = [...meal.selectedProVeg, ...meal.selectedRice, ...meal.selectedTopping, ...meal.selectedBeans]
 
-                let mainItemsPrice
-                if (mainItems.length === 2) {
-                    mainItemsPrice = cartItem.action.payload.selectedProVeg[0].price > cartItem.action.payload.selectedProVeg[1].price ? cartItem.action.payload.selectedProVeg[0].price : cartItem.action.payload.selectedProVeg[1].price
-                } else {
-                    mainItemsPrice = cartItem.action.payload.selectedProVeg[0].price
+                    const additionalItems = [...meal.selectedSide, ...meal.selectedDrinks]
+
+                    let mainItemsPrice
+                    if (mainItems.length === 2) {
+                        mainItemsPrice = meal.selectedProVeg[0].price > meal.selectedProVeg[1].price ? meal.selectedProVeg[0].price : meal.selectedProVeg[1].price
+                    } else {
+                        mainItemsPrice = meal.selectedProVeg[0].price
+                    }
+                    let totalAddiItemsPrice = 0
+                    for (let i = 0; i <= additionalItems.length - 1; i++) {
+                        totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
+                    }
+                    return mainItemsPrice + totalAddiItemsPrice
                 }
 
-                let totalAddiItemsPrice = 0
-                for (let i = 0; i <= additionalItems.length - 1; i++) {
-                    // console.log(additionalItems[i].price)
-                    totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
-                }
-                // console.log(totalAddiItemsPrice)
-
-                return mainItemsPrice + totalAddiItemsPrice
             })
         }
         let totalBagPrice = 0
-        if (pricesArr.length) {
+        if (pricesArr.length > 0) {
             for (let i = 0; i <= pricesArr.length - 1; i++) {
                 totalBagPrice = totalBagPrice + pricesArr[i]
             }
@@ -108,7 +115,7 @@ const Cart = (props) => {
     const taxAmount = Number((bagPrice() * (16 / 100)).toFixed(2))
     return (
         <>
-            {cartItems.length === 0 ? <div className='demo-inline-spacing'>
+            {!cartItems || (cartItems && cartItems.meals.length === 0) ? <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart}
@@ -187,9 +194,12 @@ const Cart = (props) => {
                             <div>
                                 <div>
                                     <div className='col-md-12 '>
-                                        {cartItems.map((foodItems, id) => (
-                                            <ItemsInCart key={id} foodItems={foodItems}/>
-                                        ))}
+                                        {cartItems && cartItems.meals.map((meal, index) => {
+                                            return !isObjEmpty(meal) ? <>
+                                                <ItemsInCart key={index} foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
+                                                <hr/>
+                                            </> : null
+                                        })}
                                     </div>
 
                                 </div>

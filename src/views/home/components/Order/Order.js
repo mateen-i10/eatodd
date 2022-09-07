@@ -122,7 +122,7 @@ const Order = () => {
                     {
                         mainMenu.map(item => (
                             <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
-                                <Link to="/gmap">
+                                <Link to="/omgPlate">
                                     <div className="menu-item"
                                         //      onClick={() => (
                                         //     dispatch(itemSelected({name: item.title, description: item.description}))
