@@ -17,9 +17,7 @@ const styles = {
         height: isRowBased ? "100vh" : "30vh"
     })
 }
-
 const Gmaps = () => {
-
 
     const mediaMatch = window.matchMedia('(min-width: 768px)')
     const [matches, setMatches] = useState(mediaMatch.matches)
@@ -31,6 +29,7 @@ const Gmaps = () => {
     const [nearestPlaces, setNearestPlaces] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [places, setPlaces] = useState([])
+    const [netStatus, setNetStatus] = useState(0)
 
     useEffect(() => {
         const handler = e => setMatches(e.matches)
@@ -46,27 +45,28 @@ const Gmaps = () => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     setResList(response)
-
-                    setPlaces(
-                        response.data.data.map(place => ({
-                            id: place.id,
-                            name: place.name,
-                            address: place.address.address1,
-                            position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)}
-                            // position: {lat: 41.884176754378224, lng: -87.64085700264113}
-                        }))
-                    )
+                    setNetStatus(response.status)
+                    if (response.data.data.length > 0) {
+                        setPlaces(
+                            response.data.data.map(place => ({
+                                id: place.id,
+                                name: place.name,
+                                address: place.address.address1,
+                                position: {lat: Number(place.address.latitude), lng: Number(place.address.longitude)},
+                                status: response.data.statusCode
+                            }))
+                        )
+                    }
                 }
             })
 
     }, [])
 
-
     console.log("restaurant List", resList)
     console.log("placesssssss", places)
     console.log("userLocation", userLocation)
+    console.log("statusss", netStatus)
 
-    // const places = []
 
     // const places = [
     //     {
@@ -147,10 +147,8 @@ const Gmaps = () => {
                 toast.error(e)
             }
         }
-        // setUserLocation({position: {lat, lng}})
         setUserLocation(place)
     }
-    // if (!places.length) setLoading(true)
     return (
         <div style={styles.container(matches)}>
             {selectedSidebar ? <div className="col-md-4 col-12">
@@ -169,6 +167,7 @@ const Gmaps = () => {
                     onPlaceChanged={onPlaceChanged}
                     onLoad={onLoad}
                     userLocation={userLocation}
+                    netStatus={netStatus}
                 /></div>}
             {pickDelivery ? <div className="col-md-8 col-12" style={styles.height(matches)}>
                 <PickUpGMap

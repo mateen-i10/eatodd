@@ -7,6 +7,7 @@ import {wineHomePgData} from "../../../tempData/wineClubData"
 import CategoryFilteredData from "../components/CategoryFilteredData"
 
 const Shop = () => {
+
     const wineClubData = wineHomePgData
     const categories = [...new Set(wineClubData.map(o => o.category))]
     const [elHovered, setElHovered] = useState({})
@@ -25,7 +26,7 @@ const Shop = () => {
         }
     }
 
-    console.log(categories)
+    // console.log(categories)
     return (
         <div>
             <Headerwine/>
@@ -54,15 +55,6 @@ const Shop = () => {
                                       xl={xl}
                                       md={md}
                 />
-                {/*{*/}
-                {/*    <Fragment>*/}
-                {/*        <Row className="align-items-center  ">*/}
-                {/*            {wineClubData.map(item => (*/}
-                {/*                <WineCards key={item.id} item={item} xl={xl} md={md}/>*/}
-                {/*            ))}*/}
-                {/*        </Row>*/}
-                {/*    </Fragment>*/}
-                {/*}*/}
             </div>
             <Footer/>
         </div>
