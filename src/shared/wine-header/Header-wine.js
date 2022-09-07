@@ -4,10 +4,10 @@ import {Button} from 'reactstrap'
 import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
-import FoodCart from "../header/components/SideCart"
+import SideCart from "../header/components/SideCart"
 import {ShoppingBag} from "react-feather"
 
-const Headerwine = () => {
+const HeaderWine = () => {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
@@ -55,15 +55,9 @@ const Headerwine = () => {
                         }}/>
 
                         {openDrawer && (<div>
-                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
+                                <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
-
-                        {/*<i className="ri-shopping-bag-line cart" onClick={() => (*/}
-                        {/*    <div>*/}
-                        {/*        <FoodCart setCanvasPlacement='start' setCanvasOpen={true} />*/}
-                        {/*    </div>*/}
-                        {/*)}></i>*/}
                     </div>
                 </header>
             </div>
@@ -119,4 +113,4 @@ const Headerwine = () => {
         </div>
     )
 }
-export default Headerwine
+export default HeaderWine

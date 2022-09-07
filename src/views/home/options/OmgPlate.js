@@ -10,8 +10,8 @@ import Rice from "./components/Rice"
 import Beans from "./components/Beans"
 import Drinks from "./components/Drinks"
 import ToppingThingOff from "./components/ToppingThingOff"
-import {useDispatch, useSelector} from "react-redux"
-import {itemAdded} from "../../../redux/cartItems/cartItemsReducer"
+import {useHistory} from "react-router-dom"
+import {addMealToCart} from "../../../utility/Utils"
 
 const Menu = (props) => {
     const [selectedProVeg, setSelectedProVeg] = useState([])
@@ -23,36 +23,10 @@ const Menu = (props) => {
     const [selectedDrinks, setSelectedDrinks] = useState([])
     const [selectedMenuItems, setSelectedMenuItems] = useState({})
     const [mealName, setMealName] = useState("")
-
-    const {cartItems} = useSelector(state => state)
-    console.log(cartItems)
-    // console.log(mealName)
-    const dispatch = useDispatch()
-    // const {cartItems} = useSelector(state => state)
-    // const halfQty = () => {
-    //     if (selectedProVeg.length === 2 && doubled === false) {
-    //         const final = selectedProVeg.map(item => {
-    //             return {...item, title: `${item.title} (1/2)`}
-    //         })
-    //         setSelectedProVeg(final)
-    //     }
-    // // // }
-    // useEffect(() => {
-    //     console.log(selectedProVeg)
-    //     if (selectedProVeg.length === 2 && doubled === true) {
-    //
-    //         const final = selectedProVeg.map(item => {
-    //             return {...item, title: `${item.title} (1/2)`}
-    //         })
-    //         setSelectedProVeg(final)
-    //     }
-    // }, [selectedProVeg])
-
+    const history = useHistory()
 
     const img = props.image
-    // const proteinImage = require("../../../assets/images/Menu&Order/proteing.png").default
     const vegies = require("../../../assets/images/Menu&Order/veg.png").default
-    // const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
     const drink2 = require("../../../assets/images/Menu&Order/drink2.png").default
 
@@ -351,28 +325,19 @@ const Menu = (props) => {
         })
     }
     const dispatchingItems = () => {
-        dispatch(itemAdded({
-                mealName,
-                selectedProVeg,
-                selectedRice,
-                selectedSide,
-                selectedBeans,
-                selectedTopping,
-                selectedDrinks
-            }
-        ))
+        const meal = {
+            mealName,
+            selectedProVeg,
+            selectedRice,
+            selectedSide,
+            selectedBeans,
+            selectedTopping,
+            selectedDrinks
+        }
+        addMealToCart(meal)
+        history.push('/home')
     }
-    // const assignHalf = (rmSelected) => {
-    //     if (rmSelected.length === 2) {
-    //         const final = selectedProVeg.map(item => {
-    //             return {...item, title: `${item.title} (1/2)`}
-    //         })
-    //         setSelectedProVeg(final)
-    //     } else {
-    //         setSelectedProVeg(rmSelected)
-    //     }
-    // }
-    // console.log(selectedProVeg.length)
+
     console.log(selectedProVeg)
     const handleProVeg = (element) => {
         if (selectedProVeg.length === 2) {

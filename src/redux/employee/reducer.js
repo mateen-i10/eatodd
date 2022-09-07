@@ -55,13 +55,16 @@ const employeeReducer = (state = initialState, action) => {
             }
         case editEmployee.type:
             const id = action.payload.data.id
-            console.log('id', id)
+            console.log('action', action.payload.data)
             return {
                 ...state,
                 object: {...action.payload.data,
                     ...action.payload.data.applicationUser,
                     applicationUserId : action.payload.data.applicationUser.id,
                     id,
+                    permission: action.payload.data.applicationUser.permission.split(',').map(p => {
+                        return { label: p, value: p}
+                    }),
                     restaurants: action.payload.data.restaurants?.map(i => {
                             return {label: i.restaurant.name, value: i.restaurant.id}
                         }

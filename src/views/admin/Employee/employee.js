@@ -63,6 +63,29 @@ const Employees = (props) => {
             })
     }
 
+    const permissions = async () => {
+        return httpService._get(`${baseURL}permission/permissions`)
+            .then(response => {
+                console.log('per', response)
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    const keys = Object.keys(response.data.data)
+                    const final = []
+                     keys.map(d =>  {
+                         response.data.data[d].map(c => {
+                             final.push({ label: c, value: c })
+                        })
+                    })
+                    return final
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Employee')
     const [edit, setEdit] = useState(false)
@@ -91,19 +114,20 @@ const Employees = (props) => {
     if (isModalLoading) setModalLoading(false)
     }
 
-    // custom hooks
-    useLoadData(isSuccess, loadEmployees, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setEmployee, {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    contactNo:'',
-    address: '',
-    phoneNo: '',
-    restaurants: []
-    })
-    useModalError(isError, setModalLoading, setIsEmployeeError)
+        // custom hooks
+        useLoadData(isSuccess, loadEmployees, isModal, toggle, currentPage, pageSize, searchValue)
+        useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setEmployee, {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            contactNo:'',
+            address: '',
+            phoneNo: '',
+            restaurants: [],
+            permission: []
+            })
+        useModalError(isError, setModalLoading, setIsEmployeeError)
 
     const addClick = () => {
         setFormData([
@@ -112,7 +136,8 @@ const Employees = (props) => {
             {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter email', name:'email', isRequired:true, fieldGroupClasses: 'col-6'},
             {type:FieldTypes.Password, label: 'Password', placeholder: 'Enter password', name:'password', isRequired:true, fieldGroupClasses: 'col-6'},
             {type:FieldTypes.Text, label: 'Contact Number', placeholder: 'Enter Contact Number', name:'contactNo', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true}
+            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true},
+            {type:FieldTypes.Select, label: 'Permissions', placeholder: 'Select Permissions', name:'permission', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:permissions, isAsyncSelect: true, isMulti:true}
         ])
         setModalTitle('Add Employee')
         toggle()
@@ -124,7 +149,8 @@ const Employees = (props) => {
             {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-6'},
             {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter email', name:'email', isRequired:true, fieldGroupClasses: 'col-6'},
             {type:FieldTypes.Text, label: 'Contact Number', placeholder: 'Enter Contact Number', name:'contactNo', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true}
+            {type:FieldTypes.Select, label: 'Restaurants', placeholder: 'Select Restaurants', name:'restaurants', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:restaurants, isAsyncSelect: true, isMulti:true},
+            {type:FieldTypes.Select, label: 'Permissions', placeholder: 'Select Permissions', name:'permission', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:permissions, isAsyncSelect: true, isMulti:true}
         ])
         setSchema(Joi.object({
             firstName: Joi.string().required().label("First Name"),
@@ -173,7 +199,7 @@ const Employees = (props) => {
 
        const final = {
             id: formState.id,
-           applicationUser: {...formState, id: formState.applicationUserId, permission: "Manage All", passwordHash: formState.password, username: formState.email},
+           applicationUser: {...formState, id: formState.applicationUserId, permission: formState.permission.map(p => p.value).toString(), passwordHash: formState.password, username: formState.email},
            restaurants: formState.restaurants.map(r => {
            return { restaurantId: r.value }
            })}

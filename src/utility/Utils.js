@@ -80,3 +80,30 @@ export const selectThemeColors = theme => ({
     neutral30: '#ededed' // for input hover border-color
   }
 })
+
+export const addMealToCart = (meal) => {
+  //getting existing cart items
+  const items = localStorage.getItem('cartItems')
+  const cart = JSON.parse(items)
+  const finalItems = items && items.length > 0 ? [...cart.meals, meal] : [meal]
+  localStorage.setItem('cartItems', JSON.stringify({ meals: [...finalItems]}))
+}
+
+export const removeMealFromCart = (index) => {
+  //getting existing cart items
+  const items = localStorage.getItem('cartItems')
+  if (items && items.length > 0) {
+    const cart = JSON.parse(items)
+    cart.meals.splice(index, 1)
+    const finalItems = {...cart, meals: [...cart.meals]}
+    localStorage.setItem('cartItems', JSON.stringify(finalItems))
+    return true
+  }
+return false
+}
+
+export const getCartData = () => {
+  const string = localStorage.getItem('cartItems')
+  const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem('cartItems')) : null
+  return obj && !isObjEmpty(obj) ? obj : null
+}

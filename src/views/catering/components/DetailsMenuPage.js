@@ -2,9 +2,10 @@ import React, {Fragment} from 'react'
 import {Row} from "reactstrap"
 import WineCards from "../../wine/components/WineCards"
 import OmgCorporate from "./OmgCorporate"
-import {omgCorporate, omgFamilyDine} from "../../../tempData/cateringDb"
+import {omgCorporate, omgFamilyDine, omgFriends} from "../../../tempData/cateringDb"
 import OmgFamilyDine from "./OmgFamilyDine"
 import {wineHomePgData} from "../../../tempData/wineClubData"
+import OmgFriends from "./OmgFriends"
 
 const DetailsMenuPage = ({selectedCategory, xl, md}) => {
 
@@ -12,7 +13,7 @@ const DetailsMenuPage = ({selectedCategory, xl, md}) => {
     const showItems = () => {
         if (selectedCategory === 1) {
             return <Fragment>
-                <Row className="align-items-center justify-content-center ">
+                <Row className="align-items-center ">
                     {omgCorporate.map(item => (
                         <OmgCorporate key={item.id} item={item} xl={xl} md={md}/>
                     ))}
@@ -31,8 +32,8 @@ const DetailsMenuPage = ({selectedCategory, xl, md}) => {
         if (selectedCategory === 3) {
             return <Fragment>
                 <Row className="align-items-center justify-content-center ">
-                    {omgCorporate.map(item => (
-                        <OmgCorporate key={item.id} item={item} xl={xl} md={md}/>
+                    {omgFriends.map(item => (
+                        <OmgFriends key={item.id} item={item} xl={xl} md={md}/>
                     ))}
                 </Row>
             </Fragment>

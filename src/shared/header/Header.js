@@ -3,7 +3,7 @@ import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
-import FoodCart from "./components/SideCart"
+import SideCart from "./components/SideCart"
 import {ShoppingBag} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {isUserLoggedIn} from "../../auth/utils"
@@ -70,7 +70,7 @@ export default function Header() {
                             SetOpenDrawer(true)
                         }}/>
                         {openDrawer && (<div>
-                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
+                                <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
                     </div>

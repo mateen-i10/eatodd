@@ -22,7 +22,6 @@ const EmployeeDetail = ({match}) => {
     const isLoading = useSelector(state => state.employee.isDetailLoading)
     const employee = useSelector(state => state.employee.object)
     console.log('employeeDetail', employee)
-    //const employeeObj = useSelector(state => state.employee.employeeObj)
     useEffect(() => {
         dispatch(getEmployee(id))
     }, [])
@@ -52,7 +51,6 @@ const EmployeeDetail = ({match}) => {
                             <Card>
                                 <CardBody>
                                     <h2 className='mb-75'>Detail:</h2>
-                                    {/*<CardText>about text here</CardText>*/}
                                     <Row>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
@@ -66,18 +64,10 @@ const EmployeeDetail = ({match}) => {
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
-                                            {/*<div className='mt-2 invoice-date-wrapper ps-1'>*/}
-                                            {/*    <p className='fw-bolder'>phone Number:</p>*/}
-                                            {/*    <CardText className="mmb-25 ms-1 mb-1">{employee.phoneNumber}</CardText>*/}
-                                            {/*</div>*/}
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Contact Number:</p>
                                                 <CardText className="mmb-25 ms-1 mb-1">{employee.applicationUser?.contactNo}</CardText>
                                             </div>
-                                           {/* <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'>Role:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{employeeObj.role}</CardText>
-                                            </div>*/}
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Status:</p>
                                                 <Badge className="mmb-25 ms-1 mb-1"
@@ -94,9 +84,17 @@ const EmployeeDetail = ({match}) => {
                                                     return <Badge className="mmb-25 ms-1 mb-1"
                                                                   color={'light-primary'}
                                                                   pill>
-                                                        {i.restaurants}
+                                                        {i.restaurant.name}
                                                     </Badge>
                                                 })}
+                                            </div>
+                                        </Col>
+                                        <Col xl={12} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'>Permissions:</p>
+                                                 <Badge className="mmb-25 ms-1 mb-1" color={'light-primary'} pill>
+                                                     {` ${employee.applicationUser?.permission}  `}
+                                                 </Badge>
                                             </div>
                                         </Col>
                                     </Row>
