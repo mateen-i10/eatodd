@@ -13,7 +13,10 @@ function DeliveryGMap({places, userLocation}) {
         >
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={userLocation ? userLocation.position : places[0].position}
+                center={userLocation ? userLocation.position : places.length === 0 ? {
+                    lat: 41.884176754378224,
+                    lng: -87.64085700264113
+                } : places[0].position}
                 zoom={userLocation ? 12 : 9}
             >
                 { /* Child components, such as markers, info windows, etc. */}

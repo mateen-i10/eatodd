@@ -3,10 +3,11 @@ import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
-import FoodCart from "./components/SideCart"
+import SideCart from "./components/SideCart"
 import {ShoppingBag} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {isUserLoggedIn} from "../../auth/utils"
+import {useSelector} from "react-redux"
 // import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 
 export default function Header() {
@@ -14,6 +15,8 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
     const [isuserlogedin, setuserloginedin] = useState(false)
+
+    const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
     useEffect(() => {
         const handleResizeWindow = () => setWidth(window.innerWidth)
@@ -24,7 +27,7 @@ export default function Header() {
             window.removeEventListener("resize", handleResizeWindow)
         }
     }, [])
-     //** ComponentDidMount
+    //** ComponentDidMount
     useEffect(() => {
         if (isUserLoggedIn() !== null) {
             setuserloginedin(true)
@@ -56,18 +59,18 @@ export default function Header() {
                     </div>
                     <div className="head-sec-3">
                         {isuserlogedin ? <ul>
-                            <UserDropdown />
+                            <UserDropdown/>
                         </ul> : null}
                         <div className="eatOMG">
                             <i className="ri-checkbox-blank-circle-fill"></i>
                             <span className="seprator"></span>
-                            <p>Delivery address</p>
+                            {userLocation.length ? <p>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</p> : <p>Delivery address</p>}
                         </div>
                         <ShoppingBag onClick={() => {
                             SetOpenDrawer(true)
                         }}/>
                         {openDrawer && (<div>
-                                <FoodCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
+                                <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
                         )}
                     </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Button,
     CardFooter,
@@ -11,62 +11,64 @@ import {
     OffcanvasHeader
 } from 'reactstrap'
 import {UserPlus} from "react-feather"
-import './FoodCart.css'
+import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
-import {useSelector} from "react-redux"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {Link} from "react-router-dom"
-// import {default as chips} from "../../../assets/images/Catering&Order/chips.png";
-// import {default as drink1} from "../../../assets/images/Catering&Order/drink1.png";
+import {getCartData, isObjEmpty, removeMealFromCart} from "../../../utility/Utils"
 
-const OffCanvasPlacement = (props) => {
+const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
     const [canvasOpen, setCanvasOpen] = useState(true)
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [openModel, SetModelOpen] = useState(false)
-    // const [taxDropDown, SetTaxDropdown] = useState(true)
-
-    const {cartItems} = useSelector(state => state)
-    console.log("cartitemssss l", cartItems)
+    const [cartItems, setCartItems] = useState()
+    const [isMealDeleted, setMealDeleted] = useState(false)
     const chips = require("../../../assets/images/Menu&Order/chips.png").default
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
 
+    useEffect(() => {
+        setCartItems({...getCartData()})
+    }, [isMealDeleted])
+
 // methods
+    const handleRemoveMeal = (index) => {
+        const result = removeMealFromCart(index)
+        setMealDeleted(result)
+    }
     const bagPrice = () => {
         let pricesArr = []
-        if (cartItems.length > 0) {
-            pricesArr = cartItems.map(cartItem => {
-                const mainItems = [...cartItem.action.payload.selectedProVeg, ...cartItem.action.payload.selectedRice, ...cartItem.action.payload.selectedTopping, ...cartItem.action.payload.selectedBeans]
+        if (cartItems && cartItems.meals.length > 0) {
+            pricesArr = cartItems.meals.map(meal => {
+                if (!isObjEmpty(meal)) {
 
-                const additionalItems = [...cartItem.action.payload.selectedSide, ...cartItem.action.payload.selectedDrinks]
+                    const mainItems = [...meal.selectedProVeg, ...meal.selectedRice, ...meal.selectedTopping, ...meal.selectedBeans]
 
-                let mainItemsPrice
-                if (mainItems.length === 2) {
-                    mainItemsPrice = cartItem.action.payload.selectedProVeg[0].price > cartItem.action.payload.selectedProVeg[1].price ? cartItem.action.payload.selectedProVeg[0].price : cartItem.action.payload.selectedProVeg[1].price
-                } else {
-                    mainItemsPrice = cartItem.action.payload.selectedProVeg[0].price
+                    const additionalItems = [...meal.selectedSide, ...meal.selectedDrinks]
+
+                    let mainItemsPrice
+                    if (mainItems.length === 2) {
+                        mainItemsPrice = meal.selectedProVeg[0].price > meal.selectedProVeg[1].price ? meal.selectedProVeg[0].price : meal.selectedProVeg[1].price
+                    } else {
+                        mainItemsPrice = meal.selectedProVeg[0].price
+                    }
+                    let totalAddiItemsPrice = 0
+                    for (let i = 0; i <= additionalItems.length - 1; i++) {
+                        totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
+                    }
+                    return mainItemsPrice + totalAddiItemsPrice
                 }
 
-                let totalAddiItemsPrice = 0
-                for (let i = 0; i <= additionalItems.length - 1; i++) {
-                    // console.log(additionalItems[i].price)
-                    totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
-                }
-                // console.log(totalAddiItemsPrice)
-
-                return mainItemsPrice + totalAddiItemsPrice
             })
         }
         let totalBagPrice = 0
-        if (pricesArr.length) {
+        if (pricesArr.length > 0) {
             for (let i = 0; i <= pricesArr.length - 1; i++) {
                 totalBagPrice = totalBagPrice + pricesArr[i]
             }
         }
         return Number(totalBagPrice.toFixed(2))
     }
-    // console.log(bagPrice())
-
 
     const toggleCanvasStart = () => {
         setCanvasPlacement('start')
@@ -113,9 +115,7 @@ const OffCanvasPlacement = (props) => {
     const taxAmount = Number((bagPrice() * (16 / 100)).toFixed(2))
     return (
         <>
-            {/* eslint-disable-next-line multiline-ternary */}
-            {cartItems.length === 0 ? <div
-                    className='demo-inline-spacing'>
+            {!cartItems || (cartItems && cartItems.meals.length === 0) ? <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart}
@@ -170,8 +170,7 @@ const OffCanvasPlacement = (props) => {
                         </CardFooter>
                     </Offcanvas>
 
-                </div> :
-                <div className='demo-inline-spacing'>
+                </div> : <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 30, justifyContent: 'center'}}>
@@ -195,15 +194,12 @@ const OffCanvasPlacement = (props) => {
                             <div>
                                 <div>
                                     <div className='col-md-12 '>
-                                        {cartItems.map((foodItems, id) => (
-                                            <ItemsInCart key={id} foodItems={foodItems}/>
-                                        ))}
-                                        {/*<ul>*/}
-
-                                        {/*{testData && testData.length > 0 && testData.map(e => <li key={e}>{e}</li>)}*/}
-                                        {/*{testData.length ? console.log('testData', testData) : "**Please Select some food**"}*/}
-                                        {/*</ul>*/}
-                                        {/*<p style={{marginTop:10, color:'black'}}>Pollo Asado, Guacamole ($2.85), White Rice, and Black Beans</p>*/}
+                                        {cartItems && cartItems.meals.map((meal, index) => {
+                                            return !isObjEmpty(meal) ? <>
+                                                <ItemsInCart key={index} foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
+                                                <hr/>
+                                            </> : null
+                                        })}
                                     </div>
 
                                 </div>
@@ -254,7 +250,7 @@ const OffCanvasPlacement = (props) => {
 
                             </div>
 
-                            <Button
+                            <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
@@ -269,6 +265,7 @@ const OffCanvasPlacement = (props) => {
                             >
                                 Add Another menu item
                             </Button>
+                            </Link>
 
                             <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
                                 <div className="row">
@@ -297,16 +294,6 @@ const OffCanvasPlacement = (props) => {
                                     sign in to use rewards
                                 </Button>
 
-                                {/*<div className="row" style={{marginBottom: -10}}>*/}
-                                {/*    <div className="col-md-10" style={{fontWeight: 500, fontSize: "1.2rem"}}>Enter a Promo*/}
-                                {/*        Code*/}
-                                {/*    </div>*/}
-                                {/*    <div className="col-md-2"*/}
-                                {/*         style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>apply*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-
-                                {/*<hr style={{color: '#451400'}}/>*/}
 
                                 <div className="row">
                                     <div className="col-9 text-uppercase"
@@ -329,50 +316,6 @@ const OffCanvasPlacement = (props) => {
                                          }}>$ {taxAmount}
                                     </div>
                                 </div>
-
-                                {/*<a href="#">*/}
-                                {/*    <div className="row">*/}
-                                {/*        <div className="col-md-10"*/}
-                                {/*             style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}} onClick={() => {*/}
-                                {/*            if (taxDropDown === true) {*/}
-                                {/*                SetTaxDropdown(false)*/}
-                                {/*            } else {*/}
-                                {/*                SetTaxDropdown(true)*/}
-                                {/*            }*/}
-                                {/*        }}>Tax & Fees {taxDropDown ? <ChevronDown size={18}/> : <ChevronUp size={18}/>}</div>*/}
-                                {/*        {*/}
-                                {/*            taxDropDown &&*/}
-                                {/*            <div className="col-md-2"*/}
-                                {/*                 style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>$2.94</div>*/}
-                                {/*        }*/}
-                                {/*    </div>*/}
-                                {/*</a>*/}
-
-                                {/*{*/}
-                                {/*    taxDropDown === false ? <div style={{textAlign: 'left'}}>*/}
-                                {/*        <div className="row">*/}
-                                {/*            <div className="col"*/}
-                                {/*                 style={{paddingLeft: 60, color: 'primary', fontSize: "1.2rem"}}>Tax*/}
-                                {/*            </div>*/}
-                                {/*            <div className="col text-end"*/}
-                                {/*                 style={{paddingLeft: 235, color: 'primary', fontSize: "1.2rem"}}>$1.44*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className="row ">*/}
-                                {/*            <div className="col"*/}
-                                {/*                 style={{paddingLeft: 60, color: 'primary', fontSize: "1.2rem"}}>Service Fee*/}
-                                {/*            </div>*/}
-                                {/*            <div className="col text-end"*/}
-                                {/*                 style={{*/}
-                                {/*                     maxWidth: 70,*/}
-                                {/*                     paddingLeft: 16,*/}
-                                {/*                     color: 'primary',*/}
-                                {/*                     fontSize: "1.2rem"*/}
-                                {/*                 }}>$1.34*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*    </div> : []*/}
-                                {/*}*/}
 
                                 <hr style={{color: 'primary'}}/>
 
@@ -424,4 +367,4 @@ const OffCanvasPlacement = (props) => {
     )
 }
 
-export default OffCanvasPlacement
+export default Cart
