@@ -49,7 +49,7 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
         } else {
             defaultPlaces.forEach(({position}) => bounds.extend(position))
         }
-        
+
         map.fitBounds(bounds)
 
     }
@@ -67,7 +67,6 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
                     lat: 41.884176754378224,
                     lng: -87.64085700264113
                 }}
-                // zoom={8}
             >
                 { /* Child components, such as markers, info windows, etc. */}
                 {places.map(({id, name, position}) => (
