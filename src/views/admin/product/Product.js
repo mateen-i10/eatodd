@@ -156,9 +156,7 @@ const Product = (props) => {
                 )}
             </>
             )
-
     }
-
 
     // ** schema for validations
     const schema = Joi.object({
@@ -184,6 +182,7 @@ const Product = (props) => {
     const addClick = () => {
         setModalTitle('Add Product')
         toggle()
+        return AddFromExistingData()
     }
 
     const editClick = (id) => {
@@ -192,6 +191,21 @@ const Product = (props) => {
         dispatch(getproduct(id, true))
         setModalTitle('Edit Product')
         setEdit(true)
+        setFormData([
+            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'RetailPrice', placeholder: 'Enter RetailPrice', name:'retailPrice', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'OnlinePrice', placeholder: 'Enter OnlinePrice', name:'onlinePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Select, label: 'SubCategory', placeholder: 'Select SubCategory', name:'subcategory', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:subCategories, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
+               ])
+        setFormFeilds(3)
     }
 
     const deleteClick = (id, e) => {
@@ -219,13 +233,11 @@ const Product = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        let finalData = {}
        if (formFeilds === 1) {
-           // eslint-disable-next-line no-var
-           var finalData = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value}
-           console.log("Hello", finalData)
+           finalData  = {...formState, subCategoryId: formState.subcategory?.value, restaurantId: formState.restaurant?.value}
        } else {
-           // eslint-disable-next-line no-var
-           var finalData = {...formState, generalProductId: formState.generalProduct?.value }
+           finalData = {...formState, generalProductId: formState.generalProduct?.value }
        }
         console.log(finalData, "lets see")
         const isError = formModalRef.current.validate(formState)
@@ -233,6 +245,9 @@ const Product = (props) => {
 
         // call api
         setModalLoading(true)
+        delete finalData.attachmentId
+        delete finalData.createdById
+        delete finalData.generalProductId
         edit ? dispatch(updateproduct(finalData)) : dispatch(addproduct(finalData))
     }
 

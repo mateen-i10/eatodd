@@ -62,7 +62,6 @@ export const deleteproduct = (id) => {
 }
 export const addproduct = (data) => {
     console.log('resData', data)
-    // delete data.attachmentId
     delete data.restaurant
     delete data.subcategory
     return async dispatch => {
@@ -81,7 +80,6 @@ export const addproduct = (data) => {
 }
 export const updateproduct = (data) => {
     console.log('updated data', data)
-    // delete data.attachmentId
     return async dispatch => {
         dispatch(apiCall({
             url,
