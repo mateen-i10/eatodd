@@ -42,7 +42,6 @@ const HeaderWine = () => {
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
                         {/*<Link to="/wine/about"><h2>About</h2></Link>*/}
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
-                        <Link to="/wine/shop"><h2>Shop</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
                     <div className="head-sec-3">
@@ -90,7 +89,6 @@ const HeaderWine = () => {
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
                         {/*<Link to="/wine/about"><h2>About</h2></Link>*/}
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
-                        <Link to="/wine/shop"><h2>Shop</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
                     <div className="nav-sec-2">
