@@ -82,6 +82,7 @@ const SubCategory = () => {
     const formData = [
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.File, label: 'Image', placeholder: 'Select image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
     ]
@@ -103,7 +104,8 @@ const SubCategory = () => {
     useLoadData(isSuccess, loadSubCategorys, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setSubCategory, {
         name: '',
-        description:''
+        description:'',
+        fillingLimit: null
     })
     useModalError(isError, setModalLoading, setIsSubCategoryError)
 
