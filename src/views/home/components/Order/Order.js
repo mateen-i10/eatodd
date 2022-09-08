@@ -9,28 +9,10 @@ import {useSelector} from "react-redux"
 // import {useDispatch} from "react-redux"
 // import {itemSelected} from "../../../../redux/cartItems/cartItemsReducer"
 // import httpService, {baseURL} from "../../../../utility/http"
+// import {toast} from "react-toastify"
+// import {isObjEmpty} from "../../../../utility/Utils"
 // import drinks from "../../../../assets/images/ORDER/cola.png"
 // import wine from '../../../../assets/images/ORDER/VCine.png'
-
-// const category = async (input) => {
-//     return httpService._get(`${baseURL}category?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-//         .then(response => {
-//             // success case
-//             if (response.status === 200 && response.data.statusCode === 200) {
-//                 console.log("respSubCategory*******", response)
-//                 return response.data.data.map(d => {
-//                     return {label: `${d.name}`, value: d.id}
-//                 })
-//             } else {
-//                 //general Error Action
-//                 toast.error(response.data.message)
-//             }
-//         }).catch(error => {
-//             toast.error(error.message)
-//         })
-// }
-// console.log("catefory****", category())
-
 
 const mainMenu = [
     {
@@ -78,25 +60,10 @@ const mainMenu = [
 ]
 
 const Order = () => {
+    //get redux state
     const {userLocation} = useSelector(state => state)
 
-    // const [category, setCategory] = useState(null)
-    // useEffect(() => {
-    //     httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=1`)
-    //         .then(response => {
-    //             // success case
-    //             if (response.status === 200 && response.data.statusCode === 200) {
-    //                 // console.log("respSubCategory*******", response)
-    //                 setCategory(response)
-    //             }
-    //         })
-    //
-    // }, [])
 
-    // console.log(category)
-    // const dispatch = useDispatch()
-    // const {cartItems} = useSelector(state => state)
-    // console.log(cartItems)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -121,6 +88,7 @@ const Order = () => {
             </div>
             <div className="menu-list container-fluid pb-5 pt-5 ">
                 <div className="row ms-0 me-1">
+                    {/*<div><img src={img} alt=""/></div>*/}
                     {
                         mainMenu.map(item => (
                             <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
