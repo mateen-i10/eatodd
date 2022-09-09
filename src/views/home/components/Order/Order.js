@@ -10,7 +10,6 @@ import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
 import {isObjEmpty} from "../../../../utility/Utils"
 
-
 // const mainMenu = [
 //     {
 //         id: 1,
