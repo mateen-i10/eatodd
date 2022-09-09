@@ -1,34 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import {Card, CardBody, CardText, Col, Row} from 'reactstrap'
 import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 
 import Footer from "../../../shared/footer/Footer"
-import {wineHomePgData} from "../../../tempData/wineClubData"
-import CategoryFilteredData from "../components/CategoryFilteredData"
-
-// import classnames from "classnames"
 
 const Homepage = () => {
-
-    const [selectedCategory, setSelectedCategory] = useState("Sparkling")
-    const [elHovered, setElHovered] = useState({})
-
-    const wineClubData = wineHomePgData
-    const categories = [...new Set(wineClubData.map(o => o.category))]
-    const sparkling = wineClubData.filter(item => item.category === "Sparkling")
-    const white = wineClubData.filter(item => item.category === "White")
-    const rose = wineClubData.filter(item => item.category === "Rose")
-    const red = wineClubData.filter(item => item.category === "Red")
-
-    const xl = "6"
-    const md = "6"
-    const toggleList = item => {
-        if (selectedCategory !== item) {
-            setSelectedCategory(item)
-        }
-    }
 
     return (
         <>
@@ -80,96 +58,12 @@ const Homepage = () => {
                                         metus curae integer orci congue integer and primis in integer metus mollis
                                         faucibus
                                     </p>
-                                    {/*<div className="abox-1-wrapper ico-75">*/}
-                                    {/*    <div className="row d-flex flex-wrap">*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-bottle"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Wine</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-glass"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Premium</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-glass-alt"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Party Pack</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-glass-alt"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Candle Light</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-glass-alt"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Desserts</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*        <div className="col-6 col-sm-4 col-md-2">*/}
-                                    {/*            <div className="abox-1 mb-40">*/}
-                                    {/*                <div className="abox-1-ico grey-color"><span*/}
-                                    {/*                    className="fas fa-wine-bottle"></span></div>*/}
-                                    {/*                <h6 className="h6-xl">Drinks</h6>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <div className="container-sm">
-                    <div className="row mt-3 justify-content-center">
-                        <div className="col-md-4 col-sm-12 mt-4 mb-3 ">
-                            <div style={{
-
-                                borderRight: "6px solid rgb(129 190 65)"
-
-                            }}>
-                                {categories.map((item, i) => (
-                                    <div key={i}
-                                         className={`fs-3 fw-bolder  ms-2 cursor-pointer  ${elHovered[i] ? "text-primary" : ""}  `}
-                                         style={{lineHeight: "35px"}}
-                                         onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}
-                                         onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}
-                                         onClick={() => {
-                                             toggleList(item)
-                                         }}
-                                    >
-                                        <div className="text-center">{item}</div>
-                                    </div>
-                                ))}
-
-                            </div>
-
-                        </div>
-
-                        <div className="col-md-7 col-10 ">
-                            <CategoryFilteredData selectedCategory={selectedCategory}
-                                                  sparkling={sparkling}
-                                                  white={white}
-                                                  rose={rose}
-                                                  red={red}
-                                                  xl={xl}
-                                                  md={md}
-                            />
-                        </div>
-                    </div>
-                </div>
                 <section id="blog-1" className="wide-60 blog-section division mt-4 mb-4">
                     <div className="container-sm">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
@@ -248,61 +142,7 @@ const Homepage = () => {
                                 </Col>
                             </Row>
                         </div>
-                        {/*<div className="row d-flex flex-wrap align-items-center justify-content-center mt-4">*/}
-                        {/*    <div className="col-md-6 col-lg-3">*/}
-                        {/*        <div className="">*/}
-                        {/*            <div className="">*/}
-                        {/*                <div className="">*/}
-                        {/*                    <img className="img-fluid"*/}
-                        {/*                         src={require("../../../assets/images/pages/wine/about/daniel-vogel-unsplash-304.jpg").default}*/}
-                        {/*                         alt="blog-post-image"/>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*            <div className=" mt-1">*/}
-                        {/*                <h5 className="text-center"><a href="#">Quaerat neque purus ipsum neque*/}
-                        {/*                    dolor</a></h5>*/}
-                        {/*                <p className="text-center mt-1">Quaerat neque purus ipsum neque dolor primis*/}
-                        {/*                    tempus impedit</p>*/}
-                        {/*            </div>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="col-md-6 col-lg-3">*/}
-                        {/*        <div className="">*/}
-                        {/*            <div className="">*/}
-                        {/*                <div className="">*/}
-                        {/*                    <img className="img-fluid"*/}
-                        {/*                         src={require("../../../assets/images/pages/wine/about/marc-antoine-unsplash-304.jpg").default}*/}
-                        {/*                         alt="blog-post-image"/>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*            <div className="">*/}
-                        {/*                <h5 className="text-center mt-1"><a href="#">Tempor blandit sapien at*/}
-                        {/*                    gravida donec ipsum</a></h5>*/}
-                        {/*                <p className="text-center mt-1">Neque dolor primis libero tempus impedit tempor*/}
-                        {/*                    sapien*/}
-                        {/*                    gravida</p>*/}
-                        {/*            </div>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="col-md-6 col-lg-3">*/}
-                        {/*        <div className="">*/}
-                        {/*            <div className="">*/}
-                        {/*                <div className="">*/}
-                        {/*                    <img className="img-fluid"*/}
-                        {/*                         src={require("../../../assets/images/pages/wine/about/winery-Lineup-304.jpg").default}*/}
-                        {/*                         alt="blog-post-image"/>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*            <div className="">*/}
-                        {/*                <h5 className="text-center mt-1"><a href="#">Neque dolor primis a libero*/}
-                        {/*                    tempus a tempor</a></h5>*/}
-                        {/*                <p className="text-center mt-1">Impedit tempor at donec sapien ipsum a neque*/}
-                        {/*                    dolor*/}
-                        {/*                    primis libero</p>*/}
-                        {/*            </div>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
+
                     </div>
                 </section>
             </div>
