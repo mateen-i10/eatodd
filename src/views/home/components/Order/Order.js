@@ -76,11 +76,9 @@ const Order = () => {
             .then(async res => {
                 if (res && !isObjEmpty(res)) {
                     const arr = [...res.data.data]
-                    // console.log("resssssss", res)
                     try {
                         const final = []
                         for (const item of arr) {
-                            // console.log("attachment", item.attachment)
                             if (item.attachment !== null) {
                                 const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
                                 const image = URL.createObjectURL(result.data)
