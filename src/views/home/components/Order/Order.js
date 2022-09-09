@@ -76,11 +76,13 @@ const Order = () => {
             .then(async res => {
                 if (res && !isObjEmpty(res)) {
                     const arr = [...res.data.data]
+                    // console.log("resssssss", res)
                     try {
                         const final = []
                         for (const item of arr) {
-                            if (item.attachmentId !== null) {
-                                const result = await httpService._get(`${baseURL}Media/GetMedia/${item.attachmentId}`, {responseType: 'blob'})
+                            // console.log("attachment", item.attachment)
+                            if (item.attachment !== null) {
+                                const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
                                 const image = URL.createObjectURL(result.data)
                                 final.push({
                                     id: item.id,
@@ -104,7 +106,7 @@ const Order = () => {
 
     }, [])
 
-    console.log("main Category ---", mainCategory)
+    // console.log("main Category ---", mainCategory)
 
     return (
         <div className="order-main">
