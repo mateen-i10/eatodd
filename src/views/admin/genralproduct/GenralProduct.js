@@ -1,10 +1,10 @@
 // ** React Imports
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
 import {
     Button,
     Card,
@@ -55,11 +55,31 @@ const GenralProducts = (props) => {
     // select subCategory
 
     const subCategories = async (input) => {
-        return httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+        return httpService._get(`${baseURL}SubCategory/GetSubCategories?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                console.log("respSubCategory", response)
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    //const Id = response.data.categoryId
+                    console.log("respSubCategory*******", response)
+                    return response.data.data.map(d => {
+                        return {label: `${d.name}`, value: d.categoryId}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const Categories = async (input) => {
+        return httpService._get(`${baseURL}category?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
-                    console.log("respSubCategory*******", response)
+                    console.log("resCategory*******", response)
                     return response.data.data.map(d => {
                         return {label: `${d.name}`, value: d.id}
                     })
@@ -72,12 +92,124 @@ const GenralProducts = (props) => {
             })
     }
 
+    const ingredients = async (input) => {
+        return httpService._get(`${baseURL}ingredient?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log("ingredients", response)
+                    return response.data.data.map(d => {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const optionType = async () => [
+        { value: 1, label: 'Default' },
+        { value: 2, label: 'Numeric' }
+    ]
+
     // ** refs
     const formModalRef = useRef(null)
 
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
+
+    const optionsListObject = {name: '', description: '', price: 0, max: 0, min: 0}
+    const [optionsList, setOptionsList] = useState([optionsListObject])
+
+    useEffect(() => {
+        if (formInitialState && formInitialState.optionsList) {
+            setOptionsList([...formInitialState.optionsList])
+        }
+    }, [isEdit])
+    const removeOptionList = (index) => {
+        const newArray = [...optionsList]
+        newArray.splice(index, 1)
+        setOptionsList(newArray)
+    }
+    const addOptionList = () => {
+        const newArray = [...optionsList, optionsListObject]
+        setOptionsList(newArray)
+    }
+    const onValueChange = (index, name, event) => {
+        const newArray = optionsList.map((item, i) => {
+            if (i === index) {
+                item[name] = event.target.value
+            }
+            return item
+        })
+
+        setOptionsList(newArray)
+    }
+
+    const child = () => {
+        return <div className='ms-1'>
+            <h5> Item Units</h5>
+            {optionsList.map((i, index) => {
+                return <div className='row mt-1'>
+                    <div className='col-3'>
+                        <Input
+                            placeholder='Enter Name'
+                            type= 'text'
+                            value={i.name}
+                            onChange={(e) => onValueChange(index, 'name', e)}
+                        />
+                    </div>
+                    <div className='col-3'>
+                        <Input
+                            placeholder='Enter Price'
+                            type= 'number'
+                            value={i.price}
+                            onChange={(e) => onValueChange(index, 'price', e)}
+                        />
+                    </div>
+                    <div className='col-6'>
+                        <Input
+                            placeholder='Enter Description'
+                            type= 'number'
+                            value={i.description}
+                            onChange={(e) => onValueChange(index, 'description', e)}
+                        />
+                    </div>
+                    <div className='col-3 mt-1'>
+                        <Input
+                            placeholder='Enter Maximum Value'
+                            type= 'text'
+                            value={i.max}
+                            onChange={(e) => onValueChange(index, 'max', e)}
+                        />
+                    </div>
+                    <div className='col-3 mt-1'>
+                        <Input
+                            placeholder='Enter Minimum Value'
+                            type= 'number'
+                            value={i.min}
+                            onChange={(e) => onValueChange(index, 'min', e)}
+                        />
+                    </div>
+                    {optionsList.length > 1 && <div className='col-1'>
+                        <Button.Ripple className='btn-icon mt-1' color='danger' onClick={() => removeOptionList(index)}>
+                            <Delete size={12}/>
+                        </Button.Ripple>
+                    </div>
+                    }
+                </div>
+            })}
+            <div className='col-2'>
+                <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addOptionList}>
+                    <Plus size={12} />
+                </Button.Ripple>
+            </div>
+        </div>
+    }
 
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
@@ -173,9 +305,42 @@ const GenralProducts = (props) => {
             name: 'category',
             isRequired: false,
             fieldGroupClasses: 'col-6',
+            loadOptions: Categories,
+            isAsyncSelect: true,
+            isMulti: false
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Sub Category',
+            placeholder: 'Select Sub Category',
+            name: 'subCategory',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
             loadOptions: subCategories,
             isAsyncSelect: true,
             isMulti: false
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Ingredients',
+            placeholder: 'Select ingredients',
+            name: 'generalProductIngredients',
+            isRequired: false,
+            fieldGroupClasses: 'col-12',
+            loadOptions: ingredients,
+            isAsyncSelect: true,
+            isMulti: true
+        },
+        {
+            type:FieldTypes.Select,
+            label: 'OptionType',
+            placeholder: 'Select option type',
+            name:'optionType',
+            isRequired:false,
+            fieldGroupClasses: 'col-6',
+            loadOptions:optionType,
+            isAsyncSelect: true,
+            isMulti:false
         }
     ]
 
@@ -238,7 +403,7 @@ const GenralProducts = (props) => {
 
     const handleSubmit = (event) => {
         console.log('formState', formState)
-        const finalData = {...formState, subCategoryId: formState.category?.value}
+        const finalData = {...formState, categoryId: formState.category?.value}
         event.preventDefault()
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
@@ -443,6 +608,7 @@ const GenralProducts = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
+                       children={child()}
             />
 
         </Fragment>
