@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -6,97 +6,105 @@ import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {Link} from "react-router-dom"
 import {useSelector} from "react-redux"
-// import {useDispatch} from "react-redux"
-// import {itemSelected} from "../../../../redux/cartItems/cartItemsReducer"
-// import httpService, {baseURL} from "../../../../utility/http"
-// import drinks from "../../../../assets/images/ORDER/cola.png"
-// import wine from '../../../../assets/images/ORDER/VCine.png'
+import httpService, {baseURL} from "../../../../utility/http"
+import {toast} from "react-toastify"
+import {isObjEmpty} from "../../../../utility/Utils"
 
-// const category = async (input) => {
-//     return httpService._get(`${baseURL}category?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-//         .then(response => {
-//             // success case
-//             if (response.status === 200 && response.data.statusCode === 200) {
-//                 console.log("respSubCategory*******", response)
-//                 return response.data.data.map(d => {
-//                     return {label: `${d.name}`, value: d.id}
-//                 })
-//             } else {
-//                 //general Error Action
-//                 toast.error(response.data.message)
-//             }
-//         }).catch(error => {
-//             toast.error(error.message)
-//         })
-// }
-// console.log("catefory****", category())
-
-
-const mainMenu = [
-    {
-        id: 1,
-        title: "omg Plate",
-        image: require("../../../../assets/images/ORDER/omg-p1.png").default,
-        description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!"
-    },
-    {
-        id: 2,
-        title: "sandwich",
-        image: require("../../../../assets/images/ORDER/sabdwich.png").default,
-        description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served as a pita sandwich or a lavash wrap. Portioned and balanced according the Mediterranean Diet!  "
-    },
-    {
-        id: 3,
-        title: "featured plate",
-        image: require("../../../../assets/images/ORDER/omg-p1.png").default,
-        description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served on a plate. Portioned and balanced according the Mediterranean Diet!  "
-    },
-    {
-        id: 4,
-        title: "salad",
-        image: require("../../../../assets/images/ORDER/salad.png").default,
-        description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!      "
-    },
-    {
-        id: 5,
-        title: "soup",
-        image: require("../../../../assets/images/ORDER/soup.png").default,
-        description: "Warm up without regret! All OMG Soups are portioned and balanced according the Mediterranean Diet!  "
-    },
-    {
-        id: 6,
-        title: "drinks",
-        image: require("../../../../assets/images/ORDER/cola.png").default,
-        description: "Have drink"
-    },
-    {
-        id: 7,
-        title: "wine",
-        image: require('../../../../assets/images/ORDER/VCine.png').default,
-        description: "JOIN THE OMG WINE CLUB AND ENJOY PRICES "
-    }
-]
+// const mainMenu = [
+//     {
+//         id: 1,
+//         title: "omg Plate",
+//         image: require("../../../../assets/images/ORDER/omg-p1.png").default,
+//         description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!"
+//     },
+//     {
+//         id: 2,
+//         title: "sandwich",
+//         image: require("../../../../assets/images/ORDER/sabdwich.png").default,
+//         description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served as a pita sandwich or a lavash wrap. Portioned and balanced according the Mediterranean Diet!  "
+//     },
+//     {
+//         id: 3,
+//         title: "featured plate",
+//         image: require("../../../../assets/images/ORDER/omg-p1.png").default,
+//         description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served on a plate. Portioned and balanced according the Mediterranean Diet!  "
+//     },
+//     {
+//         id: 4,
+//         title: "salad",
+//         image: require("../../../../assets/images/ORDER/salad.png").default,
+//         description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!      "
+//     },
+//     {
+//         id: 5,
+//         title: "soup",
+//         image: require("../../../../assets/images/ORDER/soup.png").default,
+//         description: "Warm up without regret! All OMG Soups are portioned and balanced according the Mediterranean Diet!  "
+//     },
+//     {
+//         id: 6,
+//         title: "drinks",
+//         image: require("../../../../assets/images/ORDER/cola.png").default,
+//         description: "Have drink"
+//     },
+//     {
+//         id: 7,
+//         title: "wine",
+//         image: require('../../../../assets/images/ORDER/VCine.png').default,
+//         description: "JOIN THE OMG WINE CLUB AND ENJOY PRICES "
+//     }
+// ]
 
 const Order = () => {
+    //get redux state
     const {userLocation} = useSelector(state => state)
+    const [mainCategory, setMainCategory] = useState([])
 
-    // const [category, setCategory] = useState(null)
-    // useEffect(() => {
-    //     httpService._get(`${baseURL}subCategory?pageIndex=1&&pageSize=12&&searchQuery=1`)
-    //         .then(response => {
-    //             // success case
-    //             if (response.status === 200 && response.data.statusCode === 200) {
-    //                 // console.log("respSubCategory*******", response)
-    //                 setCategory(response)
-    //             }
-    //         })
-    //
-    // }, [])
+    useEffect(() => {
+        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
+            .then(response => {
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                    return null
+                }
+            })
+            .then(async res => {
+                if (res && !isObjEmpty(res)) {
+                    const arr = [...res.data.data]
+                    try {
+                        const final = []
+                        for (const item of arr) {
+                            if (item.attachment !== null) {
+                                const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
+                                const image = URL.createObjectURL(result.data)
+                                final.push({
+                                    id: item.id,
+                                    name: item.name,
+                                    description: item.description,
+                                    image,
+                                    status: res.status
+                                })
+                            }
+                        }
+                        setMainCategory(final)
 
-    // console.log(category)
-    // const dispatch = useDispatch()
-    // const {cartItems} = useSelector(state => state)
-    // console.log(cartItems)
+                    } catch (e) {
+                        toast.error(e.message)
+                    }
+                }
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+
+    }, [])
+
+    // console.log("main Category ---", mainCategory)
+
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -122,7 +130,7 @@ const Order = () => {
             <div className="menu-list container-fluid pb-5 pt-5 ">
                 <div className="row ms-0 me-1">
                     {
-                        mainMenu.map(item => (
+                        mainCategory.length ? mainCategory.map(item => (
                             <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
                                 <Link to={userLocation.length ? "/OmgPlate" : "/gmap"}>
                                     <div className="menu-item"
@@ -137,7 +145,7 @@ const Order = () => {
                                                 width={200}/>
                                         </div>
                                         <div className="text2">
-                                            <div className="display-name">{item.title}</div>
+                                            <div className="display-name">{item.name}</div>
                                             <div className="order-cta">Order
                                                 <div className="arrow-right"></div>
                                             </div>
@@ -145,9 +153,8 @@ const Order = () => {
                                     </div>
                                 </Link>
                             </div>
-                        ))
+                        )) : <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }
-
                 </div>
             </div>
             <div className="promo-banner container-fluid  ">

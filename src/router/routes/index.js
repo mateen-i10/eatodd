@@ -74,11 +74,6 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
-        path: '/wine/shop',
-        component: lazy(() => import('../../views/wine/Pages/Shop')),
-        layout: 'BlankLayout'
-    },
-    {
         path: '/wine/about',
         component: lazy(() => import('../../views/wine/Pages/About')),
         layout: 'BlankLayout'
@@ -208,6 +203,16 @@ const Routes = [
     {
         path: '/employee/:id',
         component: lazy(() => import('../../views/admin/Employee/employeeDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/ingredients',
+        component: lazy(() => import('../../views/admin/Ingredients/Ingredients')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/ingredient/:id',
+        component: lazy(() => import('../../views/admin/Ingredients/ingredientsDetail')),
         layout: 'VerticalLayout'
     },
     {

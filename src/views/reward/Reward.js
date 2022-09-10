@@ -12,30 +12,33 @@ const Reward = () => {
         <div>
             <Header/>
             <div className="container">
-                    <div className="row">
-                        <div className="col-md-6 mt-5">
-                            <p className="test">EAT REWARDS</p>
-                            <h1 className="Headline" style={{fontSize:'60px'}}>
-                                THE FASTEST
-                                WAY TO GET FREE
-                                FOOD
-                            </h1>
-                            <div className="para">
-                                <p>Earn points just for ordering your faves and cash them out for a variety of rewards in the
-                                    Rewards Exchange.
-                                    Check out your Extras for ways to unlock extra points and collect exclusive badges.
-                                    Not a member yet?
-                                    Join now to start earning.</p>
-                                <p><a>Program Term</a></p>
-                            </div>
-                            <button type="button" className="btn" style={{backgroundColor:'#57ab00', color:'white', width:'150px' }}>Join Now</button>
+                <div className="row">
+                    <div className="col-md-6 mt-5">
+                        <p className="text-primary fs-2">EAT REWARDS</p>
+                        <h1 className="Headline" style={{fontSize: '60px'}}>
+                            THE FASTEST
+                            WAY TO GET FREE
+                            FOOD
+                        </h1>
+                        <div className="para">
+                            <p>Earn points just for ordering your faves and cash them out for a variety of rewards in
+                                the
+                                Rewards Exchange.
+                                Check out your Extras for ways to unlock extra points and collect exclusive badges.
+                                Not a member yet?
+                                Join now to start earning.</p>
+                            <p><a>Program Term</a></p>
                         </div>
-                        <div className="col-md-6">
-                            <img style={{width:'500px'}} className="new" src={img}/>
-                        </div>
+                        <button type="button" className="btn"
+                                style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now
+                        </button>
+                    </div>
+                    <div className="col-md-6">
+                        <img style={{width: '500px'}} className="new" src={img}/>
                     </div>
                 </div>
-            <div className="container" style={{paddingTop:'100px', paddingBottom:'100px'}}>
+            </div>
+            <div className="container" style={{paddingTop: '100px', paddingBottom: '100px'}}>
                 <div className="row">
                     <h1 className="test2"> HOW IT WORKS</h1>
                     <div className="col-md-4">

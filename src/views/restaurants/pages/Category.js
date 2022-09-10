@@ -5,15 +5,7 @@ import React, {Fragment, useRef, useState} from 'react'
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown, Edit, Trash} from 'react-feather'
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardTitle,
-    Col,
-    Input,
-    Row
-} from 'reactstrap'
+import {Button, Card, CardHeader, CardTitle, Col, Input, Row} from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
@@ -132,14 +124,6 @@ const Category = () => {
                 name: 'description',
                 isRequired: false,
                 fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.File,
-                label: 'Image',
-                placeholder: 'Enter Attachment',
-                name: 'image',
-                isRequired: false,
-                fieldGroupClasses: 'col-6'
             }
         ])
 
@@ -177,6 +161,7 @@ const Category = () => {
 
         // call api
         setModalLoading(true)
+        // delete formState.isActive
         edit ? dispatch(updateCategory(formState)) : dispatch(addCategory(formState))
     }
 
