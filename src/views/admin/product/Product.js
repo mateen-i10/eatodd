@@ -182,9 +182,7 @@ const Product = (props) => {
         dispatch(getproduct(id, true))
         setModalTitle('Edit Product')
         setEdit(true)
-        setFormData([
-            ...commonFields
-        ])
+        setFormData([...commonFields])
         setFormFeilds(3)
         setShowOption(true)
     }
