@@ -46,10 +46,10 @@ const LazyApp = lazy(() => import('./App'))
 ReactDOM.render(
   <Provider store={store}>
     <Suspense fallback={<Spinner />}>
-      <ThemeContext>
-        <LazyApp />
-        <ToastContainer newestOnTop />
-      </ThemeContext>
+          <ThemeContext>
+            <LazyApp />
+            <ToastContainer newestOnTop />
+          </ThemeContext>
     </Suspense>
   </Provider>,
   document.getElementById('root')

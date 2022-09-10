@@ -1,5 +1,7 @@
 // ** Checks if an object is empty (returns boolean)
 import {Roles} from "./Roles"
+import httpService, {baseURL} from "./http"
+import {toast} from "react-toastify"
 
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
@@ -106,4 +108,21 @@ export const getCartData = () => {
   const string = localStorage.getItem('cartItems')
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem('cartItems')) : null
   return obj && !isObjEmpty(obj) ? obj : null
+}
+
+export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {
+  return httpService._get(`${baseURL}${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${input}`)
+      .then(response => {
+        if (response.status === 200 && response.data.statusCode === 200) {
+          console.log(response, "resp")
+          return response.data.data.map(d =>  {
+            return {label: `${d.name}`, value: d.id}
+          })
+        } else {
+          //general Error Action
+          toast.error(response.data.message)
+        }
+      }).catch(error => {
+        toast.error(error.message)
+      })
 }
