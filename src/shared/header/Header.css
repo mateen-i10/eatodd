@@ -125,6 +125,7 @@ img {
     align-items: center;
     margin-top: 10px;
     justify-content: right;
+    font-family: 'Oswald', sans-serif;
 }
 
 .head-sec-2 h2 {
@@ -132,6 +133,7 @@ img {
     font-size: 1.375rem;
     font-weight: bolder;
     color: #262626;
+
 }
 
 /*==================
