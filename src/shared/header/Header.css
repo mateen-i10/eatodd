@@ -145,6 +145,13 @@ img {
     width: 40%
 }
 
+.head-sec-wine {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 15%
+}
+
 .head-sec-3 .eatOMG {
     height: 40px;
     display: flex;
