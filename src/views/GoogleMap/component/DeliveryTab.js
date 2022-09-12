@@ -19,32 +19,15 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
     if (loadError) {
         return <div>Please enter valid name</div>
     }
-
-    // const onClick = () => {
-    //
-    //     navigator.geolocation.getCurrentPosition(function (position) {
-    //         console.log(position)
-    //         // console.log("Latitude is :", position.coords.latitude)
-    //         // console.log("Longitude is :", position.coords.longitude)
-    //         setUserLocation({position: {lat: position.coords.latitude, lng: position.coords.longitude}})
-    //     })
-    // }
-    // const onChange = (e) => {
-    //     console.log("eeeeeee", e.target.value)
-    //     setUserLocation(e.target.value)
-    // }
     return (
-        <div>
-            <div className=" mt-1">
+        <div style={{}}>
+            <div className=" mt-1 col-lg-8 col-12 mx-auto">
                 <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                     <InputGroup className="bg-white input-group-merge">
                         <InputGroupText>
                             <Search className="cursor-pointer" size={20}/>
                         </InputGroupText>
                         <Input color='primary' type='text'/>
-                        {/*<InputGroupText>*/}
-                        {/*    <BiCurrentLocation className="cursor-pointer" size={20} onClick={onClick}/>*/}
-                        {/*</InputGroupText>*/}
                     </InputGroup>
                 </Autocomplete>
                 {/*</LoadScript>*/}
@@ -79,12 +62,8 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
                             </div>}
                     </div>
                 }
-
             </div>
-
         </div>
-
-
     )
 }
 

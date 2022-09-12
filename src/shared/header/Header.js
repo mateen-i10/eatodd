@@ -4,7 +4,7 @@ import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import SideCart from "./components/SideCart"
-import {ShoppingBag} from "react-feather"
+import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {isUserLoggedIn} from "../../auth/utils"
 import {useSelector} from "react-redux"
@@ -57,16 +57,26 @@ export default function Header() {
                         {/*<Link to="/ourvalues"><h2>OUR VALUES</h2></Link>*/}
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                     </div>
-                    <div className="head-sec-3">
-                        {isuserlogedin ? <ul>
+                    <div className="head-sec-3 align-items-center">
+                        {isuserlogedin ? <ul className="list-unstyled">
                             <UserDropdown/>
                         </ul> : null}
-                        <div className="eatOMG">
-                            <i className="ri-checkbox-blank-circle-fill"></i>
-                            <span className="seprator"></span>
-                            {userLocation.length ? <p>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</p> : <p>Delivery address</p>}
+                        <div className="eatOMG eatOMG1">
+                            <div className="img-separator">
+                                <span><img src={require("../../assets/images/logo/logo.png").default}
+                                           style={{height: 25, width: 25, marginLeft: -7}}/> </span>
+                                {/*<span className=""*/}
+                                {/*      style={{fontSize: "1.5rem", marginTop: -10}}>|</span>*/}
+                            </div>
+                            <div className="delivery-text">
+                                <div className="text-1" style={{fontSize: "0.8rem"}}>Deliver to
+                                </div>
+                                {userLocation.length ? <div
+                                    className="text-2 fw-bolder"
+                                    style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
+                            </div>
                         </div>
-                        <ShoppingBag onClick={() => {
+                        <ShoppingCart onClick={() => {
                             SetOpenDrawer(true)
                         }}/>
                         {openDrawer && (<div>
