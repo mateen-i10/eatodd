@@ -226,46 +226,6 @@ const Menu = (props) => {
             half: false,
             doubled: false
         }
-        // {
-        //     id: 5,
-        //     title: 'Fountain Drink',
-        //     image: drink2,
-        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-        //     price: 10.99,
-        //     single: false,
-        //     half: false,
-        //     doubled: false
-        // },
-        // {
-        //     id: 6,
-        //     title: 'Maxican CocaCola',
-        //     image: drink1,
-        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-        //     price: 12.99,
-        //     single: false,
-        //     half: false,
-        //     doubled: false
-        // },
-        // {
-        //     id: 7,
-        //     title: 'Maxican Sprite',
-        //     image: drink2,
-        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
-        //     price: 14.99,
-        //     single: false,
-        //     half: false,
-        //     doubled: false
-        // },
-        // {
-        //     id: 8,
-        //     title: 'Tractor organic black tea',
-        //     image: drink1,
-        //     ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-        //     price: 12.99,
-        //     single: false,
-        //     half: false,
-        //     doubled: false
-        // }
     ]
 
     const toppings = [
@@ -353,8 +313,6 @@ const Menu = (props) => {
         } else setSelectedProVeg([...selectedProVeg, {...element}])
 
     }
-    // console.log("selected bEans", selectedBeans)
-    // console.log("selected Rice", selectedRice)
     const handleSelectedRice = (element) => {
 
         if (selectedRice.length === 1 && element.id === selectedRice[0].id) {
