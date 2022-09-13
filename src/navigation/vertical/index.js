@@ -69,6 +69,12 @@ export default [
         navLink: '/subCategory'
     },
     {
+        id: 'ingredients',
+        title: 'Ingredients',
+        icon: <Copy size={12}/>,
+        navLink: '/ingredients'
+    },
+    {
         id: 'Genral Product',
         title: 'Genral Product',
         icon: <Package size={20}/>,

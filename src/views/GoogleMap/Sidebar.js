@@ -65,7 +65,8 @@ const Sidebar = ({
                                 height: "42px",
                                 width: " 132px",
                                 borderRadius: "50px",
-                                paddingTop: "12px"
+                                paddingTop: "12px",
+                                marginLeft: "0px"
                             }} active={active === '2'}
                             onClick={() => {
                                 toggle('2', false)
@@ -84,14 +85,16 @@ const Sidebar = ({
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <DeliveryTab
-                                setUserLocation={setUserLocation}
-                                onPlaceChanged={onPlaceChanged}
-                                onLoad={onLoad}
-                                places={nearPlaces}
-                                isLoading={isLoading}
-                                userLocation={userLocation}
-                            />
+                            <div style={{borderRadius: "6px"}}>
+                                <DeliveryTab
+                                    setUserLocation={setUserLocation}
+                                    onPlaceChanged={onPlaceChanged}
+                                    onLoad={onLoad}
+                                    places={nearPlaces}
+                                    isLoading={isLoading}
+                                    userLocation={userLocation}
+                                />
+                            </div>
                         </TabPane>
                     </TabContent>
                 </div>

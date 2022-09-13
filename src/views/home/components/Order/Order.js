@@ -10,7 +10,6 @@ import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
 import {isObjEmpty} from "../../../../utility/Utils"
 
-
 // const mainMenu = [
 //     {
 //         id: 1,
@@ -79,8 +78,8 @@ const Order = () => {
                     try {
                         const final = []
                         for (const item of arr) {
-                            if (item.attachmentId !== null) {
-                                const result = await httpService._get(`${baseURL}Media/GetMedia/${item.attachmentId}`, {responseType: 'blob'})
+                            if (item.attachment !== null) {
+                                const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
                                 const image = URL.createObjectURL(result.data)
                                 final.push({
                                     id: item.id,
@@ -104,7 +103,7 @@ const Order = () => {
 
     }, [])
 
-    console.log("main Category ---", mainCategory)
+    // console.log("main Category ---", mainCategory)
 
     return (
         <div className="order-main">

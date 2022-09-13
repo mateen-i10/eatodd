@@ -5,7 +5,7 @@ import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import SideCart from "../header/components/SideCart"
-import {ShoppingBag} from "react-feather"
+import {ShoppingCart} from "react-feather"
 
 const HeaderWine = () => {
     const [width, setWidth] = useState(window.innerWidth)
@@ -44,12 +44,12 @@ const HeaderWine = () => {
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
-                    <div className="head-sec-3">
+                    <div className="head-sec-wine">
                         <Link to="/home">
                             <Button.Ripple color='primary'>EATOMG</Button.Ripple>
                         </Link>
 
-                        <ShoppingBag onClick={() => {
+                        <ShoppingCart onClick={() => {
                             SetOpenDrawer(true)
                         }}/>
 
