@@ -57,16 +57,6 @@ const ProductDetail = ({match}) => {
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Retail Price:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.retailPrice}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
                                                 <h5 className='mb-75'>Discount:</h5>
                                             </div>
                                             <div className='col-7'>
@@ -81,16 +71,6 @@ const ProductDetail = ({match}) => {
                                             </div>
                                             <div className='col-7'>
                                                 <CardText>{genralProduct.quantity}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Online Price:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{genralProduct.onlinePrice}</CardText>
                                             </div>
                                         </div>
                                     </Col>
