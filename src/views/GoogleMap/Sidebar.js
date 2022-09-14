@@ -65,7 +65,8 @@ const Sidebar = ({
                                 height: "42px",
                                 width: " 132px",
                                 borderRadius: "50px",
-                                paddingTop: "12px"
+                                paddingTop: "12px",
+                                marginLeft: "0px"
                             }} active={active === '2'}
                             onClick={() => {
                                 toggle('2', false)
@@ -74,8 +75,8 @@ const Sidebar = ({
                     >delivery
                     </Button>
                 </div>
-                <div className="row align-items-center  justify-content-evenly mt-2" style={{
-                    minWidth: " 285px"
+                <div className="row align-items-center  justify-content-center mt-1" style={{
+                    width: "100%"
                 }}>
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
@@ -84,14 +85,16 @@ const Sidebar = ({
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <DeliveryTab
-                                setUserLocation={setUserLocation}
-                                onPlaceChanged={onPlaceChanged}
-                                onLoad={onLoad}
-                                places={nearPlaces}
-                                isLoading={isLoading}
-                                userLocation={userLocation}
-                            />
+                            <div className="mt-1" style={{borderRadius: "6px"}}>
+                                <DeliveryTab
+                                    setUserLocation={setUserLocation}
+                                    onPlaceChanged={onPlaceChanged}
+                                    onLoad={onLoad}
+                                    places={nearPlaces}
+                                    isLoading={isLoading}
+                                    userLocation={userLocation}
+                                />
+                            </div>
                         </TabPane>
                     </TabContent>
                 </div>
