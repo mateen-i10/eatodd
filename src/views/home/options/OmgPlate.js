@@ -1,26 +1,19 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import TopShelf from "./components/TopShelf"
 import img from '../../../assets/images/images/image2.png'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
-import ProteinVege from "./components/ProteinVege"
 import SideOrder from "./components/SideOrder"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import Rice from "./components/Rice"
 import Beans from "./components/Beans"
 import Drinks from "./components/Drinks"
-import ToppingThingOff from "./components/ToppingThingOff"
 import {useHistory} from "react-router-dom"
 import {addMealToCart} from "../../../utility/Utils"
-
+import ProductDetail from "../components/product/ProductCard"
 const Menu = (props) => {
-    const [selectedProVeg, setSelectedProVeg] = useState([])
-    const [doubled, setDoubled] = useState(false)
-    const [selectedRice, setSelectedRice] = useState([])
-    const [selectedBeans, setSelectedBeans] = useState([])
-    const [selectedTopping, setSelectedTopping] = useState([])
-    const [selectedSide, setSelectedSide] = useState([])
-    const [selectedDrinks, setSelectedDrinks] = useState([])
+    const [products, setProducts] = useState([])
+    const [selectedProducts, setSelectedProducts] = useState([])
     const [selectedMenuItems, setSelectedMenuItems] = useState({})
     const [mealName, setMealName] = useState("")
     const history = useHistory()
@@ -30,501 +23,346 @@ const Menu = (props) => {
     const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
     const drink2 = require("../../../assets/images/Menu&Order/drink2.png").default
 
-    const protein = [
-        {
-            id: 1,
-            title: 'chicken Kebab',
-            image: require("../../../assets/images/eatOmg pics 100size/Chicken Kebob.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 2,
-            title: 'Lamb',
-            image: require("../../../assets/images/eatOmg pics 100size/Lamb Sandwich.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 14.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 3,
-            title: 'Chicken Shawarma',
-            image: require("../../../assets/images/eatOmg pics 100size/Chicken Shawarma.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 4,
-            title: 'Okra Stew',
-            image: require("../../../assets/images/eatOmg pics 100size/Okra Stew.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 5,
-            title: 'Falafel',
-            image: require("../../../assets/images/eatOmg pics 100size/Falafel.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 10.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 6,
-            title: 'MeatBalls',
-            image: require("../../../assets/images/eatOmg pics 100size/Turkish Meatballs.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 7,
-            title: 'Fish',
-            image: require("../../../assets/images/eatOmg pics 100size/Beef Dish.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
-            price: 14.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 8,
-            title: 'Steak',
-            image: require("../../../assets/images/eatOmg pics 100size/Steak Kabsa.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 12.99,
-            single: false,
-            half: false,
-            doubled: false
-        }
-    ]
+    // hooks
+    useEffect(() => {
+        setProducts([
+            {
+                id: 1,
+                name: 'Protein or Veggie',
+                fillingLimit: 2,
+                products : [
+                    {
+                        id: 1,
+                        name: 'chicken Kebab',
+                        image: require("../../../assets/images/eatOmg pics 100size/Chicken Kebob.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
+                        price: 11.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 2,
+                        name: 'Lamb',
+                        image: require("../../../assets/images/eatOmg pics 100size/Lamb Sandwich.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
+                        price: 14.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 3,
+                        name: 'Chicken Shawarma',
+                        image: require("../../../assets/images/eatOmg pics 100size/Chicken Shawarma.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
+                        price: 11.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 4,
+                        name: 'Okra Stew',
+                        image: require("../../../assets/images/eatOmg pics 100size/Okra Stew.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        price: 11.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 5,
+                        name: 'Falafel',
+                        image: require("../../../assets/images/eatOmg pics 100size/Falafel.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
+                        price: 10.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 6,
+                        name: 'MeatBalls',
+                        image: require("../../../assets/images/eatOmg pics 100size/Turkish Meatballs.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        price: 12.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 7,
+                        name: 'Fish',
+                        image: require("../../../assets/images/eatOmg pics 100size/Beef Dish.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum and ",
+                        price: 14.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    },
+                    {
+                        id: 8,
+                        name: 'Steak',
+                        image: require("../../../assets/images/eatOmg pics 100size/Steak Kabsa.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        price: 12.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal', price: 222}, {id: 2, name: 'Double', price: 227}]
+                    }
+                ]
+            }, {
+                id: 2,
+                name: 'Rice',
+                fillingLimit: 1,
+                products : [
+                    {
+                        id: 9,
+                        image: require("../../../assets/images/eatOmg pics 100size/White Rice.jpg").default,
+                        name: 'White Rice',
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        price: 14.99,
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}, {id: 3, name: 'Large'}, {id: 4, name: 'Side'}]
+                    },
+                    {
+                        id: 10,
+                        image: require("../../../assets/images/eatOmg pics 100size/yellow rice.jpg").default,
+                        name: 'Brown Rice',
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}, {id: 3, name: 'Large'}, {id: 4, name: 'Side'}]
+                    }
+                ]
+            }, {
+                id: 3,
+                name: 'Beans',
+                fillingLimit: 1,
+                products : [
+                    {
+                        id: 11,
+                        image: require("../../../assets/images/eatOmg pics 100size/chickpea option.jpg").default,
+                        name: 'Chick Pea',
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}, {id: 3, name: 'Large'}, {id: 4, name: 'Side'}]
+                    },
+                    {
+                        id: 12,
+                        image: require("../../../assets/images/eatOmg pics 100size/Tabboili.jpg").default,
+                        name: 'Tebboili',
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}, {id: 3, name: 'Large'}, {id: 4, name: 'Side'}]
+                    }
+                ]
+            }, {
+                id: 4,
+                name: 'Topping Thing Off HEALTHY SPREAD',
+                fillingLimit: 1,
+                products : [
+                    {
+                        id: 13,
+                        name: 'baba ganoush',
+                        image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
 
-    const sideitems = [
-        {
-            id: 1,
-            image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
-            title: 'Garlic Sauce',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 3.80
-        },
-        {
-            id: 2,
-            image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
-            title: 'Baba Ghanoush',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 5.99
-        },
-        {
-            id: 3,
-            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
-            title: 'Red Hot Sauce',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum and",
-            price: 7.80
-        },
-        {
-            id: 4,
-            image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
-            title: 'Hummus',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 5.99
-        },
-        {
-            id: 5,
-            image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
-            title: 'Zhoug Sauce',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 6.30
-        }
-    ]
+                    },
+                    {
+                        id: 14,
+                        name: 'Persian Yogurt',
+                        image: require("../../../assets/images/eatOmg pics 100size/Persian Yogurt.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
+                    },
+                    {
+                        id: 15,
+                        name: "Hummus",
+                        image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
 
-    const rice = [
-        {
-            id: 1,
-            image: require("../../../assets/images/eatOmg pics 100size/White Rice.jpg").default,
-            title: 'White Rice',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
+                    },
+                    {
+                        id: 16,
+                        name: 'Roasted Red Papper Dip',
+                        image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
+                    },
+                    {
+                        id: 17,
+                        name: 'lebneh',
+                        image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
+                    },
+                    {
+                        id: 18,
+                        name: 'Sour Cream',
+                        image: vegies,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 1,
+                        options: [{id: 1, name: 'Normal'}, {id: 2, name: 'Extra'}]
+                    }
 
-        },
-        {
-            id: 2,
-            image: require("../../../assets/images/eatOmg pics 100size/yellow rice.jpg").default,
-            title: 'Brown Rice',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
+                ]
+            }, {
+                id: 5,
+                name: 'Side',
+                fillingLimit: 1,
+                products : [
+                    {
+                        id: 19,
+                        image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
+                        name: 'Garlic Sauce',
+                        price: 3.80,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: 'Normal'}]
+                    },
+                    {
+                        id: 20,
+                        image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
+                        name: 'Baba Ghanoush',
+                        price: 5.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: 'Normal'}]
 
-        }
-    ]
+                    },
+                    {
+                        id: 21,
+                        image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
+                        name: 'Red Hot Sauce',
+                        price: 7.80,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: 'Normal'}]
+                    },
+                    {
+                        id: 22,
+                        image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
+                        name: 'Hummus',
+                        price: 5.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: 'Normal'}]
+                    },
+                    {
+                        id: 23,
+                        image: require("../../../assets/images/eatOmg pics 100size/Tahini Sauce.jpg").default,
+                        name: 'Zhoug Sauce',
+                        price: 6.30,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: 'Normal'}]
+                    }
+                ]
+            }, {
+                id: 6,
+                name: 'Drinks',
+                fillingLimit: 1,
+                products : [
+                    {
+                        id: 24,
+                        title: 'Organic watermelon limeade',
+                        image: drink1,
+                        price: 14.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: '32L OZ', price: 3.75}, {id: 1, name: '22L OZ', price: 2.75}]
+                    },
+                    {
+                        id: 25,
+                        title: 'Organic Lemonade',
+                        image: drink1,
+                        price: 14.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: '32L OZ', price: 3.75}, {id: 1, name: '22L OZ', price: 2.75}, {id: 1, name: '22L OZ', price: 2.75}]
+                    },
+                    {
+                        id: 26,
+                        title: 'organic mandarin agua fresca',
+                        image: drink2,
+                        price: 14.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: '32L OZ', price: 3.75}, {id: 1, name: '22L OZ', price: 2.75}]
+                    },
+                    {
+                        id: 27,
+                        title: 'organic berry agua fresca',
+                        image: drink1,
+                        price: 14.99,
+                        description: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
+                        optionType: 2,
+                        options: [{id: 1, name: '32L OZ', price: 3.75}, {id: 1, name: '22L OZ', price: 2.75}]
+                    }
+                ]
+            }
+        ])
+    }, [])
 
-    const beans = [
-        {
-            id: 1,
-            image: require("../../../assets/images/eatOmg pics 100size/chickpea option.jpg").default,
-            title: 'Chick Pea',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
-
-        },
-        {
-            id: 2,
-            image: require("../../../assets/images/eatOmg pics 100size/Tabboili.jpg").default,
-            title: 'Tebboili',
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
-
-        }
-    ]
-
-    const drinks = [
-        {
-            id: 1,
-            title: 'Organic watermelon limeade',
-            image: drink1,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 2,
-            title: 'Organic Lemonade',
-            image: drink1,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 14.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 3,
-            title: 'organic mandarin agua fresca',
-            image: drink2,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum ",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        },
-        {
-            id: 4,
-            title: 'organic berry agua fresca',
-            image: drink1,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum",
-            price: 11.99,
-            single: false,
-            half: false,
-            doubled: false
-        }
-    ]
-
-    const toppings = [
-        {
-            id: 1,
-            title: 'baba ganoush',
-            image: require("../../../assets/images/eatOmg pics 100size/Baba G.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
-
-        },
-        {
-            id: 2,
-            title: 'Persian Yogurt',
-            image: require("../../../assets/images/eatOmg pics 100size/Persian Yogurt.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
-        },
-        {
-            id: 3,
-            title: "Hummus",
-            image: require("../../../assets/images/eatOmg pics 100size/hummus.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
-
-        },
-        {
-            id: 4,
-            title: 'Roasted Red Papper Dip',
-            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
-        },
-        {
-            id: 5,
-            title: 'lebneh',
-            image: require("../../../assets/images/eatOmg pics 100size/Hot Sauce.jpg").default,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum "
-        },
-        {
-            id: 6,
-            title: 'Sour Cream',
-            image: vegies,
-            ingredient: "Integer ultrice an aligula lectus luctus neque a purus ipsum"
-        }
-
-    ]
-
-    // console.log("selected Catering Items pro veg", selectedMenuItems.selectedProVeg[0].title)
-    // console.log("selected Catering Items ", selectedMenuItems)
     const handleAllMenuItems = () => {
         setSelectedMenuItems({
             ...selectedMenuItems,
             mealName,
-            selectedProVeg,
-            selectedRice,
-            selectedSide,
-            selectedBeans,
-            selectedTopping,
-            selectedDrinks
+           selectedProducts
         })
     }
     const dispatchingItems = () => {
         const meal = {
             mealName,
-            selectedProVeg,
-            selectedRice,
-            selectedSide,
-            selectedBeans,
-            selectedTopping,
-            selectedDrinks
+            selectedProducts
         }
         addMealToCart(meal)
         history.push('/home')
     }
 
-    console.log(selectedProVeg)
-    const handleProVeg = (element) => {
-        if (selectedProVeg.length === 2) {
-            const rmSelected = selectedProVeg.filter(item => item.id !== element.id)
-            // setSelectedProVeg(doubled ? rmSelected : assignHalf(rmSelected))
-            setSelectedProVeg(rmSelected)
-
-        } else if (selectedProVeg.length === 1) {
-            if (element.id === selectedProVeg[0].id) {
-                setSelectedProVeg(selectedProVeg.filter(item => item.id !== element.id))
-            } else setSelectedProVeg([...selectedProVeg, {...element}])
-            // eslint-disable-next-line brace-style
-        } else setSelectedProVeg([...selectedProVeg, {...element}])
-
-    }
-    const handleSelectedRice = (element) => {
-
-        if (selectedRice.length === 1 && element.id === selectedRice[0].id) {
-            const rmSelected = selectedRice.filter(item => item.id !== element.id)
-            setSelectedRice(rmSelected)
-            // eslint-disable-next-line brace-style
-        } else if (selectedRice.length === 2) {
-            const rmSelected = selectedRice.filter(item => item.id !== element.id)
-
-            setSelectedRice(rmSelected)
-
-            // eslint-disable-next-line brace-style
-        } else setSelectedRice([...selectedRice, element])
+    const handleSelectProduct = (product) => {
+        //changed after api implementation
+        setSelectedProducts([...selectedProducts, product])
     }
 
-    const handleSelectedBeans = (element) => {
-
-        if (selectedBeans.length === 1 && element.id === selectedBeans[0].id) {
-            const rmSelected = selectedBeans.filter(item => item.id !== element.id)
-            setSelectedBeans(rmSelected)
-            // eslint-disable-next-line brace-style
-        } else if (selectedBeans.length === 2) {
-            const rmSelected = selectedBeans.filter(item => item.id !== element.id)
-            setSelectedBeans(rmSelected)
-            // eslint-disable-next-line brace-style
-        } else setSelectedBeans([...selectedBeans, element])
-    }
-    // console.log("selected Toppoing", selectedTopping)
-    const handleSelectedTopping = (element) => {
-        const arr = [...selectedTopping]
-        const index = arr.findIndex(item => item.id === element.id)
-        // const index = arr.map(item => item.id).indexOf(element.id)
-        // console.log("index", index)
-        if (arr.length > 0 && index > -1) {
-            arr.splice(index, 1)
-            setSelectedTopping(arr)
-
-        } else {
-            setSelectedTopping([...selectedTopping, element])
-        }
-    }
-
-    // console.log(selectedSide)
-    const handleSelectedSide = (element) => {
-        const arr = [...selectedSide]
-        const index = arr.findIndex(item => item.id === element.id)
-        // const index = arr.map(item => item.id).indexOf(element.id)
-        // console.log("index", index)
-        if (arr.length > 0 && index > -1) {
-            arr.splice(index, 1)
-            setSelectedSide(arr)
-
-        } else {
-            setSelectedSide([...selectedSide, element])
-        }
-    }
-
-    // console.log(selectedDrinks)
-    const handleSelectedDrinks = (element) => {
-        const arr = [...selectedDrinks]
-        const index = arr.findIndex(item => item.id === element.id)
-        // const index = arr.map(item => item.id).indexOf(element.id)
-        // console.log("index", index)
-        if (arr.length > 0 && index > -1) {
-            arr.splice(index, 1)
-            setSelectedDrinks(arr)
-        } else {
-            setSelectedDrinks([...selectedDrinks, element])
-        }
-    }
+    const subcategoryMenu = (heading, limit, products) => (
+        <>
+            <div className='text-center text-uppercase text-primary fw-bolder my-2'>
+            <h1 className="text-primary">{heading}</h1>
+            {limit && limit > 1 && <h4 className="text-dark">Choose up to {limit}</h4>}
+        </div>
+            <div className="row align-items-center justify-content-center ">
+            {products.map((element) => {
+            return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}
+            >
+                <ProductDetail
+                    item={element}
+                    imgURL={element.image}
+                    selectedItems={selectedProducts}
+                    onItemClick={handleSelectProduct}
+                    limit={limit}
+                />
+            </div>
+        })}
+    </div>
+        </>
+    )
     return (
         <>
             <Header/>
-            {/*<Card style={{marginBottom: -50}}>*/}
             <div className="container-sm ">
                 <TopShelf image={img} fooditem='Burritto'/>
                 <hr className="text-dark"/>
                 <NutrtionPrefModel/>
                 <div className="container-sm">
                     <div className="container-sm">
-                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-                            <h1 className="text-primary">Protein or Vegie</h1>
-                            <h4 className="text-dark">Choose up to two</h4>
-                        </div>
-                        <div className="row align-items-center justify-content-center ">
-                            {protein.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.title}
-                                >
-                                    <ProteinVege
-                                        itemId={element.id}
-                                        element={element}
-                                        foodImage={element.image}
-                                        title={element.title}
-                                        price={element.price}
-                                        ingredient={element.ingredient}
-                                        selectedProVeg={selectedProVeg}
-                                        doubled={doubled}
-                                        setDoubled={setDoubled}
-                                        onItemClick={handleProVeg}
-                                    />
-                                </div>
-                            })}
-                        </div>
-                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-                            <h1 className="text-primary">Rice</h1>
-
-                        </div>
-                        <div className="row align-items-center justify-content-center ">
-
-                            {rice.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.id}
-                                >
-                                    <Rice
-                                        element={element}
-                                        foodImage={element.image}
-                                        itemId={element.id}
-                                        title={element.title}
-                                        ingredient={element.ingredient}
-                                        selectedRice={selectedRice}
-                                        onRiceSelected={handleSelectedRice}
-
-                                    />
-                                </div>
-                            })}
-                        </div>
-                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-                            <h1 className="text-primary">Beans</h1>
-                        </div>
-                        <div className="row align-items-center justify-content-center ">
-
-                            {beans.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.id}
-                                >
-                                    <Beans
-                                        element={element}
-                                        foodImage={element.image}
-                                        itemId={element.id}
-                                        title={element.title}
-                                        ingredient={element.ingredient}
-                                        selectedBeans={selectedBeans}
-                                        onBeanSelected={handleSelectedBeans}
-
-                                    />
-                                </div>
-                            })}
-                        </div>
-                        <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-                            <h1 className="text-primary">Topping Thing Off HEALTHY SPREAD
-                            </h1>
-                        </div>
-                        <div className="row align-items-center justify-content-center ">
-
-                            {toppings.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.id}
-                                >
-                                    <ToppingThingOff
-                                        element={element}
-                                        itemId={element.id}
-                                        foodImage={element.image}
-                                        title={element.title}
-                                        price={element.price}
-                                        ingredient={element.ingredient}
-                                        topppingAddOn={element.customize}
-                                        onItemSelect={handleSelectedTopping}
-                                        toppingItems={selectedTopping}
-                                    />
-                                </div>
-                            })}
-                        </div>
-                        <div className='text-center text-uppercase fw-bolder my-2'>
-                            <h1 className="text-primary">Side</h1>
-                        </div>
-                        <div className="row justify-content-center ">
-                            {sideitems.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.title}
-                                >
-                                    <SideOrder
-                                        element={element}
-                                        foodImage={element.image}
-                                        title={element.title}
-                                        price={element.price}
-                                        ingredient={element.ingredient}
-                                        onSideSelect={handleSelectedSide}
-                                    />
-                                </div>
-                            })}
-                        </div>
-                        <div className='text-center text-uppercase fw-bolder my-2'>
-                            <h1 className="text-primary">Drinks</h1>
-                        </div>
-                        <div className="row justify-content-center ">
-                            {drinks.map((element) => {
-                                return <div className="col-xl-5 col-lg-6" key={element.title}
-                                >
-                                    <Drinks
-                                        element={element}
-                                        foodImage={element.image}
-                                        title={element.title}
-                                        price={element.price}
-                                        ingredient={element.ingredient}
-                                        onDrinkSelect={handleSelectedDrinks}
-                                    />
-                                </div>
-                            })}
-                        </div>
+                        {products && products.length > 0 && products.map(prod => {
+                            return subcategoryMenu(prod.name, prod.fillingLimit, prod.products)
+                        })}
                     </div>
                 </div>
             </div>
             <Footer
-                selectedBeans={selectedBeans}
-                selectedRice={selectedRice}
-                selectedProVeg={selectedProVeg}
                 mealName={mealName}
                 addToBag={handleAllMenuItems}
                 dispatchingItems={dispatchingItems}

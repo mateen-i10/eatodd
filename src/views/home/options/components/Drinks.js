@@ -16,7 +16,8 @@ const Drinks = (props) => {
                     position: 'absolute',
                     backgroundColor: 'transparent',
                     zIndex: 1
-                }}><Counter/>
+                }}>
+                    <Counter/>
                 </div>}
 
             <div className="card add overflow-hidden mb-lg-2 mb-1 cursor-pointer "
