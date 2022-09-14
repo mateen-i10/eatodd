@@ -118,6 +118,7 @@ return <>
                         <div className="col-lg-4  col-md-4 col-5">
                             <ProductImage
                                 path={imgURL}
+                                classes={"img-fluid rounded-start"}
                                 styles={!value ? imgStyles : {
                                      ...imgStyles,
                                      backgroundColor: 'transparent',
