@@ -62,6 +62,24 @@ const ingredientDetail = ({match}) => {
                                                 <CardText className="mmb-25 ms-1 mb-1">{ingredient.unit}</CardText>
                                             </div>
                                         </Col>
+                                        <Col xl={6} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'> Fat:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.fat}</CardText>
+                                            </div>
+                                        </Col>
+                                        <Col xl={6} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'> Protein:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.protein}</CardText>
+                                            </div>
+                                        </Col>
+                                        <Col xl={6} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'> Carb:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.carb}</CardText>
+                                            </div>
+                                        </Col>
                                     </Row>
 
                                     <hr className='invoice-spacing' />

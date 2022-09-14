@@ -60,6 +60,9 @@ const Ingredients = (props) => {
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -81,7 +84,10 @@ const Ingredients = (props) => {
         name: '',
         quantity: '',
         unit: '',
-        description: ''
+        description: '',
+        fat: '',
+        protein: '',
+        carb: ''
     })
     useModalError(isError, setModalLoading, setIsIngredientError)
 
@@ -148,20 +154,38 @@ const Ingredients = (props) => {
 
     const columns = [
         {
-            name: 'User Name',
+            name: 'Name',
             selector: (row) => row.name,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Email',
+            name: 'Quantity',
             selector: (row) => row.quantity,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Contact No',
+            name: 'Unit',
             selector: (row) => row.unit,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Fat',
+            selector: (row) => row.fat,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Protein',
+            selector: (row) => row.protein,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Carb',
+            selector: (row) => row.carb,
             sortable: true,
             minWidth: '50px'
         },
