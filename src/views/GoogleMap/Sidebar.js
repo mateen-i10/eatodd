@@ -75,8 +75,8 @@ const Sidebar = ({
                     >delivery
                     </Button>
                 </div>
-                <div className="row align-items-center  justify-content-evenly mt-2" style={{
-                    minWidth: " 285px"
+                <div className="row align-items-center  justify-content-center mt-1" style={{
+                    width: "100%"
                 }}>
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
@@ -85,7 +85,7 @@ const Sidebar = ({
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>
-                            <div style={{borderRadius: "6px"}}>
+                            <div className="mt-1" style={{borderRadius: "6px"}}>
                                 <DeliveryTab
                                     setUserLocation={setUserLocation}
                                     onPlaceChanged={onPlaceChanged}

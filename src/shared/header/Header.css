@@ -50,7 +50,14 @@
 .header1 {
     display: flex;
     justify-content: space-between;
-    /*border: 2px solid red;*/
+    background-color: #ffffff;
+    padding: 1em;
+    text-transform: uppercase;
+}
+
+.w-header1 {
+    display: flex;
+    justify-content: space-between;
     background-color: #ffffff;
     padding: 1em;
     text-transform: uppercase;
@@ -73,21 +80,27 @@ img {
     font-family: 'Oswald', sans-serif;
 }
 
+.w-head-sec-1 {
+    display: flex;
+    justify-content: space-between;
+    width: 18%;
+    color: black;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px
+}
+
 .usericon {
     width: 50px;
 }
 
-.head-sec-1 .sign-in {
+.sign-in {
     display: flex;
     align-self: center;
     justify-content: space-between;
     color: #81be41;
     padding-top: 12px;
 }
-
-/*.head-sec-1 .sign-in img{*/
-/*    width: 100%;*/
-/*}*/
 
 .head-sec-1 .sign-in i {
     font-size: 30px
@@ -121,7 +134,7 @@ img {
 .head-sec-2 {
     display: flex;
     /*border: 2px solid brown;*/
-    width: 60%;
+    width: 70%;
     align-items: center;
     margin-top: 10px;
     justify-content: right;
@@ -133,6 +146,10 @@ img {
     font-size: 1.375rem;
     font-weight: bolder;
     color: #262626;
+
+}
+
+.m-nav {
 
 }
 
@@ -166,11 +183,41 @@ img {
     color: #81be41;
 }
 
-.eatOMG1 {
-    max-height: 60px;
-    max-width: 45%;
+.head-3 {
+    height: 39px;
     display: flex;
+    width: 23%;
+    justify-content: flex-end;
+    padding: 0 1.25em;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 10px;
 }
+
+.delivery-addr-bar {
+    height: 42px;
+    display: flex;
+    width: 85%;
+    padding: 0 1em;
+    border-radius: 25px;
+    border: 1px solid #81be41;
+    color: #81be41;
+    margin-right: 10px;
+    margin-top: 1px;
+}
+
+.m-delivery-addr-bar {
+    height: 42px;
+    display: flex;
+    width: 85%;
+    padding: 0 1em;
+    border-radius: 25px;
+    border: 1px solid #81be41;
+    color: #81be41;
+    margin-right: 10px;
+    margin-top: 1px;
+}
+
 
 .img-separator {
     width: 20%;
@@ -180,9 +227,27 @@ img {
     width: 80%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
-.text-2 {
+.m-delivery-text {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.deliver-to-1 {
+    margin-top: 3px;
+    font-size: .9rem;
+}
+
+.m-deliver-to-1 {
+    margin-top: 3px;
+    font-size: .9rem;
+}
+
+.address-1 {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -430,6 +495,7 @@ img {
 .signtext {
     padding-top: 15px;
     font-size: 1.375rem;
+    width: 90px
 }
 
 .menuitem:hover {

@@ -41,31 +41,46 @@ const GenralProductReducer = (state = initialState, action) => {
                 isLoading: false,
                 isDetailLoading: false
             }
-        case setGenralProductRequestCompleted.type:
-            return {
-                ...state,
-                isRequestCompleted: action.payload
-            }
         case setLoading.type:
             return {
                 ...state,
                 isLoading: action.payload
             }
-        case editGenralProduct.type:
+        case setDetailLoading.type:
             return {
                 ...state,
-                object: action.payload.data,
+                isDetailLoading: action.payload
+            }
+        case editGenralProduct.type:
+            const data = action.payload.data
+            data.options = data.options.filter(c => c.name !== "Default")
+            data.optionsString = JSON.stringify(data.options)
+            delete data.attachmentId
+            return {
+                ...state,
+                object: {...data,
+                    generalProductIngredients: data.generalProductIngredients.map(i => {
+                        return {label: i.ingredient.name, value: i.ingredientId}
+                    }),
+                    category: {label: data.category.name, value: data.category.id},
+                    optionType: {label: data.optionType === 1 ? "Default" : 'Numeric', value: data.optionType}
+                },
                 isEdit: true
+            }
+        case setGenralProductRequestCompleted.type:
+            return {
+                ...state,
+                isRequestCompleted: action.payload
+            }
+        case setIsGenralProductEdit.type:
+            return {
+                ...state,
+                isEdit: action.payload.data
             }
         case setIsGenralProductError.type:
             return {
                 ...state,
                 isError: action.payload
-            }
-        case setIsGenralProductEdit.type:
-            return {
-                ...state,
-                isEdit: action.payload
             }
         case setIsGenralProductSuccess.type:
             return {
