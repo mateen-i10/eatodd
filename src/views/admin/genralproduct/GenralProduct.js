@@ -4,7 +4,7 @@ import React, {Fragment, useEffect, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
     Button,
     Card,
@@ -38,8 +38,9 @@ import {
     loadGenralProducts,
     updateGenralProduct
 } from "../../../redux/genralProduct/actions"
-import httpService, {baseURL} from "../../../utility/http"
-import {toast} from "react-toastify"
+import {isObjEmpty, loadOptions} from "../../../utility/Utils"
+import Child from '../../admin/product/ProductFormChild'
+
 
 const GenralProducts = (props) => {
 
@@ -53,64 +54,15 @@ const GenralProducts = (props) => {
     const dispatch = useDispatch()
 
     // select subCategory
-
-    const subCategories = async (input) => {
-        return httpService._get(`${baseURL}SubCategory/GetSubCategories?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                console.log("respSubCategory", response)
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    //const Id = response.data.categoryId
-                    console.log("respSubCategory*******", response)
-                    return response.data.data.map(d => {
-                        return {label: `${d.name}`, value: d.categoryId}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
+    const categories = async (input) => {
+        return loadOptions('category', input, 1, 12)
     }
 
-    const Categories = async (input) => {
-        return httpService._get(`${baseURL}category?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    console.log("resCategory*******", response)
-                    return response.data.data.map(d => {
-                        return {label: `${d.name}`, value: d.id}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
+    const Ingredient = async (input) => {
+        return loadOptions('Ingredient', input, 1, 12)
     }
 
-    const ingredients = async (input) => {
-        return httpService._get(`${baseURL}ingredient?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    console.log("ingredients", response)
-                    return response.data.data.map(d => {
-                        return {label: `${d.name}`, value: d.id}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
-    }
-
-    const optionType = async () => [
+    const options = async () => [
         { value: 1, label: 'Default' },
         { value: 2, label: 'Numeric' }
     ]
@@ -121,94 +73,38 @@ const GenralProducts = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
+    const [subcategoryId, setSubcategoryId] = useState(0)
 
-    const optionsListObject = {name: '', description: '', price: 0, max: 0, min: 0}
-    const [optionsList, setOptionsList] = useState([optionsListObject])
+    const [showOption] = useState(true)
+
+    const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
+    const [optionType, setOptionType] = useState([showOptionObject])
 
     useEffect(() => {
-        if (formInitialState && formInitialState.optionsList) {
-            setOptionsList([...formInitialState.optionsList])
+        if (formInitialState && formInitialState.options) {
+            setOptionType([...formInitialState.options])
+        }
+        if (formInitialState && formInitialState.subCategory && !isObjEmpty(formInitialState.subCategory)) {
+            setSubcategoryId(formInitialState.subCategory.id)
         }
     }, [isEdit])
-    const removeOptionList = (index) => {
-        const newArray = [...optionsList]
+    const removeOption = (index) => {
+        const newArray = [...optionType]
         newArray.splice(index, 1)
-        setOptionsList(newArray)
+        setOptionType(newArray)
     }
-    const addOptionList = () => {
-        const newArray = [...optionsList, optionsListObject]
-        setOptionsList(newArray)
+    const addOption = () => {
+        const newArray = [...optionType, showOptionObject]
+        setOptionType(newArray)
     }
     const onValueChange = (index, name, event) => {
-        const newArray = optionsList.map((item, i) => {
+        const newArray = optionType.map((option, i) => {
             if (i === index) {
-                item[name] = event.target.value
+                option[name] = event.target.value
             }
-            return item
+            return option
         })
-
-        setOptionsList(newArray)
-    }
-
-    const child = () => {
-        return <div className='ms-1'>
-            <h5> Item Units</h5>
-            {optionsList.map((i, index) => {
-                return <div className='row mt-1'>
-                    <div className='col-3'>
-                        <Input
-                            placeholder='Enter Name'
-                            type= 'text'
-                            value={i.name}
-                            onChange={(e) => onValueChange(index, 'name', e)}
-                        />
-                    </div>
-                    <div className='col-3'>
-                        <Input
-                            placeholder='Enter Price'
-                            type= 'number'
-                            value={i.price}
-                            onChange={(e) => onValueChange(index, 'price', e)}
-                        />
-                    </div>
-                    <div className='col-6'>
-                        <Input
-                            placeholder='Enter Description'
-                            type= 'number'
-                            value={i.description}
-                            onChange={(e) => onValueChange(index, 'description', e)}
-                        />
-                    </div>
-                    <div className='col-3 mt-1'>
-                        <Input
-                            placeholder='Enter Maximum Value'
-                            type= 'text'
-                            value={i.max}
-                            onChange={(e) => onValueChange(index, 'max', e)}
-                        />
-                    </div>
-                    <div className='col-3 mt-1'>
-                        <Input
-                            placeholder='Enter Minimum Value'
-                            type= 'number'
-                            value={i.min}
-                            onChange={(e) => onValueChange(index, 'min', e)}
-                        />
-                    </div>
-                    {optionsList.length > 1 && <div className='col-1'>
-                        <Button.Ripple className='btn-icon mt-1' color='danger' onClick={() => removeOptionList(index)}>
-                            <Delete size={12}/>
-                        </Button.Ripple>
-                    </div>
-                    }
-                </div>
-            })}
-            <div className='col-2'>
-                <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addOptionList}>
-                    <Plus size={12} />
-                </Button.Ripple>
-            </div>
-        </div>
+        setOptionType(newArray)
     }
 
     // ** local States
@@ -217,137 +113,12 @@ const GenralProducts = (props) => {
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
-    const formData = [
-        {
-            type: FieldTypes.Text,
-            label: 'Name',
-            placeholder: 'Enter Product Name',
-            name: 'name',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Description',
-            placeholder: 'Enter Description',
-            name: 'description',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Whole Price',
-            placeholder: 'Enter Whole Price',
-            name: 'wholePrice',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Retail Price',
-            placeholder: 'Enter Retail Price',
-            name: 'retailPrice',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Online Price',
-            placeholder: 'Enter Online Price',
-            name: 'onlinePrice',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Discount',
-            placeholder: 'Enter Discount',
-            name: 'discount',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Quantity',
-            placeholder: 'Enter Quantity',
-            name: 'quantity',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Tax Amount',
-            placeholder: 'Enter Tax Amount',
-            name: 'taxAmount',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Tax Percentage',
-            placeholder: 'Enter Percentage',
-            name: 'taxPercentage',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.File,
-            label: 'Image',
-            placeholder: 'Enter Attachment',
-            name: 'image',
-            isRequired: false,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Select,
-            label: 'Category',
-            placeholder: 'Select Category',
-            name: 'category',
-            isRequired: false,
-            fieldGroupClasses: 'col-6',
-            loadOptions: Categories,
-            isAsyncSelect: true,
-            isMulti: false
-        },
-        {
-            type: FieldTypes.Select,
-            label: 'Sub Category',
-            placeholder: 'Select Sub Category',
-            name: 'subCategory',
-            isRequired: false,
-            fieldGroupClasses: 'col-6',
-            loadOptions: subCategories,
-            isAsyncSelect: true,
-            isMulti: false
-        },
-        {
-            type: FieldTypes.Select,
-            label: 'Ingredients',
-            placeholder: 'Select ingredients',
-            name: 'generalProductIngredients',
-            isRequired: false,
-            fieldGroupClasses: 'col-12',
-            loadOptions: ingredients,
-            isAsyncSelect: true,
-            isMulti: true
-        },
-        {
-            type:FieldTypes.Select,
-            label: 'OptionType',
-            placeholder: 'Select option type',
-            name:'optionType',
-            isRequired:false,
-            fieldGroupClasses: 'col-6',
-            loadOptions:optionType,
-            isAsyncSelect: true,
-            isMulti:false
-        }
-    ]
+    const [formData, setFormData] = useState([])
 
     // ** schema for validations
-    const schema = Joi.object({
+    const [schema, setSchema] = useState(Joi.object({
         name: Joi.string().required().label("Name")
-    })
+    }))
 
 
     // ** Function to handle filter
@@ -355,6 +126,7 @@ const GenralProducts = (props) => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
+        setOptionType([showOptionObject])
         if (isModalLoading) setModalLoading(false)
     }
 
@@ -362,17 +134,51 @@ const GenralProducts = (props) => {
     useLoadData(isSuccess, loadGenralProducts, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsGenralProductEdit, setGenralProduct, {
         name: '',
-        description: ''
+        description: '',
+        wholePrice: '',
+        discount: '',
+        quantity: '',
+        taxAmount: '',
+        taxPercentage: '',
+        generalProductIngredients: [],
+        optionType: {},
+        category: {}
     })
     useModalError(isError, setModalLoading, setIsGenralProductError)
-
     const addClick = () => {
+        setFormData([
+            {type: FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name: 'name', isRequired: true, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name: 'description', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name: 'image', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
+            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
+        ])
         setModalTitle('Add Product')
         toggle()
     }
 
     const editClick = (id) => {
-        console.log("edit", id)
+        setFormData([
+            {type: FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name: 'name', isRequired: true, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name: 'description', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
+            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
+        ])
+        setSchema(Joi.object({
+            name: Joi.string().required().label("Name")
+        }))
         toggle()
         dispatch(getGenralProduct(id, true))
         setModalTitle('Edit Product')
@@ -402,17 +208,21 @@ const GenralProducts = (props) => {
     }
 
     const handleSubmit = (event) => {
-        console.log('formState', formState)
-        const finalData = {...formState, categoryId: formState.category?.value}
         event.preventDefault()
+
+        const ingredients = formState.generalProductIngredients?.map(i => {
+            return {ingredientId: i.value}
+        })
+        const finalData = {...formState, subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
+
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
 
-        console.log(finalData, "testing")
+        console.log("Final Data", finalData)
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateGenralProduct({...finalData})) : dispatch(addGenralProduct(formState))
+        edit ? dispatch(updateGenralProduct(finalData)) : dispatch(addGenralProduct(finalData))
     }
 
     const handleFilter = e => {
@@ -450,18 +260,6 @@ const GenralProducts = (props) => {
             minWidth: '50px'
         },
         {
-            name: 'RetailPrice',
-            selector: (row) => row.retailPrice,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'OnlinePrice',
-            selector: (row) => row.onlinePrice,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
             name: 'Discount',
             selector: (row) => row.discount,
             sortable: true,
@@ -485,12 +283,12 @@ const GenralProducts = (props) => {
             sortable: true,
             minWidth: '50px'
         },
-        {
+        /*{
             name: 'Image',
             selector: (row) => row.image,
             sortable: true,
             minWidth: '50px'
-        },
+        },*/
         {
             name: 'Actions',
             allowOverflow: true,
@@ -608,8 +406,18 @@ const GenralProducts = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
-                       children={child()}
-            />
+                       children={<Child
+                                subcategoryId={subcategoryId}
+                                setSubcategoryId={setSubcategoryId}
+                                showOption={showOption}
+                                removeOption={removeOption}
+                                addOption={addOption}
+                                onValueChange={onValueChange}
+                                options={optionType}
+                                categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
+                                optionType={formState.optionsType?.value}
+                            />}
+                        />
 
         </Fragment>
     )
