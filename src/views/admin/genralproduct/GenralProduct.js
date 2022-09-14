@@ -157,6 +157,7 @@ const GenralProducts = (props) => {
             {type: FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name: 'image', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
         ])
         setModalTitle('Add Product')
@@ -174,6 +175,7 @@ const GenralProducts = (props) => {
             {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
         ])
         setSchema(Joi.object({
@@ -181,7 +183,7 @@ const GenralProducts = (props) => {
         }))
         toggle()
         dispatch(getGenralProduct(id, true))
-        setModalTitle('Edit Product')
+        setModalTitle('Edit General Product')
         setModalLoading(true)
     }
     const deleteClick = (id, e) => {
@@ -296,7 +298,7 @@ const GenralProducts = (props) => {
                 return (
                     <div className='d-flex'>
                         <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
                                 <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
@@ -415,7 +417,7 @@ const GenralProducts = (props) => {
                                 onValueChange={onValueChange}
                                 options={optionType}
                                 categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
-                                optionType={formState.optionsType?.value}
+                                optionType={formState.optionType?.value}
                             />}
                         />
 
