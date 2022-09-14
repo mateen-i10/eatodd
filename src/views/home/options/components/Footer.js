@@ -5,13 +5,9 @@ import {Link} from "react-router-dom"
 
 const Footer = (props) => {
 
-    const {addToBag, dispatchingItems, setMealName, mealName, selectedProVeg, selectedRice, selectedBeans} = props
+    const {addToBag, dispatchingItems, setMealName, mealName} = props
 
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-
-    const proteinVege = selectedProVeg
-    const Rice = selectedRice
-    const Beans = selectedBeans
 
     const RenderMealNameModal = () => {
         return (
@@ -77,13 +73,14 @@ const Footer = (props) => {
                         </div>
                     </div>
                     <div className="col-lg-5 col-12 mt-1 mb-1 mb-lg-0 " style={{textAlign: 'center'}}>
-                        <div
+                        {/*<div
                             className={(!proteinVege.length || !Rice.length || !Beans.length) ? "selectAtLeastOne " : "hideNote"}>Please
                             Select at least one item from<strong> Protein or
                                 vegetable,
-                                Beans and Rice</strong></div>
+                                Beans and Rice</strong>
+                        </div>*/}
                         <button
-                            type="button" disabled={!proteinVege.length || !Rice.length || !Beans.length}
+                            type="button" /*disabled={!proteinVege.length || !Rice.length || !Beans.length}*/
                             style={{
                                 width: '90%',
                                 height: 60,

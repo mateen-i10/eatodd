@@ -14,7 +14,7 @@ const Counter = () => {
                 </div>
                 <div className="d-flex ">
                     <div className='rounded-circle border-primary  bg-white cursor-pointer '
-                         style={{backgroundColor: 'rgb(220 220 220 / 80%)'}}>
+                         style={{backgroundColor: 'rgb(220 220 220 / 80%)', zIndex: '100'}}>
                         <Plus color='black' size={25} onClick={() => {
                             if (value === 5) {
                                 setValue(value)

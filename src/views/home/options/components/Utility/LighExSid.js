@@ -19,7 +19,7 @@ export const LightQty = () => {
         </div>
     )
 }
-export const ExtraQty = () => {
+export const ExtraQty = ({value}) => {
     return (
         <div
             className='rounded-circle border-white ms-md-3 ms-xl-2 ms-lg-1 ms-sm-2 ms-1  m-0 text-white'
@@ -33,7 +33,7 @@ export const ExtraQty = () => {
                 backgroundColor: 'rgba(129, 190, 65, .9)'
 
             }}>
-            <div style={{marginLeft: 8, marginTop: 17}}>Extra</div>
+            <div style={{marginLeft: 8, marginTop: 17}}>{value}</div>
         </div>
     )
 }

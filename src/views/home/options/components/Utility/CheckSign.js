@@ -13,7 +13,8 @@ const CheckSign = () => {
                 width: 66,
                 backgroundColor: 'rgba(129, 190, 65, .9)'
             }}>
-            <div style={{marginLeft: 10, marginTop: 12}}><FaCheck size={40}/>
+            <div style={{marginLeft: 10, marginTop: 12}}>
+                <FaCheck size={40}/>
             </div>
         </div>
     )

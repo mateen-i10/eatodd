@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TwoX = () => {
+const TwoX = (props) => {
     return (
         <div color='#81be41'
              className='rounded-circle border-white text-white ms-xl-2 ms-lg-1 ms-md-3 ms-sm-2 ms-12 m-0'
@@ -14,7 +14,8 @@ const TwoX = () => {
                  fontWeight: 700,
                  backgroundColor: 'rgba(129, 190, 65, .9)'
              }}>
-            <div style={{marginLeft: 11, marginTop: 7}}>2x
+            <div style={{marginLeft: 11, marginTop: 7}}>
+                {props.value}
             </div>
         </div>
     )

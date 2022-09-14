@@ -53,9 +53,20 @@ const productReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editproduct.type:
+            const data = action.payload.data
+            console.log(data.categoryId, 'here is the cat id ')
+            data.options = data.options.filter(c => c.name !== "Default")
+            data.optionsString = JSON.stringify(data.options)
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...data,
+                    category: {label: data.category.name, value: data.category.id},
+                    restaurant: {label: data.restaurant.name, value: data.restaurant.id},
+                    productIngredients: data.productIngredients.map(i => {
+                        return {label: i.ingredient.name, value: i.ingredientId}
+                    }),
+                    optionType: {label: data.optionType === 1 ? "Default" : 'Numeric', value: data.optionType}
+                },
                 isEdit: true
             }
         case setRequestCompleted.type:
