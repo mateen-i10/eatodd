@@ -35,24 +35,25 @@ const UserDropdown = () => {
     const userAvatar = (userData && userData.avatar) || defaultAvatar
 
     return (
-        <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
-            <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
+        <UncontrolledDropdown tag='li' className='dropdown-user nav-item '>
+            <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link ' onClick={e => e.preventDefault()}>
                 <div className='user-nav d-sm-flex d-none' style={{
                     width: 154
                 }}>
+                    <div className="d-inline-block">
                     <span className='user-name fw-bold'
                           style={{
                               marginRight: 8,
                               marginTop: 12,
                               fontSize: "1rem"
                           }}>{(userData && userData['name'].toUpperCase()) || ''}</span>
-                    <span style={{
-                        marginRight: 8,
-                        fontSize: ".7rem"
-                    }} className='user-status d-none'>{(userData && userData.role) || ''}</span>
-                    <Avatar style={{
-                        marginTop: 3
-                    }} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
+                        <span style={{
+                            marginRight: 8,
+                            fontSize: ".7rem"
+                        }} className='user-status d-none'>{(userData && userData.role) || ''}</span>
+                        <Avatar style={{
+                            marginTop: 3
+                        }} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/></div>
                 </div>
 
             </DropdownToggle>

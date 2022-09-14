@@ -116,19 +116,21 @@ export default function Header() {
                         <ul className=" mx-auto mt-2 h-25 user-login list-unstyled">
                             <UserDropdown/>
                         </ul>
-                    </div> : <div className="nav-sec-2">
+                    </div> : <div className="nav-sec-2 text-uppercase">
                         {/*<div className="challanges">*/}
                         {/*    <h2><span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span>*/}
                         {/*        <span>AND REDEEM REWARDS</span></h2>*/}
                         {/*</div>*/}
-                        <Button className="w-75 bg-secondary fs-3"><Link to="/signup" style={{color: "white"}}>Create an
+                        <Button className="w-75 bg-secondary fs-3 text-uppercase"><Link to="/signup"
+                                                                                        style={{color: "white"}}>Create
+                            an
                             Account</Link>
                         </Button>
-                        <div className=" fs-4 mt-2 mb-2">
+                        <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
                             <Button
-                                className="w-100 bg-secondary text-center fs-3"><Link to="/login"
-                                                                                      style={{color: "white"}}>Sign
+                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login"
+                                                                                                     style={{color: "white"}}>Sign
                                 In</Link></Button>
                         </div>
                         <div className="state">
