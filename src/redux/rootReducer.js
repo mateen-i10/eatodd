@@ -30,6 +30,10 @@ import subCategory from "./subcategory/reducer"
 import reorderHistory from "./reorderhistory/reducer"
 import wines from "./wines/reducer"
 import ingredient from "./ingredients/reducer"
+import section from "./section/reducer"
+import sectionItem from "./sectionItem/reducer"
+import cateringMenu from "./cateringMenu/reducer"
+import cateringMenuItem from "./cateringMenuItem/reducer"
 
 const rootReducer = {
     auth,
@@ -62,7 +66,11 @@ const rootReducer = {
     restaurantLocation,
     userLocation,
     wines,
-    ingredient
+    ingredient,
+    section,
+    sectionItem,
+    cateringMenu,
+    cateringMenuItem
 }
 
 export default rootReducer
