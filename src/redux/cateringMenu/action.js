@@ -1,35 +1,34 @@
 import {apiCall} from "../api/actions"
 import {
-    editIngredient,
-    setDetailLoading,
-    setIngredient,
-    setIngredients, setIsEdit, setIsIngredientError, setIsIngredientSuccess,
+    editCateringMenu,
+    setCateringMenu,
+    setCateringMenus,
+    setDetailLoading, setIsCateringMenuError, setIsCateringMenuSuccess, setIsEdit,
     setLoading,
     setRequestCompleted
 } from "./reducer"
-const url = 'ingredient'
+const url = 'cateringMenu'
 
-export const loadIngredients = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCateringMenus = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
             method: 'get',
-            onSuccess: setIngredients.type
+            onSuccess: setCateringMenus.type
         }))
     }
 }
 
-export const getIngredient = (id, isEdit = false) => {
-    console.log("dataGet", isEdit)
+export const getCateringMenu = (id, isEdit = false) => {
     return async dispatch => {
         if (isEdit) {
             dispatch(apiCall({
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: editIngredient.type
+                onSuccess: editCateringMenu.type
             }))
         } else {
             dispatch(setDetailLoading(true))
@@ -37,43 +36,43 @@ export const getIngredient = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: setIngredient.type
+                onSuccess: setCateringMenu.type
             }))
         }
     }
 }
 
-export const deleteIngredient = (id) => {
+export const deleteCateringMenu = (id) => {
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'Ingredient Deleted Successfully',
+            successMessage: 'Catering Menu Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsIngredientError.type,
-            isSuccess: setIsIngredientSuccess.type
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
 
-export const addIngredient = (data) => {
+export const addCateringMenu = (data) => {
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Ingredient Added Successfully',
+            successMessage: 'Catering Menu Added Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsIngredientError.type,
-            isSuccess: setIsIngredientSuccess.type
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
 
-export const updateIngredient = (data) => {
+export const updateCateringMenu = (data) => {
     console.log('dataEmp', data)
     return async dispatch => {
         dispatch(apiCall({
@@ -81,10 +80,10 @@ export const updateIngredient = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Ingredient Updated Successfully',
+            successMessage: 'Catering Menu Updated Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsIngredientError.type,
-            isSuccess: setIsIngredientSuccess.type
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
         dispatch(setIsEdit(false))
     }
