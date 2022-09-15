@@ -35,7 +35,12 @@ const Routes = [
     },
     {
         path: '/menu',
-        component: lazy(() => import('../../views/catering/Catering')),
+        component: lazy(() => import('../../views/catering/Pages/Catering')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/cateringMenuOrder',
+        component: lazy(() => import('../../views/catering/Pages/COMenu')),
         layout: 'BlankLayout'
     },
     {
