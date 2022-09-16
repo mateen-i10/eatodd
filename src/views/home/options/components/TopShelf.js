@@ -1,27 +1,27 @@
 import React from 'react'
+import ProductImage from "../../components/product/ProductImage"
 
-const TopShelf = (props) => {
+const TopShelf = ({imgPath, imgId, name, description}) => {
+    console.log('imgId', imgId)
     return (
         <>
             <div className="container-sm">
                 <div className="row my-5">
                     <div className="col-md-5 col-12">
-                        <img src={props.image} alt="..." style={{width: "87%", borderRadius: 20}}/>
+                        <ProductImage
+                            path={imgPath}
+                            styles={{width: "87%", borderRadius: 20}}/>
                     </div>
                     <div className="col-md-6 col-12  mt-1">
                         <div className="text-primary fw-bolder "
-                             style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>build your
+                             style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>select your
                         </div>
                         <div className="text-dark fw-bolder "
                              style={{
                                  fontSize: "3.6rem",
                                  textTransform: 'uppercase'
-                             }}>{props.fooditem}</div>
-                        <p style={{fontSize: "1.3rem ", lineHeight: 1.4, color: "black"}}>Your choice of freshly grilled
-                            meat
-                            or sofritas served
-                            in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso
-                            blanco, sour cream or cheese.</p>
+                             }}>{name}</div>
+                        <p style={{fontSize: "1.3rem ", lineHeight: 1.4, color: "black"}}>{description}</p>
                     </div>
                 </div>
             </div>
