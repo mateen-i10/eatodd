@@ -4,6 +4,7 @@ import '../components/stylesheet/Menu.css'
 import React, {useState} from "react"
 import {categories} from "../../../tempData/cateringDb"
 import DetailsMenuPage from "../components/DetailsMenuPage"
+import {ArrowRight} from "react-feather"
 
 const Catering = () => {
     const [selectedCategory, setSelectedCategory] = useState(1)
@@ -64,27 +65,27 @@ const Catering = () => {
             <div className="container-sm">
                 <div className="row">
                     <div className="col-md-4">
-                        <img style={{width: '500px'}} className="new mt-5"
-                             src={require("../../../assets/images/wineClub/Whispering Angel.png").default} height={380}
+                        <img style={{width: '300px'}} className="new mt-5"
+                             src={require("../../../assets/images/wineClub/Duckhorn Vinyards red.png").default}
+                             height={380}
                         />
                     </div>
                     <div className="col-md-8 mt-5">
-                        <h1 className="text-black text-uppercase" style={{fontSize: '30px'}}>
+                        <h1 className="text-black text-uppercase fw-bolder" style={{fontSize: '60px'}}>
                             ADD WINE TO YOUR OMG CATERING ORDER
                         </h1>
-                        <div className="fs-4 mb-1">
+                        <div className="fs-4 mb-3 mt-2">
                             <p>OMG will streamline your event planning by taking care of your food + WINE. We offer the
                                 ability to Mix and Match your wine selection to make sure no guest leaves thirsty. </p>
-                            <div className="text-center">*all wine will be sold at wholesale prices
+                            <div className="text-center" style={{fontSize: "15px"}}>*all wine will be sold at wholesale
+                                prices
                                 <br/>*$120 service fee added to all event orders that include wine <br/>
                                 *please provide 48-hour notice so we can make sure we have your selected wines in stock
                             </div>
                         </div>
                         <button type="button" className="btn fs-4 d-inline-block "
-                                style={{backgroundColor: '#57ab00', color: 'white', width: '350px'}}>Start your Catering
-                            Order <img className="d-inline mb-2"
-                                       src={require("../../../assets/images/icons/arrow-black.svg").default}
-                                       alt="Order Now" height={30} width={35}/>
+                                style={{backgroundColor: '#57ab00', color: 'white', width: '380px'}}>Start your Catering
+                            Order <ArrowRight/>
                         </button>
                     </div>
 
