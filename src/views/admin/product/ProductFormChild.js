@@ -35,7 +35,7 @@ const ProductFormChild = (props) => {
             )}
 
             {props.formFeilds === 0 && (
-                <div className='col-md-6 mt-2 text-end'>
+                <div className='col-md-12 mt-2 mb-3 text-end'>
                     <Button type="button" color='primary' onClick={props.AddNewData}>Add new</Button>
                 </div>
             )}

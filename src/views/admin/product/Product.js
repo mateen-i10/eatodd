@@ -114,7 +114,10 @@ const Product = (props) => {
     }
 
     const AddFromExistingData = () => {
-        setFormData([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false}])
+        setFormData([
+            {type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'Select Restaurant', placeholder: 'Select Product', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
+        ])
         setFormFeilds(0)
         setShowOption(false)
 
@@ -226,24 +229,24 @@ const Product = (props) => {
         console.log('the option type wala!!!', optionType)
         event.preventDefault()
 
-        const Ingredient = formState.productIngredients.map(i => {
-            return {ingredientId: i.value}
-        })
 
-        console.log('this is the cat id lets see if works?', Ingredient)
-
+        // console.log('this is the cat id lets see if works?', Ingredient)
+        console.log('lets see the value of : ', formFeilds)
 
         let finalData = {}
        if (formFeilds === 1 || formFeilds === 3) {
+           const Ingredient = formState.productIngredients.map(i => {
+               return {ingredientId: i.value}
+           })
            finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
-       } else {
-           finalData = {...formState, generalProductId: formState.generalProduct?.value }
+           delete finalData.generalProductId
+       } else if (formFeilds === 0) {
+           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
        }
         console.log(finalData, "lets see")
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
-        delete finalData.generalProductId
         delete finalData.modifiedById
         delete finalData.modifiedDate
 
