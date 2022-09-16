@@ -10,13 +10,13 @@ const CatMenuItems = ({product}) => {
         }}
              style={!value ? {
                  marginBottom: 25,
-                 maxHeight: 140,
-                 minHeight: 140,
+                 maxHeight: 120,
+                 minHeight: 120,
                  borderWidth: 1
              } : {
                  marginBottom: 25,
-                 maxHeight: 140,
-                 minHeight: 140,
+                 maxHeight: 120,
+                 minHeight: 120,
                  borderWidth: 1,
                  borderColor: "black"
              }}>
@@ -34,9 +34,9 @@ const CatMenuItems = ({product}) => {
                             <img src={product.image} className="img-fluid rounded-start" alt="..."
                                  style={{
                                      width: "100%",
-                                     height: 140,
+                                     height: 120,
                                      backgroundColor: 'transparent',
-                                     objectFit: "fill",
+                                     objectFit: "unset",
                                      overflow: "hidden"
                                  }}/>
                         </div>
