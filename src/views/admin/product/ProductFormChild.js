@@ -17,6 +17,7 @@ const ProductFormChild = (props) => {
                     <h5>Product Options</h5>
                     {props.options.map((i, index) => {
                         return <ProductOption
+                            key={index}
                             index={index}
                             option={i}
                             optionsLength = {props.options.length}
