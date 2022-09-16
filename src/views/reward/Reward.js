@@ -11,17 +11,14 @@ const Reward = () => {
             <div className="container-sm">
                 <div className="row">
                     <div className="col-md-6 mt-5">
-                        <p className="text-primary fs-2 fw-bolder">EAT REWARDS</p>
-                        <h1 className="text-black text-uppercase" style={{fontSize: '55px'}}>
-                            our members is like our family
+                        <p className="text-primary fs-2 fw-bolder">OMG LOYALISTS
+                        </p>
+                        <h1 className="text-black text-uppercase" style={{fontSize: '45px'}}>
+                            The More you EAT, the More we TREAT.
                         </h1>
                         <div className="fs-4 mb-1">
-                            <p>Earn points just for ordering your faves and cash them out for a variety of rewards in
-                                the
-                                Rewards Exchange.
-                                Check out your Extras for ways to unlock extra points and collect exclusive badges.
-                                Not a member yet?
-                                Join now to start earning.</p>
+                            <p>Earn points while enjoying your favorite flavorful plates and sandwiches, and cash them
+                                out in a variety of ways in the Loyalists Trade Desk! Not a member yet? </p>
                             <a className="text-decoration-underline " href="#">Program Term</a>
                         </div>
                         <button type="button" className="btn fs-4 "

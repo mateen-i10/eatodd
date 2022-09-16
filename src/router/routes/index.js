@@ -35,7 +35,12 @@ const Routes = [
     },
     {
         path: '/menu',
-        component: lazy(() => import('../../views/catering/Catering')),
+        component: lazy(() => import('../../views/catering/Pages/Catering')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/cateringMenuOrder',
+        component: lazy(() => import('../../views/catering/Pages/COMenu')),
         layout: 'BlankLayout'
     },
     {
@@ -213,6 +218,46 @@ const Routes = [
     {
         path: '/ingredient/:id',
         component: lazy(() => import('../../views/admin/Ingredients/ingredientsDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/section/:id',
+        component: lazy(() => import('../../views/admin/section/sectionDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/section',
+        component: lazy(() => import('../../views/admin/section/section')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/sectionItem/:id',
+        component: lazy(() => import('../../views/admin/sectionItem/sectionItemDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/sectionItem',
+        component: lazy(() => import('../../views/admin/sectionItem/sectionItem')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/cateringMenu/:id',
+        component: lazy(() => import('../../views/admin/cateringMenu/cateringMenuDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/cateringMenu',
+        component: lazy(() => import('../../views/admin/cateringMenu/cateringMenu')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/cateringMenuItem/:id',
+        component: lazy(() => import('../../views/admin/cateringMenuItem/cateringMenuItemDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/cateringMenuItem',
+        component: lazy(() => import('../../views/admin/cateringMenuItem/cateringMenuItem')),
         layout: 'VerticalLayout'
     },
     {

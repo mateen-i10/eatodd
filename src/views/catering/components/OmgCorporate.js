@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Button, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap"
 import {ChevronDown} from "react-feather"
+import {Link} from "react-router-dom"
 
 const OmgCorporate = (props) => {
     const {item} = props
@@ -51,9 +52,16 @@ const OmgCorporate = (props) => {
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </div>
-                <Button className="justify-content-center" color="primary" style={{width: "150px", margin: "auto"}}
-                        onClick={() => console.log('clicked')}>Add
-                    to Bag</Button>
+                <div className="text-center text-uppercase ">
+                    <Link to="/cateringMenuOrder">
+                        <Button className=" text-uppercase " color="primary"
+                                style={{width: "150px", margin: "auto"}}
+                                onClick={() => console.log('clicked')}>
+                            Add to Bag
+                        </Button>
+                    </Link>
+                </div>
+
             </div>
         </div>
     )

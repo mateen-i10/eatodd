@@ -23,24 +23,25 @@ import {FieldTypes} from "../../../utility/enums/FieldType"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 import {
-    addIngredient,
-    deleteIngredient,
-    getIngredient,
-    loadIngredients,
-    updateIngredient
-} from "../../../redux/ingredients/action"
-import {setIngredient, setIsEdit, setIsIngredientError} from "../../../redux/ingredients/reducer"
+    addCateringMenu,
+    deleteCateringMenuItem,
+    getCateringMenuItem,
+    loadCateringMenuItems, updateCateringMenu
+} from "../../../redux/cateringMenuItem/action"
+import {setCateringMenuItem, setIsCateringMenuItemError, setIsEdit} from "../../../redux/cateringMenuItem/reducer"
 
-const Ingredients = (props) => {
+const CateringMenuItems = (props) => {
 
-    const ingredientList = useSelector(state => state.ingredient.list)
-    const formInitialState = useSelector(state => state.ingredient.object)
-    const miscData = useSelector(state => state.ingredient.miscData)
-    const isEdit = useSelector(state => state.ingredient.isEdit)
-    const isLoading = useSelector(state => state.ingredient.isLoading)
-    const isError = useSelector(state => state.ingredient.isError)
-    const isSuccess = useSelector(state => state.ingredient.isSuccess)
+    const cateringMenuItemList = useSelector(state => state.cateringMenuItem.list)
+    const formInitialState = useSelector(state => state.cateringMenuItem.object)
+    const miscData = useSelector(state => state.cateringMenuItem.miscData)
+    const isEdit = useSelector(state => state.cateringMenuItem.isEdit)
+    const isLoading = useSelector(state => state.cateringMenuItem.isLoading)
+    const isError = useSelector(state => state.cateringMenuItem.isError)
+    const isSuccess = useSelector(state => state.cateringMenuItem.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
@@ -50,19 +51,35 @@ const Ingredients = (props) => {
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
 
+    const caterings = async (input) => {
+        return httpService._get(`${baseURL}cateringMenu?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                console.log('response', response)
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Ingredient')
+    const [modalTitle, setModalTitle] = useState('Add Catering Menu Item')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Catering', placeholder: 'Select Catering', name:'cateringMenuId', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:caterings, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -79,27 +96,25 @@ const Ingredients = (props) => {
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadIngredients, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setIngredient, {
+    useLoadData(isSuccess, loadCateringMenuItems, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCateringMenuItem, {
         name: '',
-        quantity: '',
-        unit: '',
-        description: '',
-        fat: '',
-        protein: '',
-        carb: ''
+        limit: '',
+        price: '',
+        cateringMenuId:{},
+        description: ''
     })
-    useModalError(isError, setModalLoading, setIsIngredientError)
+    useModalError(isError, setModalLoading, setIsCateringMenuItemError)
 
     const addClick = () => {
-        setModalTitle('Add Ingredient')
+        setModalTitle('Add Catering Menu Item')
         toggle()
     }
 
     const editClick = (id) => {
         toggle()
-        dispatch(getIngredient(id, true))
-        setModalTitle('Edit Ingredient')
+        dispatch(getCateringMenuItem(id, true))
+        setModalTitle('Edit Catering Menu')
         setModalLoading(true)
     }
 
@@ -116,39 +131,42 @@ const Ingredients = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteIngredient(id))
+                dispatch(deleteCateringMenuItem(id))
             }
         })
     }
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/ingredient/${id}`)
+        props.history.push(`/cateringMenuItem/${id}`)
     }
 
     const handleSubmit = (event) => {
         console.log('formState', formState)
         event.preventDefault()
+        const finalData = {...formState, cateringMenuId: formState.cateringMenuId?.value}
+
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
+        console.log("finalData", finalData)
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateIngredient(formState)) : dispatch(addIngredient(formState))
+        edit ? dispatch(updateCateringMenu(finalData)) : dispatch(addCateringMenu(finalData))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadIngredients(currentPage + 1, pageSize, value))
+            dispatch(loadCateringMenuItems(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadIngredients(page.selected + 1, pageSize, searchValue))
+        dispatch(loadCateringMenuItems(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
@@ -160,32 +178,14 @@ const Ingredients = (props) => {
             minWidth: '50px'
         },
         {
-            name: 'Quantity',
-            selector: (row) => row.quantity,
+            name: 'Limit',
+            selector: (row) => row.limit,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Unit',
-            selector: (row) => row.unit,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Fat',
-            selector: (row) => row.fat,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Protein',
-            selector: (row) => row.protein,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Carb',
-            selector: (row) => row.carb,
+            name: 'Price',
+            selector: (row) => row.price,
             sortable: true,
             minWidth: '50px'
         },
@@ -246,10 +246,10 @@ const Ingredients = (props) => {
     }
 
     const dataToRender = () => {
-        if (ingredientList.length > 0) {
-            return ingredientList
+        if (cateringMenuItemList.length > 0) {
+            return cateringMenuItemList
         }  else {
-            return ingredientList.slice(0, pageSize)
+            return cateringMenuItemList.slice(0, pageSize)
         }
     }
 
@@ -259,9 +259,9 @@ const Ingredients = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Ingredients</CardTitle>
+                            <CardTitle tag='h4'>Catering Menu Items</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Ingredient</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Catering Menu Item</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -306,4 +306,4 @@ const Ingredients = (props) => {
     )
 }
 
-export default Ingredients
+export default CateringMenuItems

@@ -131,7 +131,7 @@ const Order = () => {
                 <div className="row ms-0 me-1">
                     {
                         mainCategory.length ? mainCategory.map(item => (
-                            <div className="col-md-4 col-sm-5  col-6 top-level-menu" key={item.id}>
+                            <div className="col-md-3 col-sm-5  col-6 top-level-menu" key={item.id}>
                                 <Link to={userLocation.length ? "/OmgPlate" : "/gmap"}>
                                     <div className="menu-item"
                                         //      onClick={() => (
@@ -142,7 +142,9 @@ const Order = () => {
                                             <img
                                                 src={item.image}
                                                 alt="Burrito"
-                                                width={200}/>
+                                                width={200}
+                                                height={180}
+                                            />
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
@@ -250,12 +252,12 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-4 col-md-6 col-9">
+                            <div className="col-xxl-4 col-md-4 col-4">
                                 <div className="large-order-card">
                                     <h1 className="pleaser-card-title text-center">CATERING</h1>
                                     <div className="details">
                                         <ul className="pleaser-list">
-                                            <li>From 6 to 200 people</li>
+                                            <li>From 6 to 600 people</li>
                                             <li>Starting at $15.00 / person</li>
                                             <li>Build Your Own</li>
                                             <li>Boxed Lunches</li>
@@ -271,7 +273,7 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-6 col-9">
+                            <div className="col-xxl-4 col-md-4 col-4">
                                 <div className="large-order-card">
                                     <h1 className="pleaser-card-title text-center">GROUP ORDER</h1>
                                     <div className="details ">
@@ -282,6 +284,26 @@ const Order = () => {
                                             <li>Personalized meals</li>
                                             <li>Organizer pays</li>
                                             <li><b>Order and eat today</b></li>
+                                        </ul>
+                                    </div>
+                                    <div className="type-ordering-primary">
+                                        <div className="text-center">
+                                            <div className="cta-wrapper btn btn-primary mb-2 ">Start Order</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xxl-4 col-md-4 col-4">
+                                <div className="large-order-card">
+                                    <h1 className="pleaser-card-title text-center">OMG CHARCUTERIE BOARDS</h1>
+                                    <div className="details ">
+                                        <ul className="pleaser-list mb-1">
+                                            <li>*Serves 10 people</li>
+                                            <li>Cheese and Charcuterie Platter - $100</li>
+                                            <li>Fruit Platter - $90</li>
+                                            <li>Crudites Platter - $90</li>
+                                            {/*<li>Organizer pays</li>*/}
+                                            {/*<li><b>Order and eat today</b></li>*/}
                                         </ul>
                                     </div>
                                     <div className="type-ordering-primary">

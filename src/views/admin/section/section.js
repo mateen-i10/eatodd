@@ -1,10 +1,10 @@
 // ** React Imports
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -23,24 +23,20 @@ import {FieldTypes} from "../../../utility/enums/FieldType"
 import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
-import {
-    addIngredient,
-    deleteIngredient,
-    getIngredient,
-    loadIngredients,
-    updateIngredient
-} from "../../../redux/ingredients/action"
-import {setIngredient, setIsEdit, setIsIngredientError} from "../../../redux/ingredients/reducer"
+import {addSection, deleteSection, getSection, loadSections, updateSection} from "../../../redux/section/action"
+import {setIsEdit, setIsSectionError, setSection} from "../../../redux/section/reducer"
+import AsyncSelect from "react-select/async"
+import {loadOptions} from "../../../utility/Utils"
 
-const Ingredients = (props) => {
+const Sections = (props) => {
 
-    const ingredientList = useSelector(state => state.ingredient.list)
-    const formInitialState = useSelector(state => state.ingredient.object)
-    const miscData = useSelector(state => state.ingredient.miscData)
-    const isEdit = useSelector(state => state.ingredient.isEdit)
-    const isLoading = useSelector(state => state.ingredient.isLoading)
-    const isError = useSelector(state => state.ingredient.isError)
-    const isSuccess = useSelector(state => state.ingredient.isSuccess)
+    const sectionList = useSelector(state => state.section.list)
+    const formInitialState = useSelector(state => state.section.object)
+    const miscData = useSelector(state => state.section.miscData)
+    const isEdit = useSelector(state => state.section.isEdit)
+    const isLoading = useSelector(state => state.section.isLoading)
+    const isError = useSelector(state => state.section.isError)
+    const isSuccess = useSelector(state => state.section.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
@@ -49,20 +45,94 @@ const Ingredients = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
+    const sectionItemObject = {name: '', price: '', product: {}}
+    const [sectionItems, setSectionItem] = useState([sectionItemObject])
+
+    const products = async (input) => {
+        return loadOptions('product', input, 1, 12)
+    }
+
+    useEffect(() => {
+        if (formInitialState && formInitialState.sectionItems) {
+            setSectionItem([...formInitialState.sectionItems])
+        }
+    }, [isEdit])
+    const removeSectionItem = (index) => {
+        const newArray = [...sectionItems]
+        newArray.splice(index, 1)
+        setSectionItem(newArray)
+    }
+    const addSectionItem = () => {
+        const newArray = [...sectionItems, sectionItemObject]
+        setSectionItem(newArray)
+    }
+    const onValueChange = (index, name, event) => {
+        const newArray = sectionItems.map((item, i) => {
+            if (i === index) {
+                item[name] = event.target.value
+            }
+            return item
+        })
+
+        setSectionItem(newArray)
+    }
+
+    const child = () => {
+        return <div className='ms-1'>
+            <h5>Section Item</h5>
+            {sectionItems.map((i, index) => {
+                return <div className='row mt-1'>
+                    <div className='col-4'>
+                        <AsyncSelect
+                            defaultOptions
+                            value={i.productId}
+                            onClick={(e) => onValueChange(index, 'productId', e)}
+                            loadOptions={products}
+                            closeMenuOnSelect={true}
+                            isMulti = {false}
+                        />
+                    </div>
+                    <div className='col-3'>
+                        <Input
+                            placeholder='Enter Name'
+                            type= 'text'
+                            value={i.name}
+                            onChange={(e) => onValueChange(index, 'name', e)}
+                        />
+                    </div>
+                    <div className='col-3'>
+                        <Input
+                            placeholder='Enter Price'
+                            type= 'number'
+                            value={i.price}
+                            onChange={(e) => onValueChange(index, 'price', e)}
+                        />
+                    </div>
+                    {sectionItems.length > 1 && <div className='col-1'>
+                        <Button.Ripple className='btn-icon' color='danger' onClick={() => removeSectionItem(index)}>
+                            <Delete size={12}/>
+                        </Button.Ripple>
+                    </div>
+                    }
+                </div>
+            })}
+            <div className='col-2'>
+                <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addSectionItem}>
+                    <Plus size={12} />
+                </Button.Ripple>
+            </div>
+        </div>
+    }
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Ingredient')
+    const [modalTitle, setModalTitle] = useState('Add Section')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -75,30 +145,27 @@ const Ingredients = (props) => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
+        setSectionItem([sectionItemObject])
         if (isModalLoading) setModalLoading(false)
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadIngredients, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setIngredient, {
+    useLoadData(isSuccess, loadSections, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setSection, {
         name: '',
-        quantity: '',
-        unit: '',
-        description: '',
-        fat: '',
-        protein: '',
-        carb: ''
+        limit: '',
+        description: ''
     })
-    useModalError(isError, setModalLoading, setIsIngredientError)
+    useModalError(isError, setModalLoading, setIsSectionError)
 
     const addClick = () => {
-        setModalTitle('Add Ingredient')
+        setModalTitle('Add Section')
         toggle()
     }
 
     const editClick = (id) => {
         toggle()
-        dispatch(getIngredient(id, true))
+        dispatch(getSection(id, true))
         setModalTitle('Edit Ingredient')
         setModalLoading(true)
     }
@@ -116,39 +183,40 @@ const Ingredients = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteIngredient(id))
+                dispatch(deleteSection(id))
             }
         })
     }
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/ingredient/${id}`)
+        props.history.push(`/section/${id}`)
     }
 
     const handleSubmit = (event) => {
         console.log('formState', formState)
+        const finalData = {...formState, sectionItems}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
-
+        console.log("finalData", finalData)
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateIngredient(formState)) : dispatch(addIngredient(formState))
+        edit ? dispatch(updateSection(finalData)) : dispatch(addSection(finalData))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadIngredients(currentPage + 1, pageSize, value))
+            dispatch(loadSections(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadIngredients(page.selected + 1, pageSize, searchValue))
+        dispatch(loadSections(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
@@ -160,32 +228,8 @@ const Ingredients = (props) => {
             minWidth: '50px'
         },
         {
-            name: 'Quantity',
-            selector: (row) => row.quantity,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Unit',
-            selector: (row) => row.unit,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Fat',
-            selector: (row) => row.fat,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Protein',
-            selector: (row) => row.protein,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Carb',
-            selector: (row) => row.carb,
+            name: 'Limit',
+            selector: (row) => row.limit,
             sortable: true,
             minWidth: '50px'
         },
@@ -246,10 +290,10 @@ const Ingredients = (props) => {
     }
 
     const dataToRender = () => {
-        if (ingredientList.length > 0) {
-            return ingredientList
+        if (sectionList.length > 0) {
+            return sectionList
         }  else {
-            return ingredientList.slice(0, pageSize)
+            return sectionList.slice(0, pageSize)
         }
     }
 
@@ -259,9 +303,9 @@ const Ingredients = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Ingredients</CardTitle>
+                            <CardTitle tag='h4'>Sections</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Ingredient</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Section</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -300,10 +344,11 @@ const Ingredients = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading = {isModalLoading}
                        handleSubmit={handleSubmit}
+                       children={child()}
             />
 
         </Fragment>
     )
 }
 
-export default Ingredients
+export default Sections

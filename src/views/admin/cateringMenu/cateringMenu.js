@@ -24,23 +24,22 @@ import useLoadData from "../../../utility/customHooks/useLoadData"
 import useEdit from "../../../utility/customHooks/useEdit"
 import useModalError from "../../../utility/customHooks/useModalError"
 import {
-    addIngredient,
-    deleteIngredient,
-    getIngredient,
-    loadIngredients,
-    updateIngredient
-} from "../../../redux/ingredients/action"
-import {setIngredient, setIsEdit, setIsIngredientError} from "../../../redux/ingredients/reducer"
+    addCateringMenu,
+    deleteCateringMenu,
+    getCateringMenu,
+    loadCateringMenus, updateCateringMenu
+} from "../../../redux/cateringMenu/action"
+import {setCateringMenu, setIsCateringMenuError, setIsEdit} from "../../../redux/cateringMenu/reducer"
 
-const Ingredients = (props) => {
+const CateringMenus = (props) => {
 
-    const ingredientList = useSelector(state => state.ingredient.list)
-    const formInitialState = useSelector(state => state.ingredient.object)
-    const miscData = useSelector(state => state.ingredient.miscData)
-    const isEdit = useSelector(state => state.ingredient.isEdit)
-    const isLoading = useSelector(state => state.ingredient.isLoading)
-    const isError = useSelector(state => state.ingredient.isError)
-    const isSuccess = useSelector(state => state.ingredient.isSuccess)
+    const cateringMenuList = useSelector(state => state.cateringMenu.list)
+    const formInitialState = useSelector(state => state.cateringMenu.object)
+    const miscData = useSelector(state => state.cateringMenu.miscData)
+    const isEdit = useSelector(state => state.cateringMenu.isEdit)
+    const isLoading = useSelector(state => state.cateringMenu.isLoading)
+    const isError = useSelector(state => state.cateringMenu.isError)
+    const isSuccess = useSelector(state => state.cateringMenu.isSuccess)
     const dispatch = useDispatch()
 
     // ** refs
@@ -51,18 +50,15 @@ const Ingredients = (props) => {
     const [searchValue, setSearchValue] = useState('')
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Ingredient')
+    const [modalTitle, setModalTitle] = useState('Add Catering Menu')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Priority', placeholder: 'Enter Priority', name:'priority', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.SwitchButton, label: 'Is Wine Paired', name:'isWinePaired', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -79,27 +75,24 @@ const Ingredients = (props) => {
     }
 
     // custom hooks
-    useLoadData(isSuccess, loadIngredients, isModal, toggle, currentPage, pageSize, searchValue)
-    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setIngredient, {
+    useLoadData(isSuccess, loadCateringMenus, isModal, toggle, currentPage, pageSize, searchValue)
+    useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCateringMenu, {
         name: '',
-        quantity: '',
-        unit: '',
-        description: '',
-        fat: '',
-        protein: '',
-        carb: ''
+        priority: '',
+        isWinePaired: '',
+        description: ''
     })
-    useModalError(isError, setModalLoading, setIsIngredientError)
+    useModalError(isError, setModalLoading, setIsCateringMenuError)
 
     const addClick = () => {
-        setModalTitle('Add Ingredient')
+        setModalTitle('Add Catering Menu')
         toggle()
     }
 
     const editClick = (id) => {
         toggle()
-        dispatch(getIngredient(id, true))
-        setModalTitle('Edit Ingredient')
+        dispatch(getCateringMenu(id, true))
+        setModalTitle('Edit Catering Menu')
         setModalLoading(true)
     }
 
@@ -116,14 +109,14 @@ const Ingredients = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteIngredient(id))
+                dispatch(deleteCateringMenu(id))
             }
         })
     }
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/ingredient/${id}`)
+        props.history.push(`/cateringMenu/${id}`)
     }
 
     const handleSubmit = (event) => {
@@ -134,21 +127,21 @@ const Ingredients = (props) => {
 
         // call api
         setModalLoading(true)
-        edit ? dispatch(updateIngredient(formState)) : dispatch(addIngredient(formState))
+        edit ? dispatch(updateCateringMenu(formState)) : dispatch(addCateringMenu(formState))
     }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadIngredients(currentPage + 1, pageSize, value))
+            dispatch(loadCateringMenus(currentPage + 1, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadIngredients(page.selected + 1, pageSize, searchValue))
+        dispatch(loadCateringMenus(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
@@ -160,32 +153,16 @@ const Ingredients = (props) => {
             minWidth: '50px'
         },
         {
-            name: 'Quantity',
-            selector: (row) => row.quantity,
+            name: 'Priority',
+            selector: (row) => row.priority,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Unit',
-            selector: (row) => row.unit,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Fat',
-            selector: (row) => row.fat,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Protein',
-            selector: (row) => row.protein,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Carb',
-            selector: (row) => row.carb,
+            name: 'Is Wine Paired',
+            selector: (row) => {
+                return  row.isWinePaired ? "True" : "False"
+            },
             sortable: true,
             minWidth: '50px'
         },
@@ -246,10 +223,10 @@ const Ingredients = (props) => {
     }
 
     const dataToRender = () => {
-        if (ingredientList.length > 0) {
-            return ingredientList
+        if (cateringMenuList.length > 0) {
+            return cateringMenuList
         }  else {
-            return ingredientList.slice(0, pageSize)
+            return cateringMenuList.slice(0, pageSize)
         }
     }
 
@@ -259,9 +236,9 @@ const Ingredients = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Ingredients</CardTitle>
+                            <CardTitle tag='h4'>Catering Menu</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Ingredient</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Catering Menu</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -306,4 +283,4 @@ const Ingredients = (props) => {
     )
 }
 
-export default Ingredients
+export default CateringMenus
