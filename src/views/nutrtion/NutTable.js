@@ -27,7 +27,7 @@ const NutTable = () => {
                                     }}>Fat
                                     </th>
                                     <th style={{fontSize: "1.5rem"}}>Protein</th>
-                                    <th style={{fontSize: "1.5rem"}}>Carbs</th>
+                                    <th style={{fontSize: "1.5rem", color: "#c98200"}}>Carbs</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -49,7 +49,7 @@ const NutTable = () => {
                                         6
                                     </td>
 
-                                    <td style={{fontSize: "1.4rem"}}>12
+                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>12
                                         {/*    <UncontrolledDropdown>*/}
                                         {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
                                         {/*            <MoreVertical size={15}/>*/}
@@ -82,7 +82,7 @@ const NutTable = () => {
                                     <td style={{fontSize: "1.4rem"}}>
                                         10
                                     </td>
-                                    <td style={{fontSize: "1.4rem"}}> 11
+                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}> 11
                                         {/*    <UncontrolledDropdown>*/}
                                         {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
                                         {/*            <MoreVertical size={15}/>*/}
@@ -116,7 +116,7 @@ const NutTable = () => {
                                         6
                                     </td>
 
-                                    <td style={{fontSize: "1.4rem"}}>7
+                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>7
                                         {/*    <UncontrolledDropdown>*/}
                                         {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
                                         {/*            <MoreVertical size={15}/>*/}
@@ -149,7 +149,7 @@ const NutTable = () => {
                                     <td style={{fontSize: "1.4rem"}}>
                                         6
                                     </td>
-                                    <td style={{fontSize: "1.4rem"}}>
+                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>
                                         7
                                         {/*<UncontrolledDropdown>*/}
                                         {/*    <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}

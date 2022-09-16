@@ -1,4 +1,5 @@
 import {createAction} from '@reduxjs/toolkit'
+
 const initialState = {
     list: [],
     object: {},
@@ -11,19 +12,19 @@ const initialState = {
     isSuccess: false
 }
 
-export const setproducts = createAction("productReducer/setproducts")
-export const setproduct = createAction("productReducer/setproduct")
-export const setLoading = createAction("productReducer/setLoading")
-export const editproduct = createAction("productReducer/editproduct")
-export const setDetailLoading = createAction("productReducer/setDetailLoading")
-export const setIsEdit = createAction("productReducer/setIsEdit")
-export const setIsproductError = createAction("productReducer/setIsproductError")
-export const setIsproductSuccess = createAction("productReducer/setIsproductSuccess")
-export const setRequestCompleted = createAction("productReducer/setRequestCompleted")
+export const setCateringMenuItems = createAction("cateringMenuItemReducer/setCateringMenuItems")
+export const setCateringMenuItem = createAction("cateringMenuItemReducer/setCateringMenuItem")
+export const setLoading = createAction("cateringMenuItemReducer/setLoading")
+export const editCateringMenuItem = createAction("cateringMenuItemReducer/editCateringMenuItem")
+export const setDetailLoading = createAction("cateringMenuItemReducer/setDetailLoading")
+export const setIsEdit = createAction("cateringMenuItemReducer/setIsEdit")
+export const setIsCateringMenuItemError = createAction("cateringMenuItemReducer/setIsCateringMenuItemError")
+export const setIsCateringMenuItemSuccess = createAction("cateringMenuItemReducer/setIsCateringMenuItemSuccess")
+export const setRequestCompleted = createAction("cateringMenuItemReducer/setRequestCompleted")
 
-const productReducer = (state = initialState, action) => {
+const cateringMenuItemReducer = (state = initialState, action) => {
     switch (action.type) {
-        case setproducts.type:
+        case setCateringMenuItems.type:
             return {
                 ...state,
                 list: action.payload.data,
@@ -34,7 +35,7 @@ const productReducer = (state = initialState, action) => {
                 isError: false,
                 isSuccess: false
             }
-        case setproduct.type:
+        case setCateringMenuItem.type:
             return {
                 ...state,
                 object: action.payload.data,
@@ -52,20 +53,12 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 isDetailLoading: action.payload
             }
-        case editproduct.type:
+        case editCateringMenuItem.type:
             const data = action.payload.data
-            console.log(data.categoryId, 'here is the cat id ')
-            data.options = data.options.filter(c => c.name !== "Default")
-            data.optionsString = JSON.stringify(data.options)
             return {
                 ...state,
                 object: {...data,
-                    category: {label: data.category.name, value: data.category.id},
-                    restaurant: {label: data.restaurant.name, value: data.restaurant.id},
-                    productIngredients: data.productIngredients.map(i => {
-                        return {label: i.ingredient.name, value: i.ingredientId}
-                    }),
-                    optionType: {label: data.optionType === 1 ? "Default" : 'Numeric', value: data.optionType}
+                    cateringMenuId: {label: data.cateringMenu.name, value: data.cateringMenuId}
                 },
                 isEdit: true
             }
@@ -77,14 +70,14 @@ const productReducer = (state = initialState, action) => {
         case setIsEdit.type:
             return {
                 ...state,
-                isEdit: action.payload
+                isEdit: action.payload.data
             }
-        case setIsproductError.type:
+        case setIsCateringMenuItemError.type:
             return {
                 ...state,
                 isError: action.payload
             }
-        case setIsproductSuccess.type:
+        case setIsCateringMenuItemSuccess.type:
             return {
                 ...state,
                 isSuccess: action.payload
@@ -94,4 +87,4 @@ const productReducer = (state = initialState, action) => {
     }
 }
 
-export default productReducer
+export default cateringMenuItemReducer

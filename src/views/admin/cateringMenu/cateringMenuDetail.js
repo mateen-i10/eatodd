@@ -4,21 +4,21 @@ import {useDispatch, useSelector} from "react-redux"
 import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
 // ** Styles
 import '../../../@core/scss/base/pages/app-invoice.scss'
-import {getIngredient} from "../../../redux/ingredients/action"
 import UILoader from "../../../@core/components/ui-loader"
+import {getCateringMenu} from "../../../redux/cateringMenu/action"
 
 
-const ingredientDetail = ({match}) => {
+const CateringMenuDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
 
     //getting data from store
-    const isLoading = useSelector(state => state.ingredient.isLoading)
-    const ingredient = useSelector(state => state.ingredient.object)
-    console.log('ingredient', ingredient)
+    const isLoading = useSelector(state => state.cateringMenu.isLoading)
+    const cateringMenuObj = useSelector(state => state.cateringMenu.object)
+    console.log('cateringMenuObj', cateringMenuObj)
 
     useEffect(() => {
-        dispatch(getIngredient(id))
+        dispatch(getCateringMenu(id))
     }, [])
 
     return (
@@ -32,7 +32,7 @@ const ingredientDetail = ({match}) => {
                                     {/* Header */}
                                     <div className='d-flex justify-content-between flex-md-row flex-column mt-1 '>
                                         <div className='logo-wrapper'>
-                                            <h3 className='text-primary invoice-logo text-capitalize'>{ingredient.name}</h3>
+                                            <h3 className='text-primary invoice-logo text-capitalize'>{cateringMenuObj.name}</h3>
                                         </div>
                                     </div>
                                     {/* /Header */}
@@ -47,37 +47,19 @@ const ingredientDetail = ({match}) => {
                                         <Col xl={6} className="p-0">
                                             <div className='mt-1 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Name:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.name}</CardText>
+                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuObj.name}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'> Quantity:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.quantity}</CardText>
+                                                <p className='fw-bolder'> Priority:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuObj.priority}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'> Unit:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.unit}</CardText>
-                                            </div>
-                                        </Col>
-                                        <Col xl={6} className="p-0">
-                                            <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'> Fat:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.fat}</CardText>
-                                            </div>
-                                        </Col>
-                                        <Col xl={6} className="p-0">
-                                            <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'> Protein:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.protein}</CardText>
-                                            </div>
-                                        </Col>
-                                        <Col xl={6} className="p-0">
-                                            <div className='mt-2 invoice-date-wrapper ps-1'>
-                                                <p className='fw-bolder'> Carb:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{ingredient.carb}</CardText>
+                                                <p className='fw-bolder'> Is Wine Paired:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuObj.isWinePaired ? "True " : "False"}</CardText>
                                             </div>
                                         </Col>
                                     </Row>
@@ -89,7 +71,7 @@ const ingredientDetail = ({match}) => {
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Description:</p>
                                                 <CardText  className="mmb-25 ms-1 mb-1">
-                                                    {ingredient.description}
+                                                    {cateringMenuObj.description}
                                                 </CardText>
                                             </div>
                                         </Col>
@@ -105,5 +87,5 @@ const ingredientDetail = ({match}) => {
     )
 }
 
-export default ingredientDetail
+export default CateringMenuDetail
 

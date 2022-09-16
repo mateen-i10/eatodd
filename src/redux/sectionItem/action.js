@@ -1,39 +1,34 @@
 import {apiCall} from "../api/actions"
-
 import {
+    editSectionItem,
+    setDetailLoading, setIsEdit, setIsSectionItemError, setIsSectionItemSuccess,
     setLoading,
-    setSubCategorys,
-    setSubCategory,
-    editSubCategory,
-    setDetailLoading,
-    setRequestCompleted, setIsSubCategoryError, setIsSubCategorySuccess, setIsEdit
+    setRequestCompleted,
+    setSectionItem,
+    setSectionItems
 } from "./reducer"
+const url = 'sectionItem'
 
-const url = 'SubCategory'
-
-
-// ** Get All SubCategorys Data
-export const loadSubCategorys = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadSectionItems = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
             method: 'get',
-            onSuccess: setSubCategorys.type
+            onSuccess: setSectionItems.type
         }))
     }
 }
 
-export const getSubCategory = (id, isEdit = false) => {
-    console.log("dataGet", isEdit)
+export const getSectionItem = (id, isEdit = false) => {
     return async dispatch => {
         if (isEdit) {
             dispatch(apiCall({
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: editSubCategory.type
+                onSuccess: editSectionItem.type
             }))
         } else {
             dispatch(setDetailLoading(true))
@@ -41,58 +36,54 @@ export const getSubCategory = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: setSubCategory.type
+                onSuccess: setSectionItem.type
             }))
         }
     }
 }
-export const deleteSubCategory = (id) => {
+
+export const deleteSectionItem = (id) => {
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'SubCategory Deleted Successfully',
+            successMessage: 'Section Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type
+            onError: setIsSectionItemError.type,
+            isSuccess: setIsSectionItemSuccess.type
         }))
     }
 }
-export const addSubCategory = (data) => {
-    console.log('resData', data)
 
+export const addSectionItem = (data) => {
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'SubCategory Added Successfully',
+            successMessage: 'Ingredient Added Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type,
-            isFormData: true
+            onError: setIsSectionItemError.type,
+            isSuccess: setIsSectionItemSuccess.type
         }))
     }
 }
-export const updateSubCategory = (data) => {
-    console.log('updated data', data)
-    delete data.attachmentId
-    delete data.modifiedById
-    delete data.modifiedDate
+
+export const updateSectionItem = (data) => {
+    console.log('dataEmp', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'SubCategory Updated Successfully',
+            successMessage: 'Employee Updated Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type,
-            isFormData: true
+            onError: setIsSectionItemError.type,
+            isSuccess: setIsSectionItemSuccess.type
         }))
         dispatch(setIsEdit(false))
     }

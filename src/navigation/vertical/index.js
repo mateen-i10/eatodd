@@ -81,6 +81,30 @@ export default [
         navLink: '/genralProducts'
     },
     {
+        id: 'Section',
+        title: 'Sections',
+        icon: <Package size={20}/>,
+        navLink: '/section'
+    },
+    {
+        id: 'CateringMenu',
+        title: 'Catering Menu',
+        icon: <Package size={20}/>,
+        navLink: '/cateringMenu'
+    },
+    {
+        id: 'CateringMenuItem',
+        title: 'Catering Menu Items',
+        icon: <Package size={20}/>,
+        navLink: '/cateringMenuItem'
+    },
+   /* {
+        id: 'SectionItem',
+        title: 'Section Items',
+        icon: <Package size={20}/>,
+        navLink: '/sectionItem'
+    },*/
+    {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
         icon: <Facebook size={20}/>,

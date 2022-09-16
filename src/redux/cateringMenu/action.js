@@ -1,39 +1,34 @@
 import {apiCall} from "../api/actions"
-
 import {
+    editCateringMenu,
+    setCateringMenu,
+    setCateringMenus,
+    setDetailLoading, setIsCateringMenuError, setIsCateringMenuSuccess, setIsEdit,
     setLoading,
-    setSubCategorys,
-    setSubCategory,
-    editSubCategory,
-    setDetailLoading,
-    setRequestCompleted, setIsSubCategoryError, setIsSubCategorySuccess, setIsEdit
+    setRequestCompleted
 } from "./reducer"
+const url = 'cateringMenu'
 
-const url = 'SubCategory'
-
-
-// ** Get All SubCategorys Data
-export const loadSubCategorys = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCateringMenus = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
             method: 'get',
-            onSuccess: setSubCategorys.type
+            onSuccess: setCateringMenus.type
         }))
     }
 }
 
-export const getSubCategory = (id, isEdit = false) => {
-    console.log("dataGet", isEdit)
+export const getCateringMenu = (id, isEdit = false) => {
     return async dispatch => {
         if (isEdit) {
             dispatch(apiCall({
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: editSubCategory.type
+                onSuccess: editCateringMenu.type
             }))
         } else {
             dispatch(setDetailLoading(true))
@@ -41,58 +36,54 @@ export const getSubCategory = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: setSubCategory.type
+                onSuccess: setCateringMenu.type
             }))
         }
     }
 }
-export const deleteSubCategory = (id) => {
+
+export const deleteCateringMenu = (id) => {
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'SubCategory Deleted Successfully',
+            successMessage: 'Catering Menu Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
-export const addSubCategory = (data) => {
-    console.log('resData', data)
 
+export const addCateringMenu = (data) => {
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'SubCategory Added Successfully',
+            successMessage: 'Catering Menu Added Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type,
-            isFormData: true
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
-export const updateSubCategory = (data) => {
-    console.log('updated data', data)
-    delete data.attachmentId
-    delete data.modifiedById
-    delete data.modifiedDate
+
+export const updateCateringMenu = (data) => {
+    console.log('dataEmp', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'SubCategory Updated Successfully',
+            successMessage: 'Catering Menu Updated Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsSubCategoryError.type,
-            isSuccess: setIsSubCategorySuccess.type,
-            isFormData: true
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
         dispatch(setIsEdit(false))
     }

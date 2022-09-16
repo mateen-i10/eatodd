@@ -229,7 +229,7 @@ const Nutrition = () => {
                                     <div style={{fontSize: "1.7rem", fontWeight: 600}}>9g</div>
                                     <div>Protein</div>
                                 </td>
-                                <td className="text-primary" style={{paddingBottom: 30}}>
+                                <td className="" style={{paddingBottom: 30, color: "#c98200"}}>
                                     <div style={{fontSize: "1.7rem", fontWeight: 600}}>9g</div>
                                     <div>Carbs</div>
                                 </td>

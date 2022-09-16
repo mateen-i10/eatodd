@@ -81,7 +81,7 @@ export const updateIngredient = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Employee Updated Successfully',
+            successMessage: 'Ingredient Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsIngredientError.type,
             isSuccess: setIsIngredientSuccess.type
