@@ -30,10 +30,8 @@ const Order = () => {
                         id: item.id,
                         name: item.name,
                         description: item.description
-
                     }))
                     setMainCategory(final)
-
                 } else {
                     //general Error Action
                     toast.error(response.data.message)
