@@ -40,7 +40,7 @@ export const getWine = (id, isEdit = false) => {
         } else {
             dispatch(setDetailLoading(true))
             dispatch(apiCall({
-                url: `${url}/${id}`,
+                url: `${url}/GetWineProducts/${id}`,
                 data: {},
                 method: 'get',
                 onSuccess: setwine.type,
@@ -50,6 +50,7 @@ export const getWine = (id, isEdit = false) => {
     }
 }
 export const deleteWine = (id) => {
+    console.log('the id to be deleted', id)
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
@@ -64,9 +65,7 @@ export const deleteWine = (id) => {
     }
 }
 export const addWine = (data) => {
-    console.log('resData', data)
-    delete data.attachmentId
-    delete data.restaurantId
+    console.log('i come from add wine', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -83,12 +82,7 @@ export const addWine = (data) => {
 }
 export const updateWine = (data) => {
     console.log('updated data', data)
-    delete data.attachmentId
-    delete data.createdById
-    delete data.generalProductId
-    delete data.modifiedById
-    delete data.modifiedDate
-    delete data.restaurantId
+    console.log('i am called')
     return async dispatch => {
         dispatch(apiCall({
             url,

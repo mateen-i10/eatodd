@@ -62,11 +62,7 @@ export const deleteSubCategory = (id) => {
 }
 export const addSubCategory = (data) => {
     console.log('resData', data)
-    // my changes for short time @T
-    // delete data.attachment
-    // delete data.category
-    // delete data.generalProducts
-    // delete data.products
+
     return async dispatch => {
         dispatch(apiCall({
             url,

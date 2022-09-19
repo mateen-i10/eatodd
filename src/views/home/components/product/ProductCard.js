@@ -8,17 +8,14 @@ import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
 
-const ProductCard = ({item, limit, selectedItems, onItemClick, imgURL}) => {
+const ProductCard = ({item, limit, selectedItems, onItemClick, imgURL, subCatId, onOptionClick, onQuantityChange}) => {
     //local state
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
     const imgStyles = {
         width: "100%",
-        height: 180,
-        objectFit: "contain",
-        marginLeft: -8,
-        marginTop: -19
+        height: '100%'
     }
 
     // hooks
@@ -39,32 +36,17 @@ return <>
              borderWidth: 1,
              borderColor: "black"
          }}>
-        <div className={isLength ? "showFilling" : "hideFilling"} style={{
-            position: "absolute",
-            top: 30,
-            zIndex: 1,
-            backgroundColor: 'rgba(129, 190, 65, 1)',
-            color: 'white',
-            maxWidth: '50%',
-            marginLeft: '30%',
-            height: "35px",
-            width: '300px',
-            textAlign: "center",
-            padding: '3px',
-            fontSize: '1.4rem',
-            fontWeight: 500,
-            borderRadius: "3px"
-        }}>
-            You can select only {limit} fillings
-        </div>
         {customize ? <div
                 className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}>
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
                     const cols = index === 0 ? Math.ceil(10 / item.options.length) : Math.floor(10 / item.options.length)
                     return <div key={`optionsKey-${index}`}
-                        className={`col-${cols} ${index === 0 ? 'bg-primary text-white' : 'text-dark' } text-center cursor-pointer`}
+                        className={`col-${cols} ${op.isSelected ? 'bg-primary text-white' : 'text-dark' } text-center cursor-pointer`}
                         style={{height: 130}}
-                        onClick={() => { setCustomize(false) }}>
+                        onClick={() => {
+                            setCustomize(false)
+                            onOptionClick(item, index, limit, subCatId)
+                        }}>
                         <div style={{marginTop: 42, fontSize: 17, fontWeight: 440}}>
                             {`${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}
                         </div>
@@ -88,26 +70,26 @@ return <>
                     } else if (selectedItem.id === item.id) {
                         return  <ExtraQty value={lmt} key={`${selectedItem.id}-${index}`}/>
                     }
-                    /*if (selectedProVeg.length === 2 && doubled === false) {
-                        return (item.id === itemId ? <Half key={item.id}/> : "")
-                    } else if (selectedProVeg.length === 2 && doubled === true) {
-
-                        return (item.id === itemId ? <OneX key={item.id}/> : "")
-                    }*/
                 } else if (selectedItem.optionType === ProductTypes.Numeric && selectedItem.id === item.id) {
+                    const option = selectedItem.options.find(p => p.isSelected)
                     return <div className="mt-2" style={{
                         position: 'absolute',
-                        left: '-220px',
+                        left: '-180px',
                         backgroundColor: 'transparent',
-                        zIndex: 100
+                        zIndex: 1
                     }}>
-                        <Counter/>
+                        <Counter
+                            min={option ? option.min : 1}
+                            max={option ? option.max : 0}
+                            selectedProductIndex = {index}
+                            setProductQuantity={onQuantityChange}
+                        />
                     </div>
                 }
 
             })}
                 <div className="col-md-10 col-10 " onClick={() => {
-                    onItemClick(item)
+                    onItemClick(item, subCatId, limit)
                     setValue(!value)
                     if (limit !== 0 && selectedItems.length === limit) {
                         setIsLength(true)
@@ -138,10 +120,10 @@ return <>
                         </div>
                     </div>
                 </div>
-                <div className="col-md-2 col-2 mt-2 text-end">
+                <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 && <div className=" moreAddon cursor-pointer me-2" id={item?.id}
                          onClick={() => setCustomize(!customize)}>
-                        <MoreVertical size={34}/>
+                        <MoreVertical size={25}/>
                     </div>}
                     <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}</h5>
                 </div>

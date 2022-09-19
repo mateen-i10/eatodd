@@ -81,7 +81,7 @@ const EmployeeDetail = ({match}) => {
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Restaurants:</p>
                                                 {employee.restaurants?.map(i => {
-                                                    return <Badge className="mmb-25 ms-1 mb-1"
+                                                    return <Badge key={i.id} className="mmb-25 ms-1 mb-1"
                                                                   color={'light-primary'}
                                                                   pill>
                                                         {i.restaurant.name}

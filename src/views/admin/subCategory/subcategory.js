@@ -73,19 +73,23 @@ const SubCategory = () => {
             })
     }
 
+    const [commonFields] = useState([
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
+    ])
+
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Category')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
-    const formData = [
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
+    const [formData, setFormData] = useState([
+        ...commonFields,
         {type:FieldTypes.File, label: 'Image', placeholder: 'Select image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
-    ]
+    ])
 
     // ** schema for validations
     const schema = Joi.object({
@@ -110,7 +114,11 @@ const SubCategory = () => {
     useModalError(isError, setModalLoading, setIsSubCategoryError)
 
     const addClick = () => {
-        setModalTitle('Add Category')
+        setModalTitle('Add SubCategory')
+        setFormData([
+            ...commonFields,
+            {type:FieldTypes.File, label: 'Image', placeholder: 'Select image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+        ])
         toggle()
     }
 
@@ -118,7 +126,8 @@ const SubCategory = () => {
         console.log("edit", id)
         toggle()
         dispatch(getSubCategory(id, true))
-        setModalTitle('Edit Category')
+        setFormData([...commonFields])
+        setModalTitle('Edit SubCategory')
         setModalLoading(true)
     }
     const deleteClick = (id, e) => {

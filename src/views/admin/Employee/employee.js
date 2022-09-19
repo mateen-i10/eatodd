@@ -66,7 +66,7 @@ const Employees = (props) => {
     const permissions = async () => {
         return httpService._get(`${baseURL}permission/permissions`)
             .then(response => {
-                console.log('per', response)
+                console.log('permisions', response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const keys = Object.keys(response.data.data)

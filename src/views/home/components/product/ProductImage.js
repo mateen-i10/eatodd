@@ -5,8 +5,12 @@ const ProductImage = ({path, attachmentId, styles, classes }) => {
 
     console.log('path', path)
     console.log('attachmentId', attachmentId)
-
-    return <img src={imgURL} className={classes} alt="..."
+    // hooks
+    /*const [isLoading, response] = useAPI('', 'get', {}, 'blob')
+    //setProducts([response?.data])
+    console.log('isLoading', isLoading)
+    console.log('response', response)*/
+    return <img src={imgURL} className={classes} alt="product image"
              style={{...styles}} />
 }
 
