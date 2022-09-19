@@ -105,7 +105,8 @@ const Order = () => {
                                         </div>
                                     </div>
                             </div>
-                        )) : <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
+                        )) : <ComponentSpinner/>
+                        // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }
                 </div>
             </div>

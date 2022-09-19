@@ -55,7 +55,7 @@ const Catering = () => {
             <div className='bg-white'>
                 <div className="container-sm mb-3">
                     <div className="row mt-3 justify-content-center">
-                        <div className="col-md-3 col-sm-12 mb-3" style={{marginLeft: '-50px'}}>
+                        <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
                             <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
                             <hr/>
                             <div style={{
@@ -76,7 +76,7 @@ const Catering = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-md-8 col-10 ">
+                        <div className="col-md-9 col-12 ">
                             <DetailsMenuPage selectedCategory={selectedCategory}
                                              xl={xl}
                                              md={md}
