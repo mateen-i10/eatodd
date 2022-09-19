@@ -69,7 +69,6 @@ const Menu = (props) => {
         addMealToCart(meal)
         history.push('/home')
     }
-
     const handleSelectProduct = (product, subCatId, limit) => {
         const finalProducts = [...selectedProducts]
 
@@ -125,7 +124,6 @@ const Menu = (props) => {
         final[index].selectedQuantity = value
         setSelectedProducts([...final])
     }
-
     const subcategoryMenu = (heading, limit, pro, subCatId) => (
         <>
             <div className='text-center text-uppercase text-primary fw-bolder my-2'>
