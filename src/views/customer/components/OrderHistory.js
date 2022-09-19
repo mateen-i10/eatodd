@@ -6,14 +6,7 @@ import React, {Fragment, useEffect, useState} from 'react'
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown} from 'react-feather'
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    Input,
-    Row,
-    Col
-} from 'reactstrap'
+import {Card, CardHeader, CardTitle, Col, Input, Row} from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import {loadReorderHistory} from "../../../redux/reorderhistory/actions"
 
@@ -139,7 +132,7 @@ const OrderHistory = () => {
                             className='dataTable-filter mb-50'
                             type='text'
                             bsSize='sm'
-                            PlaceHolder='search'
+                            placeholder='search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}
@@ -152,7 +145,7 @@ const OrderHistory = () => {
                     columns={columns}
                     paginationPerPage={7}
                     className='react-dataTable'
-                    sortIcon={<ChevronDown size={10} />}
+                    sortIcon={<ChevronDown size={10}/>}
                     paginationDefaultPage={currentPage + 1}
                     paginationComponent={CustomPagination}
                     data={searchValue.length ? filteredData : reorderList}

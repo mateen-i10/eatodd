@@ -24,9 +24,9 @@ const Catering = () => {
             <div className="container-sm">
                 <div className="row">
                     <div className="col-md-4">
-                        <img style={{width: '300px'}} className="new mt-5"
-                             src={require("../../../assets/images/wineClub/Duckhorn Vinyards red.png").default}
-                             height={380}
+                        <img style={{width: '350px'}} className="new mt-5"
+                             src={require("../../../assets/images/images/catring-wine.png").default}
+                             height={400}
                         />
                     </div>
                     <div className="col-md-8 mt-5">
