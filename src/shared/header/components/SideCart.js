@@ -41,22 +41,10 @@ const Cart = (props) => {
         if (cartItems && cartItems.meals.length > 0) {
             pricesArr = cartItems.meals.map(meal => {
                 if (!isObjEmpty(meal)) {
-
-                    const mainItems = [...meal.selectedProVeg, ...meal.selectedRice, ...meal.selectedTopping, ...meal.selectedBeans]
-
-                    const additionalItems = [...meal.selectedSide, ...meal.selectedDrinks]
-
-                    let mainItemsPrice
-                    if (mainItems.length === 2) {
-                        mainItemsPrice = meal.selectedProVeg[0].price > meal.selectedProVeg[1].price ? meal.selectedProVeg[0].price : meal.selectedProVeg[1].price
-                    } else {
-                        mainItemsPrice = meal.selectedProVeg[0].price
-                    }
-                    let totalAddiItemsPrice = 0
-                    for (let i = 0; i <= additionalItems.length - 1; i++) {
-                        totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
-                    }
-                    return mainItemsPrice + totalAddiItemsPrice
+                    return meal.selectedProducts ? meal.selectedProducts.map(p => {
+                        const price = p.options.find(op => op.isSelected).price
+                        return price * p.quantity
+                }) : 0
                 }
 
             })
