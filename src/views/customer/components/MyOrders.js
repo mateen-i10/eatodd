@@ -5,15 +5,8 @@ import React, {Fragment, useEffect, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, RefreshCcw} from 'react-feather'
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    Input,
-    Row,
-    Col, UncontrolledTooltip
-} from 'reactstrap'
+import {ChevronDown, RefreshCcw} from 'react-feather'
+import {Card, CardHeader, CardTitle, Col, Input, Row, UncontrolledTooltip} from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import {loadReorderHistory} from "../../../redux/reorderhistory/actions"
 
@@ -105,7 +98,9 @@ const ReorderHistory = () => {
             cell: row => {
                 return (
                     <div className='d-flex cursor-pointer'>
-                        <span id='refresh' onClick={() => { console.log('reorderd the order under the id: ', row.id) }}><RefreshCcw size={15} /></span>
+                        <span id='refresh' onClick={() => {
+                            console.log('reorderd the order under the id: ', row.id)
+                        }}><RefreshCcw size={15}/></span>
                         <UncontrolledTooltip placement='top' target='refresh'>
                             Re Order
                         </UncontrolledTooltip>
@@ -153,7 +148,7 @@ const ReorderHistory = () => {
                             className='dataTable-filter mb-50'
                             type='text'
                             bsSize='sm'
-                            PlaceHolder='search'
+                            placeholder='search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}
@@ -166,7 +161,7 @@ const ReorderHistory = () => {
                     columns={columns}
                     paginationPerPage={7}
                     className='react-dataTable'
-                    sortIcon={<ChevronDown size={10} />}
+                    sortIcon={<ChevronDown size={10}/>}
                     paginationDefaultPage={currentPage + 1}
                     paginationComponent={CustomPagination}
                     data={searchValue.length ? filteredData : reorderList}
