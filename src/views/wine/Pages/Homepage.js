@@ -23,7 +23,7 @@ const Homepage = () => {
                                          alt="about-image"/>
                                 </div>
                             </div>
-                            <div className="col-md-7 col-lg-6  text-center">
+                            <div className="col-md-7 col-lg-6  text-start">
                                 <div className="about-3-txt mb-40">
                                     <p className="p-md fs-5 fw-bold " style={{color: "grey", lineHeight: "25px"}}>The
                                         OMG Wine Club was created to make you say OMG at your savings! We are the 1st

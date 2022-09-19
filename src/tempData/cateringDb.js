@@ -29,7 +29,7 @@ export const omgCorporate = [
         title: "SIGNATURE",
         price: 12,
         addToCart: 'Add To Cart',
-        detail: 'Comes with Chicken Kebob, Chicken Shawarma, Falafel, Hummus, Mediterranean Salad & Basmati Rice'
+        detail: 'Comes with Chicken Kebob, Chicken Shawarma'
     },
     {
         id: 2,
@@ -37,7 +37,7 @@ export const omgCorporate = [
         title: "CLASSIC",
         price: 8,
         addToCart: 'Add To Cart',
-        detail: "Chiken Shawarma, Steak Shawarma, Falafel, Hummus, Mediterranean Salad, Turmeric Rice & OMG Sauces."
+        detail: "Chiken Shawarma, Steak Shawarma, Falafel, Hummus."
     },
     {
         id: 3,

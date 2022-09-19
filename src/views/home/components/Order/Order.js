@@ -9,6 +9,7 @@ import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
 import {isObjEmpty} from "../../../../utility/Utils"
+import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 
 // const mainMenu = [
 //     {
@@ -155,7 +156,8 @@ const Order = () => {
                                     </div>
                                 </Link>
                             </div>
-                        )) : <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
+                        )) : <ComponentSpinner/>
+                        // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }
                 </div>
             </div>
