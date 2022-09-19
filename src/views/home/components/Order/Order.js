@@ -7,9 +7,9 @@ import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
-import {isObjEmpty} from "../../../../utility/Utils"
 import {useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
+import ProductImage from "../product/ProductImage"
 
 const Order = () => {
     //get redux state
@@ -20,38 +20,24 @@ const Order = () => {
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
             .then(response => {
+                console.log(response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
-                    return response
+                    const data = response.data.data
+                    console.log("data", data)
+                    const final = data.map(item => ({
+                        attachment: item.attachment,
+                        id: item.id,
+                        name: item.name,
+                        description: item.description
+
+                    }))
+                    setMainCategory(final)
+
                 } else {
                     //general Error Action
                     toast.error(response.data.message)
                     return null
-                }
-            })
-            .then(async res => {
-                if (res && !isObjEmpty(res)) {
-                    const arr = [...res.data.data]
-                    try {
-                        const final = []
-                        for (const item of arr) {
-                            if (item.attachment !== null) {
-                                const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
-                                const image = URL.createObjectURL(result.data)
-                                final.push({
-                                    id: item.id,
-                                    name: item.name,
-                                    description: item.description,
-                                    image,
-                                    status: res.status
-                                })
-                            }
-                        }
-                        setMainCategory(final)
-
-                    } catch (e) {
-                        toast.error(e.message)
-                    }
                 }
             })
             .catch(error => {
@@ -60,6 +46,7 @@ const Order = () => {
 
     }, [])
 
+    console.log("mein category", mainCategory)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -87,24 +74,26 @@ const Order = () => {
                     {
                         mainCategory.length ? mainCategory.map(item => (
                             <div className="col-md-3 col-sm-5  col-6 top-level-menu" key={item.id}>
-                                    <div className="menu-item" onClick={() => {
-                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", { categoryId: item.id })
-                                    }}>
-                                        <div className="thumbnail">
-                                            <img
-                                                src={item.image}
-                                                alt="category image"
-                                                width={200}
-                                                height={180}
-                                            />
-                                        </div>
-                                        <div className="text2">
-                                            <div className="display-name">{item.name}</div>
-                                            <div className="order-cta">Order
-                                                <div className="arrow-right"></div>
-                                            </div>
+                                <div className="menu-item" onClick={() => {
+                                    history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                }}>
+                                    <div className="thumbnail">
+                                        <ProductImage attachment={item.attachment}
+                                                      styles={{width: "200px", height: "180px"}}/>
+                                        {/*<img*/}
+                                        {/*    src={item.image}*/}
+                                        {/*    alt="category image"*/}
+                                        {/*    width={200}*/}
+                                        {/*    height={180}*/}
+                                        {/*/>*/}
+                                    </div>
+                                    <div className="text2">
+                                        <div className="display-name">{item.name}</div>
+                                        <div className="order-cta">Order
+                                            <div className="arrow-right"></div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         )) : <ComponentSpinner/>
                         // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>

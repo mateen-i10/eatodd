@@ -1,19 +1,8 @@
 // ** React Imports
-import { Fragment } from 'react'
+import {Fragment} from 'react'
 
 // ** Reactstrap Imports
-import {
-    Row,
-    Col,
-    Card,
-    Form,
-    Alert,
-    Button,
-    CardBody,
-    CardTitle,
-    CardHeader,
-    FormFeedback
-} from 'reactstrap'
+import {Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormFeedback, Row} from 'reactstrap'
 
 // ** Custom Components
 import InputPasswordToggle from '@components/input-password-toggle'
@@ -21,21 +10,36 @@ import InputPasswordToggle from '@components/input-password-toggle'
 // ** Third Party Components
 import * as yup from 'yup'
 import 'cleave.js/dist/addons/cleave-phone.us'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm, Controller } from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import {Controller, useForm} from 'react-hook-form'
+import httpService, {baseURL} from "../../../utility/http"
 
-const SignupSchema = yup.object().shape({
-    password: yup.string().min(8).required(),
-    confirmPassword: yup
-        .string()
-        .min(8)
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
-})
+
+const showErrors = (field, valueLen, min) => {
+    if (valueLen === 0) {
+        return `${field} field is required`
+    } else if (valueLen > 0 && valueLen < min) {
+        return `${field} must be at least ${min} characters`
+    } else {
+        return ''
+    }
+}
 
 const defaultValues = {
-    password: '',
-    confirmPassword: ''
+    newPassword: '',
+    currentPassword: ''
 }
+
+const SignupSchema = yup.object().shape({
+    currentPassword: yup
+        .string()
+        .min(8, obj => showErrors('Current Password', obj.value.length, obj.min))
+        .required(),
+    newPassword: yup
+        .string()
+        .min(8, obj => showErrors('New Password', obj.value.length, obj.min))
+        .required()
+})
 
 const SecurityTab = () => {
     // ** Hooks
@@ -43,12 +47,28 @@ const SecurityTab = () => {
         control,
         trigger,
         handleSubmit,
-        formState: { errors }
-    } = useForm({ defaultValues, resolver: yupResolver(SignupSchema) })
+        formState: {errors}
+    } = useForm({defaultValues, resolver: yupResolver(SignupSchema)})
 
     const onSubmit = data => {
         trigger()
-        console.log(data)
+        // console.log(data)
+        httpService._patch(`${baseURL}Auth/ChangePassword`, {
+            oldPassword: data.currentPassword,
+            newPassword: data.newPassword
+        })
+            .then(response => {
+                console.log("response change password", response)
+                // success case
+                // if (response.status === 200 && response.data.statusCode === 200) {
+                //     return response
+                // } else {
+                //     //general Error Action
+                //     toast.error(response.data.message)
+                //     return null
+                // }
+            })
+        
     }
 
     return (
@@ -60,41 +80,42 @@ const SecurityTab = () => {
                 <CardBody>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
-                            <Col className='mb-2' md={6}>
+                            <Col sm='6' className='mb-1'>
                                 <Controller
-                                    id='password'
-                                    name='password'
                                     control={control}
-                                    render={({ field }) => (
+                                    id='currentPassword'
+                                    name='currentPassword'
+                                    render={({field}) => (
+                                        <InputPasswordToggle
+                                            label='Current Password'
+                                            htmlFor='currentPassword'
+                                            className='input-group-merge'
+                                            invalid={errors.currentPassword && true}
+                                            {...field}
+                                        />
+                                    )}
+                                />
+                                {errors.currentPassword && (
+                                    <FormFeedback className='d-block'>{errors.currentPassword.message}</FormFeedback>
+                                )}
+                            </Col>
+                            <Col sm='6' className='mb-1'>
+                                <Controller
+                                    control={control}
+                                    id='newPassword'
+                                    name='newPassword'
+                                    render={({field}) => (
                                         <InputPasswordToggle
                                             label='New Password'
-                                            htmlFor='password'
+                                            htmlFor='newPassword'
                                             className='input-group-merge'
-                                            invalid={errors.password && true}
+                                            invalid={errors.newPassword && true}
                                             {...field}
                                         />
                                     )}
                                 />
-                                {errors.password && <FormFeedback className='d-block'>{errors.password.message}</FormFeedback>}
-                            </Col>
-                            <Col className='mb-2' md={6}>
-                                <Controller
-                                    control={control}
-                                    id='confirmPassword'
-                                    name='confirmPassword'
-                                    render={({ field }) => (
-                                        <InputPasswordToggle
-                                            label='Confirm New Password'
-                                            htmlFor='confirmPassword'
-                                            className='input-group-merge'
-                                            invalid={errors.confirmPassword && true}
-                                            {...field}
-                                        />
-                                    )}
-                                />
-                                {errors.confirmPassword && (
-                                    <FormFeedback className='d-block'>{errors.confirmPassword.message}</FormFeedback>
-                                )}
+                                {errors.newPassword &&
+                                    <FormFeedback className='d-block'>{errors.newPassword.message}</FormFeedback>}
                             </Col>
                             <Col xs={12}>
                                 <Button type='submit' color='primary'>
