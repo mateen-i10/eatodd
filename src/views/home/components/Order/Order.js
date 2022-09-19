@@ -4,61 +4,17 @@ import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
-import {Link} from "react-router-dom"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
 import {isObjEmpty} from "../../../../utility/Utils"
-
-// const mainMenu = [
-//     {
-//         id: 1,
-//         title: "omg Plate",
-//         image: require("../../../../assets/images/ORDER/omg-p1.png").default,
-//         description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!"
-//     },
-//     {
-//         id: 2,
-//         title: "sandwich",
-//         image: require("../../../../assets/images/ORDER/sabdwich.png").default,
-//         description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served as a pita sandwich or a lavash wrap. Portioned and balanced according the Mediterranean Diet!  "
-//     },
-//     {
-//         id: 3,
-//         title: "featured plate",
-//         image: require("../../../../assets/images/ORDER/omg-p1.png").default,
-//         description: "Your choice of proteins, paired perfectly with Mediterranean flavors, served on a plate. Portioned and balanced according the Mediterranean Diet!  "
-//     },
-//     {
-//         id: 4,
-//         title: "salad",
-//         image: require("../../../../assets/images/ORDER/salad.png").default,
-//         description: "Your choice of perfectly seasoned protein, served with salad, a grain, and your favorite sauce. Portioned and balanced according the Mediterranean Diet!      "
-//     },
-//     {
-//         id: 5,
-//         title: "soup",
-//         image: require("../../../../assets/images/ORDER/soup.png").default,
-//         description: "Warm up without regret! All OMG Soups are portioned and balanced according the Mediterranean Diet!  "
-//     },
-//     {
-//         id: 6,
-//         title: "drinks",
-//         image: require("../../../../assets/images/ORDER/cola.png").default,
-//         description: "Have drink"
-//     },
-//     {
-//         id: 7,
-//         title: "wine",
-//         image: require('../../../../assets/images/ORDER/VCine.png').default,
-//         description: "JOIN THE OMG WINE CLUB AND ENJOY PRICES "
-//     }
-// ]
+import {useHistory} from "react-router-dom"
 
 const Order = () => {
     //get redux state
     const {userLocation} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
+    const history = useHistory()
 
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
@@ -103,8 +59,6 @@ const Order = () => {
 
     }, [])
 
-    // console.log("main Category ---", mainCategory)
-
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -132,16 +86,13 @@ const Order = () => {
                     {
                         mainCategory.length ? mainCategory.map(item => (
                             <div className="col-md-3 col-sm-5  col-6 top-level-menu" key={item.id}>
-                                <Link to={userLocation.length ? "/OmgPlate" : "/gmap"}>
-                                    <div className="menu-item"
-                                        //      onClick={() => (
-                                        //     dispatch(itemSelected({name: item.title, description: item.description}))
-                                        // )}
-                                    >
+                                    <div className="menu-item" onClick={() => {
+                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", { categoryId: item.id })
+                                    }}>
                                         <div className="thumbnail">
                                             <img
                                                 src={item.image}
-                                                alt="Burrito"
+                                                alt="category image"
                                                 width={200}
                                                 height={180}
                                             />
@@ -153,7 +104,6 @@ const Order = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
                             </div>
                         )) : <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }

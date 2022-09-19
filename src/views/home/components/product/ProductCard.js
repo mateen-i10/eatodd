@@ -8,7 +8,7 @@ import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
 
-const ProductCard = ({item, limit, selectedItems, onItemClick, imgURL, subCatId, onOptionClick, onQuantityChange}) => {
+const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCatId, onOptionClick, onQuantityChange}) => {
     //local state
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
@@ -99,7 +99,7 @@ return <>
                     <div className="row g-0">
                         <div className="col-lg-4  col-md-4 col-5">
                             <ProductImage
-                                path={imgURL}
+                                attachment = {attachment}
                                 classes={"img-fluid rounded-start"}
                                 styles={!value ? imgStyles : {
                                      ...imgStyles,

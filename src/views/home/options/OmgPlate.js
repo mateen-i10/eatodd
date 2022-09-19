@@ -1,27 +1,25 @@
 import React, {useEffect, useState} from 'react'
 import TopShelf from "./components/TopShelf"
-import img from '../../../assets/images/images/image2.png'
 import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
-import {useHistory} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 import {addMealToCart} from "../../../utility/Utils"
 import ProductDetail from "../components/product/ProductCard"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
-const Menu = (props) => {
+const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
     const [selectedProducts, setSelectedProducts] = useState([])
     const [selectedMenuItems, setSelectedMenuItems] = useState({})
     const [mealName, setMealName] = useState("")
     const history = useHistory()
-
-    const img = props.image
-    const defaultImage = require("../../../assets/images/default/defaultImage.png").default
+    const {state} = useLocation()
+    const {categoryId, restaurantId} = state
 
     // hooks
-    const [isLoading, response] = useAPI('product/categoryProducts?categoryId=2', 'get', {}, '', true)
+    const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
     useEffect(() => {
         console.log('isLoading', isLoading)
         if (response && response.data) {
@@ -33,7 +31,6 @@ const Menu = (props) => {
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
-                currentValue.image = currentValue.attachment ? currentValue.attachment : defaultImage
                 currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options[0].price : null
                 if (currentValue.options && currentValue.options.length > 0) currentValue.options[0].isSelected = true
                 acc[currentValue.subCategory['name']] = {
@@ -135,7 +132,7 @@ const Menu = (props) => {
             return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}>
                 <ProductDetail
                     item={element}
-                    imgURL={element.image}
+                    attachment={element.attachment}
                     selectedItems={selectedProducts}
                     onItemClick={handleSelectProduct}
                     limit={limit}
@@ -153,7 +150,7 @@ const Menu = (props) => {
             <Header/>
             <div className="container-sm ">
                 <TopShelf
-                    imgPath={img}
+                    attachment={category?.attachment}
                     name={category?.name}
                     description={category?.description}
                 />
@@ -177,7 +174,3 @@ const Menu = (props) => {
     )
 }
 export default Menu
-
-Menu.defaultProps = {
-    image: img
-}

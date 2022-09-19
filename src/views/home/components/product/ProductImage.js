@@ -1,16 +1,31 @@
-import React, {memo, useState} from "react"
+import React, {memo, useEffect, useState} from "react"
+import useAPI from "../../../../utility/customHooks/useAPI"
 
-const ProductImage = ({path, attachmentId, styles, classes }) => {
-    const [imgURL] = useState(path)
+const ProductImage = ({attachment, styles, classes }) => {
+    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
+    const [imageURL, setImageURL] = useState(!attachment || !attachment?.path ? defaultImage : '')
+    const [imagePath, setImagePath] = useState('')
 
-    console.log('path', path)
-    console.log('attachmentId', attachmentId)
     // hooks
-    /*const [isLoading, response] = useAPI('', 'get', {}, 'blob')
-    //setProducts([response?.data])
-    console.log('isLoading', isLoading)
-    console.log('response', response)*/
-    return <img src={imgURL} className={classes} alt="product image"
+        const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
+        console.log('isLoading in image card', isLoading)
+        console.log('response in image card', response)
+        console.log('attachment in image card', attachment)
+        console.log('imagePath in image card', imagePath)
+
+    useEffect(() => {
+        if (attachment && attachment.path && attachment.extension) {
+            setImagePath(`media/getMediaByPath?path=${attachment.path}&&extension=${attachment.extension}`)
+        }
+    }, [attachment])
+
+    useEffect(() => {
+        if (response) {
+            setImageURL(URL.createObjectURL(response))
+        }
+    }, [response])
+
+    return <img src={imageURL} className={classes} alt="product image"
              style={{...styles}} />
 }
 

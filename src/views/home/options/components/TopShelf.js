@@ -1,16 +1,15 @@
 import React from 'react'
 import ProductImage from "../../components/product/ProductImage"
 
-const TopShelf = ({imgPath, imgId, name, description}) => {
-    console.log('imgId', imgId)
+const TopShelf = ({attachment, name, description}) => {
     return (
         <>
             <div className="container-sm">
                 <div className="row my-5">
                     <div className="col-md-5 col-12">
                         <ProductImage
-                            path={imgPath}
-                            styles={{width: "87%", borderRadius: 20}}/>
+                            attachment={attachment}
+                            styles={{width: "85%", height: "75%", borderRadius: 20}}/>
                     </div>
                     <div className="col-md-6 col-12  mt-1">
                         <div className="text-primary fw-bolder "
