@@ -3,12 +3,14 @@ import React from "react"
 import UILoader from "../../../@core/components/ui-loader"
 import {useDispatch} from "react-redux"
 import {locationAdded} from "../../../redux/restaurantLocation/restaurantLocation"
-import {Link} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 import {userLocationAdded} from "../../../redux/userLocation/userLocation"
 
 const NearByPlaces = ({places, isLoading, userLocation}) => {
-
     const dispatch = useDispatch()
+    const history = useHistory()
+    const {state} = useLocation()
+    const {categoryId} = state
 
     return <UILoader blocking={isLoading}>
         <Row className="align-items-center, justify-content-center mt-3 pickup-list">
@@ -28,14 +30,16 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                                         <small>{place.address}</small>
                                     </div>
                                 </div>
-                                <Link to="/OmgPlate"> <Button className='text-uppercase mt-1' color='primary' outline
-                                                              onClick={() => {
+                                <div onClick={() => {
+                                    history.push('/OmgPlate', categoryId ? { categoryId, restaurantId: place.id } : null)
+                                }}>
+                                    <Button className='text-uppercase mt-1' color='primary' outline onClick={() => {
                                                                   dispatch(locationAdded(place))
                                                                   if (userLocation !== null) dispatch(userLocationAdded(userLocation))
                                                               }}>
                                     Select
                                 </Button>
-                                </Link>
+                                </div>
                             </div>
                         </CardBody>
                     )) : ""}

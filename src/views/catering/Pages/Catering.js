@@ -24,9 +24,9 @@ const Catering = () => {
             <div className="container-sm">
                 <div className="row">
                     <div className="col-md-4">
-                        <img style={{width: '300px'}} className="new mt-5"
-                             src={require("../../../assets/images/wineClub/Duckhorn Vinyards red.png").default}
-                             height={380}
+                        <img style={{width: '350px'}} className="new mt-5"
+                             src={require("../../../assets/images/images/catring-wine.png").default}
+                             height={400}
                         />
                     </div>
                     <div className="col-md-8 mt-5">
@@ -55,7 +55,7 @@ const Catering = () => {
             <div className='bg-white'>
                 <div className="container-sm mb-3">
                     <div className="row mt-3 justify-content-center">
-                        <div className="col-md-3 col-sm-12 mb-3" style={{marginLeft: '-50px'}}>
+                        <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
                             <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
                             <hr/>
                             <div style={{
@@ -76,7 +76,7 @@ const Catering = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-md-8 col-10 ">
+                        <div className="col-md-9 col-12 ">
                             <DetailsMenuPage selectedCategory={selectedCategory}
                                              xl={xl}
                                              md={md}

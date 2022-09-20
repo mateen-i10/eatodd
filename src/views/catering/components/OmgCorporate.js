@@ -9,7 +9,7 @@ const OmgCorporate = (props) => {
 
     return (
 
-        <div className="col-5">
+        <div className="col-lg-4 col-sm-6 col-9 mx-auto">
             <div className="card" style={{height: "380px", paddingBottom: "15px"}}>
                 <div>
                     <img src={item.image} className="card-img-top" style={{height: 185, objectFit: "cover"}} alt="..."/>
