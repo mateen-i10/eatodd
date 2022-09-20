@@ -13,6 +13,7 @@ import 'cleave.js/dist/addons/cleave-phone.us'
 import {yupResolver} from '@hookform/resolvers/yup'
 import {Controller, useForm} from 'react-hook-form'
 import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 
 const showErrors = (field, valueLen, min) => {
@@ -58,17 +59,18 @@ const SecurityTab = () => {
             newPassword: data.newPassword
         })
             .then(response => {
-                console.log("response change password", response)
+                // console.log("response change password", response)
                 // success case
-                // if (response.status === 200 && response.data.statusCode === 200) {
-                //     return response
-                // } else {
-                //     //general Error Action
-                //     toast.error(response.data.message)
-                //     return null
-                // }
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    toast.success(response.data.message)
+                    return response
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                    return null
+                }
             })
-        
+
     }
 
     return (
