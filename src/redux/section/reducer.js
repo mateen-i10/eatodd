@@ -54,9 +54,11 @@ const sectionReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editSection.type:
+            const data = action.payload.data
+            console.log("editData", data)
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...data},
                 isEdit: true
             }
         case setRequestCompleted.type:
