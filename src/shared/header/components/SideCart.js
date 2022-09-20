@@ -43,7 +43,7 @@ const Cart = (props) => {
                 if (!isObjEmpty(meal)) {
                     return meal.selectedProducts ? meal.selectedProducts.map(p => {
                         const price = p.options.find(op => op.isSelected).price
-                        return price * p.quantity
+                        return price * p.selectedQuantity
                 }) : 0
                 }
 
@@ -51,11 +51,11 @@ const Cart = (props) => {
         }
         let totalBagPrice = 0
         if (pricesArr.length > 0) {
-            for (let i = 0; i <= pricesArr.length - 1; i++) {
-                totalBagPrice = totalBagPrice + pricesArr[i]
-            }
+            totalBagPrice = pricesArr.reduce((pre, next) => {
+                return pre + next
+            })
         }
-        return Number(totalBagPrice.toFixed(2))
+        return Number(totalBagPrice)
     }
 
     const toggleCanvasStart = () => {
@@ -183,10 +183,10 @@ const Cart = (props) => {
                                 <div>
                                     <div className='col-md-12 '>
                                         {cartItems && cartItems.meals.map((meal, index) => {
-                                            return !isObjEmpty(meal) ? <>
-                                                <ItemsInCart key={index} foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
+                                            return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
+                                                <ItemsInCart foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
                                                 <hr/>
-                                            </> : null
+                                            </div> : null
                                         })}
                                     </div>
 

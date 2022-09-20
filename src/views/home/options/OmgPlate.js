@@ -61,6 +61,7 @@ const Menu = () => {
     const dispatchingItems = () => {
         const meal = {
             mealName,
+            categoryName: category?.name,
             selectedProducts
         }
         addMealToCart(meal)
@@ -70,19 +71,32 @@ const Menu = () => {
         const finalProducts = [...selectedProducts]
 
         if (selectedProducts && selectedProducts.length > 0) {
-            const index = selectedProducts.indexOf(product)
+            const index = selectedProducts.findIndex(pro => pro.id === product.id)
             if (index > -1) {
                 // remove case
                 finalProducts.splice(index, 1)
                 setSelectedProducts([...finalProducts])
             } else {
                 // add case
-                if (limit !== 0 && selectedProducts.filter(p => p.subCategory.id === subCatId).length === limit) {
+                const existingProducts = selectedProducts.filter(p => p.subCategory.id === subCatId)
+                let updatedProducts = [...selectedProducts]
+                const sectionLimit = existingProducts.length
+                if (limit !== 0 && sectionLimit === limit) {
                     toast.info(`You can select only ${limit} items from '${product.subCategory.name.toUpperCase()}'`)
                     return
+                } else if (limit !== 0 && sectionLimit > 0 && sectionLimit < limit) {
+                    updatedProducts = [
+                        ...selectedProducts.filter(p => p.subCategory.id !== subCatId),
+                        ...existingProducts.map(p => (
+                        {...p, selectedQuantity: 1 / limit}
+                    ))
+                    ]
+                    product.selectedQuantity = 1 / limit
+                } else {
+                    product.selectedQuantity = 1
                 }
-                product.selectedQuantity = 1
-                setSelectedProducts([...selectedProducts, product])
+
+                setSelectedProducts([...updatedProducts, product])
             }
         } else {
             // empty list case
