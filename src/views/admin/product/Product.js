@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState, useEffect} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -79,8 +79,6 @@ const Product = (props) => {
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
-        // {type:FieldTypes.Number, label: 'RetailPrice', placeholder: 'Enter RetailPrice', name:'retailPrice', isRequired:false, fieldGroupClasses: 'col-6'},
-        // {type:FieldTypes.Number, label: 'OnlinePrice', placeholder: 'Enter OnlinePrice', name:'onlinePrice', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
@@ -116,7 +114,10 @@ const Product = (props) => {
     }
 
     const AddFromExistingData = () => {
-        setFormData([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false}])
+        setFormData([
+            {type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'Select Restaurant', placeholder: 'Select Product', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
+        ])
         setFormFeilds(0)
         setShowOption(false)
 
@@ -228,24 +229,24 @@ const Product = (props) => {
         console.log('the option type wala!!!', optionType)
         event.preventDefault()
 
-        const Ingredient = formState.productIngredients.map(i => {
-            return {ingredientId: i.value}
-        })
 
-        console.log('this is the cat id lets see if works?', Ingredient)
-
+        // console.log('this is the cat id lets see if works?', Ingredient)
+        console.log('lets see the value of : ', formFeilds)
 
         let finalData = {}
        if (formFeilds === 1 || formFeilds === 3) {
+           const Ingredient = formState.productIngredients.map(i => {
+               return {ingredientId: i.value}
+           })
            finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
-       } else {
-           finalData = {...formState, generalProductId: formState.generalProduct?.value }
+           delete finalData.generalProductId
+       } else if (formFeilds === 0) {
+           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
        }
         console.log(finalData, "lets see")
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
-        delete finalData.generalProductId
         delete finalData.modifiedById
         delete finalData.modifiedDate
 
