@@ -1,264 +1,327 @@
 // ** Third Party Components
-import { useForm, Controller } from 'react-hook-form'
+// import {useForm} from 'react-hook-form'
 
 // ** Reactstrap Imports
-import { Form, Input, Card, Label, CardHeader, CardTitle, CardBody, CardText, Button, Row, Col } from 'reactstrap'
+import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
 import {useState} from "react"
 
-const defaultValues = {
-  fullName: '',
-  city: '',
-  state: '',
-  phonenumb: '',
-  flat: '',
-  pinCode: '',
-  landmark: ''
-}
-
 const Address = props => {
-  // ** Props
-  const { stepper } = props
+    // ** Props
+    const {stepper} = props
 
-  // ** Vars
-  const {
-    control,
-    setError,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({ defaultValues })
+    const [billingAddress, setBillingAddress] = useState(null)
+    const [shippingAddress, setShippingAddress] = useState(null)
+    const [userAddress, setUserAddress] = useState("")
+    const [userNumber, setUserNumber] = useState(0)
 
-  const [user, setUser] = useState("")
-  const [contact, setContact] = useState("")
-  const [address, setAddress] = useState("")
 
-  const onSubmit = data => {
-    if (Object.values(data).every(field => field.length > 0)) {
-      // stepper.next()
-      console.log("Form Data", data.fullName)
-      setUser(data.fullName)
-      setContact(data.phonenumb)
-      setAddress(data.flat)
+    const [shipCity, setShipCity] = useState("")
+    const [shipState, setShipState] = useState("")
+    const [shipCountry, setShipCountry] = useState("")
+    const [shipZipCode, setShipZipCode] = useState(0)
+    const [shipPhoneNo, setShipPhoneNo] = useState(0)
+    const [shipAddress, setShipAddress] = useState("")
 
-    } else {
-      for (const key in data) {
-        if (data[key].length === 0) {
-          setError(key, {
-            type: 'manual'
-          })
-        }
-      }
+
+    const [billCity, setBillCity] = useState("")
+    const [billState, setBillState] = useState("")
+    const [billCountry, setBillCountry] = useState("")
+    const [billZipCode, setBillZipCode] = useState(0)
+    const [billPhoneNo, setBillPhoneNo] = useState(0)
+    const [billAddress, setBillAddress] = useState("")
+    // console.log("shipping City", shipCity)
+    // console.log("state", shipState)
+    // console.log("shipping country", shipCountry)
+    // console.log("shipping zip code", shipZipCode)
+    // console.log("shipping phone no", shipPhoneNo)
+    // console.log("shipping address", shipAddress)
+    // console.log("bill city", billCity)
+    // console.log("bill state", billState)
+    // console.log("bill country", billCountry)
+    // console.log("bill ZipCode", billZipCode)
+    // console.log("bill Phone no", billPhoneNo)
+    // console.log("bill address", billAddress)
+    console.log("billing  address", billingAddress)
+    console.log("shipping address", shippingAddress)
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        setBillingAddress({
+            billingCity: billCity,
+            billingState: billState,
+            billingCountry: billCountry,
+            billingZipCode: billZipCode,
+            billingPhoneNo: billPhoneNo,
+            billingAdd: billAddress
+        })
+        setShippingAddress({
+            shippingCity: shipCity,
+            shippingState: shipState,
+            shippingCountry: shipCountry,
+            shippingZipCode: shipZipCode,
+            shippingPhoneNo: shipPhoneNo,
+            shippingAdd: shipAddress
+        })
+
+        setUserAddress(shipAddress)
+        setUserNumber(shipPhoneNo)
+
     }
-  }
 
-  return (
-      <>
-    <Form className='list-view product-checkout' onSubmit={handleSubmit(onSubmit)} style={{marginBottom: 60}} >
-      <div className='container-sm'>
-        <Row>
-          <Col xl={9}>
-            <Card>
-              <CardHeader className='flex-column align-items-start'>
-                <CardTitle tag='h4'>Add New Address</CardTitle>
-                <CardText className='text-muted mt-25'>
-                  Be sure to check "Deliver to this address" when you have finished
-                </CardText>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='fullName'>
-                        Full Name:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='fullName'
-                          render={({ field }) => (
-                              <Input id='fullName' placeholder='John Doe' invalid={errors.fullName && true} {...field} />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='phonenumb'>
-                        Mobile Number:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='phonenumb'
-                          render={({ field }) => (
-                              <Input
-                                  type='number'
-                                  id='phonenumb'
-                                  placeholder='0123456789'
-                                  invalid={errors.phonenumb && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='flat'>
-                        Flat, House No:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='flat'
-                          render={({ field }) => (
-                              <Input
-                                  type='number'
-                                  id='flat'
-                                  placeholder='9447 Glen Eagles Drive'
-                                  invalid={errors.flat && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='landmark'>
-                        Landmark e.g. near apollo hospital:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='landmark'
-                          render={({ field }) => (
-                              <Input
-                                  id='landmark'
-                                  placeholder='Near Apollo Hospital'
-                                  invalid={errors.landmark && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='city'>
-                        Town/City:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='city'
-                          render={({ field }) => (
-                              <Input
-                                  id='city'
-                                  placeholder='Los Angeles'
-                                  invalid={errors.city && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='pinCode'>
-                        Pincode:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='pinCode'
-                          render={({ field }) => (
-                              <Input
-                                  type='number'
-                                  id='pinCode'
-                                  placeholder='201301'
-                                  invalid={errors.pinCode && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='state'>
-                        State:
-                      </Label>
-                      <Controller
-                          control={control}
-                          name='state'
-                          render={({ field }) => (
-                              <Input
-                                  id='state'
-                                  placeholder='California'
-                                  invalid={errors.state && true}
-                                  {...field}
-                              />
-                          )}
-                      />
-                    </div>
-                  </Col>
-                  <Col md='6' sm='12'>
-                    <div className='mb-2'>
-                      <Label className='form-label' for='add-type'>
-                        Address Type:
-                      </Label>
-                      <Input type='select' name='add-type' id='add-type'>
-                        <option value='home'>Home</option>
-                        <option value='work'>Work</option>
-                      </Input>
-                    </div>
-                  </Col>
-                  <Col sm='6'>
-                    <Button color='primary' onClick={() => stepper.previous()} >
-                      Go Back
-                    </Button>
-                  </Col>
-                  <Col sm='6' className="text-end">
-                    <Button type='submit' color='primary'>
-                      Save
-                    </Button>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
+    return (
+        <>
+            <Form className='list-view product-checkout' onSubmit={onSubmit} style={{marginBottom: 60}}>
+                <div className='container-sm'>
+                    <Row>
+                        <Col xl={9}>
+                            <Card>
+                                <CardHeader className='flex-column align-items-start'>
+                                    <CardTitle tag='h4'>Add New Address</CardTitle>
+                                    <CardText className='text-muted mt-25'>
+                                        Be sure to check "Deliver to this address" when you have finished
+                                    </CardText>
+                                </CardHeader>
+                                <CardBody>
+                                    <Row>
+                                        <Col sm='6'>
+                                            <Card>
+                                                <CardHeader className='flex-column align-items-start'>
+                                                    <CardTitle tag='h4'>Shipping Address</CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='city'>
+                                                                Town/City:
+                                                            </Label>
+                                                            <Input
+                                                                id='city'
+                                                                placeholder='Los Angeles'
+                                                                onChange={(e) => setShipCity(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='state'>
+                                                                State:
+                                                            </Label>
+                                                            <Input
+                                                                id='state'
+                                                                placeholder='California'
+                                                                onChange={(e) => setShipState(e.target.value)}
+                                                                required
+                                                            />
 
-          <Col xl={3}>
-            <div className='customer-card'>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle tag='h4'>User Data</CardTitle>
-                    </CardHeader>
-                    <CardBody>
-                      <CardText>{user !== '' ? <div>
-                          <h5>Customer Name:</h5>
-                          <p>{user}</p>
-                      </div> : []}</CardText>
-                      <CardText>{contact !== '' ? <div>
-                        <h5>Contact Details:</h5>
-                        <p>{contact}</p>
-                      </div> : []}</CardText>
-                      <CardText>{address !== '' ? <div>
-                        <h5>address:</h5>
-                        <p>{address}</p>
-                      </div> : []}</CardText>
-                    </CardBody>
-                    {user !== "" ? <Button
-                        block
-                        type='button'
-                        color='primary'
-                        onClick={() => stepper.next()}
-                        className="btn-next delivery-address mt-2"
-                    >
-                      Deliver To This Address
-                    </Button> : []}
-                  </Card>
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </Form>
-      </>
-  )
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12' className='mb-1'>
+                                                        <Label className='form-label' for='country'>
+                                                            Country
+                                                        </Label>
+                                                        <Input
+                                                            id='country'
+                                                            placeholder='USA'
+                                                            onChange={(e) => setShipCountry(e.target.value)}
+                                                            required
+                                                        />
+                                                        {/*<Select*/}
+                                                        {/*    id='country'*/}
+                                                        {/*    isClearable={false}*/}
+                                                        {/*    className='react-select'*/}
+                                                        {/*    classNamePrefix='select'*/}
+                                                        {/*    options={countryOptions}*/}
+                                                        {/*    theme={selectThemeColors}*/}
+                                                        {/*    defaultValue={countryOptions[0]}*/}
+                                                        {/*/>*/}
+                                                    </Col>
+                                                    <Col sm='12' className='mb-2'>
+                                                        <Label className='form-label' for='zipCodeAddress'>
+                                                            Zip Code
+                                                        </Label>
+                                                        <Input type='number' id='zipCodeAddress' name='zipCodeAddress'
+                                                               placeholder='123456' maxLength='6'
+                                                               onChange={(e) => setShipZipCode(e.target.value)}
+                                                               required
+                                                        />
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='phonenumb'>
+                                                                Mobile Number:
+                                                            </Label>
+                                                            <Input
+                                                                type="number"
+                                                                id='phonenumb'
+                                                                placeholder='01245667'
+                                                                onChange={(e) => setShipPhoneNo(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='checkoutLandmark'>
+                                                                Address:
+                                                            </Label>
+                                                            <Input
+                                                                id='checkoutLandmark'
+                                                                placeholder='Near Apollo Hospital'
+                                                                onChange={(e) => setShipAddress(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col md='6' sm='12'>
+                                            <Card>
+                                                <CardHeader className='flex-column align-items-start'>
+                                                    <CardTitle tag='h4'>Billing Address</CardTitle>
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='city'>
+                                                                Town/City:
+                                                            </Label>
+                                                            <Input
+                                                                id='city'
+                                                                placeholder='Los Angeles'
+                                                                onChange={(e) => setBillCity(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='state'>
+                                                                State:
+                                                            </Label>
+                                                            <Input
+                                                                id='state'
+                                                                placeholder='California'
+                                                                onChange={(e) => setBillState(e.target.value)}
+                                                                required
+                                                            />
+
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12' className='mb-1'>
+                                                        <Label className='form-label' for='country'>
+                                                            Country
+                                                        </Label>
+                                                        <Input
+                                                            id='country'
+                                                            placeholder='USA'
+                                                            onChange={(e) => setBillCountry(e.target.value)}
+                                                            required
+                                                        />
+                                                        {/*<Select*/}
+                                                        {/*    id='country'*/}
+                                                        {/*    isClearable={false}*/}
+                                                        {/*    className='react-select'*/}
+                                                        {/*    classNamePrefix='select'*/}
+                                                        {/*    options={countryOptions}*/}
+                                                        {/*    theme={selectThemeColors}*/}
+                                                        {/*    defaultValue={countryOptions[0]}*/}
+                                                        {/*/>*/}
+                                                    </Col>
+                                                    <Col sm='12' className='mb-2'>
+                                                        <Label className='form-label' for='zipCodeAddress'>
+                                                            Zip Code
+                                                        </Label>
+                                                        <Input type='number' id='zipCodeAddress' name='zipCodeAddress'
+                                                               placeholder='123456' maxLength='6'
+                                                               onChange={(e) => setBillZipCode(e.target.value)}
+                                                               required
+                                                        />
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='phonenumb'>
+                                                                Mobile Number:
+                                                            </Label>
+                                                            <Input
+                                                                type="number"
+                                                                id='phonenumb'
+                                                                placeholder='012345698'
+                                                                onChange={(e) => setBillPhoneNo(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm='12'>
+                                                        <div className='mb-2'>
+                                                            <Label className='form-label' for='checkoutLandmark'>
+                                                                Address:
+                                                            </Label>
+                                                            <Input
+                                                                id='checkoutLandmark'
+                                                                placeholder='Near Apollo Hospital'
+                                                                onChange={(e) => setBillAddress(e.target.value)}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </Col>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                        <Col sm='6'>
+                                            <Button color='primary' onClick={() => stepper.previous()}>
+                                                Go Back
+                                            </Button>
+                                        </Col>
+                                        <Col sm='6' className="text-end">
+                                            <Button type='submit' color='primary'>
+                                                Save
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col>
+
+                        <Col xl={3}>
+                            <div className='customer-card'>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle tag='h4'>Shipping Address</CardTitle>
+                                    </CardHeader>
+                                    <CardBody>
+                                        <CardText>{userAddress !== '' ? <div>
+                                            <h5>Shipping Address:</h5>
+                                            <p>{userAddress}</p>
+                                        </div> : []}</CardText>
+                                        <CardText>{userNumber !== 0 ? <div>
+                                            <h5>Phone Number:</h5>
+                                            <p>{userNumber}</p>
+                                        </div> : []}</CardText>
+                                        {/*<CardText>{address !== '' ? <div>*/}
+                                        {/*    <h5>address:</h5>*/}
+                                        {/*    <p>{address}</p>*/}
+                                        {/*</div> : []}</CardText>*/}
+                                    </CardBody>
+
+                                    {shipAddress !== "" ? <Button
+                                        block
+                                        type='button'
+                                        color='primary'
+                                        onClick={() => stepper.next()}
+                                        className="btn-next delivery-address w-50"
+                                    >
+                                        Deliver To This Address
+                                    </Button> : []}
+                                </Card>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            </Form>
+        </>
+    )
 }
 
 export default Address

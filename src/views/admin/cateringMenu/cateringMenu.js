@@ -6,13 +6,17 @@ import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
-    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    UncontrolledDropdown
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
@@ -27,7 +31,8 @@ import {
     addCateringMenu,
     deleteCateringMenu,
     getCateringMenu,
-    loadCateringMenus, updateCateringMenu
+    loadCateringMenus,
+    updateCateringMenu
 } from "../../../redux/cateringMenu/action"
 import {setCateringMenu, setIsCateringMenuError, setIsEdit} from "../../../redux/cateringMenu/reducer"
 
@@ -54,12 +59,38 @@ const CateringMenus = (props) => {
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
+    const [isModalLoading, setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Priority', placeholder: 'Enter Priority', name:'priority', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.SwitchButton, label: 'Is Wine Paired', name:'isWinePaired', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
+        {
+            type: FieldTypes.Text,
+            label: 'Name',
+            placeholder: 'Enter Name',
+            name: 'name',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Priority',
+            placeholder: 'Enter Priority',
+            name: 'priority',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.SwitchButton,
+            label: 'Is Wine Paired',
+            name: 'isWinePaired',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.TextArea,
+            label: 'Description',
+            placeholder: 'Enter Description',
+            name: 'description',
+            fieldGroupClasses: 'col-12'
+        }
     ])
 
     const schema = Joi.object({
@@ -79,7 +110,7 @@ const CateringMenus = (props) => {
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setCateringMenu, {
         name: '',
         priority: '',
-        isWinePaired: '',
+        isWinePaired: false,
         description: ''
     })
     useModalError(isError, setModalLoading, setIsCateringMenuError)
@@ -161,7 +192,7 @@ const CateringMenus = (props) => {
         {
             name: 'Is Wine Paired',
             selector: (row) => {
-                return  row.isWinePaired ? "True" : "False"
+                return row.isWinePaired ? "True" : "False"
             },
             sortable: true,
             minWidth: '50px'
@@ -174,20 +205,23 @@ const CateringMenus = (props) => {
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
-                                <MoreVertical size={15} />
+                                <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
+                                <DropdownItem tag='a' href='/' className='w-100'
+                                              onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
+                                    <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => {
+                            editClick(row.id)
+                        }}><Edit size={15}/></span>
                     </div>
                 )
             }
@@ -225,7 +259,7 @@ const CateringMenus = (props) => {
     const dataToRender = () => {
         if (cateringMenuList.length > 0) {
             return cateringMenuList
-        }  else {
+        } else {
             return cateringMenuList.slice(0, pageSize)
         }
     }
@@ -234,11 +268,13 @@ const CateringMenus = (props) => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                    <CardHeader
+                        className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Catering Menu</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Catering Menu</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Catering
+                            Menu</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -259,7 +295,7 @@ const CateringMenus = (props) => {
                         paginationServer
                         className='react-dataTable'
                         columns={columns}
-                        sortIcon={<ChevronDown size={10} />}
+                        sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
                         data={dataToRender()}
                     />
@@ -275,7 +311,7 @@ const CateringMenus = (props) => {
                        modalTitle={modalTitle}
                        primaryBtnLabel='Save'
                        secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
+                       isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
             />
 
