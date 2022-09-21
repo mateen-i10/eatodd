@@ -13,6 +13,8 @@ const Payment = (props) => {
     const cartData = getCartData()
     const submitOrder = () => {
         const orderDetails = []
+
+        // adding meals to order
         if (cartData && cartData.meals && cartData.meals.length > 0) {
             cartData.meals.forEach(m => {
                 orderDetails.push({
@@ -30,11 +32,18 @@ const Payment = (props) => {
                 })
             })
         }
+
+        //adding wines to order
+        if (cartData && cartData.wines && cartData.wines.length > 0) {
+
+        }
         const order = {
             shippingAddress: shippingAddress.payload,
             billingAddress: billingAddress.payload,
             orderDetails
         }
+
+
         console.log('cartData', cartData)
         console.log('order', order)
 
