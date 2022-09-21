@@ -1,11 +1,44 @@
 // ** Icon Imports
 // ** Reactstrap Imports
 import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
-import {cartTotalPrice} from "../../../utility/Utils"
+import {cartTotalPrice, getCartData} from "../../../utility/Utils"
+import {useSelector} from "react-redux"
 
 const Payment = (props) => {
-
     const {stepper} = props
+
+    // states in redux store
+    const shippingAddress = useSelector(s => s.cartItems.shippingAddress)
+    const billingAddress = useSelector(s => s.cartItems.billingAddress)
+    const cartData = getCartData()
+    const submitOrder = () => {
+        const orderDetails = []
+        if (cartData && cartData.meals && cartData.meals.length > 0) {
+            cartData.meals.forEach(m => {
+                orderDetails.push({
+                    meal:{
+                        name: m.mealName,
+                        mealProducts : m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
+                            return {
+                                productId : p.id,
+                                quantity: p.selectedQuantity,
+                                unitPrice : p.price,
+                                optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected).id : null
+                            }
+                        }) : []
+                    }
+                })
+            })
+        }
+        const order = {
+            shippingAddress: shippingAddress.payload,
+            billingAddress: billingAddress.payload,
+            orderDetails
+        }
+        console.log('cartData', cartData)
+        console.log('order', order)
+
+    }
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
             <section>
@@ -92,11 +125,10 @@ const Payment = (props) => {
                                                         </Col>
 
                                                         <Col sm='6' className="text-end">
-                                                            <Button type='submit' color='primary'>
+                                                            <Button type='submit' color='primary' onClick = {submitOrder}>
                                                                 Save
                                                             </Button>
                                                         </Col>
-
                                                     </Row>
                                                 </Card>
                                             </div>

@@ -1,70 +1,56 @@
-// ** Third Party Components
-// import {useForm} from 'react-hook-form'
-
-// ** Reactstrap Imports
-import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
 import {useState} from "react"
+import {useDispatch} from "react-redux"
+import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
+import {addBillingAddress, addShippingAddress} from "../../../redux/cartItems/cartItemsReducer"
 
 const Address = props => {
     // ** Props
     const {stepper} = props
 
-    const [billingAddress, setBillingAddress] = useState(null)
-    const [shippingAddress, setShippingAddress] = useState(null)
+    // local states
     const [userAddress, setUserAddress] = useState("")
     const [userNumber, setUserNumber] = useState(0)
-
-
     const [shipCity, setShipCity] = useState("")
     const [shipState, setShipState] = useState("")
     const [shipCountry, setShipCountry] = useState("")
     const [shipZipCode, setShipZipCode] = useState(0)
     const [shipPhoneNo, setShipPhoneNo] = useState(0)
     const [shipAddress, setShipAddress] = useState("")
-
-
     const [billCity, setBillCity] = useState("")
     const [billState, setBillState] = useState("")
     const [billCountry, setBillCountry] = useState("")
     const [billZipCode, setBillZipCode] = useState(0)
     const [billPhoneNo, setBillPhoneNo] = useState(0)
     const [billAddress, setBillAddress] = useState("")
-    // console.log("shipping City", shipCity)
-    // console.log("state", shipState)
-    // console.log("shipping country", shipCountry)
-    // console.log("shipping zip code", shipZipCode)
-    // console.log("shipping phone no", shipPhoneNo)
-    // console.log("shipping address", shipAddress)
-    // console.log("bill city", billCity)
-    // console.log("bill state", billState)
-    // console.log("bill country", billCountry)
-    // console.log("bill ZipCode", billZipCode)
-    // console.log("bill Phone no", billPhoneNo)
-    // console.log("bill address", billAddress)
-    console.log("billing  address", billingAddress)
-    console.log("shipping address", shippingAddress)
 
+    // hooks
+    const dispatch = useDispatch()
+
+    // functions
     const onSubmit = (e) => {
         e.preventDefault()
-        setBillingAddress({
-            billingCity: billCity,
-            billingState: billState,
-            billingCountry: billCountry,
-            billingZipCode: billZipCode,
-            billingPhoneNo: billPhoneNo,
-            billingAdd: billAddress
-        })
-        setShippingAddress({
-            shippingCity: shipCity,
-            shippingState: shipState,
-            shippingCountry: shipCountry,
-            shippingZipCode: shipZipCode,
-            shippingPhoneNo: shipPhoneNo,
-            shippingAdd: shipAddress
-        })
+        const billAdd = {
+            city: billCity,
+            state: billState,
+            country: billCountry,
+            zipCode: billZipCode,
+            phoneNo: billPhoneNo,
+            address: billAddress
+        }
+        const shipAdd = {
+            city: shipCity,
+            state: shipState,
+            country: shipCountry,
+            zipCode: shipZipCode,
+            phoneNo: shipPhoneNo,
+            address: shipAddress
+        }
 
         setUserAddress(shipAddress)
         setUserNumber(shipPhoneNo)
+
+        dispatch(addShippingAddress(shipAdd))
+        dispatch(addBillingAddress(billAdd))
 
     }
 
@@ -126,15 +112,6 @@ const Address = props => {
                                                             onChange={(e) => setShipCountry(e.target.value)}
                                                             required
                                                         />
-                                                        {/*<Select*/}
-                                                        {/*    id='country'*/}
-                                                        {/*    isClearable={false}*/}
-                                                        {/*    className='react-select'*/}
-                                                        {/*    classNamePrefix='select'*/}
-                                                        {/*    options={countryOptions}*/}
-                                                        {/*    theme={selectThemeColors}*/}
-                                                        {/*    defaultValue={countryOptions[0]}*/}
-                                                        {/*/>*/}
                                                     </Col>
                                                     <Col sm='12' className='mb-2'>
                                                         <Label className='form-label' for='zipCodeAddress'>
@@ -219,15 +196,6 @@ const Address = props => {
                                                             onChange={(e) => setBillCountry(e.target.value)}
                                                             required
                                                         />
-                                                        {/*<Select*/}
-                                                        {/*    id='country'*/}
-                                                        {/*    isClearable={false}*/}
-                                                        {/*    className='react-select'*/}
-                                                        {/*    classNamePrefix='select'*/}
-                                                        {/*    options={countryOptions}*/}
-                                                        {/*    theme={selectThemeColors}*/}
-                                                        {/*    defaultValue={countryOptions[0]}*/}
-                                                        {/*/>*/}
                                                     </Col>
                                                     <Col sm='12' className='mb-2'>
                                                         <Label className='form-label' for='zipCodeAddress'>
@@ -299,10 +267,6 @@ const Address = props => {
                                             <h5>Phone Number:</h5>
                                             <p>{userNumber}</p>
                                         </div> : []}</CardText>
-                                        {/*<CardText>{address !== '' ? <div>*/}
-                                        {/*    <h5>address:</h5>*/}
-                                        {/*    <p>{address}</p>*/}
-                                        {/*</div> : []}</CardText>*/}
                                     </CardBody>
 
                                     {shipAddress !== "" ? <Button
