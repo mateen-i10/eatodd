@@ -229,7 +229,7 @@ const Wines = (props) => {
 
         let finalData = {}
         if (formFeilds === 1 || formFeilds === 3) {
-            const Ingredient = formState.productIngredients.map(i => {
+            const Ingredient = formState.productIngredients?.map(i => {
                 return {ingredientId: i.value}
             })
             finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
