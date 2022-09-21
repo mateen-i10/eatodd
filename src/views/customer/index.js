@@ -70,49 +70,49 @@ const Customer = () => {
         <div>
             <Header/>
             <Fragment>
-                <Row className="justify-content-center">
-                    {/*<Col xs={12}>*/}
-                    {/*<Col xl={1}>*/}
-                    {/*</Col>*/}
-                        <Col xl={2} style={{marginTop: 20}}>
-                            <Tabs className='mb-2' activeTab={activeTab} toggleTab={toggleTab}/>
-                        </Col>
-                        <Col xl={9}>
-                        <TabContent activeTab={activeTab}>
-                            <TabPane tabId='1'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><ProfileDetails data={data}/></div>
-                                </div>
-                            </TabPane>
-                            <TabPane tabId='2'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><BillingPlans data={data}/></div>
-                                </div>
-                            </TabPane>
-                            <TabPane tabId='3'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><BillingAddress data={data}/></div>
-                                </div>
-                            </TabPane>
-                            <TabPane tabId='4'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><SecurityTab data={data}/></div>
-                                </div>
-                            </TabPane>
-                            <TabPane tabId='5'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><MyOrder data={data}/></div>
-                                </div>
-                            </TabPane>
-                            <TabPane tabId='6'>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-12 mt-4"><OrderHistory data={data}/></div>
-                                </div>
-                            </TabPane>
-                        </TabContent>
-                        </Col>
-                    {/*</Col>*/}
-                </Row>
+               <section>
+                   <div className='container-md'>
+                       <Row className="justify-content-center">
+                           <Col xl={2} style={{marginTop: 20}}>
+                               <Tabs className='mb-2' activeTab={activeTab} toggleTab={toggleTab}/>
+                           </Col>
+                           <Col xl={10}>
+                               <TabContent activeTab={activeTab}>
+                                   <TabPane tabId='1'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><ProfileDetails data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='2'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><BillingPlans data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='3'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><BillingAddress data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='4'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><SecurityTab data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='5'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><MyOrder data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='6'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><OrderHistory data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                               </TabContent>
+                           </Col>
+                       </Row>
+                   </div>
+               </section>
             </Fragment>
             {/*{customerDashboard.map((item, i) => (*/}
             {/*    <div key={i}*/}

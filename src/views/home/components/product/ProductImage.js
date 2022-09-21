@@ -25,8 +25,7 @@ const ProductImage = ({attachment, styles, classes }) => {
         }
     }, [response])
 
-    return <img src={imageURL} className={classes} alt="product image"
-             style={{...styles}} />
+    return <img src={imageURL} className={classes} alt="product image" style={{...styles}} />
 }
 
 export default memo(ProductImage)

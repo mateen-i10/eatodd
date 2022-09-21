@@ -106,9 +106,8 @@ const Product = (props) => {
     const AddNewData = () => {
         setFormData([
             ...commonFields,
-            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:true, fieldGroupClasses: 'col-6'}
         ])
-
         setFormFeilds(1)
         setShowOption(true)
     }
@@ -154,9 +153,22 @@ const Product = (props) => {
     }
 
     // ** schema for validations
-    const schema = Joi.object({
-        //name: Joi.string().required().label("Name")
-    })
+    // const schema = Joi.object({
+    //     name: Joi.string().required().label("Name"),
+    //     description: Joi.string().required().label("Description"),
+    //     wholePrice: Joi.number().required().label("WholePrice"),
+    //     discount: Joi.number().required().label("Discount"),
+    //     quantity: Joi.number().required().label("Quantity"),
+    //     restaurant: Joi.object({label: Joi.required(), value: Joi.required()}).required("Customer is required!"),
+    //     optionType: Joi.object({label: Joi.required(), value: Joi.required()}).required("Option Type is required!"),
+    //     category: Joi.object({label: Joi.required(), value: Joi.required()}).required("Category Type is required!"),
+    //     productIngredients: Joi.array().required().error(() => {
+    //         return {
+    //             message: '"Ingredients" is required'
+    //         }
+    //     })
+    //
+    // })
 
     // ** Function to handle filter
     const toggle = () => {
@@ -229,13 +241,12 @@ const Product = (props) => {
         console.log('the option type wala!!!', optionType)
         event.preventDefault()
 
-
         // console.log('this is the cat id lets see if works?', Ingredient)
         console.log('lets see the value of : ', formFeilds)
 
         let finalData = {}
        if (formFeilds === 1 || formFeilds === 3) {
-           const Ingredient = formState.productIngredients.map(i => {
+           const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
            finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
@@ -244,8 +255,8 @@ const Product = (props) => {
            finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
        }
         console.log(finalData, "lets see")
-        const isError = formModalRef.current.validate(formState)
-        if (isError) return
+        // const isError = formModalRef.current.validate(formState)
+        // if (isError) return
 
         delete finalData.modifiedById
         delete finalData.modifiedDate
@@ -387,7 +398,7 @@ const Product = (props) => {
                        formState={formState}
                        formData={formData}
                        setFormState={setFormState}
-                       schema={schema}
+                       // schema={schema}
                        isModal={isModal}
                        toggleModal={toggle}
                        modalTitle={modalTitle}

@@ -1,23 +1,89 @@
 // ** React Imports
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
+import {Card, CardBody, CardText, Row, Col, Button, Label, Input} from 'reactstrap'
 // ** Styles
 import '../../../../@core/scss/base/pages/app-invoice.scss'
-import tempimg from '../../../../../src/assets/images/images/images.jpg'
 import UILoader from "../../../../@core/components/ui-loader"
-import {getproduct} from '../../../../redux/products/actions'
+import {getproduct, updateImage} from '../../../../redux/products/actions'
+// import ProductImage from "../../../home/components/product/ProductImage"
+// import {default as defaultImage} from "../../../../assets/images/default/defaultImage.png";
+import useAPI from "../../../../utility/customHooks/useAPI"
+// import {loadOptions} from "../../../../utility/Utils"
 
 const ProductDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
 
     //getting data from store
-    const isLoading = useSelector(state => state.product.isLoading)
+    // const isLoading = useSelector(state => state.product.isLoading)
     const product = useSelector(state => state.product.object)
-    console.log('restaurant', product)
+
+    // console.log("product", product)
+
+    // const [picture, setPicture] = useState()
+    // console.log('picture', picture)
+
+    ///
+    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
+    const [imageURL, setImageURL] = useState(!product.attachment || !product.attachment?.path ? defaultImage : '')
+    const [imagePath, setImagePath] = useState('')
+
+    // hooks
+    const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
+    // console.log('isLoading in image card', isLoading)
+    // console.log('response in image card', response)
+    // console.log('attachment in image card', product.attachment)
+    // console.log('imagePath in image card', imagePath)
+
+    useEffect(() => {
+        if (product.attachment && product.attachment.path && product.attachment.extension) {
+            setImagePath(`media/getMediaByPath?path=${product.attachment.path}&&extension=${product.attachment.extension}`)
+        }
+    }, [product.attachment])
+
+    useEffect(() => {
+        if (response) {
+            setImageURL(URL.createObjectURL(response))
+        }
+    }, [response])
+    ///
+
+    // const onChange = e => {
+    //     const reader = new FileReader(),
+    //         files = e.target.files
+    //     reader.onload = function () {
+    //     }
+    //     reader.readAsDataURL(files[0])
+    //
+    //     setPicture(reader)
+    //     console.log(reader.result, "picture is")
+    //     // dispatch(updateImage(picture))
+    // }
+
+    const onChange = e => {
+        const reader = new FileReader(),
+            files = e.target.files
+        reader.onload = function () {
+            setImageURL(reader.result)
+            console.log(reader.result, "this is the readers result")
+            console.log(reader.result, "this is the readers result")
+        }
+        reader.readAsDataURL(files[0])
+
+        console.log(files[0], "this")
+
+        const formData = new FormData()
+        formData.append("image",  e.target.files[0])
+        // setImageURL(formData)
+        console.log(formData,  "formdata")
+        console.log(imageURL, "image data")
+        dispatch(updateImage(files[0]))
+    }
+
     useEffect(() => {
         dispatch(getproduct(id))
+        console.log(imageURL, 'image url')
     }, [])
 
     return (
@@ -25,9 +91,19 @@ const ProductDetail = ({match}) => {
             <UILoader blocking={isLoading}>
                 <Card>
                     <Row className='p-2'>
-                        <Col className='d-flex' md='3' xs='12'>
-                            <div className='d-flex'>
-                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />
+                        <Col md='3' xs='12'>
+                            <div className='text-center' style={{marginRight: 10, marginTop: 30}}>
+                                <div className='me-25'>
+                                    {/*<img className='rounded me-50' src={avatar} alt='Generic placeholder image' height='100' width='100'/>*/}
+                                    {/*<ProductImage attachment={product.attachment} styles={{width: "200px", height: "180px"}} />*/}
+                                    <img src={imageURL} alt="product image" height='100' width='100' />
+                                </div>
+                                <div className='text-center align-items-end mt-75 ms-1'>
+                                        <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
+                                            Change Image
+                                            <Input type='file' onChange={onChange} hidden accept='image/*' />
+                                        </Button>
+                                </div>
                             </div>
                         </Col>
                         <Col md='9' xs='12'>
