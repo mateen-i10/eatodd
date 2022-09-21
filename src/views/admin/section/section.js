@@ -45,7 +45,7 @@ const Sections = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const sectionItemObject = {name: '', price: '', product: {}}
+    const sectionItemObject = {name: '', price: '', productId: 0}
     const [sectionItems, setSectionItem] = useState([sectionItemObject])
 
     const products = async (input) => {
@@ -54,9 +54,13 @@ const Sections = (props) => {
 
     useEffect(() => {
         if (formInitialState && formInitialState.sectionItems) {
-            setSectionItem([...formInitialState.sectionItems])
+            const final = formInitialState.sectionItems && formInitialState.sectionItems.length > 0 && formInitialState.sectionItems.map(p => {
+                return {...p, productId: {label: p.product.name, value: p.product.id}}
+            })
+            setSectionItem(final)
         }
     }, [isEdit])
+
     const removeSectionItem = (index) => {
         const newArray = [...sectionItems]
         newArray.splice(index, 1)
@@ -67,6 +71,7 @@ const Sections = (props) => {
         setSectionItem(newArray)
     }
     const onValueChange = (index, name, event) => {
+        console.log("change", event)
         const newArray = sectionItems.map((item, i) => {
             if (i === index) {
                 item[name] = event.target.value
@@ -75,6 +80,13 @@ const Sections = (props) => {
         })
 
         setSectionItem(newArray)
+    }
+
+    const onSelectProduct = (index, event) => {
+        console.log("onSelectProduct", event, index)
+        const final = [...sectionItems]
+        final[index].productId = event
+        setSectionItem(final)
     }
 
     const child = () => {
@@ -86,7 +98,7 @@ const Sections = (props) => {
                         <AsyncSelect
                             defaultOptions
                             value={i.productId}
-                            onClick={(e) => onValueChange(index, 'productId', e)}
+                            onChange={(e) => onSelectProduct(index, e)}
                             loadOptions={products}
                             closeMenuOnSelect={true}
                             isMulti = {false}
@@ -195,7 +207,8 @@ const Sections = (props) => {
 
     const handleSubmit = (event) => {
         console.log('formState', formState)
-        const finalData = {...formState, sectionItems}
+        const finalSectionItems = sectionItems && sectionItems.length > 0 ? sectionItems.map(i => ({...i, productId: i.productId.value})) : []
+        const finalData = {...formState, sectionItems: finalSectionItems}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return

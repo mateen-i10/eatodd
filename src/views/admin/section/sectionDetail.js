@@ -15,7 +15,7 @@ const SectionsDetail = ({match}) => {
     //getting data from store
     const isLoading = useSelector(state => state.section.isLoading)
     const section = useSelector(state => state.section.object)
-    console.log('section', section)
+    console.log('sectionDetail', section)
 
     useEffect(() => {
         dispatch(getSection(id))
@@ -68,6 +68,32 @@ const SectionsDetail = ({match}) => {
                                                     {section.description}
                                                 </CardText>
                                             </div>
+                                        </Col>
+                                    </Row>
+                                    <hr />
+                                    <Row>
+                                        <h3 className='ms-2 card-title'>Section Items List</h3>
+                                        <Col xs={12}>
+                                            <table className="table table-responsive">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" style={{backgroundColor: "transparent"}}>Product</th>
+                                                    <th scope="col" style={{backgroundColor: "transparent"}}>Name</th>
+                                                    <th scope="col" style={{backgroundColor: "transparent"}}>Price</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {section && section.sectionItems && section.sectionItems.map(i => {
+                                                    console.log('find application user', i.employee)
+                                                    return <tr>
+                                                        <td>{i.product.name}</td>
+                                                        <td>{i.name}</td>
+                                                        <td>{i.price}</td>
+                                                    </tr>
+                                                })}
+
+                                                </tbody>
+                                            </table>
                                         </Col>
                                     </Row>
                                 </CardBody>

@@ -41,33 +41,21 @@ const Cart = (props) => {
         if (cartItems && cartItems.meals.length > 0) {
             pricesArr = cartItems.meals.map(meal => {
                 if (!isObjEmpty(meal)) {
-
-                    const mainItems = [...meal.selectedProVeg, ...meal.selectedRice, ...meal.selectedTopping, ...meal.selectedBeans]
-
-                    const additionalItems = [...meal.selectedSide, ...meal.selectedDrinks]
-
-                    let mainItemsPrice
-                    if (mainItems.length === 2) {
-                        mainItemsPrice = meal.selectedProVeg[0].price > meal.selectedProVeg[1].price ? meal.selectedProVeg[0].price : meal.selectedProVeg[1].price
-                    } else {
-                        mainItemsPrice = meal.selectedProVeg[0].price
-                    }
-                    let totalAddiItemsPrice = 0
-                    for (let i = 0; i <= additionalItems.length - 1; i++) {
-                        totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
-                    }
-                    return mainItemsPrice + totalAddiItemsPrice
+                    return meal.selectedProducts ? meal.selectedProducts.map(p => {
+                        const price = p.options.find(op => op.isSelected).price
+                        return price * p.selectedQuantity
+                }) : 0
                 }
 
             })
         }
         let totalBagPrice = 0
         if (pricesArr.length > 0) {
-            for (let i = 0; i <= pricesArr.length - 1; i++) {
-                totalBagPrice = totalBagPrice + pricesArr[i]
-            }
+            totalBagPrice = pricesArr.reduce((pre, next) => {
+                return pre + next
+            })
         }
-        return Number(totalBagPrice.toFixed(2))
+        return Number(totalBagPrice)
     }
 
     const toggleCanvasStart = () => {
@@ -195,10 +183,10 @@ const Cart = (props) => {
                                 <div>
                                     <div className='col-md-12 '>
                                         {cartItems && cartItems.meals.map((meal, index) => {
-                                            return !isObjEmpty(meal) ? <>
-                                                <ItemsInCart key={index} foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
+                                            return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
+                                                <ItemsInCart foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
                                                 <hr/>
-                                            </> : null
+                                            </div> : null
                                         })}
                                     </div>
 
