@@ -15,7 +15,7 @@ import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {Link} from "react-router-dom"
-import {getCartData, isObjEmpty, removeMealFromCart} from "../../../utility/Utils"
+import {cartTotalPrice, getCartData, isObjEmpty, removeMealFromCart} from "../../../utility/Utils"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -24,8 +24,8 @@ const Cart = (props) => {
     const [openModel, SetModelOpen] = useState(false)
     const [cartItems, setCartItems] = useState()
     const [isMealDeleted, setMealDeleted] = useState(false)
-    const chips = require("../../../assets/images/Menu&Order/chips.png").default
-    const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
+    /*const chips = require("../../../assets/images/Menu&Order/chips.png").default
+    const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default*/
 
     useEffect(() => {
         setCartItems({...getCartData()})
@@ -35,27 +35,6 @@ const Cart = (props) => {
     const handleRemoveMeal = (index) => {
         const result = removeMealFromCart(index)
         setMealDeleted(result)
-    }
-    const bagPrice = () => {
-        let pricesArr = []
-        if (cartItems && cartItems.meals.length > 0) {
-            pricesArr = cartItems.meals.map(meal => {
-                if (!isObjEmpty(meal)) {
-                    return meal.selectedProducts ? meal.selectedProducts.map(p => {
-                        const price = p.options.find(op => op.isSelected).price
-                        return price * p.selectedQuantity
-                }) : 0
-                }
-
-            })
-        }
-        let totalBagPrice = 0
-        if (pricesArr.length > 0) {
-            totalBagPrice = pricesArr.reduce((pre, next) => {
-                return pre + next
-            })
-        }
-        return Number(totalBagPrice)
     }
 
     const toggleCanvasStart = () => {
@@ -100,10 +79,10 @@ const Cart = (props) => {
             </div>
         )
     }
-    const taxAmount = Number((bagPrice() * (16 / 100)).toFixed(2))
+    const taxAmount = Number((cartTotalPrice() * (0 / 100)).toFixed(2))
     return (
         <>
-            {!cartItems || (cartItems && cartItems.meals.length === 0) ? <div className='demo-inline-spacing'>
+            {!cartItems || (cartItems && cartItems.meals && cartItems.meals.length === 0) ? <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart}
@@ -182,7 +161,7 @@ const Cart = (props) => {
                             <div>
                                 <div>
                                     <div className='col-md-12 '>
-                                        {cartItems && cartItems.meals.map((meal, index) => {
+                                        {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
                                             return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
                                                 <ItemsInCart foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
                                                 <hr/>
@@ -192,7 +171,7 @@ const Cart = (props) => {
 
                                 </div>
 
-                                <div style={{marginTop: 20}}>
+                                {/*<div style={{marginTop: 20}}>
                                     <h5 style={{
                                         textAlign: 'center',
                                         fontSize: "1.3rem",
@@ -234,11 +213,11 @@ const Cart = (props) => {
                                             <p style={{textAlign: 'center', fontSize: "1.1rem"}}>$3.65</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*/}
 
                             </div>
 
-                            <Link to="/home"><Button
+                           {/* <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
@@ -251,19 +230,19 @@ const Cart = (props) => {
                                 }}
                                 {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
                             >
-                                Add Another menu item
+                                Add menu item
                             </Button>
-                            </Link>
+                            </Link>*/}
 
                             <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
-                                <div className="row">
+                                {/*<div className="row">
                                     <div className="col-9 text-uppercase"
                                          style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>Bag Total
                                     </div>
                                     <div className="col-3"
-                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice()}
+                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice() ?? 0}
                                     </div>
-                                </div>
+                                </div>*/}
 
                                 <Button
                                     color='secondary'
@@ -288,7 +267,7 @@ const Cart = (props) => {
                                          style={{fontWeight: 700, color: 'primary', fontSize: "1.2rem"}}>Subtotal
                                     </div>
                                     <div className="col-3"
-                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice()}
+                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.4rem"}}>$ {cartTotalPrice() ?? 0}
                                     </div>
                                 </div>
 
@@ -301,7 +280,7 @@ const Cart = (props) => {
                                              fontWeight: 500,
                                              color: 'primary',
                                              fontSize: "1.4rem"
-                                         }}>$ {taxAmount}
+                                         }}>$ {taxAmount ?? 0}
                                     </div>
                                 </div>
 
@@ -316,7 +295,7 @@ const Cart = (props) => {
                                              fontWeight: 'bolder',
                                              color: 'primary',
                                              fontSize: "1.4rem"
-                                         }}>$ {(bagPrice() + taxAmount).toFixed(2)}
+                                         }}>$ {(cartTotalPrice() + taxAmount).toFixed(2) ?? 0}
                                     </div>
                                 </div>
 

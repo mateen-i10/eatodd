@@ -19,7 +19,6 @@ const isToday = date => {
     date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&
     date.getFullYear() === today.getFullYear()
-    /* eslint-enable */
   )
 }
 
@@ -108,6 +107,17 @@ export const getCartData = () => {
   const string = localStorage.getItem('cartItems')
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem('cartItems')) : null
   return obj && !isObjEmpty(obj) ? obj : null
+}
+
+export const cartTotalPrice = () => {
+  const cart = getCartData()
+  if (cart && cart.meals && cart.meals.length > 0) {
+    let totalPrice = 0
+    cart.meals.forEach(c => {
+      totalPrice = totalPrice + c.totalPrice
+    })
+    return Number(totalPrice)
+  }
 }
 
 export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {

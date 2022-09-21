@@ -1,11 +1,11 @@
 // ** Icon Imports
 // ** Reactstrap Imports
 import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
+import {cartTotalPrice} from "../../../utility/Utils"
 
 const Payment = (props) => {
 
     const {stepper} = props
-
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
             <section>
@@ -114,21 +114,25 @@ const Payment = (props) => {
                                     <CardBody>
                                         <ul className='list-unstyled price-details'>
                                             <li className='price-detail'>
-                                                <div className='details-title'>Price of 3 items</div>
+                                                <div className='details-title'>Total Price</div>
                                                 <div className='detail-amt'>
-                                                    <strong>$699.30</strong>
+                                                    <strong>${cartTotalPrice()}</strong>
                                                 </div>
                                             </li>
                                             <li className='price-detail'>
                                                 <div className='details-title'>Delivery Charges</div>
-                                                <div className='detail-amt discount-amt text-success'>Free</div>
+                                                <div className='detail-amt discount-amt text-success'>0</div>
+                                            </li>
+                                            <li className='price-detail'>
+                                                <div className='details-title'>Tax</div>
+                                                <div className='detail-amt discount-amt text-success'>0</div>
                                             </li>
                                         </ul>
                                         <hr/>
                                         <ul className='list-unstyled price-details'>
                                             <li className='price-detail'>
                                                 <div className='details-title'>Amount Payable</div>
-                                                <div className='detail-amt fw-bolder'>$699.30</div>
+                                                <div className='detail-amt fw-bolder'>${cartTotalPrice()}</div>
                                             </li>
                                         </ul>
                                     </CardBody>

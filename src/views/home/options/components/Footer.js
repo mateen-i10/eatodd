@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 const Footer = (props) => {
 
-    const {addToBag, dispatchingItems, setMealName, mealName} = props
+    const {dispatchingItems, setMealName, mealName} = props
 
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
 
@@ -38,7 +38,6 @@ const Footer = (props) => {
                                 if (mealName.length === 0) {
                                     setBasicNameFoodModal(true)
                                 } else {
-                                    addToBag()
                                     dispatchingItems()
                                 }
                                 setBasicNameFoodModal(!basicNameFoodModal)
