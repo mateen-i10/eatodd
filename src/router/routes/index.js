@@ -286,6 +286,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/wineOrderMenu',
+        component: lazy(() => import('../../views/wine/Pages/wineOrderMenu')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/BussinessDetails',
         component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetails')),
         layout: 'VerticalLayout'
