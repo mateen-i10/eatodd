@@ -46,7 +46,7 @@ const Catering = () => {
             setActiveItem(item.priority)
         }
     }
-    // console.log("Response catering", response, isLoading)
+    console.log("Response catering", response, isLoading)
     // console.log("Menu catering", cateringMenu)
     // console.log("Active Item", activeItem)
 

@@ -92,7 +92,7 @@ const Order = () => {
                         }) : <ComponentSpinner/>
                         // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }
-                    <div
+                    {mainCategory.length ? <div
                         className=" top-wine-menu col-md-3 col-12 d-flex flex-column align-items-center justify-content-center zindex-2 cursor-pointer ">
                         <div className="wine-item "
                              onClick={() => {
@@ -115,7 +115,7 @@ const Order = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> : ""}
                 </div>
             </div>
             <div className="promo-banner container-fluid  ">
