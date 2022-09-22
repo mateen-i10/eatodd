@@ -180,7 +180,6 @@ const Wines = (props) => {
         category: [],
         isDrink: false,
         isWine: true
-
     })
     useModalError(isError, setModalLoading, setIswineError)
 
@@ -401,10 +400,9 @@ const Wines = (props) => {
                            formFeilds={formFeilds}
                            AddFromExistingData={AddFromExistingData}
                            categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
-                           optionType={formState.optionType?.value}
-                       />}
+                           optionType={formState.optionType?.value}/>
+                       }
             />
-
         </Fragment>
     )
 }
