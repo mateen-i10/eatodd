@@ -24,7 +24,7 @@ const Order = () => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
-                    console.log("data", data)
+                    // console.log("data", data)
                     const final = data.map(item => ({
                         attachment: item.attachment,
                         id: item.id,
@@ -80,12 +80,6 @@ const Order = () => {
                                         <div className="thumbnail">
                                             <ProductImage attachment={item.attachment}
                                                           styles={{width: "200px", height: "180px"}}/>
-                                            {/*<img*/}
-                                            {/*    src={item.image}*/}
-                                            {/*    alt="category image"*/}
-                                            {/*    width={200}*/}
-                                            {/*    height={180}*/}
-                                            {/*/>*/}
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
