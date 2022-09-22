@@ -12,7 +12,7 @@ const Catering = () => {
     const [selectedCategory, setSelectedCategory] = useState(1)
     const [elHovered, setElHovered] = useState({})
     const [cateringMenu, setCateringMenu] = useState([])
-    const [activeItem, setActiveItem] = useState(1)
+    // const [activeItem, setActiveItem] = useState(1)
 
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=4', 'get', {}, {}, true)
 
@@ -33,7 +33,7 @@ const Catering = () => {
 
     }, [response])
     useEffect(() => {
-        setActiveItem(cateringMenu.length ? cateringMenu[0].priority : 0)
+        // setActiveItem(cateringMenu.length ? cateringMenu[0].priority : 0)
     }, [cateringMenu])
 
 
@@ -43,7 +43,7 @@ const Catering = () => {
         console.log("Item", item)
         if (selectedCategory !== item.id) {
             setSelectedCategory(item.id)
-            setActiveItem(item.priority)
+            // setActiveItem(item.priority)
         }
     }
     console.log("Response catering", response, isLoading)
@@ -117,42 +117,37 @@ const Catering = () => {
                     </div>
                 </div>
             </div>
-            <div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Testing</div>
-            <div className="container-sm mb-3">
-                <div className="row mt-3 justify-content-center">
-                    <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
-                        <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
-                        <hr/>
-                        <div
-                            style={{
-                                borderRight: "6px solid rgb(129 190 65)"
-                            }}
-                        >
+            {/*<div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Testing</div>*/}
+            {/*<div className="container-sm mb-3">*/}
+            {/*    <div className="row mt-3 justify-content-center">*/}
+            {/*        <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>*/}
+            {/*            <div className="text-center fs-2 fw-bolder text-primary">Menu</div>*/}
+            {/*            <hr/>*/}
+            {/*            <div*/}
+            {/*                style={{*/}
+            {/*                    borderRight: "6px solid rgb(129 190 65)"*/}
+            {/*                }}*/}
+            {/*            >*/}
 
-                            {cateringMenu.length ? cateringMenu.map((item, i) => (
-                                <div key={i}
-                                     className={`fs-3 fw-bolder ms-2 cursor-pointer mb-1  ${elHovered[i] ? "text-primary" : ""}  `}
-                                     style={{lineHeight: "35px"}}
-                                     onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}
-                                     onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}
-                                     onClick={() => {
-                                         toggleList(item)
-                                     }}
-                                >
-                                    <div className={`text-start ${activeItem === item.priority ? "text-primary" : ""}`}
-                                         style={{fontSize: 15}}>{item.name}</div>
-                                </div>
-                            )) : null}
-                        </div>
-                    </div>
-                    <div className="col-md-9 col-12 ">
-                        {/*<DetailsMenuPage selectedCategory={selectedCategory}*/}
-                        {/*                 xl={xl}*/}
-                        {/*                 md={md}*/}
-                        {/*/>*/}
-                    </div>
-                </div>
-            </div>
+            {/*                {cateringMenu.length ? cateringMenu.map((item, i) => (*/}
+            {/*                    <div key={i}*/}
+            {/*                         className={`fs-3 fw-bolder ms-2 cursor-pointer mb-1  ${elHovered[i] ? "text-primary" : ""}  `}*/}
+            {/*                         style={{lineHeight: "35px"}}*/}
+            {/*                         onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}*/}
+            {/*                         onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}*/}
+            {/*                         onClick={() => {*/}
+            {/*                             toggleList(item)*/}
+            {/*                         }}*/}
+            {/*                    >*/}
+            {/*                        <div className={`text-start ${activeItem === item.priority ? "text-primary" : ""}`}*/}
+            {/*                             style={{fontSize: 15}}>{item.name}</div>*/}
+            {/*                    </div>*/}
+            {/*                )) : null}*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+
+            {/*    </div>*/}
+            {/*</div>*/}
             <Footer/>
         </div>
     )
