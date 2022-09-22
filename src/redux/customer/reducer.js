@@ -1,41 +1,83 @@
 import {createAction} from '@reduxjs/toolkit'
+
 const initialState = {
     list: [],
     object: {},
+    miscData: {},
+    isRequestCompleted: false,
     isLoading: false,
-    isEdit: false
+    isDetailLoading: false,
+    isEdit: false,
+    isError: false,
+    isSuccess: false
 }
 
 export const setCustomers = createAction("customerReducer/setCustomers")
 export const setCustomer = createAction("customerReducer/setCustomer")
 export const setLoading = createAction("customerReducer/setLoading")
 export const editCustomer = createAction("customerReducer/editCustomer")
+export const setDetailLoading = createAction("customerReducer/setDetailLoading")
+export const setIsEdit = createAction("customerReducer/setIsEdit")
+export const setIsCustomerError = createAction("customerReducer/setIsCustomerError")
+export const setIsCustomerSuccess = createAction("customerReducer/setIsCustomerSuccess")
+export const setRequestCompleted = createAction("customerReducer/setRequestCompleted")
 
 const customerReducer = (state = initialState, action) => {
     switch (action.type) {
         case setCustomers.type:
             return {
                 ...state,
-                list: action.payload,
+                list: action.payload.data,
+                miscData: action.payload.miscData,
                 isLoading: false,
-                isEdit: false
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
             }
         case setCustomer.type:
             return {
                 ...state,
-                object: action.payload,
-                isLoading: false
+                object: action.payload.data,
+                isEdit: false,
+                isLoading: false,
+                isDetailLoading: false
             }
         case setLoading.type:
             return {
                 ...state,
                 isLoading: action.payload
             }
+        case setDetailLoading.type:
+            return {
+                ...state,
+                isDetailLoading: action.payload
+            }
         case editCustomer.type:
             return {
                 ...state,
-                object: action.payload,
+                object: action.payload.data,
                 isEdit: true
+            }
+        case setRequestCompleted.type:
+            return {
+                ...state,
+                isRequestCompleted: action.payload
+            }
+        case setIsEdit.type:
+            return {
+                ...state,
+                isEdit: action.payload.data
+            }
+        case setIsCustomerError.type:
+            return {
+                ...state,
+                isError: action.payload
+            }
+        case setIsCustomerSuccess.type:
+            return {
+                ...state,
+                isSuccess: action.payload
             }
         default:
             return state
