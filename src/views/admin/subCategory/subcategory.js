@@ -37,7 +37,7 @@ import {
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
-const SubCategory = () => {
+const SubCategory = (props) => {
 
     const categoryList = useSelector(state => state.subCategory.list)
     const formInitialState = useSelector(state => state.subCategory.object)
@@ -175,6 +175,11 @@ const SubCategory = () => {
         setCurrentPage(page.selected + 1)
     }
 
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        props.history.push(`/SubcategoryDetail/${id}`)
+    }
+
     const columns = [
         {
             name: 'Name',
@@ -194,8 +199,22 @@ const SubCategory = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <span className='cursor-pointer' onClick={e => deleteClick(row.id, e)}><Trash size={15} /></span>
-                        <span className='cursor-pointer mx-1' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                    <Trash size={15} />
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }

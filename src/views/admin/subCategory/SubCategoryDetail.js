@@ -3,36 +3,32 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {Card, CardBody, CardText, Row, Col, Button, Label, Input} from 'reactstrap'
 // ** Styles
-import '../../../../@core/scss/base/pages/app-invoice.scss'
-import UILoader from "../../../../@core/components/ui-loader"
-import {getproduct, updateImage} from '../../../../redux/products/actions'
-// import ProductImage from "../../../home/components/product/ProductImage"
-// import {default as defaultImage} from "../../../../assets/images/default/defaultImage.png";
-import useAPI from "../../../../utility/customHooks/useAPI"
-// import {loadOptions} from "../../../../utility/Utils"
+import '../../../@core/scss/base/pages/app-invoice.scss'
+import UILoader from "../../../@core/components/ui-loader"
+import {getSubCategory, updateImage} from '../../../redux/subcategory/actions'
 
-const ProductDetail = ({match}) => {
+import useAPI from "../../../utility/customHooks/useAPI"
+
+const SubCategoryDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
 
-    //getting data from store
-    // const isLoading = useSelector(state => state.product.isLoading)
-    const product = useSelector(state => state.product.object)
+    const subCategory = useSelector(state => state.subCategory.object)
 
-    // console.log("product", product)
+    console.log(subCategory, 'category')
 
-    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
-    const [imageURL, setImageURL] = useState(!product.attachment || !product.attachment?.path ? defaultImage : '')
+    const defaultImage = require("../../../assets/images/default/defaultImage.png").default
+    const [imageURL, setImageURL] = useState(!subCategory.attachment || !subCategory.attachment?.path ? defaultImage : '')
     const [imagePath, setImagePath] = useState('')
 
     // hooks
     const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
 
     useEffect(() => {
-        if (product.attachment && product.attachment.path && product.attachment.extension) {
-            setImagePath(`media/getMediaByPath?path=${product.attachment.path}&&extension=${product.attachment.extension}`)
+        if (subCategory.attachment && subCategory.attachment.path && subCategory.attachment.extension) {
+            setImagePath(`media/getMediaByPath?path=${subCategory.attachment.path}&&extension=${subCategory.attachment.extension}`)
         }
-    }, [product.attachment])
+    }, [subCategory.attachment])
 
     useEffect(() => {
         if (response) {
@@ -50,13 +46,13 @@ const ProductDetail = ({match}) => {
 
         const formData = new FormData()
         formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", product.attachmentId)
+        formData.append("attachmentId", subCategory.attachmentId)
 
         dispatch(updateImage(formData))
     }
 
     useEffect(() => {
-        dispatch(getproduct(id))
+        dispatch(getSubCategory(id))
         console.log(imageURL, 'image url')
     }, [])
 
@@ -73,16 +69,16 @@ const ProductDetail = ({match}) => {
                                     <img src={imageURL} alt="product image" height='100' width='100' />
                                 </div>
                                 <div className='text-center align-items-end mt-75 ms-1'>
-                                        <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
-                                            Change Image
-                                            <Input type='file' onChange={onChange} hidden accept='image/*' />
-                                        </Button>
+                                    <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
+                                        Change Image
+                                        <Input type='file' onChange={onChange} hidden accept='image/*' />
+                                    </Button>
                                 </div>
                             </div>
                         </Col>
                         <Col md='9' xs='12'>
                             <CardBody style={{maxHeight: 450}}>
-                                <h2 className='mb-75'>Product Details</h2>
+                                <h2 className='mb-75'>SubCategory Details</h2>
                                 <Row>
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
@@ -90,7 +86,7 @@ const ProductDetail = ({match}) => {
                                                 <h5 className='mb-75'>Name:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText className="text-capitalize">{product.name}</CardText>
+                                                <CardText className="text-capitalize">{subCategory.name}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -100,57 +96,27 @@ const ProductDetail = ({match}) => {
                                                 <h5 className='mb-75'>Description:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{product.description}</CardText>
+                                                <CardText>{subCategory.description}</CardText>
                                             </div>
                                         </div>
                                     </Col>
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Retail Price:</h5>
+                                                <h5 className='mb-75'>FillingLimit:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{product.retailPrice}</CardText>
+                                                <CardText>{subCategory.fillingLimit}</CardText>
                                             </div>
                                         </div>
                                     </Col>
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Discount:</h5>
+                                                <h5 className='mb-75'>IsActive:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{product.discount}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Quantity:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{product.quantity}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Tax Amount:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{product.taxAmount}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Tax Percentage:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{product.taxPercentage}</CardText>
+                                                <CardText>{subCategory.isActive}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -164,4 +130,4 @@ const ProductDetail = ({match}) => {
     )
 }
 
-export default ProductDetail
+export default SubCategoryDetail
