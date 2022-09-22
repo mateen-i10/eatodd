@@ -221,7 +221,7 @@ const Wines = (props) => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/productsDetail/${id}`)
+        props.history.push(`/WineDetail/${id}`)
     }
 
     const handleSubmit = (event) => {
@@ -284,7 +284,7 @@ const Wines = (props) => {
                 return (
                     <div className='d-flex'>
                         <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
                                 <MoreVertical size={15} />
                             </DropdownToggle>
                             <DropdownMenu end>

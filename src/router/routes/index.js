@@ -286,6 +286,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/wineOrderMenu',
+        component: lazy(() => import('../../views/wine/Pages/wineOrderMenu')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/BussinessDetails',
         component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetails')),
         layout: 'VerticalLayout'
@@ -433,6 +438,21 @@ const Routes = [
     {
         path: '/genralProductsDetail/:id',
         component: lazy(() => import('../../views/admin/genralproduct/components/GenralProductDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/CategoryDetail/:id',
+        component: lazy(() => import('../../views/restaurants/pages/CategoryDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/WineDetail/:id',
+        component: lazy(() => import('../../views/admin/wines/WineDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/SubcategoryDetail/:id',
+        component: lazy(() => import('../../views/admin/subCategory/SubCategoryDetail')),
         layout: 'VerticalLayout'
     }
 

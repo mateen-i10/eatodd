@@ -149,6 +149,20 @@
     background-image: url("../../../../assets/images/icons/arrow-black.svg");
 }
 
+.top-wine-menu:hover .wine-thumbnail > img {
+    transform: scale(1.1);
+}
+
+.wine-order {
+    text-transform: uppercase;
+    visibility: hidden;
+
+}
+
+.top-wine-menu:hover .wine-order {
+    visibility: visible !important;
+}
+
 .promo-banner {
     height: 100%;
     width: 95%;
