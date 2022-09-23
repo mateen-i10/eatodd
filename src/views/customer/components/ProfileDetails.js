@@ -138,7 +138,7 @@ const ProfileDetails = ({}) => {
 
                             <Row className='mt-3'>
                                 {showEdit === false &&  <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         First Name:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -153,7 +153,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Last Name:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -168,7 +168,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Email:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -183,7 +183,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}*/}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Phone Number:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
