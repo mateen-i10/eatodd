@@ -8,8 +8,6 @@ const Address = props => {
     const {stepper} = props
 
     // local states
-    const [userAddress, setUserAddress] = useState("")
-    const [userNumber, setUserNumber] = useState(0)
     const [shipCity, setShipCity] = useState("")
     const [shipState, setShipState] = useState("")
     const [shipCountry, setShipCountry] = useState("")
@@ -46,17 +44,13 @@ const Address = props => {
             address: shipAddress
         }
 
-        setUserAddress(shipAddress)
-        setUserNumber(shipPhoneNo)
-
         dispatch(addShippingAddress(shipAdd))
         dispatch(addBillingAddress(billAdd))
-
+        stepper.next()
     }
 
     return (
         <>
-            <Form className='list-view product-checkout' onSubmit={onSubmit} style={{marginBottom: 60}}>
                 <div className='container-sm'>
                     <Row>
                         <Col xl={9}>
@@ -242,11 +236,6 @@ const Address = props => {
                                                 Go Back
                                             </Button>
                                         </Col>
-                                        <Col sm='6' className="text-end">
-                                            <Button type='submit' color='primary'>
-                                                Save
-                                            </Button>
-                                        </Col>
                                     </Row>
                                 </CardBody>
                             </Card>
@@ -259,21 +248,15 @@ const Address = props => {
                                         <CardTitle tag='h4'>Shipping Address</CardTitle>
                                     </CardHeader>
                                     <CardBody>
-                                        <CardText>{userAddress !== '' ? <div>
-                                            <h5>Shipping Address:</h5>
-                                            <p>{userAddress}</p>
-                                        </div> : []}</CardText>
-                                        <CardText>{userNumber !== 0 ? <div>
-                                            <h5>Phone Number:</h5>
-                                            <p>{userNumber}</p>
-                                        </div> : []}</CardText>
+                                        <CardText>{shipAddress !== '' ? `Shipping Address: ${shipAddress}` : ''}</CardText>
+                                        <CardText>{shipPhoneNo !== 0 ? `Phone Number: ${shipPhoneNo}` : ''}</CardText>
                                     </CardBody>
 
                                     {shipAddress !== "" ? <Button
                                         block
                                         type='button'
                                         color='primary'
-                                        onClick={() => stepper.next()}
+                                        onClick={onSubmit}
                                         className="btn-next delivery-address w-50"
                                     >
                                         Deliver To This Address
@@ -283,7 +266,6 @@ const Address = props => {
                         </Col>
                     </Row>
                 </div>
-            </Form>
         </>
     )
 }

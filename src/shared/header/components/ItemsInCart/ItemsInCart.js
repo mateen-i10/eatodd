@@ -37,7 +37,7 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4 fs-3 font-medium-1">{item.calculatedPrice ? `${item.selectedQuantity} * $${item.price} = $${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice}` : `-`}</div>
                     </div>
                 </div>
             ))}

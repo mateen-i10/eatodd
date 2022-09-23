@@ -3,20 +3,39 @@
 import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
 import {cartTotalPrice, getCartData} from "../../../utility/Utils"
 import {useSelector} from "react-redux"
+import {useEffect, useState} from "react"
+import useAPI from "../../../utility/customHooks/useAPI"
+import {getUserData} from "../../../auth/utils"
+import UILoader from "../../../@core/components/ui-loader"
+import {useHistory} from "react-router-dom"
+import {toast} from "react-toastify"
 
 const Payment = (props) => {
     const {stepper} = props
+    const restaurantId = localStorage.getItem('restaurantId')
 
     // states in redux store
     const shippingAddress = useSelector(s => s.cartItems.shippingAddress)
     const billingAddress = useSelector(s => s.cartItems.billingAddress)
+    // local state
+    const [placeOrder, setPlaceOrder] = useState({ url: '', order: {}})
+    // hooks
+    const history = useHistory()
+    const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, true)
+    console.log('iss', isLoading)
+    console.log('rrr', response)
+    useEffect(() => {
+        if (response && response.data) {
+            history.push('/home')
+            toast.success('Order placed successfully')
+        } else setPlaceOrder({url: '', order: {}})
+    }, [response, isLoading])
     const cartData = getCartData()
     const submitOrder = () => {
         const orderDetails = []
-
-        // adding meals to order
-        if (cartData && cartData.meals && cartData.meals.length > 0) {
-            cartData.meals.forEach(m => {
+        if (cartData) {
+            // adding meals to order
+            if (cartData.meals && cartData.meals.length > 0) cartData.meals.forEach(m => {
                 orderDetails.push({
                     meal:{
                         name: m.mealName,
@@ -25,32 +44,41 @@ const Payment = (props) => {
                                 productId : p.id,
                                 quantity: p.selectedQuantity,
                                 unitPrice : p.price,
-                                optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected).id : null
+                                optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
                             }
                         }) : []
                     }
                 })
             })
+
+            //adding wines to order
+            if (cartData.wines && cartData.wines.length > 0) cartData.wines.forEach(p => {
+                orderDetails.push({
+                                productId : p.id,
+                                productQuantity: p.selectedQuantity,
+                                unitPrice : p.price,
+                                productOptionId: p.options && p.options.length > 0 ? p.options.find(p => p.isDefault)?.id : null
+                            })
+            })
         }
 
-        //adding wines to order
-        if (cartData && cartData.wines && cartData.wines.length > 0) {
-
-        }
         const order = {
-            shippingAddress: shippingAddress.payload,
-            billingAddress: billingAddress.payload,
-            orderDetails
+            shippingAddress: shippingAddress ? shippingAddress.payload : null,
+            billingAddress: billingAddress ? billingAddress.payload : null,
+            ordersDetail: [...orderDetails],
+            totalPrice: cartTotalPrice(),
+            customerId: getUserData()?.id,
+            quantity: orderDetails.length,
+            restaurantId
         }
-
-
+        setPlaceOrder({url: 'order', order: {...order}})
         console.log('cartData', cartData)
         console.log('order', order)
-
     }
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
-            <section>
+            <UILoader blocking={isLoading}>
+                <section>
                 <div className="container-sm">
                     <Row>
                         <Col md='9' sm='12'>
@@ -183,6 +211,7 @@ const Payment = (props) => {
                     </Row>
                 </div>
             </section>
+            </UILoader>
         </Form>
     )
 }
