@@ -2,17 +2,22 @@ import React, {useState} from 'react'
 import {Button, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap"
 import {ChevronDown} from "react-feather"
 import {Link} from "react-router-dom"
+import ProductImage from "../../home/components/product/ProductImage"
 
 const OmgCorporate = (props) => {
     const {item} = props
     const [value, setValue] = useState("People")
+
+    console.log("limit", typeof item.limit)
 
     return (
 
         <div className="col-lg-4 col-sm-6 col-9 mx-auto">
             <div className="card" style={{height: "380px", paddingBottom: "15px"}}>
                 <div>
-                    <img src={item.image} className="card-img-top" style={{height: 185, objectFit: "cover"}} alt="..."/>
+                    <ProductImage attachment={item.attachment} classes="card-img-top"
+                                  styles={{height: 185, objectFit: "cover"}}/>
+                    {/*<img src={item.image} className="card-img-top" style={{height: 185, objectFit: "cover"}} alt="..."/>*/}
                 </div>
                 <div style={{
                     position: 'absolute',
@@ -36,7 +41,7 @@ const OmgCorporate = (props) => {
                     }}>{item.detail}</p>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-around', marginTop: "-29px", marginBottom: 10}}>
-                    <h6 className="mt-1">${value === "10 People" ? item.price * 10 : value === "50 People" ? item.price * 50 : value === "100 People" ? item.price * 100 : `${item.price}/persons`}</h6>
+                    <h6 className="mt-1">${value === "10 People" ? item.price * 10 : value === "50 People" ? item.price * 50 : value === item.limit ? item.price * item.limit : `${item.price}/persons`}</h6>
                     <UncontrolledDropdown>
                         <DropdownToggle
                             caret
@@ -48,7 +53,7 @@ const OmgCorporate = (props) => {
                         <DropdownMenu>
                             <DropdownItem onClick={() => setValue("10 People")}>10 People</DropdownItem>
                             <DropdownItem onClick={() => setValue("50 People")}>50 People</DropdownItem>
-                            <DropdownItem onClick={() => setValue("100 People")}>100 People</DropdownItem>
+                            <DropdownItem onClick={() => setValue(item.limit)}>{item.limit} People</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </div>
