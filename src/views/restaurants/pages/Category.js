@@ -4,8 +4,19 @@ import React, {Fragment, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, Trash} from 'react-feather'
-import {Button, Card, CardHeader, CardTitle, Col, Input, Row} from 'reactstrap'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardTitle,
+    Col, DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Input,
+    Row,
+    UncontrolledDropdown
+} from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
@@ -28,7 +39,7 @@ import {
     updateCategory
 } from "../../../redux/restaurantPages/category/actions"
 
-const Category = () => {
+const Category = (props) => {
 
     const categoryList = useSelector(state => state.category.list)
     const formInitialState = useSelector(state => state.category.object)
@@ -180,6 +191,11 @@ const Category = () => {
         setCurrentPage(page.selected + 1)
     }
 
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        props.history.push(`/CategoryDetail/${id}`)
+    }
+
     const columns = [
         {
             name: 'Name',
@@ -199,8 +215,22 @@ const Category = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <span className='cursor-pointer' onClick={e => deleteClick(row.id, e)}><Trash size={15}/></span>
-                        <span className='cursor-pointer mx-1' onClick={() => editClick(row.id)}><Edit size={15}/></span>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                    <Trash size={15} />
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }

@@ -6,10 +6,13 @@ import {omgCorporate, omgFamilyDine, omgFriends} from "../../../tempData/caterin
 import OmgFamilyDine from "./OmgFamilyDine"
 import {wineHomePgData} from "../../../tempData/wineClubData"
 import OmgFriends from "./OmgFriends"
+// import useAPI from "../../../utility/customHooks/useAPI"
 
 const DetailsMenuPage = ({selectedCategory, xl, md}) => {
 
-
+    // const [isLoading, response] = useAPI('CateringMenuItem?PageIndex=1&PageSize=4', 'get', {}, {}, true)
+    //
+    // console.log("MenuItem", isLoading, response)
     const showItems = () => {
         if (selectedCategory === 1) {
             return <Fragment>

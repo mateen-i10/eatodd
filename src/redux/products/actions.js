@@ -100,24 +100,14 @@ export const updateproduct = (data) => {
 
 export const updateImage = (data) => {
     console.log(data, "data from actions")
-///
+
     return async () => {
-         return httpService._put(`${baseURL}media/updateMedia`).then(response => {
+         return httpService._put(`${baseURL}media/updateMedia`, data, {
+            headers: {encType:"multipart/form-data"}
+        }).then(response => {
             // success case
             if (response.status === 200 && response.data.statusCode === 200) {
-                return {
-                    data,
-                    method: 'put',
-                    header: {
-                        'Content-Type': 'multipart/form-data'
-                    },
-                    isSuccessToast: true,
-                    successMessage: 'image Updated Successfully',
-                    requestCompleted: setRequestCompleted.type,
-                    onError: setIsproductError.type,
-                    isSuccess: setIsproductSuccess.type,
-                    isFormData: true
-                }
+                toast.success('Image Updated Successfully')
             } else {
                 //general Error Action
                 toast.error(response.data.message)
@@ -126,20 +116,4 @@ export const updateImage = (data) => {
             toast.error(error.message)
         })
     }
-
-    ///
-
-    // return async dispatch => {
-    //     dispatch(apiCall({
-    //         url: 'Media/UpdateMedia',
-    //         data,
-    //         method: 'put',
-    //         isSuccessToast: true,
-    //         successMessage: 'image Updated Successfully',
-    //         requestCompleted: setRequestCompleted.type,
-    //         onError: setIsproductError.type,
-    //         isSuccess: setIsproductSuccess.type,
-    //         isFormData: true
-    //     }))
-    // }
 }
