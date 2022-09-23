@@ -1,21 +1,58 @@
 // ** React Imports
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
+import {Card, CardBody, CardText, Row, Col, Badge, Table, Button, Label, Input} from 'reactstrap'
 // ** Styles
 import '../../../../@core/scss/base/pages/app-invoice.scss'
-import tempimg from '../../../../../src/assets/images/images/images.jpg'
+// import tempimg from '../../../../../src/assets/images/images/images.jpg'
 import UILoader from "../../../../@core/components/ui-loader"
-import {getGenralProduct} from '../../../../redux/genralProduct/actions'
+import {getGenralProduct, updateImage} from '../../../../redux/genralProduct/actions'
+// import {default as defaultImage} from "../../../../assets/images/default/defaultImage.png"
+import useAPI from "../../../../utility/customHooks/useAPI"
 
 const ProductDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
 
     //getting data from store
-    const isLoading = useSelector(state => state.genralProduct.isLoading)
+    // const isLoading = useSelector(state => state.genralProduct.isLoading)
     const genralProduct = useSelector(state => state.genralProduct.object)
     console.log('genralProduct', genralProduct)
+
+    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
+    const [imageURL, setImageURL] = useState(!genralProduct.attachment || !genralProduct.attachment?.path ? defaultImage : '')
+    const [imagePath, setImagePath] = useState('')
+
+    // hooks
+    const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
+
+    useEffect(() => {
+        if (genralProduct.attachment && genralProduct.attachment.path && genralProduct.attachment.extension) {
+            setImagePath(`media/getMediaByPath?path=${genralProduct.attachment.path}&&extension=${genralProduct.attachment.extension}`)
+        }
+    }, [genralProduct.attachment])
+
+    useEffect(() => {
+        if (response) {
+            setImageURL(URL.createObjectURL(response))
+        }
+    }, [response])
+
+    const onChange = e => {
+        const reader = new FileReader(),
+            files = e.target.files
+        reader.onload = function () {
+            setImageURL(reader.result)
+        }
+        reader.readAsDataURL(files[0])
+
+        const formData = new FormData()
+        formData.append("image",  e.target.files[0])
+        formData.append("attachmentId", genralProduct.attachmentId)
+
+        dispatch(updateImage(formData))
+    }
+
     useEffect(() => {
         dispatch(getGenralProduct(id))
     }, [])
@@ -25,9 +62,22 @@ const ProductDetail = ({match}) => {
             <UILoader blocking={isLoading}>
                 <Card>
                     <Row className='p-2'>
-                        <Col className='d-flex' md='3' xs='12'>
-                            <div className='d-flex'>
-                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />
+                        {/*<Col className='d-flex' md='3' xs='12'>*/}
+                        {/*    <div className='d-flex'>*/}
+                        {/*        <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />*/}
+                        {/*    </div>*/}
+                        {/*</Col>*/}
+                        <Col md='3' xs='12'>
+                            <div className='text-center' style={{marginRight: 10, marginTop: 30}}>
+                                <div className='me-25'>
+                                    <img src={imageURL} alt="product image" height='100' width='100' />
+                                </div>
+                                <div className='text-center align-items-end mt-75 ms-1'>
+                                    <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
+                                        Change Image
+                                        <Input type='file' onChange={onChange} hidden accept='image/*' />
+                                    </Button>
+                                </div>
                             </div>
                         </Col>
                         <Col md='9' xs='12'>

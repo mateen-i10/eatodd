@@ -68,8 +68,6 @@ const ProductDetail = ({match}) => {
                         <Col md='3' xs='12'>
                             <div className='text-center' style={{marginRight: 10, marginTop: 30}}>
                                 <div className='me-25'>
-                                    {/*<img className='rounded me-50' src={avatar} alt='Generic placeholder image' height='100' width='100'/>*/}
-                                    {/*<ProductImage attachment={product.attachment} styles={{width: "200px", height: "180px"}} />*/}
                                     <img src={imageURL} alt="product image" height='100' width='100' />
                                 </div>
                                 <div className='text-center align-items-end mt-75 ms-1'>

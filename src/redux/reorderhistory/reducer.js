@@ -16,9 +16,13 @@ const reorderHistory = (state = initialState, action) => {
         case setReorderHistorys.type:
             return {
                 ...state,
-                list: action.payload,
+                list: action.payload.data,
+                miscData: action.payload.miscData,
                 isLoading: false,
-                isEdit: false
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
             }
         case setReorderHistory.type:
             return {

@@ -1,26 +1,20 @@
-import {setLoading, setReorderHistorys, setReorderHistory, editReorderHistory} from "./reducer"
+import {setLoading, setReorderHistorys} from "./reducer"
 // ** Table Data & Columns
-import { data } from '../../tempData/data'
+import {apiCall} from "../api/actions"
+
+const url = 'Customer'
 
 // ** Get ReorderHistorys Data
-export const loadReorderHistory = () => {
+export const loadReorderHistory = (pageIndex = 1, pageSize = 12, searchQuery = null, refId = 0) => {
     return async dispatch => {
+        if (refId && refId !== 0) {
         dispatch(setLoading(true))
-        dispatch(setReorderHistorys([...data]))
+        dispatch(apiCall({
+            url: `${url}/GetOrderByCustomerId?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setReorderHistorys.type
+        }))
     }
-}
-export const getReorderHistory = (id, isEdit) => {
-    return async dispatch => {
-        dispatch(setLoading(true))
-        const found = data.find(d => d.id === id)
-        if (isEdit) dispatch(editReorderHistory({...found}))
-        else {
-            dispatch(setReorderHistory({...found}))
-        }
-    }
-}
-export const deleteReorderHistory = (id) => {
-    return async dispatch => {
-        console.log('deleted', id, dispatch)
     }
 }
