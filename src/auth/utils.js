@@ -1,15 +1,24 @@
+import {Roles} from "../utility/Roles"
 
 /**
  * Return if user is logged in
  * This is completely up to you and how you want to store the token in your frontend application
  * e.g. If you are using cookies to store the application please update this function
  */
+
 // eslint-disable-next-line arrow-body-style
 export const isUserLoggedIn = () => {
   return localStorage.getItem('userData') && localStorage.getItem('accessToken')
 }
 
 export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
+
+export const isAdmin = () => {
+  return localStorage.getItem('userData') && localStorage.getItem('accessToken') && getUserData() && getUserData().role === Roles.superAdmin
+}
+export const isCustomer = () => {
+  return localStorage.getItem('userData') && localStorage.getItem('accessToken') && getUserData() && getUserData().role === Roles.customer
+}
 
 /**
  * This function is used for demo purpose route navigation
@@ -20,7 +29,7 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  * @param {String} userRole Role of user
  */
 export const getHomeRouteForLoggedInUser = userRole => {
-  if (userRole === 'admin') return '/'
-  if (userRole === 'client') return { name: 'access-control' }
+  if (userRole === Roles.superAdmin) return '/dashboard'
+  if (userRole === Roles.customer) return '/home'
   return { name: 'auth-login' }
 }
