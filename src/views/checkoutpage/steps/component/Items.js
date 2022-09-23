@@ -7,8 +7,9 @@ import classnames from "classnames"
 
 const Items = (props) => {
     const {foodItems, handleAdd} = props
+    console.log('foodItems', foodItems)
 
-    const mealName = foodItems.action.payload.mealName
+/*    const mealName = foodItems.action.payload.mealName
     const mainItems = [...foodItems.action.payload.selectedProVeg, ...foodItems.action.payload.selectedRice, ...foodItems.action.payload.selectedTopping, ...foodItems.action.payload.selectedBeans]
     const additionalItems = [...foodItems.action.payload.selectedSide, ...foodItems.action.payload.selectedDrinks]
 
@@ -25,10 +26,10 @@ const Items = (props) => {
     for (let i = 0; i <= additionalItems.length - 1; i++) {
         // console.log(additionalItems[i].price)
         totalAddiItemsPrice = totalAddiItemsPrice + additionalItems[i].price
-    }
+    }*/
     // console.log(totalAddiItemsPrice)
 
-    const totalPrice = Number((mainItemsPrice + totalAddiItemsPrice).toFixed(2))
+    const totalPrice = /*Number((mainItemsPrice + totalAddiItemsPrice).toFixed(2))*/ 0
 
     return (
         <section>

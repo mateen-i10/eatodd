@@ -2,8 +2,6 @@ import {apiCall} from "../api/actions"
 import {toast} from "react-toastify"
 import httpService, {baseURL} from "../../utility/http"
 import {push} from "react-router-redux"
-import {Roles} from "../../utility/Roles"
-import {getHomeRouteForLoggedInUser} from "../../utility/Utils"
 import {
     handleLogin,
     handleLogout,
@@ -12,9 +10,10 @@ import {
     setTokenVerified,
     setTokenVerifiedFalse
 } from "./authentication"
+import {getHomeRouteForLoggedInUser} from "../../auth/utils"
 
 const url = 'auth/'
-export const login = (username, password, isDeviceLoginEnabled, history) => {
+export const login = (username, password, isDeviceLoginEnabled, history, returnURL = null) => {
     return (dispatch) => {
         httpService
             ._post(`${baseURL}${url}login`, { username, password, isDeviceLoginEnabled })
@@ -26,7 +25,7 @@ export const login = (username, password, isDeviceLoginEnabled, history) => {
                     dispatch(handleLogin(finalData))
                     const {userData: user} = data
                         toast.success('Logged in Successfully')
-                        const url = getHomeRouteForLoggedInUser(user.role)
+                        const url = returnURL ? returnURL : getHomeRouteForLoggedInUser(user.role)
                         history.replace(url)
                 } else {
                     toast.error(res.data.message)

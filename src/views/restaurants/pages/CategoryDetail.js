@@ -78,7 +78,7 @@ const CategoryDetail = ({match}) => {
                         </Col>
                         <Col md='9' xs='12'>
                             <CardBody style={{maxHeight: 450}}>
-                                <h2 className='mb-75'>Product Details</h2>
+                                <h2 className='mb-75'>Category Details</h2>
                                 <Row>
                                     <Col xl={6}>
                                         <div className='mt-2 row'>

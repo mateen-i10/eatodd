@@ -4,7 +4,7 @@ import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import {useHistory, useLocation} from "react-router-dom"
-import {addMealToCart} from "../../../utility/Utils"
+import {addItemToCart, isObjEmpty} from "../../../utility/Utils"
 import ProductDetail from "../components/product/ProductCard"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
@@ -12,7 +12,6 @@ const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
     const [selectedProducts, setSelectedProducts] = useState([])
-    const [selectedMenuItems, setSelectedMenuItems] = useState({})
     const [mealName, setMealName] = useState("")
     const history = useHistory()
     const {state} = useLocation()
@@ -47,24 +46,28 @@ const Menu = () => {
 
     }, [response])
 
-    useEffect(() => {
-        console.log('selected products', selectedProducts)
-    }, [selectedProducts])
-
-    const handleAllMenuItems = () => {
-        setSelectedMenuItems({
-            ...selectedMenuItems,
-            mealName,
-           selectedProducts
-        })
-    }
     const dispatchingItems = () => {
+        // calculating meal total price
+        let finalItems = []
+        if (selectedProducts && selectedProducts.length > 0) {
+            finalItems = selectedProducts.map(item => {
+                if (!isObjEmpty(item)) {
+                    const price = item.options.find(op => op.isSelected).price
+                    return {...item, calculatedPrice: price * item.selectedQuantity, price}
+                }
+            })
+        }
+        let totalPrice = 0
+        finalItems.forEach(p => {
+            totalPrice =  totalPrice + p.calculatedPrice
+        })
         const meal = {
             mealName,
+            totalPrice,
             categoryName: category?.name,
-            selectedProducts
+            selectedProducts : [...finalItems]
         }
-        addMealToCart(meal)
+        addItemToCart(meal)
         history.push('/home')
     }
     const handleSelectProduct = (product, subCatId, limit) => {
@@ -180,7 +183,6 @@ const Menu = () => {
             </div>
             <Footer
                 mealName={mealName}
-                addToBag={handleAllMenuItems}
                 dispatchingItems={dispatchingItems}
                 setMealName={setMealName}
             />

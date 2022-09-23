@@ -1,29 +1,49 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {Row} from "reactstrap"
 import WineCards from "../../wine/components/WineCards"
 import OmgCorporate from "./OmgCorporate"
-import {omgCorporate, omgFamilyDine, omgFriends} from "../../../tempData/cateringDb"
+import {omgFamilyDine, omgFriends} from "../../../tempData/cateringDb"
 import OmgFamilyDine from "./OmgFamilyDine"
 import {wineHomePgData} from "../../../tempData/wineClubData"
 import OmgFriends from "./OmgFriends"
-// import useAPI from "../../../utility/customHooks/useAPI"
+import useAPI from "../../../utility/customHooks/useAPI"
 
-const DetailsMenuPage = ({selectedCategory, xl, md}) => {
+const DetailsMenuPage = ({xl, md, id}) => {
 
-    // const [isLoading, response] = useAPI('CateringMenuItem?PageIndex=1&PageSize=4', 'get', {}, {}, true)
-    //
-    // console.log("MenuItem", isLoading, response)
+    const [isLoading, response] = useAPI(`CateringMenu/GetCateringMenuItem?PageIndex=1&PageSize=4&RefId=${id}`, 'get', {}, {}, true)
+
+    const [omgCorporateItems, setOmgCorporateItems] = useState([])
+
+    useEffect(() => {
+        if (response !== null && response.statusCode === 200) {
+            const data = response.data
+            console.log("data******", data)
+            const final = data.map(item => ({
+                id: item.id,
+                attachment: item.attachment,
+                title: item.name,
+                detail: item.description,
+                price: item.price,
+                limit: item.limit,
+                isLoading
+            }))
+            setOmgCorporateItems(final)
+        }
+    }, [response])
+
+    console.log("MenuItem", isLoading, response)
+    console.log("corporate Items", omgCorporateItems)
     const showItems = () => {
-        if (selectedCategory === 1) {
+        if (id === 1) {
             return <Fragment>
                 <Row className="align-items-center ">
-                    {omgCorporate.map(item => (
+                    {omgCorporateItems.length ? omgCorporateItems.map(item => (
                         <OmgCorporate key={item.id} item={item} xl={xl} md={md}/>
-                    ))}
+                    )) : null}
                 </Row>
             </Fragment>
         }
-        if (selectedCategory === 2) {
+        if (id === 2) {
             return <Fragment>
                 <Row className="align-items-center justify-content-center ">
                     {omgFamilyDine.map(item => (
@@ -32,7 +52,7 @@ const DetailsMenuPage = ({selectedCategory, xl, md}) => {
                 </Row>
             </Fragment>
         }
-        if (selectedCategory === 3) {
+        if (id === 3) {
             return <Fragment>
                 <Row className="align-items-center justify-content-center ">
                     {omgFriends.map(item => (
@@ -41,7 +61,7 @@ const DetailsMenuPage = ({selectedCategory, xl, md}) => {
                 </Row>
             </Fragment>
         }
-        if (selectedCategory === 4) {
+        if (id === 4) {
             return <Fragment>
                 <Row className="align-items-center justify-content-center ">
                     {wineHomePgData.map(item => (
