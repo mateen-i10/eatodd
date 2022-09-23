@@ -1,5 +1,5 @@
 import { useSkin } from '@hooks/useSkin'
-import {Link, useHistory} from 'react-router-dom'
+import {Link, useHistory, useLocation} from 'react-router-dom'
 import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import {Row, Col, CardTitle, CardText, Form, Label, Input, Button, FormFeedback} from 'reactstrap'
@@ -20,6 +20,7 @@ const LoginCover = () => {
     const { skin } = useSkin()
     const dispatch = useDispatch()
     const history = useHistory()
+    const {state} = useLocation()
     const  [rememberMe, setRememberMe] = useState(false)
     const [isBlock, setBlock] = useState(false)
 
@@ -48,7 +49,7 @@ const LoginCover = () => {
         if (errors && Object.keys(errors).length !== 1) {
             const {email, password} = control._fields
             setBlock(true)
-            dispatch(login(email._f.value, password._f.value, rememberMe, history))
+            dispatch(login(email._f.value, password._f.value, rememberMe, history, state && state.returnURL ? state.returnURL : null))
         }
     }
 

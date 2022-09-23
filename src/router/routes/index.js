@@ -11,7 +11,10 @@ const Routes = [
     {
         path: '/home',
         component: lazy(() => import('../../views/home/Home')),
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        meta: {
+            publicRoute: true
+        }
     },
     {
         path: '/auth/verification',
@@ -31,7 +34,10 @@ const Routes = [
     {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        meta: {
+            publicRoute: true
+        }
     },
     {
         path: '/menu',
@@ -76,7 +82,10 @@ const Routes = [
     {
         path: '/wines',
         component: lazy(() => import('../../views/admin/wines/Wines')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            publicRoute: true
+        }
     },
     {
         path: '/wine/about',
@@ -97,7 +106,11 @@ const Routes = [
         path: '/dashboard',
         component: lazy(() => import('../../views/admin/Dashboard')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/orders',

@@ -19,7 +19,6 @@ const isToday = date => {
     date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&
     date.getFullYear() === today.getFullYear()
-    /* eslint-enable */
   )
 }
 
@@ -65,7 +64,7 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  */
 export const getHomeRouteForLoggedInUser = userRole => {
   if (userRole === Roles.superAdmin) return '/dashboard'
-  if (userRole === Roles.customer) return '/dashboard/customer'
+  if (userRole === Roles.customer) return '/home'
   if (userRole === Roles.branchManager) return '/'
   return '/'
 }
@@ -83,21 +82,37 @@ export const selectThemeColors = theme => ({
   }
 })
 
-export const addMealToCart = (meal) => {
+export const addItemToCart = (item, isWine = false) => {
   //getting existing cart items
   const items = localStorage.getItem('cartItems')
   const cart = JSON.parse(items)
-  const finalItems = items && items.length > 0 ? [...cart.meals, meal] : [meal]
-  localStorage.setItem('cartItems', JSON.stringify({ meals: [...finalItems]}))
+  const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
+  const finalWines = cart && cart.wines && cart.wines.length > 0 ? [...cart.wines] : []
+  if (isWine) {
+    //updating quantity if wine already exist
+    const index = finalWines.findIndex(p => p.id === item.id)
+    if (index > -1) {
+      item.selectedQuantity = finalWines[index].selectedQuantity + 1
+      finalWines.splice(index, 1, item)
+    } else {
+      item.selectedQuantity = 1
+      finalWines.push(item)
+    }
+  } else {
+    finalMeals.push(item)
+  }
+  localStorage.setItem('cartItems', JSON.stringify({ meals: [...finalMeals], wines: [...finalWines]}))
+  toast.success(`'${isWine ? item.name : item.mealName}' added to cart`)
+  return true
 }
 
-export const removeMealFromCart = (index) => {
+export const removeItemFromCart = (index, isWine = false) => {
   //getting existing cart items
   const items = localStorage.getItem('cartItems')
   if (items && items.length > 0) {
     const cart = JSON.parse(items)
-    cart.meals.splice(index, 1)
-    const finalItems = {...cart, meals: [...cart.meals]}
+    isWine ? cart.wines.splice(index, 1) : cart.meals.splice(index, 1)
+    const finalItems = {...cart, meals: [...cart.meals], wines: cart.wines ? [...cart.wines] : []}
     localStorage.setItem('cartItems', JSON.stringify(finalItems))
     return true
   }
@@ -108,6 +123,20 @@ export const getCartData = () => {
   const string = localStorage.getItem('cartItems')
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem('cartItems')) : null
   return obj && !isObjEmpty(obj) ? obj : null
+}
+
+export const cartTotalPrice = () => {
+  const cart = getCartData()
+  if (cart) {
+    let totalPrice = 0
+    if (cart.meals && cart.meals.length > 0) cart.meals.forEach(c => {
+      totalPrice = totalPrice + c.totalPrice
+    })
+    if (cart.wines && cart.wines.length > 0) cart.wines.forEach(c => {
+      totalPrice = totalPrice + (c.price * c.selectedQuantity)
+    })
+    return Number(totalPrice)
+  }
 }
 
 export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {

@@ -1,121 +1,104 @@
 // ** React Imports
-import {Fragment, useState} from 'react'
+import {Fragment, useState, useEffect} from 'react'
 
 // ** Third Party Components
-import Select from 'react-select'
-import Cleave from 'cleave.js/react'
-import {Controller, useForm} from 'react-hook-form'
-import 'cleave.js/dist/addons/cleave-phone.us'
+import '../../../@core/scss/base/pages/app-invoice.scss'
 
 // ** Reactstrap Imports
-import {Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormFeedback, Input, Label, Row} from 'reactstrap'
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    CardText,
+    CardTitle,
+    Col,
+    Form,
+    FormFeedback,
+    Input,
+    Label,
+    Row
+} from 'reactstrap'
+import {useDispatch, useSelector} from "react-redux"
+import UILoader from "../../../@core/components/ui-loader"
+import {getCustomer, updateCustomer} from "../../../redux/customer/actions"
+import {getUserData} from "../../../auth/utils"
+import {toast} from "react-toastify"
+import {setDetailLoading} from "../../../redux/customer/reducer"
 
-// ** Utils
-import {selectThemeColors} from '../../../utility/Utils'
+const ProfileDetails = ({}) => {
+    const userData = getUserData()
+    console.log('userData', userData)
+    const dispatch = useDispatch()
 
-// ** Demo Components
+    //getting data from store
+    const isLoading = useSelector(state => state.customer.isDetailLoading)
+    const customerObj = useSelector(state => state.customer.object)
+    const isRequestCompleted = useSelector(state => state.customer.isRequestCompleted)
+    const isSuccess = useSelector(state => state.customer.isSuccess)
 
-const countryOptions = [
-    {value: 'uk', label: 'UK'},
-    {value: 'usa', label: 'USA'},
-    {value: 'france', label: 'France'},
-    {value: 'russia', label: 'Russia'},
-    {value: 'canada', label: 'Canada'}
-]
+    console.log("customerObj", customerObj)
 
-const languageOptions = [
-    {value: 'english', label: 'English'},
-    {value: 'spanish', label: 'Spanish'},
-    {value: 'french', label: 'French'},
-    {value: 'german', label: 'German'},
-    {value: 'dutch', label: 'Dutch'}
-]
+    const  [showEdit, setShowEdit] = useState(false)
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [contactNo, setContactNo] = useState('')
 
-const currencyOptions = [
-    {value: 'usd', label: 'USD'},
-    {value: 'euro', label: 'Euro'},
-    {value: 'pound', label: 'Pound'},
-    {value: 'bitcoin', label: 'Bitcoin'}
-]
+    useEffect(() => {
+        dispatch(getCustomer(userData.id))
+    }, [])
 
-const timeZoneOptions = [
-    {value: '(GMT-12:00) International Date Line West', label: '(GMT-12:00) International Date Line West'},
-    {value: '(GMT-11:00) Midway Island, Samoa', label: '(GMT-11:00) Midway Island, Samoa'},
-    {value: '(GMT-10:00) Hawaii', label: '(GMT-10:00) Hawaii'},
-    {value: '(GMT-09:00) Alaska', label: '(GMT-09:00) Alaska'},
-    {value: '(GMT-08:00) Pacific Time (US & Canada)', label: '(GMT-08:00) Pacific Time (US & Canada)'},
-    {value: '(GMT-08:00) Tijuana, Baja California', label: '(GMT-08:00) Tijuana, Baja California'},
-    {value: '(GMT-07:00) Arizona', label: '(GMT-07:00) Arizona'},
-    {value: '(GMT-07:00) Chihuahua, La Paz, Mazatlan', label: '(GMT-07:00) Chihuahua, La Paz, Mazatlan'},
-    {value: '(GMT-07:00) Mountain Time (US & Canada)', label: '(GMT-07:00) Mountain Time (US & Canada)'},
-    {value: '(GMT-06:00) Central America', label: '(GMT-06:00) Central America'},
-    {value: '(GMT-06:00) Central Time (US & Canada)', label: '(GMT-06:00) Central Time (US & Canada)'},
-    {
-        value: '(GMT-06:00) Guadalajara, Mexico City, Monterrey',
-        label: '(GMT-06:00) Guadalajara, Mexico City, Monterrey'
-    },
-    {value: '(GMT-06:00) Saskatchewan', label: '(GMT-06:00) Saskatchewan'},
-    {value: '(GMT-05:00) Bogota, Lima, Quito, Rio Branco', label: '(GMT-05:00) Bogota, Lima, Quito, Rio Branco'},
-    {value: '(GMT-05:00) Eastern Time (US & Canada)', label: '(GMT-05:00) Eastern Time (US & Canada)'},
-    {value: '(GMT-05:00) Indiana (East)', label: '(GMT-05:00) Indiana (East)'},
-    {value: '(GMT-04:00) Atlantic Time (Canada)', label: '(GMT-04:00) Atlantic Time (Canada)'},
-    {value: '(GMT-04:00) Caracas, La Paz', label: '(GMT-04:00) Caracas, La Paz'},
-    {value: '(GMT-04:00) Manaus', label: '(GMT-04:00) Manaus'},
-    {value: '(GMT-04:00) Santiago', label: '(GMT-04:00) Santiago'},
-    {value: '(GMT-03:30) Newfoundland', label: '(GMT-03:30) Newfoundland'}
-]
-
-const ProfileDetails = ({data}) => {
-    // ** Hooks
-    const defaultValues = {
-        lastName: '',
-        firstName: data.accountSetting.general.fullName.split(" ")[0]
-    }
-    const {
-        control,
-        setError,
-        handleSubmit,
-        formState: {errors}
-    } = useForm({defaultValues})
-
-    // ** States
-    const [avatar, setAvatar] = useState(data.avatar ? data.avatar : '')
-
-    const onChange = e => {
-        const reader = new FileReader(),
-            files = e.target.files
-        reader.onload = function () {
-            setAvatar(reader.result)
+    const setData = () => {
+        try {
+            setFirstName(customerObj?.applicationUser?.firstName)
+            setLastName(customerObj?.applicationUser?.lastName)
+            setContactNo(customerObj?.applicationUser?.contactNo)
+        } catch (e) {
+            toast.error(e.message)
         }
-        reader.readAsDataURL(files[0])
-    }
 
-    const onSubmit = data => {
-        if (Object.values(data).every(field => field.length > 0)) {
-            return null
-        } else {
-            for (const key in data) {
-                if (data[key].length === 0) {
-                    setError(key, {
-                        type: 'manual'
-                    })
+    }
+    useEffect(() => {
+            setData()
+    }, [customerObj])
+
+    useEffect(() => {
+        if (isSuccess) {
+            setShowEdit(false)
+            dispatch(getCustomer(userData.id))
+            setData()
+        }
+    }, [isRequestCompleted, isSuccess])
+
+    const EditProfileDetail = () => {
+        try {
+            const data = {id: customerObj.id,
+                applicationUserId: userData.id,
+                applicationUser: {
+                    id: userData.id,
+                    firstName,
+                    lastName,
+                    contactNo
                 }
             }
+            console.log('edit data', data)
+            dispatch(setDetailLoading(true))
+            dispatch(updateCustomer(data))
+        } catch (e) {
+            toast.error(e.message)
         }
-    }
 
-    const handleImgReset = () => {
-        setAvatar(require('../../../assets/images/avatars/avatar-blank.png').default)
     }
 
     return (
         <Fragment>
-            <Card>
+            <UILoader blocking={isLoading}>
+                <Card>
                 <CardHeader className='border-bottom'>
                     <CardTitle tag='h4'>Account Details</CardTitle>
                 </CardHeader>
                     <CardBody className='py-2 my-25'>
-                        <div className='d-flex'>
+                        {/*<div className='d-flex'>
                             <div className='me-25'>
                                 <img className='rounded me-50' src={avatar} alt='Generic placeholder image' height='100' width='100'/>
                             </div>
@@ -131,151 +114,94 @@ const ProfileDetails = ({data}) => {
                                     <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
                                 </div>
                             </div>
-                        </div>
-                        <Form className='mt-2 pt-50' onSubmit={handleSubmit(onSubmit)}>
+                        </div>*/}
+                        <Form className='mt-2 pt-50'>
+
                             <Row>
-                                <Col sm='6' className='mb-1'>
+                                <Col xl='6'></Col>
+                                {showEdit === false && <Col className='p-0' xl='6'>
+                                    <Button color='success' className='float-end me-5' onClick = {() => setShowEdit(true)}>
+                                        <span className='align-middle d-sm-inline-block d-none'>Edit</span>
+                                    </Button>
+                                </Col>}
+                                {showEdit === true && <Col className='p-0' xl='6'>
+                                    <Button color='primary' className='float-end' onClick={EditProfileDetail}>
+                                        <span className='align-middle d-sm-inline-block d-none'>Save</span>
+                                    </Button>
+                                    <Button color='danger' className='float-end me-2' onClick = {() => {
+                                        setShowEdit(false)
+                                    }}>
+                                        <span className='align-middle d-sm-inline-block d-none'>Cancel</span>
+                                    </Button>
+                                </Col>}
+                            </Row>
+
+                            <Row className='mt-3'>
+                                {showEdit === false &&  <>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                        First Name:
+                                    </Col>
+                                    <Col tag='dd' sm='4' className='mb-1'>
+                                        {customerObj.applicationUser?.firstName}
+                                    </Col>
+                                </>}
+                                {showEdit === true &&  <Col sm='6' className='mb-1'>
                                     <Label className='form-label' for='firstName'>
                                         First Name
                                     </Label>
-                                    <Controller
-                                        name='firstName'
-                                        control={control}
-                                        render={({field}) => (
-                                            <Input id='firstName' placeholder='John'
-                                                   invalid={errors.firstName && true} {...field} />
-                                        )}
-                                    />
-                                    {errors && errors.firstName &&
-                                        <FormFeedback>Please enter a valid First Name</FormFeedback>}
-                                </Col>
-                                <Col sm='6' className='mb-1'>
+                                    <Input value={firstName} onChange={e => setFirstName(e.target.value)} placeholder='John'/>
+                                </Col>}
+
+                                {showEdit === false && <>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                        Last Name:
+                                    </Col>
+                                    <Col tag='dd' sm='4' className='mb-1'>
+                                        {customerObj.applicationUser?.lastName}
+                                    </Col>
+                                </>}
+                                {showEdit === true &&  <Col sm='6' className='mb-1'>
                                     <Label className='form-label' for='lastName'>
                                         Last Name
                                     </Label>
-                                    <Controller
-                                        name='lastName'
-                                        control={control}
-                                        render={({field}) => (
-                                            <Input id='lastName' placeholder='Doe'
-                                                   invalid={errors.lastName && true} {...field} />
-                                        )}
-                                    />
-                                    {errors.lastName && <FormFeedback>Please enter a valid Last Name</FormFeedback>}
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='emailInput'>
+                                    <Input value={lastName} onChange={e => setLastName(e.target.value)} placeholder='Doe' />
+                                </Col>}
+
+                                {showEdit === false && <>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                        Email:
+                                    </Col>
+                                    <Col tag='dd' sm='4' className='mb-1'>
+                                        {customerObj.applicationUser?.email}
+                                    </Col>
+                                </>}
+                                {/*{showEdit === true &&  <Col sm='6' className='mb-1'>
+                                    <Label className='form-label' for='email'>
                                         E-mail
                                     </Label>
-                                    <Input id='emailInput' type='email' name='email' placeholder='Email'
-                                           defaultValue={data.email}/>
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='company'>
-                                        Company
-                                    </Label>
-                                    <Input defaultValue={data.company} id='company' name='company'
-                                           placeholder='Company Name'/>
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='phNumber'>
+                                    <Input id='email' type='email' name='email' placeholder='email@gmail.com'/>
+                                </Col>}*/}
+
+                                {showEdit === false && <>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                        Phone Number:
+                                    </Col>
+                                    <Col tag='dd' sm='4' className='mb-1'>
+                                        {customerObj.applicationUser?.contactNo}
+                                    </Col>
+                                </>}
+                                {showEdit === true &&  <Col sm='6' className='mb-1'>
+                                    <Label className='form-label' for='contactNo'>
                                         Phone Number
                                     </Label>
-                                    <Cleave
-                                        id='phNumber'
-                                        name='phNumber'
-                                        className='form-control'
-                                        placeholder='1 234 567 8900'
-                                        options={{phone: true, phoneRegionCode: 'US'}}
-                                    />
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='address'>
-                                        Address
-                                    </Label>
-                                    <Input id='address' name='address' placeholder='12, Business Park'/>
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='accountState'>
-                                        State
-                                    </Label>
-                                    <Input id='accountState' name='state' placeholder='California'/>
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='zipCode'>
-                                        Zip Code
-                                    </Label>
-                                    <Input id='zipCode' name='zipCode' placeholder='123456' maxLength='6'/>
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='country'>
-                                        Country
-                                    </Label>
-                                    <Select
-                                        id='country'
-                                        isClearable={false}
-                                        className='react-select'
-                                        classNamePrefix='select'
-                                        options={countryOptions}
-                                        theme={selectThemeColors}
-                                        defaultValue={countryOptions[0]}
-                                    />
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='language'>
-                                        Language
-                                    </Label>
-                                    <Select
-                                        id='language'
-                                        isClearable={false}
-                                        className='react-select'
-                                        classNamePrefix='select'
-                                        options={languageOptions}
-                                        theme={selectThemeColors}
-                                        defaultValue={languageOptions[0]}
-                                    />
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='timeZone'>
-                                        Timezone
-                                    </Label>
-                                    <Select
-                                        id='timeZone'
-                                        isClearable={false}
-                                        className='react-select'
-                                        classNamePrefix='select'
-                                        options={timeZoneOptions}
-                                        theme={selectThemeColors}
-                                        defaultValue={timeZoneOptions[0]}
-                                    />
-                                </Col>
-                                <Col sm='6' className='mb-1'>
-                                    <Label className='form-label' for='currency'>
-                                        Currency
-                                    </Label>
-                                    <Select
-                                        id='currency'
-                                        isClearable={false}
-                                        className='react-select'
-                                        classNamePrefix='select'
-                                        options={currencyOptions}
-                                        theme={selectThemeColors}
-                                        defaultValue={currencyOptions[0]}
-                                    />
-                                </Col>
-                                <Col className='mt-2' sm='12'>
-                                    <Button type='submit' className='me-1' color='primary'>
-                                        Save changes
-                                    </Button>
-                                    <Button color='secondary' outline>
-                                        Discard
-                                    </Button>
-                                </Col>
+                                    <Input value={contactNo} onChange={e => setContactNo(e.target.value)} className='form-control' placeholder='1 234 567 8900'/>
+                                </Col>}
                             </Row>
                         </Form>
                     </CardBody>
 
             </Card>
+            </UILoader>
         </Fragment>
     )
 }

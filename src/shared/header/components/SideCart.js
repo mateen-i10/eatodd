@@ -14,8 +14,10 @@ import {UserPlus} from "react-feather"
 import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
-import {Link} from "react-router-dom"
-import {getCartData, isObjEmpty, removeMealFromCart} from "../../../utility/Utils"
+import {cartTotalPrice, getCartData, isObjEmpty, removeItemFromCart} from "../../../utility/Utils"
+import CartItem from "./CartItem"
+import {useHistory} from "react-router-dom"
+import {getUserData} from "../../../auth/utils"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -24,44 +26,29 @@ const Cart = (props) => {
     const [openModel, SetModelOpen] = useState(false)
     const [cartItems, setCartItems] = useState()
     const [isMealDeleted, setMealDeleted] = useState(false)
-    const chips = require("../../../assets/images/Menu&Order/chips.png").default
-    const drink1 = require("../../../assets/images/Menu&Order/drink1.png").default
+    const history = useHistory()
 
     useEffect(() => {
         setCartItems({...getCartData()})
+        if (isMealDeleted) setMealDeleted(false)
     }, [isMealDeleted])
 
 // methods
     const handleRemoveMeal = (index) => {
-        const result = removeMealFromCart(index)
+        const result = removeItemFromCart(index)
         setMealDeleted(result)
     }
-    const bagPrice = () => {
-        let pricesArr = []
-        if (cartItems && cartItems.meals.length > 0) {
-            pricesArr = cartItems.meals.map(meal => {
-                if (!isObjEmpty(meal)) {
-                    return meal.selectedProducts ? meal.selectedProducts.map(p => {
-                        const price = p.options.find(op => op.isSelected).price
-                        return price * p.selectedQuantity
-                }) : 0
-                }
-
-            })
-        }
-        let totalBagPrice = 0
-        if (pricesArr.length > 0) {
-            totalBagPrice = pricesArr.reduce((pre, next) => {
-                return pre + next
-            })
-        }
-        return Number(totalBagPrice)
+    const handleRemoveWine = (index) => {
+        const result = removeItemFromCart(index, true)
+        setMealDeleted(result)
     }
 
     const toggleCanvasStart = () => {
         setCanvasPlacement('start')
         setCanvasOpen(!canvasOpen)
         props.openDrawer(!props.isOpenDrawer)
+        if (!getUserData()) history.push('/login',  { returnURL: '/checkout' })
+        else history.push('/checkout')
     }
 
     const RenderDuplicateModal = () => {
@@ -100,10 +87,10 @@ const Cart = (props) => {
             </div>
         )
     }
-    const taxAmount = Number((bagPrice() * (16 / 100)).toFixed(2))
+    const taxAmount = Number((cartTotalPrice() * (0 / 100)).toFixed(2))
     return (
         <>
-            {!cartItems || (cartItems && cartItems.meals.length === 0) ? <div className='demo-inline-spacing'>
+            {!cartItems || isObjEmpty(cartItems) || (cartItems && (cartItems.meals && cartItems.meals.length === 0) && (cartItems.wines && cartItems.wines.length === 0)) ? <div className='demo-inline-spacing'>
                     <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                                toggle={toggleCanvasStart}>
                         <OffcanvasHeader toggle={toggleCanvasStart}
@@ -182,17 +169,36 @@ const Cart = (props) => {
                             <div>
                                 <div>
                                     <div className='col-md-12 '>
-                                        {cartItems && cartItems.meals.map((meal, index) => {
+                                        {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
                                             return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
                                                 <ItemsInCart foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
                                                 <hr/>
                                             </div> : null
                                         })}
+                                        {cartItems && cartItems.wines && cartItems.wines.length > 0 && <div className="row">
+                                            <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
+                                            <div className='col-md-2' style={{marginLeft: -15}}>
+                                                <h6 style={{
+                                                    fontSize: 20,
+                                                    marginLeft: -15,
+                                                    fontWeight: 'bolder'
+                                                }}>${cartItems.wines.map(p => {
+                                                    return p.selectedQuantity * p.price
+                                                }).reduce((final, val) => {
+                                                    return final + val
+                                                })}
+                                                </h6>
+                                            </div>
+                                        </div>}
+                                        {cartItems && cartItems.wines && cartItems.wines.map((wine, index) => {
+                                            return !isObjEmpty(wine) ? <div key={`ItemsInCart-${index}`}>
+                                                <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>
+                                            </div> : null
+                                        })}
                                     </div>
-
                                 </div>
 
-                                <div style={{marginTop: 20}}>
+                                {/*<div style={{marginTop: 20}}>
                                     <h5 style={{
                                         textAlign: 'center',
                                         fontSize: "1.3rem",
@@ -234,11 +240,11 @@ const Cart = (props) => {
                                             <p style={{textAlign: 'center', fontSize: "1.1rem"}}>$3.65</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*/}
 
                             </div>
 
-                            <Link to="/home"><Button
+                           {/* <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
@@ -251,19 +257,19 @@ const Cart = (props) => {
                                 }}
                                 {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
                             >
-                                Add Another menu item
+                                Add menu item
                             </Button>
-                            </Link>
+                            </Link>*/}
 
                             <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
-                                <div className="row">
+                                {/*<div className="row">
                                     <div className="col-9 text-uppercase"
                                          style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>Bag Total
                                     </div>
                                     <div className="col-3"
-                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice()}
+                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice() ?? 0}
                                     </div>
-                                </div>
+                                </div>*/}
 
                                 <Button
                                     color='secondary'
@@ -288,7 +294,7 @@ const Cart = (props) => {
                                          style={{fontWeight: 700, color: 'primary', fontSize: "1.2rem"}}>Subtotal
                                     </div>
                                     <div className="col-3"
-                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice()}
+                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.4rem"}}>$ {cartTotalPrice() ?? 0}
                                     </div>
                                 </div>
 
@@ -301,7 +307,7 @@ const Cart = (props) => {
                                              fontWeight: 500,
                                              color: 'primary',
                                              fontSize: "1.4rem"
-                                         }}>$ {taxAmount}
+                                         }}>$ {taxAmount ?? 0}
                                     </div>
                                 </div>
 
@@ -316,7 +322,7 @@ const Cart = (props) => {
                                              fontWeight: 'bolder',
                                              color: 'primary',
                                              fontSize: "1.4rem"
-                                         }}>$ {(bagPrice() + taxAmount).toFixed(2)}
+                                         }}>$ {(cartTotalPrice() + taxAmount).toFixed(2) ?? 0}
                                     </div>
                                 </div>
 
@@ -330,7 +336,6 @@ const Cart = (props) => {
 
                         </OffcanvasBody>
                         <CardFooter style={{padding: 0}}>
-                            <Link to='/checkout'>
                                 <Button
                                     color='primary'
                                     onClick={toggleCanvasStart}
@@ -345,7 +350,6 @@ const Cart = (props) => {
                                 >
                                     Checkout
                                 </Button>
-                            </Link>
                         </CardFooter>
                     </Offcanvas>
                     {RenderDuplicateModal()}

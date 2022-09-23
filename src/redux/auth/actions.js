@@ -14,7 +14,7 @@ import {
 } from "./authentication"
 
 const url = 'auth/'
-export const login = (username, password, isDeviceLoginEnabled, history) => {
+export const login = (username, password, isDeviceLoginEnabled, history, returnURL = null) => {
     return (dispatch) => {
         httpService
             ._post(`${baseURL}${url}login`, { username, password, isDeviceLoginEnabled })
@@ -26,7 +26,7 @@ export const login = (username, password, isDeviceLoginEnabled, history) => {
                     dispatch(handleLogin(finalData))
                     const {userData: user} = data
                         toast.success('Logged in Successfully')
-                        const url = getHomeRouteForLoggedInUser(user.role)
+                        const url = returnURL ? returnURL : getHomeRouteForLoggedInUser(user.role)
                         history.replace(url)
                 } else {
                     toast.error(res.data.message)
