@@ -1,31 +1,31 @@
 import React, {useState} from "react"
-
 import {Button, Card, CardBody, Col, Input, InputGroup, InputGroupText, Row} from 'reactstrap'
+import Items from "./component/Items"
+import {cartTotalPrice, getCartData} from "../../../utility/Utils"
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
-import Items from "./component/Items"
-import {useSelector} from "react-redux"
+
 
 const Cart = props => {
 
     const {stepper} = props
 
-    const {cartItems} = useSelector(state => state)
+    const cartItems = getCartData()
     // console.log(cartItems)
     // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
     //     if (!value) return value
     //     return new Intl.DateTimeFormat('en-US', formatting).format(new Date(value))
     // }
-    const [item, setItem] = useState([])
+    const [item] = useState([])
 
     // const mealName = ""
     // const mainItems = []
     // const additinalItems = []
-    const handleAdd = (e) => {
+    /*const handleAdd = (e) => {
         // console.log(e)
         setItem([...item, e])
-    }
+    }*/
 
     return (
         <>
@@ -34,9 +34,9 @@ const Cart = props => {
                 <div className='container-sm'>
                     <Row>
                         <Col xl={9}>
-                            {cartItems.map((foodItems, index) => (
+                            {cartItems && cartItems.meals && cartItems.meals.map((foodItems, index) => (
                                 <div key={index} className='checkout-items'>
-                                    <Items foodItems={foodItems} handleAdd={handleAdd}/>
+                                    {/*<Items foodItems={foodItems} handleAdd={handleAdd}/>*/}
                                 </div>
                             ))}
                         </Col>
@@ -64,7 +64,7 @@ const Cart = props => {
                                             <ul className='list-unstyled my-2'>
                                                 <li className='price-detail d-flex'>
                                                     <div className='detail-title detail-total flex-fill'>Total</div>
-                                                    <div className='detail-amt fw-bolder'>$574</div>
+                                                    <div className='detail-amt fw-bolder'>${cartTotalPrice()}</div>
                                                 </li>
                                             </ul>
                                             <Button

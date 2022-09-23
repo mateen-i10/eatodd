@@ -31,6 +31,7 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                                     </div>
                                 </div>
                                 <div onClick={() => {
+                                    localStorage.setItem('restaurantId', place.id)
                                     history.push('/OmgPlate', categoryId ? { categoryId, restaurantId: place.id } : null)
                                 }}>
                                     <Button className='text-uppercase mt-1' color='primary' outline onClick={() => {

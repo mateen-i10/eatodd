@@ -1,11 +1,94 @@
-import {setLoading, setCustomers} from "./reducer"
-// ** Table Data & Columns
-import { data } from '../../tempData/data'
+import {apiCall} from "../api/actions"
+import {
+    setLoading,
+    setCustomers,
+    editCustomer,
+    setCustomer,
+    setDetailLoading,
+    setRequestCompleted,
+    setIsCustomerError, setIsCustomerSuccess, setIsEdit
+} from "./reducer"
+
+const url = 'customer'
 
 // ** Get Customers Data
-export const loadCustomers = () => {
+export const loadCustomers = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
-        dispatch(setCustomers([...data]))
+        dispatch(apiCall({
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            data: {},
+            method: 'get',
+            onSuccess: setCustomers.type
+        }))
+    }
+}
+
+export const getCustomer = (id, isEdit = false) => {
+    console.log("dataGet", isEdit)
+    return async dispatch => {
+        if (isEdit) {
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: editCustomer.type
+            }))
+        } else {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setCustomer.type
+            }))
+        }
+    }
+}
+
+export const deleteCustomer = (id) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/${id}`,
+            data: {},
+            method: 'delete',
+            isSuccessToast: true,
+            successMessage: 'Customer Deleted Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsCustomerError.type,
+            isSuccess: setIsCustomerSuccess.type
+        }))
+    }
+}
+
+export const addCustomer = (data) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'post',
+            isSuccessToast: true,
+            successMessage: 'Customer Added Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsCustomerError.type,
+            isSuccess: setIsCustomerSuccess.type
+        }))
+    }
+}
+
+export const updateCustomer = (data) => {
+    console.log('dataEmp', data)
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Customer Updated Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsCustomerError.type,
+            isSuccess: setIsCustomerSuccess.type
+        }))
+        dispatch(setIsEdit(false))
     }
 }

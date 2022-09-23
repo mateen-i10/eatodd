@@ -1,28 +1,13 @@
 import React from 'react'
 import {X} from "react-feather"
 import {Button} from "reactstrap"
-import {isObjEmpty} from "../../../../utility/Utils"
 
 const ItemsInCart = ({foodItems, index, removeMeal}) => {
 
     const mealName = foodItems.mealName
     const categoryName = foodItems.categoryName
+    const totalPrice = foodItems.totalPrice
     const mainItems = [...foodItems.selectedProducts]
-    let finalItems = []
-
-    if (mainItems && mainItems.length > 0) {
-        finalItems = mainItems.map(item => {
-            if (!isObjEmpty(item)) {
-                    const price = item.options.find(op => op.isSelected).price
-                    return {...item, calculatedPrice: price * item.selectedQuantity, price}
-            }
-
-        })
-    }
-        let calculatedPrice = 0
-        finalItems.forEach(p => {
-           calculatedPrice =  calculatedPrice + p.calculatedPrice
-       })
 
     return (
         <div>
@@ -40,7 +25,7 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
                         fontSize: 20,
                         marginLeft: -15,
                         fontWeight: 'bolder'
-                    }}>${calculatedPrice}</h6>
+                    }}>${totalPrice}</h6>
                 </div>
             </div>
             <div className="row">
@@ -48,11 +33,11 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
                     {categoryName}
                 </div>
             </div>
-            {finalItems.map((item, id) => (
+            {mainItems.map((item, id) => (
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4 fs-3 font-medium-1">{item.calculatedPrice ? `${item.selectedQuantity} * $${item.price} = $${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice}` : `-`}</div>
                     </div>
                 </div>
             ))}

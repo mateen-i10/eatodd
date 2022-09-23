@@ -1,6 +1,6 @@
-.Dark_font h1{
+.Dark_font h1 {
     font-weight: 700;
-    font-family: TradeGothicLTCom,TradeGothic,sans-serif;
+    font-family: TradeGothicLTCom, TradeGothic, sans-serif;
     font-size: 16px;
 }
 
@@ -21,30 +21,36 @@
     font-weight: 700;
     text-transform: uppercase;
 }
+
 .cart__shiping, .cart__total-amount {
     border: 1px solid #dbdbdb;
     border-radius: 2px;
     padding: 30px 20px;
     margin-bottom: 30px;
 }
+
 .large-font {
     font-size: 17px;
     font-weight: bold;
 }
+
 .menu-item {
     padding-bottom: 11px;
     border-bottom: 1px dashed #dbdbdb;
     margin-bottom: 20px;
 }
+
 .menu__item-title {
     display: inline-block;
     margin-right: 10px;
 }
+
 .menu-item .menu__item-title {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 15px;
 }
+
 .menu__item-cart {
     position: absolute;
     top: 30px;
@@ -52,4 +58,8 @@
     display: block;
     min-width: 50px;
     text-align: right;
+}
+
+.cateringMenuCategory:hover {
+    color: #81be41;
 }

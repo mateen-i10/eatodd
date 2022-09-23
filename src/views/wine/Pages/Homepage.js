@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {Card, CardBody, CardText, Col, Row} from 'reactstrap'
 import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
@@ -142,7 +141,6 @@ const Homepage = () => {
                                 </Col>
                             </Row>
                         </div>
-
                     </div>
                 </section>
             </div>
