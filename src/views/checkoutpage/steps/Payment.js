@@ -1,7 +1,7 @@
 // ** Icon Imports
 // ** Reactstrap Imports
 import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
-import {cartTotalPrice, getCartData} from "../../../utility/Utils"
+import {cartTotalPrice, clearCart, getCartData} from "../../../utility/Utils"
 import {useSelector} from "react-redux"
 import {useEffect, useState} from "react"
 import useAPI from "../../../utility/customHooks/useAPI"
@@ -21,13 +21,13 @@ const Payment = (props) => {
     const [placeOrder, setPlaceOrder] = useState({ url: '', order: {}})
     // hooks
     const history = useHistory()
-    const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, true)
-    console.log('iss', isLoading)
-    console.log('rrr', response)
+    const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, false)
+
     useEffect(() => {
         if (response && response.data) {
             history.push('/home')
             toast.success('Order placed successfully')
+            clearCart()
         } else setPlaceOrder({url: '', order: {}})
     }, [response, isLoading])
     const cartData = getCartData()
@@ -67,13 +67,11 @@ const Payment = (props) => {
             billingAddress: billingAddress ? billingAddress.payload : null,
             ordersDetail: [...orderDetails],
             totalPrice: cartTotalPrice(),
-            customerId: getUserData()?.id,
+            customerId: getUserData()?.customerId,
             quantity: orderDetails.length,
-            restaurantId
+            restaurantId: Number(restaurantId)
         }
         setPlaceOrder({url: 'order', order: {...order}})
-        console.log('cartData', cartData)
-        console.log('order', order)
     }
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>

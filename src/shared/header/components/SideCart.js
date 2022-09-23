@@ -47,6 +47,9 @@ const Cart = (props) => {
         setCanvasPlacement('start')
         setCanvasOpen(!canvasOpen)
         props.openDrawer(!props.isOpenDrawer)
+    }
+    const checkOut = () => {
+        toggleCanvasStart()
         if (!getUserData()) history.push('/login',  { returnURL: '/checkout' })
         else history.push('/checkout')
     }
@@ -338,7 +341,7 @@ const Cart = (props) => {
                         <CardFooter style={{padding: 0}}>
                                 <Button
                                     color='primary'
-                                    onClick={toggleCanvasStart}
+                                    onClick={checkOut}
                                     style={{
                                         marginBottom: 0,
                                         height: 60,
