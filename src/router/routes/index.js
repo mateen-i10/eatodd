@@ -131,24 +131,6 @@ const Routes = [
         exact: true
     },
     {
-        path: '/dashboard/modifier',
-        component: lazy(() => import('../../views/restaurants/pages/Modifier')),
-        layout: 'VerticalLayout',
-        exact: true
-    },
-    {
-        path: '/Dashboard/addon',
-        component: lazy(() => import('../../views/restaurants/pages/Addon')),
-        layout: 'VerticalLayout',
-        exact: true
-    },
-    {
-        path: '/dashboard/promotion',
-        component: lazy(() => import('../../views/restaurants/pages/Promotion')),
-        layout: 'VerticalLayout',
-        exact: true
-    },
-    {
         path: '/dashboard/customer',
         component: lazy(() => import('../../views/restaurants/pages/Customer')),
         layout: 'VerticalLayout',
@@ -182,16 +164,6 @@ const Routes = [
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
         layout: 'BlankLayout'
-    },
-    {
-        path: '/Users',
-        component: lazy(() => import('../../views/admin/Users')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/AddUser',
-        component: lazy(() => import('../../views/admin/AddUserForm')),
-        layout: 'VerticalLayout'
     },
     {
         path: '/Restaurant',
@@ -344,11 +316,6 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
-        path: '/addAddon',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddonForm')),
-        layout: 'VerticalLayout'
-    },
-    {
         path: '/addMembershipType',
         component: lazy(() => import('../../views/admin/WineClubMembershipTypes/AddMembershipTypeForm')),
         layout: 'VerticalLayout'
@@ -366,16 +333,6 @@ const Routes = [
     {
         path: '/subCategory',
         component: lazy(() => import('../../views/admin/subCategory/subcategory')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/addModifier',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddModifier')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/addnorthPromotion',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddPromotion')),
         layout: 'VerticalLayout'
     },
     {

@@ -1,28 +1,25 @@
 import {
     Archive,
+    Award,
     Box,
     Clipboard,
     Clock,
     Coffee,
     Copy,
-    DollarSign,
     Facebook,
     Grid,
     Home,
-    List,
     Mail,
     Menu,
     MessageSquare,
     Package,
     PenTool,
-    PlusSquare,
     Send,
     User,
     UserCheck,
     UserPlus,
     Users,
-    Volume,
-    Award
+    Volume
 } from 'react-feather'
 
 export default [
@@ -31,12 +28,6 @@ export default [
         title: 'Dashboard',
         icon: <Home size={20}/>,
         navLink: '/dashboard'
-    },
-    {
-        id: 'Users',
-        title: 'Users',
-        icon: <Users size={20}/>,
-        navLink: '/Users'
     },
     {
         id: 'Employees',
@@ -98,12 +89,12 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/cateringMenuItem'
     },
-   /* {
-        id: 'SectionItem',
-        title: 'Section Items',
-        icon: <Package size={20}/>,
-        navLink: '/sectionItem'
-    },*/
+    /* {
+         id: 'SectionItem',
+         title: 'Section Items',
+         icon: <Package size={20}/>,
+         navLink: '/sectionItem'
+     },*/
     {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
@@ -171,24 +162,6 @@ export default [
                 title: 'Catering Items',
                 icon: <Menu size={12}/>,
                 navLink: '/dashboard/menuitems'
-            },
-            {
-                id: 'modifier',
-                title: 'Modifier',
-                icon: <List size={12}/>,
-                navLink: '/dashboard/modifier'
-            },
-            {
-                id: 'addon',
-                title: 'Addon',
-                icon: <PlusSquare size={12}/>,
-                navLink: '/dashboard/addon'
-            },
-            {
-                id: 'promotion',
-                title: 'Promotion',
-                icon: <DollarSign size={12}/>,
-                navLink: '/dashboard/promotion'
             },
             {
                 id: 'customer',

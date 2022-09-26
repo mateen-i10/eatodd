@@ -2,7 +2,7 @@ import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
 import '../components/stylesheet/Menu.css'
 import React, {useEffect, useState} from "react"
-import DetailsMenuPage from "../components/DetailsMenuPage"
+import CateringDetailMenu from "../components/CateringDetailMenu"
 import {ArrowRight} from "react-feather"
 import {Button} from "reactstrap"
 import useAPI from "../../../utility/customHooks/useAPI"
@@ -14,6 +14,7 @@ const Catering = () => {
     const [selectedMenuId, setSelectedMenuId] = useState(0)
 
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=4', 'get', {}, {}, true)
+
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
@@ -84,41 +85,7 @@ const Catering = () => {
             </div>
 
             <div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Build for your loved one's</div>
-            {/*<div className='bg-white'>*/}
-            {/*    <div className="container-sm mb-3">*/}
-            {/*        <div className="row mt-3 justify-content-center">*/}
-            {/*            <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>*/}
-            {/*                <div className="text-center fs-2 fw-bolder text-primary">Menu</div>*/}
-            {/*                <hr/>*/}
-            {/*                <div style={{*/}
-            {/*                    borderRight: "6px solid rgb(129 190 65)"*/}
-            {/*                }}>*/}
-            {/*                    {categories.map((item, i) => (*/}
-            {/*                        <div key={i}*/}
-            {/*                             className={`fs-3 fw-bolder ms-2 cursor-pointer mb-1  ${elHovered[i] ? "text-primary" : ""}  `}*/}
-            {/*                             style={{lineHeight: "35px"}}*/}
-            {/*                             onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}*/}
-            {/*                             onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}*/}
-            {/*                             onClick={() => {*/}
-            {/*                                 toggleList(item)*/}
-            {/*                             }}*/}
-            {/*                        >*/}
-            {/*                            <div className="text-start" style={{fontSize: 15}}>{item.title}</div>*/}
-            {/*                        </div>*/}
-            {/*                    ))}*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*            <div className="col-md-9 col-12 ">*/}
-            {/*                <DetailsMenuPage selectedCategory={selectedCategory}*/}
-            {/*                                 xl={xl}*/}
-            {/*                                 md={md}*/}
-            {/*                                 id={selectedMenuId}*/}
-            {/*                />*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Testing</div>*/}
+
             <div className="container-sm mb-3">
                 <div className="row mt-3 justify-content-center">
                     <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
@@ -140,14 +107,15 @@ const Catering = () => {
                                          toggleList(item)
                                      }}
                                 >
-                                    <div className={`text-start ${activeItem === item.id ? "text-primary" : ""}`}
-                                         style={{fontSize: 15}}>{item.name}</div>
+                                    <div
+                                        className={`text-start text-uppercase ${activeItem === item.id ? "text-primary" : ""}`}
+                                        style={{fontSize: 15}}>{item.name}</div>
                                 </div>
                             )) : null}
                         </div>
                     </div>
                     <div className="col-md-9 col-12 ">
-                        <DetailsMenuPage
+                        <CateringDetailMenu
                             xl={xl}
                             md={md}
                             id={selectedMenuId}
