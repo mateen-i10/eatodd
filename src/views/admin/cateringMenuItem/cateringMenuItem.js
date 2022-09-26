@@ -75,17 +75,18 @@ const CateringMenuItems = (props) => {
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData] = useState([
+    const [formData, setFormData] = useState([])
+   /* const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Select, label: 'Catering', placeholder: 'Select Catering', name:'cateringMenuId', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:caterings, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
-    ])
+        {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-12'}
+    ])*/
 
-    const schema = Joi.object({
+    const [schema, setSchema] = useState(Joi.object({
         name: Joi.string().required().label("Name")
-    })
+    }))
 
     // ** Function to handle filter
     const toggle = () => {
@@ -107,11 +108,29 @@ const CateringMenuItems = (props) => {
     useModalError(isError, setModalLoading, setIsCateringMenuItemError)
 
     const addClick = () => {
+        setFormData([
+            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Select, label: 'Catering', placeholder: 'Select Catering', name:'cateringMenuId', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:caterings, isAsyncSelect: true, isMulti:false},
+            {type: FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name: 'image', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-12'}
+        ])
         setModalTitle('Add Catering Menu Item')
         toggle()
     }
 
     const editClick = (id) => {
+        setFormData([
+            {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Number, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.Select, label: 'Catering', placeholder: 'Select Catering', name:'cateringMenuId', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:caterings, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-12'}
+        ])
+        setSchema(Joi.object({
+            name: Joi.string().required().label("Name")
+        }))
         toggle()
         dispatch(getCateringMenuItem(id, true))
         setModalTitle('Edit Catering Menu')

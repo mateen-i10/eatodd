@@ -67,7 +67,8 @@ export const addCateringMenu = (data) => {
             successMessage: 'Catering Menu Item Added Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsCateringMenuItemError.type,
-            isSuccess: setIsCateringMenuItemSuccess.type
+            isSuccess: setIsCateringMenuItemSuccess.type,
+            isFormData: true
         }))
     }
 }
@@ -83,7 +84,8 @@ export const updateCateringMenu = (data) => {
             successMessage: 'Catering Menu Item Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsCateringMenuItemError.type,
-            isSuccess: setIsCateringMenuItemSuccess.type
+            isSuccess: setIsCateringMenuItemSuccess.type,
+            isFormData: true
         }))
         dispatch(setIsEdit(false))
     }

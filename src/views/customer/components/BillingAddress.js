@@ -96,7 +96,7 @@ const BillingAddress = () => {
                                         City:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        lahore
+                                        {addressObj.billingAddress?.city}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
