@@ -21,9 +21,16 @@ const Menu = () => {
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
     useEffect(() => {
         console.log('isLoading', isLoading)
+        console.log('response', response)
         if (response && response.data) {
             const {data} = response
-            setCategory({name: data.categoryName, id: data.id, description: data.description, attachment: data.attachment})
+            setCategory({
+                name: data.categoryName,
+                id: data.id,
+                description: data.description,
+                attachment: data.attachment,
+                isWinePaired: data.isWinePaired
+            })
 
             // grouping products by sub category
             const final = data.products && data.products.length > 0 ? data.products.reduce((acc, currentValue) => {
@@ -170,6 +177,8 @@ const Menu = () => {
                     attachment={category?.attachment}
                     name={category?.name}
                     description={category?.description}
+                    restaurantId={restaurantId}
+                    isWinePaired={category?.isWinePaired}
                 />
                 <hr className="text-dark"/>
                 <NutrtionPrefModel/>
