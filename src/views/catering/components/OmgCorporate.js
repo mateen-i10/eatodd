@@ -46,14 +46,15 @@ const OmgCorporate = (props) => {
                         <DropdownToggle
                             caret
                             color="transparent"
-                            style={{border: "1px solid #81be41", color: '#81be41'}}
+                            style={{border: "1px solid #81be41", color: '#81be41', fontWeight: 700}}
                         >
                             {value} <ChevronDown size={18}/>
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={() => setValue("10 People")}>10 People</DropdownItem>
                             <DropdownItem onClick={() => setValue("50 People")}>50 People</DropdownItem>
-                            <DropdownItem onClick={() => setValue(item.limit)}>{item.limit} People</DropdownItem>
+                            <DropdownItem
+                                onClick={() => setValue(`${item.limit} People`)}>{item.limit} People</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </div>

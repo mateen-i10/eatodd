@@ -7,17 +7,19 @@ import OmgFamilyDine from "./OmgFamilyDine"
 import {wineHomePgData} from "../../../tempData/wineClubData"
 import OmgFriends from "./OmgFriends"
 import useAPI from "../../../utility/customHooks/useAPI"
+import UILoader from "../../../@core/components/ui-loader"
 
-const DetailsMenuPage = ({xl, md, id}) => {
+const CateringDetailMenu = ({xl, md, id}) => {
 
     const [isLoading, response] = useAPI(`CateringMenu/GetCateringMenuItem?PageIndex=1&PageSize=4&RefId=${id}`, 'get', {}, {}, true)
 
+    console.log("response *******", response)
     const [omgCorporateItems, setOmgCorporateItems] = useState([])
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
             const data = response.data
-            console.log("data******", data)
+            // console.log("data******", data)
             const final = data.map(item => ({
                 id: item.id,
                 attachment: item.attachment,
@@ -39,7 +41,7 @@ const DetailsMenuPage = ({xl, md, id}) => {
                 <Row className="align-items-center ">
                     {omgCorporateItems.length ? omgCorporateItems.map(item => (
                         <OmgCorporate key={item.id} item={item} xl={xl} md={md}/>
-                    )) : null}
+                    )) : <UILoader/>}
                 </Row>
             </Fragment>
         }
@@ -76,4 +78,4 @@ const DetailsMenuPage = ({xl, md, id}) => {
     )
 }
 
-export default DetailsMenuPage
+export default CateringDetailMenu
