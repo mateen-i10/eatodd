@@ -2,8 +2,6 @@ import {apiCall} from "../api/actions"
 import {toast} from "react-toastify"
 import httpService, {baseURL} from "../../utility/http"
 import {push} from "react-router-redux"
-import {Roles} from "../../utility/Roles"
-import {getHomeRouteForLoggedInUser} from "../../utility/Utils"
 import {
     handleLogin,
     handleLogout,
@@ -12,6 +10,7 @@ import {
     setTokenVerified,
     setTokenVerifiedFalse
 } from "./authentication"
+import {getHomeRouteForLoggedInUser} from "../../auth/utils"
 
 const url = 'auth/'
 export const login = (username, password, isDeviceLoginEnabled, history, returnURL = null) => {

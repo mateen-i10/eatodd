@@ -27,8 +27,10 @@ import {toast} from "react-toastify"
 import {setDetailLoading} from "../../../redux/customer/reducer"
 
 const ProfileDetails = ({}) => {
+
     const userData = getUserData()
-    console.log('userData', userData)
+    const customerId = getUserData().customerId
+
     const dispatch = useDispatch()
 
     //getting data from store
@@ -45,7 +47,7 @@ const ProfileDetails = ({}) => {
     const [contactNo, setContactNo] = useState('')
 
     useEffect(() => {
-        dispatch(getCustomer(userData.id))
+        dispatch(getCustomer(customerId))
     }, [])
 
     const setData = () => {
@@ -65,14 +67,14 @@ const ProfileDetails = ({}) => {
     useEffect(() => {
         if (isSuccess) {
             setShowEdit(false)
-            dispatch(getCustomer(userData.id))
+            dispatch(getCustomer(customerId))
             setData()
         }
     }, [isRequestCompleted, isSuccess])
 
     const EditProfileDetail = () => {
         try {
-            const data = {id: customerObj.id,
+            const data = {id: customerId,
                 applicationUserId: userData.id,
                 applicationUser: {
                     id: userData.id,
@@ -138,7 +140,7 @@ const ProfileDetails = ({}) => {
 
                             <Row className='mt-3'>
                                 {showEdit === false &&  <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         First Name:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -153,7 +155,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Last Name:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -168,7 +170,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Email:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>
@@ -183,7 +185,7 @@ const ProfileDetails = ({}) => {
                                 </Col>}*/}
 
                                 {showEdit === false && <>
-                                    <Col tag='dt' sm='2' className='fw-bolder mb-1 text-center'>
+                                    <Col tag='dt' sm='2' className='fw-bolder mb-1'>
                                         Phone Number:
                                     </Col>
                                     <Col tag='dd' sm='4' className='mb-1'>

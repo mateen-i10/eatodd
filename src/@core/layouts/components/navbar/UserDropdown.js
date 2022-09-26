@@ -58,11 +58,11 @@ const UserDropdown = () => {
 
             </DropdownToggle>
             <DropdownMenu end>
-                <DropdownItem tag='a' href='/pages/profile' onClick={e => e.preventDefault()}>
+                <DropdownItem tag='a' href='/user'>
                     <User size={14} className='me-75'/>
                     <span className='align-middle'>Profile</span>
                 </DropdownItem>
-                <DropdownItem tag='a' href='/apps/email' onClick={e => e.preventDefault()}>
+               {/* <DropdownItem tag='a' href='/apps/email' onClick={e => e.preventDefault()}>
                     <Mail size={14} className='me-75'/>
                     <span className='align-middle'>Inbox</span>
                 </DropdownItem>
@@ -86,7 +86,7 @@ const UserDropdown = () => {
                 <DropdownItem tag='a' href='/pages/faq' onClick={e => e.preventDefault()}>
                     <HelpCircle size={14} className='me-75'/>
                     <span className='align-middle'>FAQ</span>
-                </DropdownItem>
+                </DropdownItem>*/}
                 <DropdownItem tag={Link} to='/login' onClick={() => dispatch(unAuthorize())}>
                     <Power size={14} className='me-75'/>
                     <span className='align-middle'>Logout</span>
