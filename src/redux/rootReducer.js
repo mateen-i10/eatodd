@@ -34,6 +34,7 @@ import section from "./section/reducer"
 import sectionItem from "./sectionItem/reducer"
 import cateringMenu from "./cateringMenu/reducer"
 import cateringMenuItem from "./cateringMenuItem/reducer"
+import meals from "./meal/reducer"
 
 const rootReducer = {
     auth,
@@ -70,7 +71,8 @@ const rootReducer = {
     section,
     sectionItem,
     cateringMenu,
-    cateringMenuItem
+    cateringMenuItem,
+    meals
 }
 
 export default rootReducer

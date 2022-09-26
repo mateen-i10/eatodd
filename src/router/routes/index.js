@@ -467,6 +467,11 @@ const Routes = [
         path: '/SubcategoryDetail/:id',
         component: lazy(() => import('../../views/admin/subCategory/SubCategoryDetail')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/MealDetail/:id',
+        component: lazy(() => import('../../views/customer/components/MealDetail')),
+        layout: 'BlankLayout'
     }
 
 ]

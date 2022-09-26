@@ -4,12 +4,11 @@ import React, {Fragment, useEffect, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, RefreshCcw, Trash} from 'react-feather'
+import {ChevronDown, FileText, MoreVertical, RefreshCcw, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
     CardTitle,
-    Button,
     Input,
     Row,
     Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
@@ -19,12 +18,16 @@ import UILoader from "../../../@core/components/ui-loader"
 import {loadMeals} from "../../../redux/reorderhistory/actions"
 import {getUserData} from "../../../auth/utils"
 
-const OrderHistory = () => {
+import { useHistory } from "react-router-dom"
+
+const OrderHistory = (props) => {
 
     const CustomerId = getUserData().customerId
     console.log(CustomerId, "customer id from meals")
     // const userId = CustomerId && CustomerId.id ? CustomerId.id : null
     // console.log('CustomerId', CustomerId)
+
+    const history = useHistory()
 
     const ingredientList = useSelector(state => state.reorderHistory.mealList)
     const miscData = useSelector(state => state.reorderHistory.miscData)
@@ -39,6 +42,7 @@ const OrderHistory = () => {
         if (CustomerId) {
             dispatch(loadMeals(currentPage, pageSize, searchValue, CustomerId))
         }
+        console.log(props.history, 'prop data')
     }, [])
 
     const handleFilter = e => {
@@ -54,6 +58,12 @@ const OrderHistory = () => {
     const handlePagination = page => {
         dispatch(loadMeals(page.selected + 1, pageSize, searchValue, CustomerId))
         setCurrentPage(page.selected + 1)
+    }
+
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        console.log('user selected id', id)
+        history.push(`/MealDetail/${id}`)
     }
 
     const columns = [
@@ -86,7 +96,7 @@ const OrderHistory = () => {
                                 <MoreVertical size={15} />
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={() => console.log(row.id)}>
+                                <DropdownItem tag='a'  className='w-100' onClick={e => detailOptClick(row.id, e)}>
                                     <FileText size={15} />
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
