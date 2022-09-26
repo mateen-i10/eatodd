@@ -1,7 +1,9 @@
 import React from 'react'
 import ProductImage from "../../components/product/ProductImage"
+import {useHistory} from "react-router-dom"
 
-const TopShelf = ({attachment, name, description}) => {
+const TopShelf = ({attachment, name, description, isWinePaired, restaurantId}) => {
+    const history = useHistory()
     return (
         <>
             <div className="container-sm">
@@ -11,10 +13,22 @@ const TopShelf = ({attachment, name, description}) => {
                             attachment={attachment}
                             styles={{width: "85%", height: "75%", borderRadius: 20}}/>
                     </div>
-                    <div className="col-md-6 col-12  mt-1">
-                        <div className="text-primary fw-bolder "
-                             style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>select your
+                    <div className="col-md-6 col-12 mt-1">
+                        <div className='row'>
+                            <div className="col-sm-8 text-primary fw-bolder" style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>
+                                select your
+                            </div>
+                            {isWinePaired &&
+                                <div className='col-sm-4 text-center cursor-pointer'><div className="delivery-addr-bar" onClick={() => {
+                                    history.push("/wineOrderMenu", {restaurantId})
+                                }}>
+                                    <div className="delivery-text">
+                                        <div className="deliver-to-1">Select Wine</div>
+                                    </div>
+                                </div>
+                                </div>}
                         </div>
+
                         <div className="text-dark fw-bolder "
                              style={{
                                  fontSize: "3.6rem",

@@ -96,11 +96,10 @@ const Order = () => {
                         className=" top-wine-menu col-md-3 col-12 d-flex flex-column align-items-center justify-content-center zindex-2 cursor-pointer ">
                         <div className="wine-item "
                              onClick={() => {
-                                 history.push("/wineOrderMenu")
+                                 history.push("/wine/homepage")
                              }}
                         >
                             <div className="wine-thumbnail align-items-center justify-content-center">
-
                                 <img
                                     src={require("../../../../assets/images/wineClub/Ferrari Carrano.png").default}
                                     alt="wine"

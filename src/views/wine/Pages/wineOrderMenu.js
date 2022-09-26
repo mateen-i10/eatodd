@@ -4,11 +4,18 @@ import Footer from "../../../shared/footer/Footer"
 import WineCards from "../components/WineCards"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {addItemToCart} from "../../../utility/Utils"
+import {useHistory, useLocation} from "react-router-dom"
+import {Button} from "reactstrap"
+import {ArrowLeft} from "react-feather"
 
 const wineOrderMenu = () => {
     const xl = 3
     const md = 6
     const [wines, setWines] = useState([])
+    const history = useHistory()
+    const {state} = useLocation()
+    const restaurantId = state ? state.restaurantId : 0
+    console.log('restaurantId', restaurantId)
 
     // hooks
     const [isLoading, response] = useAPI(`product/getWineProducts?pageIndex=1&&pageSize=12`, 'get', {}, {}, true)
@@ -38,6 +45,9 @@ const wineOrderMenu = () => {
             <Header/>
             <Fragment>
                 <div className="container-sm mt-5 mb-4">
+                        <Button className='btn-icon rounded-circle mb-1 cursor-pointer' color='secondary' outline onClick={() => {
+                            history.goBack()
+                        }}><ArrowLeft size='18'/></Button>
                     <div className="row align-items-center justify-content-center">
                         {wines.map(item => (
                             <WineCards
