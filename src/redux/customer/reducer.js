@@ -3,6 +3,7 @@ import {createAction} from '@reduxjs/toolkit'
 const initialState = {
     list: [],
     object: {},
+    addressObject: {},
     miscData: {},
     isRequestCompleted: false,
     isLoading: false,
@@ -13,9 +14,11 @@ const initialState = {
 }
 
 export const setCustomers = createAction("customerReducer/setCustomers")
+export const setCustomerAddress = createAction("customerReducer/setCustomerAddress")
 export const setCustomer = createAction("customerReducer/setCustomer")
 export const setLoading = createAction("customerReducer/setLoading")
 export const editCustomer = createAction("customerReducer/editCustomer")
+export const editCustomerAddress = createAction("customerReducer/editCustomerAddress")
 export const setDetailLoading = createAction("customerReducer/setDetailLoading")
 export const setIsEdit = createAction("customerReducer/setIsEdit")
 export const setIsCustomerError = createAction("customerReducer/setIsCustomerError")
@@ -43,6 +46,14 @@ const customerReducer = (state = initialState, action) => {
                 isLoading: false,
                 isDetailLoading: false
             }
+        case setCustomerAddress.type:
+            return {
+                ...state,
+                addressObject: action.payload.data,
+                isEdit: false,
+                isLoading: false,
+                isDetailLoading: false
+            }
         case setLoading.type:
             return {
                 ...state,
@@ -57,6 +68,12 @@ const customerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 object: action.payload.data,
+                isEdit: true
+            }
+        case editCustomerAddress.type:
+            return {
+                ...state,
+                addressObject: action.payload.data,
                 isEdit: true
             }
         case setRequestCompleted.type:

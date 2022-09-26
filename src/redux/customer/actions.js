@@ -6,7 +6,7 @@ import {
     setCustomer,
     setDetailLoading,
     setRequestCompleted,
-    setIsCustomerError, setIsCustomerSuccess, setIsEdit
+    setIsCustomerError, setIsCustomerSuccess, setIsEdit, setCustomerAddress, editCustomerAddress
 } from "./reducer"
 
 const url = 'customer'
@@ -90,5 +90,27 @@ export const updateCustomer = (data) => {
             isSuccess: setIsCustomerSuccess.type
         }))
         dispatch(setIsEdit(false))
+    }
+}
+
+export const getCustomerAddress = (id, isEdit = false) => {
+    console.log("dataGet", isEdit)
+    return async dispatch => {
+        if (isEdit) {
+            dispatch(apiCall({
+                url: `${url}/GetAddressByCustomer/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: editCustomerAddress.type
+            }))
+        } else {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/GetAddressByCustomer/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setCustomerAddress.type
+            }))
+        }
     }
 }

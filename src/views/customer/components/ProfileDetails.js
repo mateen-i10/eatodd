@@ -30,8 +30,6 @@ const ProfileDetails = ({}) => {
 
     const userData = getUserData()
     const customerId = getUserData().customerId
-    console.log('customerId', customerId)
-    console.log('userData', userData)
 
     const dispatch = useDispatch()
 

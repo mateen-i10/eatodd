@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -21,15 +21,16 @@ import {
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import {getUserData} from "../../../auth/utils"
-/*import {useDispatch} from "react-redux"*/
+import {useDispatch, useSelector} from "react-redux"
+import UILoader from "../../../@core/components/ui-loader"
+import {getCustomerAddress} from "../../../redux/customer/actions"
 
 const BillingAddress = () => {
-    const customerId = getUserData()?.customerId
-    console.log('userData', customerId)
-    //const dispatch = useDispatch()
+    const customerId = getUserData().customerId
+    console.log('customerId', customerId)
+    const dispatch = useDispatch()
 
     // ** States
-    /*const [show, setShow] = useState(false)*/
     const  [showEdit, setShowEdit] = useState(false)
 
     const [billingCity, setBillingCity] = useState('')
@@ -46,11 +47,24 @@ const BillingAddress = () => {
     const [shippingPhoneNumber, setShippingPhoneNumber] = useState('')
     const [shippingAddress1, setShippingAddress1] = useState('')
 
+    //getting data from store
+    const isLoading = useSelector(state => state.customer.isDetailLoading)
+    const addressObj = useSelector(state => state.customer.addressObject)
+    //const isRequestCompleted = useSelector(state => state.customer.isRequestCompleted)
+    //const isSuccess = useSelector(state => state.customer.isSuccess)
+
+    console.log("addressObj", addressObj)
+
+    useEffect(() => {
+        dispatch(getCustomerAddress(customerId))
+    }, [])
+
     // ** Hooks
 
     return (
         <Fragment>
-            <Card>
+            <UILoader blocking={isLoading}>
+                <Card>
                 <Row className='pe-3 pt-3'>
                     <Col xl='6'></Col>
                     {showEdit === false && <Col className='p-0' xl='6'>
@@ -269,7 +283,7 @@ const BillingAddress = () => {
                     </Row>
                 </CardBody>
             </Card>
-
+            </UILoader>
         </Fragment>
     )
 }
