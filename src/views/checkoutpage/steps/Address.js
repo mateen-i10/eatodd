@@ -238,7 +238,7 @@ const Address = props => {
                                                             name='billCity'
                                                             placeholder='Los Angeles'
                                                             onChange={(e) => setBillCity(e.target.value)}
-                                                            invalid={!billCity && errors.billCity && true}
+                                                            invalid={!billCity ? errors.billCity && true : null}
                                                         />
                                                         {!billCity && errors.billCity && (
                                                             <div className="text-danger">
@@ -257,7 +257,7 @@ const Address = props => {
                                                             name='billState'
                                                             placeholder='California'
                                                             onChange={(e) => setBillState(e.target.value)}
-                                                            invalid={!billState && errors.billState && true}
+                                                            invalid={!billState ? errors.billState && true : null}
                                                         />
                                                         {!billState && errors.billState && (
                                                             <div className="text-danger">
@@ -276,7 +276,7 @@ const Address = props => {
                                                         name='billCountry'
                                                         placeholder='USA'
                                                         onChange={(e) => setBillCountry(e.target.value)}
-                                                        invalid={!billCountry && errors.billCountry && true}
+                                                        invalid={!billCountry ? errors.billCountry && true : null}
                                                     />
                                                     {!billCountry && errors.billCountry && (
                                                         <div className="text-danger">
@@ -291,7 +291,7 @@ const Address = props => {
                                                     <Input type='number' id='zipCodeAddress' name='billZipCode'
                                                            placeholder='123456' maxLength='6'
                                                            onChange={(e) => setBillZipCode(e.target.value)}
-                                                           invalid={!billZipCode && errors.billZipCode && true}
+                                                           invalid={!billZipCode ? errors.billZipCode && true : null}
                                                     />
                                                     {!billZipCode && errors.billZipCode && (
                                                         <div className="text-danger">
@@ -310,7 +310,7 @@ const Address = props => {
                                                             name='billPhoneNo'
                                                             placeholder='012345698'
                                                             onChange={(e) => setBillPhoneNo(e.target.value)}
-                                                            invalid={!billPhoneNo && errors.billPhoneNo && true}
+                                                            invalid={!billPhoneNo ? errors.billPhoneNo && true : null}
                                                         />
                                                         {!billPhoneNo && errors.billPhoneNo && (
                                                             <div className="text-danger">
@@ -329,7 +329,7 @@ const Address = props => {
                                                             name='billAddress'
                                                             placeholder='Near Apollo Hospital'
                                                             onChange={(e) => setBillAddress(e.target.value)}
-                                                            invalid={!billAddress && errors.billAddress && true}
+                                                            invalid={!billAddress ? errors.billAddress && true : null}
                                                         />
                                                         {!billAddress && errors.billAddress && (
                                                             <div className="text-danger">
