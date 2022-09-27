@@ -29,8 +29,8 @@ import wines from "./wines/reducer"
 import ingredient from "./ingredients/reducer"
 import section from "./section/reducer"
 import sectionItem from "./sectionItem/reducer"
-import cateringMenu from "./cateringMenu/reducer"
-import cateringMenuItem from "./cateringMenuItem/reducer"
+import cateringMenu from "./Catering/cateringMenu/reducer"
+import cateringMenuItem from "./Catering/cateringMenuItem/reducer"
 
 const rootReducer = {
     auth,
