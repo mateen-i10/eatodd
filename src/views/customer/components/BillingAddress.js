@@ -8,14 +8,9 @@ import {
     Card,
     Label,
     Input,
-    Modal,
     Button,
     CardBody,
-    CardTitle,
-    ModalBody,
-    CardHeader,
-    ModalHeader,
-    FormFeedback
+    CardTitle, CardHeader
 } from 'reactstrap'
 
 // ** Styles
@@ -26,6 +21,8 @@ import UILoader from "../../../@core/components/ui-loader"
 import {getCustomerAddress, updateCustomerAddress} from "../../../redux/customer/actions"
 import {toast} from "react-toastify"
 import {setDetailLoading} from "../../../redux/customer/reducer"
+
+import {Edit, Delete, Save} from "react-feather"
 
 const BillingAddress = () => {
     const customerId = getUserData().customerId
@@ -130,25 +127,18 @@ const BillingAddress = () => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                <Row className='pe-3 pt-3'>
-                    <Col xl='6'></Col>
-                    {showEdit === false && <Col className='p-0' xl='6'>
-                            <Button className='float-end' color='primary' onClick={() => setShowEdit(true)}>
-                                Edit Address
-                            </Button>
-                        </Col>}
-                    {showEdit === true && <Col className='p-0' xl='6'>
-                            <Button color='primary' className='float-end' onClick={updateAddressDetail}>
-                                <span className='align-middle d-sm-inline-block d-none'>Save</span>
-                            </Button>
-                            <Button color='danger' className='float-end me-2' onClick = {() => {
-                                setShowEdit(false)
-                            }}>
-                                <span className='align-middle d-sm-inline-block d-none'>Cancel</span>
-                            </Button>
-                        </Col>}
-                </Row>
-                <hr />
+                    <CardHeader className='border-bottom mb-2'>
+                        <CardTitle tag='h4'>Address</CardTitle>
+                        <div>
+                            {showEdit === false && <div>
+                               <Button className="btn-sm" color='primary' onClick={() => setShowEdit(true)}>Edit</Button>
+                            </div>}
+                            {showEdit === true && <div>
+                                <Button className="btn-sm" color='danger' onClick={() => setShowEdit(false)}>Delete</Button>
+                                <Button className="btn-sm" color='primary' style={{marginLeft: 10}} onClick={updateAddressDetail}>Save</Button>
+                            </div>}
+                        </div>
+                    </CardHeader>
                 <CardBody>
                     <Row>
                         <Col xl='6' xs='12' style={{borderRight: '1px solid #a8a0a0'}}>
