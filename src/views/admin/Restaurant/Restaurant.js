@@ -4,7 +4,18 @@ import React, {Fragment, useEffect, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {
+    Book,
+    BookOpen,
+    ChevronDown,
+    Codesandbox,
+    DollarSign,
+    Edit,
+    FileText,
+    MoreVertical,
+    Trash,
+    UserPlus
+} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -341,6 +352,23 @@ const Restaurant = (props) => {
         props.history.push(`/restaurantDetail/${id}`)
     }
 
+    const orderClick = (e) => {
+        e.preventDefault()
+        props.history.push(`/dashboard/orders`)
+    }
+    const productClick = (e) => {
+        e.preventDefault()
+        props.history.push(`/products`)
+    }
+    /*const promotionClick = (e) => {
+        e.preventDefault()
+        props.history.push(`/dashboard/promotion`)
+    }*/
+    const customerClick = (e) => {
+        e.preventDefault()
+        props.history.push(`/dashboard/customer`)
+    }
+
     const handleSubmit = (event) => {
         console.log('restaurantSchedule', restaurantSchedule)
         console.log('formState', formState)
@@ -407,6 +435,26 @@ const Restaurant = (props) => {
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
                                     <FileText size={15} />
                                     <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => orderClick(e)}>
+                                    <Book size={15} />
+                                    <span className='align-middle ms-50'>Orders</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => productClick(e)}>
+                                    <Codesandbox size={15} />
+                                    <span className='align-middle ms-50'>Products</span>
+                                </DropdownItem>
+                                {/*<DropdownItem tag='a' href='' className='w-100' onClick={e => promotionClick(e)}>
+                                    <DollarSign size={15} />
+                                    <span className='align-middle ms-50'>Promotion</span>
+                                </DropdownItem>*/}
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => customerClick(e)}>
+                                    <UserPlus size={15} />
+                                    <span className='align-middle ms-50'>Customer</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='' className='w-100'>
+                                    <BookOpen size={15} />
+                                    <span className='align-middle ms-50'>Inventory</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
                                     <Trash size={15} />

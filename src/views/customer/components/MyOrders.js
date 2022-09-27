@@ -1,109 +1,112 @@
 // ** React Imports
 import React, {Fragment, useEffect, useState} from 'react'
 
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, RefreshCcw} from 'react-feather'
-import {Card, CardHeader, CardTitle, Col, Input, Row, UncontrolledTooltip} from 'reactstrap'
+import {ChevronDown, FileText, MoreVertical, RefreshCcw, Trash} from 'react-feather'
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    Input,
+    Row,
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
-import {loadReorderHistory} from "../../../redux/reorderhistory/actions"
+import UILoader from "../../../@core/components/ui-loader"
+import {loadMeals} from "../../../redux/reorderhistory/actions"
+import {getUserData} from "../../../auth/utils"
 
-const ReorderHistory = () => {
-    const reorderList = useSelector(state => state.reorderHistory.list)
-    const isEdit = useSelector(state => state.reorderHistory.isEdit)
+import { useHistory } from "react-router-dom"
+
+const OrderHistory = (props) => {
+
+    const CustomerId = getUserData().customerId
+    console.log(CustomerId, "customer id from meals")
+    // const userId = CustomerId && CustomerId.id ? CustomerId.id : null
+    // console.log('CustomerId', CustomerId)
+
+    const history = useHistory()
+
+    const ingredientList = useSelector(state => state.reorderHistory.mealList)
+    const miscData = useSelector(state => state.reorderHistory.miscData)
+    const isLoading = useSelector(state => state.reorderHistory.isLoading)
     const dispatch = useDispatch()
 
-    // ** local States
-    const [currentPage, setCurrentPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
-        dispatch(loadReorderHistory())
-    }, [isEdit])
-
-    // const handleSubmit = (event) => {
-    //     console.log("formState on submit", formState)
-    //     event.preventDefault()
-    //     const isError = formModalRef.current.validate(formState)
-    //     if (isError) return
-    //
-    //     // call api
-    //     setModalLoading(true)
-    //     console.log("form submitted")
-    // }
-    const handleFilter = e => {
-        const value = e.target.value
-        let updatedData = []
-        setSearchValue(value)
-
-        if (value.length) {
-            updatedData = data.filter(item => {
-                const startsWith =
-                    item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.email.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.age.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.start_date.toLowerCase().startsWith(value.toLowerCase())
-
-                const includes =
-                    item.full_name.toLowerCase().includes(value.toLowerCase()) ||
-                    item.post.toLowerCase().includes(value.toLowerCase()) ||
-                    item.email.toLowerCase().includes(value.toLowerCase()) ||
-                    item.age.toLowerCase().includes(value.toLowerCase()) ||
-                    item.salary.toLowerCase().includes(value.toLowerCase()) ||
-                    item.start_date.toLowerCase().includes(value.toLowerCase())
-
-                if (startsWith) {
-                    return startsWith
-                } else if (!startsWith && includes) {
-                    return includes
-                } else return null
-            })
-            setFilteredData(updatedData)
-            setSearchValue(value)
+        if (CustomerId) {
+            dispatch(loadMeals(currentPage, pageSize, searchValue, CustomerId))
         }
+        console.log(props.history, 'prop data')
+    }, [])
+
+    const handleFilter = e => {
+        console.log('e.keyCode', e.keyCode)
+        const value = e.target.value
+        if (e.keyCode === 13) {
+            dispatch(loadMeals(currentPage + 1, pageSize, value, CustomerId))
+        }
+        setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        setCurrentPage(page.selected)
+        dispatch(loadMeals(page.selected + 1, pageSize, searchValue, CustomerId))
+        setCurrentPage(page.selected + 1)
+    }
+
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        console.log('user selected id', id)
+        history.push(`/MealDetail/${id}`)
     }
 
     const columns = [
         {
-            name: 'order name',
-            selector: (row) => row.full_name,
+            name: 'Name',
+            selector: (row) => row.name,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'order date',
-            selector: (row) => row.start_date,
+            name: 'Order Date',
+            selector: (row) => row.quantity,
             sortable: true,
-            minWidth: '250px'
+            minWidth: '50px'
         },
         {
-            name: 'Filters',
-            selector: (row) => row.filter,
+            name: 'Price',
+            selector: (row) => row.unit,
             sortable: true,
-            minWidth: '150px'
+            minWidth: '50px'
         },
         {
             name: 'Actions',
             allowOverflow: true,
             cell: row => {
                 return (
-                    <div className='d-flex cursor-pointer'>
-                        <span id='refresh' onClick={() => {
-                            console.log('reorderd the order under the id: ', row.id)
-                        }}><RefreshCcw size={15}/></span>
-                        <UncontrolledTooltip placement='top' target='refresh'>
-                            Re Order
-                        </UncontrolledTooltip>
+                    <div className='d-flex'>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a'  className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={() => console.log(row.id)}>
+                                    <Trash size={15} />
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span className='cursor-pointer' onClick={() => { console.log("Reorder from meal id : ", row.id) }}><RefreshCcw size={15} /></span>
                     </div>
                 )
             }
@@ -111,65 +114,78 @@ const ReorderHistory = () => {
     ]
 
     // ** Custom Pagination
-    const CustomPagination = () => (
-        <ReactPaginate
-            previousLabel=''
-            nextLabel=''
-            forcePage={currentPage}
-            onPageChange={page => handlePagination(page)}
-            pageCount={searchValue.length ? filteredData.length / 7 : reorderList.length / 7 || 1}
+    const CustomPagination = () => {
+        const count = miscData?.totalPages ?? 0
+
+        return <ReactPaginate
+            previousLabel={''}
+            nextLabel={''}
             breakLabel='...'
-            pageRangeDisplayed={2}
+            pageCount={count || 1}
             marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
             activeClassName='active'
-            pageClassName='page-item'
+            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+            onPageChange={page => handlePagination(page)}
+            pageClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            nextClassName={'page-item next'}
+            previousClassName={'page-item prev'}
+            previousLinkClassName={'page-link'}
+            pageLinkClassName={'page-link'}
             breakClassName='page-item'
             breakLinkClassName='page-link'
-            nextLinkClassName='page-link'
-            nextClassName='page-item next'
-            previousClassName='page-item prev'
-            previousLinkClassName='page-link'
-            pageLinkClassName='page-link'
-            containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            containerClassName={
+                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            }
         />
-    )
+    }
+
+    const dataToRender = () => {
+        if (ingredientList.length > 0) {
+            return ingredientList
+        }  else {
+            return ingredientList.slice(0, pageSize)
+        }
+    }
 
     return (
         <Fragment>
-            <Card>
-                <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <div>
-                        <CardTitle tag='h4'>ReOrder From History</CardTitle>
-                    </div>
-                </CardHeader>
-                <Row className='mx-0'>
-                    <Col className='mt-1' md='12' sm='12'>
-                        <Input
-                            className='dataTable-filter mb-50'
-                            type='text'
-                            bsSize='sm'
-                            placeholder='search'
-                            id='search-input'
-                            value={searchValue}
-                            onChange={handleFilter}
-                        />
-                    </Col>
-                </Row>
-                <DataTable
-                    noHeader
-                    pagination
-                    columns={columns}
-                    paginationPerPage={7}
-                    className='react-dataTable'
-                    sortIcon={<ChevronDown size={10}/>}
-                    paginationDefaultPage={currentPage + 1}
-                    paginationComponent={CustomPagination}
-                    data={searchValue.length ? filteredData : reorderList}
-                />
-            </Card>
+            <UILoader blocking={isLoading}>
+                <Card>
+                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <div>
+                            <CardTitle tag='h4'>Meals</CardTitle>
+                        </div>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                type='text'
+                                placeholder='Search'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10} />}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
+            </UILoader>
 
         </Fragment>
     )
 }
 
-export default ReorderHistory
+export default OrderHistory
