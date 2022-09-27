@@ -76,10 +76,10 @@ const SecurityTab = () => {
     return (
         <Fragment>
             <Card>
-                <CardHeader>
+                <CardHeader className='border-bottom'>
                     <CardTitle tag='h4'>Change Password</CardTitle>
                 </CardHeader>
-                <CardBody>
+                <CardBody className='pt-2'>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
                             <Col sm='6' className='mb-1'>

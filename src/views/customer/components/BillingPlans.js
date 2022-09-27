@@ -84,10 +84,10 @@ const BillingPlan = () => {
         <Fragment>
             {isBilling === 0 && (
                 <Card>
-                    <CardHeader>
+                    <CardHeader className='border-bottom'>
                         <CardTitle tag='h4'>Current plan</CardTitle>
                     </CardHeader>
-                    <CardBody>
+                    <CardBody className='mt-2'>
                         <Row>
                             <Col md='6'>
                                 <div className='mb-2 pb-50'>
@@ -95,33 +95,6 @@ const BillingPlan = () => {
                                         Your Current Plan is <strong>Basic</strong>
                                     </h5>
                                     <span>A simple start for everyone</span>
-                                </div>
-                                <div className='mb-2 pb-50'>
-                                    <h5>Active until Dec 09, 2021</h5>
-                                    <span>We will send you a notification upon Subscription expiration</span>
-                                </div>
-                                <div className='mb-2 mb-md-1'>
-                                    <h5>
-                                        $199 Per Month{' '}
-                                        <Badge color='light-primary' className='ms-50'>
-                                            Popular
-                                        </Badge>
-                                    </h5>
-                                    <span>Standard plan for small to medium businesses</span>
-                                </div>
-                            </Col>
-                            <Col md='6'>
-                                <Alert color='warning' className='mb-2'>
-                                    <h4 className='alert-heading'>We need your attention!</h4>
-                                    <div className='alert-body'>your plan requires update</div>
-                                </Alert>
-                                <div className='plan-statistics pt-1'>
-                                    <div className='d-flex justify-content-between'>
-                                        <h5 className='fw-bolder'>Days</h5>
-                                        <h5 className='fw-bolder'>4 of 30 Days</h5>
-                                    </div>
-                                    <Progress className='mb-50' value={85} />
-                                    <p className='mt-50'>4 days remaining until your plan requires update</p>
                                 </div>
                             </Col>
                             <Col xs={12}>
