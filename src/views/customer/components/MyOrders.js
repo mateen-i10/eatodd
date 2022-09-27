@@ -106,7 +106,7 @@ const OrderHistory = (props) => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { console.log("Reorder from meal id : ", row.id) }}><RefreshCcw size={15} /></span>
+                        {/*<span className='cursor-pointer' onClick={() => { console.log("Reorder from meal id : ", row.id) }}><RefreshCcw size={15} /></span>*/}
                     </div>
                 )
             }

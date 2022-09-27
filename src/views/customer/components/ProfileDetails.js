@@ -4,17 +4,17 @@ import {Fragment, useState, useEffect} from 'react'
 // ** Third Party Components
 import '../../../@core/scss/base/pages/app-invoice.scss'
 
+import img from '../../../assets/images/default/defaultImage.png'
+
 // ** Reactstrap Imports
 import {
     Button,
     Card,
     CardBody,
     CardHeader,
-    CardText,
     CardTitle,
     Col,
     Form,
-    FormFeedback,
     Input,
     Label,
     Row
@@ -89,7 +89,6 @@ const ProfileDetails = ({}) => {
         } catch (e) {
             toast.error(e.message)
         }
-
     }
 
     return (
@@ -100,27 +99,13 @@ const ProfileDetails = ({}) => {
                     <CardTitle tag='h4'>Account Details</CardTitle>
                 </CardHeader>
                     <CardBody className='py-2 my-25'>
-                        {/*<div className='d-flex'>
-                            <div className='me-25'>
-                                <img className='rounded me-50' src={avatar} alt='Generic placeholder image' height='100' width='100'/>
-                            </div>
-                            <div className='d-flex align-items-end mt-75 ms-1'>
-                                <div>
-                                    <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
-                                        Upload
-                                        <Input type='file' onChange={onChange} hidden accept='image/*'/>
-                                    </Button>
-                                    <Button className='mb-75' color='secondary' size='sm' outline onClick={handleImgReset}>
-                                        Reset
-                                    </Button>
-                                    <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
-                                </div>
-                            </div>
-                        </div>*/}
-                        <Form className='mt-2 pt-50'>
-
+                        <Form>
                             <Row>
-                                <Col xl='6'></Col>
+                                <Col xl='6'>
+                                    <div className='me-25'>
+                                        <img className='rounded me-50' src={img} alt='Generic placeholder image' height='100' width='100'/>
+                                    </div>
+                                </Col>
                                 {showEdit === false && <Col className='p-0' xl='6'>
                                     <Button color='success' className='float-end me-5' onClick = {() => setShowEdit(true)}>
                                         <span className='align-middle d-sm-inline-block d-none'>Edit</span>

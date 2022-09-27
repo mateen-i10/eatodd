@@ -55,8 +55,10 @@ const Wines = (props) => {
         return loadOptions('category', input, 1, 12)
     }
 
+    console.log(categories, "Categories")
+
     const generalProduct = async (input) => {
-        return loadOptions('GeneralProduct', input, 1, 12)
+        return loadOptions('Product/GetWineProducts', input, 1, 12)
     }
 
     const Restaurant = async (input) => {
@@ -349,7 +351,7 @@ const Wines = (props) => {
                             <CardTitle tag='h4'>Wines</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Wines</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Wine</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

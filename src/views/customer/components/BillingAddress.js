@@ -8,14 +8,9 @@ import {
     Card,
     Label,
     Input,
-    Modal,
     Button,
     CardBody,
-    CardTitle,
-    ModalBody,
-    CardHeader,
-    ModalHeader,
-    FormFeedback
+    CardTitle, CardHeader
 } from 'reactstrap'
 
 // ** Styles
@@ -23,11 +18,14 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import {getUserData} from "../../../auth/utils"
 import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
-import {getCustomerAddress} from "../../../redux/customer/actions"
+import {getCustomerAddress, updateCustomerAddress} from "../../../redux/customer/actions"
+import {toast} from "react-toastify"
+import {setDetailLoading} from "../../../redux/customer/reducer"
+
+import {Edit, Delete, Save} from "react-feather"
 
 const BillingAddress = () => {
     const customerId = getUserData().customerId
-    console.log('customerId', customerId)
     const dispatch = useDispatch()
 
     // ** States
@@ -50,8 +48,8 @@ const BillingAddress = () => {
     //getting data from store
     const isLoading = useSelector(state => state.customer.isDetailLoading)
     const addressObj = useSelector(state => state.customer.addressObject)
-    //const isRequestCompleted = useSelector(state => state.customer.isRequestCompleted)
-    //const isSuccess = useSelector(state => state.customer.isSuccess)
+    const isRequestCompleted = useSelector(state => state.customer.isRequestCompleted)
+    const isSuccess = useSelector(state => state.customer.isSuccess)
 
     console.log("addressObj", addressObj)
 
@@ -59,31 +57,88 @@ const BillingAddress = () => {
         dispatch(getCustomerAddress(customerId))
     }, [])
 
-    // ** Hooks
+    const setData = () => {
+        try {
+            billingAddress : {
+                setBillingCity(addressObj.billingAddress?.city)
+                setBillingState(addressObj.billingAddress?.state)
+                setBillingCountry(addressObj.billingAddress?.country)
+                setBillingZipCode(addressObj.billingAddress?.zipCode)
+                setBillingPhoneNumber(addressObj.billingAddress?.phoneNumber)
+                setBillingAddress1(addressObj.billingAddress?.address1)
+            }
+            shippingAddress : {
+                setShippingCity(addressObj.shippingAddress?.city)
+                setShippingState(addressObj.shippingAddress?.state)
+                setShippingCountry(addressObj.shippingAddress?.country)
+                setShippingZipCode(addressObj.shippingAddress?.zipCode)
+                setShippingPhoneNumber(addressObj.shippingAddress?.phoneNumber)
+                setShippingAddress1(addressObj.shippingAddress?.address1)
+            }
+        } catch (e) {
+            toast.error(e.message)
+        }
 
+    }
+
+    useEffect(() => {
+        setData()
+    }, [addressObj])
+
+    useEffect(() => {
+        if (isSuccess) {
+            setShowEdit(false)
+            dispatch(getCustomerAddress(customerId))
+            setData()
+        }
+    }, [isRequestCompleted, isSuccess])
+
+    const updateAddressDetail = () => {
+        try {
+            const data = {id: customerId,
+                billingAddress: {
+                    id: addressObj.billingAddress.id,
+                    city: billingCity,
+                    state: billingState,
+                    country: billingCountry,
+                    zipCode: billingZipCode,
+                    phoneNumber: billingPhoneNumber,
+                    address1: billingAddress1
+                },
+                shippingAddress: {
+                id: addressObj.shippingAddress.id,
+                    city: shippingCity,
+                    state: shippingState,
+                    country: shippingCountry,
+                    zipCode: shippingZipCode,
+                    phoneNumber: shippingPhoneNumber,
+                    address1: shippingAddress1
+                }
+            }
+            console.log('edit data', data)
+            dispatch(setDetailLoading(true))
+            dispatch(updateCustomerAddress(data))
+        } catch (e) {
+            toast.error(e.message)
+        }
+
+    }
     return (
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                <Row className='pe-3 pt-3'>
-                    <Col xl='6'></Col>
-                    {showEdit === false && <Col className='p-0' xl='6'>
-                            <Button className='float-end' color='primary' onClick={() => setShowEdit(true)}>
-                                Edit Address
-                            </Button>
-                        </Col>}
-                    {showEdit === true && <Col className='p-0' xl='6'>
-                            <Button color='primary' className='float-end'>
-                                <span className='align-middle d-sm-inline-block d-none'>Save</span>
-                            </Button>
-                            <Button color='danger' className='float-end me-2' onClick = {() => {
-                                setShowEdit(false)
-                            }}>
-                                <span className='align-middle d-sm-inline-block d-none'>Cancel</span>
-                            </Button>
-                        </Col>}
-                </Row>
-                <hr />
+                    <CardHeader className='border-bottom mb-2'>
+                        <CardTitle tag='h4'>Address</CardTitle>
+                        <div>
+                            {showEdit === false && <div>
+                               <Button className="btn-sm" color='primary' onClick={() => setShowEdit(true)}>Edit</Button>
+                            </div>}
+                            {showEdit === true && <div>
+                                <Button className="btn-sm" color='danger' onClick={() => setShowEdit(false)}>Delete</Button>
+                                <Button className="btn-sm" color='primary' style={{marginLeft: 10}} onClick={updateAddressDetail}>Save</Button>
+                            </div>}
+                        </div>
+                    </CardHeader>
                 <CardBody>
                     <Row>
                         <Col xl='6' xs='12' style={{borderRight: '1px solid #a8a0a0'}}>
@@ -111,7 +166,7 @@ const BillingAddress = () => {
                                         State:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Punjab
+                                        {addressObj.billingAddress?.state}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -126,7 +181,7 @@ const BillingAddress = () => {
                                         Country:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Pakistan
+                                        {addressObj.billingAddress?.country}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -141,7 +196,7 @@ const BillingAddress = () => {
                                         Zip Code:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        37300
+                                        {addressObj.billingAddress?.zipCode}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -156,7 +211,7 @@ const BillingAddress = () => {
                                         Phone Number:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        37300-123-456777
+                                        {addressObj.billingAddress?.phoneNumber}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -171,7 +226,7 @@ const BillingAddress = () => {
                                         Address:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Lahore punjab pakistan street # 1
+                                        {addressObj.billingAddress?.address1}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -193,7 +248,7 @@ const BillingAddress = () => {
                                         City:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        lahore
+                                        {addressObj.shippingAddress?.city}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -208,7 +263,7 @@ const BillingAddress = () => {
                                         State:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Punjab
+                                        {addressObj.shippingAddress?.state}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -223,7 +278,7 @@ const BillingAddress = () => {
                                         Country:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Pakistan
+                                        {addressObj.shippingAddress?.country}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -238,7 +293,7 @@ const BillingAddress = () => {
                                         Zip Code:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        37300
+                                        {addressObj.shippingAddress?.zipCode}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -253,7 +308,7 @@ const BillingAddress = () => {
                                         Phone Number:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        37300-123-456777
+                                        {addressObj.shippingAddress?.phoneNumber}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>
@@ -268,7 +323,7 @@ const BillingAddress = () => {
                                         Address:
                                     </Col>
                                     <Col tag='dd' sm='8' className='mb-1'>
-                                        Lahore punjab pakistan street # 1
+                                        {addressObj.shippingAddress?.address1}
                                     </Col>
                                 </>}
                                 {showEdit === true &&  <Col sm='12' className='mb-1'>

@@ -73,10 +73,10 @@ const Customer = () => {
                <section>
                    <div className='container-md'>
                        <Row className="justify-content-center">
-                           <Col xl={2} style={{marginTop: 20}}>
+                           <Col xl={3} style={{marginTop: 20}}>
                                <Tabs className='mb-2' activeTab={activeTab} toggleTab={toggleTab}/>
                            </Col>
-                           <Col xl={10}>
+                           <Col xl={9}>
                                <TabContent activeTab={activeTab}>
                                    <TabPane tabId='1'>
                                        <div className="row justify-content-center">
@@ -126,10 +126,7 @@ const Customer = () => {
             {/*        <div className="text-end">{item.title}</div>*/}
             {/*    </div>*/}
             {/*))}*/}
-
-
             {/*<MainComponent selectedOption={selectedOption}/>*/}
-
             <Footer/>
         </div>
     )

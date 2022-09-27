@@ -114,3 +114,20 @@ export const getCustomerAddress = (id, isEdit = false) => {
         }
     }
 }
+
+export const updateCustomerAddress = (data) => {
+    console.log('dataEmp', data)
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/updateAddress`,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Customer Address Updated Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsCustomerError.type,
+            isSuccess: setIsCustomerSuccess.type
+        }))
+        dispatch(setIsEdit(false))
+    }
+}

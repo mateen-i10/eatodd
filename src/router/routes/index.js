@@ -227,22 +227,27 @@ const Routes = [
     },
     {
         path: '/cateringMenu/:id',
-        component: lazy(() => import('../../views/admin/cateringMenu/cateringMenuDetail')),
+        component: lazy(() => import('../../views/admin/Catering/cateringMenu/cateringMenuDetail')),
         layout: 'VerticalLayout'
     },
     {
         path: '/cateringMenu',
-        component: lazy(() => import('../../views/admin/cateringMenu/cateringMenu')),
+        component: lazy(() => import('../../views/admin/Catering/cateringMenu/cateringMenu')),
         layout: 'VerticalLayout'
     },
     {
         path: '/cateringMenuItem/:id',
-        component: lazy(() => import('../../views/admin/cateringMenuItem/cateringMenuItemDetail')),
+        component: lazy(() => import('../../views/admin/Catering/cateringMenuItem/cateringMenuItemDetail')),
         layout: 'VerticalLayout'
     },
     {
         path: '/cateringMenuItem',
-        component: lazy(() => import('../../views/admin/cateringMenuItem/cateringMenuItem')),
+        component: lazy(() => import('../../views/admin/Catering/cateringMenuItem/cateringMenuItem')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/cateringCustomers',
+        component: lazy(() => import('../../views/admin/Catering/CateringCutomers/CateringCustomers')),
         layout: 'VerticalLayout'
     },
     {

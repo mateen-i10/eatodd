@@ -77,18 +77,7 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/section'
     },
-    {
-        id: 'CateringMenu',
-        title: 'Catering Menu',
-        icon: <Package size={20}/>,
-        navLink: '/cateringMenu'
-    },
-    {
-        id: 'CateringMenuItem',
-        title: 'Catering Menu Items',
-        icon: <Package size={20}/>,
-        navLink: '/cateringMenuItem'
-    },
+
     /* {
          id: 'SectionItem',
          title: 'Section Items',
@@ -241,6 +230,31 @@ export default [
                 title: 'CRM (Sms)',
                 icon: <Send size={20}/>,
                 navLink: '/CrmSms'
+            }
+        ]
+    },
+    {
+        id: 'Catering',
+        title: 'Catering',
+        // icon: <Package size={20}/>,
+        children: [
+            {
+                id: 'CateringMenu',
+                title: 'Catering Menu',
+                icon: <Package size={20}/>,
+                navLink: '/cateringMenu'
+            },
+            {
+                id: 'CateringMenuItem',
+                title: 'Catering Menu Items',
+                icon: <Package size={20}/>,
+                navLink: '/cateringMenuItem'
+            },
+            {
+                id: 'Customers',
+                title: 'Customers',
+                icon: <User size={20}/>,
+                navLink: '/cateringCustomers'
             }
         ]
     }

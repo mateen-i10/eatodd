@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import './stylesheet/Nutrition.css'
-import Link from "react-router-dom/es/Link"
+import {Link} from "react-router-dom"
 import NutTable from "./NutTable"
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
@@ -12,19 +12,21 @@ import {isObjEmpty} from "../../utility/Utils"
 import {useSelector} from "react-redux"
 import "./../home/components/Order/Order.css"
 import {Table} from "reactstrap"
+import ComponentSpinner from "../../@core/components/spinner/Loading-spinner"
 
 const Nutrition = () => {
 
     const [mainCategory, setMainCategory] = useState([])
     const {userLocation} = useSelector(state => state)
     const [isVisible, setIsVisible] = useState(false)
-    const [height, setHeight] = useState(0)
+    // const [height, setHeight] = useState(0)
+    const [width, setWidth] = useState(window.innerWidth)
 
     const listenToScroll = () => {
         const heightToShowFrom = 308
         const winScroll = document.body.scrollTop ||
             document.documentElement.scrollTop
-        setHeight(winScroll)
+        // setHeight(winScroll)
 
         if (winScroll > heightToShowFrom) {
             setIsVisible(true)
@@ -34,10 +36,19 @@ const Nutrition = () => {
     }
     useEffect(() => {
         window.addEventListener("scroll", listenToScroll)
-        return () => window.removeEventListener("scroll", listenToScroll)
+        const handleResizeWindow = () => setWidth(window.innerWidth)
+        // subscribe to window resize event "onComponentDidMount"
+        window.addEventListener("resize", handleResizeWindow)
+
+        return () => {
+            window.removeEventListener("scroll", listenToScroll)
+            // unsubscribe "onComponentDestroy"
+            window.removeEventListener("resize", handleResizeWindow)
+        }
     }, [])
-    console.log("height", height)
-    console.log("isVisible", isVisible)
+    // console.log("height", height)
+    // console.log("isVisible", isVisible)
+    console.log("width", width)
 
 
     useEffect(() => {
@@ -85,40 +96,7 @@ const Nutrition = () => {
 
     console.log("main Category ---", mainCategory)
 
-    // const FoodItems = [
-    //     {
-    //         id: 1,
-    //         title: 'Burrito'
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Burrito Bowl'
-    //     },
-    //     {
-    //         id: 3,
-    //         title: 'Lifestyle Bowl'
-    //     },
-    //     {
-    //         id: 4,
-    //         title: 'Questilla'
-    //     },
-    //     {
-    //         id: 5,
-    //         title: 'Salad'
-    //     },
-    //     {
-    //         id: 6,
-    //         title: 'Tacos'
-    //     },
-    //     {
-    //         id: 7,
-    //         title: 'Side & Drinks'
-    //     },
-    //     {
-    //         id: 8,
-    //         title: 'Kids Meal'
-    //     }
-    // ]
+
     const data = {
         chart: {
             toolbar: {
@@ -188,7 +166,7 @@ const Nutrition = () => {
                 breakpoint: 1065,
                 options: {
                     chart: {
-                        height: 100
+                        height: 120
                     }
                 }
             },
@@ -205,8 +183,9 @@ const Nutrition = () => {
     return (
         <div>
             <Header/>
-            <div className={`container-fluid position-fixed ${isVisible ? "d-block" : "d-none"}  zindex-3`}
-                 style={{backgroundColor: "#ededed"}}>
+            <div
+                className={`container-fluid position-fixed ${isVisible && width > 1100 ? "d-block" : "d-none"}  zindex-3`}
+                style={{backgroundColor: "#ededed"}}>
                 <div className="row align-content-center justify-content-center"
                      style={{height: 120}}>
                     <div className="col-10 text-center">
@@ -240,48 +219,51 @@ const Nutrition = () => {
                 </div>
             </div>
             <div style={{backgroundColor: '#e3e3e3'}}>
-                <div className="container-sm row">
-                    <div className="col" style={{marginLeft: 180, marginTop: 60, marginBottom: 50}}>
-                        <h5 style={{
-                            color: '#2a2a2a',
-                            fontSize: '1.3em',
-                            textTransform: 'uppercase',
-                            fontWeight: 'bolder',
-                            letterSpacing: 4
-                        }}>Calculate</h5>
-                        <h1 style={{
-                            color: '#262626',
-                            fontSize: '4em',
-                            textTransform: 'uppercase',
-                            fontWeight: 'bolder',
-                            letterSpacing: 1
-                        }}>Nutrtion</h1>
-                        <p style={{color: '#6b6b6b', fontWeight: 450}}>Build your calorie, carb and nutrition
-                            information based on your selected meal below using the nutrition calculator.</p>
-                        <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
-                            Statement</a>
-                    </div>
-                    <div className="col" style={{paddingTop: 100, paddingLeft: 70}}>
-                        <div>
-                            <h1 style={{fontSize: '3em', fontWeight: 'bolder', color: '#81be41'}}>00cal</h1>
-                            <div style={{display: 'flex'}}>
-                                <div>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
-                                    <h5>Fat</h5>
-                                </div>
-                                <div style={{marginLeft: 40, marginRight: 40}}>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
-                                    <h5>Protien</h5>
-                                </div>
-                                <div>
-                                    <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
-                                    <h5>Carbs</h5>
+                <div className="container-sm">
+                    <div className="row">
+                        <div className="col-lg-4 col-12  text-center"
+                             style={{paddingLeft: 50, marginTop: 60, marginBottom: 10}}>
+                            <h5 style={{
+                                color: '#2a2a2a',
+                                fontSize: '1.3em',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bolder',
+                                letterSpacing: 4
+                            }}>Calculate</h5>
+                            <h1 style={{
+                                color: '#262626',
+                                fontSize: '4em',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bolder',
+                                letterSpacing: 1
+                            }}>Nutrtion</h1>
+                            <p style={{color: '#6b6b6b', fontWeight: 450}}>Build your calorie, carb and nutrition
+                                information based on your selected meal below using the nutrition calculator.</p>
+                            <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
+                                Statement</a>
+                        </div>
+                        <div className=" col-lg-3 col-6  mb-3" style={{paddingTop: 70, paddingLeft: 70}}>
+                            <div>
+                                <h1 style={{fontSize: '3em', fontWeight: 'bolder', color: '#81be41'}}>00cal</h1>
+                                <div style={{display: 'flex'}}>
+                                    <div>
+                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                        <h5>Fat</h5>
+                                    </div>
+                                    <div style={{marginLeft: 40, marginRight: 40}}>
+                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                        <h5>Protien</h5>
+                                    </div>
+                                    <div>
+                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                        <h5>Carbs</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col" style={{paddingLeft: 70, paddingTop: 50}}>
-                        <Chart options={data} series={[53, 16, 31]} type='donut' height={200}/>
+                        <div className=" col-lg-5 col-6 mb-3" style={{paddingLeft: 70, paddingTop: 50}}>
+                            <Chart options={data} series={[53, 16, 31]} type='donut' height={250}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -318,7 +300,7 @@ const Nutrition = () => {
                                     </div>
                                 </Link>
                             </div>
-                        )) : <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
+                        )) : <ComponentSpinner/>
                     }
                 </div>
             </div>
