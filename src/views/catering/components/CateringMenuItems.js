@@ -4,7 +4,7 @@ import {ChevronDown} from "react-feather"
 import {Link} from "react-router-dom"
 import ProductImage from "../../home/components/product/ProductImage"
 
-const OmgCorporate = (props) => {
+const CateringMenuItems = (props) => {
     const {item} = props
     const [value, setValue] = useState("People")
 
@@ -73,4 +73,4 @@ const OmgCorporate = (props) => {
     )
 }
 
-export default OmgCorporate
+export default CateringMenuItems

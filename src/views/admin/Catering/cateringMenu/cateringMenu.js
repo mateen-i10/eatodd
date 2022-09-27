@@ -21,20 +21,20 @@ import {
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
 import Joi from "joi-browser"
-import UILoader from "../../../@core/components/ui-loader"
-import FormModal from "../../../components/FormModal"
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import useLoadData from "../../../utility/customHooks/useLoadData"
-import useEdit from "../../../utility/customHooks/useEdit"
-import useModalError from "../../../utility/customHooks/useModalError"
+import UILoader from "../../../../@core/components/ui-loader"
+import FormModal from "../../../../components/FormModal"
+import {FieldTypes} from "../../../../utility/enums/FieldType"
+import useLoadData from "../../../../utility/customHooks/useLoadData"
+import useEdit from "../../../../utility/customHooks/useEdit"
+import useModalError from "../../../../utility/customHooks/useModalError"
 import {
     addCateringMenu,
     deleteCateringMenu,
     getCateringMenu,
     loadCateringMenus,
     updateCateringMenu
-} from "../../../redux/cateringMenu/action"
-import {setCateringMenu, setIsCateringMenuError, setIsEdit} from "../../../redux/cateringMenu/reducer"
+} from "../../../../redux/Catering/cateringMenu/action"
+import {setCateringMenu, setIsCateringMenuError, setIsEdit} from "../../../../redux/Catering/cateringMenu/reducer"
 
 const CateringMenus = (props) => {
 

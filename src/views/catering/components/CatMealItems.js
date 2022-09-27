@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import CheckSign from "../../home/options/components/Utility/CheckSign"
 
 
-const CatMenuItems = ({product}) => {
+const CatMealItems = ({product}) => {
     const [value, setValue] = useState(false)
     return (
         <div className="card mb-lg-2 mb-1 overflow-hidden  " onClick={() => {
@@ -61,4 +61,4 @@ const CatMenuItems = ({product}) => {
     )
 }
 
-export default CatMenuItems
+export default CatMealItems

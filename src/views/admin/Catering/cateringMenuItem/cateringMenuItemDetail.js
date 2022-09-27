@@ -1,11 +1,11 @@
 // ** React Imports
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
+import {Badge, Card, CardBody, CardText, Col, Row} from 'reactstrap'
 // ** Styles
-import '../../../@core/scss/base/pages/app-invoice.scss'
-import UILoader from "../../../@core/components/ui-loader"
-import {getCateringMenuItem} from "../../../redux/cateringMenuItem/action"
+import '../../../../@core/scss/base/pages/app-invoice.scss'
+import UILoader from "../../../../@core/components/ui-loader"
+import {getCateringMenuItem} from "../../../../redux/Catering/cateringMenuItem/action"
 
 
 const CateringMenuItemDetail = ({match}) => {
@@ -38,7 +38,7 @@ const CateringMenuItemDetail = ({match}) => {
                                     {/* /Header */}
                                 </CardBody>
 
-                                <hr className='' />
+                                <hr className=''/>
 
                                 {/* Address and Contact */}
                                 <CardBody className='invoice-padding pt-0'>
@@ -47,26 +47,30 @@ const CateringMenuItemDetail = ({match}) => {
                                         <Col xl={6} className="p-0">
                                             <div className='mt-1 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Name:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.name}</CardText>
+                                                <CardText
+                                                    className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.name}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'> Limit:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.limit}</CardText>
+                                                <CardText
+                                                    className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.limit}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'> Price:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.price}</CardText>
+                                                <CardText
+                                                    className="mmb-25 ms-1 mb-1">{cateringMenuItemObj.price}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'> Catering Menu:</p>
                                                 <CardText className="mmb-25 ms-1 mb-1">
-                                                    <Badge className="mmb-25 ms-1 font-medium-1" color='light-success' pill>
+                                                    <Badge className="mmb-25 ms-1 font-medium-1" color='light-success'
+                                                           pill>
                                                         {cateringMenuItemObj.cateringMenu?.name}
                                                     </Badge>
                                                 </CardText>
@@ -74,13 +78,13 @@ const CateringMenuItemDetail = ({match}) => {
                                         </Col>
                                     </Row>
 
-                                    <hr className='invoice-spacing' />
+                                    <hr className='invoice-spacing'/>
 
                                     <Row className='invoice-spacing'>
                                         <Col col={12} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Description:</p>
-                                                <CardText  className="mmb-25 ms-1 mb-1">
+                                                <CardText className="mmb-25 ms-1 mb-1">
                                                     {cateringMenuItemObj.description}
                                                 </CardText>
                                             </div>

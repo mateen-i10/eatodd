@@ -1,34 +1,38 @@
-import {apiCall} from "../api/actions"
+import {apiCall} from "../../api/actions"
 import {
-    editCateringMenuItem,
-    setCateringMenuItem,
-    setCateringMenuItems, setDetailLoading, setIsCateringMenuItemError, setIsCateringMenuItemSuccess, setIsEdit,
+    editCateringMenu,
+    setCateringMenu,
+    setCateringMenus,
+    setDetailLoading,
+    setIsCateringMenuError,
+    setIsCateringMenuSuccess,
+    setIsEdit,
     setLoading,
     setRequestCompleted
 } from "./reducer"
 
-const url = 'cateringMenuItem'
+const url = 'cateringMenu'
 
-export const loadCateringMenuItems = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCateringMenus = (pageIndex = 1, pageSize = 12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
             method: 'get',
-            onSuccess: setCateringMenuItems.type
+            onSuccess: setCateringMenus.type
         }))
     }
 }
 
-export const getCateringMenuItem = (id, isEdit = false) => {
+export const getCateringMenu = (id, isEdit = false) => {
     return async dispatch => {
         if (isEdit) {
             dispatch(apiCall({
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: editCateringMenuItem.type
+                onSuccess: editCateringMenu.type
             }))
         } else {
             dispatch(setDetailLoading(true))
@@ -36,23 +40,23 @@ export const getCateringMenuItem = (id, isEdit = false) => {
                 url: `${url}/${id}`,
                 data: {},
                 method: 'get',
-                onSuccess: setCateringMenuItem.type
+                onSuccess: setCateringMenu.type
             }))
         }
     }
 }
 
-export const deleteCateringMenuItem = (id) => {
+export const deleteCateringMenu = (id) => {
     return async dispatch => {
         dispatch(apiCall({
             url: `${url}/${id}`,
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'Catering Menu Item Deleted Successfully',
+            successMessage: 'Catering Menu Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsCateringMenuItemError.type,
-            isSuccess: setIsCateringMenuItemSuccess.type
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
@@ -64,11 +68,10 @@ export const addCateringMenu = (data) => {
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Catering Menu Item Added Successfully',
+            successMessage: 'Catering Menu Added Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsCateringMenuItemError.type,
-            isSuccess: setIsCateringMenuItemSuccess.type,
-            isFormData: true
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
     }
 }
@@ -81,11 +84,10 @@ export const updateCateringMenu = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Catering Menu Item Updated Successfully',
+            successMessage: 'Catering Menu Updated Successfully',
             requestCompleted: setRequestCompleted.type,
-            onError: setIsCateringMenuItemError.type,
-            isSuccess: setIsCateringMenuItemSuccess.type,
-            isFormData: true
+            onError: setIsCateringMenuError.type,
+            isSuccess: setIsCateringMenuSuccess.type
         }))
         dispatch(setIsEdit(false))
     }

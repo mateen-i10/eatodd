@@ -1,11 +1,11 @@
 // ** React Imports
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
+import {Card, CardBody, CardText, Col, Row} from 'reactstrap'
 // ** Styles
-import '../../../@core/scss/base/pages/app-invoice.scss'
-import UILoader from "../../../@core/components/ui-loader"
-import {getCateringMenu} from "../../../redux/cateringMenu/action"
+import '../../../../@core/scss/base/pages/app-invoice.scss'
+import UILoader from "../../../../@core/components/ui-loader"
+import {getCateringMenu} from "../../../../redux/Catering/cateringMenu/action"
 
 
 const CateringMenuDetail = ({match}) => {
@@ -38,7 +38,7 @@ const CateringMenuDetail = ({match}) => {
                                     {/* /Header */}
                                 </CardBody>
 
-                                <hr className='' />
+                                <hr className=''/>
 
                                 {/* Address and Contact */}
                                 <CardBody className='invoice-padding pt-0'>
@@ -53,24 +53,26 @@ const CateringMenuDetail = ({match}) => {
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'> Priority:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuObj.priority}</CardText>
+                                                <CardText
+                                                    className="mmb-25 ms-1 mb-1">{cateringMenuObj.priority}</CardText>
                                             </div>
                                         </Col>
                                         <Col xl={6} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'> Is Wine Paired:</p>
-                                                <CardText className="mmb-25 ms-1 mb-1">{cateringMenuObj.isWinePaired ? "True " : "False"}</CardText>
+                                                <CardText
+                                                    className="mmb-25 ms-1 mb-1">{cateringMenuObj.isWinePaired ? "True " : "False"}</CardText>
                                             </div>
                                         </Col>
                                     </Row>
 
-                                    <hr className='invoice-spacing' />
+                                    <hr className='invoice-spacing'/>
 
                                     <Row className='invoice-spacing'>
                                         <Col col={12} className="p-0">
                                             <div className='mt-2 invoice-date-wrapper ps-1'>
                                                 <p className='fw-bolder'>Description:</p>
-                                                <CardText  className="mmb-25 ms-1 mb-1">
+                                                <CardText className="mmb-25 ms-1 mb-1">
                                                     {cateringMenuObj.description}
                                                 </CardText>
                                             </div>
