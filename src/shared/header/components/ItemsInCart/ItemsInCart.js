@@ -4,10 +4,12 @@ import {Button} from "reactstrap"
 
 const ItemsInCart = ({foodItems, index, removeMeal}) => {
 
+    const {selectedProducts} = foodItems
     const mealName = foodItems.mealName
     const categoryName = foodItems.categoryName
     const totalPrice = foodItems.totalPrice
-    const mainItems = [...foodItems.selectedProducts]
+    const mainItems = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => !p.isWine)] : []
+    const wines = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => p.isWine)] : []
 
     return (
         <div>
@@ -34,6 +36,19 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
                 </div>
             </div>
             {mainItems.map((item, id) => (
+                <div className="container-fluid" key={`products-${id}`}>
+                    <div className="row">
+                        <div className="col-8 fs-4 font-medium-1">{item.name}</div>
+                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice}` : `-`}</div>
+                    </div>
+                </div>
+            ))}
+            <div className="row">
+                <div className="col-md-9 ms-1 mt-1" style={{fontSize: "1.3rem", fontWeight: 'bolder', color: 'rgb(129 190 65)'}}>
+                    Wines
+                </div>
+            </div>
+            {wines.map((item, id) => (
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>

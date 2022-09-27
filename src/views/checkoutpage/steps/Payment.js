@@ -39,6 +39,7 @@ const Payment = (props) => {
                 orderDetails.push({
                     meal:{
                         name: m.mealName,
+                        categoryId: m.categoryId,
                         mealProducts : m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
                             return {
                                 productId : p.id,

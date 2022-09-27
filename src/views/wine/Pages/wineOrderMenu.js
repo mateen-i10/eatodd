@@ -18,7 +18,7 @@ const wineOrderMenu = () => {
     console.log('restaurantId', restaurantId)
 
     // hooks
-    const [isLoading, response] = useAPI(`product/getWineProducts?pageIndex=1&&pageSize=12`, 'get', {}, {}, true)
+    const [isLoading, response] = useAPI(`product/getWineProducts?pageIndex=1&&pageSize=20`, 'get', {}, {}, true)
     useEffect(() => {
     if (response && response.data && response.data.length > 0) {
         const {data} = response
@@ -47,7 +47,9 @@ const wineOrderMenu = () => {
                 <div className="container-sm mt-5 mb-4">
                         <Button className='btn-icon rounded-circle mb-1 cursor-pointer' color='secondary' outline onClick={() => {
                             history.goBack()
-                        }}><ArrowLeft size='18'/></Button>
+                        }}>
+                            <ArrowLeft size='18'/>
+                        </Button>
                     <div className="row align-items-center justify-content-center">
                         {wines.map(item => (
                             <WineCards
