@@ -2,7 +2,7 @@
 import navbar from './navbar'
 import layout from './layout'
 import auth from './auth/authentication'
-import user from './user/reducer'
+
 import member from "./member/reducer"
 import restaurant from "./restaurant/reducer"
 import employee from "./employee/reducer"
@@ -10,10 +10,7 @@ import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
 import crmReducer from "./crmEmail/reducer"
-import addonReducer from "./restaurantPages/addonReducer"
 import menuItemReducer from "./restaurantPages/menuItemReducer"
-import promotionReducer from "./restaurantPages/promotionsReducer"
-import modifierReducer from "./restaurantPages/modifierReducer"
 import invItemReducer from "./restaurantPages/Inventory/itemReducer"
 import invDistributorReducer from "./restaurantPages/Inventory/distributerReducer"
 import invRecipeReducer from "./restaurantPages/Inventory/recipeReducer"
@@ -34,6 +31,7 @@ import section from "./section/reducer"
 import sectionItem from "./sectionItem/reducer"
 import cateringMenu from "./cateringMenu/reducer"
 import cateringMenuItem from "./cateringMenuItem/reducer"
+import meals from "./meal/reducer"
 
 const rootReducer = {
     auth,
@@ -44,13 +42,9 @@ const rootReducer = {
     employee,
     facebookPost,
     crmSms,
-    user,
     customer,
     crmReducer,
-    addonReducer,
     menuItemReducer,
-    promotionReducer,
-    modifierReducer,
     invItemReducer,
     invDistributorReducer,
     invRecipeReducer,
@@ -70,7 +64,8 @@ const rootReducer = {
     section,
     sectionItem,
     cateringMenu,
-    cateringMenuItem
+    cateringMenuItem,
+    meals
 }
 
 export default rootReducer

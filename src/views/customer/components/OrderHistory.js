@@ -21,11 +21,12 @@ import {getUserData} from "../../../auth/utils"
 
 const OrderHistory = () => {
 
-    const userData = getUserData()
-    const userId = userData && userData.id ? userData.id : null
-    console.log('userData', userData)
+    const CustomerId = getUserData().customerId
+    console.log(CustomerId, "customer id from history")
+    // const userId = CustomerId && CustomerId.id ? CustomerId.id : null
+    // console.log('CustomerId', CustomerId)
 
-    const ingredientList = useSelector(state => state.reorderHistory.list)
+    const orderHistory = useSelector(state => state.reorderHistory.list)
     const miscData = useSelector(state => state.reorderHistory.miscData)
     const isLoading = useSelector(state => state.reorderHistory.isLoading)
     const dispatch = useDispatch()
@@ -35,8 +36,8 @@ const OrderHistory = () => {
     const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
-        if (userId) {
-            dispatch(loadReorderHistory(currentPage, pageSize, searchValue, userId))
+        if (CustomerId) {
+            dispatch(loadReorderHistory(currentPage, pageSize, searchValue, CustomerId))
         }
     }, [])
 
@@ -44,14 +45,14 @@ const OrderHistory = () => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadReorderHistory(currentPage + 1, pageSize, value, userData.id))
+            dispatch(loadReorderHistory(currentPage + 1, pageSize, value, CustomerId))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadReorderHistory(page.selected + 1, pageSize, searchValue, userData.id))
+        dispatch(loadReorderHistory(page.selected + 1, pageSize, searchValue, CustomerId))
         setCurrentPage(page.selected + 1)
     }
 
@@ -123,10 +124,10 @@ const OrderHistory = () => {
     }
 
     const dataToRender = () => {
-        if (ingredientList.length > 0) {
-            return ingredientList
+        if (orderHistory.length > 0) {
+            return orderHistory
         }  else {
-            return ingredientList.slice(0, pageSize)
+            return orderHistory.slice(0, pageSize)
         }
     }
 
