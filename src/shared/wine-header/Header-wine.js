@@ -67,13 +67,11 @@ const HeaderWine = () => {
                         <Link to="/home">
                             <Button.Ripple color='primary'>EATOMG</Button.Ripple>
                         </Link>
-
                     </div>
                 </header>
             </div>
         )
     }
-
     return (
         <div>
             <header className="header2" style={{backgroundColor: "white"}}>
@@ -81,19 +79,15 @@ const HeaderWine = () => {
                     <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} aria-label="toggle navigation">
                         <span className="hamburger"></span>
                     </button>
-
                     <div style={{display: width > 540 ? "block" : "none"}}>
                         <img className="logo" src={logo}/>
                     </div>
                 </div>
-
                 <div className="eatOMG mx-auto">
                     <i className="ri-checkbox-blank-circle-fill"></i>
                     <span className="seprator"></span>
                     <p>Find a EatOMG</p>
                 </div>
-
-
                 <nav className="nav ">
                     <div className="nav-sec-1 text-center">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
@@ -105,7 +99,6 @@ const HeaderWine = () => {
                             <Button.Ripple color='primary' className="fs-3"
                                            style={{width: "75%", marginTop: 30}}>EATOMG</Button.Ripple>
                         </Link>
-
                     </div>
                     {isuserlogedin ? <div className="text-center  mx-auto"
                                           style={{marginTop: 30, display: width < 1200 ? "block" : "flex"}}>
@@ -115,17 +108,16 @@ const HeaderWine = () => {
                         {/*    <h2><span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span>*/}
                         {/*        <span>AND REDEEM REWARDS</span></h2>*/}
                         {/*</div>*/}
-                        <Button className="w-75 bg-secondary text-uppercase fs-3"><Link to="/signup"
-                                                                                        style={{color: "white"}}>Create
+                        <Button className="w-75 bg-secondary text-uppercase fs-3">
+                            <Link to="/signup" style={{color: "white"}}>Create
                             an
                             Account</Link>
                         </Button>
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
                             <Button
-                                className="w-100 bg-secondary text-uppercase text-center fs-3"><Link to="/login"
-                                                                                                     style={{color: "white"}}>Sign
-                                In</Link></Button>
+                                className="w-100 bg-secondary text-uppercase text-center fs-3">
+                                <Link to="/login" style={{color: "white"}}>Sign In</Link></Button>
                         </div>
                         <div className="state">
                             <div className="rounded-circle"

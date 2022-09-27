@@ -156,7 +156,6 @@ const Gmaps = () => {
                     setSelectedSidebar={setSelectedSidebar}
                     places={places}
                     markerClicked={markerClicked}
-
                 /></div> : <div className="col-md-4 col-12">
                 <Sidebar
                     isLoading={isLoading}
