@@ -55,6 +55,7 @@ export default function Header() {
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
+                        {isuserlogedin ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                     </div>
                     {isuserlogedin ? <ul className="user-login list-unstyled">
                         <UserDropdown/>
@@ -110,6 +111,7 @@ export default function Header() {
                             <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>
                             <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
+                            {isuserlogedin ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                         </div>
                     </div>
                     {isuserlogedin ? <div className="">
@@ -121,17 +123,13 @@ export default function Header() {
                         {/*    <h2><span>EARN POINTS,</span> <span>COMPLETE CHALLENGES,</span>*/}
                         {/*        <span>AND REDEEM REWARDS</span></h2>*/}
                         {/*</div>*/}
-                        <Button className="w-75 bg-secondary fs-3 text-uppercase"><Link to="/signup"
-                                                                                        style={{color: "white"}}>Create
-                            an
-                            Account</Link>
+                        <Button className="w-75 bg-secondary fs-3 text-uppercase">
+                            <Link to="/signup" style={{color: "white"}}>Create an Account</Link>
                         </Button>
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
                             <Button
-                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login"
-                                                                                                     style={{color: "white"}}>Sign
-                                In</Link></Button>
+                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login" style={{color: "white"}}>Sign In</Link></Button>
                         </div>
                         <div className="state">
                             <div className="rounded-circle"
