@@ -5,7 +5,7 @@ import Footer from "../../../shared/footer/Footer"
 import {default as vegies} from "../../../assets/images/Menu&Order/veg.png"
 import {default as drink1} from "../../../assets/images/Menu&Order/drink1.png"
 import {default as drink2} from "../../../assets/images/Menu&Order/drink2.png"
-import CatMenuItems from "../components/CatMenuItems"
+import CatMealItems from "../components/CatMealItems"
 
 const COMenu = () => {
     const [products, setProducts] = useState([])
@@ -302,7 +302,7 @@ const COMenu = () => {
                 <div className="row align-items-center justify-content-center">
                     {products.map((product) => (
                         <div className="col-9 col-xl-5" key={product.id}>
-                            <CatMenuItems product={product}/>
+                            <CatMealItems product={product}/>
                         </div>
                     ))}
                 </div>

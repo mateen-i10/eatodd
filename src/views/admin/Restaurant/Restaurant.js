@@ -360,10 +360,10 @@ const Restaurant = (props) => {
         e.preventDefault()
         props.history.push(`/products`)
     }
-    const promotionClick = (e) => {
+    /*const promotionClick = (e) => {
         e.preventDefault()
         props.history.push(`/dashboard/promotion`)
-    }
+    }*/
     const customerClick = (e) => {
         e.preventDefault()
         props.history.push(`/dashboard/customer`)
@@ -444,10 +444,10 @@ const Restaurant = (props) => {
                                     <Codesandbox size={15} />
                                     <span className='align-middle ms-50'>Products</span>
                                 </DropdownItem>
-                                <DropdownItem tag='a' href='' className='w-100' onClick={e => promotionClick(e)}>
+                                {/*<DropdownItem tag='a' href='' className='w-100' onClick={e => promotionClick(e)}>
                                     <DollarSign size={15} />
                                     <span className='align-middle ms-50'>Promotion</span>
-                                </DropdownItem>
+                                </DropdownItem>*/}
                                 <DropdownItem tag='a' href='' className='w-100' onClick={e => customerClick(e)}>
                                     <UserPlus size={15} />
                                     <span className='align-middle ms-50'>Customer</span>
