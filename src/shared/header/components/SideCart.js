@@ -158,10 +158,10 @@ const Cart = (props) => {
             </div> : <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
-                    <div className="mx-auto delivery-addr-bar mt-3 " style={{width: "50%", height: 52}}>
+                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 52}}>
                         <div className="img-separator">
                                 <span><img src={require("../../../assets/images/logo/logo.png").default}
-                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 6}}/> </span>
+                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 7}}/> </span>
                         </div>
                         <div className="delivery-text">
                             <div className="deliver-to-1">Deliver to
@@ -171,7 +171,7 @@ const Cart = (props) => {
                                 style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                         </div>
                     </div>
-                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 5, justifyContent: 'center'}}>
+                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
                         <div style={{display: 'flex'}}>
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
