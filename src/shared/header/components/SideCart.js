@@ -16,8 +16,9 @@ import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {cartTotalPrice, getCartData, isObjEmpty, removeItemFromCart} from "../../../utility/Utils"
 import CartItem from "./CartItem"
-import {useHistory} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import {getUserData} from "../../../auth/utils"
+import {useSelector} from "react-redux"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -27,6 +28,8 @@ const Cart = (props) => {
     const [cartItems, setCartItems] = useState()
     const [isMealDeleted, setMealDeleted] = useState(false)
     const history = useHistory()
+
+    const {userLocation} = useSelector(state => state)
 
     useEffect(() => {
         setCartItems({...getCartData()})
@@ -50,7 +53,7 @@ const Cart = (props) => {
     }
     const checkOut = () => {
         toggleCanvasStart()
-        if (!getUserData()) history.push('/login',  { returnURL: '/checkout' })
+        if (!getUserData()) history.push('/login', {returnURL: '/checkout'})
         else history.push('/checkout')
     }
 
@@ -93,92 +96,114 @@ const Cart = (props) => {
     const taxAmount = Number((cartTotalPrice() * (0 / 100)).toFixed(2))
     return (
         <>
-            {!cartItems || isObjEmpty(cartItems) || (cartItems && (cartItems.meals && cartItems.meals.length === 0) && (cartItems.wines && cartItems.wines.length === 0)) ? <div className='demo-inline-spacing'>
-                    <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
-                               toggle={toggleCanvasStart}>
-                        <OffcanvasHeader toggle={toggleCanvasStart}
-                                         style={{marginTop: 10, justifyContent: 'center'}}>
-                            <div className="cursor-pointer" onClick={() => SetModelOpen(true)}>
-                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                                <span className="fs-3 me-3 text-secondary  mt-2"
-                                > Register Your
+            {!cartItems || isObjEmpty(cartItems) || (cartItems &&
+                (cartItems.meals && cartItems.meals.length === 0) &&
+                (cartItems.wines && cartItems.wines.length === 0)) ? <div className='demo-inline-spacing'>
+                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
+                           toggle={toggleCanvasStart}>
+                    <OffcanvasHeader toggle={toggleCanvasStart}
+                                     style={{marginTop: 10, justifyContent: 'center'}}>
+                        <div className="cursor-pointer" onClick={() => SetModelOpen(true)}>
+                            <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
+                            <span className="fs-3 me-3 text-secondary  mt-2"
+                            > Register Your
                                 self
                             </span>
-                            </div>
-                        </OffcanvasHeader>
+                        </div>
+                    </OffcanvasHeader>
 
-                        {openModel === true && (
-                            <div>
-                                <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
-                            </div>
-                        )}
-                        <hr/>
-                        <OffcanvasBody style={{paddingBottom: 0}}>
-                            <div className="container" style={{
-                                marginTop: "25%"
+                    {openModel === true && (
+                        <div>
+                            <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
+                        </div>
+                    )}
+                    <hr/>
+                    <OffcanvasBody style={{paddingBottom: 0}}>
+                        <div className="container" style={{
+                            marginTop: "25%"
 
-                            }}>
-                                <div className="row align-items-center justify-content-center">
-                                    <div className="col-12 fs-1 fw-bolder text-uppercase text-primary text-center ">Your bag
-                                        is empty
-                                    </div>
-                                    <div className="col-12 fs-3 fw-bold text-uppercase text-secondary text-center">Start an
-                                        order
-                                        for yourself, or you and your friends.
-                                    </div>
+                        }}>
+                            <div className="row align-items-center justify-content-center">
+                                <div className="col-12 fs-1 fw-bolder text-uppercase text-primary text-center ">Your
+                                    bag
+                                    is empty
+                                </div>
+                                <div className="col-12 fs-3 fw-bold text-uppercase text-secondary text-center">Start
+                                    an
+                                    order
+                                    for yourself, or you and your friends.
                                 </div>
                             </div>
+                        </div>
 
-                        </OffcanvasBody>
-                        <CardFooter style={{padding: 0}}>
-                            <Button
-                                color='primary'
-                                onClick={toggleCanvasStart}
-                                style={{
-                                    marginBottom: 0,
-                                    height: 60,
-                                    borderRadius: 0,
-                                    fontSize: '2em',
-                                    textTransform: 'uppercase'
-                                }}
-                                {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
-                            >
-                                Start my order
-                            </Button>
-                        </CardFooter>
-                    </Offcanvas>
+                    </OffcanvasBody>
+                    <CardFooter style={{padding: 0}}>
+                        <Button
+                            color='primary'
+                            onClick={toggleCanvasStart}
+                            style={{
+                                marginBottom: 0,
+                                height: 60,
+                                borderRadius: 0,
+                                fontSize: '2em',
+                                textTransform: 'uppercase'
+                            }}
+                            {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
+                        >
+                            Start my order
+                        </Button>
+                    </CardFooter>
+                </Offcanvas>
 
-                </div> : <div className='demo-inline-spacing'>
-                    <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
-                               toggle={toggleCanvasStart}>
-                        <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 30, justifyContent: 'center'}}>
-                            <div style={{display: 'flex'}}>
-                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                                <h1 className='header-offCanvas fw-bolder mb-1'
-                                    onClick={() => SetModelOpen(true)}>Make It a group
-                                    Order.</h1>
+            </div> : <div className='demo-inline-spacing'>
+                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
+                           toggle={toggleCanvasStart}>
+                    <div className="mx-auto delivery-addr-bar mt-3 " style={{width: "50%", height: 52}}>
+                        <div className="img-separator">
+                                <span><img src={require("../../../assets/images/logo/logo.png").default}
+                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 6}}/> </span>
+                        </div>
+                        <div className="delivery-text">
+                            <div className="deliver-to-1">Deliver to
                             </div>
-                        </OffcanvasHeader>
+                            {userLocation.length ? <div
+                                className="address-1 fw-bolder"
+                                style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
+                        </div>
+                    </div>
+                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 5, justifyContent: 'center'}}>
 
-                        {openModel === true && (
+                        <div style={{display: 'flex'}}>
+                            <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
+                            <Link to="/order/group/create"><h1 className='header-offCanvas fw-bolder mb-1'
+                                // onClick={() => SetModelOpen(true)}
+                                                               onClick={() => toggleCanvasStart()}
+                            >Make It a group
+                                Order.</h1></Link>
+                        </div>
+                    </OffcanvasHeader>
+
+                    {openModel === true && (
+                        <div>
+                            <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
+                        </div>
+                    )}
+
+                    <hr/>
+                    <OffcanvasBody style={{paddingBottom: 0}}>
+
+                        <div>
                             <div>
-                                <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
-                            </div>
-                        )}
-
-                        <hr/>
-                        <OffcanvasBody style={{paddingBottom: 0}}>
-
-                            <div>
-                                <div>
-                                    <div className='col-md-12 '>
-                                        {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
-                                            return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
-                                                <ItemsInCart foodItems={meal} index={index} removeMeal={handleRemoveMeal}/>
-                                                <hr/>
-                                            </div> : null
-                                        })}
-                                        {cartItems && cartItems.wines && cartItems.wines.length > 0 && <div className="row">
+                                <div className='col-md-12 '>
+                                    {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
+                                        return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
+                                            <ItemsInCart foodItems={meal} index={index}
+                                                         removeMeal={handleRemoveMeal}/>
+                                            <hr/>
+                                        </div> : null
+                                    })}
+                                    {cartItems && cartItems.wines && cartItems.wines.length > 0 &&
+                                        <div className="row">
                                             <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
                                             <div className='col-md-2' style={{marginLeft: -15}}>
                                                 <h6 style={{
@@ -193,15 +218,15 @@ const Cart = (props) => {
                                                 </h6>
                                             </div>
                                         </div>}
-                                        {cartItems && cartItems.wines && cartItems.wines.map((wine, index) => {
-                                            return !isObjEmpty(wine) ? <div key={`ItemsInCart-${index}`}>
-                                                <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>
-                                            </div> : null
-                                        })}
-                                    </div>
+                                    {cartItems && cartItems.wines && cartItems.wines.map((wine, index) => {
+                                        return !isObjEmpty(wine) ? <div key={`ItemsInCart-${index}`}>
+                                            <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>
+                                        </div> : null
+                                    })}
                                 </div>
+                            </div>
 
-                                {/*<div style={{marginTop: 20}}>
+                            {/*<div style={{marginTop: 20}}>
                                     <h5 style={{
                                         textAlign: 'center',
                                         fontSize: "1.3rem",
@@ -245,9 +270,9 @@ const Cart = (props) => {
                                     </div>
                                 </div>*/}
 
-                            </div>
+                        </div>
 
-                           {/* <Link to="/home"><Button
+                        {/* <Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}
@@ -264,8 +289,8 @@ const Cart = (props) => {
                             </Button>
                             </Link>*/}
 
-                            <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
-                                {/*<div className="row">
+                        <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
+                            {/*<div className="row">
                                     <div className="col-9 text-uppercase"
                                          style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>Bag Total
                                     </div>
@@ -274,89 +299,93 @@ const Cart = (props) => {
                                     </div>
                                 </div>*/}
 
-                                <Button
-                                    color='secondary'
-                                    outline
-                                    onClick={() => SetModelOpen(true)}
-                                    style={{
-                                        marginBottom: 20,
-                                        marginTop: 30,
-                                        borderRadius: 0,
-                                        height: 55,
-                                        fontSize: "1.5rem",
-                                        textTransform: 'uppercase'
-                                    }}
-                                    {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
-                                >
-                                    sign in to use rewards
-                                </Button>
+                            <Button
+                                color='secondary'
+                                outline
+                                onClick={() => SetModelOpen(true)}
+                                style={{
+                                    marginBottom: 20,
+                                    marginTop: 30,
+                                    borderRadius: 0,
+                                    height: 55,
+                                    fontSize: "1.5rem",
+                                    textTransform: 'uppercase'
+                                }}
+                                {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
+                            >
+                                sign in to use rewards
+                            </Button>
 
 
-                                <div className="row">
-                                    <div className="col-9 text-uppercase"
-                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.2rem"}}>Subtotal
-                                    </div>
-                                    <div className="col-3"
-                                         style={{fontWeight: 700, color: 'primary', fontSize: "1.4rem"}}>$ {cartTotalPrice() ?? 0}
-                                    </div>
+                            <div className="row">
+                                <div className="col-9 text-uppercase"
+                                     style={{fontWeight: 700, color: 'primary', fontSize: "1.2rem"}}>Subtotal
                                 </div>
-
-                                <div className="row">
-                                    <div className="col-9 text-uppercase"
-                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>Tax
-                                    </div>
-                                    <div className="col-3"
-                                         style={{
-                                             fontWeight: 500,
-                                             color: 'primary',
-                                             fontSize: "1.4rem"
-                                         }}>$ {taxAmount ?? 0}
-                                    </div>
+                                <div className="col-3"
+                                     style={{
+                                         fontWeight: 700,
+                                         color: 'primary',
+                                         fontSize: "1.4rem"
+                                     }}>$ {cartTotalPrice() ?? 0}
                                 </div>
-
-                                <hr style={{color: 'primary'}}/>
-
-                                <div className="row">
-                                    <div className="col-9 text-uppercase"
-                                         style={{fontWeight: 'bolder', color: 'primary', fontSize: "1.4rem"}}>Total
-                                    </div>
-                                    <div className="col-3"
-                                         style={{
-                                             fontWeight: 'bolder',
-                                             color: 'primary',
-                                             fontSize: "1.4rem"
-                                         }}>$ {(cartTotalPrice() + taxAmount).toFixed(2) ?? 0}
-                                    </div>
-                                </div>
-
-                                <p style={{color: 'primary', marginTop: 20, fontSize: "1.2rem"}}>Delivery includes
-                                    higher
-                                    menu
-                                    prices and additional
-                                    fees to help offset the costs of delivery.</p>
-
                             </div>
 
-                        </OffcanvasBody>
-                        <CardFooter style={{padding: 0}}>
-                                <Button
-                                    color='primary'
-                                    onClick={checkOut}
-                                    style={{
-                                        marginBottom: 0,
-                                        height: 60,
-                                        borderRadius: 0,
-                                        fontSize: '2em',
-                                        textTransform: 'uppercase'
-                                    }}
-                                    {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
-                                >
-                                    Checkout
-                                </Button>
-                        </CardFooter>
-                    </Offcanvas>
-                    {RenderDuplicateModal()}
-                </div>
+                            <div className="row">
+                                <div className="col-9 text-uppercase"
+                                     style={{fontWeight: 500, color: 'primary', fontSize: "1.2rem"}}>Tax
+                                </div>
+                                <div className="col-3"
+                                     style={{
+                                         fontWeight: 500,
+                                         color: 'primary',
+                                         fontSize: "1.4rem"
+                                     }}>$ {taxAmount ?? 0}
+                                </div>
+                            </div>
+
+                            <hr style={{color: 'primary'}}/>
+
+                            <div className="row">
+                                <div className="col-9 text-uppercase"
+                                     style={{fontWeight: 'bolder', color: 'primary', fontSize: "1.4rem"}}>Total
+                                </div>
+                                <div className="col-3"
+                                     style={{
+                                         fontWeight: 'bolder',
+                                         color: 'primary',
+                                         fontSize: "1.4rem"
+                                     }}>$ {(cartTotalPrice() + taxAmount).toFixed(2) ?? 0}
+                                </div>
+                            </div>
+
+                            <p style={{color: 'primary', marginTop: 20, fontSize: "1.2rem"}}>Delivery includes
+                                higher
+                                menu
+                                prices and additional
+                                fees to help offset the costs of delivery.</p>
+
+                        </div>
+
+                    </OffcanvasBody>
+                    <CardFooter style={{padding: 0}}>
+                        <Button
+                            color='primary'
+                            onClick={checkOut}
+                            style={{
+                                marginBottom: 0,
+                                height: 60,
+                                borderRadius: 0,
+                                fontSize: '2em',
+                                textTransform: 'uppercase'
+                            }}
+                            {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
+                        >
+                            Checkout
+                        </Button>
+                    </CardFooter>
+                </Offcanvas>
+                {RenderDuplicateModal()}
+            </div>
             }
         </>
     )

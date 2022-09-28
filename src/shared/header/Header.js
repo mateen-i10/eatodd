@@ -51,7 +51,7 @@ export default function Header() {
                     <div className="head-sec-2">
                         <Link to="/"><h2>HOME</h2></Link>
                         <Link to="/"><h2>ORDER</h2></Link>
-                        <Link to="/menu"><h2>CATERING</h2></Link>
+                        <Link to="/catering"><h2>CATERING</h2></Link>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
@@ -107,7 +107,7 @@ export default function Header() {
                         <div className="text-center">
                             <Link to="/"><h2>HOME</h2></Link>
                             <Link to="/"><h2>ORDER</h2></Link>
-                            <Link to="/menu"><h2>CATERING</h2></Link>
+                            <Link to="/catering"><h2>CATERING</h2></Link>
                             <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>
                             <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
