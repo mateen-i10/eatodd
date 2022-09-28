@@ -22,26 +22,48 @@ import {getMeal} from "../../../redux/meal/actions"
 import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
 import {ArrowLeft, ShoppingCart} from "react-feather"
-
-import {Link, useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom"
+import {addItemToCart, isObjEmpty} from "../../../utility/Utils"
 
 const MealDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
-
-    // const mls = [{id: 1, name:"pro 1"}, {id: 2, name:"pro 2"}, {id: 3, name:"pro 3"}]
-
-    //getting data from store
-    // const isLoading = useSelector(state => state.employee.isDetailLoading)
-    const Meals = useSelector(state => state.meals.object)
+    // redux state
+    const meal = useSelector(state => state.meals.object)
 
     const history = useHistory()
 
-    const handleback = () => {
+    const handleBack = () => {
         history.push('/user')
     }
 
-    console.log('meals', Meals)
+    const addToCart = () => {
+        // calculating meal total price
+        let finalItems = []
+        let totalPrice = 0
+
+        if (meal && meal.mealProducts && meal.mealProducts.length > 0) {
+            finalItems = meal.mealProducts.map(item => {
+                if (!isObjEmpty(item)) {
+                    const found = item.option
+                    const price = found ? found.price : 0
+                    totalPrice =  totalPrice + (price * item.quantity)
+                    return {...item.product, options: [{...found, isSelected : true}], calculatedPrice: price * item.quantity, price, selectedQuantity: item.quantity}
+                }
+            })
+        }
+
+        const newMeal = {
+            mealName: meal.name,
+            totalPrice,
+            categoryName: meal?.category?.name,
+            categoryId: meal?.category?.id,
+            selectedProducts : [...finalItems]
+        }
+        addItemToCart(newMeal)
+    }
+
+    console.log('meals', meal)
     useEffect(() => {
         dispatch(getMeal(id))
     }, [])
@@ -57,9 +79,11 @@ const MealDetail = ({match}) => {
                                 <Col md='12' xs='12'>
                                     <CardBody style={{maxHeight: 450}}>
                                         <div className='d-flex'>
-                                            <h2 className='flex-fill mb-75'><ArrowLeft color='#81be41' size={25} className='cursor-pointer' onClick={handleback} /> Meal Details</h2>
+                                            <h2 className='flex-fill mb-75'><ArrowLeft color='#81be41' size={25} className='cursor-pointer' onClick={handleBack} /> Meal Details</h2>
                                             <div>
-                                                <Button.Ripple className="text-center btn-sm" color='primary'>Add to <ShoppingCart size={20}/></Button.Ripple>
+                                                <Button.Ripple className="text-center btn-sm" color='primary' onClick={addToCart}>
+                                                    Add to <ShoppingCart size={20}/>
+                                                </Button.Ripple>
                                             </div>
                                         </div>
                                         <Row>
@@ -69,7 +93,7 @@ const MealDetail = ({match}) => {
                                                         <h5 className='mb-75'>Meal Name:</h5>
                                                     </div>
                                                     <div className='col-7'>
-                                                        <CardText className="text-capitalize">{Meals.name}</CardText>
+                                                        <CardText className="text-capitalize">{meal.name}</CardText>
                                                     </div>
                                                 </div>
                                             </Col>
@@ -87,11 +111,11 @@ const MealDetail = ({match}) => {
                                     <th>Quantity</th>
                                     <th>Discount</th>
                                     <th>Price</th>
-                                    <th>Total Price</th>
+                                    <th>Total</th>
                                 </tr>
                                 </thead>
                                     <tbody>
-                                    {Meals.mealProducts?.map(item => (
+                                    {meal.mealProducts?.map(item => (
                                     <tr key={item.id}>
                                         <td>
                                             {item.product.name}

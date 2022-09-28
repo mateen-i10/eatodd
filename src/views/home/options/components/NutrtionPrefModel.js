@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {List, X} from "react-feather"
 import {Modal, ModalBody, ModalFooter} from "reactstrap"
 
-const NutrtionPrefModel = () => {
+const NutritionPrefModel = () => {
 
     const [basicModal, setBasicModal] = useState(false)
     const [plantBased, SetplantBased] = useState(0)
@@ -131,7 +131,7 @@ const NutrtionPrefModel = () => {
                         <h1 className="modal-head flex-fill">
                             Nutrition Preferences
                         </h1>
-                        <a href="#"><X className='close-modal-button' onClick={() => setBasicModal(!basicModal)}/></a>
+                        <X className='close-modal-button cursor-pointer' onClick={() => setBasicModal(!basicModal)}/>
                     </div>
                     <hr/>
                     <ModalBody style={{paddingRight: 50, paddingLeft: 50}}>
@@ -350,16 +350,20 @@ const NutrtionPrefModel = () => {
         <>
             <div className="container-sm">
                 <div className="row">
-                    <div className="col-12" style={{textAlign: 'right'}}>
-                        <a href="#"><h3
+                    <div className="col-12 cursor-pointer" style={{textAlign: 'right'}}>
+                        <h3
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setBasicModal((!basicModal))
+                            }}
                             style={{
                                 textTransform: 'uppercase',
                                 color: "black",
                                 fontWeight: 'bolder'
-                            }}>Nutrtion
-                            Preferences <List onClick={() => setBasicModal((!basicModal))} color="black"/>
+                            }}>
+                            Nutrition Preferences
+                            <List color="black"/>
                         </h3>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -368,4 +372,4 @@ const NutrtionPrefModel = () => {
     )
 }
 
-export default NutrtionPrefModel
+export default NutritionPrefModel

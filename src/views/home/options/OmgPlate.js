@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import TopShelf from "./components/TopShelf"
-import NutrtionPrefModel from "./components/NutrtionPrefModel"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import {useHistory, useLocation} from "react-router-dom"
 import {addItemToCart, isObjEmpty} from "../../../utility/Utils"
-import ProductDetail from "../components/product/ProductCard"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
+import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcategoryMenu"
+import Wines from "../../wine/Pages/wines"
+import NutritionPrefModel from "./components/NutrtionPrefModel"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -37,7 +38,7 @@ const Menu = () => {
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
-                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options[0].price : null
+                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault).price : null
                 if (currentValue.options && currentValue.options.length > 0) currentValue.options[0].isSelected = true
                 acc[currentValue.subCategory['name']] = {
                     id: currentValue.subCategory['id'],
@@ -56,22 +57,24 @@ const Menu = () => {
     const dispatchingItems = () => {
         // calculating meal total price
         let finalItems = []
+        let totalPrice = 0
+
         if (selectedProducts && selectedProducts.length > 0) {
             finalItems = selectedProducts.map(item => {
                 if (!isObjEmpty(item)) {
-                    const price = item.options.find(op => op.isSelected).price
+                    const found = item.options.find(op => op.isSelected)
+                    const price = found ? found.price  : item.price
+                    totalPrice =  totalPrice + (price * item.selectedQuantity)
                     return {...item, calculatedPrice: price * item.selectedQuantity, price}
                 }
             })
         }
-        let totalPrice = 0
-        finalItems.forEach(p => {
-            totalPrice =  totalPrice + p.calculatedPrice
-        })
+
         const meal = {
             mealName,
             totalPrice,
             categoryName: category?.name,
+            categoryId,
             selectedProducts : [...finalItems]
         }
         addItemToCart(meal)
@@ -88,15 +91,16 @@ const Menu = () => {
                 setSelectedProducts([...finalProducts])
             } else {
                 // add case
-                const existingProducts = selectedProducts.filter(p => p.subCategory.id === subCatId)
+                const existingProducts = product.isWine ? selectedProducts.filter(p => p.isWine) : selectedProducts.filter(p => !p.isWine && p?.subCategory?.id === subCatId)
                 let updatedProducts = [...selectedProducts]
                 const sectionLimit = existingProducts.length
                 if (limit !== 0 && sectionLimit === limit) {
-                    toast.info(`You can select only ${limit} items from '${product.subCategory.name.toUpperCase()}'`)
+                    const message = product.isWine ? `You can select up to ${limit} wines` : `You can select up to ${limit} items from '${product?.subCategory?.name?.toUpperCase()}'`
+                    toast.info(message)
                     return
-                } else if (limit !== 0 && sectionLimit > 0 && sectionLimit < limit) {
+                } else if (limit !== 0 && sectionLimit > 0 && sectionLimit < limit && !product.isWine) {
                     updatedProducts = [
-                        ...selectedProducts.filter(p => p.subCategory.id !== subCatId),
+                        ...selectedProducts.filter(p => p.subCategory.id !== subCatId || p.isWine),
                         ...existingProducts.map(p => (
                         {...p, selectedQuantity: 1 / limit}
                     ))
@@ -145,30 +149,7 @@ const Menu = () => {
         final[index].selectedQuantity = value
         setSelectedProducts([...final])
     }
-    const subcategoryMenu = (heading, limit, pro, subCatId) => (
-        <>
-            <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-            <h1 className="text-primary">{heading}</h1>
-            {(limit && limit > 1) ? <h4 className="text-dark">Choose up to {limit}</h4> : ''}
-        </div>
-            <div className="row align-items-center justify-content-center ">
-            {pro && pro.length > 0 && pro.map((element) => {
-            return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}>
-                <ProductDetail
-                    item={element}
-                    attachment={element.attachment}
-                    selectedItems={selectedProducts}
-                    onItemClick={handleSelectProduct}
-                    limit={limit}
-                    subCatId={subCatId}
-                    onOptionClick={handleSelectOption}
-                    onQuantityChange={handleChangeQuantity}
-                />
-            </div>
-        })}
-    </div>
-        </>
-    )
+
     return (
         <>
             <Header/>
@@ -177,16 +158,30 @@ const Menu = () => {
                     attachment={category?.attachment}
                     name={category?.name}
                     description={category?.description}
-                    restaurantId={restaurantId}
-                    isWinePaired={category?.isWinePaired}
                 />
                 <hr className="text-dark"/>
-                <NutrtionPrefModel/>
+                <NutritionPrefModel/>
                 <div className="container-sm">
                     <div className="container-sm">
                         {products && products.length > 0 && products.map(prod => {
-                            return subcategoryMenu(prod.name, prod.fillingLimit, prod.products, prod.id)
+                            return <ProductsSubcategoryMenu
+                                heading={prod.name}
+                                limit={prod.fillingLimit}
+                                products={prod.products}
+                                subCatId={prod.id}
+                                handleSelectOption={handleSelectOption}
+                                handleChangeQuantity={handleChangeQuantity}
+                                handleSelectProduct={handleSelectProduct}
+                                selectedProducts={selectedProducts}
+                            />
                         })}
+                        {category?.isWinePaired && <Wines
+                            restaurantId={restaurantId}
+                            handleSelectOption={handleSelectOption}
+                            handleChangeQuantity={handleChangeQuantity}
+                            handleSelectProduct={handleSelectProduct}
+                            selectedProducts={selectedProducts}
+                        />}
                     </div>
                 </div>
             </div>

@@ -60,7 +60,7 @@ export default function Header() {
                     {isuserlogedin ? <ul className="user-login list-unstyled">
                         <UserDropdown/>
                     </ul> : null}
-                    <div className="head-3 align-items-center">
+                    <div className="head-3 align-items-center cursor-pointer">
                         <div className=" delivery-addr-bar">
                             <div className="img-separator">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
