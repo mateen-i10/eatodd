@@ -13,6 +13,7 @@ import {useSelector} from "react-redux"
 import "./../home/components/Order/Order.css"
 import {Table} from "reactstrap"
 import ComponentSpinner from "../../@core/components/spinner/Loading-spinner"
+import ProductImage from "../home/components/product/ProductImage"
 
 const Nutrition = () => {
 
@@ -46,14 +47,12 @@ const Nutrition = () => {
             window.removeEventListener("resize", handleResizeWindow)
         }
     }, [])
-    // console.log("height", height)
-    // console.log("isVisible", isVisible)
-    console.log("width", width)
 
 
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
             .then(response => {
+
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response
@@ -69,14 +68,12 @@ const Nutrition = () => {
                     try {
                         const final = []
                         for (const item of arr) {
-                            if (item.attachment !== null) {
-                                const result = await httpService._get(`${baseURL}Media/GetMediaByPath?path=${item.attachment.path}&extension=${item.attachment.extension}`, {responseType: 'blob'})
-                                const image = URL.createObjectURL(result.data)
+                            if (arr.length !== 0) {
                                 final.push({
                                     id: item.id,
+                                    attachment: item.attachment,
                                     name: item.name,
                                     description: item.description,
-                                    image,
                                     status: res.status
                                 })
                             }
@@ -94,7 +91,7 @@ const Nutrition = () => {
 
     }, [])
 
-    console.log("main Category ---", mainCategory)
+    // console.log("main Category---", mainCategory)
 
 
     const data = {
@@ -286,10 +283,11 @@ const Nutrition = () => {
                                         // )}
                                     >
                                         <div className="thumbnail">
-                                            <img
-                                                src={item.image}
-                                                alt="Burrito"
-                                                width={200}/>
+                                            <ProductImage attachment={item.attachment} styles={{width: 180}}/>
+                                            {/*<img*/}
+                                            {/*    src={item.image}*/}
+                                            {/*    alt="Burrito"*/}
+                                            {/*    width={200}/>*/}
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
@@ -304,22 +302,7 @@ const Nutrition = () => {
                     }
                 </div>
             </div>
-            {/*<div className='container'>*/}
-            {/*    <div className='row pb-5 pt-5'>*/}
-            {/*        <h3 style={{*/}
-            {/*            fontWeight: 'bolder',*/}
-            {/*            color: '#57ab00',*/}
-            {/*            marginBottom: 40,*/}
-            {/*            paddingLeft: 100,*/}
-            {/*            textTransform: 'uppercase'*/}
-            {/*        }}>Select Your Meal</h3>*/}
-            {/*        {FoodItems.map((e) => (*/}
-            {/*            <div>*/}
-            {/*                <a href="#"><h3 className='food-items' key={e.title}>{e.title}</h3></a>*/}
-            {/*            </div>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+
             <NutTable/>
             <div className='container-fluid bgimg'
                  style={{textAlign: 'center', paddingTop: '100px', paddingBottom: '100px'}}>
