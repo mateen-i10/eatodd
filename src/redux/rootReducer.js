@@ -4,6 +4,7 @@ import layout from './layout'
 import auth from './auth/authentication'
 
 import member from "./member/reducer"
+import memberShip from "./memberShipType/reducer"
 import restaurant from "./restaurant/reducer"
 import employee from "./employee/reducer"
 import facebookPost from './facebookPosts/reducer'
@@ -38,6 +39,7 @@ const rootReducer = {
     navbar,
     layout,
     member,
+    memberShip,
     restaurant,
     employee,
     facebookPost,
