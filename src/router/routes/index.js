@@ -119,14 +119,8 @@ const Routes = [
         exact: true
     },
     {
-        path: '/dashboard/menuitems',
-        component: lazy(() => import('../../views/restaurants/pages/MenuItems')),
-        layout: 'VerticalLayout',
-        exact: true
-    },
-    {
         path: '/dashboard/category',
-        component: lazy(() => import('../../views/restaurants/pages/Category')),
+        component: lazy(() => import('../../views/admin/Category/Category')),
         layout: 'VerticalLayout',
         exact: true
     },
@@ -417,7 +411,7 @@ const Routes = [
     },
     {
         path: '/CategoryDetail/:id',
-        component: lazy(() => import('../../views/restaurants/pages/CategoryDetail')),
+        component: lazy(() => import('../../views/admin/Category/CategoryDetail')),
         layout: 'VerticalLayout'
     },
     {

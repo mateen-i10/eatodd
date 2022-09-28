@@ -219,7 +219,7 @@ const Nutrition = () => {
                 <div className="container-sm">
                     <div className="row">
                         <div className="col-lg-4 col-12  text-center"
-                             style={{paddingLeft: 50, marginTop: 60, marginBottom: 10}}>
+                             style={{marginTop: 60, marginBottom: 10}}>
                             <h5 style={{
                                 color: '#2a2a2a',
                                 fontSize: '1.3em',
@@ -239,26 +239,27 @@ const Nutrition = () => {
                             <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
                                 Statement</a>
                         </div>
-                        <div className=" col-lg-3 col-6  mb-3" style={{paddingTop: 70, paddingLeft: 70}}>
-                            <div>
-                                <h1 style={{fontSize: '3em', fontWeight: 'bolder', color: '#81be41'}}>00cal</h1>
-                                <div style={{display: 'flex'}}>
-                                    <div>
-                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                        <div className="col-lg-4 col-6 mb-3 " style={{paddingTop: 70}}>
+                            <div className="text-center">
+                                <h1 className=""
+                                    style={{fontSize: '2.7em', fontWeight: 'bolder', color: '#81be41'}}>00cal</h1>
+                                <div className="text-center justify-content-center row">
+                                    <div className="text-center  col-3">
+                                        <h3 style={{fontSize: '1.8em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
                                         <h5>Fat</h5>
                                     </div>
-                                    <div style={{marginLeft: 40, marginRight: 40}}>
-                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                    <div className="text-center  col-4" style={{}}>
+                                        <h3 style={{fontSize: '1.8em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
                                         <h5>Protien</h5>
                                     </div>
-                                    <div>
-                                        <h3 style={{fontSize: '2em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
+                                    <div className="text-center col-3">
+                                        <h3 style={{fontSize: '1.8em', fontWeight: 'bolder', color: '#63852e'}}>0g</h3>
                                         <h5>Carbs</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className=" col-lg-5 col-6 mb-3" style={{paddingLeft: 70, paddingTop: 50}}>
+                        <div className=" col-lg-4 col-6 mb-3" style={{paddingTop: 50}}>
                             <Chart options={data} series={[53, 16, 31]} type='donut' height={250}/>
                         </div>
                     </div>
