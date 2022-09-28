@@ -4,13 +4,13 @@ import layout from './layout'
 import auth from './auth/authentication'
 
 import member from "./member/reducer"
+import memberShip from "./memberShipType/reducer"
 import restaurant from "./restaurant/reducer"
 import employee from "./employee/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
 import crmReducer from "./crmEmail/reducer"
-import menuItemReducer from "./restaurantPages/menuItemReducer"
 import invItemReducer from "./restaurantPages/Inventory/itemReducer"
 import invDistributorReducer from "./restaurantPages/Inventory/distributerReducer"
 import invRecipeReducer from "./restaurantPages/Inventory/recipeReducer"
@@ -37,13 +37,13 @@ const rootReducer = {
     navbar,
     layout,
     member,
+    memberShip,
     restaurant,
     employee,
     facebookPost,
     crmSms,
     customer,
     crmReducer,
-    menuItemReducer,
     invItemReducer,
     invDistributorReducer,
     invRecipeReducer,

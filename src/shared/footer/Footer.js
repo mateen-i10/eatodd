@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <div>
             <footer className="footer">
-                <div className="container">
+                <div className="container-sm">
                     <Row>
                         <Col md={3}>
                             <div className="footer-info mb-40">
@@ -49,10 +49,12 @@ export default function Footer() {
                                              src="https://jthemes.net/themes/html/testo/files/images/instagram/img-02.jpg"
                                              alt="insta-img"/></a></li>
                                     <li><a href="#" target="_blank">
-                                        <img className="insta-img" src="https://jthemes.net/themes/html/testo/files/images/instagram/img-03.jpg"
+                                        <img className="insta-img"
+                                             src="https://jthemes.net/themes/html/testo/files/images/instagram/img-03.jpg"
                                              alt="insta-img"/></a></li>
                                     <li><a href="#" target="_blank">
-                                        <img className="insta-img" src="https://jthemes.net/themes/html/testo/files/images/instagram/img-04.jpg"
+                                        <img className="insta-img"
+                                             src="https://jthemes.net/themes/html/testo/files/images/instagram/img-04.jpg"
                                              alt="insta-img"/></a>
                                     </li>
                                     <li><a href="#" target="_blank">
@@ -62,44 +64,45 @@ export default function Footer() {
                                     </li>
                                     <li><a href="#" target="_blank">
                                         <img className="insta-img"
-                                             src="https://jthemes.net/themes/html/testo/files/images/instagram/img-06.jpg" alt="insta-img"/></a>
+                                             src="https://jthemes.net/themes/html/testo/files/images/instagram/img-06.jpg"
+                                             alt="insta-img"/></a>
                                     </li>
                                 </ul>
                             </div>
                         </Col>
                         <div className="bottom-footer">
-                        <div className="row d-flex align-items-center">
-                            <div className="col-md-5 col-lg-6">
-                                <div className="footer-copyright">
-                                    <p>© 2022 EATOMG. All Rights Reserved</p>
+                            <div className="row d-flex align-items-center">
+                                <div className="col-md-5 col-lg-6">
+                                    <div className="footer-copyright">
+                                        <p>© 2022 EATOMG. All Rights Reserved</p>
+                                    </div>
+                                </div>
+                                <div className="col-md-7 col-lg-6 align-content-end">
+                                    <ul className="bottom-footer-list clearfix">
+                                        <li>
+                                            <p className="first-list-link">
+                                                <a href="#">
+                                                    <i className="fab fa-facebook-f"></i> Facebook</a>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <a href="#"><i className="fab fa-twitter"></i> Twitter</a>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p><a href="#"><i className="fab fa-youtube"></i> YouTube</a>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p className="last-li"><a href="#">
+                                                <i className="fab fa-yelp"></i> Yelp</a>
+                                            </p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div className="col-md-7 col-lg-6 align-content-end">
-                                <ul className="bottom-footer-list clearfix">
-                                    <li>
-                                        <p className="first-list-link">
-                                            <a href="#">
-                                                <i className="fab fa-facebook-f"></i> Facebook</a>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            <a href="#"><i className="fab fa-twitter"></i> Twitter</a>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p><a href="#"><i className="fab fa-youtube"></i> YouTube</a>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p className="last-li"><a href="#">
-                                            <i className="fab fa-yelp"></i> Yelp</a>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-                    </div>
                     </Row>
                 </div>
             </footer>

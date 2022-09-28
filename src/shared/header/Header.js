@@ -6,15 +6,15 @@ import {Link} from "react-router-dom"
 import SideCart from "./components/SideCart"
 import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
-import {isUserLoggedIn} from "../../auth/utils"
 import {useSelector} from "react-redux"
 import {Button} from "reactstrap"
+
 
 export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
-    const [isuserlogedin, setuserloginedin] = useState(false)
+    const [isUserLoggedIn, setUserLoggedIn] = useState(false)
 
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
@@ -29,10 +29,10 @@ export default function Header() {
     }, [])
     //** ComponentDidMount
     useEffect(() => {
-        if (isUserLoggedIn() !== null) {
-            setuserloginedin(true)
+        if (isUserLoggedIn !== null) {
+            setUserLoggedIn(true)
         }
-    }, [isuserlogedin])
+    }, [isUserLoggedIn])
     useEffect(() => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
@@ -43,7 +43,7 @@ export default function Header() {
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>
-                        {isuserlogedin ? null : <div className="headlogin">
+                        {isUserLoggedIn ? null : <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>}
@@ -51,16 +51,16 @@ export default function Header() {
                     <div className="head-sec-2">
                         <Link to="/"><h2>HOME</h2></Link>
                         <Link to="/"><h2>ORDER</h2></Link>
-                        <Link to="/menu"><h2>CATERING</h2></Link>
+                        <Link to="/catering"><h2>CATERING</h2></Link>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                        {isuserlogedin ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
+                        {isUserLoggedIn ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                     </div>
-                    {isuserlogedin ? <ul className="user-login list-unstyled">
+                    {isUserLoggedIn ? <ul className="user-login list-unstyled">
                         <UserDropdown/>
                     </ul> : null}
-                    <div className="head-3 align-items-center">
+                    <div className="head-3 align-items-center cursor-pointer">
                         <div className=" delivery-addr-bar">
                             <div className="img-separator">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
@@ -107,14 +107,14 @@ export default function Header() {
                         <div className="text-center">
                             <Link to="/"><h2>HOME</h2></Link>
                             <Link to="/"><h2>ORDER</h2></Link>
-                            <Link to="/menu"><h2>CATERING</h2></Link>
+                            <Link to="/catering"><h2>CATERING</h2></Link>
                             <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>
                             <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                            {isuserlogedin ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
+                            {isUserLoggedIn ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                         </div>
                     </div>
-                    {isuserlogedin ? <div className="">
+                    {isUserLoggedIn ? <div className="">
                         <ul className=" mx-auto mt-2 h-25 user-login list-unstyled">
                             <UserDropdown/>
                         </ul>
@@ -129,7 +129,9 @@ export default function Header() {
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
                             <Button
-                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login" style={{color: "white"}}>Sign In</Link></Button>
+                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login"
+                                                                                                     style={{color: "white"}}>Sign
+                                In</Link></Button>
                         </div>
                         <div className="state">
                             <div className="rounded-circle"
