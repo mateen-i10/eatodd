@@ -27,8 +27,6 @@ import {FieldTypes} from "../../../../utility/enums/FieldType"
 import useLoadData from "../../../../utility/customHooks/useLoadData"
 import useEdit from "../../../../utility/customHooks/useEdit"
 import useModalError from "../../../../utility/customHooks/useModalError"
-import httpService, {baseURL} from "../../../../utility/http"
-import {toast} from "react-toastify"
 import {
     addCateringMenu,
     deleteCateringMenuItem,
@@ -41,6 +39,7 @@ import {
     setIsCateringMenuItemError,
     setIsEdit
 } from "../../../../redux/Catering/cateringMenuItem/reducer"
+import {loadOptions} from "../../../../utility/Utils"
 
 const CateringMenuItems = (props) => {
 
@@ -61,21 +60,13 @@ const CateringMenuItems = (props) => {
     const [searchValue, setSearchValue] = useState('')
 
     const caterings = async (input) => {
-        return httpService._get(`${baseURL}cateringMenu?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
-            .then(response => {
-                console.log('response', response)
-                // success case
-                if (response.status === 200 && response.data.statusCode === 200) {
-                    return response.data.data.map(d => {
-                        return {label: `${d.name}`, value: d.id}
-                    })
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                }
-            }).catch(error => {
-                toast.error(error.message)
-            })
+        return loadOptions('cateringMenu', input, 1, 12)
+    }
+    const addons = async (input) => {
+        return loadOptions('cateringMenu', input, 1, 12)
+    }
+    const modifiers = async (input) => {
+        return loadOptions('cateringMenu', input, 1, 12)
     }
 
     // ** local States
@@ -85,13 +76,65 @@ const CateringMenuItems = (props) => {
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
     const [formData, setFormData] = useState([])
-    /* const [formData] = useState([
-         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-         {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
-         {type:FieldTypes.Number, label: 'Price', placeholder: 'Enter Price', name:'price', isRequired:false, fieldGroupClasses: 'col-6'},
-         {type:FieldTypes.Select, label: 'Catering', placeholder: 'Select Catering', name:'cateringMenuId', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:caterings, isAsyncSelect: true, isMulti:false},
-         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-12'}
-     ])*/
+    const commonFields = [
+        {
+            type: FieldTypes.Text,
+            label: 'Name',
+            placeholder: 'Enter Name',
+            name: 'name',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Limit',
+            placeholder: 'Enter Limit',
+            name: 'limit',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Price',
+            placeholder: 'Enter Price',
+            name: 'price',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Catering Menu',
+            placeholder: 'Select Catering Menu',
+            name: 'cateringMenuId',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            loadOptions: caterings,
+            isAsyncSelect: true,
+            isMulti: false
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Select Modifiers',
+            placeholder: 'Select Modifiers',
+            name: 'modifiers',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            loadOptions: modifiers,
+            isAsyncSelect: true,
+            isMulti: true
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Select Add-ons',
+            placeholder: 'Select Add-ons',
+            name: 'addons',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            loadOptions: addons,
+            isAsyncSelect: true,
+            isMulti: true
+        }
+    ]
 
     const [schema, setSchema] = useState(Joi.object({
         name: Joi.string().required().label("Name")
@@ -111,48 +154,14 @@ const CateringMenuItems = (props) => {
         name: '',
         limit: '',
         price: '',
-        cateringMenuId: {},
+        cateringMenuId: null,
         description: ''
     })
     useModalError(isError, setModalLoading, setIsCateringMenuItemError)
 
     const addClick = () => {
         setFormData([
-            {
-                type: FieldTypes.Text,
-                label: 'Name',
-                placeholder: 'Enter Name',
-                name: 'name',
-                isRequired: true,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Number,
-                label: 'Limit',
-                placeholder: 'Enter Limit',
-                name: 'limit',
-                isRequired: false,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Number,
-                label: 'Price',
-                placeholder: 'Enter Price',
-                name: 'price',
-                isRequired: false,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Select,
-                label: 'Catering',
-                placeholder: 'Select Catering',
-                name: 'cateringMenuId',
-                isRequired: false,
-                fieldGroupClasses: 'col-6',
-                loadOptions: caterings,
-                isAsyncSelect: true,
-                isMulti: false
-            },
+            ...commonFields,
             {
                 type: FieldTypes.File,
                 label: 'Image',
@@ -169,48 +178,14 @@ const CateringMenuItems = (props) => {
                 isRequired: false,
                 fieldGroupClasses: 'col-12'
             }
-        ])
+            ])
         setModalTitle('Add Catering Menu Item')
         toggle()
     }
 
     const editClick = (id) => {
         setFormData([
-            {
-                type: FieldTypes.Text,
-                label: 'Name',
-                placeholder: 'Enter Name',
-                name: 'name',
-                isRequired: true,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Number,
-                label: 'Limit',
-                placeholder: 'Enter Limit',
-                name: 'limit',
-                isRequired: false,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Number,
-                label: 'Price',
-                placeholder: 'Enter Price',
-                name: 'price',
-                isRequired: false,
-                fieldGroupClasses: 'col-6'
-            },
-            {
-                type: FieldTypes.Select,
-                label: 'Catering',
-                placeholder: 'Select Catering',
-                name: 'cateringMenuId',
-                isRequired: false,
-                fieldGroupClasses: 'col-6',
-                loadOptions: caterings,
-                isAsyncSelect: true,
-                isMulti: false
-            },
+            ...commonFields,
             {
                 type: FieldTypes.TextArea,
                 label: 'Description',
