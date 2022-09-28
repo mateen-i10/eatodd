@@ -8,7 +8,7 @@ import Avatar from '@components/avatar'
 // ** Utils
 // import { isUserLoggedIn } from '@utils'
 // ** Third Party Components
-import {CheckSquare, CreditCard, HelpCircle, Mail, MessageSquare, Power, Settings, User} from 'react-feather'
+import {Power, User} from 'react-feather'
 
 // ** Reactstrap Imports
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap'
@@ -30,6 +30,7 @@ const UserDropdown = () => {
             setUserData(JSON.parse(localStorage.getItem('userData')))
         }
     }, [])
+    const usernameArray = userData?.name.trim().split(/\s+/)
 
     //** Vars
     const userAvatar = (userData && userData.avatar) || defaultAvatar
@@ -41,12 +42,12 @@ const UserDropdown = () => {
                     width: 154
                 }}>
                     <div className="d-inline-block">
-                    <span className='user-name fw-bold'
+                    <span className='user-name fw-bold text-uppercase'
                           style={{
                               marginRight: 8,
                               marginTop: 12,
                               fontSize: "1rem"
-                          }}>{(userData && userData['name'].toUpperCase()) || ''}</span>
+                          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['name'].toUpperCase()) || ''}</span>
                         <span style={{
                             marginRight: 8,
                             fontSize: ".7rem"
@@ -62,7 +63,7 @@ const UserDropdown = () => {
                     <User size={14} className='me-75'/>
                     <span className='align-middle'>Profile</span>
                 </DropdownItem>
-               {/* <DropdownItem tag='a' href='/apps/email' onClick={e => e.preventDefault()}>
+                {/* <DropdownItem tag='a' href='/apps/email' onClick={e => e.preventDefault()}>
                     <Mail size={14} className='me-75'/>
                     <span className='align-middle'>Inbox</span>
                 </DropdownItem>

@@ -36,7 +36,7 @@
 }
 
 .create-an-account {
-    padding: 3px;
+    padding: 3px 15px 3px 15px;
     color: #81be41;
     user-select: none;
     cursor: pointer;

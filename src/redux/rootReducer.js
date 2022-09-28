@@ -30,9 +30,8 @@ import wines from "./wines/reducer"
 import ingredient from "./ingredients/reducer"
 import section from "./section/reducer"
 import sectionItem from "./sectionItem/reducer"
-import cateringMenu from "./cateringMenu/reducer"
-import cateringMenuItem from "./cateringMenuItem/reducer"
-import meals from "./meal/reducer"
+import cateringMenu from "./Catering/cateringMenu/reducer"
+import cateringMenuItem from "./Catering/cateringMenuItem/reducer"
 
 const rootReducer = {
     auth,
@@ -66,8 +65,7 @@ const rootReducer = {
     section,
     sectionItem,
     cateringMenu,
-    cateringMenuItem,
-    meals
+    cateringMenuItem
 }
 
 export default rootReducer

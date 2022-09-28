@@ -1,8 +1,7 @@
 import React, {memo, useEffect, useState} from "react"
 import useAPI from "../../../../utility/customHooks/useAPI"
-import {CardImg} from "reactstrap"
 
-const ProductImage = ({attachment, styles, classes, isCardTopImage }) => {
+const ProductImage = ({attachment, styles, classes }) => {
     const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
     const [imageURL, setImageURL] = useState(!attachment || !attachment?.path ? defaultImage : '')
     const [imagePath, setImagePath] = useState('')
@@ -12,8 +11,6 @@ const ProductImage = ({attachment, styles, classes, isCardTopImage }) => {
         console.log('isLoading in image card', isLoading)
         console.log('response in image card', response)
         console.log('attachment in image card', attachment)
-        console.log('imagePath in image card', imagePath)
-        console.log('isCardTopImage in image card', isCardTopImage)
 
     useEffect(() => {
         if (attachment && attachment.path && attachment.extension) {
