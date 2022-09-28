@@ -109,6 +109,12 @@ export default [
         icon: <MessageSquare size={20}/>,
         navLink: '/CrmSms'
     },
+    {
+        id: 'Section',
+        title: 'Modifier/Addon',
+        icon: <Package size={20}/>,
+        navLink: '/section'
+    },
     // {
     //     id: 'Bussiness Details',
     //     title: 'Bussiness Details',
@@ -231,12 +237,6 @@ export default [
         title: 'Catering',
         // icon: <Package size={20}/>,
         children: [
-            {
-                id: 'Section',
-                title: 'Sections',
-                icon: <Package size={20}/>,
-                navLink: '/section'
-            },
             {
                 id: 'CateringMenu',
                 title: 'Catering Menu',

@@ -162,7 +162,7 @@ const Sections = (props) => {
     }
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Section')
+    const [modalTitle, setModalTitle] = useState('Add Modifier/Addon')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
@@ -197,14 +197,14 @@ const Sections = (props) => {
     useModalError(isError, setModalLoading, setIsSectionError)
 
     const addClick = () => {
-        setModalTitle('Add Section')
+        setModalTitle('Add Modifier/Addon')
         toggle()
     }
 
     const editClick = (id) => {
         toggle()
         dispatch(getSection(id, true))
-        setModalTitle('Edit Section')
+        setModalTitle('Edit Modifier/Addon')
         setModalLoading(true)
     }
 
