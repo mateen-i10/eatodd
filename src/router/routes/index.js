@@ -40,7 +40,7 @@ const Routes = [
         }
     },
     {
-        path: '/menu',
+        path: '/catering',
         component: lazy(() => import('../../views/catering/Pages/Catering')),
         layout: 'BlankLayout'
     },
@@ -157,6 +157,11 @@ const Routes = [
     {
         path: '/OmgPlate',
         component: lazy(() => import('../../views/home/options/OmgPlate')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/order/group/create',
+        component: lazy(() => import('../../views/GroupOrder/CreateGroupOrder')),
         layout: 'BlankLayout'
     },
     {
