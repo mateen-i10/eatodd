@@ -12,11 +12,11 @@ import {
 const url = 'customer'
 
 // ** Get Customers Data
-export const loadCustomers = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCustomers = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            url: `${url}/getAllCustomer?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
             data: {},
             method: 'get',
             onSuccess: setCustomers.type

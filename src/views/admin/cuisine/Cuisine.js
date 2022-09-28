@@ -12,7 +12,7 @@ import {
     Button,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Col
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"

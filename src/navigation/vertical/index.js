@@ -71,13 +71,6 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/genralProducts'
     },
-    {
-        id: 'Section',
-        title: 'Sections',
-        icon: <Package size={20}/>,
-        navLink: '/section'
-    },
-
     /* {
          id: 'SectionItem',
          title: 'Section Items',
@@ -116,18 +109,18 @@ export default [
         icon: <MessageSquare size={20}/>,
         navLink: '/CrmSms'
     },
-    {
-        id: 'Bussiness Details',
-        title: 'Bussiness Details',
-        icon: <Archive size={20}/>,
-        navLink: '/BussinessDetails'
-    },
-    {
-        id: 'Login History',
-        title: 'Login History',
-        icon: <Clock size={20}/>,
-        navLink: '/LoginHistory'
-    },
+    // {
+    //     id: 'Bussiness Details',
+    //     title: 'Bussiness Details',
+    //     icon: <Archive size={20}/>,
+    //     navLink: '/BussinessDetails'
+    // },
+    // {
+    //     id: 'Login History',
+    //     title: 'Login History',
+    //     icon: <Clock size={20}/>,
+    //     navLink: '/LoginHistory'
+    // },
     {
         id: 'northave',
         title: 'North Ave',
@@ -238,6 +231,12 @@ export default [
         title: 'Catering',
         // icon: <Package size={20}/>,
         children: [
+            {
+                id: 'Section',
+                title: 'Sections',
+                icon: <Package size={20}/>,
+                navLink: '/section'
+            },
             {
                 id: 'CateringMenu',
                 title: 'Catering Menu',
