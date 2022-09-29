@@ -50,7 +50,7 @@ export const deleteSection = (id) => {
             data: {},
             method: 'delete',
             isSuccessToast: true,
-            successMessage: 'Section Deleted Successfully',
+            successMessage: 'Deleted Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsSectionError.type,
             isSuccess: setIsSectionSuccess.type
@@ -65,7 +65,7 @@ export const addSection = (data) => {
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Section Added Successfully',
+            successMessage: 'Added Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsSectionError.type,
             isSuccess: setIsSectionSuccess.type
@@ -81,7 +81,7 @@ export const updateSection = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'Section Updated Successfully',
+            successMessage: 'Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsSectionError.type,
             isSuccess: setIsSectionSuccess.type

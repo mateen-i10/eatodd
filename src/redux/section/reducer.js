@@ -55,7 +55,6 @@ const sectionReducer = (state = initialState, action) => {
             }
         case editSection.type:
             const data = action.payload.data
-            console.log("editData", data)
             return {
                 ...state,
                 object: {...data},

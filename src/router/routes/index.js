@@ -45,7 +45,7 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/cateringMenuOrder',
+        path: '/cateringMenuOrder/:id',
         component: lazy(() => import('../../views/catering/Pages/COMenu')),
         layout: 'BlankLayout'
     },
@@ -438,6 +438,11 @@ const Routes = [
         path: '/customerDetails/:id',
         component: lazy(() => import('../../views/admin/Customers/CustomerDetail')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/winePayment',
+        component: lazy(() => import('../../views/wine/Pages/winePayment')),
+        layout: 'BlankLayout'
     }
 
 ]

@@ -59,10 +59,9 @@ const CateringMenuItems = (props) => {
                     </UncontrolledDropdown>
                 </div>
                 <div className="text-center text-uppercase ">
-                    <Link to="/cateringMenuOrder">
+                    <Link to={`/cateringMenuOrder/${item.id}`}>
                         <Button className=" text-uppercase " color="primary"
-                                style={{width: "150px", margin: "auto"}}
-                                onClick={() => console.log('clicked')}>
+                                style={{width: "150px", margin: "auto"}}>
                             Add to Bag
                         </Button>
                     </Link>

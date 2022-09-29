@@ -12,7 +12,6 @@ const Catering = () => {
     const [cateringMenu, setCateringMenu] = useState([])
     const [activeItem, setActiveItem] = useState(0)
     const [selectedMenuId, setSelectedMenuId] = useState(0)
-
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=4', 'get', {}, {}, true)
 
 
@@ -47,9 +46,6 @@ const Catering = () => {
             setSelectedMenuId(item.id)
         }
     }
-    // console.log("Response catering", response, isLoading)
-    // console.log("Menu catering", cateringMenu)
-    // console.log("Active Item", activeItem)
 
     return (
         <div>

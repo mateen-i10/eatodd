@@ -15,7 +15,7 @@ const NormLightExSide = (props) => {
     return (
         <>
             <div className=" col-3 bg-primary text-center text-white cursor-pointer "
-                 style={{height: 130}} onClick={() => {
+                 style={{height: 99}} onClick={() => {
                 setCustomize(false)
                 setNormalQty(true)
                 setExtraQty(false)
@@ -30,7 +30,7 @@ const NormLightExSide = (props) => {
                 >Normal
                 </div>
             </div>
-            <div className=" col-3 text-center text-dark hoveredItem cursor-pointer" style={{height: 130}}
+            <div className=" col-3 text-center text-dark hoveredItem cursor-pointer" style={{height: 99}}
                  onClick={() => {
                      setExtraQty(true)
                      setCustomize(false)
@@ -45,7 +45,7 @@ const NormLightExSide = (props) => {
                 >Extra
                 </div>
             </div>
-            <div className=" col-2 text-center text-dark hoveredItem cursor-pointer" style={{height: 130}}
+            <div className=" col-2 text-center text-dark hoveredItem cursor-pointer" style={{height: 99}}
                  onClick={() => {
                      setLightQty(true)
                      setExtraQty(false)
@@ -60,7 +60,7 @@ const NormLightExSide = (props) => {
                 >Light
                 </div>
             </div>
-            <div className=" col-2 text-center text-dark hoveredItem cursor-pointer" style={{height: 130}}
+            <div className=" col-2 text-center text-dark hoveredItem cursor-pointer" style={{height: 99}}
                  onClick={() => {
                      setLightQty(false)
                      setExtraQty(false)
@@ -75,10 +75,10 @@ const NormLightExSide = (props) => {
                 >Side
                 </div>
             </div>
-            <div className="col-2 text-center hoveredItem cursor-pointer" style={{height: 130}}
+            <div className="col-2 text-center hoveredItem cursor-pointer" style={{height: 99}}
                  onClick={() => setCustomize(false)}>
                 <div className=" text-primary"
-                     style={{marginTop: 42, fontSize: 30, fontWeight: 700}}
+                     style={{marginTop: 52, fontSize: 30, fontWeight: 700}}
                 ><MdArrowBackIos/>
                 </div>
             </div>

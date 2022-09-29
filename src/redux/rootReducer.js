@@ -31,6 +31,7 @@ import section from "./section/reducer"
 import sectionItem from "./sectionItem/reducer"
 import cateringMenu from "./Catering/cateringMenu/reducer"
 import cateringMenuItem from "./Catering/cateringMenuItem/reducer"
+import subscriptionReducer from "./subscription/reducer"
 
 const rootReducer = {
     auth,
@@ -63,7 +64,8 @@ const rootReducer = {
     section,
     sectionItem,
     cateringMenu,
-    cateringMenuItem
+    cateringMenuItem,
+    subscriptionReducer
 }
 
 export default rootReducer

@@ -39,7 +39,7 @@ import {
     setIsCateringMenuItemError,
     setIsEdit
 } from "../../../../redux/Catering/cateringMenuItem/reducer"
-import {loadOptions} from "../../../../utility/Utils"
+import {isObjEmpty, loadOptions} from "../../../../utility/Utils"
 
 const CateringMenuItems = (props) => {
 
@@ -63,10 +63,10 @@ const CateringMenuItems = (props) => {
         return loadOptions('cateringMenu', input, 1, 12)
     }
     const addons = async (input) => {
-        return loadOptions('cateringMenu', input, 1, 12)
+        return loadOptions('section/getByAddon', input, 1, 12)
     }
     const modifiers = async (input) => {
-        return loadOptions('cateringMenu', input, 1, 12)
+        return loadOptions('section/getByModifier', input, 1, 12)
     }
 
     // ** local States
@@ -235,6 +235,20 @@ const CateringMenuItems = (props) => {
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
+        finalData.cateringMenuItemSection = []
+        const sections = []
+        if (finalData.modifiers) finalData.modifiers.forEach(m => {
+             if (m && !isObjEmpty(m)) sections.push({sectionId: m.value})
+        })
+        if (finalData.addons) finalData.addons.forEach(m => {
+            if (m && !isObjEmpty(m)) sections.push({sectionId: m.value})
+        })
+        finalData.cateringMenuItemSectionsString = JSON.stringify(sections)
+
+        // deleting extra null values
+        Object.keys(finalData).forEach(key => {
+            if (!finalData[key]) delete finalData[key]
+        })
         console.log("finalData", finalData)
         // call api
         setModalLoading(true)

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 
 // ** Reactstrap Imports
 import {
@@ -19,63 +19,58 @@ import {
     ModalHeader
 } from 'reactstrap'
 
-// ** Third Party Components
-import Swal from 'sweetalert2'
-import Select from 'react-select'
-import withReactContent from 'sweetalert2-react-content'
-
-// ** Utils
-import { selectThemeColors } from '@utils'
-
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/base/plugins/extensions/ext-component-sweet-alerts.scss'
 import PaymentMethods from "./PaymentMethod"
-
-const planOptions = [
-    { value: 'standard', label: 'Standard - $99/month' },
-    { value: 'exclusive', label: 'Exclusive - $249/month' },
-    { value: 'enterprise', label: 'Enterprise - $499/month' }
-]
-
-const MySwal = withReactContent(Swal)
+import {getUserData} from "../../../auth/utils"
+import {useHistory} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
+import { deleteSubscription, getWinePackageByCustomer} from "../../../redux/memberShipType/action"
+import UILoader from "../../../@core/components/ui-loader"
+import Swal from "sweetalert2"
+import {isObjEmpty} from "../../../utility/Utils"
 
 const BillingPlan = () => {
-    // ** States
-    const [show, setShow] = useState(false)
-    const [isBilling, setIsbilling] = useState(0)
+    //const id = match.params.id
 
-    const handleConfirmCancel = () => {
-        return MySwal.fire({
-            title: '',
-            text: 'Are you sure you would like to cancel your subscription?',
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const [isBilling, setIsBilling] = useState(0)
+
+    const customerId = getUserData()?.customerId
+    console.log('customer ID', customerId)
+
+    //getting data from store
+    const isLoading = useSelector(state => state.memberShip.isLoading)
+    const membershipObj = useSelector(state => state.memberShip.object)
+    console.log('membershipObj', membershipObj)
+
+    useEffect(() => {
+        dispatch(getWinePackageByCustomer(customerId))
+    }, [])
+
+
+    const goPackagesPage = () => {
+        history.push('/wine/membership')
+    }
+
+    const deleteClick = (id, e) => {
+        e.preventDefault()
+        // show sweet alert here
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes',
-            customClass: {
-                confirmButton: 'btn btn-primary',
-                cancelButton: 'btn btn-outline-danger ms-1'
-            },
-            buttonsStyling: false
-        }).then(function (result) {
-            if (result.value) {
-                MySwal.fire({
-                    icon: 'success',
-                    title: 'Unsubscribed!',
-                    text: 'Your subscription cancelled successfully.',
-                    customClass: {
-                        confirmButton: 'btn btn-success'
-                    }
-                })
-            } else if (result.dismiss === MySwal.DismissReason.cancel) {
-                MySwal.fire({
-                    title: 'Cancelled',
-                    text: 'Unsubscription Cancelled!!',
-                    icon: 'error',
-                    customClass: {
-                        confirmButton: 'btn btn-success'
-                    }
-                })
+            confirmButtonColor: '#7367f0',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteSubscription(customerId))
+                history.push('/user')
             }
         })
     }
@@ -83,79 +78,80 @@ const BillingPlan = () => {
     return (
         <Fragment>
             {isBilling === 0 && (
-                <Card>
-                    <CardHeader className='border-bottom'>
-                        <CardTitle tag='h4'>Current plan</CardTitle>
-                    </CardHeader>
-                    <CardBody className='mt-2'>
-                        <Row>
-                            <Col md='6'>
-                                <div className='mb-2 pb-50'>
-                                    <h5>
-                                        Your Current Plan is <strong>Basic</strong>
-                                    </h5>
-                                    <span>A simple start for everyone</span>
-                                </div>
-                            </Col>
-                            <Col xs={12}>
-                                <Button color='primary' className='me-1 mt-1' onClick={() => setIsbilling(1)}>
+                <UILoader blocking={isLoading}>
+                    <Card>
+                        <CardHeader className='border-bottom'>
+                            <CardTitle tag='h4'>Current plan</CardTitle>
+                        </CardHeader>
+                        <CardBody className='mt-2'>
+                            <Row>
+                                {membershipObj && !isObjEmpty(membershipObj) ?  <Row>
+                                    <Col md='6'>
+                                        <div className='mb-2 pb-50'>
+                                            <h5>
+                                                Subscription Name:
+                                                <strong className='success ms-1'>
+                                                    <Badge className="mmb-25 text-capitalize" color= 'light-info' pill>
+                                                        {membershipObj.name}
+                                                    </Badge>
+                                                </strong>
+                                            </h5>
+                                        </div>
+                                    </Col>
+                                    <Col md='6'>
+                                        <div className='mb-2 pb-50'>
+                                            <h5>
+                                                Amount:
+                                                <strong className='success ms-1'>
+                                                    $ {membershipObj.amount}
+                                                </strong>
+                                            </h5>
+                                        </div>
+                                    </Col>
+                                    <Col md='6'>
+                                        <div className='mb-2 pb-50'>
+                                            <h5>
+                                                Your Current Plan is
+                                                <strong className='success ms-1'>
+                                                    <Badge className="mmb-25" color= 'light-info' pill>
+                                                        {membershipObj.billType === 1 ? 'Weekly' : membershipObj.billType === 2 ? 'Monthly' : membershipObj.billType === 3 ? 'Yearly' : 'null'}
+                                                    </Badge>
+                                                </strong>
+                                            </h5>
+                                        </div>
+                                    </Col>
+                                    <Col md='6'></Col>
+                                    <Col md='6'>
+                                        <div className='mb-2 pb-50'>
+                                            <h5>
+                                                Description:
+                                            </h5>
+                                            <span>{membershipObj.description}</span>
+                                        </div>
+                                    </Col>
+                                 </Row> : <div>No Subscription Added, Kindly Select a Package !</div>}
+
+                                <Col xs={12}>
+                                    {/*<Button color='primary' className='me-1 mt-1' onClick={() => setIsBilling(1)}>
                                     Continue to billing
-                                </Button>
-                                <Button color='primary' className='me-1 mt-1' onClick={() => setShow(true)}>
-                                    Upgrade Plan
-                                </Button>
-                                <Button outline color='danger' className='mt-1' onClick={handleConfirmCancel}>
-                                    Cancel Subscription
-                                </Button>
-                            </Col>
-                        </Row>
-                    </CardBody>
-                </Card>
+                                    </Button>*/}
+                                    <Button color='primary' className='me-1 mt-1' onClick={goPackagesPage}>
+                                        Upgrade Plan
+                                    </Button>
+                                    <Button outline color='danger' className='mt-1' onClick={e => deleteClick(customerId, e)}>
+                                        Cancel Subscription
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </CardBody>
+                    </Card>
+                </UILoader>
             )}
 
             {isBilling === 1 && (
-                <PaymentMethods setIsbilling={setIsbilling} />
+                <PaymentMethods setIsBilling={setIsBilling} />
             )}
 
-            <Modal isOpen={show} toggle={() => setShow(!show)} className='modal-dialog-centered'>
-                <ModalHeader className='bg-transparent' toggle={() => setShow(!show)}></ModalHeader>
-                <ModalBody className='px-5 pb-2'>
-                    <div className='text-center mb-2'>
-                        <h1 className='mb-1'>Upgrade Plan</h1>
-                        <p>Choose the best plan for user.</p>
-                    </div>
-                    <Row className='pt-50'>
-                        <Col sm={8}>
-                            <Label className='form-label'>Choose Plan</Label>
-                            <Select
-                                isClearable={false}
-                                className='react-select'
-                                classNamePrefix='select'
-                                options={planOptions}
-                                theme={selectThemeColors}
-                                defaultValue={planOptions[0]}
-                            />
-                        </Col>
-                        <Col sm={4} className='text-sm-end mt-2'>
-                            <Button color='primary'>Upgrade</Button>
-                        </Col>
-                    </Row>
-                </ModalBody>
-                <hr />
-                <ModalBody className='px-5 pb-3'>
-                    <h6>User current plan is standard plan</h6>
-                    <div className='d-flex justify-content-between align-items-center flex-wrap'>
-                        <div className='d-flex justify-content-center me-1 mb-1'>
-                            <sup className='h5 pricing-currency pt-1 text-primary'>$</sup>
-                            <h1 className='fw-bolder display-4 mb-0 text-primary me-25'>99</h1>
-                            <sub className='pricing-duration font-small-4 mt-auto mb-2'>/month</sub>
-                        </div>
-                        <Button outline color='danger' className='mb-1' onClick={handleConfirmCancel}>
-                            Cancel Subscription
-                        </Button>
-                    </div>
-                </ModalBody>
-            </Modal>
         </Fragment>
     )
 }
