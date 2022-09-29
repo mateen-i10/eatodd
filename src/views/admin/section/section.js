@@ -27,6 +27,7 @@ import {addSection, deleteSection, getSection, loadSections, updateSection} from
 import {setIsEdit, setIsSectionError, setSection} from "../../../redux/section/reducer"
 import AsyncSelect from "react-select/async"
 import {loadOptions} from "../../../utility/Utils"
+import Select from "react-select"
 
 const Sections = (props) => {
 
@@ -45,12 +46,28 @@ const Sections = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const sectionItemObject = {name: '', price: '', productId: 0}
+    const sectionItemObject = {name: '', price: '', productId: 0, type: 2}
     const [sectionItems, setSectionItem] = useState([sectionItemObject])
 
     const products = async (input) => {
         return loadOptions('product', input, 1, 12)
     }
+    const sectionTypes = [
+        {
+            label: 'Modifier', value: 1
+        },
+        {
+            label: 'Add-on', value: 2
+        }
+    ]
+    const sectionItemTypes = [
+        {
+            label: 'Radio', value: 1
+        },
+        {
+            label: 'Checkbox', value: 2
+        }
+    ]
 
     useEffect(() => {
         if (formInitialState && formInitialState.sectionItems) {
@@ -70,11 +87,10 @@ const Sections = (props) => {
         const newArray = [...sectionItems, sectionItemObject]
         setSectionItem(newArray)
     }
-    const onValueChange = (index, name, event) => {
-        console.log("change", event)
+    const onValueChange = (index, name, event, isSelect = false) => {
         const newArray = sectionItems.map((item, i) => {
             if (i === index) {
-                item[name] = event.target.value
+                item[name] = isSelect ? event.value :  event.target.value
             }
             return item
         })
@@ -94,7 +110,7 @@ const Sections = (props) => {
             <h5>Section Item</h5>
             {sectionItems.map((i, index) => {
                 return <div className='row mt-1'>
-                    <div className='col-4'>
+                    <div className='col-3'>
                         <AsyncSelect
                             defaultOptions
                             value={i.productId}
@@ -106,15 +122,24 @@ const Sections = (props) => {
                     </div>
                     <div className='col-3'>
                         <Input
-                            placeholder='Enter Name'
+                            placeholder='Name'
                             type= 'text'
                             value={i.name}
                             onChange={(e) => onValueChange(index, 'name', e)}
                         />
                     </div>
                     <div className='col-3'>
+                        <Select
+                            closeMenuOnSelect={true}
+                            isMulti = {false}
+                            options={sectionItemTypes}
+                            value={sectionItemTypes.find(opt => opt.value === i.type)}
+                            onChange={(e) => onValueChange(index, 'type', e, true) }
+                        />
+                    </div>
+                    <div className='col-2'>
                         <Input
-                            placeholder='Enter Price'
+                            placeholder='Price'
                             type= 'number'
                             value={i.price}
                             onChange={(e) => onValueChange(index, 'price', e)}
@@ -137,14 +162,15 @@ const Sections = (props) => {
     }
 
     // ** local States
-    const [modalTitle, setModalTitle] = useState('Add Section')
+    const [modalTitle, setModalTitle] = useState('Add Modifier/Addon')
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-12'},
         {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Type', placeholder: 'Enter Limit', name:'sectionType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionTypes, isAsyncSelect: false},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -171,14 +197,14 @@ const Sections = (props) => {
     useModalError(isError, setModalLoading, setIsSectionError)
 
     const addClick = () => {
-        setModalTitle('Add Section')
+        setModalTitle('Add Modifier/Addon')
         toggle()
     }
 
     const editClick = (id) => {
         toggle()
         dispatch(getSection(id, true))
-        setModalTitle('Edit Ingredient')
+        setModalTitle('Edit Modifier/Addon')
         setModalLoading(true)
     }
 

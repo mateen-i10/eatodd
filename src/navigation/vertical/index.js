@@ -1,6 +1,8 @@
 import {
     Archive,
     Award,
+    Box,
+    Clipboard,
     Clock,
     Coffee,
     Copy,
@@ -8,12 +10,14 @@ import {
     Grid,
     Home,
     Mail,
+    Menu,
     MessageSquare,
     Package,
     PenTool,
     Send,
     User,
     UserCheck,
+    UserPlus,
     Users,
     Volume
 } from 'react-feather'
@@ -68,12 +72,11 @@ export default [
         navLink: '/genralProducts'
     },
     {
-        id: 'Section',
-        title: 'Sections',
-        icon: <Package size={20}/>,
-        navLink: '/section'
+               id: 'Product',
+               title: 'Product',
+               icon: <Package size={20}/>,
+               navLink: '/products'
     },
-
     /* {
          id: 'SectionItem',
          title: 'Section Items',
@@ -113,17 +116,23 @@ export default [
         navLink: '/CrmSms'
     },
     {
-        id: 'Bussiness Details',
-        title: 'Bussiness Details',
-        icon: <Archive size={20}/>,
-        navLink: '/BussinessDetails'
+        id: 'Section',
+        title: 'Modifier/Addon',
+        icon: <Package size={20}/>,
+        navLink: '/section'
     },
-    {
-        id: 'Login History',
-        title: 'Login History',
-        icon: <Clock size={20}/>,
-        navLink: '/LoginHistory'
-    },
+    // {
+    //     id: 'Bussiness Details',
+    //     title: 'Bussiness Details',
+    //     icon: <Archive size={20}/>,
+    //     navLink: '/BussinessDetails'
+    // },
+    // {
+    //     id: 'Login History',
+    //     title: 'Login History',
+    //     icon: <Clock size={20}/>,
+    //     navLink: '/LoginHistory'
+    // },
     // {
     //     id: 'northave',
     //     title: 'North Ave',
@@ -141,6 +150,12 @@ export default [
     //             title: 'Product',
     //             icon: <Package size={20}/>,
     //             navLink: '/products'
+    //         },
+    //         {
+    //             id: 'menuitems',
+    //             title: 'Catering Items',
+    //             icon: <Menu size={12}/>,
+    //             navLink: '/dashboard/menuitems'
     //         },
     //         {
     //             id: 'customer',
