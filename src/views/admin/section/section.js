@@ -26,8 +26,8 @@ import useModalError from "../../../utility/customHooks/useModalError"
 import {addSection, deleteSection, getSection, loadSections, updateSection} from "../../../redux/section/action"
 import {setIsEdit, setIsSectionError, setSection} from "../../../redux/section/reducer"
 import AsyncSelect from "react-select/async"
-import {loadOptions} from "../../../utility/Utils"
-import Select from "react-select"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const Sections = (props) => {
 
@@ -46,11 +46,27 @@ const Sections = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const sectionItemObject = {name: '', price: '', productId: 0, type: 2}
+    const sectionItemObject = {name: '', price: '', productId: 0}
     const [sectionItems, setSectionItem] = useState([sectionItemObject])
+    const [existingProducts, setExistingProducts] = useState([])
 
     const products = async (input) => {
-        return loadOptions('product', input, 1, 12)
+        const res = httpService._get(`${baseURL}product?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+            .then(response => {
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    setExistingProducts([...response.data.data])
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+
+        return res
     }
     const sectionTypes = [
         {
@@ -98,10 +114,14 @@ const Sections = (props) => {
         setSectionItem(newArray)
     }
 
-    const onSelectProduct = (index, event) => {
-        console.log("onSelectProduct", event, index)
+    const onSelectProduct = (index, productId) => {
         const final = [...sectionItems]
-        final[index].productId = event
+        final[index].productId = productId
+        const found = existingProducts.find(p => p.id === productId.value)
+        if (found) {
+            final[index].name = found.name
+            final[index].price = found.options ? found.options.find(f => f.isDefault)?.price : 0
+        }
         setSectionItem(final)
     }
 
@@ -110,7 +130,7 @@ const Sections = (props) => {
             <h5>Section Item</h5>
             {sectionItems.map((i, index) => {
                 return <div className='row mt-1'>
-                    <div className='col-3'>
+                    <div className='col-4'>
                         <AsyncSelect
                             defaultOptions
                             value={i.productId}
@@ -120,7 +140,7 @@ const Sections = (props) => {
                             isMulti = {false}
                         />
                     </div>
-                    <div className='col-3'>
+                    <div className='col-4'>
                         <Input
                             placeholder='Name'
                             type= 'text'
@@ -129,15 +149,6 @@ const Sections = (props) => {
                         />
                     </div>
                     <div className='col-3'>
-                        <Select
-                            closeMenuOnSelect={true}
-                            isMulti = {false}
-                            options={sectionItemTypes}
-                            value={sectionItemTypes.find(opt => opt.value === i.type)}
-                            onChange={(e) => onValueChange(index, 'type', e, true) }
-                        />
-                    </div>
-                    <div className='col-2'>
                         <Input
                             placeholder='Price'
                             type= 'number'
@@ -168,9 +179,10 @@ const Sections = (props) => {
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-12'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Type', placeholder: 'Enter Limit', name:'sectionType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionTypes, isAsyncSelect: false},
+        {type:FieldTypes.Select, label: 'Type', placeholder: 'Select Type', name:'sectionType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionTypes, isAsyncSelect: false},
+        {type:FieldTypes.Select, label: 'Items Type', placeholder: 'Select Items Type', name:'sectionItemType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionItemTypes, isAsyncSelect: false},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
@@ -232,13 +244,11 @@ const Sections = (props) => {
     }
 
     const handleSubmit = (event) => {
-        console.log('formState', formState)
         const finalSectionItems = sectionItems && sectionItems.length > 0 ? sectionItems.map(i => ({...i, productId: i.productId.value})) : []
         const finalData = {...formState, sectionItems: finalSectionItems}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)
         if (isError) return
-        console.log("finalData", finalData)
         // call api
         setModalLoading(true)
         edit ? dispatch(updateSection(finalData)) : dispatch(addSection(finalData))
@@ -342,9 +352,9 @@ const Sections = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Sections</CardTitle>
+                            <CardTitle tag='h4'>Modifiers/Addons</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Section</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Modifier/Addon</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

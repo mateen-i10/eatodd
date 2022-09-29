@@ -45,7 +45,7 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/cateringMenuOrder',
+        path: '/cateringMenuOrder/:id',
         component: lazy(() => import('../../views/catering/Pages/COMenu')),
         layout: 'BlankLayout'
     },
