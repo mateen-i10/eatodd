@@ -3,7 +3,7 @@ import React, {memo, useEffect, useState} from "react"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
-const SubcategoryDropdown = ({ categoryId, subcategoryId, setSubcategory }) => {
+const SubcategoryDropdown = ({ categoryId, subcategoryId, setSubcategory, isFormSubmit }) => {
 
     const [subCategories, setSubCategories] = useState([])
     const loadSubCategories = async (input, categoryId) => {
@@ -35,14 +35,17 @@ const SubcategoryDropdown = ({ categoryId, subcategoryId, setSubcategory }) => {
     }, [categoryId])
 
     return <div className='col-md-6 mb-2'>
-        <label>Select Sub Category</label>
+        <label>Select Sub Category <span className='text-danger'>*</span></label>
         <Select
             closeMenuOnSelect={true}
+            name = "subCategory"
             isMulti = {false}
-            options={subCategories}
-            value={subCategories.find(opt => opt.value === subcategoryId) }
-            onChange={(e) => { setSubcategory(e.value) }}
+            options = {subCategories}
+            value = {subCategories.find(opt => opt.value === subcategoryId) }
+            onChange = {(e) => { setSubcategory(e.value) }}
         />
+
+        {isFormSubmit && (!subcategoryId || subcategoryId === 0) && <span className='text-danger'>'Subcategory' is required</span> }
     </div>
 }
 

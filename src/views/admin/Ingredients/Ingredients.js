@@ -58,16 +58,20 @@ const Ingredients = (props) => {
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        quantity: Joi.number().required().label("Quantity"),
+        fat: Joi.number().required().label("Fat"),
+        protein: Joi.number().required().label("Protein"),
+        carb: Joi.number().required().label("Carb")
     })
 
     // ** Function to handle filter
