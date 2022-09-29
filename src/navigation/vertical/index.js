@@ -71,6 +71,12 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/genralProducts'
     },
+    {
+               id: 'Product',
+               title: 'Product',
+               icon: <Package size={20}/>,
+               navLink: '/products'
+    },
     /* {
          id: 'SectionItem',
          title: 'Section Items',
