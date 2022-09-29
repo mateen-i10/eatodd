@@ -140,8 +140,12 @@ const ProductCard = ({
                             <div className="card-body ">
                                 <div className=''>
                                     <div
-                                        className="card-title text-start text-uppercase mt-0 mb-0 text-primary fw-bolder"
-                                        style={{fontSize: '1.2rem'}}>{item?.name}</div>
+                                        className="card-title text-start text-uppercase mb-0 text-primary fw-bolder "
+                                        style={{
+                                            fontSize: '1.1em',
+                                            lineHeight: "18px",
+                                            marginTop: "-6px"
+                                        }}>{item?.name}</div>
                                     <p className="mb-0 text-dark  ">{item?.description}</p>
 
                                 </div>
