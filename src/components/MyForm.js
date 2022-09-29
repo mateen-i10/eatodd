@@ -62,7 +62,6 @@ const MyForm =  (props, ref) => {
     }
     const renderInputGroup = (name, type, index, label, placeholder, options, isTime, rows, isMulti, isAsyncSelect = false, loadOptions, fieldGroupClasses = 'col-6', isRequired = false, isFormGroup = true) => {
         const html = <>{ type !== FieldTypes.CheckBox && type !== FieldTypes.Radio && type !== FieldTypes.SwitchButton && <><Label for={name}>{label}</Label> {isRequired && <span className="text-danger ml-1">*</span>}</>}
-            {/*{console.log('yess', name, props.formState[name])}*/}
             {type === FieldTypes.File ? <div className="custom-file">
                     <Input
                         type='file'

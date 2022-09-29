@@ -10,7 +10,6 @@ const CateringDetailMenu = ({md, id}) => {
 
     const [isLoading, response] = useAPI(`CateringMenu/GetCateringMenuItem?PageIndex=1&PageSize=4&RefId=${id}`, 'get', {}, {}, true)
 
-    console.log("response *******", response)
     const [omgCorporateItems, setOmgCorporateItems] = useState([])
 
     useEffect(() => {

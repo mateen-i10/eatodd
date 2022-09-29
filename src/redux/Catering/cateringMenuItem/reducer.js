@@ -1,4 +1,5 @@
 import {createAction} from '@reduxjs/toolkit'
+import {SectionType} from "../../../utility/enums/Types"
 
 const initialState = {
     list: [],
@@ -58,7 +59,13 @@ const cateringMenuItemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 object: {...data,
-                    cateringMenuId: {label: data.cateringMenu.name, value: data.cateringMenuId}
+                    cateringMenuId: data.cateringMenu ? {label: data?.cateringMenu?.name, value: data?.cateringMenu?.id} : null,
+                    modifiers : data.cateringMenuItemSections ? data.cateringMenuItemSections.map(c => {
+                        return c.section && c.section.sectionType && c.section.sectionType === SectionType.Modifiers  && {label: c.section.name, value: c.section.id }
+                    }) : [],
+                    addons : data.cateringMenuItemSections ? data.cateringMenuItemSections.map(c => {
+                        return c.section && c.section.sectionType && c.section.sectionType === SectionType.Addons && {label: c.section.name, value: c.section.id }
+                    }) : []
                 },
                 isEdit: true
             }

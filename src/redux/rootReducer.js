@@ -11,7 +11,6 @@ import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
 import crmReducer from "./crmEmail/reducer"
-import menuItemReducer from "./restaurantPages/menuItemReducer"
 import invItemReducer from "./restaurantPages/Inventory/itemReducer"
 import invDistributorReducer from "./restaurantPages/Inventory/distributerReducer"
 import invRecipeReducer from "./restaurantPages/Inventory/recipeReducer"
@@ -46,7 +45,6 @@ const rootReducer = {
     crmSms,
     customer,
     crmReducer,
-    menuItemReducer,
     invItemReducer,
     invDistributorReducer,
     invRecipeReducer,
