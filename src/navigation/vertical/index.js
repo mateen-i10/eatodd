@@ -71,6 +71,12 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/genralProducts'
     },
+    {
+               id: 'Product',
+               title: 'Product',
+               icon: <Package size={20}/>,
+               navLink: '/products'
+    },
     /* {
          id: 'SectionItem',
          title: 'Section Items',
@@ -127,69 +133,69 @@ export default [
     //     icon: <Clock size={20}/>,
     //     navLink: '/LoginHistory'
     // },
-    {
-        id: 'northave',
-        title: 'North Ave',
-        // badge: 'light-warning',
-        // badgeText: '2',
-        children: [
-            {
-                id: 'orders',
-                title: 'Orders',
-                icon: <Clipboard size={20}/>,
-                navLink: '/dashboard/orders'
-            },
-            {
-                id: 'Product',
-                title: 'Product',
-                icon: <Package size={20}/>,
-                navLink: '/products'
-            },
-            {
-                id: 'menuitems',
-                title: 'Catering Items',
-                icon: <Menu size={12}/>,
-                navLink: '/dashboard/menuitems'
-            },
-            {
-                id: 'customer',
-                title: 'Customer',
-                icon: <UserPlus size={12}/>,
-                navLink: '/dashboard/customer'
-            },
-            {
-                id: 'inventory',
-                title: 'Inventory',
-                icon: <Box size={12}/>,
-                children: [
-                    {
-                        id: 'items',
-                        title: 'Items',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/item'
-                    },
-                    {
-                        id: 'distributor',
-                        title: 'Distributor',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/distributor'
-                    },
-                    {
-                        id: 'category',
-                        title: 'Category',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/category'
-                    },
-                    {
-                        id: 'Recipe',
-                        title: 'recipe',
-                        icon: <Clipboard size={20}/>,
-                        navLink: '/dashboard/inventory/recipe'
-                    }
-                ]
-            }
-        ]
-    },
+    // {
+    //     id: 'northave',
+    //     title: 'North Ave',
+    //     // badge: 'light-warning',
+    //     // badgeText: '2',
+    //     children: [
+    //         {
+    //             id: 'orders',
+    //             title: 'Orders',
+    //             icon: <Clipboard size={20}/>,
+    //             navLink: '/dashboard/orders'
+    //         },
+    //         {
+    //             id: 'Product',
+    //             title: 'Product',
+    //             icon: <Package size={20}/>,
+    //             navLink: '/products'
+    //         },
+    //         {
+    //             id: 'menuitems',
+    //             title: 'Catering Items',
+    //             icon: <Menu size={12}/>,
+    //             navLink: '/dashboard/menuitems'
+    //         },
+    //         {
+    //             id: 'customer',
+    //             title: 'Customer',
+    //             icon: <UserPlus size={12}/>,
+    //             navLink: '/dashboard/customer'
+    //         },
+    //         {
+    //             id: 'inventory',
+    //             title: 'Inventory',
+    //             icon: <Box size={12}/>,
+    //             children: [
+    //                 {
+    //                     id: 'items',
+    //                     title: 'Items',
+    //                     icon: <Clipboard size={20}/>,
+    //                     navLink: '/dashboard/inventory/item'
+    //                 },
+    //                 {
+    //                     id: 'distributor',
+    //                     title: 'Distributor',
+    //                     icon: <Clipboard size={20}/>,
+    //                     navLink: '/dashboard/inventory/distributor'
+    //                 },
+    //                 {
+    //                     id: 'category',
+    //                     title: 'Category',
+    //                     icon: <Clipboard size={20}/>,
+    //                     navLink: '/dashboard/inventory/category'
+    //                 },
+    //                 {
+    //                     id: 'Recipe',
+    //                     title: 'recipe',
+    //                     icon: <Clipboard size={20}/>,
+    //                     navLink: '/dashboard/inventory/recipe'
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // },
     {
         id: 'Wineclub',
         title: 'Wineclub',
