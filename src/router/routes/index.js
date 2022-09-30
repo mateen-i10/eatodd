@@ -170,6 +170,11 @@ const Routes = [
         layout: 'VerticalLayout'
     },
     {
+        path: '/restaurantDetail/:id',
+        component: lazy(() => import('../../views/admin/Restaurant/RestaurantDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
         path: '/Facebook',
         component: lazy(() => import('../../views/admin/FacebookAutoPost/FaceBookAuto')),
         layout: 'VerticalLayout'
@@ -317,11 +322,6 @@ const Routes = [
     {
         path: '/Addpromotions',
         component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/restaurantDetail/:id',
-        component: lazy(() => import('../../views/admin/Restaurant/RestaurantDetail')),
         layout: 'VerticalLayout'
     },
     {

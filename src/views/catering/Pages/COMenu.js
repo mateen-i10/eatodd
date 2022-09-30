@@ -5,16 +5,21 @@ import Footer from "../../../shared/footer/Footer"
 import CatMealItems from "../components/CatMealItems"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {useParams} from "react-router-dom"
+import UILoader from "../../../@core/components/ui-loader"
+import {SectionItemType} from "../../../utility/enums/Types"
+import {addCateringItem, isObjEmpty} from "../../../utility/Utils"
+import {Button} from "reactstrap"
 
 const COMenu = () => {
     const {id} = useParams()
+
+    // local states
     const [menuItem, setMenuItem] = useState({})
     const [sections, setSections] = useState([])
+    const [selectedItems, setSelectedItems] = useState([])
+
+    // hooks
     const [isLoading, response] = useAPI(`cateringMenuItem/${id}`, 'get', {}, {}, true)
-    console.log('isLoading', isLoading)
-    console.log('id', id)
-    console.log('responses', response)
-    console.log('sec', sections)
     useEffect(() => {
         if (response && response.data) {
             const {data} = response
@@ -34,7 +39,14 @@ const COMenu = () => {
                             name: i.name,
                             image: require("../../../assets/images/eatOmg pics 100size/Lamb Sandwich.jpg").default,
                             description: '',
-                            price: i.price
+                            price: i.price,
+                            attachment: i.attachment,
+                            item: {
+                                ...i,
+                                sectionId: c.section.id,
+                                sectionType: c.section.sectionType,
+                                sectionItemType: c.section.sectionItemType
+                            }
                         })) : []
                     } : undefined
                 })
@@ -42,8 +54,57 @@ const COMenu = () => {
             }
         }
     }, [response])
+
+    // functions
+    const handleSelect = (item) => {
+        console.log('iii', item)
+        let finalItems = []
+
+        // remove item case
+        if (selectedItems && selectedItems.find(c => c.id === item.id)) {
+            finalItems = selectedItems.filter(c => c.id !== item.id)
+        } else if (item.sectionItemType === SectionItemType.Radio) {
+            // add new item when type is radio
+            finalItems =  [...selectedItems.filter(c => c.sectionId !== item.sectionId), item]
+        } else {
+            // add new item when type is checkbox
+            finalItems =  [...selectedItems, item]
+        }
+        setSelectedItems([...finalItems])
+    }
+    const addToCart = () => {
+        // calculating meal total price
+        let finalItems = []
+        let totalPrice = 0
+
+        if (selectedItems && selectedItems.length > 0) {
+            finalItems = selectedItems.map(item => {
+                if (!isObjEmpty(item)) {
+                    const price =  item.price
+                    totalPrice =  totalPrice + price
+                    return {...item, calculatedPrice: price, price}
+                }
+            })
+        }
+
+        const item = {
+            id: menuItem.id,
+            name: menuItem.name,
+            totalPrice,
+            selectedProducts : [...finalItems]
+        }
+        addCateringItem(item)
+        //history.push('/home')
+    }
+
+    console.log('responses', response)
+    console.log('sec', sections)
+    console.log('addToCart', addToCart)
+
+
     return (
         <div>
+            <UILoader blocking={isLoading}>
             <Header/>
             <div className="container-sm ">
                 <TopShelf attachment={menuItem?.attachment}
@@ -58,14 +119,20 @@ const COMenu = () => {
                     <div className="row align-items-center justify-content-center my-1">
                         {s.items.map((product) => (
                             <div className="col-9 col-xl-5" key={product.id}>
-                                <CatMealItems product={product}/>
+                                <CatMealItems
+                                    product={product}
+                                    handleSelect={handleSelect}
+                                    selectedItems={selectedItems}
+                                    attachment={product.attachment}
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
             })}
-
+                <Button onClick={addToCart}>Add To Cart</Button>
             <Footer/>
+            </UILoader>
         </div>
     )
 }

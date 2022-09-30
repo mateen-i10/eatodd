@@ -1,22 +1,23 @@
-import React, {useState} from 'react'
+import React from 'react'
 import CheckSign from "../../home/options/components/Utility/CheckSign"
+import ProductImage from "../../home/components/product/ProductImage"
 
 
-const CatMealItems = ({product}) => {
-    const [value, setValue] = useState(false)
+const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
+    const isChecked = selectedItems && selectedItems.find(i => i.id === product.id)
     return (
-        <div className="card mb-lg-2 mb-1 overflow-hidden  " onClick={() => {
-            setValue(!value)
+        <div className="card mb-lg-2 mb-1 overflow-hidden" onClick={() => {
+            handleSelect(product?.item)
         }}
-             style={!value ? {
+             style={!isChecked ? {
                  marginBottom: 25,
-                 maxHeight: 120,
-                 minHeight: 120,
+                 maxHeight: 100,
+                 minHeight: 100,
                  borderWidth: 1
              } : {
                  marginBottom: 25,
-                 maxHeight: 120,
-                 minHeight: 120,
+                 maxHeight: 100,
+                 minHeight: 100,
                  borderWidth: 1,
                  borderColor: "black"
              }}>
@@ -24,28 +25,30 @@ const CatMealItems = ({product}) => {
                 <div className=" col-9 ">
                     <div className="row g-0">
                         <div className=" col-4">
-                            {value === true &&
+                            {isChecked &&
                                 <div className="  " style={{
                                     position: 'absolute',
                                     backgroundColor: 'transparent',
                                     zIndex: 3
                                 }}><CheckSign/>
                                 </div>}
-                            <img src={product.image} className="img-fluid rounded-start" alt="..."
-                                 style={{
-                                     width: "100%",
-                                     height: 120,
-                                     backgroundColor: 'transparent',
-                                     objectFit: "unset",
-                                     overflow: "hidden"
-                                 }}/>
+                            <ProductImage
+                                attachment={attachment}
+                                classes={"img-fluid rounded-start"}
+                                styles={{
+                                    width: "100%",
+                                    height: 100,
+                                    backgroundColor: 'transparent',
+                                    objectFit: "unset",
+                                    overflow: "hidden"
+                                }}/>
                         </div>
                         <div className="col-8 ">
                             <div className="card-body " style={{
                                 marginTop: -4
                             }}>
                                 <div
-                                    className="card-title mb-0 text-start text-uppercase  text-primary fw-bolder"
+                                    className="card-title mb-0 text-start text-uppercase text-primary fw-bolder"
                                     style={{fontSize: '1.2rem'}}>{product.name}
                                 </div>
                                 <p className="text-dark">{product.description}</p>
@@ -54,7 +57,7 @@ const CatMealItems = ({product}) => {
                     </div>
                 </div>
                 <div className=" col-3 mt-2 text-end">
-                    <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>${product.price}</h5>
+                    <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>add ${product.price}</h5>
                 </div>
             </div>
         </div>
