@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState, useEffect} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -75,22 +75,25 @@ const Product = (props) => {
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
 
+    const [schema] = useState({})
+
     const [commonFields] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name:'productIngredients', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Ingredient, isAsyncSelect: true, isMulti:true},
-        {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-5 mt-2 mx-1'}
     ])
 
     const [edit, setEdit] = useState(false)
+    const [isSubmit, setSubmit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
@@ -106,7 +109,7 @@ const Product = (props) => {
     const AddNewData = () => {
         setFormData([
             ...commonFields,
-            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:true, fieldGroupClasses: 'col-6'}
+            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
         ])
         setFormFeilds(1)
         setShowOption(true)
@@ -152,24 +155,6 @@ const Product = (props) => {
         setOptionType(newArray)
     }
 
-    // ** schema for validations
-    // const schema = Joi.object({
-    //     name: Joi.string().required().label("Name"),
-    //     description: Joi.string().required().label("Description"),
-    //     wholePrice: Joi.number().required().label("WholePrice"),
-    //     discount: Joi.number().required().label("Discount"),
-    //     quantity: Joi.number().required().label("Quantity"),
-    //     restaurant: Joi.object({label: Joi.required(), value: Joi.required()}).required("Customer is required!"),
-    //     optionType: Joi.object({label: Joi.required(), value: Joi.required()}).required("Option Type is required!"),
-    //     category: Joi.object({label: Joi.required(), value: Joi.required()}).required("Category Type is required!"),
-    //     productIngredients: Joi.array().required().error(() => {
-    //         return {
-    //             message: '"Ingredients" is required'
-    //         }
-    //     })
-    //
-    // })
-
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
@@ -186,13 +171,12 @@ const Product = (props) => {
         description:'',
         wholePrice: '',
         discount: '',
-        optionType: [],
+        // optionType: [],
         taxAmount: '',
         taxPercentage: '',
-        restaurant: [],
-        category: [],
+        // restaurant: [],
+        // category: [],
         isDrink: false
-
     })
     useModalError(isError, setModalLoading, setIsproductError)
 
@@ -239,24 +223,39 @@ const Product = (props) => {
     const handleSubmit = (event) => {
         console.log('subcatId', subcategoryId)
         console.log('the option type wala!!!', optionType)
+        setSubmit(true)
         event.preventDefault()
 
-        // console.log('this is the cat id lets see if works?', Ingredient)
-        console.log('lets see the value of : ', formFeilds)
+        console.log('lets see the value of :', formFeilds)
 
         let finalData = {}
+        let finalSchema = {}
        if (formFeilds === 1 || formFeilds === 3) {
+            finalSchema = Joi.object({
+                name: Joi.string().required().label('Name'),
+                wholePrice: Joi.string().required().label("WholePrice"),
+                category: Joi.required().label('Category'),
+                restaurant: Joi.required().label("Restaurant"),
+                optionType: Joi.required().label("OptionType")
+            })
+
            const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
            finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
            delete finalData.generalProductId
        } else if (formFeilds === 0) {
+           finalSchema = Joi.object({
+               generalProduct: Joi.required().label("general product"),
+               restaurant: Joi.required().label("Restaurant")
+           })
+
            finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
        }
         console.log(finalData, "lets see")
-        // const isError = formModalRef.current.validate(formState)
-        // if (isError) return
+        const isError = formModalRef.current.validateWithSchema(formState, finalSchema)
+        if (isError) return
+
 
         delete finalData.modifiedById
         delete finalData.modifiedDate
@@ -398,7 +397,7 @@ const Product = (props) => {
                        formState={formState}
                        formData={formData}
                        setFormState={setFormState}
-                       // schema={schema}
+                       schema={schema}
                        isModal={isModal}
                        toggleModal={toggle}
                        modalTitle={modalTitle}
@@ -419,6 +418,7 @@ const Product = (props) => {
                            AddFromExistingData={AddFromExistingData}
                            categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
                            optionType={formState.optionType?.value}
+                           isFormSubmit={isSubmit}
                        />}
             />
 
