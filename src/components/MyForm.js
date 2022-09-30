@@ -37,6 +37,28 @@ const MyForm =  (props, ref) => {
             setErrors({...errors})
 
             return true
+        },
+        validateWithSchema(currentState, schema) {
+            // validating form object only provided schema
+            const schemaKeys = schema._inner.children.map(sc => sc.key)
+            const newState = {...currentState}
+            for (const key in currentState) {
+                if (!schemaKeys.find(sc => sc === key)) delete newState[key]
+            }
+
+            const result = Joi.validate(newState, schema, {abortEarly: false})
+            if (!result.error) {
+                setErrors({})
+                return false
+            }
+
+            const errors = {}
+            result.error.details.map(d => {
+                errors[d.path[0]] = d.message
+            })
+            setErrors({...errors})
+
+            return true
         }
     }), [])
     const handleDateChange = (e, key) => {
