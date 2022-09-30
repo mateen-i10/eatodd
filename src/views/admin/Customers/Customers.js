@@ -4,7 +4,7 @@ import React, {Fragment, useEffect, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit} from 'react-feather'
+import {ChevronDown, FileText} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -21,7 +21,7 @@ import {loadCustomers} from "../../../redux/customer/actions"
 import {getUserData} from "../../../auth/utils"
 // my changes
 
-const Customers = () => {
+const Customers = (props) => {
 
     const customerList = useSelector(state => state.customer.list)
     const miscData = useSelector(state => state.customer.miscData)
@@ -55,6 +55,11 @@ const Customers = () => {
         setCurrentPage(page.selected + 1)
     }
 
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        props.history.push(`/customerDetails/${id}`)
+    }
+
     const columns = [
         {
             name: 'Name',
@@ -74,7 +79,7 @@ const Customers = () => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <span className='cursor-pointer mx-1' onClick={() => console.log(row.id)}><Edit size={20} /></span>
+                        <span className='cursor-pointer mx-1' onClick={e => detailOptClick(row.id, e)}><FileText size={15} /></span>
                     </div>
                 )
             }

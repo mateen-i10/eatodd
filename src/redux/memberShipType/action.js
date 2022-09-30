@@ -88,3 +88,39 @@ export const updateMemberShipType = (data) => {
         dispatch(setIsEdit(false))
     }
 }
+
+export const getWinePackageByCustomer = (id, isEdit = false) => {
+    return async dispatch => {
+        if (isEdit) {
+            dispatch(apiCall({
+                url: `${url}/winePackageByCustomer/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: editMemberShipType.type
+            }))
+        } else {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/winePackageByCustomer/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setMemberShipType.type
+            }))
+        }
+    }
+}
+
+export const deleteSubscription = (CustomerId) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/CancelSubscription/${CustomerId}`,
+            data: {},
+            method: 'delete',
+            isSuccessToast: true,
+            successMessage: 'Subscription Deleted Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsMemberShipTypeError.type,
+            isSuccess: setIsMemberShipTypeSuccess.type
+        }))
+    }
+}

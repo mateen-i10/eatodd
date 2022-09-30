@@ -13,6 +13,7 @@ const ProductFormChild = (props) => {
                         categoryId={props.categoryId}
                         subcategoryId={props.subcategoryId}
                         setSubcategory={props.setSubcategoryId}
+                        isFormSubmit={props.isFormSubmit}
                     />
                     <h5>Product Options</h5>
                     {props.options.map((i, index) => {

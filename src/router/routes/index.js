@@ -433,6 +433,16 @@ const Routes = [
         path: '/MealDetail/:id',
         component: lazy(() => import('../../views/customer/components/MealDetail')),
         layout: 'BlankLayout'
+    },
+    {
+        path: '/customerDetails/:id',
+        component: lazy(() => import('../../views/admin/Customers/CustomerDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/winePayment',
+        component: lazy(() => import('../../views/wine/Pages/winePayment')),
+        layout: 'BlankLayout'
     }
 
 ]

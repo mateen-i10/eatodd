@@ -76,8 +76,8 @@ const SubCategory = (props) => {
     const [commonFields] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
+        {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
     ])
 
     // ** local States
@@ -93,7 +93,14 @@ const SubCategory = (props) => {
 
     // ** schema for validations
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        // category: Joi.required().label("Category"),
+        category: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Category" is required'
+            }
+        }),
+        fillingLimit: Joi.number().required().label("Filling Limit")
     })
 
     // ** Function to handle filter
@@ -109,7 +116,7 @@ const SubCategory = (props) => {
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setSubCategory, {
         name: '',
         description:'',
-        fillingLimit: null
+        fillingLimit:''
     })
     useModalError(isError, setModalLoading, setIsSubCategoryError)
 

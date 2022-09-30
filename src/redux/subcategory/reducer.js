@@ -35,9 +35,11 @@ const SubCategoryReducer = (state = initialState, action) => {
                 isSuccess: false
             }
         case setSubCategory.type:
+            const data1 = action.payload.data
+            console.log(data1, "some data")
             return {
                 ...state,
-                object: action.payload.data,
+                object:{...data1, category: {label: data1.category?.name, value: data1.categoryId}},
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
@@ -53,9 +55,11 @@ const SubCategoryReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editSubCategory.type:
+            const data = action.payload.data
+            console.log(data, "some data 2")
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...data, category: {label: data.category?.name, value: data.categoryId}},
                 isEdit: true
             }
         case setRequestCompleted.type:
