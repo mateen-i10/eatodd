@@ -53,7 +53,7 @@ const GenralProductReducer = (state = initialState, action) => {
             }
         case editGenralProduct.type:
             const data = action.payload.data
-            data.options = data.options.filter(c => c.name !== "Default")
+            data.options = data.options.filter(c => c.name !== "Numeric" && c.name !== "Normal")
             data.optionsString = JSON.stringify(data.options)
             delete data.attachmentId
             return {
