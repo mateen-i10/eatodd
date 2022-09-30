@@ -110,6 +110,7 @@ const GenralProducts = (props) => {
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
     const [edit, setEdit] = useState(false)
+    const [isSubmit, setSubmit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
@@ -117,13 +118,22 @@ const GenralProducts = (props) => {
 
     // ** schema for validations
     const [schema, setSchema] = useState(Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        wholePrice: Joi.number().required().label("Whole Price"),
+        quantity: Joi.number().required().label("Quantity"),
+        optionType: Joi.required().label("OptionType"),
+        category: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Category" is required'
+            }
+        })
     }))
 
 
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
+        if (isSubmit) setSubmit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
         setOptionType([showOptionObject])
@@ -141,24 +151,25 @@ const GenralProducts = (props) => {
         taxAmount: '',
         taxPercentage: '',
         generalProductIngredients: [],
-        optionType: {},
-        category: {}
+        optionType: null,
+        category: null
     })
     useModalError(isError, setModalLoading, setIsGenralProductError)
     const addClick = () => {
+
         setFormData([
             {type: FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name: 'name', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name: 'description', isRequired: false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.File, label: 'Image', placeholder: 'Enter Attachment', name: 'image', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
-            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
-            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
+            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
         ])
         setModalTitle('Add Product')
         toggle()
@@ -168,18 +179,26 @@ const GenralProducts = (props) => {
         setFormData([
             {type: FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name: 'name', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name: 'description', isRequired: false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
-            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: false, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
+            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
         ])
         setSchema(Joi.object({
-            name: Joi.string().required().label("Name")
+            name: Joi.string().required().label("Name"),
+            wholePrice: Joi.number().required().label("Whole Price"),
+            quantity: Joi.number().required().label("Quantity"),
+            optionType: Joi.required().label("OptionType"),
+            category: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+                return {
+                    message: '"Category" is required'
+                }
+            })
         }))
         toggle()
         dispatch(getGenralProduct(id, true))
@@ -211,14 +230,17 @@ const GenralProducts = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
+        setSubmit(true)
         const ingredients = formState.generalProductIngredients?.map(i => {
             return {ingredientId: i.value}
         })
         const finalData = {...formState, subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
-
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
+        if (!subcategoryId || subcategoryId === 0) {
+            console.log('yyyyyyyyyyyyyyyy')
+            return
+        }
 
         console.log("Final Data", finalData)
 
@@ -418,6 +440,7 @@ const GenralProducts = (props) => {
                                 options={optionType}
                                 categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
                                 optionType={formState.optionType?.value}
+                                isFormSubmit={isSubmit}
                             />}
                         />
 

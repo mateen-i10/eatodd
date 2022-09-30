@@ -65,7 +65,6 @@ export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {
   return httpService._get(`${baseURL}${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${input}`)
       .then(response => {
         if (response.status === 200 && response.data.statusCode === 200) {
-          console.log(response, "resp")
           return response.data.data.map(d =>  {
             return {label: `${d.name}`, value: d.id}
           })
@@ -103,7 +102,6 @@ export const addItemToCart = (item, isWine = false) => {
   toast.success(`'${isWine ? item.name : item.mealName}' added to cart`)
   return true
 }
-
 export const removeItemFromCart = (index, isWine = false) => {
   //getting existing cart items
   const items = localStorage.getItem(cartName)
@@ -116,13 +114,11 @@ export const removeItemFromCart = (index, isWine = false) => {
   }
 return false
 }
-
 export const getCartData = () => {
   const string = localStorage.getItem(cartName)
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem(cartName)) : null
   return obj && !isObjEmpty(obj) ? obj : null
 }
-
 export const cartTotalPrice = () => {
   const cart = getCartData()
   if (cart) {
@@ -133,9 +129,36 @@ export const cartTotalPrice = () => {
     if (cart.wines && cart.wines.length > 0) cart.wines.forEach(c => {
       totalPrice = totalPrice + (c.price * c.selectedQuantity)
     })
+    if (cart.catering && cart.catering.length > 0) cart.catering.forEach(c => {
+      totalPrice = totalPrice + c.totalPrice
+    })
     return Number(totalPrice)
   }
 }
 export const clearCart = () => {
   localStorage.removeItem(cartName)
+}
+
+// catering items
+export const addCateringItem = (item) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  const cart = JSON.parse(items)
+  const finalCatering = cart && cart.catering && cart.catering.length > 0 ? [...cart.catering] : []
+  finalCatering.push(item)
+  localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering] }))
+  toast.success(`'${item.name}' added to cart`)
+  return true
+}
+export const removeCateringItemFromCart = (index) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  if (items && items.length > 0) {
+    const cart = JSON.parse(items)
+    cart.catering.splice(index, 1)
+    const finalItems = {...cart, catering: [...cart.catering]}
+    localStorage.setItem(cartName, JSON.stringify(finalItems))
+    return true
+  }
+  return false
 }
