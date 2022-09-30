@@ -14,7 +14,13 @@ import {UserPlus} from "react-feather"
 import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
-import {cartTotalPrice, getCartData, isObjEmpty, removeItemFromCart} from "../../../utility/Utils"
+import {
+    cartTotalPrice,
+    getCartData,
+    isObjEmpty,
+    removeCateringItemFromCart,
+    removeItemFromCart
+} from "../../../utility/Utils"
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
 import {getUserData} from "../../../auth/utils"
@@ -26,24 +32,33 @@ const Cart = (props) => {
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
     const [openModel, SetModelOpen] = useState(false)
     const [cartItems, setCartItems] = useState()
-    const [isMealDeleted, setMealDeleted] = useState(false)
+    const [isDeleted, setDeleted] = useState(false)
     const history = useHistory()
 
     const {userLocation} = useSelector(state => state)
+    const isCartEmpty = !cartItems || isObjEmpty(cartItems) || (cartItems &&
+        (!cartItems.meals || (cartItems.meals && cartItems.meals.length === 0)) &&
+        (!cartItems.wines || (cartItems.wines && cartItems.wines.length === 0)) &&
+        (!cartItems.catering || (cartItems.catering && cartItems.catering.length === 0)))
 
     useEffect(() => {
         setCartItems({...getCartData()})
-        if (isMealDeleted) setMealDeleted(false)
-    }, [isMealDeleted])
+        if (isDeleted) setDeleted(false)
+    }, [isDeleted])
 
 // methods
-    const handleRemoveMeal = (index) => {
-        const result = removeItemFromCart(index)
-        setMealDeleted(result)
+    const handleRemove = (index, isCatering) => {
+        let result = false
+        if (isCatering) {
+            result = removeCateringItemFromCart(index)
+        } else {
+            result = removeItemFromCart(index)
+        }
+        setDeleted(result)
     }
     const handleRemoveWine = (index) => {
         const result = removeItemFromCart(index, true)
-        setMealDeleted(result)
+        setDeleted(result)
     }
 
     const toggleCanvasStart = () => {
@@ -96,9 +111,7 @@ const Cart = (props) => {
     const taxAmount = Number((cartTotalPrice() * (0 / 100)).toFixed(2))
     return (
         <>
-            {!cartItems || isObjEmpty(cartItems) || (cartItems &&
-                (cartItems.meals && cartItems.meals.length === 0) &&
-                (cartItems.wines && cartItems.wines.length === 0)) ? <div className='demo-inline-spacing'>
+            {isCartEmpty ? <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
                     <OffcanvasHeader toggle={toggleCanvasStart}
@@ -106,8 +119,7 @@ const Cart = (props) => {
                         <div className="cursor-pointer" onClick={() => SetModelOpen(true)}>
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
                             <span className="fs-3 me-3 text-secondary  mt-2"
-                            > Register Your
-                                self
+                            > Register Your Self
                             </span>
                         </div>
                     </OffcanvasHeader>
@@ -175,11 +187,11 @@ const Cart = (props) => {
 
                         <div style={{display: 'flex'}}>
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <Link to="/order/group/create"><h1 className='header-offCanvas fw-bolder mb-1'
-                                // onClick={() => SetModelOpen(true)}
-                                                               onClick={() => toggleCanvasStart()}
-                            >Make It a group
-                                Order.</h1></Link>
+                            <Link to="/order/group/create">
+                                <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
+                                    Make It a group Order.
+                                </h1>
+                            </Link>
                         </div>
                     </OffcanvasHeader>
 
@@ -197,13 +209,27 @@ const Cart = (props) => {
                                 <div className='col-md-12 '>
                                     {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
                                         return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
-                                            <ItemsInCart foodItems={meal} index={index}
-                                                         removeMeal={handleRemoveMeal}/>
+                                            <ItemsInCart foodItems={meal}
+                                                         index={index}
+                                                         mainSectionName={meal.mealName}
+                                                         menuName={meal.categoryName}
+                                                         removeMeal={handleRemove}/>
                                             <hr/>
                                         </div> : null
                                     })}
-                                    {cartItems && cartItems.wines && cartItems.wines.length > 0 &&
-                                        <div className="row">
+                                    {cartItems && cartItems.catering && cartItems.catering.map((item, index) => {
+                                        return !isObjEmpty(item) ? <div key={`ItemsInCart-${index}`}>
+                                            <ItemsInCart foodItems={item}
+                                                         index={index}
+                                                         mainSectionName={item.name}
+                                                         menuName={''}
+                                                         removeMeal={handleRemove}
+                                                         isCatering={true}
+                                            />
+                                            <hr/>
+                                        </div> : null
+                                    })}
+                                    {cartItems && cartItems.wines && cartItems.wines.length > 0 && <div className="row">
                                             <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
                                             <div className='col-md-2' style={{marginLeft: -15}}>
                                                 <h6 style={{
@@ -223,6 +249,7 @@ const Cart = (props) => {
                                             <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>
                                         </div> : null
                                     })}
+
                                 </div>
                             </div>
 

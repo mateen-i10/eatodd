@@ -2,11 +2,11 @@ import React from 'react'
 import {X} from "react-feather"
 import {Button} from "reactstrap"
 
-const ItemsInCart = ({foodItems, index, removeMeal}) => {
+const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, isCatering}) => {
 
     const {selectedProducts} = foodItems
-    const mealName = foodItems.mealName
-    const categoryName = foodItems.categoryName
+    const mealName = mainSectionName
+    const categoryName = menuName
     const totalPrice = foodItems.totalPrice
     const mainItems = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => !p.isWine)] : []
     const wines = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => p.isWine)] : []
@@ -15,7 +15,7 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
         <div>
             <div className='row'>
                 <div className='col-12'>
-                    <Button className='btn-icon btn-sm rounded-circle float-end' outline color='danger' onClick={() => removeMeal(index)}>
+                    <Button className='btn-icon btn-sm rounded-circle float-end' outline color='danger' onClick={() => removeMeal(index, isCatering)}>
                         <X size='12'/>
                     </Button>
                 </div>
@@ -30,25 +30,26 @@ const ItemsInCart = ({foodItems, index, removeMeal}) => {
                     }}>${totalPrice}</h6>
                 </div>
             </div>
-            <div className="row">
+            {categoryName && <div className="row">
                 <div className="col-md-9 ms-1" style={{fontSize: "1.3rem", fontWeight: 'bolder', color: 'rgb(129 190 65)'}}>
                     {categoryName}
                 </div>
-            </div>
+            </div> }
             {mainItems.map((item, id) => (
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice && item.selectedQuantity ? `${item.selectedQuantity} x $${item.price } = $${item.calculatedPrice}` : item.calculatedPrice ? `$${item.calculatedPrice}` : `-`}</div>
                     </div>
                 </div>
             ))}
-            <div className="row">
+
+            {wines && wines.length > 0 && <div className="row">
                 <div className="col-md-9 ms-1 mt-1" style={{fontSize: "1.3rem", fontWeight: 'bolder', color: 'rgb(129 190 65)'}}>
                     Wines
                 </div>
-            </div>
-            {wines.map((item, id) => (
+            </div>}
+            {wines && wines.map((item, id) => (
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
