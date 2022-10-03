@@ -316,8 +316,21 @@
     margin-bottom: 30px;
 }
 
+.loc1 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser1.jpg');
+    /*filter: grayscale(100%)*/
+}
+
+.loc2 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser2.jpg');
+}
+
+.loc3 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser3.jpg');
+}
+
 .large-order-card {
-    background-image: url(https://www.chipotle.com/content/dam/poc/order/images/large-order-promo/A_Catering-Tile_570x190@2x.jpg);
+    /*background-image: url();*/
     background-size: 100% 180px;
     /*min-height: 90%;*/
     padding: 19% 0 0 0;
