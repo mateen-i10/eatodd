@@ -31,6 +31,6 @@ export const isCustomer = () => {
 export const getHomeRouteForLoggedInUser = userRole => {
   if (userRole === Roles.superAdmin) return '/dashboard'
   if (userRole === Roles.customer) return '/home'
-  if (userRole === Roles.branchManager) return '/'
+  if (userRole === Roles.branchManager) return '/employeeDashboard'
   return '/'
 }
