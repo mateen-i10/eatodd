@@ -48,30 +48,10 @@ const RestaurantDetail = ({match}) => {
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
                                             <div className='col-5'>
-                                                <h5 className='mb-75'>Description:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{restaurant.description}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Address:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{restaurant.address}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
                                                 <h5 className='mb-75'>Phone Number:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{restaurant.address}</CardText>
+                                                <CardText>{restaurant.phoneNo}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -81,7 +61,7 @@ const RestaurantDetail = ({match}) => {
                                                 <h5 className='mb-75'>Latitude:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{restaurant.latitude}</CardText>
+                                                <CardText>{restaurant.address?.latitude}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -91,7 +71,7 @@ const RestaurantDetail = ({match}) => {
                                                 <h5 className='mb-75'>Longitude:</h5>
                                             </div>
                                             <div className='col-7'>
-                                                <CardText>{restaurant.longitude}</CardText>
+                                                <CardText>{restaurant.address?.longitude}</CardText>
                                             </div>
                                         </div>
                                     </Col>
@@ -109,9 +89,32 @@ const RestaurantDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
+                                    <Col xl={12}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-2'>
+                                                <h5 className='mb-75'>Address:</h5>
+                                            </div>
+                                            <div className='col-10'>
+                                                <CardText>{restaurant.address?.address1}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={12}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-2'>
+                                                <h5 className='mb-75'>Description</h5>
+                                            </div>
+                                            <div className='col-10'>
+                                                <CardText>{restaurant.description}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
                                 </Row>
                             </CardBody>
                         </Col>
+                    </Row>
+                    <Row>
+
                     </Row>
                     <hr />
                     <Row className='p-2'>
