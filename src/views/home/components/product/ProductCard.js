@@ -84,14 +84,14 @@ const ProductCard = ({
                         if (lmt === '1' && selectedItem.id === item.id) {
                             return <div style={{
                                 position: "absolute",
-                                top: "-0.8%",
-                                left: "2.6%"
-                            }}><CheckSign key={`${selectedItem.id}-${index}`}/></div>
+                                top: "17%",
+                                left: "6%"
+                            }}><CheckSign styles={{marginLeft: 10}} key={`${selectedItem.id}-${index}`}/></div>
                         } else if (selectedItem.id === item.id) {
                             return <div className="" style={{
                                 position: "absolute",
-                                top: "-0.8%",
-                                left: "2.6%"
+                                top: "17%",
+                                left: "6%"
                             }}><ExtraQty value={lmt} key={`${selectedItem.id}-${index}`}/></div>
                         }
                     } else if (selectedItem.optionType === ProductTypes.Numeric && selectedItem.id === item.id) {

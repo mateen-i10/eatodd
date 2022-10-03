@@ -22,14 +22,13 @@ export const LightQty = () => {
 export const ExtraQty = ({value}) => {
     return (
         <div
-            className='rounded-circle border-white ms-md-3 ms-xl-2 ms-lg-1 ms-sm-2 ms-1  m-0 text-white'
+            className='rounded-circle border-white text-white'
             style={{
                 position: 'absolute',
                 height: 60,
                 width: 60,
                 fontSize: 18,
                 fontWeight: 700,
-                top: 20,
                 backgroundColor: 'rgba(129, 190, 65, .9)'
 
             }}>

@@ -8,7 +8,7 @@ import {useParams} from "react-router-dom"
 import UILoader from "../../../@core/components/ui-loader"
 import {SectionItemType} from "../../../utility/enums/Types"
 import {addCateringItem, isObjEmpty} from "../../../utility/Utils"
-import {Button} from "reactstrap"
+import CateringMenuFooter from "../components/CateringMenuFooter"
 
 const COMenu = () => {
     const {id} = useParams()
@@ -65,10 +65,10 @@ const COMenu = () => {
             finalItems = selectedItems.filter(c => c.id !== item.id)
         } else if (item.sectionItemType === SectionItemType.Radio) {
             // add new item when type is radio
-            finalItems =  [...selectedItems.filter(c => c.sectionId !== item.sectionId), item]
+            finalItems = [...selectedItems.filter(c => c.sectionId !== item.sectionId), item]
         } else {
             // add new item when type is checkbox
-            finalItems =  [...selectedItems, item]
+            finalItems = [...selectedItems, item]
         }
         setSelectedItems([...finalItems])
     }
@@ -80,8 +80,8 @@ const COMenu = () => {
         if (selectedItems && selectedItems.length > 0) {
             finalItems = selectedItems.map(item => {
                 if (!isObjEmpty(item)) {
-                    const price =  item.price
-                    totalPrice =  totalPrice + price
+                    const price = item.price
+                    totalPrice = totalPrice + price
                     return {...item, calculatedPrice: price, price}
                 }
             })
@@ -91,7 +91,7 @@ const COMenu = () => {
             id: menuItem.id,
             name: menuItem.name,
             totalPrice,
-            selectedProducts : [...finalItems]
+            selectedProducts: [...finalItems]
         }
         addCateringItem(item)
         //history.push('/home')
@@ -105,33 +105,34 @@ const COMenu = () => {
     return (
         <div>
             <UILoader blocking={isLoading}>
-            <Header/>
-            <div className="container-sm ">
-                <TopShelf attachment={menuItem?.attachment}
-                          name={menuItem.name}
-                          description={menuItem.description}
-                />
-                <hr className="text-dark"/>
-            </div>
-            {sections.map(s => {
-                    return <div className="container-sm mt-5 mb-4 text-center">
-                    <h1>{s.name}</h1>
-                    <div className="row align-items-center justify-content-center my-1">
-                        {s.items.map((product) => (
-                            <div className="col-9 col-xl-5" key={product.id}>
-                                <CatMealItems
-                                    product={product}
-                                    handleSelect={handleSelect}
-                                    selectedItems={selectedItems}
-                                    attachment={product.attachment}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                <Header/>
+                <div className="container-sm mb-0">
+                    <TopShelf attachment={menuItem?.attachment}
+                              name={menuItem.name}
+                              description={menuItem.description}
+                    />
+                    <hr className="text-dark m-0"/>
                 </div>
-            })}
-                <Button onClick={addToCart}>Add To Cart</Button>
-            <Footer/>
+                {sections.map(s => {
+                    return <div className="container-sm mt-3 mb-4 text-center">
+                        <h1>{s.name}</h1>
+                        <div className="row align-items-center justify-content-center my-1">
+                            {s.items.map((product) => (
+                                <div className="col-9 col-xl-5" key={product.id}>
+                                    <CatMealItems
+                                        product={product}
+                                        handleSelect={handleSelect}
+                                        selectedItems={selectedItems}
+                                        attachment={product.attachment}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                })}
+                {/*<Button onClick={addToCart}>Add To Cart</Button>*/}
+                <CateringMenuFooter/>
+                <Footer/>
             </UILoader>
         </div>
     )
