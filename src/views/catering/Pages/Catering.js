@@ -6,6 +6,7 @@ import CateringDetailMenu from "../components/CateringDetailMenu"
 import {ArrowRight} from "react-feather"
 import {Button} from "reactstrap"
 import useAPI from "../../../utility/customHooks/useAPI"
+import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 
 const Catering = () => {
     const [elHovered, setElHovered] = useState({})
@@ -82,7 +83,7 @@ const Catering = () => {
 
             <div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Build for your loved one's</div>
 
-            <div className="container-sm mb-3">
+            {cateringMenu.length ? <div className="container-sm mb-3">
                 <div className="row mt-3 justify-content-center">
                     <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
                         <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
@@ -93,7 +94,7 @@ const Catering = () => {
                             }}
                         >
 
-                            {cateringMenu.length ? cateringMenu.map((item, i) => (
+                            {cateringMenu.map((item, i) => (
                                 <div key={i}
                                      className={`fs-3 fw-bolder ms-2 cursor-pointer mb-1  ${elHovered[i] ? "text-primary" : ""}  `}
                                      style={{lineHeight: "35px"}}
@@ -107,7 +108,7 @@ const Catering = () => {
                                         className={`text-start text-uppercase ${activeItem === item.id ? "text-primary" : ""}`}
                                         style={{fontSize: 15}}>{item.name}</div>
                                 </div>
-                            )) : null}
+                            ))}
                         </div>
                     </div>
                     <div className="col-md-9 col-12 ">
@@ -118,7 +119,7 @@ const Catering = () => {
                         />
                     </div>
                 </div>
-            </div>
+            </div> : <div className="m-5"><ComponentSpinner/></div>}
             <Footer/>
         </div>
     )
