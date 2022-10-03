@@ -4,10 +4,9 @@ import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcat
 
 const Wines = ({restaurantId, handleSelectOption, handleChangeQuantity, handleSelectProduct, selectedProducts }) => {
     const [wines, setWines] = useState([])
-    console.log('restaurantId', restaurantId)
 
     // hooks
-    const [isLoading, response] = useAPI(`product/getWineProducts?pageIndex=1&&pageSize=20`, 'get', {}, {}, true)
+    const [isLoading, response] = useAPI(`product/getWineProducts?refId=${restaurantId}pageIndex=1&&pageSize=20`, 'get', {}, {}, true)
     useEffect(() => {
         if (response && response.data && response.data.length > 0) {
             const {data} = response

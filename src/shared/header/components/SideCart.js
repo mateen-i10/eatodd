@@ -68,6 +68,8 @@ const Cart = (props) => {
     }
     const checkOut = () => {
         toggleCanvasStart()
+        const isCatering = cartItems && cartItems.catering && cartItems.catering.length > 0
+        console.log('isCatering', isCatering)
         if (!getUserData()) history.push('/login', {returnURL: '/checkout'})
         else history.push('/checkout')
     }
