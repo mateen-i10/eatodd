@@ -443,6 +443,11 @@ const Routes = [
         path: '/winePayment',
         component: lazy(() => import('../../views/wine/Pages/winePayment')),
         layout: 'BlankLayout'
+    },
+    {
+        path: '/employeeDashboard',
+        component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
+        layout: 'VerticalLayout'
     }
 
 ]
