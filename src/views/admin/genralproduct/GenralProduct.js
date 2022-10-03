@@ -205,6 +205,7 @@ const GenralProducts = (props) => {
         setModalTitle('Edit General Product')
         setModalLoading(true)
     }
+
     const deleteClick = (id, e) => {
         e.preventDefault()
         // show sweet alert here

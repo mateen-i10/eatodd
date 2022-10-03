@@ -11,40 +11,39 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
         }}
              style={!isChecked ? {
                  marginBottom: 25,
-                 maxHeight: 100,
-                 minHeight: 100,
+                 maxHeight: 98,
+                 minHeight: 98,
                  borderWidth: 1
              } : {
                  marginBottom: 25,
-                 maxHeight: 100,
-                 minHeight: 100,
+                 maxHeight: 98,
+                 minHeight: 98,
                  borderWidth: 1,
                  borderColor: "black"
              }}>
-            <div className="row g-0">
+            <div className="row ">
                 <div className=" col-9 ">
                     <div className="row g-0">
                         <div className=" col-4">
                             {isChecked &&
-                                <div className="  " style={{
-                                    position: 'absolute',
-                                    backgroundColor: 'transparent',
-                                    zIndex: 3
-                                }}><CheckSign/>
+                                <div className=" " style={{
+                                    position: "absolute",
+                                    top: "17%",
+                                    left: "4.6%"
+                                }}><CheckSign styles={{marginLeft: 0}}/>
                                 </div>}
                             <ProductImage
                                 attachment={attachment}
                                 classes={"img-fluid rounded-start"}
                                 styles={{
                                     width: "100%",
-                                    height: 100,
+                                    height: 98,
                                     backgroundColor: 'transparent',
-                                    objectFit: "unset",
                                     overflow: "hidden"
                                 }}/>
                         </div>
                         <div className="col-8 ">
-                            <div className="card-body " style={{
+                            <div className="card-body" style={{
                                 marginTop: -4
                             }}>
                                 <div

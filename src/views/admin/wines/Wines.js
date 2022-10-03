@@ -77,21 +77,24 @@ const Wines = (props) => {
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
 
+    const [schema] = useState({})
+
     const [commonFields] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name:'productIngredients', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Ingredient, isAsyncSelect: true, isMulti:true},
-        {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
+        {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
     ])
 
     const [edit, setEdit] = useState(false)
+    const [isSubmit, setSubmit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
@@ -121,7 +124,6 @@ const Wines = (props) => {
         ])
         setFormFeilds(0)
         setShowOption(false)
-
     }
 
     useEffect(() => {
@@ -154,10 +156,10 @@ const Wines = (props) => {
         setOptionType(newArray)
     }
 
-    // ** schema for validations
-    const schema = Joi.object({
-        //name: Joi.string().required().label("Name")
-    })
+    // // ** schema for validations
+    // const schema = Joi.object({
+    //     //name: Joi.string().required().label("Name")
+    // })
 
     // ** Function to handle filter
     const toggle = () => {
@@ -175,11 +177,11 @@ const Wines = (props) => {
         description:'',
         wholePrice: '',
         discount: '',
-        optionType: [],
+        // optionType: [],
         taxAmount: '',
         taxPercentage: '',
-        restaurant: [],
-        category: [],
+        // restaurant: [],
+        // category: [],
         isDrink: false,
         isWine: true
     })
@@ -226,20 +228,37 @@ const Wines = (props) => {
     }
 
     const handleSubmit = (event) => {
+        setSubmit(true)
         event.preventDefault()
 
         let finalData = {}
+        let finalSchema = {}
         if (formFeilds === 1 || formFeilds === 3) {
+
+            finalSchema = Joi.object({
+                name: Joi.string().required().label('Name'),
+                wholePrice: Joi.string().required().label("WholePrice"),
+                category: Joi.required().label('Category'),
+                restaurant: Joi.required().label("Restaurant"),
+                optionType: Joi.required().label("OptionType")
+            })
+
             const Ingredient = formState.productIngredients?.map(i => {
                 return {ingredientId: i.value}
             })
             finalData  = {...formState, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
             delete finalData.generalProductId
         } else if (formFeilds === 0) {
+
+            finalSchema = Joi.object({
+                generalProduct: Joi.required().label("general product"),
+                restaurant: Joi.required().label("Restaurant")
+            })
+
             finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
         }
         console.log(finalData, "lets see")
-        const isError = formModalRef.current.validate(formState)
+        const isError = formModalRef.current.validateWithSchema(formState, finalSchema)
         if (isError) return
 
         delete finalData.modifiedById
@@ -402,7 +421,9 @@ const Wines = (props) => {
                            formFeilds={formFeilds}
                            AddFromExistingData={AddFromExistingData}
                            categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
-                           optionType={formState.optionType?.value}/>
+                           optionType={formState.optionType?.value}
+                           isFormSubmit={isSubmit}
+                       />
                        }
             />
         </Fragment>

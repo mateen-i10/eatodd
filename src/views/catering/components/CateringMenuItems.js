@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
-import {Button, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap"
-import {ChevronDown} from "react-feather"
+import React from 'react'
+import {Button} from "reactstrap"
 import {Link} from "react-router-dom"
 import ProductImage from "../../home/components/product/ProductImage"
 
 const CateringMenuItems = (props) => {
     const {item} = props
-    const [value, setValue] = useState("People")
+    // const [value, setValue] = useState("10 People")
 
     console.log("limit", typeof item.limit)
 
@@ -41,22 +40,23 @@ const CateringMenuItems = (props) => {
                     }}>{item.detail}</p>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-around', marginTop: "-29px", marginBottom: 10}}>
-                    <h6 className="mt-1">${value === "10 People" ? item.price * 10 : value === "50 People" ? item.price * 50 : value === item.limit ? item.price * item.limit : `${item.price}/persons`}</h6>
-                    <UncontrolledDropdown>
-                        <DropdownToggle
-                            caret
-                            color="transparent"
-                            style={{border: "1px solid #81be41", color: '#81be41', fontWeight: 700}}
-                        >
-                            {value} <ChevronDown size={18}/>
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={() => setValue("10 People")}>10 People</DropdownItem>
-                            <DropdownItem onClick={() => setValue("50 People")}>50 People</DropdownItem>
-                            <DropdownItem
-                                onClick={() => setValue(`${item.limit} People`)}>{item.limit} People</DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
+                    <h6 className="mt-1">${`${item.price}/persons`}</h6>
+                    {/*<h6 className="mt-1">${value === "10 People" ? item.price * 10 : value === "50 People" ? item.price * 50 : value === item.limit ? item.price * item.limit : `${item.price}/persons`}</h6>*/}
+                    {/*<UncontrolledDropdown>*/}
+                    {/*    <DropdownToggle*/}
+                    {/*        caret*/}
+                    {/*        color="transparent"*/}
+                    {/*        style={{border: "1px solid #81be41", color: '#81be41', fontWeight: 700}}*/}
+                    {/*    >*/}
+                    {/*        {value} <ChevronDown size={18}/>*/}
+                    {/*    </DropdownToggle>*/}
+                    {/*    <DropdownMenu>*/}
+                    {/*        <DropdownItem onClick={() => setValue("10 People")}>10 People</DropdownItem>*/}
+                    {/*        <DropdownItem onClick={() => setValue("50 People")}>50 People</DropdownItem>*/}
+                    {/*        <DropdownItem*/}
+                    {/*            onClick={() => setValue(`${item.limit} People`)}>{item.limit} People</DropdownItem>*/}
+                    {/*    </DropdownMenu>*/}
+                    {/*</UncontrolledDropdown>*/}
                 </div>
                 <div className="text-center text-uppercase ">
                     <Link to={`/cateringMenuOrder/${item.id}`}>
