@@ -97,12 +97,6 @@ const Products = () => {
             minWidth: '50px'
         }
         /*{
-            name: 'Status',
-            selector: (row) => { return row.status === 1 ? "Paid" : row.status === 2 ? "Pending" : row.status === 3 ? "Cancelled" : row.status === 4 ? "Completed" : '' },
-            sortable: true,
-            minWidth: '50px'
-        }*/
-        /*{
             name: 'Actions',
             allowOverflow: true,
             cell: row => {
@@ -158,9 +152,9 @@ const Products = () => {
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>
-                                <Button color='primary' className='me-1 btn-sm' onClick={goPackagesPage}>
-                                    <ArrowLeftCircle size={20} />
-                                </Button>
+                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                </span>
                                 Products by Restaurant
                             </CardTitle>
                             {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}

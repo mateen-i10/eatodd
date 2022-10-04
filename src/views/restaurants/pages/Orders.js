@@ -151,9 +151,9 @@ const Orders = () => {
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>
-                                <Button color='primary' className='me-1 btn-sm' bssize='sm' onClick={goPackagesPage}>
-                                    <span><ArrowLeftCircle size={20} /></span>
-                                </Button>
+                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                </span>
                                    Orders by Restaurant
                             </CardTitle>
                         </div>

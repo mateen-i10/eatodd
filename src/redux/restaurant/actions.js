@@ -11,7 +11,7 @@ import {
     setIsRestaurantSuccess,
     setIsEdit,
     setOrdersByRestaurant,
-    setProductsByRestaurant
+    setProductsByRestaurant, setCustomersByRestaurant
 } from "./reducer"
 const url = 'restaurant'
 
@@ -129,7 +129,7 @@ export const loadCustomersByRestaurant = (pageIndex = 1, pageSize =  12, searchQ
             url: `${url}/CustomerByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
             data: {},
             method: 'get',
-            onSuccess: setProductsByRestaurant.type
+            onSuccess: setCustomersByRestaurant.type
         }))
     }
 }

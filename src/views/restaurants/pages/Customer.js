@@ -74,34 +74,22 @@ const Customers = () => {
     const columns = [
         {
             name: 'Name',
-            selector: (row) => row.name,
+            selector: (row) => `${row.applicationUser?.firstName} ${row.applicationUser?.lastName}`,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Whole Price',
-            selector: (row) => row.wholePrice,
+            name: 'Email',
+            selector: (row) => row.applicationUser?.email,
             sortable: true,
             minWidth: '50px'
         },
         {
-            name: 'Discount',
-            selector: (row) => row.discount,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Quantity',
-            selector: (row) => row.quantity,
+            name: 'User Name',
+            selector: (row) => row.applicationUser?.userName,
             sortable: true,
             minWidth: '50px'
         }
-        /*{
-            name: 'Status',
-            selector: (row) => { return row.status === 1 ? "Paid" : row.status === 2 ? "Pending" : row.status === 3 ? "Cancelled" : row.status === 4 ? "Completed" : '' },
-            sortable: true,
-            minWidth: '50px'
-        }*/
         /*{
             name: 'Actions',
             allowOverflow: true,
@@ -158,9 +146,9 @@ const Customers = () => {
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>
-                                <Button color='primary' className='me-1 btn-sm' onClick={goPackagesPage}>
-                                    <ArrowLeftCircle size={20} />
-                                </Button>
+                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                </span>
                                 Customers by Restaurant
                             </CardTitle>
                             {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
