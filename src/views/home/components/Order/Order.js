@@ -44,7 +44,7 @@ const Order = () => {
 
     }, [])
 
-    console.log("mein category", mainCategory)
+    // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -144,7 +144,8 @@ const Order = () => {
                                         benefits
                                         include vendor pricing on all offered wines!</p>
                                 </div>
-                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING
+                                </div>
                             </div>
                             <video autoPlay="autoplay" muted="muted" loop="loop"
                                    src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
@@ -211,8 +212,12 @@ const Order = () => {
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
                             <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">CATERING</h1>
+                                <div className="large-order-card loc1">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{
+                                            backgroundColor: 'rgba(0, 0, 0, 0.7)'
+
+                                        }}>CATERING</h1>
                                     <div className="details">
                                         <ul className="pleaser-list">
                                             <li>From 6 to 600 people</li>
@@ -225,15 +230,18 @@ const Order = () => {
                                     </div>
                                     <div className="type-ordering-primary">
                                         <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 ">Explore Catering
+                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                                history.push("/catering")
+                                            }}>Explore Catering
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">GROUP ORDER</h1>
+                                <div className="large-order-card loc2">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>GROUP ORDER</h1>
                                     <div className="details ">
                                         <ul className="pleaser-list">
                                             <li>Invite up to 20 people</li>
@@ -246,14 +254,18 @@ const Order = () => {
                                     </div>
                                     <div className="type-ordering-primary">
                                         <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 ">Start Order</div>
+                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                                history.push("/order/group/create")
+                                            }}>Start Order
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">OMG CHARCUTERIE BOARDS</h1>
+                                <div className="large-order-card loc3">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>OMG CHARCUTERIE BOARDS</h1>
                                     <div className="details ">
                                         <ul className="pleaser-list mb-1">
                                             <li>*Serves 10 people</li>
