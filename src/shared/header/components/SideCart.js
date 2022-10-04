@@ -23,7 +23,7 @@ import {
 } from "../../../utility/Utils"
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
-import {getUserData} from "../../../auth/utils"
+import {getUserData, isCustomer} from "../../../auth/utils"
 import {useSelector} from "react-redux"
 
 const Cart = (props) => {
@@ -68,9 +68,7 @@ const Cart = (props) => {
     }
     const checkOut = () => {
         toggleCanvasStart()
-        const isCatering = cartItems && cartItems.catering && cartItems.catering.length > 0
-        console.log('isCatering', isCatering)
-        if (!getUserData()) history.push('/login', {returnURL: '/checkout'})
+        if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
         else history.push('/checkout')
     }
 

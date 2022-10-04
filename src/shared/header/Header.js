@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "./Header.css"
 import logo from "../../assets/images/my-images/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import SideCart from "./components/SideCart"
 import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
@@ -11,6 +11,7 @@ import {Button} from "reactstrap"
 
 
 export default function Header() {
+    const history = useHistory()
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
@@ -37,6 +38,10 @@ export default function Header() {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
 
+    const onCateringClick = () => {
+        history.push('/gmap', {returnURL: 'catering', isCatering: true})
+    }
+
     if (width > breakpoint) {
         return (
             <div className="sticky-top">
@@ -51,7 +56,7 @@ export default function Header() {
                     <div className="head-sec-2">
                         <Link to="/"><h2>HOME</h2></Link>
                         <Link to="/"><h2>ORDER</h2></Link>
-                        <Link to="/catering"><h2>CATERING</h2></Link>
+                        <h2 onClick={onCateringClick} className='cursor-pointer'>CATERING</h2>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>

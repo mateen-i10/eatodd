@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductImage from "../../components/product/ProductImage"
 
-const TopShelf = ({attachment, name, description}) => {
+const TopShelf = ({attachment, name, description, price}) => {
     return (
         <>
             <div className="container-sm mb-0">
@@ -16,7 +16,10 @@ const TopShelf = ({attachment, name, description}) => {
                              style={{
                                  fontSize: "3.2rem",
                                  textTransform: 'uppercase'
-                             }}>{name}</div>
+                             }}>
+                            {name}
+                        </div>
+                        <p className="text-primary fw-bolder " style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>{`$${price}/person`}</p>
                         <p style={{fontSize: "1.3rem ", lineHeight: 1.4, color: "black"}}>{description}</p>
                     </div>
                 </div>

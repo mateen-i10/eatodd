@@ -12,13 +12,16 @@ const Sidebar = ({
                      onLoad,
                      nearPlaces,
                      isLoading,
-                     netStatus
+                     netStatus,
+                     isCatering,
+                     returnURl
                  }) => {
     const [active, setActive] = useState('1')
     const [activeColor, setActiveColor] = useState("1")
     const showActiveColor = (selectedButton) => {
         setActiveColor(selectedButton)
     }
+    console.log('rrr', returnURl)
     const toggle = (tab, gMapSelect) => {
         setActive(tab)
         setPickDelivery(gMapSelect)
@@ -39,7 +42,7 @@ const Sidebar = ({
                     overflowY: "auto"
                 }}
             >
-                <div className="row align-items-center  justify-content-evenly text-center fs-5 " style={{
+                {!isCatering && <div className="row align-items-center  justify-content-evenly text-center fs-5 " style={{
                     backgroundColor: "white",
                     height: "42px",
                     width: " 264px",
@@ -74,14 +77,18 @@ const Sidebar = ({
                             }}
                     >delivery
                     </Button>
-                </div>
+                </div>}
                 <div className="row align-items-center  justify-content-center mt-1" style={{
                     width: "100%"
                 }}>
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
                             <div style={{borderRadius: "6px"}}>
-                                <PickUpTab places={places} userLocation={userLocation} netStatus={netStatus}/>
+                                <PickUpTab
+                                    returnURl={returnURl}
+                                    places={places}
+                                    userLocation={userLocation}
+                                    netStatus={netStatus}/>
                             </div>
                         </TabPane>
                         <TabPane tabId='2'>

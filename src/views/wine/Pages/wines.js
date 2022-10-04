@@ -6,7 +6,7 @@ const Wines = ({restaurantId, handleSelectOption, handleChangeQuantity, handleSe
     const [wines, setWines] = useState([])
 
     // hooks
-    const [isLoading, response] = useAPI(`product/getWineProducts?refId=${restaurantId}pageIndex=1&&pageSize=20`, 'get', {}, {}, true)
+    const [isLoading, response] = useAPI(`product/getWineProducts?refId=${restaurantId}&&pageIndex=1&&pageSize=20`, 'get', {}, {}, true)
     useEffect(() => {
         if (response && response.data && response.data.length > 0) {
             const {data} = response

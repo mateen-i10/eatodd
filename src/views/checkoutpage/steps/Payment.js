@@ -13,6 +13,8 @@ import {toast} from "react-toastify"
 const Payment = (props) => {
     const {stepper} = props
     const restaurantId = localStorage.getItem('restaurantId')
+    const cartData = getCartData()
+    const isCatering = cartData && cartData.catering && cartData.catering.length > 0
 
     // states in redux store
     const shippingAddress = useSelector(s => s.cartItems.shippingAddress)
@@ -25,13 +27,13 @@ const Payment = (props) => {
 
     useEffect(() => {
         if (response && response.data) {
-            history.push('/home')
+            isCatering ? history.push('/catering') : history.push('/home')
             toast.success('Order placed successfully')
             clearCart()
         } else setPlaceOrder({url: '', order: {}})
     }, [response, isLoading])
-    const cartData = getCartData()
-    const submitOrder = () => {
+
+    const placeMealOrder = () => {
         const orderDetails = []
         if (cartData) {
             // adding meals to order
@@ -55,25 +57,70 @@ const Payment = (props) => {
             //adding wines to order
             if (cartData.wines && cartData.wines.length > 0) cartData.wines.forEach(p => {
                 orderDetails.push({
-                                productId : p.id,
-                                productQuantity: p.selectedQuantity,
-                                unitPrice : p.price,
-                                productOptionId: p.options && p.options.length > 0 ? p.options.find(p => p.isDefault)?.id : null
-                            })
+                    productId : p.id,
+                    productQuantity: p.selectedQuantity,
+                    unitPrice : p.price,
+                    productOptionId: p.options && p.options.length > 0 ? p.options.find(p => p.isDefault)?.id : null
+                })
             })
+
+            // final order object
+            const order = {
+                shippingAddress: shippingAddress ? shippingAddress.payload : null,
+                billingAddress: billingAddress ? billingAddress.payload : null,
+                ordersDetail: [...orderDetails],
+                totalPrice: cartTotalPrice(),
+                customerId: getUserData()?.customerId,
+                quantity: orderDetails.length,
+                restaurantId: Number(restaurantId)
+            }
+            setPlaceOrder({url: 'order', order: {...order}})
+        }
+    }
+    const placeCateringOrder = () => {
+        const cateringOrderMenuItems = []
+        let cateringOrderSectionItems = []
+        if (cartData) {
+            if (cartData.catering && cartData.catering.length > 0) {
+                cartData.catering.forEach(i => {
+                    cateringOrderMenuItems.push({
+                        quantity : i.quantity,
+                        unitPrice: i.perPersonPrice,
+                        cateringMenuItemId: i.id
+                    })
+                    cateringOrderSectionItems = i.selectedProducts && i.selectedProducts.length > 0 ? i.selectedProducts.map(p => {
+                            return {
+                                sectionItemId: p.id,
+                                cateringMenuItemId: i.id,
+                                unitPrice: p.price,
+                                quantity: 1
+                            }
+                        }) : []
+                })
+            }
+            const totalQuantity = cateringOrderSectionItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderMenuItems.map(i => i.quantity).reduce((pre, next) => pre + next)
+            // final order object
+            const order = {
+                shippingAddress: shippingAddress ? shippingAddress.payload : null,
+                billingAddress: billingAddress ? billingAddress.payload : null,
+                totalPrice: cartTotalPrice(),
+                customerId: getUserData()?.customerId,
+                quantity: totalQuantity,
+                cateringOrderSectionItems,
+                cateringOrderMenuItems,
+                restaurantId: Number(restaurantId)
+            }
+            console.log('order', order)
+            setPlaceOrder({url: 'cateringOrder', order: {...order}})
         }
 
-        const order = {
-            shippingAddress: shippingAddress ? shippingAddress.payload : null,
-            billingAddress: billingAddress ? billingAddress.payload : null,
-            ordersDetail: [...orderDetails],
-            totalPrice: cartTotalPrice(),
-            customerId: getUserData()?.customerId,
-            quantity: orderDetails.length,
-            restaurantId: Number(restaurantId)
-        }
-        setPlaceOrder({url: 'order', order: {...order}})
     }
+
+    const submitOrder = () => {
+        if (isCatering) placeCateringOrder()
+        else placeMealOrder()
+    }
+
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
             <UILoader blocking={isLoading}>

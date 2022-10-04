@@ -14,22 +14,23 @@ import {
     ModalFooter,
     UncontrolledDropdown
 } from "reactstrap"
-// import "./Plate.css"
-import {Link} from "react-router-dom"
 import {ChevronDown} from "react-feather"
 
-const Footer = () => {
-
-    // const {dispatchingItems, setMealName, mealName} = props
+const Footer = ({addToCartClick}) => {
 
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-    const [value, setValue] = useState("10 People")
+    const [value, setValue] = useState(10)
+    const [instructions, setInstructions] = useState('')
+    const onSaveClick = () => {
+        addToCartClick(value, instructions)
+        setBasicNameFoodModal(!basicNameFoodModal)
+    }
 
     const RenderMealNameModal = () => {
         return (
             <div className='basic-modal '>
                 <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
-                    <div className='name-meal-model text-center my-1'><h1>Give More Instructions</h1></div>
+                    <div className='name-meal-model text-center my-1'><h1>Details</h1></div>
                     <Form>
                         <ModalBody>
                             <FormGroup>
@@ -52,12 +53,23 @@ const Footer = () => {
                                                 {value} <ChevronDown size={18}/>
                                             </DropdownToggle>
                                             <DropdownMenu>
-                                                <DropdownItem onClick={() => setValue("10 People")}>10
-                                                    People</DropdownItem>
-                                                <DropdownItem onClick={() => setValue("50 People")}>50
-                                                    People</DropdownItem>
+                                                <DropdownItem onClick={() => setValue(10)}>
+                                                    10 People
+                                                </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(20)}>
+                                                    20 People
+                                                </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(30)}>
+                                                    30 People
+                                                </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(40)}>
+                                                    40 People
+                                                </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(50)}>
+                                                    50 People
+                                                </DropdownItem>
                                                 <DropdownItem
-                                                    onClick={() => setValue(`100 People`)}>100 People</DropdownItem>
+                                                    onClick={() => setValue(100)}>100 People</DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
                                     </div>
@@ -68,7 +80,7 @@ const Footer = () => {
                                     <Label className='form-label' for='instructions'>
                                         Instructions:
                                     </Label>
-                                    <Input id="instructions" type='textarea'/>
+                                    <Input value={instructions} onChange={e => setInstructions(e.target.value)} id="instructions" type='textarea'/>
                                 </div>
 
                             </FormGroup>
@@ -79,12 +91,11 @@ const Footer = () => {
                             }}>
                                 Cancel
                             </Button>
-                            <Link to="/"><Button color='primary'
-                                                 onClick={() => setBasicNameFoodModal(!basicNameFoodModal)}
-
-                            >
+                                <Button
+                                    color='primary'
+                                    onClick={onSaveClick}>
                                 Save
-                            </Button></Link>
+                            </Button>
                         </ModalFooter>
                     </Form>
                 </Modal>
@@ -106,22 +117,12 @@ const Footer = () => {
                 <div className="row mb-2">
                     <div className="col-lg-7 col-12 mt-1 mb-2 d-lg-block d-none" style={{}}>
                         <div className="text-center text-uppercase fw-bolder"
-                             style={{color: 'black', fontSize: "1.6rem"}}> Select Your
-                            Menu Items
+                             style={{color: 'black', fontSize: "1.6rem"}}> Select Your Menu Items
                         </div>
-                        {/*<div className="text-center fw-bolder" style={{color: 'black', fontSize: "1.3rem"}}>Select a*/}
-                        {/*    protein or vegie to get started*/}
-                        {/*</div>*/}
                     </div>
                     <div className="col-lg-5 col-12 mt-1 mb-1 mb-lg-0 " style={{textAlign: 'center'}}>
-                        {/*<div
-                            className={(!proteinVege.length || !Rice.length || !Beans.length) ? "selectAtLeastOne " : "hideNote"}>Please
-                            Select at least one item from<strong> Protein or
-                                vegetable,
-                                Beans and Rice</strong>
-                        </div>*/}
                         <button
-                            type="button" /*disabled={!proteinVege.length || !Rice.length || !Beans.length}*/
+                            type="button"
                             style={{
                                 width: '90%',
                                 height: 60,
