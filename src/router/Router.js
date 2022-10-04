@@ -70,7 +70,6 @@ const Router = () => {
    */
   const FinalRoute = props => {
     const route = props.route
-    console.log('rrrrr', route)
    /* let action, resource*/
 
     // ** Assign vars based on route meta
