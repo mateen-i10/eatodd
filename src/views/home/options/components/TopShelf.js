@@ -5,8 +5,8 @@ const TopShelf = ({attachment, name, description, price}) => {
     return (
         <>
             <div className="container-sm mb-0">
-                <div className="row mt-3 h-25">
-                    <div className="col-md-5 col-12 m-0">
+                <div className="row mt-3 ">
+                    <div className="col-md-5 col-12 ">
                         <ProductImage
                             attachment={attachment}
                             styles={{width: "85%", height: "77%", borderRadius: 20}}/>

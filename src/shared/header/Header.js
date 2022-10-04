@@ -43,8 +43,8 @@ export default function Header() {
                 <header className="header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>
-                        {isUserLoggedIn ? null : <div className="headlogin">
-                            <img className="usericon" src={usericon}/>
+                        {isUserLoggedIn() ? null : <div className="headlogin">
+                            <img className="usericon " src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>}
                     </div>
@@ -55,7 +55,7 @@ export default function Header() {
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                        {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link> }
+                        {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
                     </div>
                     {isUserLoggedIn() && <ul className="user-login list-unstyled">
                         <UserDropdown/>
@@ -111,11 +111,11 @@ export default function Header() {
                             <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>
                             <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                            {isUserLoggedIn ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
+                            {isUserLoggedIn() ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                         </div>
                     </div>
-                    {isUserLoggedIn ? <div className="">
-                        <ul className=" mx-auto mt-2 h-25 user-login list-unstyled">
+                    {isUserLoggedIn() ? <div className="mt-3 mb-2" style={{marginLeft: "72%"}}>
+                        <ul className=" ">
                             <UserDropdown/>
                         </ul>
                     </div> : <div className="nav-sec-2 text-uppercase">

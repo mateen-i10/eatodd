@@ -36,7 +36,8 @@ const MenuItemsCatering = (props) => {
         <Fragment>
             <Row className="align-items-center ">
                 {cateringItems.length ? cateringItems.map(item => (
-                    <div className="col-lg-3 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id} item={item}/>
+                    <div key={item.id} className="col-lg-3 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id}
+                                                                                                      item={item}/>
                     </div>
                 )) : <UILoader/>}
             </Row>
