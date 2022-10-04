@@ -27,20 +27,16 @@ import {
     Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
-import Swal from "sweetalert2"
-import Joi from "joi-browser"
 import UILoader from "../../../@core/components/ui-loader"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
-import {loadOrdersByRestaurant} from "../../../redux/restaurant/actions"
-import StatsCard from "../../../ui-elements/Cards/StatsCard"
+import {loadProductsByRestaurant} from "../../../redux/restaurant/actions"
 import {useHistory, useLocation} from "react-router-dom"
 
 
-const Orders = () => {
-    const OrdersByRestaurantList = useSelector(state => state.restaurant.orderList)
+const Products = () => {
+    const productsByRestaurantList = useSelector(state => state.restaurant.productList)
     const miscData = useSelector(state => state.restaurant.miscData)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -50,48 +46,62 @@ const Orders = () => {
     //for restaurant id
     const {state} = useLocation()
 
+    const history = useHistory()
+
     useEffect(() => {
-        dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, state.id))
+        dispatch(loadProductsByRestaurant(currentPage, pageSize, searchValue, state.id))
     }, [])
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadOrdersByRestaurant(currentPage + 1, pageSize, value, state.id))
+            dispatch(loadProductsByRestaurant(currentPage + 1, pageSize, value, state.id))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadOrdersByRestaurant(page.selected + 1, pageSize, searchValue, state.id))
+        dispatch(loadProductsByRestaurant(page.selected + 1, pageSize, searchValue, state.id))
         setCurrentPage(page.selected + 1)
     }
-
     const goPackagesPage = () => {
         history.push('/restaurant')
     }
 
+
     const columns = [
+        {
+            name: 'Name',
+            selector: (row) => row.name,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Whole Price',
+            selector: (row) => row.wholePrice,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Discount',
+            selector: (row) => row.discount,
+            sortable: true,
+            minWidth: '50px'
+        },
         {
             name: 'Quantity',
             selector: (row) => row.quantity,
             sortable: true,
             minWidth: '50px'
-        },
-        {
-            name: 'Total Price',
-            selector: (row) => row.totalPrice,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
+        }
+        /*{
             name: 'Status',
             selector: (row) => { return row.status === 1 ? "Paid" : row.status === 2 ? "Pending" : row.status === 3 ? "Cancelled" : row.status === 4 ? "Completed" : '' },
             sortable: true,
             minWidth: '50px'
-        }
+        }*/
         /*{
             name: 'Actions',
             allowOverflow: true,
@@ -134,28 +144,26 @@ const Orders = () => {
     }
 
     const dataToRender = () => {
-        if (OrdersByRestaurantList.length > 0) {
-            return OrdersByRestaurantList
+        if (productsByRestaurantList.length > 0) {
+            return productsByRestaurantList
         }  else {
-            return OrdersByRestaurantList.slice(0, pageSize)
+            return productsByRestaurantList.slice(0, pageSize)
         }
     }
 
     return (
         <Fragment>
             <UILoader>
-                <Col xs='12'>
-                    <StatsCard cols={{xl: '2', sm: '6'}}/>
-                </Col>
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>
-                                <Button color='primary' className='me-1 btn-sm' bssize='sm' onClick={goPackagesPage}>
-                                    <span><ArrowLeftCircle size={20} /></span>
+                                <Button color='primary' className='me-1 btn-sm' onClick={goPackagesPage}>
+                                    <ArrowLeftCircle size={20} />
                                 </Button>
-                                   Orders by Restaurant
+                                Products by Restaurant
                             </CardTitle>
+                            {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                         </div>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
@@ -187,4 +195,4 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default Products

@@ -226,7 +226,7 @@ const GenralProducts = (props) => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/genralProductsDetail/${id}`)
+        props.history.push(`/generalProductsDetail/${id}`)
     }
 
     const handleSubmit = (event) => {

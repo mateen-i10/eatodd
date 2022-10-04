@@ -6,7 +6,12 @@ import {
     setRestaurant,
     editRestaurant,
     setDetailLoading,
-    setRequestCompleted, setIsRestaurantError, setIsRestaurantSuccess, setIsEdit
+    setRequestCompleted,
+    setIsRestaurantError,
+    setIsRestaurantSuccess,
+    setIsEdit,
+    setOrdersByRestaurant,
+    setProductsByRestaurant
 } from "./reducer"
 const url = 'restaurant'
 
@@ -23,7 +28,6 @@ export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = nul
         }))
     }
 }
-
 export const getRestaurant = (id, isEdit = false) => {
     console.log("dataGet", isEdit)
     return async dispatch => {
@@ -88,5 +92,44 @@ export const updateRestaurant = (data) => {
             isSuccess: setIsRestaurantSuccess.type
         }))
         dispatch(setIsEdit(false))
+    }
+}
+
+// ** Get All Orders by Restaurants Data
+export const loadOrdersByRestaurant = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/OrderByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setOrdersByRestaurant.type
+        }))
+    }
+}
+
+// ** Get All Products by Restaurants Data
+export const loadProductsByRestaurant = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/ProductByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setProductsByRestaurant.type
+        }))
+    }
+}
+
+// ** Get All Customers by Restaurants Data
+export const loadCustomersByRestaurant = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/CustomerByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setProductsByRestaurant.type
+        }))
     }
 }
