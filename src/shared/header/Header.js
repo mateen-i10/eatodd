@@ -8,6 +8,7 @@ import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {useSelector} from "react-redux"
 import {Button} from "reactstrap"
+import {isUserLoggedIn} from "../../auth/utils"
 
 
 export default function Header() {
@@ -15,7 +16,6 @@ export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
-    const [isUserLoggedIn, setUserLoggedIn] = useState(false)
 
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
@@ -29,11 +29,6 @@ export default function Header() {
         }
     }, [])
     //** ComponentDidMount
-    useEffect(() => {
-        if (isUserLoggedIn !== null) {
-            setUserLoggedIn(true)
-        }
-    }, [isUserLoggedIn])
     useEffect(() => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
@@ -60,11 +55,11 @@ export default function Header() {
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                        {isUserLoggedIn ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
+                        {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link> }
                     </div>
-                    {isUserLoggedIn ? <ul className="user-login list-unstyled">
+                    {isUserLoggedIn() && <ul className="user-login list-unstyled">
                         <UserDropdown/>
-                    </ul> : null}
+                    </ul>}
                     <div className="head-3 align-items-center cursor-pointer">
                         <div className=" delivery-addr-bar">
                             <div className="img-separator">
