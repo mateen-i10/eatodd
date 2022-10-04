@@ -15,14 +15,14 @@ const Homepage = () => {
                 <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-sm ">
                         <div className="row d-flex align-items-center justify-content-center h-75 ">
-                            <div className="col-md-5 col-lg-5 ">
+                            <div className="col-md-2 col-lg-2 ">
                                 <div className="about-3-img text-center mb-40 ">
                                     <img className="img-fluid" style={{width: "100%", height: "100%"}}
                                          src={require('../../../assets/images/my-images/wine1.jpg').default}
                                          alt="about-image"/>
                                 </div>
                             </div>
-                            <div className="col-md-7 col-lg-6  text-start">
+                            <div className="col-md-8 col-lg-7  text-start">
                                 <div className="about-3-txt mb-40">
                                     <p className="p-md fs-5 fw-bold " style={{color: "grey", lineHeight: "25px"}}>The
                                         OMG Wine Club was created to make you say OMG at your savings! We are the 1st

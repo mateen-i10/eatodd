@@ -40,8 +40,8 @@
     color: #81be41;
     user-select: none;
     cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
     border: 1px solid #81be41;
 }
 
@@ -316,24 +316,38 @@
     margin-bottom: 30px;
 }
 
+.loc1 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser1.jpg');
+    /*filter: grayscale(100%)*/
+}
+
+.loc2 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser2.jpg');
+}
+
+.loc3 {
+    background-image: url('../../../../assets/images/images/home-crowd-pleaser3.jpg');
+}
+
 .large-order-card {
-    background-image: url(https://www.chipotle.com/content/dam/poc/order/images/large-order-promo/A_Catering-Tile_570x190@2x.jpg);
     background-size: 100% 180px;
-    /*min-height: 90%;*/
     padding: 19% 0 0 0;
-    /*max-width: 96%;*/
     background-repeat: no-repeat;
     box-shadow: 0 0 14px 2px rgb(0 0 0 / 20%);
     background-color: rgb(255 255 255);
     margin-bottom: 8%;
-    /*font-size: 1rem;*/
+}
+
+.card-crowd {
+    min-height: 400px;
+    max-height: 400px;
 }
 
 .pleaser-card-title {
     color: rgb(255 255 255);
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 2.1rem;
+    font-size: 2rem;
     line-height: 1em;
 
 }

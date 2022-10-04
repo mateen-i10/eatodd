@@ -6,7 +6,7 @@ import {locationAdded} from "../../../redux/restaurantLocation/restaurantLocatio
 import {useHistory, useLocation} from "react-router-dom"
 import {userLocationAdded} from "../../../redux/userLocation/userLocation"
 
-const NearByPlaces = ({places, isLoading, userLocation}) => {
+const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const {state} = useLocation()
@@ -32,7 +32,7 @@ const NearByPlaces = ({places, isLoading, userLocation}) => {
                                 </div>
                                 <div onClick={() => {
                                     localStorage.setItem('restaurantId', place.id)
-                                    history.push('/OmgPlate', categoryId ? { categoryId, restaurantId: place.id } : null)
+                                    returnURl ? history.push(`/${returnURl}`) : history.push('/OmgPlate', categoryId ? { categoryId, restaurantId: place.id } : null)
                                 }}>
                                     <Button className='text-uppercase mt-1' color='primary' outline onClick={() => {
                                                                   dispatch(locationAdded(place))

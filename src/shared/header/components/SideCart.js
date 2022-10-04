@@ -23,7 +23,7 @@ import {
 } from "../../../utility/Utils"
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
-import {getUserData} from "../../../auth/utils"
+import {getUserData, isCustomer} from "../../../auth/utils"
 import {useSelector} from "react-redux"
 
 const Cart = (props) => {
@@ -68,7 +68,7 @@ const Cart = (props) => {
     }
     const checkOut = () => {
         toggleCanvasStart()
-        if (!getUserData()) history.push('/login', {returnURL: '/checkout'})
+        if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
         else history.push('/checkout')
     }
 
@@ -170,10 +170,10 @@ const Cart = (props) => {
             </div> : <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
-                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 52}}>
+                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 54}}>
                         <div className="img-separator">
                                 <span><img src={require("../../../assets/images/logo/logo.png").default}
-                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 7}}/> </span>
+                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 2}}/> </span>
                         </div>
                         <div className="delivery-text">
                             <div className="deliver-to-1">Deliver to
@@ -230,20 +230,20 @@ const Cart = (props) => {
                                         </div> : null
                                     })}
                                     {cartItems && cartItems.wines && cartItems.wines.length > 0 && <div className="row">
-                                            <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
-                                            <div className='col-md-2' style={{marginLeft: -15}}>
-                                                <h6 style={{
-                                                    fontSize: 20,
-                                                    marginLeft: -15,
-                                                    fontWeight: 'bolder'
-                                                }}>${cartItems.wines.map(p => {
-                                                    return p.selectedQuantity * p.price
-                                                }).reduce((final, val) => {
-                                                    return final + val
-                                                })}
-                                                </h6>
-                                            </div>
-                                        </div>}
+                                        <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
+                                        <div className='col-md-2' style={{marginLeft: -15}}>
+                                            <h6 style={{
+                                                fontSize: 20,
+                                                marginLeft: -15,
+                                                fontWeight: 'bolder'
+                                            }}>${cartItems.wines.map(p => {
+                                                return p.selectedQuantity * p.price
+                                            }).reduce((final, val) => {
+                                                return final + val
+                                            })}
+                                            </h6>
+                                        </div>
+                                    </div>}
                                     {cartItems && cartItems.wines && cartItems.wines.map((wine, index) => {
                                         return !isObjEmpty(wine) ? <div key={`ItemsInCart-${index}`}>
                                             <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>

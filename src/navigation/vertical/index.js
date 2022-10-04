@@ -66,10 +66,10 @@ export default [
         navLink: '/ingredients'
     },
     {
-        id: 'Genral Product',
-        title: 'Genral Product',
+        id: 'General Product',
+        title: 'General Product',
         icon: <Package size={20}/>,
-        navLink: '/genralProducts'
+        navLink: '/generalProducts'
     },
     {
                id: 'Product',
@@ -262,5 +262,13 @@ export default [
                 navLink: '/cateringCustomers'
             }
         ]
+    }
+]
+export const branchManagerMenu = [
+    {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        icon: <Home size={20}/>,
+        navLink: '/employeeDashboard'
     }
 ]

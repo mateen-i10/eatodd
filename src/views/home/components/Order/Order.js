@@ -7,9 +7,10 @@ import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
-import {useHistory} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
+import {isUserLoggedIn} from "../../../../auth/utils"
 
 const Order = () => {
     //get redux state
@@ -44,26 +45,30 @@ const Order = () => {
 
     }, [])
 
-    console.log("mein category", mainCategory)
+    // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
                 <div className="container-sm">
                     <div className="row align-items-center justify-content-center pt-1 pb-1">
                         <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
-                            <img className="unlock-img d-md-inline-flex d-none me-2" src={icon}
+                            <img className="unlock-img d-lg-inline-flex d-none me-2" src={icon}
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
                             <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
+                        {isUserLoggedIn() ? null : <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
-                                    <div>Create an Account</div>
+                                    <Link to='/signup'>
+                                        <div>Create an Account</div>
+                                    </Link>
                                 </div>
-                                <div className="unlock-or">OR</div>
-                                <div className="sign-in fs-5">Sign In</div>
+                                <div className="fw-bolder text-black m-1 text-uppercase ">OR</div>
+                                <Link to='/login'>
+                                    <div className="fw-bolder text-primary text-uppercase fs-4 ">Sign In</div>
+                                </Link>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
@@ -77,9 +82,9 @@ const Order = () => {
                                     <div className="menu-item-1" onClick={() => {
                                         history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
                                     }}>
-                                        <div className="thumbnail">
+                                        <div className="thumbnail ">
                                             <ProductImage attachment={item.attachment}
-                                                          styles={{width: "200px", height: "180px"}}/>
+                                                          styles={{width: "200px", height: "180px", margin: "auto"}}/>
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
@@ -144,7 +149,8 @@ const Order = () => {
                                         benefits
                                         include vendor pricing on all offered wines!</p>
                                 </div>
-                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING
+                                </div>
                             </div>
                             <video autoPlay="autoplay" muted="muted" loop="loop"
                                    src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
@@ -210,11 +216,17 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">CATERING</h1>
+                            <div className="col-xxl-4 col-md-4 col-9 ">
+                                <div className="large-order-card loc1">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{
+                                            backgroundColor: 'rgba(0, 0, 0, 0.7)'
+
+                                        }}>CATERING</h1>
                                     <div className="details">
-                                        <ul className="pleaser-list">
+                                        <ul className="pleaser-list"
+                                            // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
+                                        >
                                             <li>From 6 to 600 people</li>
                                             <li>Starting at $15.00 / person</li>
                                             <li>Build Your Own</li>
@@ -225,16 +237,21 @@ const Order = () => {
                                     </div>
                                     <div className="type-ordering-primary">
                                         <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 ">Explore Catering
+                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                                history.push("/catering")
+                                            }}>Explore Catering
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">GROUP ORDER</h1>
-                                    <div className="details ">
+                            <div className="col-xxl-4 col-md-4 col-9 ">
+                                <div className="large-order-card loc2">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>GROUP ORDER</h1>
+                                    <div className="details"
+                                        // style={{minHeight: 170, maxHeight: 170, overflow: "hidden"}}
+                                    >
                                         <ul className="pleaser-list">
                                             <li>Invite up to 20 people</li>
                                             <li>Normal menu pricing</li>
@@ -246,22 +263,26 @@ const Order = () => {
                                     </div>
                                     <div className="type-ordering-primary">
                                         <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 ">Start Order</div>
+                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                                history.push("/order/group/create")
+                                            }}>Start Order
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-4">
-                                <div className="large-order-card">
-                                    <h1 className="pleaser-card-title text-center">OMG CHARCUTERIE BOARDS</h1>
-                                    <div className="details ">
-                                        <ul className="pleaser-list mb-1">
+                            <div className="col-xxl-4 col-md-4 col-9  ">
+                                <div className="large-order-card loc3">
+                                    <h1 className="pleaser-card-title text-center"
+                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>OMG CHARCUTERIE BOARDS</h1>
+                                    <div className="details "
+                                        // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
+                                    >
+                                        <ul className="pleaser-list mt-xl-2 ">
                                             <li>*Serves 10 people</li>
                                             <li>Cheese and Charcuterie Platter - $100</li>
                                             <li>Fruit Platter - $90</li>
                                             <li>Crudites Platter - $90</li>
-                                            {/*<li>Organizer pays</li>*/}
-                                            {/*<li><b>Order and eat today</b></li>*/}
                                         </ul>
                                     </div>
                                     <div className="type-ordering-primary">

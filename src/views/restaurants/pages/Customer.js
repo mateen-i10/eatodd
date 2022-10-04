@@ -1,135 +1,186 @@
+// ** React Imports
 import React, {Fragment, useEffect, useState} from 'react'
-import {getCustomerData} from "../../../tempData/fakeData"
-import {Card, CardHeader, CardTitle, Col, Row} from "reactstrap"
-import PageItemsInput from "../components/tables/PageItemsInput"
-import SearchBox from "../components/tables/SearchBox"
-import PaginatedDataTable from "../components/tables/PaginatedDataTable"
 
-const Customer = () => {
-    const [itemsPerPage, setItemsPerPage] = useState(7)
+// ** Third Party Components
+import ReactPaginate from 'react-paginate'
+import DataTable from 'react-data-table-component'
+import {
+    ArrowLeftCircle,
+    Book,
+    BookOpen,
+    ChevronDown,
+    Codesandbox,
+    DollarSign,
+    Edit,
+    FileText,
+    MoreVertical,
+    Trash,
+    UserPlus
+} from 'react-feather'
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    Button,
+    Input,
+    Row,
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap'
+import {useDispatch, useSelector} from "react-redux"
+import UILoader from "../../../@core/components/ui-loader"
+import '@styles/react/libs/flatpickr/flatpickr.scss'
+import {useHistory, useLocation} from "react-router-dom"
+import {loadCustomersByRestaurant} from "../../../redux/restaurant/actions"
+
+
+const Customers = () => {
+    const customersByRestaurantList = useSelector(state => state.restaurant.customerList)
+    const miscData = useSelector(state => state.restaurant.miscData)
+    const dispatch = useDispatch()
+
+    // ** refs
+    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const [filteredData, setFilteredData] = useState([])
-    const [pageCount, setPageCount] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
-    const customerData = getCustomerData()
-    const [getPageData, setPageData] = useState(customerData)
 
-    const handlePerPage = e => {
-        return (setItemsPerPage(parseInt(e.target.value)))
-    }
-    const handlePagination = e => {
-        return (setCurrentPage(e.selected))
-    }
-    // ** Function to handle filter
-    const handleFilter = e => {
-        const value = e.target.value
-        let updatedData = []
-        setSearchValue(value)
-        if (value.length) {
-            updatedData = customerData.filter(item => {
-                const startsWith =
-                    item.name.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.email.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.address.toLowerCase().startsWith(value.toLowerCase()) ||
-                    item.city.toLowerCase().startsWith(value.toLowerCase())
+    //for restaurant id
+    const {state} = useLocation()
 
-                const includes =
-                    item.name.toLowerCase().includes(value.toLowerCase()) ||
-                    item.email.toLowerCase().includes(value.toLowerCase()) ||
-                    item.address.toLowerCase().includes(value.toLowerCase()) ||
-                    item.city.toLowerCase().includes(value.toLowerCase())
-                if (startsWith) {
-                    return startsWith
-                } else if (!startsWith && includes) {
-                    return includes
-                } else return null
-            })
-            setFilteredData(updatedData)
-            setSearchValue(value)
-        }
-    }
+    const history = useHistory()
+
     useEffect(() => {
-        setPageData(searchValue.length > 0 ? filteredData : customerData)
-        setPageCount(searchValue.length > 0 ? Math.ceil(filteredData.length / itemsPerPage) : Math.ceil(getPageData.length / itemsPerPage))
-    }, [itemsPerPage, searchValue])
+        dispatch(loadCustomersByRestaurant(currentPage, pageSize, searchValue, state.id))
+    }, [])
 
-    // ** Table for customer page
-    const customerColumns = [
-        {
-            sortable: true,
-            name: 'Name',
-            minWidth: '225px',
-            selector: row => row.name
-        },
-        {
-            sortable: true,
-            name: 'Email',
-            minWidth: '250px',
-            selector: row => row.email
-        },
-        {
-            sortable: true,
-            name: 'Phone',
-            minWidth: '250px',
-            selector: row => row.phone
-        },
-        {
-            sortable: true,
-            name: 'Has Register',
-            minWidth: '150px',
-            selector: row => row.has_register
-        },
-        {
-            sortable: true,
-            name: 'DOB',
-            minWidth: '150px',
-            selector: row => row.dob
-        },
-        {
-            sortable: true,
-            name: 'Address',
-            minWidth: '150px',
-            selector: row => row.address
-        },
-        {
-            sortable: true,
-            name: 'City',
-            minWidth: '150px',
-            selector: row => row.city
-        },
-        {
-            sortable: true,
-            name: 'State',
-            minWidth: '150px',
-            selector: row => row.state
+    const handleFilter = e => {
+        console.log('e.keyCode', e.keyCode)
+        const value = e.target.value
+        if (e.keyCode === 13) {
+            dispatch(loadCustomersByRestaurant(currentPage + 1, pageSize, value, state.id))
         }
+        setSearchValue(value)
+    }
+
+    // ** Function to handle Pagination
+    const handlePagination = page => {
+        dispatch(loadCustomersByRestaurant(page.selected + 1, pageSize, searchValue, state.id))
+        setCurrentPage(page.selected + 1)
+    }
+
+    const goPackagesPage = () => {
+        history.push('/restaurant')
+    }
+
+    const columns = [
+        {
+            name: 'Name',
+            selector: (row) => `${row.applicationUser?.firstName} ${row.applicationUser?.lastName}`,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Email',
+            selector: (row) => row.applicationUser?.email,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'User Name',
+            selector: (row) => row.applicationUser?.userName,
+            sortable: true,
+            minWidth: '50px'
+        }
+        /*{
+            name: 'Actions',
+            allowOverflow: true,
+            cell: row => {
+                return (
+                    <div className='d-flex'>
+                        <span className='cursor-pointer mx-1' onClick={e => detailOptClick(row.id, e)}><FileText size={15} /></span>
+                    </div>
+                )
+            }
+        }*/
     ]
+
+    // ** Custom Pagination
+    const CustomPagination = () => {
+        const count = miscData?.totalPages ?? 0
+
+        return <ReactPaginate
+            previousLabel={''}
+            nextLabel={''}
+            breakLabel='...'
+            pageCount={count || 1}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            activeClassName='active'
+            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+            onPageChange={page => handlePagination(page)}
+            pageClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            nextClassName={'page-item next'}
+            previousClassName={'page-item prev'}
+            previousLinkClassName={'page-link'}
+            pageLinkClassName={'page-link'}
+            breakClassName='page-item'
+            breakLinkClassName='page-link'
+            containerClassName={
+                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            }
+        />
+    }
+
+    const dataToRender = () => {
+        if (customersByRestaurantList.length > 0) {
+            return customersByRestaurantList
+        }  else {
+            return customersByRestaurantList.slice(0, pageSize)
+        }
+    }
+
     return (
         <Fragment>
-            <Card>
-                <CardHeader className="border-bottom">
-                    <CardTitle tag="h4">Customers</CardTitle>
-                </CardHeader>
-                <Row className="mx-0 mt-1 mb-50">
-                    <Col sm="6">
-                        <PageItemsInput itemsPerPage={itemsPerPage} onPageChange={handlePerPage}/>
-                    </Col>
-                    <Col
-                        className="d-flex align-items-center justify-content-sm-end mt-sm-0 "
-                        sm="6">
-                        <SearchBox searchValue={searchValue} handleFilter={handleFilter}/>
-                    </Col>
-                </Row>
-                <PaginatedDataTable
-                    data={getPageData}
-                    itemsPerPage={itemsPerPage}
-                    handlePageClick={handlePagination}
-                    columns={customerColumns}
-                    currentPage={currentPage}
-                    pageCount={pageCount}/>
-            </Card>
+            <UILoader>
+                <Card>
+                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <div>
+                            <CardTitle tag='h4'>
+                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                </span>
+                                Customers by Restaurant
+                            </CardTitle>
+                            {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
+                        </div>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                type='text'
+                                placeholder='Search'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10} />}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
+            </UILoader>
         </Fragment>
     )
 }
 
-export default Customer
+export default Customers

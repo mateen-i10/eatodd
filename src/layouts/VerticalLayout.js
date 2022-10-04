@@ -3,7 +3,8 @@
 import Layout from '@layouts/VerticalLayout'
 
 // ** Catering Items Array
-import navigation from '@src/navigation/vertical'
+import navigation, {branchManagerMenu} from '@src/navigation/vertical'
+import {isAdmin, isBranchManager} from "../auth/utils"
 
 const VerticalLayout = props => {
     // const [menuData, setMenuData] = useState([])
@@ -13,8 +14,9 @@ const VerticalLayout = props => {
     //   axios.get(URL).then(response => setMenuData(response.data))
     // }, [])
 
+    const finalNavigation = isAdmin() ? navigation : isBranchManager() ? branchManagerMenu : []
     return (
-        <Layout menuData={navigation} {...props}>
+        <Layout menuData={finalNavigation} {...props}>
             {props.children}
         </Layout>
     )

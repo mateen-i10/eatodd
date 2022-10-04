@@ -4,7 +4,7 @@ import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
 import CatMealItems from "../components/CatMealItems"
 import useAPI from "../../../utility/customHooks/useAPI"
-import {useParams} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom"
 import UILoader from "../../../@core/components/ui-loader"
 import {SectionItemType} from "../../../utility/enums/Types"
 import {addCateringItem, isObjEmpty} from "../../../utility/Utils"
@@ -12,6 +12,7 @@ import CateringMenuFooter from "../components/CateringMenuFooter"
 
 const COMenu = () => {
     const {id} = useParams()
+    const history = useHistory()
 
     // local states
     const [menuItem, setMenuItem] = useState({})
@@ -26,6 +27,7 @@ const COMenu = () => {
             setMenuItem({
                 id: data.id,
                 name: data.name,
+                price: data.price,
                 description: data.description,
                 attachment: data.attachment
             })
@@ -57,7 +59,6 @@ const COMenu = () => {
 
     // functions
     const handleSelect = (item) => {
-        console.log('iii', item)
         let finalItems = []
 
         // remove item case
@@ -72,10 +73,11 @@ const COMenu = () => {
         }
         setSelectedItems([...finalItems])
     }
-    const addToCart = () => {
+    const addToCart = (quantity, instructions) => {
         // calculating meal total price
         let finalItems = []
         let totalPrice = 0
+        console.log('ins', instructions)
 
         if (selectedItems && selectedItems.length > 0) {
             finalItems = selectedItems.map(item => {
@@ -86,20 +88,21 @@ const COMenu = () => {
                 }
             })
         }
-
+         totalPrice = totalPrice + (menuItem.price * quantity)
         const item = {
             id: menuItem.id,
             name: menuItem.name,
             totalPrice,
+            perPersonPrice : menuItem.price,
+            quantity,
             selectedProducts: [...finalItems]
         }
         addCateringItem(item)
-        //history.push('/home')
+        history.push('/catering')
     }
 
     console.log('responses', response)
     console.log('sec', sections)
-    console.log('addToCart', addToCart)
 
 
     return (
@@ -110,6 +113,7 @@ const COMenu = () => {
                     <TopShelf attachment={menuItem?.attachment}
                               name={menuItem.name}
                               description={menuItem.description}
+                              price={menuItem.price}
                     />
                     <hr className="text-dark m-0"/>
                 </div>
@@ -130,8 +134,7 @@ const COMenu = () => {
                         </div>
                     </div>
                 })}
-                {/*<Button onClick={addToCart}>Add To Cart</Button>*/}
-                <CateringMenuFooter/>
+                <CateringMenuFooter addToCartClick={addToCart}/>
                 <Footer/>
             </UILoader>
         </div>
