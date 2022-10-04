@@ -449,7 +449,6 @@ const Routes = [
         component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
         layout: 'VerticalLayout'
     }
-
 ]
 
 export {DefaultRoute, TemplateTitle, Routes}
