@@ -264,3 +264,11 @@ export default [
         ]
     }
 ]
+export const branchManagerMenu = [
+    {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        icon: <Home size={20}/>,
+        navLink: '/employeeDashboard'
+    }
+]

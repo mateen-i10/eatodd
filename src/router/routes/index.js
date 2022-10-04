@@ -657,8 +657,12 @@ const Routes = [
             authRoute: true,
             customerOnly: true
         }
+    },
+    {
+        path: '/employeeDashboard',
+        component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
+        layout: 'VerticalLayout'
     }
-
 ]
 
 export {DefaultRoute, TemplateTitle, Routes}

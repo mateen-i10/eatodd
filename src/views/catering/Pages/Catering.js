@@ -3,8 +3,6 @@ import Footer from "../../../shared/footer/Footer"
 import '../components/stylesheet/Menu.css'
 import React, {useEffect, useState} from "react"
 import CateringDetailMenu from "../components/CateringDetailMenu"
-import {ArrowRight} from "react-feather"
-import {Button} from "reactstrap"
 import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 
@@ -13,7 +11,7 @@ const Catering = () => {
     const [cateringMenu, setCateringMenu] = useState([])
     const [activeItem, setActiveItem] = useState(0)
     const [selectedMenuId, setSelectedMenuId] = useState(0)
-    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=4', 'get', {}, {}, true)
+    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=5', 'get', {}, {}, true)
 
 
     useEffect(() => {
@@ -37,7 +35,7 @@ const Catering = () => {
         setSelectedMenuId(cateringMenu.length ? cateringMenu[0].id : 0)
     }, [cateringMenu])
 
-
+    // console.log(cateringMenu)
     const xl = "6"
     const md = "6"
     const toggleList = item => {
@@ -72,10 +70,6 @@ const Catering = () => {
                                 *please provide 48-hour notice so we can make sure we have your selected wines in stock
                             </div>
                         </div>
-                        <Button color={"primary"} type="button" className="btn fs-4 d-inline-block "
-                                style={{backgroundColor: '#57ab00', color: 'white', width: '380px'}}>Start your Catering
-                            Order <ArrowRight/>
-                        </Button>
                     </div>
 
                 </div>
@@ -93,7 +87,6 @@ const Catering = () => {
                                 borderRight: "6px solid rgb(129 190 65)"
                             }}
                         >
-
                             {cateringMenu.map((item, i) => (
                                 <div key={i}
                                      className={`fs-3 fw-bolder ms-2 cursor-pointer mb-1  ${elHovered[i] ? "text-primary" : ""}  `}
@@ -106,7 +99,7 @@ const Catering = () => {
                                 >
                                     <div
                                         className={`text-start text-uppercase ${activeItem === item.id ? "text-primary" : ""}`}
-                                        style={{fontSize: 15}}>{item.name}</div>
+                                        style={{fontSize: 15}}>{item.name.toLowerCase() === 'home' ? null : item.name}</div>
                                 </div>
                             ))}
                         </div>

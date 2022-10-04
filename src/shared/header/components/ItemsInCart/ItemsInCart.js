@@ -35,11 +35,22 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                     {categoryName}
                 </div>
             </div> }
+            {isCatering && <div className="row">
+                <div className="col-md-9 ms-1" style={{fontSize: "1.3rem", fontWeight: 'bolder', color: 'rgb(129 190 65)'}}>
+                    { }
+                </div>
+            </div> }
+            { isCatering && <div className="container-fluid">
+                <div className="row">
+                    <div className="col-8 fs-4 font-medium-1">Quantity * Price/Person </div>
+                    <div className="col-4">{`${foodItems?.quantity} x $${foodItems?.perPersonPrice} = $${foodItems?.perPersonPrice * foodItems?.quantity}`}</div>
+                </div>
+            </div>}
             {mainItems.map((item, id) => (
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4">{item.calculatedPrice && item.selectedQuantity ? `${item.selectedQuantity} x $${item.price } = $${item.calculatedPrice}` : item.calculatedPrice ? `$${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice && item.selectedQuantity ? `${item.selectedQuantity} x $${item.price } = $${item.calculatedPrice}` : item.calculatedPrice ? `1 x $${item.price } = $${item.calculatedPrice}` : `-`}</div>
                     </div>
                 </div>
             ))}

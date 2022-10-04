@@ -5,7 +5,7 @@ import "./index.css"
 import NearByPlaces from "./NearByPlaces"
 import UILoader from "../../../@core/components/ui-loader"
 
-const PickUpTab = ({places, userLocation, netStatus}) => {
+const PickUpTab = ({places, userLocation, netStatus, returnURl}) => {
     return (
         <div className="mt-1">
             <InputGroup className="bg-white input-group-merge">
@@ -35,7 +35,7 @@ const PickUpTab = ({places, userLocation, netStatus}) => {
                         />
                     </div>
                     <div>
-                        <NearByPlaces places={places} userLocation={userLocation}/>
+                        <NearByPlaces returnURl={returnURl} places={places} userLocation={userLocation}/>
                     </div>
                 </div>}
 
