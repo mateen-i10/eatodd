@@ -16,6 +16,9 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
 export const isAdmin = () => {
   return localStorage.getItem('userData') && localStorage.getItem('accessToken') && getUserData() && getUserData().role === Roles.superAdmin
 }
+export const isBranchManager = () => {
+  return localStorage.getItem('userData') && localStorage.getItem('accessToken') && getUserData() && getUserData().role === Roles.branchManager
+}
 export const isCustomer = () => {
   return localStorage.getItem('userData') && localStorage.getItem('accessToken') && getUserData() && getUserData().role === Roles.customer
 }

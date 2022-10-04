@@ -18,7 +18,14 @@ import { DefaultRoute, Routes } from './routes'
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
-import {isAdmin, isCustomer, isUserLoggedIn} from "../auth/utils"
+import {
+  getHomeRouteForLoggedInUser,
+  getUserData,
+  isAdmin,
+  isBranchManager,
+  isCustomer,
+  isUserLoggedIn
+} from "../auth/utils"
 
 const Router = () => {
   // ** Hooks
@@ -85,11 +92,17 @@ const Router = () => {
 
       return <Redirect to='/login' />
     } else if (route.meta && route.meta.authRoute && route.meta.adminOnly && !isAdmin()) {
-      // ** If route has meta and adminOnly and user is Logged in but not admin then redirect user to home page
-      return <Redirect to={DefaultRoute} />
+      // ** If route has meta and adminOnly and user is Logged in but not admin then redirect user to its default route
+      const userRoute = getHomeRouteForLoggedInUser(getUserData().role)
+      return <Redirect to={userRoute} />
     } else if (route.meta && route.meta.authRoute && route.meta.customerOnly && !isCustomer()) {
-      // ** If route has meta and customerOnly and user is Logged in but not customer then redirect user to home page
-      return <Redirect to={DefaultRoute} />
+      // ** If route has meta and customerOnly and user is Logged in but not customer then redirect user to its default route
+      const userRoute = getHomeRouteForLoggedInUser(getUserData().role)
+      return <Redirect to={userRoute} />
+    } else if (route.meta && route.meta.authRoute && route.meta.branchManagerOnly && !isBranchManager()) {
+      // ** If route has meta and customerOnly and user is Logged in but not customer then redirect user to its default route
+      const userRoute = getHomeRouteForLoggedInUser(getUserData().role)
+      return <Redirect to={userRoute} />
     } else {
       // ** If none of the above render component
       return <route.component {...props} />
