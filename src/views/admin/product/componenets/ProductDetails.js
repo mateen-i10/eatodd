@@ -49,8 +49,11 @@ const ProductDetail = ({match}) => {
         reader.readAsDataURL(files[0])
 
         const formData = new FormData()
+
         formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", product.attachmentId)
+        formData.append("attachmentId", product.attachmentId !== null ? product.attachmentId : 0)
+        formData.append("entityId",  product.attachmentId === null ? product.id : 0)
+        formData.append("entityName", null)
 
         dispatch(updateImage(formData))
     }
