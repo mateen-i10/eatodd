@@ -49,7 +49,7 @@ const Order = () => {
     }, [])
 
 
-    const scrollToOrder = scrollSlice.length ? scrollSlice[0]?.action.payload.toLowerCase() : ""
+    const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     // console.log("*****************", scrollToOrder)
     if (scrollToOrder === 'order') {
         useEffect(() => {
