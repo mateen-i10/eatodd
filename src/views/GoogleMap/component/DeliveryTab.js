@@ -31,7 +31,10 @@ const DeliveryTab = ({onPlaceChanged, userLocation, onLoad, places, isLoading}) 
                 </InputGroup>
             </Autocomplete>
             {/*</LoadScript>*/}
-            {places && places.length > 0 ? <NearByPlaces places={places} isLoading={isLoading} userLocation={userLocation}/> : <div className=" align-items-center justify-content-center text-center">
+            {places && places.length > 0 ? <div className=" align-items-center justify-content-center text-center"><NearByPlaces places={places}
+                                                                                                      isLoading={isLoading}
+                                                                                                      userLocation={userLocation}/>
+                </div> : <div className=" align-items-center justify-content-center text-center">
                     <div className="col-12 mt-2">
                         <img className="disabled" src={require('../../../assets/images/logo/OMG_logo.png').default}
                              alt="EatOMG-image" width="100px"

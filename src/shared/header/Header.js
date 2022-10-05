@@ -6,9 +6,10 @@ import {Link, useHistory} from "react-router-dom"
 import SideCart from "./components/SideCart"
 import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {Button} from "reactstrap"
 import {isUserLoggedIn} from "../../auth/utils"
+import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 
 
 export default function Header() {
@@ -16,6 +17,8 @@ export default function Header() {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
+    const dispatch = useDispatch()
+
 
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
@@ -49,8 +52,8 @@ export default function Header() {
                         </div>}
                     </div>
                     <div className="head-sec-2">
-                        <Link to="/"><h2>HOME</h2></Link>
-                        <Link to="/"><h2>ORDER</h2></Link>
+                        <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("home"))}>HOME</h2></Link>
+                        <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("order"))}>ORDER</h2></Link>
                         <h2 onClick={onCateringClick} className='cursor-pointer'>CATERING</h2>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
@@ -105,8 +108,8 @@ export default function Header() {
                 <nav className="nav sticky-top">
                     <div className="nav-sec-1 ">
                         <div className="text-center">
-                            <Link to="/"><h2>HOME</h2></Link>
-                            <Link to="/"><h2>ORDER</h2></Link>
+                            <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("home"))}>HOME</h2></Link>
+                            <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("order"))}>ORDER</h2></Link>
                             <Link to="/catering"><h2>CATERING</h2></Link>
                             <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>

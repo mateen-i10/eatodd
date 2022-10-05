@@ -23,7 +23,7 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                     {places.length ? places.map((place, i) => (
                         <CardBody key={i}>
                             <div className='justify-content-center align-items-center'>
-                                <div className='d-flex'>
+                                <div className=''>
                                     <div>
                                         <h6 className='transaction-title'
                                             color="primary">{place.name}</h6>
@@ -32,14 +32,17 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                                 </div>
                                 <div onClick={() => {
                                     localStorage.setItem('restaurantId', place.id)
-                                    returnURl ? history.push(`/${returnURl}`) : history.push('/OmgPlate', categoryId ? { categoryId, restaurantId: place.id } : null)
+                                    returnURl ? history.push(`/${returnURl}`) : history.push('/OmgPlate', categoryId ? {
+                                        categoryId,
+                                        restaurantId: place.id
+                                    } : null)
                                 }}>
                                     <Button className='text-uppercase mt-1' color='primary' outline onClick={() => {
-                                                                  dispatch(locationAdded(place))
-                                                                  if (userLocation !== null) dispatch(userLocationAdded(userLocation))
-                                                              }}>
-                                    Select
-                                </Button>
+                                        dispatch(locationAdded(place))
+                                        if (userLocation !== null) dispatch(userLocationAdded(userLocation))
+                                    }}>
+                                        Select
+                                    </Button>
                                 </div>
                             </div>
                         </CardBody>
