@@ -129,7 +129,6 @@ const GenralProducts = (props) => {
         })
     }))
 
-
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
@@ -226,7 +225,7 @@ const GenralProducts = (props) => {
 
     const detailOptClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/genralProductsDetail/${id}`)
+        props.history.push(`/generalProductsDetail/${id}`)
     }
 
     const handleSubmit = (event) => {

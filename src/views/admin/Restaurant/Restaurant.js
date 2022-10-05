@@ -352,21 +352,23 @@ const Restaurant = (props) => {
         props.history.push(`/restaurantDetail/${id}`)
     }
 
-    const orderClick = (e) => {
+    const orderClick = (id, e) => {
+        console.log('rid', id)
         e.preventDefault()
-        props.history.push(`/dashboard/orders`)
+        props.history.push(`/dashboard/orders`, {id})
     }
-    const productClick = (e) => {
+    const productClick = (id, e) => {
+        console.log('rId', id)
         e.preventDefault()
-        props.history.push(`/products`)
+        props.history.push(`/dashboard/product`, {id})
     }
     /*const promotionClick = (e) => {
         e.preventDefault()
         props.history.push(`/dashboard/promotion`)
     }*/
-    const customerClick = (e) => {
+    const customerClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/dashboard/customer`)
+        props.history.push(`/dashboard/customer`, {id})
     }
 
     const handleSubmit = (event) => {
@@ -436,11 +438,11 @@ const Restaurant = (props) => {
                                     <FileText size={15} />
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
-                                <DropdownItem tag='a' href='' className='w-100' onClick={e => orderClick(e)}>
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => orderClick(row.id, e)}>
                                     <Book size={15} />
                                     <span className='align-middle ms-50'>Orders</span>
                                 </DropdownItem>
-                                <DropdownItem tag='a' href='' className='w-100' onClick={e => productClick(e)}>
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => productClick(row.id, e)}>
                                     <Codesandbox size={15} />
                                     <span className='align-middle ms-50'>Products</span>
                                 </DropdownItem>
@@ -448,7 +450,7 @@ const Restaurant = (props) => {
                                     <DollarSign size={15} />
                                     <span className='align-middle ms-50'>Promotion</span>
                                 </DropdownItem>*/}
-                                <DropdownItem tag='a' href='' className='w-100' onClick={e => customerClick(e)}>
+                                <DropdownItem tag='a' href='' className='w-100' onClick={e => customerClick(row.id, e)}>
                                     <UserPlus size={15} />
                                     <span className='align-middle ms-50'>Customer</span>
                                 </DropdownItem>

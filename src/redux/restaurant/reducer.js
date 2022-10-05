@@ -1,6 +1,9 @@
 import {createAction} from '@reduxjs/toolkit'
 const initialState = {
     list: [],
+    orderList: [],
+    productList: [],
+    customerList: [],
     object: {},
     miscData: {},
     isRequestCompleted: false,
@@ -12,6 +15,9 @@ const initialState = {
 }
 
 export const setRestaurants = createAction("RestaurantReducer/setRestaurants")
+export const setOrdersByRestaurant = createAction("RestaurantReducer/setOrdersByRestaurant")
+export const setProductsByRestaurant = createAction("RestaurantReducer/setProductsByRestaurant")
+export const setCustomersByRestaurant = createAction("RestaurantReducer/setCustomersByRestaurant")
 export const setRestaurant = createAction("RestaurantReducer/setRestaurant")
 export const setLoading = createAction("RestaurantReducer/setLoading")
 export const editRestaurant = createAction("RestaurantReducer/editRestaurant")
@@ -87,6 +93,39 @@ const RestaurantReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isSuccess: action.payload
+            }
+        case setOrdersByRestaurant.type:
+            return {
+                ...state,
+                orderList: action.payload.data,
+                miscData: action.payload.miscData,
+                isLoading: false,
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
+            }
+        case setProductsByRestaurant.type:
+            return {
+                ...state,
+                productList: action.payload.data,
+                miscData: action.payload.miscData,
+                isLoading: false,
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
+            }
+        case setCustomersByRestaurant.type:
+            return {
+                ...state,
+                customerList: action.payload.data,
+                miscData: action.payload.miscData,
+                isLoading: false,
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
             }
         default:
             return state
