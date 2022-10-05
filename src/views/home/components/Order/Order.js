@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -15,8 +15,11 @@ import {isUserLoggedIn} from "../../../../auth/utils"
 const Order = () => {
     //get redux state
     const {userLocation} = useSelector(state => state)
+    const {scrollSlice} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
     const history = useHistory()
+    const orderRef = useRef(null)
+
 
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
@@ -45,6 +48,16 @@ const Order = () => {
 
     }, [])
 
+
+    const scrollToOrder = scrollSlice.length ? scrollSlice[0]?.action.payload.toLowerCase() : ""
+    // console.log("*****************", scrollToOrder)
+    if (scrollToOrder === 'order') {
+        useEffect(() => {
+            orderRef.current?.scrollIntoView({behavior: 'smooth'})
+        }, [])
+    }
+
+
     // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
@@ -72,7 +85,7 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-            <div className="menu-list container-sm pb-5 pt-5  mx-auto">
+            <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
                 <div className="row ms-0 me-1 ">
                     {
                         mainCategory.length ? mainCategory.map(item => {

@@ -129,7 +129,6 @@ const GenralProducts = (props) => {
         })
     }))
 
-
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)

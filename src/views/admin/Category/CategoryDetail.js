@@ -45,9 +45,11 @@ const CategoryDetail = ({match}) => {
         reader.readAsDataURL(files[0])
 
         const formData = new FormData()
-        formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", Category.attachmentId)
 
+        formData.append("image",  e.target.files[0])
+        formData.append("attachmentId", Category.attachmentId !== null ? Category.attachmentId : 0)
+        formData.append("entityId",  Category.attachmentId === null ? Category.id : 0)
+        formData.append("entityName", null)
         dispatch(updateImage(formData))
     }
 

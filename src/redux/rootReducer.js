@@ -18,6 +18,7 @@ import invCategoryReducer from "./restaurantPages/Inventory/InvCategoryReducer"
 import testReducer from "./test/reducer"
 import cuisine from "./cuisine/reducer"
 import cartItems from "./cartItems/cartItemsReducer"
+import scrollSlice from "./scroll/scrollSlice"
 import restaurantLocation from "./restaurantLocation/restaurantLocation"
 import userLocation from "./userLocation/userLocation"
 import product from "./products/reducer"
@@ -65,7 +66,8 @@ const rootReducer = {
     sectionItem,
     cateringMenu,
     cateringMenuItem,
-    subscriptionReducer
+    subscriptionReducer,
+    scrollSlice
 }
 
 export default rootReducer
