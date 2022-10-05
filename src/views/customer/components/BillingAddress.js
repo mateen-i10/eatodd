@@ -97,7 +97,7 @@ const BillingAddress = () => {
         try {
             const data = {id: customerId,
                 billingAddress: {
-                    id: addressObj.billingAddress.id,
+                    id: addressObj.billingAddress?.id,
                     city: billingCity,
                     state: billingState,
                     country: billingCountry,
@@ -106,7 +106,7 @@ const BillingAddress = () => {
                     address1: billingAddress1
                 },
                 shippingAddress: {
-                id: addressObj.shippingAddress.id,
+                id: addressObj.shippingAddress?.id,
                     city: shippingCity,
                     state: shippingState,
                     country: shippingCountry,
