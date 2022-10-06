@@ -22,7 +22,7 @@ const Order = () => {
 
 
     useEffect(() => {
-        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
+        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
                 console.log(response)
                 // success case
@@ -49,7 +49,7 @@ const Order = () => {
     }, [])
 
 
-    const scrollToOrder = scrollSlice.length ? scrollSlice[0]?.action.payload.toLowerCase() : ""
+    const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     // console.log("*****************", scrollToOrder)
     if (scrollToOrder === 'order') {
         useEffect(() => {

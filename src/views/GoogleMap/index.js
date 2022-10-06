@@ -47,7 +47,7 @@ const Gmaps = () => {
     const [resList, setResList] = useState(null)
     useLayoutEffect(() => {
         const url = isCatering ? 'restaurant/cateringRestaurants' : 'restaurant'
-        httpService._get(`${baseURL}${url}?pageIndex=1&&pageSize=12&&searchQuery=null`)
+        httpService._get(`${baseURL}${url}?pageIndex=1&&pageSize=12`)
             .then(response => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
@@ -124,7 +124,7 @@ const Gmaps = () => {
                 <Sidebar
                     isLoading={isLoading}
                     isCatering={isCatering}
-                    returnURl = {state?.returnURL}
+                    returnURl={state?.returnURL}
                     places={places}
                     nearPlaces={nearestPlaces}
                     setPickDelivery={setPickDelivery}
