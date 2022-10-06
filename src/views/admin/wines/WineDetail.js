@@ -6,20 +6,14 @@ import {Card, CardBody, CardText, Row, Col, Button, Label, Input} from 'reactstr
 import '../../../@core/scss/base/pages/app-invoice.scss'
 import UILoader from "../../../@core/components/ui-loader"
 import {getWine, updateImage} from '../../../redux/wines/actions'
-// import ProductImage from "../../../home/components/product/ProductImage"
-// import {default as defaultImage} from "../../../../assets/images/default/defaultImage.png";
 import useAPI from "../../../utility/customHooks/useAPI"
-// import {loadOptions} from "../../../../utility/Utils"
 
 const ProductDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
 
     //getting data from store
-    // const isLoading = useSelector(state => state.product.isLoading)
     const wine = useSelector(state => state.wines.object)
-
-    // console.log("product", product)
 
     const defaultImage = require("../../../assets/images/default/defaultImage.png").default
     const [imageURL, setImageURL] = useState(!wine.attachment || !wine.attachment?.path ? defaultImage : '')
@@ -49,8 +43,11 @@ const ProductDetail = ({match}) => {
         reader.readAsDataURL(files[0])
 
         const formData = new FormData()
+
         formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", wine.attachmentId)
+        formData.append("attachmentId", wine.attachmentId !== null ? wine.attachmentId : 0)
+        formData.append("entityId",  wine.attachmentId === null ? wine.id : 0)
+        formData.append("entityName", null)
 
         dispatch(updateImage(formData))
     }

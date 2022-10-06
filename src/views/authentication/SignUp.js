@@ -30,8 +30,8 @@ const SignUp = () => {
         {type:FieldTypes.Text, label: 'User Name', placeholder: 'Enter User Name', name:'userName', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
         {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter Email', name:'email', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
         {type:FieldTypes.Password, label: 'Password', placeholder: 'Enter Password', name:'password', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Password, label: 'Confirm Password', placeholder: 'Enter Confirm Password', name:'confirmPassword', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.CheckBox, label: 'I agree to privacy policy & terms', placeholder: '', name:'acceptTerms', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false}
+        {type:FieldTypes.Password, label: 'Confirm Password', placeholder: 'Enter Confirm Password', name:'confirmPassword', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false}
+        // {type:FieldTypes.CheckBox, label: 'I agree to privacy policy & terms', placeholder: '', name:'acceptTerms', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false}
     ])
     const [isBlock, setBlock] = useState(false)
     const history = useHistory()

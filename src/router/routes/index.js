@@ -116,43 +116,81 @@ const Routes = [
         path: '/dashboard/orders',
         component: lazy(() => import('../../views/restaurants/pages/Orders')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/dashboard/product',
+        component: lazy(() => import('../../views/restaurants/pages/product')),
+        layout: 'VerticalLayout',
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/category',
         component: lazy(() => import('../../views/admin/Category/Category')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/customer',
         component: lazy(() => import('../../views/restaurants/pages/Customer')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/inventory/distributor',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/inventory/item',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Item')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/inventory/recipe',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Recipe')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/dashboard/inventory/category',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Category')),
         layout: 'VerticalLayout',
-        exact: true
+        exact: true,
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/OmgPlate',
@@ -167,112 +205,200 @@ const Routes = [
     {
         path: '/Restaurant',
         component: lazy(() => import('../../views/admin/Restaurant/Restaurant')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/restaurantDetail/:id',
         component: lazy(() => import('../../views/admin/Restaurant/RestaurantDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/Facebook',
         component: lazy(() => import('../../views/admin/FacebookAutoPost/FaceBookAuto')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/AddFacebookPost',
         component: lazy(() => import('../../views/admin/FacebookAutoPost/AddFacebookPostForm')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/Customers',
         component: lazy(() => import('../../views/admin/Customers/Customers')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/employees',
         component: lazy(() => import('../../views/admin/Employee/employee')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/employee/:id',
         component: lazy(() => import('../../views/admin/Employee/employeeDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/ingredients',
         component: lazy(() => import('../../views/admin/Ingredients/Ingredients')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/ingredient/:id',
         component: lazy(() => import('../../views/admin/Ingredients/ingredientsDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/section/:id',
         component: lazy(() => import('../../views/admin/section/sectionDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/section',
         component: lazy(() => import('../../views/admin/section/section')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/sectionItem/:id',
         component: lazy(() => import('../../views/admin/sectionItem/sectionItemDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/sectionItem',
         component: lazy(() => import('../../views/admin/sectionItem/sectionItem')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/cateringMenu/:id',
         component: lazy(() => import('../../views/admin/Catering/cateringMenu/cateringMenuDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/cateringMenu',
         component: lazy(() => import('../../views/admin/Catering/cateringMenu/cateringMenu')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/cateringMenuItem/:id',
         component: lazy(() => import('../../views/admin/Catering/cateringMenuItem/cateringMenuItemDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/cateringMenuItem',
         component: lazy(() => import('../../views/admin/Catering/cateringMenuItem/cateringMenuItem')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/cateringCustomers',
         component: lazy(() => import('../../views/admin/Catering/CateringCutomers/CateringCustomers')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
-    {
+    /*{
         path: '/Customer',
         component: lazy(() => import('../../views/customer/index')),
-        layout: 'BlankLayout'
-    },
+        layout: 'BlankLayout',
+        meta: {
+            authRoute: true,
+            customerOnly: true
+        }
+    },*/
     {
         path: '/CrmEmails',
         component: lazy(() => import('../../views/admin/CrmEmails/CrmEmail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/CrmSms',
         component: lazy(() => import('../../views/admin/CrmSms/CrmSms')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/SechduledSms',
         component: lazy(() => import('../../views/admin/CrmSms/ScheduleSms')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/wine/homepage',
@@ -287,44 +413,76 @@ const Routes = [
     {
         path: '/BussinessDetails',
         component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetails')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/BussinessForm',
         component: lazy(() => import('../../views/admin/BussinessDetails/BussinessDetailsForm')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/LoginHistory',
         component: lazy(() => import('../../views/admin/Loghistory/LoginHistory')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/members',
         component: lazy(() => import('../../views/admin/WineClubMembers/Members')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/membershipTypes',
         component: lazy(() => import('../../views/admin/WineClubMembershipTypes/MembershipTypes')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/membershipType/:id',
         component: lazy(() => import('../../views/admin/WineClubMembershipTypes/MembershipTypeDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/promotions',
         component: lazy(() => import('../../views/admin/WineClubPromotions/Promotions')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/Addpromotions',
         component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
-    {
+   /* {
         path: '/addmenuitem',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddMenuItem')),
         layout: 'VerticalLayout'
@@ -333,13 +491,17 @@ const Routes = [
         path: '/addCategory',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddCategory')),
         layout: 'VerticalLayout'
-    },
+    },*/
     {
         path: '/subCategory',
         component: lazy(() => import('../../views/admin/subCategory/subcategory')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
-    {
+    /*{
         path: '/addInventoryItem',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddInventoryItemForm')),
         layout: 'VerticalLayout'
@@ -358,11 +520,15 @@ const Routes = [
         path: '/addRecipe',
         component: lazy(() => import('../../views/restaurants/pages/forms/AddRecipe')),
         layout: 'VerticalLayout'
-    },
+    },*/
     {
         path: '/designer',
         component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/login',
@@ -382,7 +548,11 @@ const Routes = [
     {
         path: '/user',
         component: lazy(() => import('../../views/customer/index')),
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        meta: {
+            authRoute: true,
+            customerOnly: true
+        }
     },
     {
         path: '/checkout',
@@ -392,57 +562,101 @@ const Routes = [
     {
         path: '/cuisine',
         component: lazy(() => import('../../views/admin/cuisine/Cuisine')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/products',
         component: lazy(() => import('../../views/admin/product/Product')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/productsDetail/:id',
         component: lazy(() => import('../../views/admin/product/componenets/ProductDetails')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
-        path: '/genralProducts',
+        path: '/generalProducts',
         component: lazy(() => import('../../views/admin/genralproduct/GenralProduct')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
-        path: '/genralProductsDetail/:id',
+        path: '/generalProductsDetail/:id',
         component: lazy(() => import('../../views/admin/genralproduct/components/GenralProductDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/CategoryDetail/:id',
         component: lazy(() => import('../../views/admin/Category/CategoryDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/WineDetail/:id',
         component: lazy(() => import('../../views/admin/wines/WineDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/SubcategoryDetail/:id',
         component: lazy(() => import('../../views/admin/subCategory/SubCategoryDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/MealDetail/:id',
         component: lazy(() => import('../../views/customer/components/MealDetail')),
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        meta: {
+            authRoute: true,
+            customerOnly: true
+        }
     },
     {
         path: '/customerDetails/:id',
         component: lazy(() => import('../../views/admin/Customers/CustomerDetail')),
-        layout: 'VerticalLayout'
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     },
     {
         path: '/winePayment',
         component: lazy(() => import('../../views/wine/Pages/winePayment')),
-        layout: 'BlankLayout'
+        layout: 'BlankLayout',
+        meta: {
+            authRoute: true,
+            customerOnly: true
+        }
     },
     {
         path: '/employeeDashboard',

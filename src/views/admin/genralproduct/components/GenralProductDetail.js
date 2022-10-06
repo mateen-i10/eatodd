@@ -48,7 +48,9 @@ const ProductDetail = ({match}) => {
 
         const formData = new FormData()
         formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", genralProduct.attachmentId)
+        formData.append("attachmentId", genralProduct.id === 0 ? genralProduct.attachmentId : 0)
+        formData.append("entityId", genralProduct.attachmentId === 0 ? genralProduct.id : 0)
+        formData.append("entityName", null)
 
         dispatch(updateImage(formData))
     }

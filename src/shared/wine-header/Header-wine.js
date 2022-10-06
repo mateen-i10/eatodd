@@ -6,11 +6,15 @@ import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link} from "react-router-dom"
 import {isUserLoggedIn} from "../../auth/utils"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
+import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
+import {useDispatch} from "react-redux"
 
 const HeaderWine = () => {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [isuserlogedin, setuserloginedin] = useState(false)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const handleResizeWindow = () => setWidth(window.innerWidth)
@@ -65,7 +69,8 @@ const HeaderWine = () => {
                     </div>
                     <div className="head-sec-wine">
                         <Link to="/home">
-                            <Button.Ripple color='primary'>EATOMG</Button.Ripple>
+                            <Button.Ripple color='primary'
+                                           onClick={() => dispatch(scrollToOrderAdded("home"))}>EATOMG</Button.Ripple>
                         </Link>
                     </div>
                 </header>
@@ -97,7 +102,8 @@ const HeaderWine = () => {
                     <div className=" text-center">
                         <Link to="/home">
                             <Button.Ripple color='primary' className="fs-3"
-                                           style={{width: "75%", marginTop: 30}}>EATOMG</Button.Ripple>
+                                           style={{width: "75%", marginTop: 30}}
+                                           onClick={() => dispatch(scrollToOrderAdded("home"))}>EATOMG</Button.Ripple>
                         </Link>
                     </div>
                     {isuserlogedin ? <div className="text-center  mx-auto"
@@ -110,8 +116,8 @@ const HeaderWine = () => {
                         {/*</div>*/}
                         <Button className="w-75 bg-secondary text-uppercase fs-3">
                             <Link to="/signup" style={{color: "white"}}>Create
-                            an
-                            Account</Link>
+                                an
+                                Account</Link>
                         </Button>
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>

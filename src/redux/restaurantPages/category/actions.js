@@ -106,7 +106,7 @@ export const updateImage = (data) => {
     console.log(data, "data from actions")
 
     return async () => {
-        return httpService._put(`${baseURL}media/updateMedia`, data, {
+        return httpService._put(`${baseURL}Media/UpdateCategoryImage`, data, {
             headers: {encType:"multipart/form-data"}
         }).then(response => {
             // success case

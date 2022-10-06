@@ -15,16 +15,17 @@ const Homepage = () => {
                 <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-sm ">
                         <div className="row d-flex align-items-center justify-content-center h-75 ">
-                            <div className="col-md-5 col-lg-5 ">
+                            <div className=" col-lg-3 col-12">
                                 <div className="about-3-img text-center mb-40 ">
                                     <img className="img-fluid" style={{width: "100%", height: "100%"}}
                                          src={require('../../../assets/images/my-images/wine1.jpg').default}
                                          alt="about-image"/>
                                 </div>
                             </div>
-                            <div className="col-md-7 col-lg-6  text-start">
+                            <div className=" col-lg-9 col-12 text-start ">
                                 <div className="about-3-txt mb-40">
-                                    <p className="p-md fs-5 fw-bold " style={{color: "grey", lineHeight: "25px"}}>The
+                                    <p className="p-md fs-5 fw-bold mt-1"
+                                       style={{color: "grey", lineHeight: "25px"}}>The
                                         OMG Wine Club was created to make you say OMG at your savings! We are the 1st
                                         wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
                                         to OMG.As our way to say THANK YOU, we are extending you the
@@ -33,6 +34,13 @@ const Homepage = () => {
                                         why not let YOU PAY WHAT WE PAY?! We are not complicated; we just want you to
                                         EAT. LIVE. LOVE – now with
                                         your favorite glass of wine. Cheers Friends!
+                                        The
+                                        OMG Wine Club was created to make you say OMG at your savings! We are the 1st
+                                        wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
+                                        to OMG.As our way to say THANK YOU, we are extending you the
+                                        opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
+                                        with our food, we figured
+                                        why not let YOU PAY WHAT WE PAY?! We are not complicated;
                                     </p>
 
                                 </div>
@@ -40,10 +48,11 @@ const Homepage = () => {
                         </div>
                     </div>
                 </section>
-                <section id="about-1" className="bg-fixed wide-100 about-section division mt-4">
+                <section id="about-1" className="bg-fixed wide-100 about-section division  "
+                         style={{marginTop: "100px"}}>
                     <div className="container-fluid">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center">
-                            <div className="col-lg-8 ">
+                            <div className="col-lg-8 " style={{height: "30vh"}}>
                                 <div className="about-1-txt text-center">
                                     <h2><span
                                         className="text-uppercase text-primary fw-bolder ">Sommelier’s Selection</span>
@@ -63,9 +72,10 @@ const Homepage = () => {
                     </div>
                 </section>
 
-                <section id="blog-1" className="wide-60 blog-section division mt-4 mb-4">
-                    <div className="container-sm">
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center">
+                <section id="blog-1" className="wide-60 blog-section division ">
+                    <div className="container-sm ">
+                        <div className="row d-flex flex-wrap align-items-center justify-content-center "
+                             style={{height: "30vh"}}>
                             <div className="col-lg-8 ">
                                 <div className="  text-center">
                                     <h2 className=" text-uppercase text-primary fw-bolder">Events &amp; Catering</h2>

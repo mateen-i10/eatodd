@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -7,18 +7,22 @@ import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
-import {useHistory} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
+import {isUserLoggedIn} from "../../../../auth/utils"
 
 const Order = () => {
     //get redux state
     const {userLocation} = useSelector(state => state)
+    const {scrollSlice} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
     const history = useHistory()
+    const orderRef = useRef(null)
+
 
     useEffect(() => {
-        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
+        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
                 console.log(response)
                 // success case
@@ -44,6 +48,16 @@ const Order = () => {
 
     }, [])
 
+
+    const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
+    // console.log("*****************", scrollToOrder)
+    if (scrollToOrder === 'order') {
+        useEffect(() => {
+            orderRef.current?.scrollIntoView({behavior: 'smooth'})
+        }, [])
+    }
+
+
     // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
@@ -51,23 +65,27 @@ const Order = () => {
                 <div className="container-sm">
                     <div className="row align-items-center justify-content-center pt-1 pb-1">
                         <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
-                            <img className="unlock-img d-md-inline-flex d-none me-2" src={icon}
+                            <img className="unlock-img d-lg-inline-flex d-none me-2" src={icon}
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
                             <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
+                        {isUserLoggedIn() ? null : <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
-                                    <div>Create an Account</div>
+                                    <Link to='/signup'>
+                                        <div>Create an Account</div>
+                                    </Link>
                                 </div>
-                                <div className="unlock-or">OR</div>
-                                <div className="sign-in fs-5">Sign In</div>
+                                <div className="fw-bolder text-black m-1 text-uppercase ">OR</div>
+                                <Link to='/login'>
+                                    <div className="fw-bolder text-primary text-uppercase fs-4 ">Sign In</div>
+                                </Link>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
-            <div className="menu-list container-sm pb-5 pt-5  mx-auto">
+            <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
                 <div className="row ms-0 me-1 ">
                     {
                         mainCategory.length ? mainCategory.map(item => {
@@ -77,9 +95,9 @@ const Order = () => {
                                     <div className="menu-item-1" onClick={() => {
                                         history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
                                     }}>
-                                        <div className="thumbnail">
+                                        <div className="thumbnail ">
                                             <ProductImage attachment={item.attachment}
-                                                          styles={{width: "200px", height: "180px"}}/>
+                                                          styles={{width: "200px", height: "180px", margin: "auto"}}/>
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
@@ -211,7 +229,7 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-4 col-md-4 col-4">
+                            <div className="col-xxl-4 col-md-4 col-9 ">
                                 <div className="large-order-card loc1">
                                     <h1 className="pleaser-card-title text-center"
                                         style={{
@@ -219,7 +237,9 @@ const Order = () => {
 
                                         }}>CATERING</h1>
                                     <div className="details">
-                                        <ul className="pleaser-list">
+                                        <ul className="pleaser-list"
+                                            // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
+                                        >
                                             <li>From 6 to 600 people</li>
                                             <li>Starting at $15.00 / person</li>
                                             <li>Build Your Own</li>
@@ -238,11 +258,13 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-4">
+                            <div className="col-xxl-4 col-md-4 col-9 ">
                                 <div className="large-order-card loc2">
                                     <h1 className="pleaser-card-title text-center"
                                         style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>GROUP ORDER</h1>
-                                    <div className="details ">
+                                    <div className="details"
+                                        // style={{minHeight: 170, maxHeight: 170, overflow: "hidden"}}
+                                    >
                                         <ul className="pleaser-list">
                                             <li>Invite up to 20 people</li>
                                             <li>Normal menu pricing</li>
@@ -262,18 +284,18 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-4">
+                            <div className="col-xxl-4 col-md-4 col-9  ">
                                 <div className="large-order-card loc3">
                                     <h1 className="pleaser-card-title text-center"
                                         style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>OMG CHARCUTERIE BOARDS</h1>
-                                    <div className="details ">
-                                        <ul className="pleaser-list mb-1">
+                                    <div className="details "
+                                        // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
+                                    >
+                                        <ul className="pleaser-list mt-xl-2 ">
                                             <li>*Serves 10 people</li>
                                             <li>Cheese and Charcuterie Platter - $100</li>
                                             <li>Fruit Platter - $90</li>
                                             <li>Crudites Platter - $90</li>
-                                            {/*<li>Organizer pays</li>*/}
-                                            {/*<li><b>Order and eat today</b></li>*/}
                                         </ul>
                                     </div>
                                     <div className="type-ordering-primary">
