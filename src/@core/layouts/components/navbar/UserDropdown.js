@@ -15,7 +15,7 @@ import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from '
 
 // ** Default Avatar Image
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
-import {isUserLoggedIn} from "../../../../auth/utils"
+import {isCustomer, isUserLoggedIn} from "../../../../auth/utils"
 import {unAuthorize} from "../../../../redux/auth/actions"
 import {useDispatch} from "react-redux"
 
@@ -59,7 +59,7 @@ const UserDropdown = () => {
 
             </DropdownToggle>
             <DropdownMenu end>
-                <DropdownItem tag='a' href='/user'>
+                <DropdownItem tag='a' href= {`${isCustomer() ? '/user' : '/dashboard' }`}>
                     <User size={14} className='me-75'/>
                     <span className='align-middle'>Profile</span>
                 </DropdownItem>
