@@ -3,7 +3,7 @@ import useAPI from "../../../../utility/customHooks/useAPI"
 
 const ProductImage = ({attachment, styles, classes }) => {
     const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
-    const [imageURL, setImageURL] = useState(!attachment || !attachment?.path ? defaultImage : '')
+    const [imageURL, setImageURL] = useState(defaultImage)
     const [imagePath, setImagePath] = useState('')
 
     // hooks
