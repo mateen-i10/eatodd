@@ -76,7 +76,8 @@ const Ingredients = (props) => {
         quantity: Joi.number().required().label("Quantity"),
         fat: Joi.number().required().label("Fat"),
         protein: Joi.number().required().label("Protein"),
-        carb: Joi.number().required().label("Carb")
+        carb: Joi.number().required().label("Carb"),
+        unit: Joi.string().required().label("Unit")
     })
 
     // ** Function to handle filter
@@ -137,8 +138,10 @@ const Ingredients = (props) => {
 
     const handleSubmit = (event) => {
         console.log('formState', formState)
+
         const final = {...formState, unit: formState.unit?.value}
         console.log(final, 'see')
+
         event.preventDefault()
         const isError = formModalRef.current.validate(final)
         if (isError) return
