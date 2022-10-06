@@ -28,9 +28,6 @@ const Members = () => {
     // const isLoading = useSelector(state => state.customer.isLoading)
     const dispatch = useDispatch()
 
-    // const customerId = getUserData().customerId
-    // console.log(customerId, "dataof user")
-
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
