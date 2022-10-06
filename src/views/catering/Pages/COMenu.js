@@ -88,12 +88,12 @@ const COMenu = () => {
                 }
             })
         }
-         totalPrice = totalPrice + (menuItem.price * quantity)
+        totalPrice = totalPrice + (menuItem.price * quantity)
         const item = {
             id: menuItem.id,
             name: menuItem.name,
             totalPrice,
-            perPersonPrice : menuItem.price,
+            perPersonPrice: menuItem.price,
             quantity,
             selectedProducts: [...finalItems]
         }
@@ -115,7 +115,7 @@ const COMenu = () => {
                               description={menuItem.description}
                               price={menuItem.price}
                     />
-                    <hr className="text-dark m-0"/>
+                    <hr className="text-dark mt-1"/>
                 </div>
                 {sections.map(s => {
                     return <div className="container-sm mt-3 mb-4 text-center">
