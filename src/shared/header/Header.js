@@ -11,14 +11,12 @@ import {Button} from "reactstrap"
 import {isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 
-
 export default function Header() {
     const history = useHistory()
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
     const dispatch = useDispatch()
-
 
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
