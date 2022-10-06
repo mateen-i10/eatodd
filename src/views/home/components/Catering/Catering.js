@@ -7,13 +7,12 @@ const Catering = () => {
     const [catMenu, setCatMenu] = useState([])
     const [catHomeId, setCatHomeId] = useState(0)
 
-    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=5', 'get', {}, {}, true)
-
+    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=12', 'get', {}, {}, true)
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
             const data = response.data
-            // console.log("data", data)
+            // console.log("data LLLLLLLLLLLLL", data)
             const final = data.map(item => ({
                 id: item.id,
                 name: item.name,
@@ -28,7 +27,7 @@ const Catering = () => {
 
     }, [response])
 
-    console.log("cat Manu", catMenu)
+    // console.log("cat Manu", catMenu)
 
     useEffect(() => {
         if (catMenu.length) {
@@ -41,7 +40,7 @@ const Catering = () => {
     }, [catMenu])
 
 
-    console.log("cat Home Id ", catHomeId)
+    // console.log("cat Home Id ", catHomeId)
     return (
         <>
             <div style={{backgroundColor: 'white', paddingTop: 40}}>

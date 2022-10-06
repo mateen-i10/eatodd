@@ -54,9 +54,10 @@ const ingredientReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editIngredient.type:
+            const {data} = action.payload
             return {
                 ...state,
-                object: action.payload.data,
+                object: {...data, unit: {value: data.unit, label: data.unit}},
                 isEdit: true
             }
         case setRequestCompleted.type:
