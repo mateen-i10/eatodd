@@ -230,27 +230,41 @@ const Order = () => {
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
                             <div className="col-xxl-4 col-md-4 col-9 ">
-                                <div className="large-order-card loc1">
-                                    <h1 className="pleaser-card-title text-center"
-                                        style={{
-                                            backgroundColor: 'rgba(0, 0, 0, 0.7)'
-
-                                        }}>CATERING</h1>
-                                    <div className="details">
-                                        <ul className="pleaser-list"
-                                            // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
-                                        >
-                                            <li>From 6 to 600 people</li>
-                                            <li>Starting at $15.00 / person</li>
-                                            <li>Build Your Own</li>
-                                            <li>Boxed Lunches</li>
-                                            <li>A La Carte</li>
-                                            <li><b>Requires 24 hour notice</b></li>
-                                        </ul>
+                                <div className="card ">
+                                    <img className='img-fluid'
+                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
+                                         alt='Crowd Pleaser'/>
+                                    <div style={{
+                                        position: 'absolute',
+                                        marginTop: "20%",
+                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                        width: "100%"
+                                    }}>
+                                        <div className="text-center text-white fw-bolder" style={{fontSize: "1.7rem"}}
+                                        >CATERING
+                                        </div>
                                     </div>
-                                    <div className="type-ordering-primary">
-                                        <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                    <div className="card-body" style={{
+                                        maxHeight: 170,
+                                        minHeight: 170,
+                                        textOverflow: 'ellipsis',
+                                        overflow: "hidden"
+                                    }}>
+                                        <div className="">
+                                            <ul className=""
+                                            >
+                                                <li>From 6 to 600 people</li>
+                                                <li>Starting at $15.00 / person</li>
+                                                <li>Build Your Own</li>
+                                                <li>Boxed Lunches</li>
+                                                <li>A La Carte</li>
+                                                <li><b>Requires 24 hour notice</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-center text-uppercase">
+                                            <div className="btn btn-primary mb-2 fw-bolder " onClick={() => {
                                                 history.push("/catering")
                                             }}>Explore Catering
                                             </div>
@@ -259,24 +273,40 @@ const Order = () => {
                                 </div>
                             </div>
                             <div className="col-xxl-4 col-md-4 col-9 ">
-                                <div className="large-order-card loc2">
-                                    <h1 className="pleaser-card-title text-center"
-                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>GROUP ORDER</h1>
-                                    <div className="details"
-                                        // style={{minHeight: 170, maxHeight: 170, overflow: "hidden"}}
-                                    >
-                                        <ul className="pleaser-list">
-                                            <li>Invite up to 20 people</li>
-                                            <li>Normal menu pricing</li>
-                                            <li>Full menu</li>
-                                            <li>Personalized meals</li>
-                                            <li>Organizer pays</li>
-                                            <li><b>Order and eat today</b></li>
-                                        </ul>
+                                <div className="card ">
+                                    <img className='img-fluid'
+                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
+                                         alt='Crowd Pleaser'/>
+                                    <div style={{
+                                        position: 'absolute',
+                                        marginTop: "20%",
+                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                        width: "100%"
+                                    }}>
+                                        <div className="text-center text-white fw-bolder" style={{fontSize: "1.7rem"}}
+                                        >GROUP ORDER
+                                        </div>
                                     </div>
-                                    <div className="type-ordering-primary">
-                                        <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 " onClick={() => {
+                                    <div className="card-body" style={{
+                                        maxHeight: 170,
+                                        minHeight: 170,
+                                        textOverflow: 'ellipsis',
+                                        overflow: "hidden"
+                                    }}>
+                                        <div className="">
+                                            <ul className="">
+                                                <li>Invite up to 20 people</li>
+                                                <li>Normal menu pricing</li>
+                                                <li>Full menu</li>
+                                                <li>Personalized meals</li>
+                                                <li>Organizer pays</li>
+                                                <li><b>Order and eat today</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-center text-uppercase">
+                                            <div className="btn btn-primary mb-2 fw-bolder " onClick={() => {
                                                 history.push("/order/group/create")
                                             }}>Start Order
                                             </div>
@@ -284,23 +314,47 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-9  ">
-                                <div className="large-order-card loc3">
-                                    <h1 className="pleaser-card-title text-center"
-                                        style={{backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>OMG CHARCUTERIE BOARDS</h1>
-                                    <div className="details "
-                                        // style={{minHeight: 160, maxHeight: 160, overflow: "hidden"}}
-                                    >
-                                        <ul className="pleaser-list mt-xl-2 ">
-                                            <li>*Serves 10 people</li>
-                                            <li>Cheese and Charcuterie Platter - $100</li>
-                                            <li>Fruit Platter - $90</li>
-                                            <li>Crudites Platter - $90</li>
-                                        </ul>
+                            <div className="col-xxl-4 col-md-4 col-9 ">
+                                <div className="card ">
+                                    <img className='img-fluid'
+                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
+                                         alt='Crowd Pleaser'/>
+                                    <div style={{
+                                        position: 'absolute',
+                                        marginTop: "20%",
+                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                        width: "100%"
+                                    }}>
+                                        <div className="text-center text-white fw-bolder "
+                                             style={{
+                                                 fontSize: "1.5rem",
+                                                 minHeight: "35px",
+                                                 maxHeight: "68px",
+                                                 overflow: "hidden"
+                                                 // lineHeight: "20px"
+                                             }}
+                                        >OMG CHARCUTERIE BOARDS
+                                        </div>
                                     </div>
-                                    <div className="type-ordering-primary">
-                                        <div className="text-center">
-                                            <div className="cta-wrapper btn btn-primary mb-2 ">Start Order</div>
+                                    <div className="card-body" style={{
+                                        maxHeight: 170,
+                                        minHeight: 170,
+                                        textOverflow: 'ellipsis',
+                                        overflow: "hidden"
+                                    }}>
+                                        <div className="">
+                                            <ul className=" ">
+                                                <li>*Serves 10 people</li>
+                                                <li>Cheese and Charcuterie Platter - $100</li>
+                                                <li>Fruit Platter - $90</li>
+                                                <li>Crudites Platter - $90</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-center text-uppercase">
+                                            <div className="btn btn-primary mb-2 fw-bolder ">Start Order
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
