@@ -13,7 +13,9 @@ import {
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 
+
 const url = 'cateringMenuItem'
+// const imgUpdateURL = 'Media/UpdateCateringMenuItemProduct'
 
 export const loadCateringMenuItems = (pageIndex = 1, pageSize = 12, searchQuery = null) => {
     return async dispatch => {
@@ -80,7 +82,7 @@ export const addCateringMenu = (data) => {
 }
 
 export const updateCateringMenu = (data) => {
-    console.log('dataEmp', data)
+    // console.log('dataEmp', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -113,4 +115,5 @@ export const updateImage = (data) => {
             toast.error(error.message)
         })
     }
+
 }
