@@ -16,6 +16,9 @@
     "@hookform/resolvers": "^2.8.3",
     "@react-google-maps/api": "^2.12.0",
     "@reduxjs/toolkit": "^1.2.5",
+    "@square/web-payments-sdk-types": "^1.41.2",
+    "@square/web-sdk": "^2.0.1",
+    "@stitches/react": "^1.2.8",
     "@uppy/core": "^3.0.1",
     "@uppy/dashboard": "^3.0.0",
     "@uppy/drag-drop": "^3.0.0",
@@ -91,6 +94,7 @@
     "react-shepherd": "^3.3.6",
     "react-slidedown": "^2.4.5",
     "react-sortablejs": "^6.0.0",
+    "react-square-web-payments-sdk": "^3.2.1",
     "react-toastify": "^8.0.3",
     "react-tooltip": "^4.2.21",
     "reactstrap": "9.0.1",
@@ -128,18 +132,11 @@
     "eslint-plugin-react": "^7.20.6",
     "sass-loader": "8.0.2"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "resolutions": {
     "react-error-overlay": "6.0.9"
   },
