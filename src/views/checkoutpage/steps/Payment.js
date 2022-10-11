@@ -1,6 +1,19 @@
 // ** Icon Imports
 // ** Reactstrap Imports
-import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Input, Label, Row} from 'reactstrap'
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    CardText,
+    CardTitle,
+    Col,
+    Form,
+    Input,
+    Label,
+    Row,
+    Spinner
+} from 'reactstrap'
 import {cartTotalPrice, clearCart, getCartData} from "../../../utility/Utils"
 import {useSelector} from "react-redux"
 import {useEffect, useState} from "react"
@@ -11,6 +24,7 @@ import {useHistory} from "react-router-dom"
 import {toast} from "react-toastify"
 import {PaymentForm, CreditCard} from 'react-square-web-payments-sdk'
 import http, {baseURL} from '../../../utility/http'
+import {Fragment} from "@fullcalendar/core"
 
 const Payment = () => {
     const restaurantId = localStorage.getItem('restaurantId')
@@ -23,6 +37,7 @@ const Payment = () => {
     // local state
     const [placeOrder, setPlaceOrder] = useState({ url: '', order: {}})
     const [loading, setLoading] = useState(false)
+    const [loadingMesssage, setLoadingMessage] = useState('Payment InProgress...')
     // hooks
     const history = useHistory()
     const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, false)
@@ -135,27 +150,102 @@ const Payment = () => {
         }
         const res = await http._post(`${baseURL}payment`, {...body})
         if (res && res.status === 200 && res.data.statusCode === 200) {
+            setLoadingMessage('Booking Order...')
             submitOrder()
+        } else {
+            setLoading(false)
+            toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
         }
         console.log('resss', res)
+
+    }
+    const Loader = () => {
+        return (
+            <Fragment>
+                <Spinner />
+                <CardText className='mb-0 mt-3 text-white'>{loadingMesssage}</CardText>
+            </Fragment>
+        )
+    }
+
+    const onCLick = () => {
+        console.log('eee')
     }
 
     return (
-        <PaymentForm  applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
-                      locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
-                      cardTokenizeResponseReceived={getToken}>
-            <UILoader blocking={loading}>
-                <div className='row my-5 mx-auto'>
-                    <div className='col-6'>
-                        <CreditCard>
-                            <span onClick={() => setLoading(!loading)}>
-                                Pay ${cartTotalPrice()}
-                            </span>
-                        </CreditCard>
+        <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
+            <UILoader blocking={loading} loader={<Loader />} >
+                <section>
+                    <div className="container-sm">
+                        <Row>
+                            <Col md='9' sm='12'>
+                                <div className='payment-type'>
+                                    <Card>
+                                        <CardHeader className='flex-column align-items-start'>
+                                            <CardTitle tag='h4'>Payment Details</CardTitle>
+                                            <CardText className='text-muted mt-25'>
+                                                Be sure to enter the correct payment data
+                                            </CardText>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <section>
+                                                <div className="container-sm">
+                                                    <Card>
+                                                        <Row>
+                                                            <PaymentForm  applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
+                                                                          locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
+                                                                          cardTokenizeResponseReceived={getToken}>
+                                                                            <CreditCard buttonProps={{
+                                                                                onClick: onCLick
+                                                                            }}/>
+                                                            </PaymentForm>
+                                                        </Row>
+                                                    </Card>
+                                                </div>
+                                            </section>
+                                        </CardBody>
+                                    </Card>
+                                </div>
+                            </Col>
+                            <Col md='3' sm='12'>
+                                <div className='amount-payable checkout-options'>
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle tag='h4'>Price Details</CardTitle>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <ul className='list-unstyled price-details'>
+                                                <li className='price-detail'>
+                                                    <div className='details-title'>Total Price</div>
+                                                    <div className='detail-amt'>
+                                                        <strong>${cartTotalPrice()}</strong>
+                                                    </div>
+                                                </li>
+                                                <li className='price-detail'>
+                                                    <div className='details-title'>Delivery Charges</div>
+                                                    <div className='detail-amt discount-amt text-success'>0</div>
+                                                </li>
+                                                <li className='price-detail'>
+                                                    <div className='details-title'>Tax</div>
+                                                    <div className='detail-amt discount-amt text-success'>0</div>
+                                                </li>
+                                            </ul>
+                                            <hr/>
+                                            <ul className='list-unstyled price-details'>
+                                                <li className='price-detail'>
+                                                    <div className='details-title'>Amount Payable</div>
+                                                    <div className='detail-amt fw-bolder'>${cartTotalPrice()}</div>
+                                                </li>
+                                            </ul>
+                                        </CardBody>
+                                    </Card>
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
-                </div>
+                </section>
             </UILoader>
-        </PaymentForm>
+        </Form>
     )
 }
 

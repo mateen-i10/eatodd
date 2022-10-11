@@ -11,7 +11,7 @@ const Catering = () => {
     const [cateringMenu, setCateringMenu] = useState([])
     const [activeItem, setActiveItem] = useState(0)
     const [selectedMenuId, setSelectedMenuId] = useState(0)
-    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=5', 'get', {}, {}, true)
+    const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
 
 
     useEffect(() => {
@@ -25,6 +25,13 @@ const Catering = () => {
                 priority: item.priority,
                 isLoading
             }))
+            final.push({
+                id: 0,
+                name: 'Wines',
+                description: 'Select wines',
+                priority: final.length,
+                isLoading
+            })
             setCateringMenu(final)
         }
 
