@@ -50,9 +50,9 @@ const Nutrition = () => {
 
 
     useEffect(() => {
-        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12&&searchQuery=null`)
+        httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
-
+                console.log("response ***", response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response
@@ -182,7 +182,7 @@ const Nutrition = () => {
             <Header/>
             <div
                 className={`container-fluid position-fixed ${isVisible && width > 1100 ? "d-block" : "d-none"}  zindex-3`}
-                style={{backgroundColor: "#ededed"}}>
+                style={{backgroundColor: "#ededed", marginTop: 0}}>
                 <div className="row align-content-center justify-content-center"
                      style={{height: 120}}>
                     <div className="col-10 text-center">

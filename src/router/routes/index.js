@@ -532,6 +532,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/confirmOrder',
+        component: lazy(() => import('../../views/checkoutpage/steps/OrderConfirmation')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/cuisine',
         component: lazy(() => import('../../views/admin/cuisine/Cuisine')),
         layout: 'VerticalLayout',
