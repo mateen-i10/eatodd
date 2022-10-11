@@ -30,7 +30,7 @@ const UserDropdown = () => {
             setUserData(JSON.parse(localStorage.getItem('userData')))
         }
     }, [])
-    const usernameArray = userData?.name.trim().split(/\s+/)
+    const usernameArray = userData?.userName.trim().split(/\s+/)
 
     //** Vars
     const userAvatar = (userData && userData.avatar) || defaultAvatar
@@ -39,15 +39,15 @@ const UserDropdown = () => {
         <UncontrolledDropdown tag='li' className='dropdown-user nav-item '>
             <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link ' onClick={e => e.preventDefault()}>
                 <div className='user-nav d-sm-flex d-none' style={{
-                    width: 154
+                    width: 200
                 }}>
                     <div className="d-inline-block">
                     <span className='user-name fw-bold text-uppercase'
                           style={{
-                              marginRight: 8,
+                              marginRight: 15,
                               marginTop: 12,
-                              fontSize: "1rem"
-                          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['name'].toUpperCase()) || ''}</span>
+                              fontSize: "1.2rem"
+                          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
                         <span style={{
                             marginRight: 8,
                             fontSize: ".7rem"

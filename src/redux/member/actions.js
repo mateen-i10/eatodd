@@ -1,26 +1,20 @@
-import {setLoading, setCustomers, setCustomer, editCustomer} from "./reducer"
-// ** Table Data & Columns
-import { data } from '../../tempData/data'
+import {apiCall} from "../api/actions"
+import {
+    setLoading,
+    setMembers
+} from "./reducer"
+
+const url = 'WinePackage'
 
 // ** Get Customers Data
-export const loadCustomers = () => {
+export const loadMembers = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
-        dispatch(setCustomers([...data]))
-    }
-}
-export const getCustomer = (id, isEdit) => {
-    return async dispatch => {
-        dispatch(setLoading(true))
-        const found = data.find(d => d.id === id)
-        if (isEdit) dispatch(editCustomer({...found}))
-        else {
-            dispatch(setCustomer({...found}))
-        }
-    }
-}
-export const deleteCustomer = (id) => {
-    return async dispatch => {
-        console.log('deleted', id, dispatch)
+        dispatch(apiCall({
+            url: `${url}/GetPackageMembers?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            data: {},
+            method: 'get',
+            onSuccess: setMembers.type
+        }))
     }
 }
