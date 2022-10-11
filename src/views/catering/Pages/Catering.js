@@ -5,12 +5,13 @@ import React, {useEffect, useState} from "react"
 import CateringDetailMenu from "../components/CateringDetailMenu"
 import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
+import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 
 const Catering = () => {
     const [elHovered, setElHovered] = useState({})
     const [cateringMenu, setCateringMenu] = useState([])
-    const [activeItem, setActiveItem] = useState(0)
     const [selectedMenuId, setSelectedMenuId] = useState(0)
+    const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
 
 
@@ -30,6 +31,7 @@ const Catering = () => {
                 name: 'Wines',
                 description: 'Select wines',
                 priority: final.length,
+                isWine: true,
                 isLoading
             })
             setCateringMenu(final)
@@ -38,8 +40,8 @@ const Catering = () => {
 
     }, [response])
     useEffect(() => {
-        setActiveItem(cateringMenu.length ? cateringMenu[0].id : 0)
         setSelectedMenuId(cateringMenu.length ? cateringMenu[0].id : 0)
+        setWineSelected(false)
     }, [cateringMenu])
 
     // console.log(cateringMenu)
@@ -48,9 +50,9 @@ const Catering = () => {
     const toggleList = item => {
         // console.log("Item", item)
         if (selectedMenuId !== item.id) {
-            setActiveItem(item.id)
             setSelectedMenuId(item.id)
         }
+        if (item.isWine) setWineSelected(true)
     }
 
     return (
@@ -105,18 +107,19 @@ const Catering = () => {
                                      }}
                                 >
                                     <div
-                                        className={`text-start text-uppercase ${activeItem === item.id ? "text-primary" : ""}`}
+                                        className={`text-start text-uppercase ${selectedMenuId === item.id ? "text-primary" : ""}`}
                                         style={{fontSize: 15}}>{item.name.toLowerCase() === 'home' ? null : item.name}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div className="col-md-9 col-12 ">
-                        <CateringDetailMenu
+                        {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
                             xl={xl}
                             md={md}
                             id={selectedMenuId}
-                        />
+                        />}
+
                     </div>
                 </div>
             </div> : <div className="m-5"><ComponentSpinner/></div>}

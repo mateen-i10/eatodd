@@ -23,7 +23,6 @@ import UILoader from "../../../@core/components/ui-loader"
 import {useHistory} from "react-router-dom"
 import {toast} from "react-toastify"
 import {PaymentForm, CreditCard} from 'react-square-web-payments-sdk'
-import http, {baseURL} from '../../../utility/http'
 import {Fragment} from "@fullcalendar/core"
 
 const Payment = () => {
@@ -37,7 +36,7 @@ const Payment = () => {
     // local state
     const [placeOrder, setPlaceOrder] = useState({ url: '', order: {}})
     const [loading, setLoading] = useState(false)
-    const [loadingMesssage, setLoadingMessage] = useState('Payment InProgress...')
+    const [loadingMessage, setLoadingMessage] = useState('Payment InProgress...')
     // hooks
     const history = useHistory()
     const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, false)
@@ -98,6 +97,7 @@ const Payment = () => {
     const placeCateringOrder = () => {
         const cateringOrderMenuItems = []
         let cateringOrderSectionItems = []
+        const cateringOrderWines = []
         if (cartData) {
             if (cartData.catering && cartData.catering.length > 0) {
                 cartData.catering.forEach(i => {
@@ -116,7 +116,16 @@ const Payment = () => {
                         }) : []
                 })
             }
-            const totalQuantity = cateringOrderSectionItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderMenuItems.map(i => i.quantity).reduce((pre, next) => pre + next)
+            if (cartData.wines && cartData.wines.length > 0) {
+                cartData.wines.forEach(i => {
+                    cateringOrderWines.push({
+                        quantity : i.selectedQuantity,
+                        unitPrice: i.price,
+                        wineId: i.id
+                    })
+                })
+            }
+            const totalQuantity = cateringOrderSectionItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderMenuItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderWines.map(i => i.quantity).reduce((pre, next) => pre + next)
             // final order object
             const order = {
                 shippingAddress: shippingAddress ? shippingAddress.payload : null,
@@ -126,6 +135,7 @@ const Payment = () => {
                 quantity: totalQuantity,
                 cateringOrderSectionItems,
                 cateringOrderMenuItems,
+                cateringOrderWines,
                 restaurantId: Number(restaurantId)
             }
             console.log('order', order)
@@ -137,33 +147,37 @@ const Payment = () => {
         if (isCatering) placeCateringOrder()
         else placeMealOrder()
     }
+    console.info('yuyiyiuy', submitOrder, setLoadingMessage)
     const getToken = async (token, verifiedBuyer) => {
         console.info('Token:', token)
         console.info('Verified Buyer:', verifiedBuyer)
-        const body = {
-            sourceId: token.token,
-            locationId: process.env.SQUARE_LOCATION_ID,
-            amountMoney: {
-                amount: cartTotalPrice(),
-                currency: 'USD'
+        /*if (token && token.token && token.status === "OK") {
+            setLoadingMessage('Payment InProgress...')
+            const body = {
+                sourceId: token.token,
+                locationId: process.env.SQUARE_LOCATION_ID,
+                amountMoney: {
+                    amount: cartTotalPrice(),
+                    currency: 'USD'
+                }
             }
-        }
-        const res = await http._post(`${baseURL}payment`, {...body})
-        if (res && res.status === 200 && res.data.statusCode === 200) {
-            setLoadingMessage('Booking Order...')
-            submitOrder()
-        } else {
-            setLoading(false)
-            toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
-        }
-        console.log('resss', res)
+            const res = await http._post(`${baseURL}payment`, {...body})
+            if (res && res.status === 200 && res.data.statusCode === 200) {
+                setLoadingMessage('Booking Order...')
+                submitOrder()
+            } else {
+                setLoading(false)
+                toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
+            }
+            console.log('resss', res)
+        }*/
 
     }
     const Loader = () => {
         return (
             <Fragment>
                 <Spinner />
-                <CardText className='mb-0 mt-3 text-white'>{loadingMesssage}</CardText>
+                <CardText className='mb-0 mt-3 text-white'>{loadingMessage}</CardText>
             </Fragment>
         )
     }
@@ -194,6 +208,19 @@ const Payment = () => {
                                                         <Row>
                                                             <PaymentForm  applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
                                                                           locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
+                                                                          createVerificationDetails={() => ({
+                                                                              amount: '1.00',
+                                                                              /* collected from the buyer */
+                                                                              billingContact: {
+                                                                                  addressLines: ['123 Main Street', 'Apartment 1'],
+                                                                                  familyName: 'Doe',
+                                                                                  givenName: 'John',
+                                                                                  countryCode: 'US',
+                                                                                  city: 'California'
+                                                                              },
+                                                                              currencyCode: 'USD',
+                                                                              intent: 'CHARGE'
+                                                                          })}
                                                                           cardTokenizeResponseReceived={getToken}>
                                                                             <CreditCard buttonProps={{
                                                                                 onClick: onCLick

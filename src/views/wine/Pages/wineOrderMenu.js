@@ -1,18 +1,14 @@
 import React, {Fragment, useEffect, useState} from 'react'
-import Header from "../../../shared/header/Header"
-import Footer from "../../../shared/footer/Footer"
 import WineCards from "../components/WineCards"
 import useAPI from "../../../utility/customHooks/useAPI"
-import {addItemToCart} from "../../../utility/Utils"
-import {useHistory, useLocation} from "react-router-dom"
-import {Button} from "reactstrap"
-import {ArrowLeft} from "react-feather"
+import {addCateringItem} from "../../../utility/Utils"
+import {useLocation} from "react-router-dom"
+import UILoader from "../../../@core/components/ui-loader"
 
-const wineOrderMenu = () => {
+const WineOrderMenu = () => {
     const xl = 3
     const md = 6
     const [wines, setWines] = useState([])
-    const history = useHistory()
     const {state} = useLocation()
     const restaurantId = state ? state.restaurantId : 0
     console.log('restaurantId', restaurantId)
@@ -34,23 +30,17 @@ const wineOrderMenu = () => {
     }
 
     }, [response])
-    console.log('isLoading', isLoading)
-    console.log('res', response)
+
     // functions
     const handleAddToCart = (wine) => {
-        addItemToCart(wine, true)
+        addCateringItem(wine, true)
     }
     return (
         <div>
-            <Header/>
             <Fragment>
                 <div className="container-sm mt-5 mb-4">
-                        <Button className='btn-icon rounded-circle mb-1 cursor-pointer' color='secondary' outline onClick={() => {
-                            history.goBack()
-                        }}>
-                            <ArrowLeft size='18'/>
-                        </Button>
-                    <div className="row align-items-center justify-content-center">
+                    <UILoader blocking={isLoading}>
+                        <div className="row align-items-center justify-content-center">
                         {wines.map(item => (
                             <WineCards
                                 key={item.id}
@@ -61,11 +51,11 @@ const wineOrderMenu = () => {
                             />
                         ))}
                     </div>
+                    </UILoader>
                 </div>
             </Fragment>
-            <Footer/>
         </div>
     )
 }
 
-export default wineOrderMenu
+export default WineOrderMenu

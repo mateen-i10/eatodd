@@ -79,41 +79,6 @@ export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {
 
 // cart related functions
 const cartName = 'cartItems'
-export const addItemToCart = (item, isWine = false) => {
-  //getting existing cart items
-  const items = localStorage.getItem(cartName)
-  const cart = JSON.parse(items)
-  const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
-  const finalWines = cart && cart.wines && cart.wines.length > 0 ? [...cart.wines] : []
-  if (isWine) {
-    //updating quantity if wine already exist
-    const index = finalWines.findIndex(p => p.id === item.id)
-    if (index > -1) {
-      item.selectedQuantity = finalWines[index].selectedQuantity + 1
-      finalWines.splice(index, 1, item)
-    } else {
-      item.selectedQuantity = 1
-      finalWines.push(item)
-    }
-  } else {
-    finalMeals.push(item)
-  }
-  localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals], wines: [...finalWines]}))
-  toast.success(`'${isWine ? item.name : item.mealName}' added to cart`)
-  return true
-}
-export const removeItemFromCart = (index, isWine = false) => {
-  //getting existing cart items
-  const items = localStorage.getItem(cartName)
-  if (items && items.length > 0) {
-    const cart = JSON.parse(items)
-    isWine ? cart.wines.splice(index, 1) : cart.meals.splice(index, 1)
-    const finalItems = {...cart, meals: [...cart.meals], wines: cart.wines ? [...cart.wines] : []}
-    localStorage.setItem(cartName, JSON.stringify(finalItems))
-    return true
-  }
-return false
-}
 export const getCartData = () => {
   const string = localStorage.getItem(cartName)
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem(cartName)) : null
@@ -132,31 +97,79 @@ export const cartTotalPrice = () => {
     if (cart.catering && cart.catering.length > 0) cart.catering.forEach(c => {
       totalPrice = totalPrice + c.totalPrice
     })
-    return Number(totalPrice)
+    return Math.round(Number(totalPrice))
+  }
+}
+export const cartTotalItems = () => {
+  const cart = getCartData()
+  if (cart) {
+    let totalQuantity = 0
+    if (cart.meals && cart.meals.length > 0) totalQuantity = totalQuantity + cart.meals.length
+    if (cart.wines && cart.wines.length > 0) totalQuantity = totalQuantity + cart.wines.length
+    if (cart.catering && cart.catering.length > 0) totalQuantity = totalQuantity + cart.catering.length
+    return Number(totalQuantity)
   }
 }
 export const clearCart = () => {
   localStorage.removeItem(cartName)
 }
 
-// catering items
-export const addCateringItem = (item) => {
+// meal items
+export const addItemToCart = (item) => {
   //getting existing cart items
   const items = localStorage.getItem(cartName)
   const cart = JSON.parse(items)
-  const finalCatering = cart && cart.catering && cart.catering.length > 0 ? [...cart.catering] : []
-  finalCatering.push(item)
-  localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering] }))
-  toast.success(`'${item.name}' added to cart`)
+  const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
+    finalMeals.push(item)
+  localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
+  toast.success(`'${item.mealName}' added to cart`)
   return true
 }
-export const removeCateringItemFromCart = (index) => {
+export const removeItemFromCart = (index, isWine = false) => {
   //getting existing cart items
   const items = localStorage.getItem(cartName)
   if (items && items.length > 0) {
     const cart = JSON.parse(items)
-    cart.catering.splice(index, 1)
-    const finalItems = {...cart, catering: [...cart.catering]}
+    isWine ? cart.wines.splice(index, 1) : cart.meals.splice(index, 1)
+    const finalItems = {...cart, meals: [...cart.meals], wines: cart.wines ? [...cart.wines] : []}
+    localStorage.setItem(cartName, JSON.stringify(finalItems))
+    return true
+  }
+return false
+}
+
+// catering items
+export const addCateringItem = (item, isWine = false) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  const cart = JSON.parse(items)
+  const finalCatering = cart && cart.catering && cart.catering.length > 0 ? [...cart.catering] : []
+  const finalWines = cart && cart.wines && cart.wines.length > 0 ? [...cart.wines] : []
+  if (isWine) {
+    //updating quantity if wine already exist
+    const index = finalWines.findIndex(p => p.id === item.id)
+    if (index > -1) {
+      item.selectedQuantity = finalWines[index].selectedQuantity + 1
+      finalWines.splice(index, 1, item)
+    } else {
+      item.selectedQuantity = 1
+      finalWines.push(item)
+    }
+  } else {
+    finalCatering.push(item)
+  }
+
+  localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering], wines: [...finalWines] }))
+  toast.success(`'${item.name}' added to cart`)
+  return true
+}
+export const removeCateringItemFromCart = (index, isWine = false) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  if (items && items.length > 0) {
+    const cart = JSON.parse(items)
+    isWine ? cart.wines.splice(index, 1) : cart.catering.splice(index, 1)
+    const finalItems = {...cart, catering: [...cart.catering], wines: cart.wines ? [...cart.wines] : []}
     localStorage.setItem(cartName, JSON.stringify(finalItems))
     return true
   }
