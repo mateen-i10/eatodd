@@ -11,3 +11,7 @@ export const SectionType = {
     Modifiers: 1,
     Addons: 2
 }
+export const FlavourType = {
+    Normal: 'Normal',
+    Spicy: 'Spicy'
+}

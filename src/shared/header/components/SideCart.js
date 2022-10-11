@@ -57,7 +57,7 @@ const Cart = (props) => {
         setDeleted(result)
     }
     const handleRemoveWine = (index) => {
-        const result = removeItemFromCart(index, true)
+        const result = removeCateringItemFromCart(index, true)
         setDeleted(result)
     }
 

@@ -406,7 +406,7 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/wineOrderMenu',
+        path: '/catering/wines',
         component: lazy(() => import('../../views/wine/Pages/wineOrderMenu')),
         layout: 'BlankLayout'
     },
