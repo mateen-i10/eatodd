@@ -44,14 +44,15 @@ import * as serviceWorker from './serviceWorker'
 const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Suspense fallback={<Spinner />}>
-          <ThemeContext>
-            <LazyApp />
-            <ToastContainer newestOnTop />
-          </ThemeContext>
-    </Suspense>
-  </Provider>,
+
+      <Provider store={store}>
+        <Suspense fallback={<Spinner />}>
+              <ThemeContext>
+                <LazyApp />
+                <ToastContainer newestOnTop />
+              </ThemeContext>
+        </Suspense>
+      </Provider>,
   document.getElementById('root')
 )
 

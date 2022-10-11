@@ -5,25 +5,27 @@ const initialState = {
     miscData: {},
     isRequestCompleted: false,
     isLoading: false,
+    isEdit: false,
     isError: false,
     isSuccess: false
 }
 
-export const setMembers = createAction("memberReducer/setMembers")
-export const setLoading = createAction("memberReducer/setLoading")
-export const setIsMemberError = createAction("memberReducer/setIsMemberError")
-export const setIsMemberSuccess = createAction("memberReducer/setIsMemberSuccess")
-export const setRequestCompleted = createAction("memberReducer/setRequestCompleted")
+export const setCateringCustomers = createAction("cateringReducer/setCateringCustomers")
+export const setLoading = createAction("cateringReducer/setLoading")
+export const setIsCateringCustomerError = createAction("cateringReducer/setIsCateringCustomerError")
+export const setIsCateringCustomerSuccess = createAction("cateringReducer/setIsCateringCustomerSuccess")
+export const setRequestCompleted = createAction("cateringReducer/setRequestCompleted")
 
-const memberReducer = (state = initialState, action) => {
+const cateringReducer = (state = initialState, action) => {
     switch (action.type) {
-        case setMembers.type:
+        case setCateringCustomers.type:
             return {
                 ...state,
                 list: action.payload.data,
                 miscData: action.payload.miscData,
                 isLoading: false,
                 isDetailLoading: false,
+                isEdit: false,
                 isError: false,
                 isSuccess: false
             }
@@ -37,12 +39,12 @@ const memberReducer = (state = initialState, action) => {
                 ...state,
                 isRequestCompleted: action.payload
             }
-        case setIsMemberError.type:
+        case setIsCateringCustomerError.type:
             return {
                 ...state,
                 isError: action.payload
             }
-        case setIsMemberSuccess.type:
+        case setIsCateringCustomerSuccess.type:
             return {
                 ...state,
                 isSuccess: action.payload
@@ -52,4 +54,4 @@ const memberReducer = (state = initialState, action) => {
     }
 }
 
-export default memberReducer
+export default cateringReducer

@@ -219,12 +219,6 @@ export default [
                 navLink: '/membershipTypes'
             },
             {
-                id: 'wine-Promotions',
-                title: 'Promotions',
-                icon: <Volume size={20}/>,
-                navLink: '/promotions'
-            },
-            {
                 id: 'crmEmail',
                 title: 'CRM (Email)',
                 icon: <Mail size={20}/>,

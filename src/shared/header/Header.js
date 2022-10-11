@@ -75,9 +75,17 @@ export default function Header() {
                                     style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                             </div>
                         </div>
-                        <ShoppingCart onClick={() => {
-                            SetOpenDrawer(true)
-                        }}/>
+                        <div className='position-relative'>
+                            <ShoppingCart onClick={() => {
+                                SetOpenDrawer(true)
+                            }}/>
+                            <span
+                                className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
+                                style={{marginLeft: "6px"}}>
+                                    {10}
+                                </span>
+                        </div>
+
                         {openDrawer && (<div>
                                 <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
                             </div>
@@ -156,10 +164,15 @@ export default function Header() {
                                         style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                                 </div>
                             </div>
-                            <div className="cursor-pointer">
+                            <div className="cursor-pointer position-relative">
                                 <ShoppingCart onClick={() => {
                                     SetOpenDrawer(true)
                                 }}/>
+                                <span
+                                    className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
+                                    style={{marginLeft: "6px"}}>
+                                    {10}
+                                </span>
                             </div>
                             {openDrawer && (<div>
                                     <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>

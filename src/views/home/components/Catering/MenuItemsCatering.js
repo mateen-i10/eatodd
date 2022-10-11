@@ -9,7 +9,7 @@ const MenuItemsCatering = (props) => {
 
     const [cateringItems, setCateringItems] = useState([])
     const [isLoading, response] = useAPI(`CateringMenu/GetCateringMenuItem?PageIndex=1&PageSize=4&RefId=${props.id}`)
-    console.log("cat home response *********", response, isLoading)
+    // console.log("cat home response *********", response, isLoading)
 
 
     useEffect(() => {

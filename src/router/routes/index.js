@@ -465,34 +465,6 @@ const Routes = [
         }
     },
     {
-        path: '/promotions',
-        component: lazy(() => import('../../views/admin/WineClubPromotions/Promotions')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
-        path: '/Addpromotions',
-        component: lazy(() => import('../../views/admin/WineClubPromotions/AddPromotion')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-   /* {
-        path: '/addmenuitem',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddMenuItem')),
-        layout: 'VerticalLayout'
-    },
-    {
-        path: '/addCategory',
-        component: lazy(() => import('../../views/restaurants/pages/forms/AddCategory')),
-        layout: 'VerticalLayout'
-    },*/
-    {
         path: '/subCategory',
         component: lazy(() => import('../../views/admin/subCategory/subcategory')),
         layout: 'VerticalLayout',

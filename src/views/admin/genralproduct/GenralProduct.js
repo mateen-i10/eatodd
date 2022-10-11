@@ -107,6 +107,11 @@ const GenralProducts = (props) => {
         setOptionType(newArray)
     }
 
+    const Flavour = async () => [
+        { value: 1, label: 'Spicy' },
+        { value: 2, label: 'Normal' }
+    ]
+
     // ** local States
     const [modalTitle, setModalTitle] = useState('Add Product')
     const [edit, setEdit] = useState(false)
@@ -168,7 +173,8 @@ const GenralProducts = (props) => {
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
-            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false}
+            {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false},
+            {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:true}
         ])
         setModalTitle('Add Product')
         toggle()
@@ -230,11 +236,14 @@ const GenralProducts = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        const flv = formState.flavour.map(e => JSON.stringify(e.label))
+
         setSubmit(true)
         const ingredients = formState.generalProductIngredients?.map(i => {
             return {ingredientId: i.value}
         })
-        const finalData = {...formState, subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
+        const finalData = {...formState, flavour: String(flv), subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
         if (!subcategoryId || subcategoryId === 0) {

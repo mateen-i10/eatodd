@@ -10,8 +10,12 @@ import {
     setLoading,
     setRequestCompleted
 } from "./reducer"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
+
 
 const url = 'cateringMenuItem'
+// const imgUpdateURL = 'Media/UpdateCateringMenuItemProduct'
 
 export const loadCateringMenuItems = (pageIndex = 1, pageSize = 12, searchQuery = null) => {
     return async dispatch => {
@@ -78,7 +82,7 @@ export const addCateringMenu = (data) => {
 }
 
 export const updateCateringMenu = (data) => {
-    console.log('dataEmp', data)
+    // console.log('dataEmp', data)
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -93,4 +97,23 @@ export const updateCateringMenu = (data) => {
         }))
         dispatch(setIsEdit(false))
     }
+}
+export const updateImage = (data) => {
+    // console.log(data, "data from actions")
+    return async () => {
+        return httpService._put(`${baseURL}Media/UpdateCateringMenuItemProduct`, data, {
+            headers: {encType: "multipart/form-data"}
+        }).then(response => {
+            // success case
+            if (response.status === 200 && response.data.statusCode === 200) {
+                toast.success('Image Updated Successfully')
+            } else {
+                //general Error Action
+                toast.error(response.data.message)
+            }
+        }).catch(error => {
+            toast.error(error.message)
+        })
+    }
+
 }
