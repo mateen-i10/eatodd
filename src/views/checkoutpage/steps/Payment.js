@@ -24,6 +24,7 @@ import {useHistory} from "react-router-dom"
 import {toast} from "react-toastify"
 import {PaymentForm, CreditCard} from 'react-square-web-payments-sdk'
 import {Fragment} from "@fullcalendar/core"
+import http, {baseURL} from "../../../utility/http"
 
 const Payment = () => {
     const restaurantId = localStorage.getItem('restaurantId')
@@ -44,8 +45,8 @@ const Payment = () => {
     useEffect(() => {
         setLoading(isLoading)
         if (response && response.data) {
-            isCatering ? history.push('/catering') : history.push('/home')
-            toast.success('Order placed successfully')
+            history.push('/confirmOrder', {data: response.data})
+            //isCatering ? history.push('/catering') : history.push('/home')
             clearCart()
         } else setPlaceOrder({url: '', order: {}})
     }, [response, isLoading])
@@ -151,16 +152,19 @@ const Payment = () => {
     const getToken = async (token, verifiedBuyer) => {
         console.info('Token:', token)
         console.info('Verified Buyer:', verifiedBuyer)
-        /*if (token && token.token && token.status === "OK") {
-            setLoadingMessage('Payment InProgress...')
+        if (token && token.token && token.status === "OK" && verifiedBuyer && verifiedBuyer.token) {
             const body = {
                 sourceId: token.token,
                 locationId: process.env.SQUARE_LOCATION_ID,
+                verificationToken: verifiedBuyer.token,
+                customerEmail: getUserData().email,
                 amountMoney: {
                     amount: cartTotalPrice(),
                     currency: 'USD'
                 }
             }
+            setLoading(true)
+            setLoadingMessage('Payment InProgress...')
             const res = await http._post(`${baseURL}payment`, {...body})
             if (res && res.status === 200 && res.data.statusCode === 200) {
                 setLoadingMessage('Booking Order...')
@@ -169,8 +173,8 @@ const Payment = () => {
                 setLoading(false)
                 toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
             }
-            console.log('resss', res)
-        }*/
+            console.info('yuyyuyuyuyuyiu', res)
+        }
 
     }
     const Loader = () => {
@@ -180,10 +184,6 @@ const Payment = () => {
                 <CardText className='mb-0 mt-3 text-white'>{loadingMessage}</CardText>
             </Fragment>
         )
-    }
-
-    const onCLick = () => {
-        console.log('eee')
     }
 
     return (
@@ -208,23 +208,24 @@ const Payment = () => {
                                                         <Row>
                                                             <PaymentForm  applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
                                                                           locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
-                                                                          createVerificationDetails={() => ({
-                                                                              amount: '1.00',
+                                                                          createVerificationDetails={() => {
+                                                                              setLoading(true)
+                                                                              return {
+                                                                              amount: `${cartTotalPrice()}`,
                                                                               /* collected from the buyer */
                                                                               billingContact: {
-                                                                                  addressLines: ['123 Main Street', 'Apartment 1'],
-                                                                                  familyName: 'Doe',
-                                                                                  givenName: 'John',
+                                                                                  addressLines: [`${billingAddress?.payload?.address1}`],
+                                                                                  familyName: '',
+                                                                                  givenName: '',
                                                                                   countryCode: 'US',
-                                                                                  city: 'California'
+                                                                                  city: billingAddress?.payload?.city
                                                                               },
                                                                               currencyCode: 'USD',
                                                                               intent: 'CHARGE'
-                                                                          })}
+                                                                          }
+                                                                          }}
                                                                           cardTokenizeResponseReceived={getToken}>
-                                                                            <CreditCard buttonProps={{
-                                                                                onClick: onCLick
-                                                                            }}/>
+                                                                            <CreditCard />
                                                             </PaymentForm>
                                                         </Row>
                                                     </Card>
