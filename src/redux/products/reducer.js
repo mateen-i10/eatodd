@@ -54,12 +54,13 @@ const productReducer = (state = initialState, action) => {
             }
         case editproduct.type:
             const data = action.payload.data
-            console.log(data.categoryId, 'here is the cat id ')
+            console.log(data, 'here is the cat id ')
             data.options = data.options.filter(c => c.name !== "Default")
             data.optionsString = JSON.stringify(data.options)
             return {
                 ...state,
                 object: {...data,
+                    flavour: {label: data.flavour.name, value: data.flavour.id},
                     category: {label: data.category.name, value: data.category.id},
                     restaurant: {label: data.restaurant.name, value: data.restaurant.id},
                     productIngredients: data.productIngredients.map(i => {

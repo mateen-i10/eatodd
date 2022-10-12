@@ -94,8 +94,9 @@ const Product = (props) => {
         {type:FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name:'productIngredients', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Ingredient, isAsyncSelect: true, isMulti:true},
         {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:true},
-        {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
+        {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+        {type:FieldTypes.CheckBox, label: 'IsSpicy', name:'isSpicy', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
     ])
 
     const [edit, setEdit] = useState(false)
@@ -182,9 +183,11 @@ const Product = (props) => {
         taxPercentage: '',
         // restaurant: [],
         // category: [],
-        isDrink: false
+        isDrink: false,
+        isSpicy: false
     })
-    useModalError(isError, setModalLoading, setIsproductError)
+    useModalError(isError,
+        setModalLoading, setIsproductError)
 
     const addClick = () => {
         setModalTitle('Add Product')
@@ -232,8 +235,6 @@ const Product = (props) => {
         setSubmit(true)
         event.preventDefault()
 
-        const flv = formState.flavour.map(e => JSON.stringify(e.label))
-
         console.log('lets see the value of :', formFeilds)
 
         let finalData = {}
@@ -250,7 +251,7 @@ const Product = (props) => {
            const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
-           finalData  = {...formState, flavour: String(flv), subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
+           finalData  = {...formState, flavourId: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
            delete finalData.generalProductId
        } else if (formFeilds === 0) {
            finalSchema = Joi.object({
@@ -262,7 +263,6 @@ const Product = (props) => {
        }
         console.log(finalData, "lets see")
 
-        console.log(String(flv), "flavour")
         const isError = formModalRef.current.validateWithSchema(formState, finalSchema)
         if (isError) return
 
