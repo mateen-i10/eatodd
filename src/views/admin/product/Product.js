@@ -73,8 +73,8 @@ const Product = (props) => {
     ]
 
     const Flavour = async () => [
-        { value: 1, label: 'Spicy' },
-        { value: 2, label: 'Normal' }
+        { value: 'Spicy', label: 'Spicy' },
+        { value: 'Normal', label: 'Normal' }
     ]
 
     // ** local States
@@ -95,8 +95,7 @@ const Product = (props) => {
         {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
-        {type:FieldTypes.CheckBox, label: 'IsSpicy', name:'isSpicy', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
+        {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
     ])
 
     const [edit, setEdit] = useState(false)
@@ -239,10 +238,10 @@ const Product = (props) => {
 
         let finalData = {}
         let finalSchema = {}
-       if (formFeilds === 1 || formFeilds === 3) {
+       if (formFeilds === 1 || formFeilds === 3 || edit === true) {
             finalSchema = Joi.object({
                 name: Joi.string().required().label('Name'),
-                wholePrice: Joi.string().required().label("WholePrice"),
+                wholePrice: Joi.number().required().label("WholePrice"),
                 category: Joi.required().label('Category'),
                 restaurant: Joi.required().label("Restaurant"),
                 optionType: Joi.required().label("OptionType")
@@ -251,23 +250,32 @@ const Product = (props) => {
            const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
-           finalData  = {...formState, flavourId: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
+           finalData  = {...formState, flavour: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
            delete finalData.generalProductId
        } else if (formFeilds === 0) {
            finalSchema = Joi.object({
-               generalProduct: Joi.required().label("general product"),
+               generalProduct: Joi.required().label("General product"),
                restaurant: Joi.required().label("Restaurant")
            })
 
            finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
        }
+
+       const keys = Object.keys(finalData)
+        console.log('key', keys)
+        for (const key of keys) {
+            // console.log('finalData[key]', finalData[key])
+            if (finalData[key] === undefined || finalData[key] === null) delete finalData[key]
+        }
+
         console.log(finalData, "lets see")
+        console.log(formState, "formState")
+        console.log(finalSchema, "finalSchema")
 
         const isError = formModalRef.current.validateWithSchema(formState, finalSchema)
-        if (isError) return
+        console.log(isError, 'errors')
+         if (isError) return
 
-        delete finalData.modifiedById
-        delete finalData.modifiedDate
 
         // call api
         setModalLoading(true)
@@ -278,7 +286,7 @@ const Product = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadproducts(currentPage + 1, pageSize, value))
+            dispatch(loadproducts(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -386,6 +394,7 @@ const Product = (props) => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
+                                onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
                         </Col>

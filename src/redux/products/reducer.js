@@ -60,7 +60,7 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 object: {...data,
-                    flavour: {label: data.flavour.name, value: data.flavour.id},
+                    flavour: {label: data.flavour, value: data.flavour},
                     category: {label: data.category.name, value: data.category.id},
                     restaurant: {label: data.restaurant.name, value: data.restaurant.id},
                     productIngredients: data.productIngredients.map(i => {
