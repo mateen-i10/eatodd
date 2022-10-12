@@ -406,7 +406,7 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/wineOrderMenu',
+        path: '/catering/wines',
         component: lazy(() => import('../../views/wine/Pages/wineOrderMenu')),
         layout: 'BlankLayout'
     },
@@ -529,6 +529,11 @@ const Routes = [
     {
         path: '/checkout',
         component: lazy(() => import('../../views/checkoutpage/CheckOut')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/confirmOrder',
+        component: lazy(() => import('../../views/checkoutpage/steps/OrderConfirmation')),
         layout: 'BlankLayout'
     },
     {

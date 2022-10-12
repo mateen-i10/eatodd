@@ -1,13 +1,14 @@
 // ** React Imports
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table} from 'reactstrap'
+import {Card, CardBody, CardText, Row, Col, Badge, Table, CardImg} from 'reactstrap'
 // ** Styles
 import '../../../@core/scss/base/pages/app-invoice.scss'
-import tempimg from '../../../../src/assets/images/my-images/grp.jpg'
 import UILoader from "../../../@core/components/ui-loader"
 import {getRestaurant} from "../../../redux/restaurant/actions"
 import {WeekDays} from "../../../utility/enums/WeekDays"
+import coverImage from '@src/assets/images/pages/vuexy-login-bg.jpg'
+import moment from "moment"
 
 const RestaurantDetail = ({match}) => {
     const id = match.params.id
@@ -25,97 +26,81 @@ const RestaurantDetail = ({match}) => {
         <div>
             <UILoader blocking={isLoading}>
                 <Card>
-                    <Row className='p-2'>
-                        <Col className='d-flex' md='3' xs='12'>
-                            <div className='d-flex'>
-                                <img className='img-fluid product-img' src={tempimg} alt="User Profile Image" style={{padding: 25, maxHeight:266}} />
-                            </div>
-                        </Col>
-                        <Col md='9' xs='12'>
-                            <CardBody style={{maxHeight: 450}}>
-                                <h2 className='mb-75'>Restaurant Details</h2>
-                                <Row>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Name:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText className="text-capitalize">{restaurant.name}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Phone Number:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{restaurant.phoneNo}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Latitude:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{restaurant.address?.latitude}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Longitude:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <CardText>{restaurant.address?.longitude}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={6}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-5'>
-                                                <h5 className='mb-75'>Status:</h5>
-                                            </div>
-                                            <div className='col-7'>
-                                                <Badge className="mb-1"
-                                                       color={restaurant.isActive ? 'light-success' : 'light-danger'}
-                                                       pill>
-                                                    {restaurant.isActive ? 'Active' : 'In Active'}
-                                                </Badge>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-2'>
-                                                <h5 className='mb-75'>Address:</h5>
-                                            </div>
-                                            <div className='col-10'>
-                                                <CardText>{restaurant.address?.address1}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                    <Col xl={12}>
-                                        <div className='mt-2 row'>
-                                            <div className='col-2'>
-                                                <h5 className='mb-75'>Description</h5>
-                                            </div>
-                                            <div className='col-10'>
-                                                <CardText>{restaurant.description}</CardText>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Col>
-                    </Row>
-                    <Row>
+                    <div className='invoice-preview-wrapper'>
+                        <Row className='invoice-preview'>
+                            <Col xl={12} md={12} sm={12}>
 
-                    </Row>
+                                <Card className='profile-header mb-2'>
+                                    <CardImg src={coverImage} alt='User Profile Image' top style={{maxHeight: 150}}/>
+                                    <div className='position-absolute' style={{paddingLeft: "50px", paddingTop: "15px"}}>
+                                        <div className='profile-img-container d-flex align-items-center'>
+                                            <div className='profile-title ms-3 mt-3'>
+                                                <h2 className='text-black text-capitalize'>{`${restaurant.name} `}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Card>
+
+                                <Card>
+                                    <CardBody>
+                                        <h2 className='mb-75'>Detail:</h2>
+                                        <Row>
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Name:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">{`${restaurant.name}`}</CardText>
+                                                </div>
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Phone No:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">{restaurant.phoneNo}</CardText>
+                                                </div>
+                                            </Col>
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Latitude:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">{restaurant.address?.latitude}</CardText>
+                                                </div>
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Longitude:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">{restaurant.address?.longitude}</CardText>
+                                                </div>
+                                            </Col>
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Status:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        <Badge className=""
+                                                               color={restaurant.isActive ? 'light-success' : 'light-danger'}
+                                                               pill>
+                                                            {restaurant.isActive ? 'Active' : 'In Active'}
+                                                        </Badge>
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            <Col xl={12} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Address:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${restaurant.address?.address1}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            <Col xl={12} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Description:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${restaurant.description}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </CardBody>
+                                </Card>
+
+                            </Col>
+                        </Row>
+                    </div>
+
                     <hr />
                     <Row className='p-2'>
                         <Col md='12' xs='12'>
@@ -124,7 +109,6 @@ const RestaurantDetail = ({match}) => {
                                 <Table responsive>
                                     <thead>
                                     <tr>
-                                        <th>Restaurant id</th>
                                         <th>Day</th>
                                         <th>Start Time</th>
                                         <th>End Time</th>
@@ -132,12 +116,11 @@ const RestaurantDetail = ({match}) => {
                                     </tr>
                                     </thead>
                                     {restaurant.restaurantSchedules?.map(i => (
-                                        <tbody key={i.id}>
+                                        <tbody key={WeekDays[i.day]}>
                                         <tr>
-                                            <td>{i.restaurantId}</td>
                                             <td>{WeekDays[i.day]}</td>
-                                            <td>{i.endDate}</td>
-                                            <td>{i.startDate}</td>
+                                            <td>{i.startDate ? moment(i.startDate).format('hh:mm:A') : '--'}</td>
+                                            <td>{i.startDate ? moment(i.endDate).format('hh:mm:A') : '--'}</td>
                                             <td>{i.isClosed ? "Closed" : "Not Closed"}</td>
                                         </tr>
                                         </tbody>
