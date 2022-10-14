@@ -12,6 +12,7 @@ import {isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 
 export default function Header({isSimple}) {
+    const totalItems = useSelector(state => state.cartItems.total)
     const history = useHistory()
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ export default function Header({isSimple}) {
 
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
+
     useEffect(() => {
         const handleResizeWindow = () => setWidth(window.innerWidth)
         // subscribe to window resize event "onComponentDidMount"
@@ -86,7 +88,7 @@ export default function Header({isSimple}) {
                             <span
                                 className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
                                 style={{marginLeft: "6px"}}>
-                                    {10}
+                                    {totalItems}
                                 </span>
                         </div>
 
