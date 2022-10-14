@@ -165,7 +165,7 @@ const CateringMenus = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadCateringMenus(currentPage + 1, pageSize, value))
+            dispatch(loadCateringMenus(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -285,6 +285,7 @@ const CateringMenus = (props) => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
+                                onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
                         </Col>

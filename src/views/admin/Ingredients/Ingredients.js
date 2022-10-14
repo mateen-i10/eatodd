@@ -155,7 +155,7 @@ const Ingredients = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadIngredients(currentPage + 1, pageSize, value))
+            dispatch(loadIngredients(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -286,7 +286,8 @@ const Ingredients = (props) => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
-                                onChange={(e) => handleFilter(e)}
+                                onKeyUp={handleFilter}
+                                onChange={handleFilter}
                             />
                         </Col>
                     </Row>

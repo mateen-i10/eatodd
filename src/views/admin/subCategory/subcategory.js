@@ -171,7 +171,7 @@ const SubCategory = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadSubCategorys(currentPage + 1, pageSize, value))
+            dispatch(loadSubCategorys(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -284,6 +284,7 @@ const SubCategory = (props) => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
+                                onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
                         </Col>
