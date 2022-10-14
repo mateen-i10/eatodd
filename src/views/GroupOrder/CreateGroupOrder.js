@@ -3,8 +3,11 @@ import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import {Button} from "reactstrap"
 import {Link} from "react-router-dom"
+// import {getUserData} from "../../auth/utils"
 
 const CreateGroupOrder = () => {
+    // const userdata = getUserData()
+    // console.log(userdata, "userdata")
     return (
         <div>
             <Header/>
@@ -28,16 +31,32 @@ const CreateGroupOrder = () => {
                             and get status
                             updates
                         </div>
+                        {/*{userdata !== null && <div className=" fw-bold mb-2" style={{fontSize: "2.3rem", color: "black", textTransform: 'capitalize'}}>User has invited you to eat EatOmg today.</div>}*/}
+
                         <div className="mb-2" style={{fontSize: "1.1rem"}}>We will provide a link to share with your
                             group. Up to 20
                             participant meals can be added
                             and you get all the points.
                         </div>
 
-                        <div className="mb-2"><Button
+                        {/*{userdata !== null && <div style={{textAlign: 'start'}}>*/}
+                        {/*    <Label>Full Name</Label>*/}
+                        {/*    <Input placeholder='Enter your full name' />*/}
+                        {/*</div>}*/}
+
+                        {/*{userdata !== null && <div className="mb-2 mt-2">*/}
+                        {/*    <Button*/}
+                        {/*        style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">Join*/}
+                        {/*        Group*/}
+                        {/*        order</Button>*/}
+                        {/*</div>}*/}
+
+                        <div className="mb-2">
+                            <Button
                             style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">Create
                             Group
-                            order</Button></div>
+                            order</Button>
+                        </div>
                         <div className="mb-1" style={{fontSize: "1.1rem"}}>Need more than 20 participant meals?</div>
                         <Link to="/catering">
                             <div className="text-decoration-underline text-black fw-bold mb-2 cursor-pointer"

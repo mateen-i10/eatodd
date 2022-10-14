@@ -203,6 +203,11 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
+        path: '/order/group/joinGroupOrder',
+        component: lazy(() => import('../../views/GroupOrder/JoinGroupOrder')),
+        layout: 'BlankLayout'
+    },
+    {
         path: '/Restaurant',
         component: lazy(() => import('../../views/admin/Restaurant/Restaurant')),
         layout: 'VerticalLayout',
