@@ -11,11 +11,12 @@ import {Button} from "reactstrap"
 import {isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 
-export default function Header() {
+export default function Header({isSimple}) {
     const history = useHistory()
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     const [openDrawer, SetOpenDrawer] = useState(false)
+    const [count, setCount] = useState(1)
     const dispatch = useDispatch()
 
     const {userLocation} = useSelector(state => state)
@@ -37,7 +38,6 @@ export default function Header() {
     const onCateringClick = () => {
         history.push('/gmap', {returnURL: 'catering', isCatering: true})
     }
-
     if (width > breakpoint) {
         return (
             <div className="sticky-top">
@@ -49,20 +49,24 @@ export default function Header() {
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>}
                     </div>
-                    <div className="head-sec-2">
-                        <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("home"))}>HOME</h2></Link>
-                        <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("order"))}>ORDER</h2></Link>
+                    {!isSimple && <div className="head-sec-2">
+                        <Link to="/"><h2 onClick={() => {
+                            dispatch(scrollToOrderAdded("home"))
+                        }}>HOME</h2></Link>
+                        <Link to="/"><h2 onClick={() => {
+                            dispatch(scrollToOrderAdded("order"))
+                        }}>ORDER</h2></Link>
                         <h2 onClick={onCateringClick} className='cursor-pointer'>CATERING</h2>
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                         {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
-                    </div>
-                    {isUserLoggedIn() && <ul className="user-login list-unstyled">
+                    </div>}
+                    {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled">
                         <UserDropdown/>
                     </ul>}
                     <div className="head-3 align-items-center cursor-pointer">
-                        <div className=" delivery-addr-bar">
+                        {!isSimple && <div className=" delivery-addr-bar">
                             <div className="img-separator">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
                                            style={{height: 25, width: 33, marginLeft: -8, marginTop: 6}}/> </span>
@@ -74,7 +78,7 @@ export default function Header() {
                                     className="address-1 fw-bolder"
                                     style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                             </div>
-                        </div>
+                        </div>}
                         <div className='position-relative'>
                             <ShoppingCart onClick={() => {
                                 SetOpenDrawer(true)
@@ -92,6 +96,30 @@ export default function Header() {
                         )}
                     </div>
                 </header>
+                {count > 0 ? <div className="container-fluid mb-0 pb-0">
+                    <div className="row alert alert-primary align-items-center" style={{
+                        marginBottom: 0,
+                        height: "45px"
+                    }
+                    }>
+                        <div className="col-9 text-center text-black text-uppercase">Items in cart. Please complete your
+                            order!
+                        </div>
+                        <div className="col-3 me-0 text-end" style={{}}>
+                            <div className='btn btn-primary btn-sm text-uppercase me-1'
+                                 onClick={() => {
+                                     history.push('/checkout')
+                                 }}>Checkout
+                            </div>
+                            <div className='btn btn-danger btn-sm text-uppercase'
+                                 onClick={() => {
+                                     setCount(0)
+                                     // history.push('/checkout')
+                                 }}>X
+                            </div>
+                        </div>
+                    </div>
+                </div> : null}
             </div>
         )
     }

@@ -57,7 +57,7 @@ const MyForm =  (props, ref) => {
                 errors[d.path[0]] = d.message
             })
             setErrors({...errors})
-
+            console.log('yes', errors)
             return true
         }
     }), [])
