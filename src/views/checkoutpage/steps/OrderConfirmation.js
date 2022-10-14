@@ -1,8 +1,11 @@
 import React from 'react'
 import Footer from "../../../shared/footer/Footer"
 import Header from "../../../shared/header/Header"
+import {useLocation} from "react-router-dom"
 
 const OrderConfirmation = () => {
+    const {state} = useLocation()
+    console.log('state', state)
     return (
         <>
             <Header/>
