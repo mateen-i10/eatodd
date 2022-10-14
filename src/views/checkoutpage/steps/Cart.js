@@ -1,10 +1,11 @@
 import React, {useState} from "react"
-import {Button, Card, CardBody, Col, Input, InputGroup, InputGroupText, Row} from 'reactstrap'
-import Items from "./component/Items"
+import {Button, Card, CardBody, Col, Input, InputGroup, InputGroupText, Row, Table} from 'reactstrap'
 import {cartTotalPrice, getCartData} from "../../../utility/Utils"
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
+import Items from "./component/Items"
+import WineItems from "./component/WineItems"
 
 
 const Cart = props => {
@@ -12,34 +13,104 @@ const Cart = props => {
     const {stepper} = props
 
     const cartItems = getCartData()
-    // console.log(cartItems)
-    // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
-    //     if (!value) return value
-    //     return new Intl.DateTimeFormat('en-US', formatting).format(new Date(value))
-    // }
+    const meals = cartItems?.meals
+    const catOrder = cartItems?.catering
+    const wines = cartItems?.wines
+
+    console.log('meals, catorder or wines', meals, catOrder, wines)
+    console.log(cartItems)
     const [item] = useState([])
-
-    // const mealName = ""
-    // const mainItems = []
-    // const additinalItems = []
-    /*const handleAdd = (e) => {
-        // console.log(e)
-        setItem([...item, e])
-    }*/
-
     return (
         <>
             <div className='list-view product-checkout' style={{marginBottom: 60}}>
 
                 <div className='container-sm'>
                     <Row>
-                        <Col xl={9}>
-                            {cartItems && cartItems.meals && cartItems.meals.map((foodItems, index) => (
-                                <div key={index} className='checkout-items'>
-                                    {/*<Items foodItems={foodItems} handleAdd={handleAdd}/>*/}
-                                </div>
-                            ))}
-                        </Col>
+                        {meals && meals?.length ? <Col xl={9}>
+                            <Card className='ecommerce-card'>
+                                <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
+                                    {meals.map((item, index) => (
+                                        <div key={index} className='checkout-items'>
+                                            <Items item={item} isQuantity={false}/>
+                                        </div>
+                                    ))}
+                                    <hr className="mt-2"/>
+                                    <Row>
+                                        <Col xl={12}>
+                                            <Table responsive>
+                                                <tbody>
+                                                <tr className=' '>
+                                                    <td className='text-start text-uppercase fw-bolder fs-3'>
+                                                        Total Price
+                                                    </td>
+                                                    <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col> : catOrder && catOrder?.length > 0 && wines.length > 0 ? <Col xl={9}>
+                            <Card className='ecommerce-card'>
+                                <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
+                                    {catOrder.map((item, index) => (
+                                        <div key={index} className='checkout-items'>
+                                            <Items item={item} isQuantity={false}/>
+                                        </div>
+                                    ))}
+                                    {/*{wines.map((item, index) => (*/}
+                                    <div className='checkout-items'>
+                                        <WineItems item={wines}/>
+                                    </div>
+                                    {/*))}*/}
+                                    <hr className="mt-2"/>
+                                    <Row>
+                                        <Col xl={12}>
+                                            <Table responsive>
+                                                <tbody>
+                                                <tr className=' '>
+                                                    <td className='text-start text-uppercase fw-bolder fs-3'>
+                                                        Total Price
+                                                    </td>
+                                                    <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col> : catOrder && catOrder?.length ? <Col xl={9}>
+                            <Card className='ecommerce-card'>
+                                <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
+                                    {catOrder.map((item, index) => (
+                                        <div key={index} className='checkout-items'>
+                                            <Items item={item} isQuantity={false}/>
+                                        </div>
+                                    ))}
+
+                                    <hr className="mt-2"/>
+                                    <Row>
+                                        <Col xl={12}>
+                                            <Table responsive>
+                                                <tbody>
+                                                <tr className=' '>
+                                                    <td className='text-start text-uppercase fw-bolder fs-3'>
+                                                        Total Price
+                                                    </td>
+                                                    <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col> : <Col lg={9}/>}
                         <Col xl={3}>
                             <div className='checkout-options'>
                                 <Card>
