@@ -17,6 +17,14 @@ const Routes = [
         }
     },
     {
+        path: '/group-order-menu',
+        component: lazy(() => import('../../views/home/components/groupOrderMenu')),
+        layout: 'BlankLayout',
+        meta: {
+            publicRoute: true
+        }
+    },
+    {
         path: '/auth/verification',
         component: lazy(() => import('../../views/authentication/Verification')),
         layout: 'BlankLayout'
