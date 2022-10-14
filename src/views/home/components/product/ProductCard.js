@@ -8,6 +8,8 @@ import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
 
+import chilli from '../../../../assets/images/ORDER/chilli.png'
+
 const ProductCard = ({
                          item,
                          limit,
@@ -22,6 +24,7 @@ const ProductCard = ({
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
+    console.log(item.flavour, "items coming from product card comp")
     const imgStyles = {
         width: "100%",
         height: 99,
@@ -145,7 +148,7 @@ const ProductCard = ({
                                             fontSize: '1.1em',
                                             lineHeight: "18px",
                                             marginTop: "-6px"
-                                        }}>{item?.name}</div>
+                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20}/>}</div>
                                     <p className="mb-0 text-dark  ">{item?.description}</p>
 
                                 </div>
