@@ -2,11 +2,14 @@ import React from 'react'
 import {Col, Row, Table} from "reactstrap"
 // import classnames from "classnames"
 
-const Items = (props) => {
-    const {item, isQuantity} = props
+const WineItems = (props) => {
+    const {item} = props
     console.log('foodItems', item)
-
-
+    let total = 0
+    for (const i in item) {
+        total = total + (item[i]?.price * item[i]?.selectedQuantity)
+    }
+    // console.log("total price", total)
     return (
         <section>
             <div className='container-sm' style={{maxHeight: 'auto'}}>
@@ -19,9 +22,10 @@ const Items = (props) => {
                                     <tbody>
                                     <tr className=' '>
                                         <td className='text-start text-primary text-uppercase fw-bolder fs-4'>
-                                            {item?.mealName ? item.mealName : item.name}
+                                            Wines
                                         </td>
-                                        <td className='text-end text-primary text-uppercase fw-bolder fs-4'>$ {item?.totalPrice}
+                                        <td className='text-end text-primary text-uppercase fw-bolder fs-4'>
+                                            $ {total}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -34,22 +38,22 @@ const Items = (props) => {
                                     <thead>
                                     <tr>
                                         <th className='text-start'>Name</th>
-                                        {isQuantity === true ? <th className='text-center'>Quantity</th> : null}
+                                        <th className='text-center'>Quantity</th>
                                         <th className='text-center'>Price</th>
                                         <th className='text-center'>Total Price</th>
                                     </tr>
                                     </thead>
-                                    {item?.selectedProducts.map((subItem, id) => (<tbody key={id}>
+                                    {item?.map((subItem, id) => (<tbody key={id}>
                                         <tr className=' '>
                                             <td className='text-start'>
                                                 {subItem.name}
                                             </td>
-                                            {isQuantity === true ? <td className='text-center'>{subItem.selectedQuantity}
-                                                </td> : null}
+                                            <td className='text-center'>{subItem.selectedQuantity}
+                                            </td>
                                             <td className='text-center'>
                                                 $ {subItem.price}
                                             </td>
-                                            <td className='text-center'>$ {subItem.calculatedPrice}
+                                            <td className='text-center'>$ {subItem?.price * subItem?.selectedQuantity}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -66,4 +70,4 @@ const Items = (props) => {
     )
 }
 
-export default Items
+export default WineItems
