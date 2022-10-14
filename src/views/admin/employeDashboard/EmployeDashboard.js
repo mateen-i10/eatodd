@@ -13,98 +13,51 @@ import {
 } from 'reactstrap'
 import {Briefcase, DollarSign, Users, MoreVertical, Edit, Trash, ChevronDown} from "react-feather"
 // ** React Imports
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 // ** Context
 import { ThemeColors } from '../../../utility/context/ThemeColors'
 // ** Demo Components
 // import CompanyTable from './CompanyTable'
 import Earnings from '../../../ui-elements/Cards/analytics/Earnings'
-import CardMedal from '../../../ui-elements/Cards/advance/CardMedal'
-import CardMeetup from '../../../ui-elements/Cards/advance/CardMeetup'
 import StatsCard from '../../../ui-elements/Cards/statistics/StatsCard'
-import CardTransactions from '../../../ui-elements/Cards/advance/CardTransactions'
-import CardBrowserStates from '../../../ui-elements/Cards/advance/CardBrowserState'
-import DataTable from "react-data-table-component"
 import ReactPaginate from "react-paginate"
-import {loadCuisines} from "../../../redux/cuisine/actions"
+import {useDispatch, useSelector} from "react-redux"
+import {getEmployeesDashboard} from "../../../redux/employeeDashboard/action"
+import UILoader from "../../../@core/components/ui-loader"
 
-const EmployeDashboard = () => {
+const EmployeeDashboard = () => {
     // ** Context
     const { colors } = useContext(ThemeColors)
 
-    //data table
+    //getting data from store
+    const isLoading = useSelector(state => state.employeeDashboard.isDetailLoading)
+    const miscData = useSelector(state => state.employeeDashboard.miscData)
+    const empDashboardOrders = useSelector(state => state.employeeDashboard.list)
+    console.log('emp', empDashboardOrders)
 
-    const miscData = {
-        pageIndex: 1,
-        pageSize: 10,
-        refId: 1,
-        searchQuery: null,
-        total: 4,
-        totalPages: 1
-    }
+    // hooks
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(getEmployeesDashboard())
+    }, [])
+
+    // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
-    // const [pageSize] = useState(10)
+    const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadCuisines(currentPage + 1, pageSize, value))
+            dispatch(getEmployeesDashboard(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
 
-    const data = [
-        {
-            ordername: 'Chicken meal',
-            restaurantName: 'Subway',
-            orderDate: '10-oct-2022',
-            status: 'true'
-        }
-    ]
-
-    const columns = [
-        {
-            name: 'Order Name',
-            selector: (row) => row.ordername,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Restaurant Name',
-            selector: (row) => row.restaurantName,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Order Date',
-            selector: (row) => row.orderDate,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Status',
-            selector: (row) => row.status,
-            sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Actions',
-            allowOverflow: true,
-            cell: () => {
-                return (
-                    <div className='d-flex'>
-                        <span className='cursor-pointer mx-1' onClick={() => console.log('Delete Item')}><Trash size={15} /></span>
-                        <span className='cursor-pointer' onClick={() => console.log('Edit Click') }><Edit size={15} /></span>
-                    </div>
-                )
-            }
-        }
-    ]
-
     const handlePagination = page => {
+        dispatch(getEmployeesDashboard(page.selected + 1, pageSize, searchValue))
         setCurrentPage(page.selected + 1)
     }
 
@@ -144,169 +97,74 @@ const EmployeDashboard = () => {
     // }
 
     return (
-        <div id='dashboard-ecommerce'>
-            <Row className='match-height'>
-                <Col xl='4' md='6' xs='12'>
-                    <Earnings success={colors.success.main} />
-                </Col>
-                <Col xl='8' md='6' xs='12'>
-                    <StatsCard cols={{ xl: '3', sm: '6' }} />
-                </Col>
-            </Row>
-            <Row className='match-height'>
-                <Col lg='12' xs='12'>
-                    <Row className='justify-content-end mx-0'>
-                        <Col className='mt-1' md='12' sm='12'>
-                            <Input
-                                className='dataTable-filter mb-50'
-                                type='text'
-                                placeholder='Search'
-                                bsSize='sm'
-                                id='search-input'
-                                value={searchValue}
-                                onChange={handleFilter}
-                            />
-                        </Col>
-                    </Row>
-                    <DataTable
-                        noHeader
-                        pagination
-                        paginationServer
-                        className='react-dataTable'
-                        columns={columns}
-                        sortIcon={<ChevronDown size={10} />}
-                        paginationComponent={CustomPagination}
-                        data={data}
-                    />
-                    {/*<div className='card'>*/}
-                    {/*    <div className="card-body">*/}
-                    {/*        <Table responsive>*/}
-                    {/*            <thead>*/}
-                    {/*            <tr>*/}
-                    {/*                <th>Order Name</th>*/}
-                    {/*                <th>Restaurant Name</th>*/}
-                    {/*                <th>Order Date</th>*/}
-                    {/*                <th>Status</th>*/}
-                    {/*                <th>Actions</th>*/}
-                    {/*            </tr>*/}
-                    {/*            </thead>*/}
-                    {/*            <tbody>*/}
-                    {/*            <tr>*/}
-                    {/*                <td>Job 1</td>*/}
-                    {/*                <td>Project Test</td>*/}
-                    {/*                <td>March 30, 2022</td>*/}
-                    {/*                <td>*/}
-                    {/*                    <Badge pill color='light-primary' className='me-1'>*/}
-                    {/*                        Active*/}
-                    {/*                    </Badge>*/}
-                    {/*                </td>*/}
-                    {/*                <td>*/}
-                    {/*                    <UncontrolledDropdown>*/}
-                    {/*                        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                    {/*                            <MoreVertical size={15} />*/}
-                    {/*                        </DropdownToggle>*/}
-                    {/*                        <DropdownMenu>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Edit className='me-50' size={15} /> <span className='align-middle'>Edit</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Trash className='me-50' size={15} /> <span className='align-middle'>Delete</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                        </DropdownMenu>*/}
-                    {/*                    </UncontrolledDropdown>*/}
-                    {/*                </td>*/}
-                    {/*            </tr>*/}
-                    {/*            <tr>*/}
-                    {/*                <td>Job 1</td>*/}
-                    {/*                <td>Project Test</td>*/}
-                    {/*                <td>March 30, 2022</td>*/}
-                    {/*                <td>*/}
-                    {/*                    <Badge pill color='light-primary' className='me-1'>*/}
-                    {/*                        Active*/}
-                    {/*                    </Badge>*/}
-                    {/*                </td>*/}
-                    {/*                <td>*/}
-                    {/*                    <UncontrolledDropdown>*/}
-                    {/*                        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                    {/*                            <MoreVertical size={15} />*/}
-                    {/*                        </DropdownToggle>*/}
-                    {/*                        <DropdownMenu>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Edit className='me-50' size={15} /> <span className='align-middle'>Edit</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Trash className='me-50' size={15} /> <span className='align-middle'>Delete</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                        </DropdownMenu>*/}
-                    {/*                    </UncontrolledDropdown>*/}
-                    {/*                </td>*/}
-                    {/*            </tr>*/}
-                    {/*            <tr>*/}
-                    {/*                <td>Job 1</td>*/}
-                    {/*                <td>Project Test</td>*/}
-                    {/*                <td>March 30, 2022</td>*/}
-                    {/*                <td>*/}
-                    {/*                    <Badge pill color='light-primary' className='me-1'>*/}
-                    {/*                        Active*/}
-                    {/*                    </Badge>*/}
-                    {/*                </td>*/}
-                    {/*                <td>*/}
-                    {/*                    <UncontrolledDropdown>*/}
-                    {/*                        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                    {/*                            <MoreVertical size={15} />*/}
-                    {/*                        </DropdownToggle>*/}
-                    {/*                        <DropdownMenu>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Edit className='me-50' size={15} /> <span className='align-middle'>Edit</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Trash className='me-50' size={15} /> <span className='align-middle'>Delete</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                        </DropdownMenu>*/}
-                    {/*                    </UncontrolledDropdown>*/}
-                    {/*                </td>*/}
-                    {/*            </tr>*/}
-                    {/*            <tr>*/}
-                    {/*                <td>Job 1</td>*/}
-                    {/*                <td>Project Test</td>*/}
-                    {/*                <td>March 30, 2022</td>*/}
-                    {/*                <td>*/}
-                    {/*                    <Badge pill color='light-primary' className='me-1'>*/}
-                    {/*                        Active*/}
-                    {/*                    </Badge>*/}
-                    {/*                </td>*/}
-                    {/*                <td>*/}
-                    {/*                    <UncontrolledDropdown>*/}
-                    {/*                        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                    {/*                            <MoreVertical size={15} />*/}
-                    {/*                        </DropdownToggle>*/}
-                    {/*                        <DropdownMenu>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Edit className='me-50' size={15} /> <span className='align-middle'>Edit</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                    {/*                                <Trash className='me-50' size={15} /> <span className='align-middle'>Delete</span>*/}
-                    {/*                            </DropdownItem>*/}
-                    {/*                        </DropdownMenu>*/}
-                    {/*                    </UncontrolledDropdown>*/}
-                    {/*                </td>*/}
-                    {/*            </tr>*/}
-                    {/*            </tbody>*/}
-                    {/*        </Table>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+        <UILoader blocking={isLoading}>
+            <div id='dashboard-ecommerce'>
+                <Row className='match-height'>
+                    <Col xl='4' md='6' xs='12'>
+                        <Earnings success={colors.success.main} />
+                    </Col>
+                    <Col xl='8' md='6' xs='12'>
+                        <StatsCard cols={{ xl: '3', sm: '6' }} />
+                    </Col>
+                </Row>
+            </div>
+
+            <Row>
+                <Col xl={12} md={12} sm={12}>
+                    <div className="card">
+                        <div className="card-header d-flex align-items-start pb-2">
+                            <div>
+                                <h3 className="font-weight-bolder">Pending Orders</h3>
+                            </div>
+                        </div>
+                        <Row className='justify-content-end mx-0'>
+                            <Col className='mt-1' md='12' sm='12'>
+                                <Input
+                                    className='dataTable-filter mb-50'
+                                    type='text'
+                                    placeholder='Search'
+                                    bsSize='sm'
+                                    id='search-input'
+                                    value={searchValue}
+                                    onKeyUp={handleFilter}
+                                    onChange={handleFilter}
+                                />
+                            </Col>
+                        </Row>
+
+                        <div className="card-body">
+                            <Table className="table table-responsive" paginationComponent={CustomPagination}>
+                                <thead>
+                                <tr>
+                                    <th>Job Name</th>
+                                    <th>Budget</th>
+                                    <th>Estimated Hours</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empDashboardOrders && empDashboardOrders.map(e => {
+                                    return <>
+                                        <tr>
+                                            <td>{e.name}</td>
+                                            <td>qw</td>
+                                            <td>qw</td>
+                                            {/*<td>{moment(new Date(d.expectedStartDate)).format('YYYY-MM-DD') }</td>
+                                            <td>{moment(new Date(d.expectedEndDate)).format('YYYY-MM-DD') }</td>*/}
+                                        </tr>
+                                    </>
+                                })
+
+                                }
+
+                                </tbody>
+                            </Table>
+                        </div>
+
+                    </div>
                 </Col>
             </Row>
-            {/*<Row className='match-height'>*/}
-            {/*    /!*<Col lg='6' md='6' xs='12'>*!/*/}
-            {/*    /!*    <CardBrowserStates colors={colors}  />*!/*/}
-            {/*    /!*</Col>*!/*/}
-            {/*    <Col lg='12' md='12' xs='12'>*/}
-            {/*        <CardTransactions />*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
-        </div>
+        </UILoader>
     )
 }
 
-export default EmployeDashboard
+export default EmployeeDashboard

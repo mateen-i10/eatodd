@@ -17,6 +17,14 @@ const Routes = [
         }
     },
     {
+        path: '/group-order-menu',
+        component: lazy(() => import('../../views/home/components/groupOrderMenu')),
+        layout: 'BlankLayout',
+        meta: {
+            publicRoute: true
+        }
+    },
+    {
         path: '/auth/verification',
         component: lazy(() => import('../../views/authentication/Verification')),
         layout: 'BlankLayout'
@@ -200,6 +208,11 @@ const Routes = [
     {
         path: '/order/group/create',
         component: lazy(() => import('../../views/GroupOrder/CreateGroupOrder')),
+        layout: 'BlankLayout'
+    },
+    {
+        path: '/order/group/joinGroupOrder',
+        component: lazy(() => import('../../views/GroupOrder/JoinGroupOrder')),
         layout: 'BlankLayout'
     },
     {

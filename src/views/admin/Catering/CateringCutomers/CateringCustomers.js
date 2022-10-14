@@ -41,7 +41,7 @@ const CateringCustomer = () => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadCateringCustomerss(currentPage + 1, pageSize, value))
+            dispatch(loadCateringCustomerss(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -133,6 +133,7 @@ const CateringCustomer = () => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
+                                onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
                         </Col>
