@@ -98,7 +98,7 @@ export default function Header({isSimple}) {
                         )}
                     </div>
                 </header>
-                {count > 0 ? <div className="container-fluid mb-0 pb-0">
+                {count > 0 && totalItems > 0 ? <div className="container-fluid mb-0 pb-0">
                     <div className="row alert alert-primary align-items-center" style={{
                         marginBottom: 0,
                         height: "45px"
@@ -121,7 +121,7 @@ export default function Header({isSimple}) {
                             </div>
                         </div>
                     </div>
-                </div> : null}
+                </div> : null }
             </div>
         )
     }
