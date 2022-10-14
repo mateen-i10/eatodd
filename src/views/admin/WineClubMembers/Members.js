@@ -41,7 +41,7 @@ const Members = () => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadMembers(currentPage + 1, pageSize, value))
+            dispatch(loadMembers(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
@@ -138,6 +138,7 @@ const Members = () => {
                                 bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
+                                onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
                         </Col>

@@ -51,7 +51,7 @@ const Payment = () => {
         } else setPlaceOrder({url: '', order: {}})
     }, [response, isLoading])
 
-    const placeMealOrder = () => {
+    const placeMealOrder = (paymentId, paymentDateTime) => {
         const orderDetails = []
         if (cartData) {
             // adding meals to order
@@ -90,12 +90,14 @@ const Payment = () => {
                 totalPrice: cartTotalPrice(),
                 customerId: getUserData()?.customerId,
                 quantity: orderDetails.length,
-                restaurantId: Number(restaurantId)
+                restaurantId: Number(restaurantId),
+                paymentId,
+                paymentDateTime
             }
             setPlaceOrder({url: 'order', order: {...order}})
         }
     }
-    const placeCateringOrder = () => {
+    const placeCateringOrder = (paymentId, paymentDateTime) => {
         const cateringOrderMenuItems = []
         let cateringOrderSectionItems = []
         const cateringOrderWines = []
@@ -137,18 +139,20 @@ const Payment = () => {
                 cateringOrderSectionItems,
                 cateringOrderMenuItems,
                 cateringOrderWines,
-                restaurantId: Number(restaurantId)
+                restaurantId: Number(restaurantId),
+                paymentId,
+                paymentDateTime
             }
             console.log('order', order)
             setPlaceOrder({url: 'cateringOrder', order: {...order}})
         }
 
     }
-    const submitOrder = () => {
-        if (isCatering) placeCateringOrder()
-        else placeMealOrder()
+    const submitOrder = (payment) => {
+        if (isCatering) placeCateringOrder(payment.id, payment.createdAt)
+        else placeMealOrder(payment.id, payment.createdAt)
     }
-    console.info('yuyiyiuy', submitOrder, setLoadingMessage)
+
     const getToken = async (token, verifiedBuyer) => {
         console.info('Token:', token)
         console.info('Verified Buyer:', verifiedBuyer)
@@ -168,12 +172,12 @@ const Payment = () => {
             const res = await http._post(`${baseURL}payment`, {...body})
             if (res && res.status === 200 && res.data.statusCode === 200) {
                 setLoadingMessage('Booking Order...')
-                submitOrder()
+                submitOrder(res.data.data)
             } else {
                 setLoading(false)
                 toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
             }
-            console.info('yuyyuyuyuyuyiu', res)
+            console.info('payment details', res)
         }
 
     }

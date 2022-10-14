@@ -212,7 +212,7 @@ const Employees = (props) => {
     console.log('e.keyCode', e.keyCode)
     const value = e.target.value
     if (e.keyCode === 13) {
-       dispatch(loadEmployees(currentPage + 1, pageSize, value))
+       dispatch(loadEmployees(currentPage, pageSize,  value))
     }
     setSearchValue(value)
     }
@@ -325,6 +325,7 @@ const Employees = (props) => {
                            bsSize='sm'
                            id='search-input'
                            value={searchValue}
+                           onKeyUp={handleFilter}
                            onChange={handleFilter}
                        />
                    </Col>
