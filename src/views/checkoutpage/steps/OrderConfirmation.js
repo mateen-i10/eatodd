@@ -6,6 +6,15 @@ import {useLocation} from "react-router-dom"
 const OrderConfirmation = () => {
     const {state} = useLocation()
     console.log('state', state)
+
+    const date = new Date(state.data.response.createdDate)
+    const date_str = [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('-')
+    const time_str = [date.getHours(), date.getMinutes()].join(':')
+
+    // const mealName = state.data?.response?.orderDetail[0].meal.name
+    // const totalPrice = state.data?.response?.totalPrice
+    // const mealProducts =
+    // console.log(mealName) // output: 2021/10/26
     return (
         <>
             <Header/>
@@ -13,12 +22,14 @@ const OrderConfirmation = () => {
 
                 <div className="row mt-2">
                     <p className="col-11 mt-1 text-center text-uppercase fw-bolder fs-5">Thank you for your order.</p>
-                    <div className="col-11 mt-1 text-center  fs-5">Your order <b> #2232123 </b> has been placed.
+                    <div className="col-11 mt-1 text-center  fs-5">Your
+                        order <b> #{state.data?.response?.orderNo} </b> has been placed.
                     </div>
                 </div>
                 <div className="row mt-2">
                     <div className="col-11 mt-1 text-center text-uppercase fw-bolder fs-5"> Order Summery</div>
-                    <div className="col-11 mt-1 text-center text-uppercase fw-bolder fs-5">11-10-2022</div>
+                    <div
+                        className="col-11 mt-1 text-center text-uppercase fw-bolder fs-5">{date_str}, {time_str}</div>
                 </div>
             </div>
             <div className="container-sm">
@@ -27,8 +38,8 @@ const OrderConfirmation = () => {
                         <hr className="col-10 "/>
 
                         <div className="row mt-1">
-                            <div className="col-6  text-uppercase fw-bolder fs-5">Your Buritto</div>
-                            <div className="col-4 text-end">$14</div>
+                            <div className="col-6  text-uppercase fw-bolder fs-4 text-primary">Your Burrito</div>
+                            <div className="col-4 text-end fw-bolder fs-4 text-primary">$ 61</div>
                         </div>
 
                         <div className="row mt-1">
@@ -47,15 +58,6 @@ const OrderConfirmation = () => {
                         </div>
                         <hr className="col-10 "/>
 
-                        <div className="row mt-1">
-                            <div className="col-6">Order No.</div>
-                            <div className="col-4 text-end">12345</div>
-                        </div>
-
-                        <div className="row mt-1">
-                            <div className="col-6">Quantity</div>
-                            <div className="col-4 text-end">1</div>
-                        </div>
                     </div>
                 </div>
             </div>

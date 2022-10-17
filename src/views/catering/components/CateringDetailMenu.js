@@ -55,8 +55,8 @@ const CateringDetailMenu = ({md, id}) => {
         if (id === 3) {
             return <Fragment>
                 <Row className="align-items-center ">
-                    {omgCorporateItems.length ? omgCorporateItems.map(item => (
-                        <div className="col-lg-4 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id} item={item}/>
+                    {omgCorporateItems.length ? omgCorporateItems.map((item) => (
+                        <div className="col-lg-4 col-sm-6 col-9 mx-auto" key={item.id}><CateringMenuItems item={item}/>
                         </div>
                     )) : <UILoader/>}
                 </Row>
