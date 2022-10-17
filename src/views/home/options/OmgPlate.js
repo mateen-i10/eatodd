@@ -3,12 +3,14 @@ import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import {useHistory, useLocation} from "react-router-dom"
-import {addItemToCart, isObjEmpty} from "../../../utility/Utils"
+import {addItemToCart, isGroupOrder, isObjEmpty} from "../../../utility/Utils"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
 import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcategoryMenu"
 import Wines from "../../wine/Pages/wines"
 import NutritionPrefModel from "./components/NutrtionPrefModel"
+import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
+import http, {baseURL} from "../../../utility/http"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -22,7 +24,6 @@ const Menu = () => {
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
     useEffect(() => {
         console.log('isLoading', isLoading)
-        console.log('response', response)
         if (response && response.data) {
             const {data} = response
             setCategory({
@@ -70,15 +71,35 @@ const Menu = () => {
             })
         }
 
-        const meal = {
-            mealName,
-            totalPrice,
-            categoryName: category?.name,
-            categoryId,
-            selectedProducts : [...finalItems]
+        if (isGroupOrder()) {
+            const meal =  {
+                    name: mealName,
+                    categoryId,
+                    customerId: isUserLoggedIn() && isCustomer() ? getUserData().customerId : null,
+                    mealProducts : selectedProducts && selectedProducts.length > 0 ? selectedProducts.map(p => {
+                        return {
+                            productId : p.id,
+                            quantity: p.selectedQuantity,
+                            unitPrice : p.price,
+                            optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
+                        }
+                    }) : []
+                }
+                http._post(`${baseURL}groupOrder/addMeal`, {...meal}).then(res => {
+                    console.log('res or add group meal', res)
+                })
+        } else {
+            const meal = {
+                mealName,
+                totalPrice,
+                categoryName: category?.name,
+                categoryId,
+                selectedProducts : [...finalItems]
+            }
+            addItemToCart(meal)
+            history.push('/home')
         }
-        addItemToCart(meal)
-        history.push('/home')
+
     }
     const handleSelectProduct = (product, subCatId, limit) => {
         const finalProducts = [...selectedProducts]

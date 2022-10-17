@@ -15,7 +15,7 @@ import {
     Spinner
 } from 'reactstrap'
 import {cartTotalPrice, clearCart, getCartData} from "../../../utility/Utils"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {useEffect, useState} from "react"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {getUserData} from "../../../auth/utils"
@@ -25,6 +25,7 @@ import {toast} from "react-toastify"
 import {PaymentForm, CreditCard} from 'react-square-web-payments-sdk'
 import {Fragment} from "@fullcalendar/core"
 import http, {baseURL} from "../../../utility/http"
+import {calculateTotalItems} from "../../../redux/cartItems/actions"
 
 const Payment = () => {
     const restaurantId = localStorage.getItem('restaurantId')
@@ -40,6 +41,7 @@ const Payment = () => {
     const [loadingMessage, setLoadingMessage] = useState('Payment InProgress...')
     // hooks
     const history = useHistory()
+    const dispatch = useDispatch()
     const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, false)
 
     useEffect(() => {
@@ -48,6 +50,7 @@ const Payment = () => {
             history.push('/confirmOrder', {data: response.data})
             //isCatering ? history.push('/catering') : history.push('/home')
             clearCart()
+            dispatch(calculateTotalItems())
         } else setPlaceOrder({url: '', order: {}})
     }, [response, isLoading])
 

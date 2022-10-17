@@ -17,8 +17,8 @@ const Routes = [
         }
     },
     {
-        path: '/group-order-menu',
-        component: lazy(() => import('../../views/home/components/groupOrderMenu')),
+        path: '/group-order-menu/:code',
+        component: lazy(() => import('../../views/GroupOrder/groupOrderMenu')),
         layout: 'BlankLayout',
         meta: {
             publicRoute: true
@@ -206,7 +206,7 @@ const Routes = [
         layout: 'BlankLayout'
     },
     {
-        path: '/order/group/create',
+        path: '/groupOrder',
         component: lazy(() => import('../../views/GroupOrder/CreateGroupOrder')),
         layout: 'BlankLayout'
     },
