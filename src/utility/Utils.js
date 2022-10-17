@@ -1,7 +1,8 @@
 // ** Checks if an object is empty (returns boolean)
-import {Roles} from "./Roles"
 import httpService, {baseURL} from "./http"
 import {toast} from "react-toastify"
+import {store} from "../redux/store"
+import {calculateTotalItems} from "../redux/cartItems/actions"
 
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
@@ -123,6 +124,7 @@ export const addItemToCart = (item) => {
     finalMeals.push(item)
   localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
   toast.success(`'${item.mealName}' added to cart`)
+  store.dispatch(calculateTotalItems())
   return true
 }
 export const removeItemFromCart = (index, isWine = false) => {
@@ -133,6 +135,7 @@ export const removeItemFromCart = (index, isWine = false) => {
     isWine ? cart.wines.splice(index, 1) : cart.meals.splice(index, 1)
     const finalItems = {...cart, meals: [...cart.meals], wines: cart.wines ? [...cart.wines] : []}
     localStorage.setItem(cartName, JSON.stringify(finalItems))
+    store.dispatch(calculateTotalItems())
     return true
   }
 return false
@@ -161,6 +164,7 @@ export const addCateringItem = (item, isWine = false) => {
 
   localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering], wines: [...finalWines] }))
   toast.success(`'${item.name}' added to cart`)
+  store.dispatch(calculateTotalItems())
   return true
 }
 export const removeCateringItemFromCart = (index, isWine = false) => {
@@ -171,6 +175,7 @@ export const removeCateringItemFromCart = (index, isWine = false) => {
     isWine ? cart.wines.splice(index, 1) : cart.catering.splice(index, 1)
     const finalItems = {...cart, catering: [...cart.catering], wines: cart.wines ? [...cart.wines] : []}
     localStorage.setItem(cartName, JSON.stringify(finalItems))
+    store.dispatch(calculateTotalItems())
     return true
   }
   return false
