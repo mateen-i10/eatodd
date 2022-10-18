@@ -67,8 +67,22 @@ const Address = props => {
         console.log(result)
         const {error} = result
         if (!error) {
-            dispatch(addShippingAddress(shipAdd))
-            dispatch(addBillingAddress(billAdd))
+            dispatch(addShippingAddress({
+                city: shipCity,
+                state: shipState,
+                country: shipCountry,
+                zipCode: shipZipCode,
+                phoneNumber: shipPhoneNo,
+                address1: shipAddress
+            }))
+            dispatch(addBillingAddress({
+                city: billCity,
+                state: billState,
+                country: billCountry,
+                zipCode: billZipCode,
+                phoneNumber: billPhoneNo,
+                address1: billAddress
+            }))
             stepper.next()
             console.log("ship add and bill add", shipAdd, billAdd)
         } else {
