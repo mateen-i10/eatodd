@@ -1,17 +1,69 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import {Button} from "reactstrap"
-import {Link} from "react-router-dom"
-// import {getUserData} from "../../auth/utils"
+import {Link, useHistory} from "react-router-dom"
+import {getUserData, isCustomer, isUserLoggedIn} from "../../auth/utils"
+import {getCartData, isGroupOrder, setGroupOrder} from "../../utility/Utils"
+import UILoader from "../../@core/components/ui-loader"
+import useAPI from "../../utility/customHooks/useAPI"
+import GroupOrderCreated from "./groupOrderCreated"
 
 const CreateGroupOrder = () => {
-    // const userdata = getUserData()
-    // console.log(userdata, "userdata")
+    const history = useHistory()
+    const [url, setUrl] = useState('')
+    const [data, setData] = useState('')
+    const [groupOrder, setIsGroupOrder] = useState(isGroupOrder())
+    const [isLoading, response] = useAPI(url, 'post', data, {}, true)
+
+    useEffect(() => {
+        console.log('res', response)
+        if (response) {
+            setIsGroupOrder(true)
+            setGroupOrder(true)
+        }
+    }, [response])
+
+ const createGroupOrder = (e) => {
+     e.preventDefault()
+     if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/groupOrder'})
+     if (isUserLoggedIn() && isCustomer()) {
+         const restaurantId = localStorage.getItem('restaurantId')
+         const customerId = getUserData().customerId
+         const cartData = getCartData()
+         let meals = []
+         // adding meals to order
+         if (cartData && cartData.meals && cartData.meals.length > 0) {
+             meals = cartData.meals.map(m => {
+                 return {
+                     name: m.mealName,
+                     categoryId: m.categoryId,
+                     customerId,
+                     mealProducts : m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
+                         return {
+                             productId : p.id,
+                             quantity: p.selectedQuantity,
+                             unitPrice : p.price,
+                             optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
+                         }
+                     }) : []
+                 }
+             })
+         }
+
+         setData({
+             meals,
+             restaurantId,
+             customerId
+         })
+         setUrl('groupOrder')
+     }
+ }
     return (
         <div>
             <Header/>
-            <div className="container-sm">
+            {groupOrder ? <div className='container-sm my-4'><GroupOrderCreated groupCode={`${response?.data?.groupCode}`}/></div>  : <UILoader blocking={isLoading}>
+                <div className="container-sm">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-sm-8 col-10 text-center">
                         <div className="text-uppercase fw-bolder text-black mt-2 mb-2"
@@ -53,9 +105,10 @@ const CreateGroupOrder = () => {
 
                         <div className="mb-2">
                             <Button
-                            style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">Create
-                            Group
-                            order</Button>
+                            onClick= {createGroupOrder}
+                            style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">
+                                Create Group order
+                            </Button>
                         </div>
                         <div className="mb-1" style={{fontSize: "1.1rem"}}>Need more than 20 participant meals?</div>
                         <Link to="/catering">
@@ -67,6 +120,7 @@ const CreateGroupOrder = () => {
                     </div>
                 </div>
             </div>
+            </UILoader>}
             <Footer/>
         </div>
     )

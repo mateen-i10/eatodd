@@ -16,15 +16,16 @@ import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {
     cartTotalPrice,
-    getCartData,
+    getCartData, isGroupOrder,
     isObjEmpty,
     removeCateringItemFromCart,
     removeItemFromCart
 } from "../../../utility/Utils"
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
-import {getUserData, isCustomer} from "../../../auth/utils"
+import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import {useSelector} from "react-redux"
+import GroupOrderSideCart from "../../../views/GroupOrder/groupOrderSideCart"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -66,6 +67,7 @@ const Cart = (props) => {
         setCanvasOpen(!canvasOpen)
         props.openDrawer(!props.isOpenDrawer)
     }
+
     const checkOut = () => {
         toggleCanvasStart()
         if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
@@ -111,9 +113,8 @@ const Cart = (props) => {
     const taxAmount = Number((cartTotalPrice() * (0 / 100)).toFixed(2))
     return (
         <>
-            {isCartEmpty ? <div className='demo-inline-spacing'>
-                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
-                           toggle={toggleCanvasStart}>
+            {!isGroupOrder() && isCartEmpty ? <div className='demo-inline-spacing'>
+                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen} toggle={toggleCanvasStart}>
                     <OffcanvasHeader toggle={toggleCanvasStart}
                                      style={{marginTop: 10, justifyContent: 'center'}}>
                         <div className="cursor-pointer" onClick={() => SetModelOpen(true)}>
@@ -166,7 +167,6 @@ const Cart = (props) => {
                         </Button>
                     </CardFooter>
                 </Offcanvas>
-
             </div> : <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
@@ -185,16 +185,15 @@ const Cart = (props) => {
                     </div>
                     <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
-                        {cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
+                        {!isGroupOrder() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <Link to="/order/group/create">
+                            <Link to="/groupOrder">
                                 <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
                                     Make It a group Order.
                                 </h1>
                             </Link>
                         </div>}
                     </OffcanvasHeader>
-
                     {openModel === true && (
                         <div>
                             <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
@@ -203,8 +202,7 @@ const Cart = (props) => {
 
                     <hr/>
                     <OffcanvasBody style={{paddingBottom: 0}}>
-
-                        <div>
+                        {isGroupOrder() ? <GroupOrderSideCart/> : <div>
                             <div>
                                 <div className='col-md-12 '>
                                     {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
@@ -297,7 +295,8 @@ const Cart = (props) => {
                                     </div>
                                 </div>*/}
 
-                        </div>
+                        </div>}
+
 
                         {/* <Link to="/home"><Button
                                 outline
@@ -326,7 +325,7 @@ const Cart = (props) => {
                                     </div>
                                 </div>*/}
 
-                            <Button
+                            {!isUserLoggedIn() && <Button
                                 color='secondary'
                                 outline
                                 onClick={() => SetModelOpen(true)}
@@ -341,7 +340,7 @@ const Cart = (props) => {
                                 {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
                             >
                                 sign in to use rewards
-                            </Button>
+                            </Button>}
 
 
                             <div className="row">

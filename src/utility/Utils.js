@@ -3,6 +3,7 @@ import httpService, {baseURL} from "./http"
 import {toast} from "react-toastify"
 import {store} from "../redux/store"
 import {calculateTotalItems} from "../redux/cartItems/actions"
+import {cartName, groupOrder} from "./constants"
 
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
@@ -78,8 +79,18 @@ export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {
       })
 }
 
+// group order related functions
+export const isGroupOrder = () => {
+  return localStorage.getItem(groupOrder) && JSON.parse(localStorage.getItem(groupOrder))
+}
+export const setGroupOrder = (val) => {
+  return localStorage.setItem(groupOrder, val)
+}
+export const clearGroupOrder = () => {
+  return localStorage.removeItem(groupOrder)
+}
+
 // cart related functions
-const cartName = 'cartItems'
 export const getCartData = () => {
   const string = localStorage.getItem(cartName)
   const obj = string && string.length > 0 ? JSON.parse(localStorage.getItem(cartName)) : null

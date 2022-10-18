@@ -1,14 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react'
-import "./Order/Order.css"
-import icon from "../../../assets/images/my-images/OMG_icon.png"
+import "../home/components/Order/Order.css"
+import icon from "../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
-import httpService, {baseURL} from "../../../utility/http"
+import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
 import {Link, useHistory} from "react-router-dom"
-import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
-import ProductImage from "./product/ProductImage"
-import {isUserLoggedIn} from "../../../auth/utils"
-import Header from "../../../shared/header/Header"
+import ComponentSpinner from "../../@core/components/spinner/Loading-spinner"
+import ProductImage from "../home/components/product/ProductImage"
+import {isUserLoggedIn} from "../../auth/utils"
+import Header from "../../shared/header/Header"
 
 const GroupOrderMenu = () => {
     //get redux state
@@ -119,7 +119,7 @@ const GroupOrderMenu = () => {
                             >
                                 <div className="wine-thumbnail align-items-center justify-content-center">
                                     <img
-                                        src={require("../../../assets/images/wineClub/Ferrari Carrano.png").default}
+                                        src={require("../../assets/images/wineClub/Ferrari Carrano.png").default}
                                         alt="wine"
                                         width={150}
                                         height={180}

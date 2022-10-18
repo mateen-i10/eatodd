@@ -1,2 +1,2 @@
-export const itemAddedToCartEvent = 'itemAddedToCartEvent'
-export const itemRemovedFromCartEvent = 'itemRemovedFromCartEvent'
+export const cartName = 'cartItems'
+export const groupOrder = 'isGroupOrder'
