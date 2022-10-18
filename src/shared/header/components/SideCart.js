@@ -16,7 +16,7 @@ import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {
     cartTotalPrice,
-    getCartData, isGroupOrder,
+    getCartData, isGroupOrder, isJoinedByLink,
     isObjEmpty,
     removeCateringItemFromCart,
     removeItemFromCart
@@ -185,7 +185,7 @@ const Cart = (props) => {
                     </div>
                     <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
-                        {!isGroupOrder() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
+                        {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
                             <Link to="/groupOrder">
                                 <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
@@ -325,7 +325,7 @@ const Cart = (props) => {
                                     </div>
                                 </div>*/}
 
-                            {!isUserLoggedIn() && <Button
+                            {!isUserLoggedIn() && !isJoinedByLink() && <Button
                                 color='secondary'
                                 outline
                                 onClick={() => SetModelOpen(true)}
@@ -393,7 +393,7 @@ const Cart = (props) => {
                         </div>
 
                     </OffcanvasBody>
-                    <CardFooter style={{padding: 0}}>
+                    {!isJoinedByLink() && <CardFooter style={{padding: 0}}>
                         <Button
                             color='primary'
                             onClick={checkOut}
@@ -408,7 +408,7 @@ const Cart = (props) => {
                         >
                             Checkout
                         </Button>
-                    </CardFooter>
+                    </CardFooter>}
                 </Offcanvas>
                 {RenderDuplicateModal()}
             </div>

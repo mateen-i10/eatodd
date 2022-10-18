@@ -4,22 +4,32 @@ import icon from "../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
-import {Link, useHistory} from "react-router-dom"
+import {Link, useHistory, useParams} from "react-router-dom"
 import ComponentSpinner from "../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../home/components/product/ProductImage"
 import {isUserLoggedIn} from "../../auth/utils"
 import Header from "../../shared/header/Header"
+import useAPI from "../../utility/customHooks/useAPI"
+import {clearGroupOrder, joinByLink} from "../../utility/Utils"
 
 const GroupOrderMenu = () => {
     //get redux state
-    const {userLocation} = useSelector(state => state)
     const {scrollSlice} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
     const history = useHistory()
+    const {code} = useParams()
     const orderRef = useRef(null)
-
+    const [isLoading, response] = useAPI(`${baseURL}groupOrder/getByCode/${code}`, 'get', {}, {}, true)
+    console.log('loading', isLoading)
 
     useEffect(() => {
+        if (response && response.data) {
+            const {data} = response
+            joinByLink(data.restaurantId, data.customerId, data.id)
+        } else {
+            clearGroupOrder()
+        }
+
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
                 console.log(response)
@@ -44,11 +54,10 @@ const GroupOrderMenu = () => {
                 toast.error(error.message)
             })
 
-    }, [])
+    }, [response])
 
 
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
-    // console.log("*****************", scrollToOrder)
     if (scrollToOrder === 'order') {
         useEffect(() => {
             orderRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -93,7 +102,7 @@ const GroupOrderMenu = () => {
                                 return item.name.toString().toLowerCase() !== "wine" ?
                                     <div className="col-md-3  col-12 top-level-menu" key={item.id}>
                                         <div className="menu-item-1" onClick={() => {
-                                            history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                            history.push("/OmgPlate", {categoryId: item.id, restaurantId: response?.data?.restaurantId})
                                         }}>
                                             <div className="thumbnail ">
                                                 <ProductImage attachment={item.attachment}

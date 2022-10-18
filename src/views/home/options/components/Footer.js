@@ -34,7 +34,7 @@ const Footer = (props) => {
                             }}>
                                 Cancel
                             </Button>
-                            <Link to="/"><Button color='primary' onClick={() => {
+                            <Button color='primary' onClick={() => {
                                 if (mealName.length === 0) {
                                     setBasicNameFoodModal(true)
                                 } else {
@@ -43,7 +43,7 @@ const Footer = (props) => {
                                 setBasicNameFoodModal(!basicNameFoodModal)
                             }}>
                                 Save
-                            </Button></Link>
+                            </Button>
                         </ModalFooter>
                     </Form>
                 </Modal>

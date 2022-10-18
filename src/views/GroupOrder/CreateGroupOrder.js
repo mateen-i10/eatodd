@@ -17,10 +17,12 @@ const CreateGroupOrder = () => {
     const [isLoading, response] = useAPI(url, 'post', data, {}, true)
 
     useEffect(() => {
-        console.log('res', response)
-        if (response) {
+        console.log('resss', response)
+        if (response && response.data) {
             setIsGroupOrder(true)
-            setGroupOrder(true)
+            console.log('response.data.id', response.data.id)
+            console.log('response.data', response.data)
+            setGroupOrder(true, response.data.id)
         }
     }, [response])
 
