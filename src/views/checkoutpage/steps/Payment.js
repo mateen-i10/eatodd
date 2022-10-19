@@ -1,19 +1,6 @@
 // ** Icon Imports
 // ** Reactstrap Imports
-import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    CardText,
-    CardTitle,
-    Col,
-    Form,
-    Input,
-    Label,
-    Row,
-    Spinner
-} from 'reactstrap'
+import {Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Row, Spinner} from 'reactstrap'
 import {cartTotalPrice, clearCart, getCartData} from "../../../utility/Utils"
 import {useDispatch, useSelector} from "react-redux"
 import {useEffect, useState} from "react"
@@ -22,7 +9,7 @@ import {getUserData} from "../../../auth/utils"
 import UILoader from "../../../@core/components/ui-loader"
 import {useHistory} from "react-router-dom"
 import {toast} from "react-toastify"
-import {PaymentForm, CreditCard} from 'react-square-web-payments-sdk'
+import {CreditCard, PaymentForm} from 'react-square-web-payments-sdk'
 import {Fragment} from "@fullcalendar/core"
 import http, {baseURL} from "../../../utility/http"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
@@ -36,7 +23,7 @@ const Payment = () => {
     const shippingAddress = useSelector(s => s.cartItems.shippingAddress)
     const billingAddress = useSelector(s => s.cartItems.billingAddress)
     // local state
-    const [placeOrder, setPlaceOrder] = useState({ url: '', order: {}})
+    const [placeOrder, setPlaceOrder] = useState({url: '', order: {}})
     const [loading, setLoading] = useState(false)
     const [loadingMessage, setLoadingMessage] = useState('Payment InProgress...')
     // hooks
@@ -60,14 +47,14 @@ const Payment = () => {
             // adding meals to order
             if (cartData.meals && cartData.meals.length > 0) cartData.meals.forEach(m => {
                 orderDetails.push({
-                    meal:{
+                    meal: {
                         name: m.mealName,
                         categoryId: m.categoryId,
-                        mealProducts : m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
+                        mealProducts: m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
                             return {
-                                productId : p.id,
+                                productId: p.id,
                                 quantity: p.selectedQuantity,
-                                unitPrice : p.price,
+                                unitPrice: p.price,
                                 optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
                             }
                         }) : []
@@ -78,9 +65,9 @@ const Payment = () => {
             //adding wines to order
             if (cartData.wines && cartData.wines.length > 0) cartData.wines.forEach(p => {
                 orderDetails.push({
-                    productId : p.id,
+                    productId: p.id,
                     productQuantity: p.selectedQuantity,
-                    unitPrice : p.price,
+                    unitPrice: p.price,
                     productOptionId: p.options && p.options.length > 0 ? p.options.find(p => p.isDefault)?.id : null
                 })
             })
@@ -102,36 +89,38 @@ const Payment = () => {
     }
     const placeCateringOrder = (paymentId, paymentDateTime) => {
         const cateringOrderMenuItems = []
-        let cateringOrderSectionItems = []
+        const cateringOrderSectionItems = []
         const cateringOrderWines = []
         if (cartData) {
             if (cartData.catering && cartData.catering.length > 0) {
                 cartData.catering.forEach(i => {
                     cateringOrderMenuItems.push({
-                        quantity : i.quantity,
+                        quantity: i.quantity,
                         unitPrice: i.perPersonPrice,
                         cateringMenuItemId: i.id
                     })
-                    cateringOrderSectionItems = i.selectedProducts && i.selectedProducts.length > 0 ? i.selectedProducts.map(p => {
-                            return {
-                                sectionItemId: p.id,
-                                cateringMenuItemId: i.id,
-                                unitPrice: p.price,
-                                quantity: 1
-                            }
-                        }) : []
+                    if (i.selectedProducts && i.selectedProducts.length > 0) i.selectedProducts.forEach(p => {
+                        cateringOrderSectionItems.push({
+                            sectionItemId: p.id,
+                            cateringMenuItemId: i.id,
+                            unitPrice: p.price,
+                            quantity: 1
+                        })
+                    })
                 })
             }
             if (cartData.wines && cartData.wines.length > 0) {
                 cartData.wines.forEach(i => {
                     cateringOrderWines.push({
-                        quantity : i.selectedQuantity,
+                        quantity: i.selectedQuantity,
                         unitPrice: i.price,
                         wineId: i.id
                     })
                 })
             }
-            const totalQuantity = cateringOrderSectionItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderMenuItems.map(i => i.quantity).reduce((pre, next) => pre + next) + cateringOrderWines.map(i => i.quantity).reduce((pre, next) => pre + next)
+            const totalQuantity = cateringOrderSectionItems && cateringOrderSectionItems.length > 0 ? cateringOrderSectionItems.map(i => i.quantity).reduce((pre, next) => pre + next) : 0 +
+            cateringOrderMenuItems && cateringOrderMenuItems.length > 0 ? cateringOrderMenuItems.map(i => i.quantity).reduce((pre, next) => pre + next) : 0 +
+            cateringOrderWines && cateringOrderWines.length > 0 ? cateringOrderWines.map(i => i.quantity).reduce((pre, next) => pre + next) : 0
             // final order object
             const order = {
                 shippingAddress: shippingAddress ? shippingAddress.payload : null,
@@ -187,7 +176,7 @@ const Payment = () => {
     const Loader = () => {
         return (
             <Fragment>
-                <Spinner />
+                <Spinner/>
                 <CardText className='mb-0 mt-3 text-white'>{loadingMessage}</CardText>
             </Fragment>
         )
@@ -195,7 +184,7 @@ const Payment = () => {
 
     return (
         <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
-            <UILoader blocking={loading} loader={<Loader />} >
+            <UILoader blocking={loading} loader={<Loader/>}>
                 <section>
                     <div className="container-sm">
                         <Row>
@@ -213,26 +202,27 @@ const Payment = () => {
                                                 <div className="container-sm">
                                                     <Card>
                                                         <Row>
-                                                            <PaymentForm  applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
-                                                                          locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
-                                                                          createVerificationDetails={() => {
-                                                                              setLoading(true)
-                                                                              return {
-                                                                              amount: `${cartTotalPrice()}`,
-                                                                              /* collected from the buyer */
-                                                                              billingContact: {
-                                                                                  addressLines: [`${billingAddress?.payload?.address1}`],
-                                                                                  familyName: '',
-                                                                                  givenName: '',
-                                                                                  countryCode: 'US',
-                                                                                  city: billingAddress?.payload?.city
-                                                                              },
-                                                                              currencyCode: 'USD',
-                                                                              intent: 'CHARGE'
-                                                                          }
-                                                                          }}
-                                                                          cardTokenizeResponseReceived={getToken}>
-                                                                            <CreditCard />
+                                                            <PaymentForm
+                                                                applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
+                                                                locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
+                                                                createVerificationDetails={() => {
+                                                                    setLoading(true)
+                                                                    return {
+                                                                        amount: `${cartTotalPrice()}`,
+                                                                        /* collected from the buyer */
+                                                                        billingContact: {
+                                                                            addressLines: [`${billingAddress?.payload?.address1}`],
+                                                                            familyName: '',
+                                                                            givenName: '',
+                                                                            countryCode: 'US',
+                                                                            city: billingAddress?.payload?.city
+                                                                        },
+                                                                        currencyCode: 'USD',
+                                                                        intent: 'CHARGE'
+                                                                    }
+                                                                }}
+                                                                cardTokenizeResponseReceived={getToken}>
+                                                                <CreditCard/>
                                                             </PaymentForm>
                                                         </Row>
                                                     </Card>

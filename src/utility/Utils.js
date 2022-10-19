@@ -3,7 +3,7 @@ import httpService, {baseURL} from "./http"
 import {toast} from "react-toastify"
 import {store} from "../redux/store"
 import {calculateTotalItems} from "../redux/cartItems/actions"
-import {cartName, groupOrder} from "./constants"
+import {cartName, groupOrder, groupOrderCustomerId, groupOrderId, isJoinedGroupOrderByLink} from "./constants"
 
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
@@ -79,17 +79,6 @@ export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12) => {
       })
 }
 
-// group order related functions
-export const isGroupOrder = () => {
-  return localStorage.getItem(groupOrder) && JSON.parse(localStorage.getItem(groupOrder))
-}
-export const setGroupOrder = (val) => {
-  return localStorage.setItem(groupOrder, val)
-}
-export const clearGroupOrder = () => {
-  return localStorage.removeItem(groupOrder)
-}
-
 // cart related functions
 export const getCartData = () => {
   const string = localStorage.getItem(cartName)
@@ -127,14 +116,14 @@ export const clearCart = () => {
 }
 
 // meal items
-export const addItemToCart = (item) => {
+export const addItemToCart = (item, isToast = true) => {
   //getting existing cart items
   const items = localStorage.getItem(cartName)
   const cart = JSON.parse(items)
   const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
     finalMeals.push(item)
   localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
-  toast.success(`'${item.mealName}' added to cart`)
+  if (isToast) toast.success(`'${item.mealName}' added to cart`)
   store.dispatch(calculateTotalItems())
   return true
 }
@@ -190,4 +179,34 @@ export const removeCateringItemFromCart = (index, isWine = false) => {
     return true
   }
   return false
+}
+
+// group order related functions
+export const isGroupOrder = () => {
+  return localStorage.getItem(groupOrder) && JSON.parse(localStorage.getItem(groupOrder))
+}
+export const setGroupOrder = (val, id) => {
+  console.log('tttttt', id)
+  localStorage.setItem(groupOrder, val)
+  localStorage.setItem(groupOrderId, id)
+}
+export const clearGroupOrder = () => {
+  localStorage.removeItem(groupOrder)
+  /*localStorage.removeItem(groupOrderId)*/
+}
+export const joinByLink = (restaurantId, customerId, groupId) => {
+  localStorage.setItem('restaurantId', restaurantId)
+  localStorage.setItem(groupOrderCustomerId, customerId)
+  localStorage.setItem(groupOrderId, groupId)
+  localStorage.setItem(isJoinedGroupOrderByLink, 'true')
+  setGroupOrder(true, groupId)
+}
+export const isJoinedByLink = () => {
+  return localStorage.getItem(isJoinedGroupOrderByLink) && JSON.parse(localStorage.getItem(isJoinedGroupOrderByLink))
+}
+export const clearJoinByLink = () => {
+  localStorage.removeItem(groupOrderCustomerId)
+  localStorage.removeItem(isJoinedGroupOrderByLink)
+  clearCart()
+  clearGroupOrder()
 }
