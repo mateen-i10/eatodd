@@ -110,6 +110,30 @@ const Cart = props => {
                                     </Row>
                                 </CardBody>
                             </Card>
+                        </Col> : wines && wines?.length > 0 ? <Col xl={9}>
+                            <Card className='ecommerce-card'>
+                                <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
+                                    <div className='checkout-items'>
+                                        <WineItems item={wines}/>
+                                    </div>
+                                    <hr className="mt-2"/>
+                                    <Row>
+                                        <Col xl={12}>
+                                            <Table responsive>
+                                                <tbody>
+                                                <tr className=' '>
+                                                    <td className='text-start text-uppercase fw-bolder fs-3'>
+                                                        Total Price
+                                                    </td>
+                                                    <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
                         </Col> : <Col lg={9}/>}
                         <Col xl={3}>
                             <div className='checkout-options'>

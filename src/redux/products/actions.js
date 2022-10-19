@@ -15,11 +15,11 @@ const url = 'product'
 
 
 // ** Get All products Data
-export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
             data: {},
             method: 'get',
             onSuccess: setproducts.type
