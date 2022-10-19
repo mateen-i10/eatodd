@@ -1,12 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit"
-import {cartTotalItems} from "../../utility/Utils"
+/*import {cartTotalItems} from "../../utility/Utils"*/
 
 const slice = createSlice({
     name: "cartItems",
     initialState: {
         meals:[],
         wines: [],
-        total: cartTotalItems(),
+        total: 0/*cartTotalItems()*/,
         shippingAddress: null,
         billingAddress: null
     },

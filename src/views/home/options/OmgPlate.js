@@ -3,7 +3,7 @@ import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import {useHistory, useLocation} from "react-router-dom"
-import {addItemToCart, isGroupOrder, isJoinedByLink, isObjEmpty} from "../../../utility/Utils"
+import {addItemToCart, isGroupOrder, isGroupOrderMemberName, isJoinedByLink, isObjEmpty} from "../../../utility/Utils"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
 import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcategoryMenu"
@@ -11,7 +11,7 @@ import Wines from "../../wine/Pages/wines"
 import NutritionPrefModel from "./components/NutrtionPrefModel"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
-import {groupOrderId} from "../../../utility/constants"
+import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -78,6 +78,7 @@ const Menu = () => {
             const meal =  {
                     name: mealName,
                     categoryId,
+                    guestName: isUserLoggedIn() && isCustomer() ? getUserData().name : isGroupOrderMemberName() ? localStorage.getItem(groupOrderMemberName) : null,
                     customerId: isUserLoggedIn() && isCustomer() ? getUserData().customerId : null,
                     mealProducts : selectedProducts && selectedProducts.length > 0 ? selectedProducts.map(p => {
                         return {
