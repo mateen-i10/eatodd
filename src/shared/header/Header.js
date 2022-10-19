@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {Button} from "reactstrap"
 import {isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
+import {isJoinedByLink} from "../../utility/Utils"
 
 export default function Header({isSimple}) {
     const totalItems = useSelector(state => state.cartItems.total)
@@ -98,7 +99,7 @@ export default function Header({isSimple}) {
                         )}
                     </div>
                 </header>
-                {count > 0 && totalItems > 0 ? <div className="container-fluid mb-0 pb-0">
+                {count > 0 && !isJoinedByLink() && totalItems > 0 ? <div className="container-fluid mb-0 pb-0">
                     <div className="row alert alert-primary align-items-center" style={{
                         marginBottom: 0,
                         height: "45px"
