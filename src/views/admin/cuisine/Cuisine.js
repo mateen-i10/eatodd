@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Edit, Trash} from 'react-feather'
 import {
     Card,
     CardHeader,
