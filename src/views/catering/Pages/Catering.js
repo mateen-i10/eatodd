@@ -6,6 +6,7 @@ import CateringDetailMenu from "../components/CateringDetailMenu"
 import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
+import CateringSubForm from "../components/CateringSubForm"
 
 const Catering = () => {
     const [elHovered, setElHovered] = useState({})
@@ -33,6 +34,11 @@ const Catering = () => {
                 priority: final.length,
                 isWine: true,
                 isLoading
+            })
+            final.push({
+                id: 1,
+                name: 'Event Catering',
+                description: 'Fill in Form'
             })
             setCateringMenu(final)
         }
@@ -119,7 +125,7 @@ const Catering = () => {
                             md={md}
                             id={selectedMenuId}
                         />}
-
+                        {selectedMenuId === 1 ? <CateringSubForm /> : []}
                     </div>
                 </div>
             </div> : <div className="m-5"><ComponentSpinner/></div>}
