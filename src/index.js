@@ -28,7 +28,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import '@styles/react/libs/toastify/toastify.scss'
 
 // ** bootstrap
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // ** Core styles
@@ -43,8 +42,8 @@ import * as serviceWorker from './serviceWorker'
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'))
 
-ReactDOM.render(
 
+ReactDOM.render(
       <Provider store={store}>
         <Suspense fallback={<Spinner />}>
               <ThemeContext>

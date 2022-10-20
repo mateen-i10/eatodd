@@ -11,6 +11,8 @@ import {
     setTokenVerifiedFalse
 } from "./authentication"
 import {getHomeRouteForLoggedInUser} from "../../auth/utils"
+import {Roles} from "../../utility/Roles"
+import {setGroupOrder, setGroupOrderMeals} from "../../utility/Utils"
 
 const url = 'auth/'
 export const login = (username, password, isDeviceLoginEnabled, history, returnURL = null) => {
@@ -24,9 +26,23 @@ export const login = (username, password, isDeviceLoginEnabled, history, returnU
                     const finalData = { ...data.userData, accessToken: data.accessToken}
                     dispatch(handleLogin(finalData))
                     const {userData: user} = data
-                        toast.success('Logged in Successfully')
                         const url = returnURL ? returnURL : getHomeRouteForLoggedInUser(user.role)
                         history.replace(url)
+
+                    // check for already existing group order of a customer
+                    if (user.role === Roles.customer) {
+                        httpService._get(`${baseURL}groupOrder/getActive/${user.customerId}`).then(res => {
+                                console.log('res in existing group order', res)
+                                if (res && res.status === 200 && res.data && res.data.data && res.data.statusCode === 200) {
+                                    const {data} = res.data
+                                    setGroupOrderMeals(data)
+                                    setGroupOrder(true, res.data.id)
+                                    toast('You have an active group order either complete it or cancel it!', {})
+                                }
+                            }).catch(e => {
+                                toast.error(e.message)
+                            })
+                    } else toast.success('Logged in Successfully')
                 } else {
                     toast.error(res.data.message)
                 }

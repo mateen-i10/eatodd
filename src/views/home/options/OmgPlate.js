@@ -3,7 +3,7 @@ import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
 import {useHistory, useLocation} from "react-router-dom"
-import {addItemToCart, isGroupOrder, isJoinedByLink, isObjEmpty} from "../../../utility/Utils"
+import {addItemToCart, isGroupOrder, isGroupOrderMemberName, isJoinedByLink, isObjEmpty} from "../../../utility/Utils"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
 import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcategoryMenu"
@@ -11,7 +11,9 @@ import Wines from "../../wine/Pages/wines"
 import NutritionPrefModel from "./components/NutrtionPrefModel"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
-import {groupOrderId} from "../../../utility/constants"
+import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
+import {calculateTotalItems} from "../../../redux/cartItems/actions"
+import {useDispatch} from "react-redux"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -19,6 +21,7 @@ const Menu = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const history = useHistory()
+    const dispatch = useDispatch()
     const {state} = useLocation()
     const {categoryId, restaurantId} = state
     console.log('iss', isPageLoading)
@@ -78,6 +81,7 @@ const Menu = () => {
             const meal =  {
                     name: mealName,
                     categoryId,
+                    guestName: isUserLoggedIn() && isCustomer() ? getUserData().name : isGroupOrderMemberName() ? localStorage.getItem(groupOrderMemberName) : null,
                     customerId: isUserLoggedIn() && isCustomer() ? getUserData().customerId : null,
                     mealProducts : selectedProducts && selectedProducts.length > 0 ? selectedProducts.map(p => {
                         return {
@@ -91,6 +95,8 @@ const Menu = () => {
                 http._post(`${baseURL}groupOrder/addMeals/${Number(localStorage.getItem(groupOrderId))}`, {...meal}).then(res => {
                     setIsLoading(false)
                     if (res.status === 200 && res.data && res.data.statusCode === 200) {
+                        console.log('tttt', res)
+                        dispatch(calculateTotalItems(res?.data.data?.mealCount))
                         toast.success(`${mealName} added to cart`)
                         isJoinedByLink() ? history.goBack() : history.push('/home')
                     } else {

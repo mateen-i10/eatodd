@@ -1,7 +1,7 @@
 // ** Icon Imports
 // ** Reactstrap Imports
 import {Card, CardBody, CardHeader, CardText, CardTitle, Col, Form, Row, Spinner} from 'reactstrap'
-import {cartTotalPrice, clearCart, getCartData} from "../../../utility/Utils"
+import {cartTotalPrice, clearCart, getCartData, getGroupOrderCode} from "../../../utility/Utils"
 import {useDispatch, useSelector} from "react-redux"
 import {useEffect, useState} from "react"
 import useAPI from "../../../utility/customHooks/useAPI"
@@ -82,7 +82,8 @@ const Payment = () => {
                 quantity: orderDetails.length,
                 restaurantId: Number(restaurantId),
                 paymentId,
-                paymentDateTime
+                paymentDateTime,
+                groupOrderId : getGroupOrderCode() ? getGroupOrderCode() : null
             }
             setPlaceOrder({url: 'order', order: {...order}})
         }

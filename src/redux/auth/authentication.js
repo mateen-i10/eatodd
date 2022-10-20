@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // ** UseJWT import to get config
 import useJwt from '@src/auth/jwt/useJwt'
+import {groupOrder, groupOrderId} from "../../utility/constants"
+import {clearGroupOrder} from "../../utility/Utils";
 
 const config = useJwt.jwtConfig
 
@@ -38,6 +40,7 @@ export const authSlice = createSlice({
       localStorage.removeItem('userData')
       localStorage.removeItem(config.storageTokenKeyName)
       localStorage.removeItem(config.storageRefreshTokenKeyName)
+      clearGroupOrder()
     },
     setRequestCompleted: (state, action) => {
       state.isRequestCompleted = action.payload
