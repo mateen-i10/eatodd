@@ -227,6 +227,9 @@ export const setGroupOrderCode = (code) => {
 export const getGroupOrderCode = () => {
   return localStorage.getItem(groupOrderCode)
 }
+export const getGroupOrderId = () => {
+  return localStorage.getItem(groupOrderId)
+}
 export const isGroupOrderMemberName = () => {
   return localStorage.getItem(groupOrderMemberName) && localStorage.getItem(groupOrderMemberName).length && localStorage.getItem(groupOrderMemberName).length > 0
 }
