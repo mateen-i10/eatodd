@@ -10,7 +10,8 @@ const initialState = {
     isDetailLoading: false,
     isEdit: false,
     isError: false,
-    isSuccess: false
+    isSuccess: false,
+    isGroupOrderExist: false
 }
 
 export const setCustomers = createAction("customerReducer/setCustomers")
@@ -24,6 +25,7 @@ export const setIsEdit = createAction("customerReducer/setIsEdit")
 export const setIsCustomerError = createAction("customerReducer/setIsCustomerError")
 export const setIsCustomerSuccess = createAction("customerReducer/setIsCustomerSuccess")
 export const setRequestCompleted = createAction("customerReducer/setRequestCompleted")
+export const setGroupOrderExist = createAction("customerReducer/setGroupOrderExist")
 
 const customerReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -95,6 +97,11 @@ const customerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isSuccess: action.payload
+            }
+        case setGroupOrderExist.type:
+            return {
+                ...state,
+                isGroupOrderExist: action.payload
             }
         default:
             return state

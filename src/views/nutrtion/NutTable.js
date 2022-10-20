@@ -2,8 +2,7 @@ import NutrtionPrefModel from "../home/options/components/NutrtionPrefModel"
 import React from "react"
 import {Table} from 'reactstrap'
 
-
-const NutTable = () => {
+const NutTable = ({nutritionCal}) => {
     return (
         <>
             <div className="container-fluid">
@@ -31,143 +30,28 @@ const NutTable = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    {/*<td>*/}
-                                    {/*    <Input type="checkbox" style={{width: '25px', height: '25px'}}/>*/}
-                                    {/*    <Label check>*/}
-                                    {/*        Some other input*/}
-                                    {/*    </Label>*/}
-                                    {/*</td>*/}
-                                    <td style={{fontSize: "1.4rem"}}>
-                                        Ronald Frest
-                                    </td>
-                                    <td style={{fontSize: "1.4rem"}}>201Cal</td>
-                                    <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
-                                        5
-                                    </td>
-                                    <td style={{fontSize: "1.4rem"}}>
-                                        6
-                                    </td>
+                                {nutritionCal.length > 0 ? nutritionCal.map((item, i) => (<tr key={i}>
+                                        <td style={{fontSize: "1.4rem"}}>{item.name}</td>
+                                        <td style={{fontSize: "1.4rem"}}>201Cal</td>
+                                        <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
+                                            {item.fat}
+                                        </td>
+                                        <td style={{fontSize: "1.4rem"}}>
+                                            {item.protein}
+                                        </td>
+                                        <td style={{
+                                            fontSize: "1.4rem",
+                                            color: "#c98200",
+                                            backgroundColor: "#ededed"
+                                        }}> {item.carb}
 
-                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>12
-                                        {/*    <UncontrolledDropdown>*/}
-                                        {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                                        {/*            <MoreVertical size={15}/>*/}
-                                        {/*        </DropdownToggle>*/}
-                                        {/*        <DropdownMenu>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Edit className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Edit</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Trash className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Delete</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*        </DropdownMenu>*/}
-                                        {/*    </UncontrolledDropdown>*/}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    {/*<td>*/}
-                                    {/*    <Input type="checkbox" style={{width: '25px', height: '25px'}}/>*/}
-                                    {/*    <Label check>*/}
-                                    {/*        1*/}
-                                    {/*    </Label>*/}
-                                    {/*</td>*/}
-                                    <td style={{fontSize: "1.4rem"}}>Ronald Frest</td>
-                                    <td style={{fontSize: "1.4rem"}}>201Cal</td>
-                                    <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
-                                        8
-                                    </td>
-                                    <td style={{fontSize: "1.4rem"}}>
-                                        10
-                                    </td>
-                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}> 11
-                                        {/*    <UncontrolledDropdown>*/}
-                                        {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                                        {/*            <MoreVertical size={15}/>*/}
-                                        {/*        </DropdownToggle>*/}
-                                        {/*        <DropdownMenu>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Edit className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Edit</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Trash className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Delete</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*        </DropdownMenu>*/}
-                                        {/*    </UncontrolledDropdown>*/}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    {/*<td>*/}
-                                    {/*    <Input type="checkbox" style={{width: '25px', height: '25px'}}/>*/}
-                                    {/*    <Label check>*/}
-                                    {/*        2*/}
-                                    {/*    </Label>*/}
-                                    {/*</td>*/}
-                                    <td style={{fontSize: "1.4rem"}}>Jack Obes</td>
-                                    <td style={{fontSize: "1.4rem"}}>201Cal</td>
-                                    <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
-                                        9
-                                    </td>
-                                    <td style={{fontSize: "1.4rem"}}>
-                                        6
-                                    </td>
+                                        </td>
+                                    </tr>)) : <tr className='fs-4 fw-bolder text-center text-uppercase text-primary justify-content-center'>
+                                        <td colSpan={5} className='text-center '>No Nutrition
+                                            Available
+                                        </td>
+                                    </tr>}
 
-                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>7
-                                        {/*    <UncontrolledDropdown>*/}
-                                        {/*        <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                                        {/*            <MoreVertical size={15}/>*/}
-                                        {/*        </DropdownToggle>*/}
-                                        {/*        <DropdownMenu>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Edit className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Edit</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*            <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*                <Trash className='me-50' size={15}/> <span*/}
-                                        {/*                className='align-middle'>Delete</span>*/}
-                                        {/*            </DropdownItem>*/}
-                                        {/*        </DropdownMenu>*/}
-                                        {/*    </UncontrolledDropdown>*/}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    {/*<td>*/}
-                                    {/*    <Input type="checkbox" style={{width: '25px', height: '25px'}}/>*/}
-                                    {/*    <Label check>*/}
-                                    {/*        3*/}
-                                    {/*    </Label>*/}
-                                    {/*</td>*/}
-                                    <td style={{fontSize: "1.4rem"}}>Jerry Milton</td>
-                                    <td style={{fontSize: "1.4rem"}}>201Cal</td>
-                                    <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
-                                        5
-                                    </td>
-                                    <td style={{fontSize: "1.4rem"}}>
-                                        6
-                                    </td>
-                                    <td style={{fontSize: "1.4rem", color: "#c98200", backgroundColor: "#ededed"}}>
-                                        7
-                                        {/*<UncontrolledDropdown>*/}
-                                        {/*    <DropdownToggle className='icon-btn hide-arrow' color='transparent' size='sm' caret>*/}
-                                        {/*        <MoreVertical size={15}/>*/}
-                                        {/*    </DropdownToggle>*/}
-                                        {/*    <DropdownMenu>*/}
-                                        {/*        <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*            <Edit className='me-50' size={15}/> <span*/}
-                                        {/*            className='align-middle'>Edit</span>*/}
-                                        {/*        </DropdownItem>*/}
-                                        {/*        <DropdownItem href='/' onClick={e => e.preventDefault()}>*/}
-                                        {/*            <Trash className='me-50' size={15}/> <span*/}
-                                        {/*            className='align-middle'>Delete</span>*/}
-                                        {/*        </DropdownItem>*/}
-                                        {/*    </DropdownMenu>*/}
-                                        {/*</UncontrolledDropdown>*/}
-                                    </td>
-                                </tr>
                                 </tbody>
                             </Table>
                         </div>
