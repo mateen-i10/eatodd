@@ -4,7 +4,7 @@ import Footer from "../../shared/footer/Footer"
 import {Button} from "reactstrap"
 import {Link, useHistory} from "react-router-dom"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../auth/utils"
-import {getCartData, isGroupOrder, setGroupOrder} from "../../utility/Utils"
+import {getCartData, isGroupOrder, setGroupOrder, setGroupOrderCode} from "../../utility/Utils"
 import UILoader from "../../@core/components/ui-loader"
 import useAPI from "../../utility/customHooks/useAPI"
 import GroupOrderCreated from "./groupOrderCreated"
@@ -20,9 +20,8 @@ const CreateGroupOrder = () => {
         console.log('resss', response)
         if (response && response.data) {
             setIsGroupOrder(true)
-            console.log('response.data.id', response.data.id)
-            console.log('response.data', response.data)
             setGroupOrder(true, response.data.id)
+            setGroupOrderCode(response.data.groupCode)
         }
     }, [response])
 
@@ -69,7 +68,7 @@ const CreateGroupOrder = () => {
                 <div className="row justify-content-center align-items-center">
                     <div className="col-sm-8 col-10 text-center">
                         <div className="text-uppercase fw-bolder text-black mt-2 mb-2"
-                             style={{fontSize: 27}}> start a group
+                             style={{fontSize: 27}}> create a group
                             order
                         </div>
                     </div>
@@ -92,18 +91,6 @@ const CreateGroupOrder = () => {
                             participant meals can be added
                             and you get all the points.
                         </div>
-
-                        {/*{userdata !== null && <div style={{textAlign: 'start'}}>*/}
-                        {/*    <Label>Full Name</Label>*/}
-                        {/*    <Input placeholder='Enter your full name' />*/}
-                        {/*</div>}*/}
-
-                        {/*{userdata !== null && <div className="mb-2 mt-2">*/}
-                        {/*    <Button*/}
-                        {/*        style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">Join*/}
-                        {/*        Group*/}
-                        {/*        order</Button>*/}
-                        {/*</div>}*/}
 
                         <div className="mb-2">
                             <Button

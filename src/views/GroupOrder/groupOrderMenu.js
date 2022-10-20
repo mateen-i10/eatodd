@@ -40,7 +40,6 @@ const GroupOrderMenu = () => {
 
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
-                console.log(response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data

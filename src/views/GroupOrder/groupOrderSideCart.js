@@ -33,7 +33,6 @@ const GroupOrderSideCart = () => {
     }
 
     useEffect(() => {
-        console.log('group order', response?.data)
         clearCart()
         if (response && response.data) {
             setUrl('')
@@ -44,7 +43,7 @@ const GroupOrderSideCart = () => {
         setCartItems({...getCartData()})
         const interval = setInterval(() => {
             setUrl(`/groupOrder/getActive/${customerId}`)
-        }, 2000)
+        }, 4000)
 
         return () => {
             clearInterval(interval)

@@ -33,13 +33,11 @@ export const login = (username, password, isDeviceLoginEnabled, history, returnU
                     if (user.role === Roles.customer) {
                         httpService._get(`${baseURL}groupOrder/getActive/${user.customerId}`).then(res => {
                                 console.log('res in existing group order', res)
-                                if (res && res.status === 200 && res.data && res.data.statusCode === 200) {
+                                if (res && res.status === 200 && res.data && res.data.data && res.data.statusCode === 200) {
                                     const {data} = res.data
                                     setGroupOrderMeals(data)
                                     setGroupOrder(true, res.data.id)
                                     toast('You have an active group order either complete it or cancel it!', {})
-                                } else {
-
                                 }
                             }).catch(e => {
                                 toast.error(e.message)

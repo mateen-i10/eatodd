@@ -12,6 +12,8 @@ import NutritionPrefModel from "./components/NutrtionPrefModel"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
 import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
+import {calculateTotalItems} from "../../../redux/cartItems/actions"
+import {useDispatch} from "react-redux"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -19,6 +21,7 @@ const Menu = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const history = useHistory()
+    const dispatch = useDispatch()
     const {state} = useLocation()
     const {categoryId, restaurantId} = state
     console.log('iss', isPageLoading)
@@ -92,6 +95,8 @@ const Menu = () => {
                 http._post(`${baseURL}groupOrder/addMeals/${Number(localStorage.getItem(groupOrderId))}`, {...meal}).then(res => {
                     setIsLoading(false)
                     if (res.status === 200 && res.data && res.data.statusCode === 200) {
+                        console.log('tttt', res)
+                        dispatch(calculateTotalItems(res?.data.data?.mealCount))
                         toast.success(`${mealName} added to cart`)
                         isJoinedByLink() ? history.goBack() : history.push('/home')
                     } else {

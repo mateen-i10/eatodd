@@ -2,7 +2,7 @@ import {Badge, Button, Col, Input, Modal, Row} from "reactstrap"
 import {Link, useHistory} from "react-router-dom"
 import {useRef, useState} from "react"
 import {User} from "react-feather"
-import {clearGroupOrder, isGroupOrder, isJoinedByLink} from "../../utility/Utils"
+import {clearGroupOrder, getGroupOrderCode, isGroupOrder, isJoinedByLink} from "../../utility/Utils"
 import Swal from "sweetalert2"
 import http, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
@@ -70,11 +70,10 @@ const GroupOrderCreated = ({groupCode, isAddMealBtn, isJoinedPeople, noOfPeople}
                 </div>}
                 <div className="col-12 text-center">
                     <h6 className='my-1'> Copy this link and share with up to 10 people </h6>
-                    <Input type='text' ref={inputRef} readOnly className='my-2' value={`http://${window.location.hostname}:3000/group-order-menu/${groupCode}`} />
+                    <Input type='text' ref={inputRef} readOnly className='my-2' value={`http://${window.location.hostname}:3000/group-order-menu/${groupCode ? groupCode : getGroupOrderCode()}`} />
                     <Button onClick = {onCopyCLick} className='btn btn-success'>
                         Copy
                     </Button>
-
                     {isAddMealBtn && <div className='mt-2'>
                      <Link to="/home">
                          <Button
