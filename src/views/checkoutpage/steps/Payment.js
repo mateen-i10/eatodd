@@ -83,7 +83,7 @@ const Payment = () => {
                 restaurantId: Number(restaurantId),
                 paymentId,
                 paymentDateTime,
-                groupOrderId : getGroupOrderCode() ? getGroupOrderCode() : null
+                groupOrderId : getGroupOrderCode() ? Number(getGroupOrderCode()) : null
             }
             setPlaceOrder({url: 'order', order: {...order}})
         }

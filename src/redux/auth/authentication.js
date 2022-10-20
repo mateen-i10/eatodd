@@ -3,8 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // ** UseJWT import to get config
 import useJwt from '@src/auth/jwt/useJwt'
-import {groupOrder, groupOrderId} from "../../utility/constants"
-import {clearGroupOrder} from "../../utility/Utils";
+import {clearGroupOrder} from "../../utility/Utils"
 
 const config = useJwt.jwtConfig
 
