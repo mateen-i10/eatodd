@@ -1,5 +1,5 @@
 // ** React Imports
-import { Suspense, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 
 // ** Redux Imports
@@ -41,7 +41,6 @@ import * as serviceWorker from './serviceWorker'
 
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'))
-
 
 ReactDOM.render(
       <Provider store={store}>

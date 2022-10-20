@@ -95,7 +95,6 @@ const Menu = () => {
                 http._post(`${baseURL}groupOrder/addMeals/${Number(localStorage.getItem(groupOrderId))}`, {...meal}).then(res => {
                     setIsLoading(false)
                     if (res.status === 200 && res.data && res.data.statusCode === 200) {
-                        console.log('tttt', res)
                         dispatch(calculateTotalItems(res?.data.data?.mealCount))
                         toast.success(`${mealName} added to cart`)
                         isJoinedByLink() ? history.goBack() : history.push('/home')

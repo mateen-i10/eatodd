@@ -13,6 +13,9 @@ import {
 import {getHomeRouteForLoggedInUser} from "../../auth/utils"
 import {Roles} from "../../utility/Roles"
 import {setGroupOrder, setGroupOrderMeals} from "../../utility/Utils"
+import {setGroupOrderExist} from "../customer/reducer"
+import {store} from "../store"
+import {calculateTotalItems} from "../cartItems/actions"
 
 const url = 'auth/'
 export const login = (username, password, isDeviceLoginEnabled, history, returnURL = null) => {
@@ -37,7 +40,8 @@ export const login = (username, password, isDeviceLoginEnabled, history, returnU
                                     const {data} = res.data
                                     setGroupOrderMeals(data)
                                     setGroupOrder(true, res.data.id)
-                                    toast('You have an active group order either complete it or cancel it!', {})
+                                    store.dispatch(calculateTotalItems(data.meals ? data.meals.length : null))
+                                    store.dispatch(setGroupOrderExist(true))
                                 }
                             }).catch(e => {
                                 toast.error(e.message)
