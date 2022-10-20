@@ -3,7 +3,14 @@ import httpService, {baseURL} from "./http"
 import {toast} from "react-toastify"
 import {store} from "../redux/store"
 import {calculateTotalItems} from "../redux/cartItems/actions"
-import {cartName, groupOrder, groupOrderCustomerId, groupOrderId, isJoinedGroupOrderByLink} from "./constants"
+import {
+  cartName,
+  groupOrder, groupOrderCode,
+  groupOrderCustomerId,
+  groupOrderId,
+  groupOrderMemberName,
+  isJoinedGroupOrderByLink
+} from "./constants"
 
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
@@ -186,13 +193,13 @@ export const isGroupOrder = () => {
   return localStorage.getItem(groupOrder) && JSON.parse(localStorage.getItem(groupOrder))
 }
 export const setGroupOrder = (val, id) => {
-  console.log('tttttt', id)
   localStorage.setItem(groupOrder, val)
   localStorage.setItem(groupOrderId, id)
 }
 export const clearGroupOrder = () => {
   localStorage.removeItem(groupOrder)
-  /*localStorage.removeItem(groupOrderId)*/
+  localStorage.removeItem(groupOrderCode)
+  //localStorage.removeItem(groupOrderId)
 }
 export const joinByLink = (restaurantId, customerId, groupId) => {
   localStorage.setItem('restaurantId', restaurantId)
@@ -207,6 +214,51 @@ export const isJoinedByLink = () => {
 export const clearJoinByLink = () => {
   localStorage.removeItem(groupOrderCustomerId)
   localStorage.removeItem(isJoinedGroupOrderByLink)
+  localStorage.removeItem(groupOrderMemberName)
   clearCart()
   clearGroupOrder()
+}
+export const setMemberName = (name) => {
+  localStorage.setItem(groupOrderMemberName, name)
+}
+export const setGroupOrderCode = (code) => {
+  localStorage.setItem(groupOrderCode, code)
+}
+export const getGroupOrderCode = () => {
+  return localStorage.getItem(groupOrderCode)
+}
+export const getGroupOrderId = () => {
+  return localStorage.getItem(groupOrderId)
+}
+export const isGroupOrderMemberName = () => {
+  return localStorage.getItem(groupOrderMemberName) && localStorage.getItem(groupOrderMemberName).length && localStorage.getItem(groupOrderMemberName).length > 0
+}
+export const setGroupOrderMeals = (data) => {
+  if (data && data.meals && data.meals.length > 0) {
+    data.meals.map(m => {
+      let totalPrice = 0
+      const finalItems = m.mealProducts ? m.mealProducts.map(item => {
+        const price = item.option.price
+        totalPrice =  totalPrice + (price * item.quantity)
+        return {
+          ...item.product,
+          options: [{...item.option, isSelected: true}],
+          selectedQuantity: item.quantity,
+          calculatedPrice: price * item.quantity,
+          price
+        }
+      }) : []
+
+      const meal = {
+        mealId: m.id,
+        mealName: m.name,
+        totalPrice,
+        categoryName: m.category?.name,
+        categoryId: m.categoryId,
+        selectedProducts : [...finalItems]
+      }
+      addItemToCart(meal, false)
+    })
+  }
+
 }

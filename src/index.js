@@ -1,5 +1,5 @@
 // ** React Imports
-import { Suspense, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 
 // ** Redux Imports
@@ -28,7 +28,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import '@styles/react/libs/toastify/toastify.scss'
 
 // ** bootstrap
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 // ** Core styles
@@ -44,7 +43,6 @@ import * as serviceWorker from './serviceWorker'
 const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
-
       <Provider store={store}>
         <Suspense fallback={<Spinner />}>
               <ThemeContext>

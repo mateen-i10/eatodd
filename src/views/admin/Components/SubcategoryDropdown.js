@@ -34,7 +34,7 @@ const SubcategoryDropdown = ({ categoryId, subcategoryId, setSubcategory, isForm
         }
     }, [categoryId])
 
-    return <div className='col-md-6 mb-2'>
+    return <div className='col-md-6 mb-2' style={{width:'100%'}}>
         <label>Select Sub Category <span className='text-danger'>*</span></label>
         <Select
             closeMenuOnSelect={true}

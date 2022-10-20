@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState, useEffect} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash, Search} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -32,8 +32,15 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 import {deleteproduct, loadproducts, getproduct, addproduct, updateproduct} from "../../../redux/products/actions"
 import Child from './ProductFormChild'
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
+import AsyncSelect from "react-select/async"
+
+import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 
 const Product = (props) => {
+
+    //setting the drop down
+
+    const [catId, setCatId] = useState(0)
 
     const productList = useSelector(state => state.product.list)
     const formInitialState = useSelector(state => state.product.object)
@@ -297,6 +304,13 @@ const Product = (props) => {
         setCurrentPage(page.selected + 1)
     }
 
+    const callFunc = () => {
+        const refId = subcategoryId
+
+        if (refId !== 0) dispatch(loadproducts(currentPage, pageSize, "", refId))
+        else console.log('please select a value to search for')
+    }
+
     const columns = [
         {
             name: 'Name',
@@ -391,12 +405,31 @@ const Product = (props) => {
                                 className='dataTable-filter mb-50'
                                 type='text'
                                 placeholder='Search'
-                                bsSize='sm'
                                 id='search-input'
                                 value={searchValue}
                                 onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
+                        </Col>
+                        <Col className='mt-1' md='5' sm='12'>
+                            <label>Search by Category <span className='text-danger'>*</span></label>
+                            <AsyncSelect
+                                loadOptions={categories}
+                                defaultOptions
+                                isLoading={true}
+                                onChange={e => setCatId(e.value)}
+                            />
+                        </Col>
+                        <Col className='mt-1' md='5' sm='12'>
+                            {catId !== 0 ? <SubcategoryDropdown
+                                categoryId={catId}
+                                subcategoryId={subcategoryId}
+                                setSubcategory={setSubcategoryId}
+                                isFormSubmit={isSubmit}
+                            /> : []}
+                        </Col>
+                        <Col md='2' sm='12' style={{marginTop:'32px'}}>
+                            {catId !== 0 ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='primary' onClick={() => callFunc()}><Search size={18}/></Button> : []}
                         </Col>
                     </Row>
                     <DataTable

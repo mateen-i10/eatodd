@@ -1,16 +1,16 @@
 // ** Router Import
 import Router from './router/Router'
-import {useEffect} from "react"
-import {clearGroupOrder} from "./utility/Utils"
-import {getUserData, isCustomer, isUserLoggedIn} from "./auth/utils"
-import {groupOrderCustomerId} from "./utility/constants"
+import React, {useEffect} from "react"
+import {useDispatch} from "react-redux"
+import {calculateTotalItems} from "./redux/cartItems/actions"
 
 const App = () => {
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        if (!isUserLoggedIn() || (isUserLoggedIn() && isCustomer() && getUserData().customerId !== localStorage.getItem(groupOrderCustomerId))) {
-            clearGroupOrder()
-        }
+        dispatch(calculateTotalItems())
     }, [])
+
 
     return <Router />
 }

@@ -1,9 +1,9 @@
 import {cartTotalItems} from "../../utility/Utils"
 import {totalCartItems} from "./cartItemsReducer"
 
-export const calculateTotalItems = () => {
+export const calculateTotalItems = (val = null) => {
     return dispatch => {
-        const total = cartTotalItems()
+        const total = val ? val : cartTotalItems()
         dispatch(totalCartItems(total))
     }
 }

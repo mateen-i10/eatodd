@@ -35,7 +35,6 @@ const MyForm =  (props, ref) => {
                 errors[d.path[0]] = d.message
             })
             setErrors({...errors})
-
             return true
         },
         validateWithSchema(currentState, schema) {
@@ -162,8 +161,7 @@ const MyForm =  (props, ref) => {
                                             invalid={!!(errors[name]) && props.formState[name] === ''}
                                         />
             }
-            {(type === FieldTypes.Select || type === FieldTypes.Date) && errors[name] && <span className="ml-1" style = {{ width: '100%', fontSize: '0.857rem', color: '#ea5455'}}>{errors[name]}</span>}
-            {(type !== FieldTypes.Select || type !== FieldTypes.Date) && errors[name] && <FormFeedback className="ml-1">{errors[name]}</FormFeedback>}
+            {errors[name] && <span className="ml-1" style = {{ width: '100%', fontSize: '0.857rem', color: '#ea5455'}}>{errors[name]}</span>}
         </>
         if (isFormGroup) {
             return <FormGroup key={index} className={fieldGroupClasses}>{html}</FormGroup>

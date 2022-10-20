@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {
-    addItemToCart, clearCart,
+    clearCart,
     getCartData, isJoinedByLink,
-    isObjEmpty
+    isObjEmpty, setGroupOrder, setGroupOrderMeals
 } from "../../utility/Utils"
 import ItemsInCart from "../../shared/header/components/ItemsInCart/ItemsInCart"
 import useAPI from "../../utility/customHooks/useAPI"
@@ -33,34 +33,17 @@ const GroupOrderSideCart = () => {
     }
 
     useEffect(() => {
-        console.log('group order', response?.data)
         clearCart()
         if (response && response.data) {
             setUrl('')
             const {data} = response
-            data.meals.map(m => {
-                let totalPrice = 0
-                const finalItems = m.mealProducts ? m.mealProducts.map(item => {
-                    const price = item.option.price
-                    totalPrice =  totalPrice + (price * item.quantity)
-                    return {...item.product, selectedQuantity: item.quantity, calculatedPrice: price * item.quantity, price}
-                }) : []
-
-                const meal = {
-                    mealId: m.id,
-                    mealName: m.name,
-                    totalPrice,
-                    categoryName: m.category?.name,
-                    categoryId: m.categoryId,
-                    selectedProducts : [...finalItems]
-                }
-                addItemToCart(meal, false)
-            })
+            setGroupOrderMeals(data)
+            setGroupOrder(true, data.id)
         }
         setCartItems({...getCartData()})
         const interval = setInterval(() => {
             setUrl(`/groupOrder/getActive/${customerId}`)
-        }, 2000)
+        }, 4000)
 
         return () => {
             clearInterval(interval)
@@ -68,7 +51,11 @@ const GroupOrderSideCart = () => {
     }, [isLoading, response])
     return (
         <div className='col-md-12 '>
-            {!isJoinedByLink() && <GroupOrderCreated groupCode={response?.data?.groupCode}/>}
+            {!isJoinedByLink() && <GroupOrderCreated
+                groupCode={response?.data?.groupCode}
+                isJoinedPeople={true}
+                noOfPeople={response?.data?.noOfMembers}
+            />}
             {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
                 return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
                     <ItemsInCart foodItems={meal}
