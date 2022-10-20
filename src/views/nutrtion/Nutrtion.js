@@ -62,7 +62,7 @@ const Nutrition = () => {
     return (
         <div>
             <Header/>
-            <NutritionHeader cartItems={cartItems} customerMealName={customerMealName} chartData={chartData}
+            <NutritionHeader cartItems={cartItems} customerMealName={customerMealName}
                              nutritionCal={nutritionCal}/>
             {/* eslint-disable-next-line multiline-ternary */}
             {!cartItems?.meals.length > 0 ?

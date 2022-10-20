@@ -3,7 +3,7 @@ import {Table} from "reactstrap"
 import Chart from "react-apexcharts"
 
 const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
-    console.log("llllllll", customerMealName)
+    // console.log("llllllll", customerMealName)
     const [isVisible, setIsVisible] = useState(false)
     const [chartData, setChartData] = useState([])
     const [width, setWidth] = useState(window.innerWidth)
@@ -30,7 +30,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
             window.removeEventListener("resize", handleResizeWindow)
         }
     }, [])
-    console.log("nutritionCal------", nutritionCal)
+    // console.log("nutritionCal------", nutritionCal)
 
     useEffect(() => {
         let headTotalFAt = 0
