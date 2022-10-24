@@ -4,7 +4,7 @@ import MyForm from "../../../components/MyForm"
 
 import Joi from "joi-browser"
 import moment from 'moment'
-import {toast} from "react-toastify"
+// import {toast} from "react-toastify"
 import {Fragment} from "@fullcalendar/core"
 import {Info} from "react-feather"
 import Avatar from "../../../@core/components/avatar"
@@ -13,7 +13,26 @@ const CateringSubForm = () => {
     // ** React Imports
     const formModalRef = useRef(null)
 
-    const [dateError,  setDateError] = useState(false)
+    // const [dateError, setDateError] = useState(false)
+
+    let today = moment(Date.now()).format('DD')
+    today = Number(today) + 7
+    let month = moment(Date.now()).format('MM')
+    let year = moment(Date.now()).format('YYYY')
+
+    if (today >= 31) {
+        today = today - 30
+        month = Number(month) + 1
+    }
+
+    if (month > 12) {
+        year = Number(year) + 1
+    }
+
+    const d = new Date(`${month} ${today} ${year} 11:13:00`)
+
+    const validDate = moment(d).format('YYYY MM DD')
+
 
     const [formState, setFormState] = useState({})
     const [formData] = useState([
@@ -26,78 +45,20 @@ const CateringSubForm = () => {
     const schema = Joi.object({
         email: Joi.string().required(),
         name: Joi.string().required(),
-        date: Joi.date().required()
+        date: Joi.date().required().greater(validDate)
     })
-
-    // useEffect(() => {}, [dateError])
-    const InfoToast = () => (
-        <Fragment>
-            <div className='toastify-header'>
-                <div className='title-wrapper'>
-                    <Avatar size='sm' color='danger' icon={<Info size={12} />} />
-                    <h6 className=' ms-50 mb-0' style={{color:'#81be41'}}>Please Select a Date 7 days from today.</h6>
-                </div>
-            </div>
-            <div className='toastify-body'>
-                <span>Please Choose a Date that is 7 days from now</span>
-            </div>
-        </Fragment>
-    )
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        const todayDate = moment(new Date()).format('DD MM YYYY')
-
-        const todayDay = moment(new Date()).format('DD')
-        let todayDayMonth = moment(new Date()).format('MM')
-
-        let inWeek = Number(todayDay)
-
-        const userSelectedDate = moment(formState.date).format('DD MM YYYY')
-        const userSelectedDay = moment(formState.date).format('DD')
-
-        console.log(inWeek)
-
-        if (userSelectedDay <= inWeek) {
-            setDateError(true)
-            if (dateError === true) {
-                return toast.info(<InfoToast />, {
-                    icon: false,
-                    hideProgressBar: true,
-                    position: toast.POSITION.TOP_RIGHT
-                })
-            }
-        } else if (userSelectedDay > (inWeek + 7)) {
-            setDateError(false)
-            console.log("all good")
-        } else if (userSelectedDay <= (inWeek + 7)) {
-
-            if (inWeek >= 30) {
-                inWeek = inWeek - 30
-                todayDayMonth = Number(todayDayMonth) + 1
-            }
-
-            if (userSelectedDate !== todayDate) {
-                console.log(inWeek, todayDayMonth)
-                setDateError(true)
-                if (dateError === true) {
-                    return toast.info(<InfoToast />, {
-                        icon: false,
-                        hideProgressBar: true,
-                        position: toast.POSITION.TOP_RIGHT
-                    })
-                }
-                console.log(dateError)
-            }
-        }
+        const finalData = {...formState, date: moment(formState.date).format('DD MM YYYY')}
 
         const isError = formModalRef.current.validate(formState)
         console.log(isError, 'errors')
 
         if (isError) return
 
-        const finalData = {...formState, date: userSelectedDate}
+
         console.log(finalData, 'final Data')
 
     }
@@ -106,10 +67,10 @@ const CateringSubForm = () => {
         <>
             <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
             <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
-            <p>*Requires 1 week notice for all orders.</p>
+            <p style={{color: 'rgb(234, 84, 85)'}}>*Requires 1 week notice for all orders.</p>
             <p>Our OMG Grazing Tables are the perfect way to entertain and feed larger groups. They provide a beautiful statement piece at your gathering. Styled to perfection with high quality artisanal products. Components include a Variety of Premium Cheeses, Grilled & Cured Meats, Antipasto Items, Jams, Nuts, Dried Fruit, Mediterranean Dips, Meat Pies, Mediterranean Pizza’s, Crudités, Seasonal Fresh Fruit, Crackers, and Fresh Herbal Accents & a Variety of Single Serve Desserts such as: Baklava, Strawberry Shortcake, Panna Cotta, Cupcakes, Tiramisu, Chocolate Chip Cookies, Salt & Pepper Cookies, and Cardamom Cookies. </p>
-            <p>*All items are seasonal and based on weekly availability.</p>
-            <p style={{marginTop: '-10px'}}>*OMG Offers Complete Event Catering, Wine Selection and Event Design.</p>
+            <p style={{color: 'rgb(234, 84, 85)'}}>*All items are seasonal and based on weekly availability.</p>
+            <p style={{marginTop: '-10px', color: 'rgb(234, 84, 85)'}}>*OMG Offers Complete Event Catering, Wine Selection and Event Design.</p>
 
             <MyForm
                 ref={formModalRef}
