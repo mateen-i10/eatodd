@@ -66,13 +66,13 @@ const Catering = () => {
             <Header/>
             <div className="container-sm">
                 <div className="row">
-                    <div className="col-md-4">
-                        <img style={{width: '350px'}} className="new mt-5"
+                    <div className="col-lg-4 col-md-5 col-sm-8 col-10 mx-auto">
+                        <img style={{width: '100%'}} className="new mt-5"
                              src={require("../../../assets/images/images/catring-wine.png").default}
                              height={400}
                         />
                     </div>
-                    <div className="col-md-8 mt-5">
+                    <div className="col-lg-8 col-md-7  col-12 mx-auto mt-5">
                         <h1 className="text-black text-uppercase fw-bolder" style={{fontSize: '40px', lineHeight: 1.1}}>
                             ADD WINE TO YOUR <br/>OMG CATERING ORDER
                         </h1>

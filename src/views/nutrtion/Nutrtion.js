@@ -13,13 +13,9 @@ const Nutrition = () => {
     const [selectedItem, setSelectedItem] = useState(0)
     const [mealNutrition, setMealNutrition] = useState({mealNut: {name: "", fat: 0, carb: 0, protein: 0}})
     const [nutritionCal, setNutritionCal] = useState([])
-    // const [chartData, setChartData] = useState([])
-    // const [fatValue, setFatValue] = useState(0)
     const [customerMealName, setCustomerMealName] = useState("")
     const history = useHistory()
     console.log(selectedItem)
-    // console.log("chart data", chartData, fatValue, customerMealName)
-
 
     const cartItems = getCartData()
 
@@ -40,20 +36,15 @@ const Nutrition = () => {
                             totalCarbs += i?.ingredient?.carb
                             totalProtein += i?.ingredient?.protein
                         }
-                    } else {
-                        return []
                     }
                     setMealNutrition({
                         ...mealNutrition,
                         mealNut: {name: item.name, fat: totalFAt, carb: totalCarbs, protein: totalProtein}
                     })
-                    // setChartData([totalFAt, totalProtein, totalCarbs])
-                    // setFatValue(totalFAt)
                     return {name: item.name, fat: totalFAt, carb: totalCarbs, protein: totalProtein}
                 })
-
             } else {
-                return []
+                return mealNutrition
             }
             setNutritionCal(nutritionTableData)
             setCustomerMealName(cartItems.meals[index].mealName)

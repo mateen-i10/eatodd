@@ -4,7 +4,7 @@ import icon from "../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
-import {Link, useHistory, useParams} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom"
 import ComponentSpinner from "../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../home/components/product/ProductImage"
 import Header from "../../shared/header/Header"
@@ -25,12 +25,15 @@ const GroupOrderMenu = () => {
     const [isLoading, response] = useAPI(`${baseURL}groupOrder/getByCode/${code}`, 'get', {}, {}, true)
     console.log('loading', isLoading)
 
+    const friendName = localStorage.getItem('groupOrderMemberName')
+    // console.log("username---------", friendName.length)
+
     useEffect(() => {
         console.log('ggggg', response)
         if (response && response.data) {
             const {data} = response
-                !isGroupOrderMemberName() ? setModal(true) : setModal(false)
-                joinByLink(data.restaurantId, data.customerId, data.id)
+            !isGroupOrderMemberName() ? setModal(true) : setModal(false)
+            joinByLink(data.restaurantId, data.customerId, data.id)
         } else if (response && !response.data) {
             clearGroupOrder()
             clearJoinByLink()
@@ -112,7 +115,17 @@ const GroupOrderMenu = () => {
             <Header isSimple={true}/>
             {memberNameModal()}
             <div className="order-main">
-                <div className="container-fluid unlock-section">
+                {friendName.length > 0 ? <div className="container-fluid mt-5">
+                    <div className="row align-items-center justify-content-center section-joined">
+                        <div className="col-12 text-center">
+                            {/*<img className=" d-lg-inline-flex d-none me-2" src={icon}*/}
+                            {/*     alt="JOIN THE OMG WINE CLUB. UNLOCK"/>*/}
+                            <div
+                                className="loyalty-text "
+                                style={{fontSize: "2.5rem"}}> {`Hey ${friendName}, YOU JOINED the ORDER.`}</div>
+                        </div>
+                    </div>
+                </div> : <div className="container-fluid unlock-section">
                     <div className="container-sm">
                         <div className="row align-items-center justify-content-center pt-1 pb-1">
                             <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
@@ -122,7 +135,7 @@ const GroupOrderMenu = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
                 <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
                     <div className="row ms-0 me-1 ">
                         {
@@ -131,11 +144,18 @@ const GroupOrderMenu = () => {
                                 return item.name.toString().toLowerCase() !== "wine" ?
                                     <div className="col-md-3  col-12 top-level-menu" key={item.id}>
                                         <div className="menu-item-1" onClick={() => {
-                                            history.push("/OmgPlate", {categoryId: item.id, restaurantId: response?.data?.restaurantId})
+                                            history.push("/OmgPlate", {
+                                                categoryId: item.id,
+                                                restaurantId: response?.data?.restaurantId
+                                            })
                                         }}>
                                             <div className="thumbnail ">
                                                 <ProductImage attachment={item.attachment}
-                                                              styles={{width: "200px", height: "180px", margin: "auto"}}/>
+                                                              styles={{
+                                                                  width: "200px",
+                                                                  height: "180px",
+                                                                  margin: "auto"
+                                                              }}/>
                                             </div>
                                             <div className="text2">
                                                 <div className="display-name">{item.name}</div>
