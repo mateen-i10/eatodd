@@ -7,6 +7,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
     const [isVisible, setIsVisible] = useState(false)
     const [chartData, setChartData] = useState([])
     const [width, setWidth] = useState(window.innerWidth)
+    const chartCustomData = [0.01, 0.01, 0.01]
 
     const listenToScroll = () => {
         const heightToShowFrom = 308
@@ -43,7 +44,9 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                 headTotalProtein += i.protein
             }
         }
-        setChartData([headTotalFAt, headTotalProtein, headTotalCarbs])
+        if (headTotalFAt > 0 || headTotalProtein > 0 || headTotalCarbs > 0) {
+            setChartData([headTotalFAt, headTotalProtein, headTotalCarbs])
+        }
 
     }, [nutritionCal])
 
@@ -235,7 +238,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                             </div>
                         </div>
                         <div className=" col-lg-4 col-6 mb-3" style={{paddingTop: 50}}>
-                            <Chart options={data} series={chartData.length > 0 ? chartData : [1, 1, 1]}
+                            <Chart options={data} series={chartData.length > 0 ? chartData : chartCustomData}
                                    type='donut'
                                    height={250}/>
                         </div>
