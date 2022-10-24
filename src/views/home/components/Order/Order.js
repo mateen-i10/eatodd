@@ -231,17 +231,28 @@ const Order = () => {
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
                             <div className="col-xxl-4 col-md-4 col-9 ">
                                 <div className="card ">
-                                    <img className='img-fluid'
-                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
-                                         alt='Crowd Pleaser'/>
-                                    <div style={{
-                                        position: 'absolute',
-                                        marginTop: "20%",
-                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                                        width: "100%"
-                                    }}>
-                                        <div className="text-center text-white fw-bolder" style={{fontSize: "1.7rem"}}
-                                        >CATERING
+                                    <div style={{position: "relative"}}>
+                                        <img className='img-fluid'
+                                             src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
+                                             alt='Crowd Pleaser' width="100%"/>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            height: "100%",
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            width: "100%"
+                                        }}>
+                                            <div className="text-center text-white fw-bolder"
+                                                 style={{
+                                                     fontSize: "1.7rem",
+                                                     position: 'absolute',
+                                                     top: "50%",
+                                                     left: "50%",
+                                                     transform: "translate(-50%, -50%)",
+                                                     width: "100%"
+                                                 }}
+                                            >CATERING
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="card-body" style={{
@@ -274,17 +285,28 @@ const Order = () => {
                             </div>
                             <div className="col-xxl-4 col-md-4 col-9 ">
                                 <div className="card ">
-                                    <img className='img-fluid'
-                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
-                                         alt='Crowd Pleaser'/>
-                                    <div style={{
-                                        position: 'absolute',
-                                        marginTop: "20%",
-                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                                        width: "100%"
-                                    }}>
-                                        <div className="text-center text-white fw-bolder" style={{fontSize: "1.7rem"}}
-                                        >GROUP ORDER
+                                    <div style={{position: "relative"}}>
+                                        <img className='img-fluid'
+                                             src={require("../../../../assets/images/images/home-crowd-pleaser2.jpg").default}
+                                             alt='Crowd Pleaser' width="100%"/>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            height: "100%",
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            width: "100%"
+                                        }}>
+                                            <div className="text-center text-white fw-bolder"
+                                                 style={{
+                                                     fontSize: "1.7rem",
+                                                     position: 'absolute',
+                                                     top: "50%",
+                                                     left: "50%",
+                                                     transform: "translate(-50%, -50%)",
+                                                     width: "100%"
+                                                 }}
+                                            >GROUP ORDER
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="card-body" style={{
@@ -316,24 +338,28 @@ const Order = () => {
                             </div>
                             <div className="col-xxl-4 col-md-4 col-9 ">
                                 <div className="card ">
-                                    <img className='img-fluid'
-                                         src={require("../../../../assets/images/images/home-crowd-pleaser1.jpg").default}
-                                         alt='Crowd Pleaser'/>
-                                    <div style={{
-                                        position: 'absolute',
-                                        marginTop: "20%",
-                                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                                        width: "100%"
-                                    }}>
-                                        <div className="text-center text-white fw-bolder "
-                                             style={{
-                                                 fontSize: "1.5rem",
-                                                 minHeight: "35px",
-                                                 maxHeight: "68px",
-                                                 overflow: "hidden"
-                                                 // lineHeight: "20px"
-                                             }}
-                                        >OMG CHARCUTERIE BOARDS
+                                    <div style={{position: "relative"}}>
+                                        <img className='img-fluid'
+                                             src={require("../../../../assets/images/images/home-crowd-pleaser3.jpg").default}
+                                             alt='Crowd Pleaser' width="100%"/>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            height: "100%",
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            width: "100%"
+                                        }}>
+                                            <div className="text-center text-white fw-bolder"
+                                                 style={{
+                                                     fontSize: "1.7rem",
+                                                     position: 'absolute',
+                                                     top: "50%",
+                                                     left: "50%",
+                                                     transform: "translate(-50%, -50%)",
+                                                     width: "100%"
+                                                 }}
+                                            >OMG CHARCUTERIE BOARDS
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="card-body" style={{

@@ -12,7 +12,7 @@ import {useDispatch} from "react-redux"
 const HeaderWine = () => {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
-    const [isuserlogedin, setuserloginedin] = useState(false)
+    // const [isuserlogedin, setuserloginedin] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -26,11 +26,11 @@ const HeaderWine = () => {
         }
     }, [])
     //** ComponentDidMount
-    useEffect(() => {
-        if (isUserLoggedIn() !== null) {
-            setuserloginedin(true)
-        }
-    }, [isuserlogedin])
+    // useEffect(() => {
+    //     if (isUserLoggedIn() !== null) {
+    //         setuserloginedin(true)
+    //     }
+    // }, [isuserlogedin])
     useEffect(() => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
@@ -50,17 +50,17 @@ const HeaderWine = () => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
 
-    console.log(isuserlogedin)
+    // console.log(isuserlogedin)
     if (width > breakpoint) {
         return (
             <div className="sticky-top">
                 <header className="w-header1">
                     <div className="head-sec-1">
                         <img className="logo" src={logo}/>
-                        <div className="headlogin">
+                        {isUserLoggedIn() ? null : <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
-                        </div>
+                        </div>}
                     </div>
                     <div className="head-sec-2">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
@@ -106,8 +106,8 @@ const HeaderWine = () => {
                                            onClick={() => dispatch(scrollToOrderAdded("home"))}>EATOMG</Button.Ripple>
                         </Link>
                     </div>
-                    {isuserlogedin ? <div className="text-center  mx-auto"
-                                          style={{marginTop: 30, display: width < 1200 ? "block" : "flex"}}>
+                    {isUserLoggedIn() ? <div className="text-center  mx-auto"
+                                             style={{marginTop: 30, display: width < 1200 ? "block" : "flex"}}>
                         <UserDropdown/>
                     </div> : <div className="nav-sec-2 text-uppercase">
                         {/*<div className="challanges">*/}
