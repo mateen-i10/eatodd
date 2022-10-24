@@ -15,3 +15,8 @@ export const FlavourType = {
     Normal: 'Normal',
     Spicy: 'Spicy'
 }
+
+export const WinePackageBillType = {
+    Monthly: 2,
+    Yearly: 3
+}
