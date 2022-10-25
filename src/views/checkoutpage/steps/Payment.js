@@ -16,10 +16,10 @@ import {getUserData} from "../../../auth/utils"
 import UILoader from "../../../@core/components/ui-loader"
 import {useHistory} from "react-router-dom"
 import {toast} from "react-toastify"
-import {CreditCard, PaymentForm} from 'react-square-web-payments-sdk'
 import {Fragment} from "@fullcalendar/core"
 import http, {baseURL} from "../../../utility/http"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
+import SquareCard from "../../../components/SquareCard"
 
 const Payment = () => {
     const restaurantId = localStorage.getItem('restaurantId')
@@ -183,6 +183,22 @@ const Payment = () => {
         }
 
     }
+    const cardVerification = () => {
+        setLoading(true)
+        return {
+            amount: `${cartTotalPrice()}`,
+            /* collected from the buyer */
+            billingContact: {
+                addressLines: [`${billingAddress?.payload?.address1}`],
+                familyName: '',
+                givenName: '',
+                countryCode: 'US',
+                city: billingAddress?.payload?.city
+            },
+            currencyCode: 'USD',
+            intent: 'CHARGE'
+        }
+    }
     const Loader = () => {
         return (
             <Fragment>
@@ -199,47 +215,9 @@ const Payment = () => {
                     <div className="container-sm">
                         <Row>
                             <Col md='9' sm='12'>
-                                <div className='payment-type'>
-                                    <Card>
-                                        <CardHeader className='flex-column align-items-start'>
-                                            <CardTitle tag='h4'>Payment Details</CardTitle>
-                                            <CardText className='text-muted mt-25'>
-                                                Be sure to enter the correct payment data
-                                            </CardText>
-                                        </CardHeader>
-                                        <CardBody>
-                                            <section>
-                                                <div className="container-sm">
-                                                    <Card>
-                                                        <Row>
-                                                            <PaymentForm
-                                                                applicationId={process.env.REACT_APP_SQUARE_APPLICATION_ID}
-                                                                locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
-                                                                createVerificationDetails={() => {
-                                                                    setLoading(true)
-                                                                    return {
-                                                                        amount: `${cartTotalPrice()}`,
-                                                                        /* collected from the buyer */
-                                                                        billingContact: {
-                                                                            addressLines: [`${billingAddress?.payload?.address1}`],
-                                                                            familyName: '',
-                                                                            givenName: '',
-                                                                            countryCode: 'US',
-                                                                            city: billingAddress?.payload?.city
-                                                                        },
-                                                                        currencyCode: 'USD',
-                                                                        intent: 'CHARGE'
-                                                                    }
-                                                                }}
-                                                                cardTokenizeResponseReceived={getToken}>
-                                                                <CreditCard/>
-                                                            </PaymentForm>
-                                                        </Row>
-                                                    </Card>
-                                                </div>
-                                            </section>
-                                        </CardBody>
-                                    </Card>
+                                <div className="container-sm">
+                                    <SquareCard getTokenFunc={getToken}
+                                                cardVerificationFunc={cardVerification} />
                                 </div>
                             </Col>
                             <Col md='3' sm='12'>
