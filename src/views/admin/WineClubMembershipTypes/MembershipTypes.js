@@ -117,7 +117,6 @@ const MembershipTypes = (props) => {
     }
 
     const billTypes = [
-        {label: 'Weekly', value: 1},
         {label: 'Monthly', value: 2},
         {label: 'Yearly', value: 3}
     ]

@@ -20,8 +20,6 @@ const Address = props => {
         billPhoneNo: Joi.number().required().label("Billing Phone Number"),
         billZipCode: Joi.number().required().label("Billing Zip Code"),
         billAddress: Joi.string().required().label("Billing Address")
-
-
     })
     // ** Props
     const {stepper} = props

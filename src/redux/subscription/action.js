@@ -1,19 +1,10 @@
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
 import {
-    setRequestCompleted,
-    setSubscription
+    setRequestCompleted
 } from "./reducer"
 
 const url = 'winePackage'
-
-export const addSubscription = (ids) => {
-    const packageId = ids.packageId
-    const customerId = ids.customerId
-    return dispatch => {
-        dispatch(setSubscription({packageId, customerId}))
-    }
-}
 
 export const addWinePayment = (data, history) => {
     return (dispatch) => {
