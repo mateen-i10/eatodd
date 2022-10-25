@@ -15,14 +15,16 @@ import refund from '../../../assets/images/empDashboard/refund.png'
 import schedule from '../../../assets/images/empDashboard/calendar.png'
 import all from '../../../assets/images/empDashboard/all-inclusive.png'
 
+import {Blocks, LineCards} from "./components/Blocks"
+
 import Select from 'react-select'
 
 const EmpCards = () => {
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
+        { value: 'Overall Stats', label: 'Overall Stats' },
+        { value: 'Todays Stats', label: 'Todays Stats' },
+        { value: 'This Month Stats', label: 'This Month Stats' }
     ]
 
     const customStyles = {
@@ -33,6 +35,64 @@ const EmpCards = () => {
             fontSize: '15px'
         })
     }
+
+    const dashboardBlockCardData = [
+        {
+            id:0,
+            stats: 0,
+            img: confirmed,
+            title: 'Confirmed',
+            bg: '#28c76f66'
+        },
+        {
+            id:1,
+            stats: 0,
+            img: cooking,
+            title: 'Cooking',
+            bg: '#28c76f33'
+        },
+        {
+            id:2,
+            stats: 0,
+            img: cooked,
+            title: 'Ready for delivery',
+            bg: '#BDFF7E'
+        },
+        {
+            id:3,
+            stats: 0,
+            img: foodTruck,
+            title: 'Food on the way',
+            bg: '#D7FFDE'
+        }
+    ]
+
+    const dashboardLineCharts = [
+        {
+            id: 0,
+            stats: 15,
+            title: 'Delivered',
+            img: deliverd
+        },
+        {
+            id: 0,
+            stats: 0,
+            title: 'Refunded',
+            img: refund
+        },
+        {
+            id: 0,
+            stats: 0,
+            title: 'Scheduled',
+            img: schedule
+        },
+        {
+            id: 0,
+            stats: 15,
+            title: 'All',
+            img: all
+        }
+    ]
 
     return (
         <>
@@ -45,8 +105,8 @@ const EmpCards = () => {
                                     <Row>
                                         <Col>
                                             <div style={{display:'flex'}}>
-                                                <img src={dashboard} width={30} height={30}/>
-                                                <h2 style={{marginLeft: '10px', marginTop: '1px'}}>Dashboard</h2>
+                                                <img src={dashboard} width={20} height={20}/>
+                                                <h2 style={{marginLeft: '10px', marginTop: '-5px'}}>Dashboard</h2>
                                             </div>
                                         </Col>
                                     </Row>
@@ -58,9 +118,9 @@ const EmpCards = () => {
                                 <section>
                                     <Row>
                                         <Col>
-                                            <div style={{display:'flex'}}>
-                                                <p style={{marginTop: '0px'}}>Follow Up your restaurants Activity</p>
-                                                <img src={cutlery} width={25} height={25}/>
+                                            <div style={{display:'flex', justifyContent: 'end'}}>
+                                                <p style={{marginTop: '0px', marginRight: '5px'}}>Follow Up your restaurants Activity</p>
+                                                <img src={cutlery} width={20} height={20}/>
                                             </div>
                                         </Col>
                                     </Row>
@@ -77,12 +137,12 @@ const EmpCards = () => {
                         <Row style={{justifyContent: 'space-between', padding: '15px', marginBottom: '-36px'}}>
                             <Col md={5}>
                                 <div style={{display:'flex'}}>
-                                    <img src={growth} width={35}/>
+                                    <img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>
                                     <h4 style={{marginTop: '10px', marginLeft: '5px'}}>Dashboard order statistics</h4>
                                 </div>
                             </Col>
                             <Col md={3}>
-                                <Select options={options}  styles={customStyles} />
+                                <Select options={options}  styles={customStyles} maxMenuHeight={100} />
                             </Col>
                         </Row>
                     </section>
@@ -92,140 +152,22 @@ const EmpCards = () => {
                     <section>
                         <div className="container-sm">
                             <Row>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#28c76f66', height: '85%', padding:'5px'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{marginTop:'40px'}}>
-                                                    <h3 style={{fontWeight: 'bolder'}}>1</h3>
-                                                </Col>
-                                                <Col style={{textAlign: 'end', marginTop: '10px', padding: '0px'}}>
-                                                    <img src={confirmed} width={35}/>
-                                                </Col>
-                                            </Row>
-                                            <h6>Confirmed</h6>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#28c76f33', height: '85%', padding:'5px'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{marginTop:'40px'}}>
-                                                    <h3 style={{fontWeight: 'bolder'}}>0</h3>
-                                                </Col>
-                                                <Col style={{textAlign: 'end', marginTop: '10px', padding: '0px'}}>
-                                                    <img src={cooking} width={35}/>
-                                                </Col>
-                                            </Row>
-                                            <h6>Cooking</h6>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#BDFF7E', height: '85%', padding:'5px'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{marginTop:'40px'}}>
-                                                    <h3 style={{fontWeight: 'bolder'}}>0</h3>
-                                                </Col>
-                                                <Col style={{textAlign: 'end', marginTop: '10px', padding: '0px'}}>
-                                                    <img src={cooked} width={35}/>
-                                                </Col>
-                                            </Row>
-                                            <h6>Ready for delivery</h6>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#D7FFDE', height: '85%', padding:'5px'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{marginTop:'40px'}}>
-                                                    <h3 style={{fontWeight: 'bolder'}}>0</h3>
-                                                </Col>
-                                                <Col style={{textAlign: 'end', marginTop: '10px', padding: '0px'}}>
-                                                    <img src={foodTruck} width={35}/>
-                                                </Col>
-                                            </Row>
-                                            <h6>Food on the way</h6>
-                                        </div>
-                                    </Card>
-                                </Col>
+                                {dashboardBlockCardData !== null ? dashboardBlockCardData.map(e => (
+                                    <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}} key={e.id} onClick={() => console.log(e.title, 'selected card title')}>
+                                        <Blocks stats={e.stats} img={e.img} title={e.title} bg={e.bg} />
+                                    </Col>
+                                )) : [] }
                             </Row>
                         </div>
-            </section>
+                    </section>
                     <section>
                         <div className="container-sm">
                             <Row>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#e8eaed'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{padding:'0px'}}>
-                                                    <div style={{display:'flex', justifyContent:'space-between', margin:'6px'}}>
-                                                        <div style={{display:'flex'}}>
-                                                            <img src={deliverd} width={35}/>
-                                                            <h6 style={{marginTop:'8px', marginLeft:'5px'}}>Delivered</h6>
-                                                        </div>
-                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>15</h4>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#e8eaed'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{padding:'0px'}}>
-                                                    <div style={{display:'flex', justifyContent:'space-between', margin:'6px'}}>
-                                                        <div style={{display:'flex'}}>
-                                                            <img src={refund} width={35}/>
-                                                            <h6 style={{marginTop:'8px', marginLeft:'5px'}}>Refunded</h6>
-                                                        </div>
-                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>0</h4>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#e8eaed'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{padding:'0px'}}>
-                                                    <div style={{display:'flex', justifyContent:'space-between', margin:'6px'}}>
-                                                        <div style={{display:'flex'}}>
-                                                            <img src={schedule} width={35}/>
-                                                            <h6 style={{marginTop:'8px', marginLeft:'5px'}}>Scheduled</h6>
-                                                        </div>
-                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>0</h4>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    </Card>
-                                </Col>
-                                <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}}>
-                                    <Card style={{backgroundColor: '#e8eaed'}}>
-                                        <div className="container-sm">
-                                            <Row>
-                                                <Col style={{padding:'0px'}}>
-                                                    <div style={{display:'flex', justifyContent:'space-between', margin:'6px'}}>
-                                                        <div style={{display:'flex'}}>
-                                                            <img src={all} width={35}/>
-                                                            <h6 style={{marginTop:'8px', marginLeft:'5px'}}>All</h6>
-                                                        </div>
-                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>21</h4>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                    </Card>
-                                </Col>
+                                {dashboardLineCharts !== null ? dashboardLineCharts.map(e => (
+                                    <Col lg={3} md={6} sm={12} style={{paddingBottom: '5px'}} key={e.id} onClick={() => console.log(e.title)}>
+                                        <LineCards stats={e.stats} img={e.img} title={e.title}/>
+                                    </Col>
+                                )) : []}
                             </Row>
                         </div>
                     </section>

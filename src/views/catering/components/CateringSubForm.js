@@ -20,8 +20,15 @@ const CateringSubForm = () => {
     let month = moment(Date.now()).format('MM')
     let year = moment(Date.now()).format('YYYY')
 
-    if (today >= 31) {
-        today = today - 30
+    function daysInMonth (month, year) {
+        return new Date(year, month, 0).getDate()
+    }
+
+    console.log(daysInMonth(month, year), 'monthhs')
+    const totalDays = daysInMonth(month, year)
+
+    if (today >= totalDays) {
+        today = today - totalDays
         month = Number(month) + 1
     }
 
