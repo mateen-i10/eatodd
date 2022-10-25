@@ -6,13 +6,17 @@ import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
 import {
+    Button,
     Card,
     CardHeader,
     CardTitle,
-    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    UncontrolledDropdown
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
@@ -51,8 +55,8 @@ const Ingredients = (props) => {
     const [searchValue, setSearchValue] = useState('')
 
     const Unit = async () => [
-        { value: "kg", label: 'Kg' },
-        { value: "grams", label: 'Grams' }
+        {value: "kg", label: 'Kg'},
+        {value: "grams", label: 'Grams'}
     ]
 
     // ** local States
@@ -60,20 +64,80 @@ const Ingredients = (props) => {
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
+    const [isModalLoading, setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Option Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Unit', placeholder: 'Enter Unit', name:'unit', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Unit, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.Number, label: 'Fat', placeholder: 'Enter Fat', name:'fat', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Protein', placeholder: 'Enter Protein', name:'protein', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Carb', placeholder: 'Enter Carb', name:'carb', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
+        {
+            type: FieldTypes.Text,
+            label: 'Name',
+            placeholder: 'Enter Option Name',
+            name: 'name',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Quantity',
+            placeholder: 'Enter Quantity',
+            name: 'quantity',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Unit',
+            placeholder: 'Enter Unit',
+            name: 'unit',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            loadOptions: Unit,
+            isAsyncSelect: true,
+            isMulti: false
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Calories',
+            placeholder: 'Enter Calories',
+            name: 'cal',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Fat',
+            placeholder: 'Enter Fat',
+            name: 'fat',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Protein',
+            placeholder: 'Enter Protein',
+            name: 'protein',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Carb',
+            placeholder: 'Enter Carb',
+            name: 'carb',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.TextArea,
+            label: 'Description',
+            placeholder: 'Enter Description',
+            name: 'description',
+            fieldGroupClasses: 'col-12'
+        }
     ])
 
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
         quantity: Joi.number().required().label("Quantity"),
+        cal: Joi.number().required().label("Calories"),
         fat: Joi.number().required().label("Fat"),
         protein: Joi.number().required().label("Protein"),
         carb: Joi.number().required().label("Carb"),
@@ -95,6 +159,7 @@ const Ingredients = (props) => {
         quantity: '',
         unit: '',
         description: '',
+        cal: '',
         fat: '',
         protein: '',
         carb: ''
@@ -186,6 +251,12 @@ const Ingredients = (props) => {
             minWidth: '50px'
         },
         {
+            name: 'Cal',
+            selector: (row) => row.cal,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
             name: 'Fat',
             selector: (row) => row.fat,
             sortable: true,
@@ -211,20 +282,23 @@ const Ingredients = (props) => {
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
-                                <MoreVertical size={15} />
+                                <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
+                                <DropdownItem tag='a' href='/' className='w-100'
+                                              onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
+                                    <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => {
+                            editClick(row.id)
+                        }}><Edit size={15}/></span>
                     </div>
                 )
             }
@@ -262,7 +336,7 @@ const Ingredients = (props) => {
     const dataToRender = () => {
         if (ingredientList.length > 0) {
             return ingredientList
-        }  else {
+        } else {
             return ingredientList.slice(0, pageSize)
         }
     }
@@ -271,11 +345,13 @@ const Ingredients = (props) => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                    <CardHeader
+                        className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Ingredients</CardTitle>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add Ingredient</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add
+                            Ingredient</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
@@ -297,7 +373,7 @@ const Ingredients = (props) => {
                         paginationServer
                         className='react-dataTable'
                         columns={columns}
-                        sortIcon={<ChevronDown size={10} />}
+                        sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
                         data={dataToRender()}
                     />
@@ -313,7 +389,7 @@ const Ingredients = (props) => {
                        modalTitle={modalTitle}
                        primaryBtnLabel='Save'
                        secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
+                       isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
             />
 
