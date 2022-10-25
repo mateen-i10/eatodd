@@ -38,9 +38,7 @@ const UserDropdown = () => {
     return (
         <UncontrolledDropdown tag='li' className='dropdown-user nav-item '>
             <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link ' onClick={e => e.preventDefault()}>
-                <div className='user-nav d-sm-flex d-none' style={{
-                    width: 200
-                }}>
+                <div className='user-nav d-sm-flex d-none'>
                     <div className="d-inline-block">
                     <span className='user-name fw-bold text-uppercase'
                           style={{

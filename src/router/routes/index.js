@@ -649,10 +649,50 @@ const Routes = [
         }
     },
     {
+        path: '/employeeDashboard/orders',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        layout: 'VerticalLayout'
+        // exact: true,
+        // meta: {
+        //     authRoute: true
+        // }
+    },
+    {
+        path: '/employeeDashboard/product',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        layout: 'VerticalLayout'
+        // exact: true
+        // meta: {
+        //     authRoute: true,
+        //     adminOnly: true
+        // }
+    },
+    {
+        path: '/employeeDashboard/customer',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        layout: 'VerticalLayout'
+        // exact: true
+        // meta: {
+        //     authRoute: true,
+        //     adminOnly: true
+        // }
+    },
+    {
+        path: '/employeeDashboard/inventory/distributor',
+        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        layout: 'VerticalLayout'
+        // exact: true
+        // meta: {
+        //     authRoute: true,
+        //     adminOnly: true
+        // }
+    },
+    {
         path: '/employeeDashboard',
         component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
         layout: 'VerticalLayout'
     }
+
 ]
 
 export {DefaultRoute, TemplateTitle, Routes}

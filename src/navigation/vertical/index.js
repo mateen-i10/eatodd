@@ -1,25 +1,18 @@
 import {
-    Archive,
     Award,
-    Box,
-    Clipboard,
-    Clock,
     Coffee,
     Copy,
     Facebook,
     Grid,
     Home,
     Mail,
-    Menu,
     MessageSquare,
     Package,
     PenTool,
     Send,
     User,
     UserCheck,
-    UserPlus,
-    Users,
-    Volume
+    Users
 } from 'react-feather'
 
 export default [
@@ -72,17 +65,11 @@ export default [
         navLink: '/generalProducts'
     },
     {
-               id: 'Product',
-               title: 'Product',
-               icon: <Package size={20}/>,
-               navLink: '/products'
+        id: 'Product',
+        title: 'Product',
+        icon: <Package size={20}/>,
+        navLink: '/products'
     },
-    /* {
-         id: 'SectionItem',
-         title: 'Section Items',
-         icon: <Package size={20}/>,
-         navLink: '/sectionItem'
-     },*/
     {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
@@ -121,81 +108,7 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/section'
     },
-    // {
-    //     id: 'Bussiness Details',
-    //     title: 'Bussiness Details',
-    //     icon: <Archive size={20}/>,
-    //     navLink: '/BussinessDetails'
-    // },
-    // {
-    //     id: 'Login History',
-    //     title: 'Login History',
-    //     icon: <Clock size={20}/>,
-    //     navLink: '/LoginHistory'
-    // },
-    // {
-    //     id: 'northave',
-    //     title: 'North Ave',
-    //     // badge: 'light-warning',
-    //     // badgeText: '2',
-    //     children: [
-    //         {
-    //             id: 'orders',
-    //             title: 'Orders',
-    //             icon: <Clipboard size={20}/>,
-    //             navLink: '/dashboard/orders'
-    //         },
-    //         {
-    //             id: 'Product',
-    //             title: 'Product',
-    //             icon: <Package size={20}/>,
-    //             navLink: '/products'
-    //         },
-    //         {
-    //             id: 'menuitems',
-    //             title: 'Catering Items',
-    //             icon: <Menu size={12}/>,
-    //             navLink: '/dashboard/menuitems'
-    //         },
-    //         {
-    //             id: 'customer',
-    //             title: 'Customer',
-    //             icon: <UserPlus size={12}/>,
-    //             navLink: '/dashboard/customer'
-    //         },
-    //         {
-    //             id: 'inventory',
-    //             title: 'Inventory',
-    //             icon: <Box size={12}/>,
-    //             children: [
-    //                 {
-    //                     id: 'items',
-    //                     title: 'Items',
-    //                     icon: <Clipboard size={20}/>,
-    //                     navLink: '/dashboard/inventory/item'
-    //                 },
-    //                 {
-    //                     id: 'distributor',
-    //                     title: 'Distributor',
-    //                     icon: <Clipboard size={20}/>,
-    //                     navLink: '/dashboard/inventory/distributor'
-    //                 },
-    //                 {
-    //                     id: 'category',
-    //                     title: 'Category',
-    //                     icon: <Clipboard size={20}/>,
-    //                     navLink: '/dashboard/inventory/category'
-    //                 },
-    //                 {
-    //                     id: 'Recipe',
-    //                     title: 'recipe',
-    //                     icon: <Clipboard size={20}/>,
-    //                     navLink: '/dashboard/inventory/recipe'
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // },
+
     {
         id: 'Wineclub',
         title: 'Wineclub',
@@ -264,5 +177,44 @@ export const branchManagerMenu = [
         title: 'Dashboard',
         icon: <Home size={20}/>,
         navLink: '/employeeDashboard'
+    },
+    {
+        header: 'Restaurants'
+    },
+    {
+        id: 'NorthEve',
+        title: 'North Eve',
+        children: [
+            {
+                id: 'Details',
+                title: 'Details',
+                icon: <Award size={20}/>
+                // navLink: '/Details'
+            },
+            {
+                id: 'Orders',
+                title: 'Orders',
+                icon: <UserCheck size={20}/>,
+                navLink: "/employeeDashboard/orders"
+            },
+            {
+                id: 'Products',
+                title: 'Products',
+                icon: <UserCheck size={20}/>,
+                navLink: '/employeeDashboard/product'
+            },
+            {
+                id: 'Customers',
+                title: 'Customers',
+                icon: <Mail size={20}/>,
+                navLink: '/employeeDashboard/customer'
+            },
+            {
+                id: 'Inventory',
+                title: 'Inventory',
+                icon: <Send size={20}/>,
+                navLink: '/employeeDashboard/inventory/distributor'
+            }
+        ]
     }
 ]
