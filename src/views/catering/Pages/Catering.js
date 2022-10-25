@@ -36,7 +36,7 @@ const Catering = () => {
                 isLoading
             })
             final.push({
-                id: 1,
+                id: '1',
                 name: 'Event Catering',
                 description: 'Fill in Form'
             })
@@ -125,7 +125,7 @@ const Catering = () => {
                             md={md}
                             id={selectedMenuId}
                         />}
-                        {selectedMenuId === 1 ? <CateringSubForm/> : []}
+                        {selectedMenuId === '1' ? <CateringSubForm /> : []}
                     </div>
                 </div>
             </div> : <div className="m-5"><ComponentSpinner/></div>}

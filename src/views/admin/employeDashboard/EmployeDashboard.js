@@ -24,6 +24,7 @@ import ReactPaginate from "react-paginate"
 import {useDispatch, useSelector} from "react-redux"
 import {getEmployeesDashboard} from "../../../redux/employeeDashboard/action"
 import UILoader from "../../../@core/components/ui-loader"
+import EmpCards from "../../../ui-elements/Cards/employeeDashboard/EmpCards"
 
 const EmployeeDashboard = () => {
     // ** Context
@@ -98,6 +99,9 @@ const EmployeeDashboard = () => {
 
     return (
         <UILoader blocking={isLoading}>
+
+            <EmpCards />
+
             <div id='dashboard-ecommerce'>
                 <Row className='match-height'>
                     <Col xl='4' md='6' xs='12'>
