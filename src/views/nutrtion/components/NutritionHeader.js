@@ -6,6 +6,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
     // console.log("llllllll", customerMealName)
     const [isVisible, setIsVisible] = useState(false)
     const [chartData, setChartData] = useState([])
+    const [totalCalories, setTotalCalories] = useState(0)
     const [width, setWidth] = useState(window.innerWidth)
     const chartCustomData = [0.01, 0.01, 0.01]
 
@@ -37,15 +38,18 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
         let headTotalFAt = 0
         let headTotalCarbs = 0
         let headTotalProtein = 0
+        let headTotalCalories = 0
         if (nutritionCal.length) {
             for (const i of nutritionCal) {
                 headTotalFAt += i.fat
                 headTotalCarbs += i.carb
                 headTotalProtein += i.protein
+                headTotalCalories += i.calories
             }
         }
-        if (headTotalFAt > 0 || headTotalProtein > 0 || headTotalCarbs > 0) {
+        if (headTotalFAt > 0 || headTotalProtein > 0 || headTotalCarbs > 0 || headTotalCalories > 0) {
             setChartData([headTotalFAt, headTotalProtein, headTotalCarbs])
+            setTotalCalories(headTotalCalories)
         }
 
     }, [nutritionCal])
@@ -63,7 +67,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
         comparedResult: [2, -3, 8],
         labels: ['Fat', 'Protien', 'Carb'],
         stroke: {width: 0},
-        colors: ['#81be41', '#63852e', '#a1ba78'],
+        colors: ['#9c1f16', '#57ab00', '#c98200'],
         grid: {
             padding: {
                 right: -20,
@@ -83,15 +87,16 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                         value: {
                             offsetY: -15,
                             formatter(val) {
-                                return `${parseInt(val)} %`
+                                return `${parseInt(val)}`
                             }
                         },
                         total: {
                             show: true,
                             offsetY: 15,
-                            label: 'Fat',
+                            label: 'Calories',
                             formatter() {
-                                return `50%`
+                                return 50
+
                             }
                         }
                     }
@@ -150,7 +155,10 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                 </td>
                                 <td className="text-primary"
                                     style={{fontSize: "1rem", fontWeight: 300, paddingBottom: 40}}><span
-                                    style={{fontSize: "1.7rem", fontWeight: 600}}>210</span>Cal
+                                    style={{
+                                        fontSize: "1.7rem",
+                                        fontWeight: 600
+                                    }}>{totalCalories}</span> <span>Cal</span>
                                 </td>
                                 <td className="" style={{paddingBottom: 30}}>
                                     <div style={{
@@ -207,13 +215,17 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                         <div className="col-lg-4 col-6 mb-3 " style={{paddingTop: 70}}>
                             <div className="text-center">
                                 <h1 className=""
-                                    style={{fontSize: '2.7em', fontWeight: 'bolder', color: '#81be41'}}>210cal</h1>
+                                    style={{
+                                        fontSize: '2.7em',
+                                        fontWeight: 'bolder',
+                                        color: '#81be41'
+                                    }}>{totalCalories} cal</h1>
                                 <div className="text-center justify-content-center row">
                                     <div className="text-center  col-3">
                                         <h3 style={{
                                             fontSize: '1.8em',
                                             fontWeight: 'bolder',
-                                            color: '#63852e'
+                                            color: '#9c1f16'
                                         }}>{chartData.length > 0 ? chartData[0] : 0}</h3>
                                         <h5>Fat</h5>
                                         {/*setChartData([totalFAt, totalProtein, totalCarbs])*/}
@@ -222,7 +234,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                         <h3 style={{
                                             fontSize: '1.8em',
                                             fontWeight: 'bolder',
-                                            color: '#63852e'
+                                            color: '#57ab00'
                                         }}>{chartData.length > 0 ? chartData[1] : 0}</h3>
                                         <h5>Protien</h5>
                                     </div>
@@ -230,7 +242,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                         <h3 style={{
                                             fontSize: '1.8em',
                                             fontWeight: 'bolder',
-                                            color: '#63852e'
+                                            color: '#c98200'
                                         }}>{chartData.length > 0 ? chartData[2] : 0}</h3>
                                         <h5>Carbs</h5>
                                     </div>
