@@ -1,12 +1,4 @@
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    CardTitle,
-    Col,
-    Form, FormGroup, Input, Label,
-    Row
-} from 'reactstrap'
+import {Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap'
 import UILoader from "../../../@core/components/ui-loader"
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import {useState} from "react"
@@ -16,6 +8,7 @@ import {toast} from "react-toastify"
 import {useHistory, useLocation} from "react-router-dom"
 import Joi from "joi-browser"
 import {WinePackageBillType} from "../../../utility/enums/Types"
+import Select from "react-select"
 
 const winePayment = () => {
 
@@ -46,28 +39,28 @@ const winePayment = () => {
         console.info('Verified Buyer:', verifiedBuyer)
         if (token && token.token && token.status === "OK" && verifiedBuyer && verifiedBuyer.token) {
             try {
-            const body = {
-                sourceId: token.token,
-                locationId: process.env.SQUARE_LOCATION_ID,
-                verificationToken: verifiedBuyer.token,
-                customerId: state.customerId,
-                packageId: state.package.id,
-                isAutoRenual: autoRenewable,
-                card: {
-                    cardBrand: token.details.card.brand,
-                    expMonth: token.details.card.expMonth,
-                    expYear:token.details.card.expYear,
-                    last4: token.details.card.last4,
-                    billingAddress: {
-                        city: billCity,
-                        state: billState,
-                        country: billCountry,
-                        address1: billAddress,
-                        phoneNumber: billPhoneNo,
-                        zipCode: token.details.postalCode
+                const body = {
+                    sourceId: token.token,
+                    locationId: process.env.SQUARE_LOCATION_ID,
+                    verificationToken: verifiedBuyer.token,
+                    customerId: state.customerId,
+                    packageId: state.package.id,
+                    isAutoRenual: autoRenewable,
+                    card: {
+                        cardBrand: token.details.card.brand,
+                        expMonth: token.details.card.expMonth,
+                        expYear: token.details.card.expYear,
+                        last4: token.details.card.last4,
+                        billingAddress: {
+                            city: billCity,
+                            state: billState,
+                            country: billCountry,
+                            address1: billAddress,
+                            phoneNumber: billPhoneNo,
+                            zipCode: token.details.postalCode
+                        }
                     }
                 }
-            }
                 console.log('body of add wine package', body)
                 const res = await http._put(`${baseURL}winePackage/AssignToCustomer`, {...body})
                 if (res && res.status === 200 && res.data.statusCode === 200) {
@@ -116,10 +109,14 @@ const winePayment = () => {
             return errorData
         }
     }
+    const countryOptions = [
+        {value: 'USA', label: 'USA'},
+        {value: 'UK', label: 'UK'}
+    ]
 
     return (
         <>
-            <Headerwine />
+            <Headerwine/>
             <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
                 <UILoader blocking={isLoading}>
                     <section className='mt-3'>
@@ -131,9 +128,11 @@ const winePayment = () => {
                                             <Col sm='7'><CardTitle tag='h4'>Billing Address </CardTitle></Col>
                                             <Col sm='5'>
                                                 <FormGroup check inline>
-                                                    <Input type='checkbox' checked={autoRenewable} onChange={(e) => setAutoRenewable(e.target.checked)} id='basic-cb-checked' />
+                                                    <Input type='checkbox' checked={autoRenewable}
+                                                           onChange={(e) => setAutoRenewable(e.target.checked)}
+                                                           id='basic-cb-checked'/>
                                                     <Label for='basic-cb-checked' check>
-                                                         Renew subscription every {billType}
+                                                        Renew subscription every {billType}
                                                     </Label>
                                                 </FormGroup>
                                             </Col>
@@ -184,18 +183,28 @@ const winePayment = () => {
                                                     <Label className='form-label' for='country'>
                                                         Country
                                                     </Label>
-                                                    <Input
+                                                    <Select
                                                         id='country'
                                                         name='billCountry'
-                                                        placeholder='USA'
-                                                        onChange={(e) => setBillCountry(e.target.value)}
-                                                        invalid={!billCountry ? errors.billCountry && true : null}
+                                                        className='react-select'
+                                                        classNamePrefix='select'
+                                                        defaultValue={countryOptions[0]}
+                                                        options={countryOptions}
+                                                        isClearable={false}
+                                                        onChange={(e) => setBillCountry(e.value)}
                                                     />
-                                                    {!billCountry && errors.billCountry && (
-                                                        <div className="text-danger">
-                                                            {errors.billCountry}
-                                                        </div>
-                                                    )}
+                                                    {/*<Input*/}
+                                                    {/*    id='country'*/}
+                                                    {/*    name='billCountry'*/}
+                                                    {/*    placeholder='USA'*/}
+                                                    {/*    onChange={(e) => setBillCountry(e.target.value)}*/}
+                                                    {/*    invalid={!billCountry ? errors.billCountry && true : null}*/}
+                                                    {/*/>*/}
+                                                    {/*{!billCountry && errors.billCountry && (*/}
+                                                    {/*    <div className="text-danger">*/}
+                                                    {/*        {errors.billCountry}*/}
+                                                    {/*    </div>*/}
+                                                    {/*)}*/}
                                                 </Col>
                                                 <Col sm='3'>
                                                     <div className='mb-2'>
@@ -218,24 +227,24 @@ const winePayment = () => {
                                                     </div>
                                                 </Col>
                                                 <Col sm='12'>
-                                                <div className='mb-2'>
-                                                    <Label className='form-label' for='checkoutLandmark'>
-                                                        Address:
-                                                    </Label>
-                                                    <Input
-                                                        id='checkoutLandmark'
-                                                        name='billAddress'
-                                                        placeholder='Near Apollo Hospital'
-                                                        onChange={(e) => setBillAddress(e.target.value)}
-                                                        invalid={!billAddress ? errors.billAddress && true : null}
-                                                    />
-                                                    {!billAddress && errors.billAddress && (
-                                                        <div className="text-danger">
-                                                            {errors.billAddress}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </Col>
+                                                    <div className='mb-2'>
+                                                        <Label className='form-label' for='checkoutLandmark'>
+                                                            Address:
+                                                        </Label>
+                                                        <Input
+                                                            id='checkoutLandmark'
+                                                            name='billAddress'
+                                                            placeholder='Near Apollo Hospital'
+                                                            onChange={(e) => setBillAddress(e.target.value)}
+                                                            invalid={!billAddress ? errors.billAddress && true : null}
+                                                        />
+                                                        {!billAddress && errors.billAddress && (
+                                                            <div className="text-danger">
+                                                                {errors.billAddress}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </Col>
                                             </Row>
                                         </CardBody>
                                     </Card>
