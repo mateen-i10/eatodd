@@ -25,7 +25,7 @@ const winePayment = () => {
     const [isLoading, setLoading] = useState(false)
     const [billCity, setBillCity] = useState()
     const [billState, setBillState] = useState()
-    const [billCountry, setBillCountry] = useState()
+    const [billCountry, setBillCountry] = useState('US')
     const [billPhoneNo, setBillPhoneNo] = useState()
     const [billAddress, setBillAddress] = useState()
     const [autoRenewable, setAutoRenewable] = useState(false)
@@ -110,7 +110,7 @@ const winePayment = () => {
                     addressLines: [billAddress],
                     familyName: '',
                     givenName: '',
-                    countryCode: 'US',
+                    countryCode: billCountry,
                     city: billCity
                 },
                 currencyCode: 'USD',
