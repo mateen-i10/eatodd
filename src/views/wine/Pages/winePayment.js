@@ -1,4 +1,17 @@
-import {Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap'
+import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    CardText,
+    CardTitle,
+    Col,
+    Form,
+    FormGroup,
+    Input,
+    Label,
+    Row
+} from 'reactstrap'
 import UILoader from "../../../@core/components/ui-loader"
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import {useEffect, useState} from "react"
@@ -10,6 +23,7 @@ import Joi from "joi-browser"
 import {WinePackageBillType} from "../../../utility/enums/Types"
 import Select from "react-select"
 import {getUserData} from "../../../auth/utils"
+import './winePayment.css'
 
 const winePayment = () => {
     // hooks
@@ -32,13 +46,13 @@ const winePayment = () => {
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
-            if (state && state.currentPackage) {
-                setIsActivePackage(true)
-                setExistingCard(true)
-            } else {
-                setIsActivePackage(false)
-                setExistingCard(false)
-            }
+        if (state && state.currentPackage) {
+            setIsActivePackage(true)
+            setExistingCard(true)
+        } else {
+            setIsActivePackage(false)
+            setExistingCard(false)
+        }
 
     }, [state])
 
@@ -69,7 +83,7 @@ const winePayment = () => {
             try {
                 const body = {
                     sourceId: token.token,
-                    locationId: process.env.SQUARE_LOCATION_ID,
+                    locationId: 'L523E85DPXAJ5',  //process.env.SQUARE_LOCATION_ID,
                     verificationToken: verifiedBuyer.token,
                     customerId,
                     packageId: state.package.id,
@@ -136,178 +150,210 @@ const winePayment = () => {
     return (
         <>
             <Headerwine/>
-                <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
-                    <UILoader blocking={isLoading}>
-                        {isActivePackage && <Col sm='4'>
-                            <FormGroup check inline>
-                                <Input type='checkbox' checked={useExistingCard}
-                                       onChange={(e) => setExistingCard(e.target.checked)}
-                                       id='basic-cb-checked'/>
-                                <Label for='basic-cb-checked' check>
-                                    Use Existing card
-                                </Label>
-                            </FormGroup>
-                            {useExistingCard && <FormGroup check inline>
-                                <Button onClick={() => handleSubmit({
-                                    customerId,
-                                    packageId: state.package.id,
-                                    isAutoRenual: autoRenewable
-                                })}>Upgrade</Button>
-                            </FormGroup>}
-                        </Col>}
-                        {!useExistingCard && <section className='mt-3'>
-                            <div className="container-sm">
-                                <Row>
-                                    <Col md='9' sm='12'>
-                                        <Card>
-                                            <Row className='pt-2 px-2'>
-                                                <Col sm='8'><CardTitle tag='h4'>Billing Address </CardTitle></Col>
-                                                <Col sm='4'>
-                                                    <FormGroup check inline>
-                                                        <Input type='checkbox' checked={autoRenewable}
-                                                               onChange={(e) => setAutoRenewable(e.target.checked)}
-                                                               id='basic-cb-checked'/>
-                                                        <Label for='basic-cb-checked' check>
-                                                            Auto renew subscription every {billType}
+            <Form className='list-view product-checkout' onSubmit={e => e.preventDefault()}>
+                <UILoader blocking={isLoading}>
+                    {<section className='mt-3'>
+                        <div className="container-sm">
+                            <Row>
+                                <Col md='9' sm='12'>
+                                    <Card>
+                                        {/*<Row className='justify-content-end'>*/}
+                                        {/*    <Col sm='3' className='mt-2 ms-3'> <FormGroup check inline>*/}
+                                        {/*        <Input type='checkbox' checked={useExistingCard}*/}
+                                        {/*               onChange={(e) => setExistingCard(e.target.checked)}*/}
+                                        {/*               id='basic-cb-checked'/>*/}
+                                        {/*        <Label for='basic-cb-checked' check>*/}
+                                        {/*            Use Existing card*/}
+                                        {/*        </Label>*/}
+                                        {/*    </FormGroup></Col>*/}
+                                        {/*</Row>*/}
+                                        <Row className='mt-2 ms-2 text-start'>
+                                            {useExistingCard &&
+                                                <Col sm='8'><CardText tag='h4'>You have already subscribed a
+                                                    plane </CardText></Col>}
+                                            {!useExistingCard &&
+                                                <Col sm='8'><CardText tag='h4'>Billing Address </CardText></Col>}
+                                            {!useExistingCard && <Col sm='4'>
+                                                <FormGroup check inline>
+                                                    <Input type='checkbox' checked={autoRenewable}
+                                                           onChange={(e) => setAutoRenewable(e.target.checked)}
+                                                           id='basic-cb-checked'/>
+                                                    <Label for='basic-cb-checked' check>
+                                                        Auto renew subscription every {billType}
+                                                    </Label>
+                                                </FormGroup>
+                                            </Col>}
+                                        </Row>
+                                        {useExistingCard && isActivePackage && <CardBody className='ms-2'>
+                                            {/*<CardTitle tag='h4'>Card Title</CardTitle>*/}
+                                            <CardText>
+                                                Through the OMG wine club, you’ll sip on a wide variety of wines that
+                                                are pre-released or made in small batches. Exclusivity is key here. Each
+                                                subscription also includes access to digital wine experiences and
+                                                tastings.
+                                            </CardText>
+                                            <FormGroup check inline className='mt-1'>
+                                                <Button color="primary" className='text-uppercase'
+                                                        onClick={() => handleSubmit({
+                                                            customerId,
+                                                            packageId: state.package.id,
+                                                            isAutoRenual: autoRenewable
+                                                        })}>Upgrade</Button>
+                                                <Button color="secondary" className=' mx-2 text-uppercase'
+                                                        onClick={() => {
+                                                            history.push('/user')
+                                                        }}>View Your Plane</Button>
+                                            </FormGroup>
+                                        </CardBody>}
+                                        {!useExistingCard && <CardBody>
+                                            <Row>
+                                                <Col sm='3'>
+                                                    <div className='mb-2'>
+                                                        <Label for='city'>
+                                                            Town/City:
                                                         </Label>
-                                                    </FormGroup>
+                                                        <Input
+                                                            id='city'
+                                                            name='billCity'
+                                                            placeholder='Los Angeles'
+                                                            onChange={(e) => setBillCity(e.target.value)}
+                                                            invalid={!billCity ? errors.billCity && true : null}
+                                                        />
+                                                        {!billCity && errors.billCity && (
+                                                            <div className="text-danger">
+                                                                {errors.billCity}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </Col>
+                                                <Col sm='3'>
+                                                    <div className='mb-2'>
+                                                        <Label for='state'>
+                                                            State:
+                                                        </Label>
+                                                        <Input
+                                                            id='state'
+                                                            name='billState'
+                                                            placeholder='California'
+                                                            onChange={(e) => setBillState(e.target.value)}
+                                                            invalid={!billState ? errors.billState && true : null}
+                                                        />
+                                                        {!billState && errors.billState && (
+                                                            <div className="text-danger">
+                                                                {errors.billState}
+                                                            </div>
+                                                        )}
+
+                                                    </div>
+                                                </Col>
+                                                <Col sm='3' className='mb-1'>
+                                                    <Label for='country'>
+                                                        Country
+                                                    </Label>
+                                                    <Select
+                                                        id='country'
+                                                        name='billCountry'
+                                                        className='react-select'
+                                                        classNamePrefix='select'
+                                                        defaultValue={countryOptions[0]}
+                                                        options={countryOptions}
+                                                        isClearable={false}
+                                                        onChange={(e) => setBillCountry(e.value)}
+                                                    />
+                                                </Col>
+                                                <Col sm='3'>
+                                                    <div className='mb-2'>
+                                                        <Label for='phonenumb'>
+                                                            Mobile Number:
+                                                        </Label>
+                                                        <Input
+                                                            type='number'
+                                                            id='phonenumb'
+                                                            name='billPhoneNo'
+                                                            placeholder='012345698'
+                                                            onChange={(e) => setBillPhoneNo(e.target.value)}
+                                                            invalid={!billPhoneNo ? errors.billPhoneNo && true : null}
+                                                        />
+                                                        {!billPhoneNo && errors.billPhoneNo && (
+                                                            <div className="text-danger">
+                                                                {errors.billPhoneNo}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </Col>
+                                                <Col sm='12'>
+                                                    <div className='mb-2'>
+                                                        <Label for='checkoutLandmark'>
+                                                            Address:
+                                                        </Label>
+                                                        <Input
+                                                            id='checkoutLandmark'
+                                                            name='billAddress'
+                                                            placeholder='Near Apollo Hospital'
+                                                            onChange={(e) => setBillAddress(e.target.value)}
+                                                            invalid={!billAddress ? errors.billAddress && true : null}
+                                                        />
+                                                        {!billAddress && errors.billAddress && (
+                                                            <div className="text-danger">
+                                                                {errors.billAddress}
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </Col>
                                             </Row>
+                                        </CardBody>}
+                                    </Card>
+                                </Col>
 
-                                            <CardBody>
-                                                <Row>
-                                                    <Col sm='3'>
-                                                        <div className='mb-2'>
-                                                            <Label className='form-label' for='city'>
-                                                                Town/City:
+                                <Col md='3' sm='12'>
+                                    <Row>
+                                        <Col>
+                                            <div className='amount-payable checkout-options'>
+                                                <Card>
+                                                    <CardHeader>
+                                                        <FormGroup check inline>
+                                                            <Input type='checkbox' checked={useExistingCard}
+                                                                   onChange={(e) => setExistingCard(e.target.checked)}
+                                                                   id='basic-cb-checked'/>
+                                                            <Label for='basic-cb-checked'
+                                                                   className='text-primary fw-bold fs-5 text-uppercase'
+                                                                   check>
+                                                                Use Existing card
                                                             </Label>
-                                                            <Input
-                                                                id='city'
-                                                                name='billCity'
-                                                                placeholder='Los Angeles'
-                                                                onChange={(e) => setBillCity(e.target.value)}
-                                                                invalid={!billCity ? errors.billCity && true : null}
-                                                            />
-                                                            {!billCity && errors.billCity && (
-                                                                <div className="text-danger">
-                                                                    {errors.billCity}
+                                                        </FormGroup>
+                                                        <CardTitle className='mt-1' tag='h4'>Price Details</CardTitle>
+                                                    </CardHeader>
+                                                    <CardBody>
+                                                        <ul className='list-unstyled price-details'>
+                                                            <li className='price-detail'>
+                                                                <div className='details-title'>Total Price</div>
+                                                                <div className='detail-amt'>
+                                                                    <strong>${price}</strong>
                                                                 </div>
-                                                            )}
-                                                        </div>
-                                                    </Col>
-                                                    <Col sm='3'>
-                                                        <div className='mb-2'>
-                                                            <Label className='form-label' for='state'>
-                                                                State:
-                                                            </Label>
-                                                            <Input
-                                                                id='state'
-                                                                name='billState'
-                                                                placeholder='California'
-                                                                onChange={(e) => setBillState(e.target.value)}
-                                                                invalid={!billState ? errors.billState && true : null}
-                                                            />
-                                                            {!billState && errors.billState && (
-                                                                <div className="text-danger">
-                                                                    {errors.billState}
-                                                                </div>
-                                                            )}
-
-                                                        </div>
-                                                    </Col>
-                                                    <Col sm='3' className='mb-1'>
-                                                        <Label className='form-label' for='country'>
-                                                            Country
-                                                        </Label>
-                                                        <Select
-                                                            id='country'
-                                                            name='billCountry'
-                                                            className='react-select'
-                                                            classNamePrefix='select'
-                                                            defaultValue={countryOptions[0]}
-                                                            options={countryOptions}
-                                                            isClearable={false}
-                                                            onChange={(e) => setBillCountry(e.value)}
-                                                        />
-                                                    </Col>
-                                                    <Col sm='3'>
-                                                        <div className='mb-2'>
-                                                            <Label className='form-label' for='phonenumb'>
-                                                                Mobile Number:
-                                                            </Label>
-                                                            <Input
-                                                                type='number'
-                                                                id='phonenumb'
-                                                                name='billPhoneNo'
-                                                                placeholder='012345698'
-                                                                onChange={(e) => setBillPhoneNo(e.target.value)}
-                                                                invalid={!billPhoneNo ? errors.billPhoneNo && true : null}
-                                                            />
-                                                            {!billPhoneNo && errors.billPhoneNo && (
-                                                                <div className="text-danger">
-                                                                    {errors.billPhoneNo}
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    </Col>
-                                                    <Col sm='12'>
-                                                        <div className='mb-2'>
-                                                            <Label className='form-label' for='checkoutLandmark'>
-                                                                Address:
-                                                            </Label>
-                                                            <Input
-                                                                id='checkoutLandmark'
-                                                                name='billAddress'
-                                                                placeholder='Near Apollo Hospital'
-                                                                onChange={(e) => setBillAddress(e.target.value)}
-                                                                invalid={!billAddress ? errors.billAddress && true : null}
-                                                            />
-                                                            {!billAddress && errors.billAddress && (
-                                                                <div className="text-danger">
-                                                                    {errors.billAddress}
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </CardBody>
-                                        </Card>
-                                    </Col>
-                                    <Col md='3' sm='12'>
-                                        <div className='amount-payable checkout-options'>
-                                            <Card>
-                                                <CardHeader>
-                                                    <CardTitle tag='h4'>Price Details</CardTitle>
-                                                </CardHeader>
-                                                <CardBody>
-                                                    <ul className='list-unstyled price-details'>
-                                                        <li className='price-detail'>
-                                                            <div className='details-title'>Total Price</div>
-                                                            <div className='detail-amt'>
-                                                                <strong>${price}</strong>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <hr/>
-                                                    <ul className='list-unstyled price-details'>
-                                                        <li className='price-detail'>
-                                                            <div className='details-title'>Amount Payable</div>
-                                                            <div className='detail-amt fw-bolder'>${price}</div>
-                                                        </li>
-                                                    </ul>
-                                                </CardBody>
-                                            </Card>
-                                        </div>
-                                    </Col>
-                                    <Col md='9' sm='12'>
-                                        <SquareCard cardVerificationFunc={cardVerification}
-                                                    getTokenFunc={getToken}/>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </section>}
-                    </UILoader>
-                </Form>
+                                                            </li>
+                                                        </ul>
+                                                        <hr/>
+                                                        <ul className='list-unstyled price-details'>
+                                                            <li className='price-detail'>
+                                                                <div className='details-title'>Amount Payable</div>
+                                                                <div className='detail-amt fw-bolder'>${price}</div>
+                                                            </li>
+                                                        </ul>
+                                                    </CardBody>
+                                                </Card>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                {!useExistingCard && <Col md='9' sm='12'>
+                                    <SquareCard cardVerificationFunc={cardVerification}
+                                                getTokenFunc={getToken}/>
+                                </Col>}
+                            </Row>
+                        </div>
+                    </section>}
+                </UILoader>
+            </Form>
         </>
     )
 }
