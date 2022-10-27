@@ -2,22 +2,13 @@ import {
     Row,
     Col,
     Table,
-    Label,
-    UncontrolledDropdown,
-    DropdownMenu,
-    DropdownItem,
-    DropdownToggle,
-    Input,
-    Badge,
-    Card, CardBody, CardTitle, CardText
+    Input
 } from 'reactstrap'
-import {Briefcase, DollarSign, Users, MoreVertical, Edit, Trash, ChevronDown} from "react-feather"
 // ** React Imports
 import React, {useContext, useEffect, useState} from 'react'
 // ** Context
 import { ThemeColors } from '../../../utility/context/ThemeColors'
 // ** Demo Components
-// import CompanyTable from './CompanyTable'
 import Earnings from '../../../ui-elements/Cards/analytics/Earnings'
 import StatsCard from '../../../ui-elements/Cards/statistics/StatsCard'
 import ReactPaginate from "react-paginate"
@@ -88,14 +79,6 @@ const EmployeeDashboard = () => {
             }
         />
     }
-
-    // const dataToRender = () => {
-    //     if (cuisineList.length > 0) {
-    //         return cuisineList
-    //     }  else {
-    //         return cuisineList.slice(0, pageSize)
-    //     }
-    // }
 
     return (
         <UILoader blocking={isLoading}>
