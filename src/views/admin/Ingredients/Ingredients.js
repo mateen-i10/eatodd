@@ -97,7 +97,7 @@ const Ingredients = (props) => {
             type: FieldTypes.Number,
             label: 'Calories',
             placeholder: 'Enter Calories',
-            name: 'cal',
+            name: 'calories',
             isRequired: true,
             fieldGroupClasses: 'col-6'
         },
@@ -137,13 +137,12 @@ const Ingredients = (props) => {
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
         quantity: Joi.number().required().label("Quantity"),
-        cal: Joi.number().required().label("Calories"),
+        calories: Joi.number().required().label("Calories"),
         fat: Joi.number().required().label("Fat"),
         protein: Joi.number().required().label("Protein"),
         carb: Joi.number().required().label("Carb"),
         unit: Joi.string().required().label("Unit")
     })
-
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
@@ -159,7 +158,7 @@ const Ingredients = (props) => {
         quantity: '',
         unit: '',
         description: '',
-        cal: '',
+        calories: '',
         fat: '',
         protein: '',
         carb: ''
@@ -251,8 +250,8 @@ const Ingredients = (props) => {
             minWidth: '50px'
         },
         {
-            name: 'Cal',
-            selector: (row) => row.cal,
+            name: 'Calories',
+            selector: (row) => row.calories,
             sortable: true,
             minWidth: '50px'
         },

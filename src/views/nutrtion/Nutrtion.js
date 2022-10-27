@@ -30,18 +30,32 @@ const Nutrition = () => {
                     let totalFAt = 0
                     let totalCarbs = 0
                     let totalProtein = 0
+                    let totalCalories = 0
                     if (item.productIngredients !== null && item.productIngredients.length > 0) {
                         for (const i of item.productIngredients) {
                             totalFAt += i?.ingredient?.fat
                             totalCarbs += i?.ingredient?.carb
                             totalProtein += i?.ingredient?.protein
+                            totalCalories += i?.ingredient?.calories
                         }
                     }
                     setMealNutrition({
                         ...mealNutrition,
-                        mealNut: {name: item.name, fat: totalFAt, carb: totalCarbs, protein: totalProtein}
+                        mealNut: {
+                            name: item.name,
+                            fat: totalFAt,
+                            carb: totalCarbs,
+                            protein: totalProtein,
+                            calories: totalCalories
+                        }
                     })
-                    return {name: item.name, fat: totalFAt, carb: totalCarbs, protein: totalProtein}
+                    return {
+                        name: item.name,
+                        fat: totalFAt,
+                        carb: totalCarbs,
+                        protein: totalProtein,
+                        calories: totalCalories
+                    }
                 })
             } else {
                 return mealNutrition

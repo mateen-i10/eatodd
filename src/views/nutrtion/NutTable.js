@@ -32,7 +32,7 @@ const NutTable = ({nutritionCal}) => {
                                 <tbody>
                                 {nutritionCal.length > 0 ? nutritionCal.map((item, i) => (<tr key={i}>
                                         <td style={{fontSize: "1.4rem"}}>{item.name}</td>
-                                        <td style={{fontSize: "1.4rem"}}>201Cal</td>
+                                        <td style={{fontSize: "1.4rem"}}>{item.calories}</td>
                                         <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
                                             {item.fat}
                                         </td>
