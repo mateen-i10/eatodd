@@ -69,7 +69,7 @@ const winePayment = () => {
             try {
                 const body = {
                     sourceId: token.token,
-                    locationId: process.env.SQUARE_LOCATION_ID,
+                    locationId: "L523E85DPXAJ5", //process.env.SQUARE_LOCATION_ID,
                     verificationToken: verifiedBuyer.token,
                     customerId,
                     packageId: state.package.id,
