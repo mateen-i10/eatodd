@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react'
 import {Table} from "reactstrap"
 import Chart from "react-apexcharts"
 
-const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
+const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategoryName}) => {
     // console.log("llllllll", customerMealName)
     const [isVisible, setIsVisible] = useState(false)
     const [chartData, setChartData] = useState([])
     const [totalCalories, setTotalCalories] = useState(0)
     const [width, setWidth] = useState(window.innerWidth)
-    const chartCustomData = [0.01, 0.01, 0.01]
+    const chartCustomData = [0.01, 1, 0.018]
 
     const listenToScroll = () => {
         const heightToShowFrom = 308
@@ -89,16 +89,16 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                             formatter(val) {
                                 return `${parseInt(val)}`
                             }
-                        },
-                        total: {
-                            show: true,
-                            offsetY: 15,
-                            label: 'Calories',
-                            formatter() {
-                                return 50
-
-                            }
                         }
+                        // total: {
+                        //     show: true,
+                        //     offsetY: 15,
+                        //     label: 'Calories',
+                        //     formatter() {
+                        //         return 0
+                        //
+                        //     }
+                        // }
                     }
                 }
             }
@@ -153,14 +153,23 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                     style={{fontSize: "1.9rem", fontWeight: 700, width: 320, paddingBottom: 30}}>
                                     {`Your ${customerMealName.length ? customerMealName : "meal"}`}
                                 </td>
-                                <td className="text-primary"
-                                    style={{fontSize: "1rem", fontWeight: 300, paddingBottom: 40}}><span
+                                <td className="text-primary "
                                     style={{
-                                        fontSize: "1.7rem",
-                                        fontWeight: 600
-                                    }}>{totalCalories}</span> <span>Cal</span>
+                                        paddingBottom: 30,
+                                        width: 230
+                                    }}>
+                                    <div
+                                        style={{
+                                            fontSize: "1.7rem",
+                                            fontWeight: 600,
+                                            color: '#262626'
+                                        }}>{totalCalories}</div>
+                                    <span style={{color: '#262626'}}>Cal</span>
                                 </td>
-                                <td className="" style={{paddingBottom: 30}}>
+                                <td className="" style={{
+                                    paddingBottom: 30,
+                                    width: 220
+                                }}>
                                     <div style={{
                                         fontSize: "1.7rem",
                                         fontWeight: 600,
@@ -168,14 +177,21 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                     }}>{chartData.length > 0 ? chartData[0] : 0}</div>
                                     <div style={{color: "#9c1f16"}}>Fat</div>
                                 </td>
-                                <td className="text-primary" style={{paddingBottom: 30}}>
+                                <td className="text-primary" style={{
+                                    paddingBottom: 30,
+                                    width: 250
+                                }}>
                                     <div style={{
                                         fontSize: "1.7rem",
                                         fontWeight: 600
                                     }}>{chartData.length > 0 ? chartData[1] : 0}</div>
                                     <div>Protein</div>
                                 </td>
-                                <td className="" style={{paddingBottom: 30, color: "#c98200"}}>
+                                <td className="" style={{
+                                    paddingBottom: 30,
+                                    color: "#c98200",
+                                    width: 160
+                                }}>
                                     <div style={{
                                         fontSize: "1.7rem",
                                         fontWeight: 600
@@ -191,8 +207,23 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
             <div style={{backgroundColor: '#e3e3e3'}}>
                 <div className="container-sm">
                     <div className="row">
-                        <div className="col-lg-4 col-12  text-center"
-                             style={{marginTop: 60, marginBottom: 10}}>
+                        {mealCategoryName.length > 0 ? <div className="col-lg-4 col-12  text-center"
+                                                            style={{marginTop: 60, marginBottom: 10}}>
+
+                            <h1 style={{
+                                color: '#262626',
+                                fontSize: '4em',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bolder',
+                                letterSpacing: 1
+                            }}>{mealCategoryName}</h1>
+                            <p style={{color: '#6b6b6b', fontWeight: 450}}>Your choice of freshly grilled meat or
+                                sofritas wrapped in a warm flour tortilla with rice, beans, or fajita veggies, and
+                                topped with guac, salsa, queso blanco, sour cream or cheese.</p>
+                            <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
+                                Statement</a>
+                        </div> : <div className="col-lg-4 col-12  text-center"
+                                      style={{marginTop: 60, marginBottom: 10}}>
                             <h5 style={{
                                 color: '#2a2a2a',
                                 fontSize: '1.3em',
@@ -207,18 +238,18 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal}) => {
                                 fontWeight: 'bolder',
                                 letterSpacing: 1
                             }}>Nutrtion</h1>
-                            <p style={{color: '#6b6b6b', fontWeight: 450}}>Build your calorie, carb and nutrition
+                            <p style={{color: '#6b6b6b', fontWeight: 450}}>See your meal calorie, carb and nutrition
                                 information based on your selected meal below using the nutrition calculator.</p>
                             <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
                                 Statement</a>
-                        </div>
+                        </div>}
                         <div className="col-lg-4 col-6 mb-3 " style={{paddingTop: 70}}>
                             <div className="text-center">
                                 <h1 className=""
                                     style={{
                                         fontSize: '2.7em',
                                         fontWeight: 'bolder',
-                                        color: '#81be41'
+                                        color: '#262626'
                                     }}>{totalCalories} cal</h1>
                                 <div className="text-center justify-content-center row">
                                     <div className="text-center  col-3">

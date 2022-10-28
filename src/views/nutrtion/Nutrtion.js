@@ -8,20 +8,24 @@ import Footer from "../../shared/footer/Footer"
 import {getCartData} from "../../utility/Utils"
 import "./../home/components/Order/Order.css"
 import NutritionHeader from "./components/NutritionHeader"
+import CartMeals from "./components/CartMeals"
 
 const Nutrition = () => {
     const [selectedItem, setSelectedItem] = useState(0)
     const [mealNutrition, setMealNutrition] = useState({mealNut: {name: "", fat: 0, carb: 0, protein: 0}})
     const [nutritionCal, setNutritionCal] = useState([])
     const [customerMealName, setCustomerMealName] = useState("")
+    const [mealCategoryName, setMealCategoryName] = useState("")
     const history = useHistory()
-    console.log(selectedItem)
+    // console.log(selectedItem)
 
     const cartItems = getCartData()
 
     console.log("cartItems data *******", cartItems)
+
+
     const nutritionData = (index) => {
-        console.log("selected item", cartItems.meals[index])
+        console.log("selected item -----", cartItems.meals[index])
         let nutritionTableData = []
         if (cartItems.meals.length > 0) {
             const mealItems = cartItems.meals[index]
@@ -62,13 +66,15 @@ const Nutrition = () => {
             }
             setNutritionCal(nutritionTableData)
             setCustomerMealName(cartItems.meals[index].mealName)
+            setMealCategoryName(cartItems.meals[index].categoryName)
         }
     }
+
     return (
         <div>
             <Header/>
             <NutritionHeader cartItems={cartItems} customerMealName={customerMealName}
-                             nutritionCal={nutritionCal}/>
+                             nutritionCal={nutritionCal} mealCategoryName={mealCategoryName}/>
             {/* eslint-disable-next-line multiline-ternary */}
             {!cartItems?.meals.length > 0 ?
                 <div className="menu-list container-fluid pt-5 mb-3 text-center">
@@ -89,26 +95,19 @@ const Nutrition = () => {
                         fontWeight: 'bolder',
                         color: '#57ab00',
                         textTransform: 'uppercase'
-                    }}>Please Select Your Meal for Nutrition Calculation</h3>
+                    }}>Select Your Meal for Nutrition Calculation</h3>
                     <div className="row ms-0 me-1 align-items-center justify-content-center">
                         {cartItems.meals.map((item, i) => (
                             <div key={i}
-                                 className="col-md-3 col-sm-5 col-6 cursor-pointer text-center fw-bolder fs-4   "
-                                 onClick={() => {
-                                     setSelectedItem(i)
-                                     nutritionData(i)
-                                 }}>
-                                <div className='text-uppercase fs-5 mt-1'>
-                                    <span>Meal Name</span> : <span>{item.mealName}</span></div>
-                                <div className='text-uppercase fs-5 mt-1'>
-                                    <span>Category</span> : <span>{item.categoryName}</span></div>
-                                <div className='text-uppercase fs-5 mt-1'>
-                                    <span>Price</span> : <span>{item.totalPrice}</span>
-                                </div>
-                            </div>))}
+                                 className="col-xl-2 col-md-3 col-sm-5 col-12 cursor-pointer text-start fw-bolder fs-4  mt-2 "
+                            >
+                                <CartMeals i={i} item={item} setSelectedItem={setSelectedItem}
+                                           nutritionData={nutritionData} selectedItem={selectedItem}/>
+                            </div>
+                        ))}
                     </div>
                 </div>}
-            {cartItems.meals.length > 0 ? <div className="mt-4">
+            {cartItems.meals.length > 0 ? <div className="mt-1">
                 <NutTable nutritionCal={nutritionCal}/>
             </div> : null}
             <div className='container-fluid bgimg'
