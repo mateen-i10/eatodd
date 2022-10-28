@@ -250,32 +250,32 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategor
                                         fontSize: '2.7em',
                                         fontWeight: 'bolder',
                                         color: '#262626'
-                                    }}>{totalCalories} cal</h1>
+                                    }}>{totalCalories} Cal</h1>
                                 <div className="text-center justify-content-center row">
                                     <div className="text-center  col-3">
                                         <h3 style={{
-                                            fontSize: '1.8em',
+                                            fontSize: '1.9em',
                                             fontWeight: 'bolder',
                                             color: '#9c1f16'
                                         }}>{chartData.length > 0 ? chartData[0] : 0}</h3>
-                                        <h5>Fat</h5>
+                                        <h5 style={{color: '#9c1f16'}}>Fat</h5>
                                         {/*setChartData([totalFAt, totalProtein, totalCarbs])*/}
                                     </div>
                                     <div className="text-center  col-4" style={{}}>
                                         <h3 style={{
-                                            fontSize: '1.8em',
+                                            fontSize: '1.9em',
                                             fontWeight: 'bolder',
                                             color: '#57ab00'
                                         }}>{chartData.length > 0 ? chartData[1] : 0}</h3>
-                                        <h5>Protien</h5>
+                                        <h5 style={{color: '#57ab00'}}>Protien</h5>
                                     </div>
                                     <div className="text-center col-3">
                                         <h3 style={{
-                                            fontSize: '1.8em',
+                                            fontSize: '1.9em',
                                             fontWeight: 'bolder',
                                             color: '#c98200'
                                         }}>{chartData.length > 0 ? chartData[2] : 0}</h3>
-                                        <h5>Carbs</h5>
+                                        <h5 style={{color: '#c98200'}}>Carbs</h5>
                                     </div>
                                 </div>
                             </div>
