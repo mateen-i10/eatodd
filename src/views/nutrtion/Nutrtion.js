@@ -16,10 +16,12 @@ const Nutrition = () => {
     const [nutritionCal, setNutritionCal] = useState([])
     const [customerMealName, setCustomerMealName] = useState("")
     const [mealCategoryName, setMealCategoryName] = useState("")
+    // const [cartItems, setCartItems] = useState([])
     const history = useHistory()
     // console.log(selectedItem)
 
     const cartItems = getCartData()
+
 
     console.log("cartItems data *******", cartItems)
 
@@ -27,8 +29,8 @@ const Nutrition = () => {
     const nutritionData = (index) => {
         console.log("selected item -----", cartItems.meals[index])
         let nutritionTableData = []
-        if (cartItems.meals.length > 0) {
-            const mealItems = cartItems.meals[index]
+        if (cartItems?.meals?.length > 0) {
+            const mealItems = cartItems?.meals[index]
             if (mealItems.selectedProducts !== null && mealItems.selectedProducts.length > 0) {
                 nutritionTableData = mealItems.selectedProducts.map((item) => {
                     let totalFAt = 0
@@ -65,8 +67,8 @@ const Nutrition = () => {
                 return mealNutrition
             }
             setNutritionCal(nutritionTableData)
-            setCustomerMealName(cartItems.meals[index].mealName)
-            setMealCategoryName(cartItems.meals[index].categoryName)
+            setCustomerMealName(cartItems?.meals[index].mealName)
+            setMealCategoryName(cartItems?.meals[index].categoryName)
         }
     }
 
@@ -76,7 +78,7 @@ const Nutrition = () => {
             <NutritionHeader cartItems={cartItems} customerMealName={customerMealName}
                              nutritionCal={nutritionCal} mealCategoryName={mealCategoryName}/>
             {/* eslint-disable-next-line multiline-ternary */}
-            {!cartItems?.meals.length > 0 ?
+            {!cartItems?.meals?.length > 0 ?
                 <div className="menu-list container-fluid pt-5 mb-3 text-center">
                     <h3 style={{
                         fontWeight: 'bolder',
@@ -97,7 +99,7 @@ const Nutrition = () => {
                         textTransform: 'uppercase'
                     }}>Select Your Meal for Nutrition Calculation</h3>
                     <div className="row ms-0 me-1 align-items-center justify-content-center">
-                        {cartItems.meals.map((item, i) => (
+                        {cartItems?.meals.map((item, i) => (
                             <div key={i}
                                  className="col-xl-2 col-md-3 col-sm-5 col-12 cursor-pointer text-start fw-bolder fs-4  mt-2 "
                             >
@@ -107,7 +109,7 @@ const Nutrition = () => {
                         ))}
                     </div>
                 </div>}
-            {cartItems.meals.length > 0 ? <div className="mt-1">
+            {cartItems?.meals?.length > 0 ? <div className="mt-1">
                 <NutTable nutritionCal={nutritionCal}/>
             </div> : null}
             <div className='container-fluid bgimg'

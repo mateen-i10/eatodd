@@ -140,7 +140,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategor
     }
     return (
         <div>
-            {cartItems.meals && cartItems.meals.length > 0 ? <div
+            {cartItems?.meals && cartItems?.meals.length > 0 ? <div
                 className={`container-fluid position-fixed ${isVisible && width > 1100 ? "d-block" : "d-none"}  zindex-3`}
                 style={{backgroundColor: "#ededed", marginTop: 0}}>
                 <div className="row align-content-center justify-content-center"
