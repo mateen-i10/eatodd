@@ -11,7 +11,7 @@ import Avatar from '@components/avatar'
 import {Power, User} from 'react-feather'
 
 // ** Reactstrap Imports
-import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap'
+import {Col, DropdownItem, DropdownMenu, DropdownToggle, Row, UncontrolledDropdown} from 'reactstrap'
 
 // ** Default Avatar Image
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
@@ -38,21 +38,34 @@ const UserDropdown = () => {
     return (
         <UncontrolledDropdown tag='li' className='dropdown-user nav-item '>
             <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link ' onClick={e => e.preventDefault()}>
+                {/*<div className='user-nav d-sm-flex d-none'>*/}
+                {/*    <div className="d-inline-block">*/}
+                {/*    <span className='user-name fw-bold text-uppercase'*/}
+                {/*          style={{*/}
+                {/*              marginRight: 15,*/}
+                {/*              marginTop: 12,*/}
+                {/*              fontSize: "1.2rem"*/}
+                {/*          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>*/}
+                {/*        <span style={{*/}
+                {/*            marginRight: 8,*/}
+                {/*            fontSize: ".7rem"*/}
+                {/*        }} className='user-status d-none'>{(userData && userData.role) || ''}</span>*/}
+                {/*        <Avatar style={{*/}
+                {/*            marginTop: 3*/}
+                {/*        }} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/></div>*/}
+                {/*</div>*/}
+
                 <div className='user-nav d-sm-flex d-none'>
-                    <div className="d-inline-block">
-                    <span className='user-name fw-bold text-uppercase'
-                          style={{
-                              marginRight: 15,
-                              marginTop: 12,
-                              fontSize: "1.2rem"
-                          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
-                        <span style={{
-                            marginRight: 8,
-                            fontSize: ".7rem"
-                        }} className='user-status d-none'>{(userData && userData.role) || ''}</span>
-                        <Avatar style={{
-                            marginTop: 3
-                        }} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/></div>
+                    <section>
+                        <Row>
+                            <Col lg={3} style={{padding:0, marginLeft:10}}>
+                                <Avatar style={{marginTop: 3}} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
+                            </Col>
+                            <Col lg={7} style={{marginTop:10, marginRight:10, padding:0}}>
+                                <span style={{marginRight: 50, fontSize: "1.2rem", fontWeight: 'bolder'}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
+                            </Col>
+                        </Row>
+                    </section>
                 </div>
 
             </DropdownToggle>

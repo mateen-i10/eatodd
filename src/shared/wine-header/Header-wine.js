@@ -9,7 +9,7 @@ import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 import {useDispatch} from "react-redux"
 
-const HeaderWine = () => {
+const HeaderWine = ({isSimple}) => {
     const [width, setWidth] = useState(window.innerWidth)
     const [isOpen, setIsOpen] = useState(false)
     // const [isuserlogedin, setuserloginedin] = useState(false)
@@ -66,6 +66,11 @@ const HeaderWine = () => {
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
+                        <Link to="#" style={{marginTop: '-10px'}}>
+                            {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled">
+                                <UserDropdown/>
+                            </ul>}
+                        </Link>
                     </div>
                     <div className="head-sec-wine">
                         <Link to="/home">

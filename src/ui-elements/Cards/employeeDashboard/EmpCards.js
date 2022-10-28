@@ -75,19 +75,19 @@ const EmpCards = () => {
             img: deliverd
         },
         {
-            id: 0,
+            id: 1,
             stats: 0,
             title: 'Refunded',
             img: refund
         },
         {
-            id: 0,
+            id: 2,
             stats: 0,
             title: 'Scheduled',
             img: schedule
         },
         {
-            id: 0,
+            id: 3,
             stats: 15,
             title: 'All',
             img: all
