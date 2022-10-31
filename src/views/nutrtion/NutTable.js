@@ -18,31 +18,35 @@ const NutTable = ({nutritionCal}) => {
                                 <thead className="">
                                 <tr className="">
                                     {/*<th></th>*/}
-                                    <th style={{fontSize: "1.5rem", width: 320}}> Your Meal</th>
-                                    <th style={{fontSize: "1.5rem"}}>Calories</th>
+                                    <th style={{fontSize: "1.5rem", width: 320, color: '#262626'}}> Your Meal</th>
+                                    <th style={{fontSize: "1.5rem", color: '#262626'}}>Calories</th>
                                     <th style={{
                                         fontSize: "1.5rem",
                                         color: "#9c1f16"
                                     }}>Fat
                                     </th>
-                                    <th style={{fontSize: "1.5rem"}}>Protein</th>
+                                    <th style={{fontSize: "1.5rem", color: '#57ab00'}}>Protein</th>
                                     <th style={{fontSize: "1.5rem", color: "#c98200"}}>Carbs</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {nutritionCal.length > 0 ? nutritionCal.map((item, i) => (<tr key={i}>
-                                        <td style={{fontSize: "1.4rem"}}>{item.name}</td>
-                                        <td style={{fontSize: "1.4rem"}}>{item.calories}</td>
-                                        <td style={{fontSize: "1.4rem", color: "#9c1f16", backgroundColor: "#ededed"}}>
+                                        <td style={{fontSize: "1.4rem", fontWeight: 500, color: '#262626'}}>{item.name}</td>
+                                        <td style={{
+                                            fontSize: "1.4rem",
+                                            fontWeight: 500,
+                                            color: '#262626'
+                                        }}>{item.calories}</td>
+                                        <td style={{fontSize: "1.4rem", fontWeight: 500, color: "#9c1f16"}}>
                                             {item.fat}
                                         </td>
-                                        <td style={{fontSize: "1.4rem"}}>
+                                        <td style={{fontSize: "1.4rem", fontWeight: 500, color: '#57ab00'}}>
                                             {item.protein}
                                         </td>
                                         <td style={{
                                             fontSize: "1.4rem",
                                             color: "#c98200",
-                                            backgroundColor: "#ededed"
+                                            fontWeight: 500
                                         }}> {item.carb}
 
                                         </td>
