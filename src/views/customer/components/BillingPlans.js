@@ -36,11 +36,8 @@ const BillingPlan = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()
-
     const [isBilling, setIsBilling] = useState(0)
-
     const customerId = getUserData()?.customerId
-    console.log('customer ID', customerId)
 
     //getting data from store
     const isLoading = useSelector(state => state.memberShip.isLoading)
@@ -132,15 +129,12 @@ const BillingPlan = () => {
                                  </Row> : <div>No Subscription Added, Kindly Select a Package !</div>}
 
                                 <Col xs={12}>
-                                    {/*<Button color='primary' className='me-1 mt-1' onClick={() => setIsBilling(1)}>
-                                    Continue to billing
-                                    </Button>*/}
                                     <Button color='primary' className='me-1 mt-1' onClick={goPackagesPage}>
-                                        Upgrade Plan
+                                        {membershipObj && isObjEmpty(membershipObj) ? 'Select' : 'Upgrade'} Plan
                                     </Button>
-                                    <Button outline color='danger' className='mt-1' onClick={e => deleteClick(customerId, e)}>
+                                    {membershipObj && !isObjEmpty(membershipObj) && <Button outline color='danger' className='mt-1' onClick={e => deleteClick(customerId, e)}>
                                         Cancel Subscription
-                                    </Button>
+                                    </Button>}
                                 </Col>
                             </Row>
                         </CardBody>
