@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import {
-    Badge,
     Button,
     Card,
     CardHeader,
@@ -9,7 +8,8 @@ import {
     Col,
     DropdownItem,
     DropdownMenu,
-    DropdownToggle, Input,
+    DropdownToggle,
+    Input,
     Row,
     UncontrolledDropdown
 } from "reactstrap"
@@ -29,7 +29,8 @@ import {
     addMemberShipType,
     deleteMemberShipType,
     getMemberShipType,
-    loadMemberShipTypes, updateMemberShipType
+    loadMemberShipTypes,
+    updateMemberShipType
 } from "../../../redux/memberShipType/action"
 import {setIsEdit, setIsMemberShipTypeError, setMemberShipType} from "../../../redux/memberShipType/reducer"
 
@@ -85,7 +86,7 @@ const MembershipTypes = (props) => {
                     <div className='col-5'>
                         <Input
                             placeholder='Enter Name'
-                            type= 'text'
+                            type='text'
                             value={i.name}
                             onChange={(e) => onValueChange(index, 'name', e)}
                         />
@@ -93,7 +94,7 @@ const MembershipTypes = (props) => {
                     <div className='col-5'>
                         <Input
                             placeholder='Enter Description'
-                            type= 'text'
+                            type='text'
                             value={i.description}
                             onChange={(e) => onValueChange(index, 'description', e)}
                         />
@@ -110,7 +111,7 @@ const MembershipTypes = (props) => {
             })}
             <div className='col-2'>
                 <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addPackagesItem}>
-                    <Plus size={12} />
+                    <Plus size={12}/>
                 </Button.Ripple>
             </div>
         </div>
@@ -125,17 +126,54 @@ const MembershipTypes = (props) => {
     const [edit, setEdit] = useState(false)
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
-    const [isModalLoading,  setModalLoading] = useState(false)
+    const [isModalLoading, setModalLoading] = useState(false)
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Amount', placeholder: 'Enter Amount', name:'amount', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Bill Type', placeholder: 'Select Bill Type', name:'billType', isRequired:false, fieldGroupClasses: 'col-6', options:billTypes, isAsyncSelect: false, isMulti:false},
-        {type: FieldTypes.SwitchButton, label: 'Show Contact Us Form', name: 'showContactUsForm', isRequired: false, fieldGroupClasses: 'col-6 mt-2'},
-        {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
+        {
+            type: FieldTypes.Text,
+            label: 'Name',
+            placeholder: 'Enter Name',
+            name: 'name',
+            isRequired: true,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Number,
+            label: 'Amount',
+            placeholder: 'Enter Amount',
+            name: 'amount',
+            isRequired: false,
+            fieldGroupClasses: 'col-6'
+        },
+        {
+            type: FieldTypes.Select,
+            label: 'Bill Type',
+            placeholder: 'Select Bill Type',
+            name: 'billType',
+            isRequired: false,
+            fieldGroupClasses: 'col-6',
+            options: billTypes,
+            isAsyncSelect: false,
+            isMulti: false
+        },
+        {
+            type: FieldTypes.SwitchButton,
+            label: 'Show Contact Us Form',
+            name: 'showContactUsForm',
+            isRequired: false,
+            fieldGroupClasses: 'col-6 mt-2'
+        },
+        {
+            type: FieldTypes.TextArea,
+            label: 'Description',
+            placeholder: 'Enter Description',
+            name: 'description',
+            fieldGroupClasses: 'col-12'
+        }
     ])
 
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        amount: Joi.number().greater(200).label("Amount")
     })
 
     const toggle = () => {
@@ -246,20 +284,23 @@ const MembershipTypes = (props) => {
                     <div className='d-flex'>
                         <UncontrolledDropdown>
                             <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
-                                <MoreVertical size={15} />
+                                <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
-                                    <FileText size={15} />
+                                <DropdownItem tag='a' href='/' className='w-100'
+                                              onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
-                                    <Trash size={15} />
+                                    <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => {
+                            editClick(row.id)
+                        }}><Edit size={15}/></span>
                     </div>
                 )
             }
@@ -297,7 +338,7 @@ const MembershipTypes = (props) => {
     const dataToRender = () => {
         if (memberShipTypeList.length > 0) {
             return memberShipTypeList
-        }  else {
+        } else {
             return memberShipTypeList.slice(0, pageSize)
         }
     }
@@ -306,35 +347,37 @@ const MembershipTypes = (props) => {
         <Fragment>
             <UILoader blocking={isLoading}>
                 <Card>
-                <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                    <CardTitle tag='h4'>Membership Types</CardTitle>
-                            <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Membership Type</Button.Ripple>
-                </CardHeader>
-                <Row className='justify-content-end mx-0'>
-                    <Col className='d-flex align-items-center justify-content-end mt-1' md='12' sm='12'>
-                        <Input
-                            className='dataTable-filter mb-50'
-                            placeHolder="Search"
-                            type='text'
-                            bsSize='sm'
-                            id='search-input'
-                            value={searchValue}
-                            onKeyUp={handleFilter}
-                            onChange={handleFilter}
-                        />
-                    </Col>
-                </Row>
-                <DataTable
-                    noHeader
-                    pagination
-                    paginationServer
-                    className='react-dataTable'
-                    columns={columns}
-                    sortIcon={<ChevronDown size={10} />}
-                    paginationComponent={CustomPagination}
-                    data={dataToRender()}
-                />
-            </Card>
+                    <CardHeader
+                        className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+                        <CardTitle tag='h4'>Membership Types</CardTitle>
+                        <Button.Ripple color='primary' onClick={(e) => addClick(e)}>Add a new Membership
+                            Type</Button.Ripple>
+                    </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='d-flex align-items-center justify-content-end mt-1' md='12' sm='12'>
+                            <Input
+                                className='dataTable-filter mb-50'
+                                placeHolder="Search"
+                                type='text'
+                                bsSize='sm'
+                                id='search-input'
+                                value={searchValue}
+                                onKeyUp={handleFilter}
+                                onChange={handleFilter}
+                            />
+                        </Col>
+                    </Row>
+                    <DataTable
+                        noHeader
+                        pagination
+                        paginationServer
+                        className='react-dataTable'
+                        columns={columns}
+                        sortIcon={<ChevronDown size={10}/>}
+                        paginationComponent={CustomPagination}
+                        data={dataToRender()}
+                    />
+                </Card>
             </UILoader>
             <FormModal ref={formModalRef}
                        formState={formState}
@@ -346,7 +389,7 @@ const MembershipTypes = (props) => {
                        modalTitle={modalTitle}
                        primaryBtnLabel='Save'
                        secondaryBtnLabel='Cancel'
-                       isLoading = {isModalLoading}
+                       isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
                        children={child()}
             />
