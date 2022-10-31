@@ -61,8 +61,8 @@ const UserDropdown = () => {
                             <Col lg={3} style={{padding:0, marginLeft:10}}>
                                 <Avatar style={{marginTop: 3}} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
                             </Col>
-                            <Col lg={7} style={{marginTop:10, marginRight:10, padding:0}}>
-                                <span style={{marginRight: 50, fontSize: "1.2rem", fontWeight: 'bolder'}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
+                            <Col lg={7} style={{marginTop:10, marginRight:10, padding:0, marginLeft:5}}>
+                                <span style={{marginRight: 50, fontSize: "1.2rem", fontWeight: 'bold'}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
                             </Col>
                         </Row>
                     </section>
