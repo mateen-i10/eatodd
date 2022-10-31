@@ -5,6 +5,10 @@ import Headerwine from "../../../shared/wine-header/Header-wine"
 
 import Footer from "../../../shared/footer/Footer"
 
+//talha's changes
+
+import luxurayWine from '../../../assets/images/wineClubStylingImages/wine.jpg'
+
 const Homepage = () => {
 
     return (
@@ -15,17 +19,14 @@ const Homepage = () => {
                 <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-sm ">
                         <div className="row d-flex align-items-center justify-content-center h-75 ">
-                            <div className=" col-lg-3 col-12">
+                            <div className="col-lg-3 col-12">
                                 <div className="about-3-img text-center mb-40 ">
-                                    <img className="img-fluid" style={{width: "100%", height: "100%"}}
-                                         src={require('../../../assets/images/my-images/wine1.jpg').default}
-                                         alt="about-image"/>
+                                    <img className="img-fluid" style={{width: "200%", height: "200%"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
                                 </div>
                             </div>
-                            <div className=" col-lg-9 col-12 text-start ">
+                            <div className="col-lg-9 col-12 text-start ">
                                 <div className="about-3-txt mb-40">
-                                    <p className="p-md fs-5 fw-bold mt-1"
-                                       style={{color: "grey", lineHeight: "25px"}}>The
+                                    <p className="p-md fs-5 fw-bold mt-1" style={{color: "grey", lineHeight: "25px"}}>The
                                         OMG Wine Club was created to make you say OMG at your savings! We are the 1st
                                         wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
                                         to OMG.As our way to say THANK YOU, we are extending you the
@@ -48,47 +49,33 @@ const Homepage = () => {
                         </div>
                     </div>
                 </section>
-                <section id="about-1" className="bg-fixed wide-100 about-section division  "
-                         style={{marginTop: "100px"}}>
-                    <div className="container-fluid">
-                        <div className="row d-flex flex-wrap align-items-center justify-content-center">
-                            <div className="col-lg-8 " style={{height: "30vh"}}>
-                                <div className="about-1-txt text-center">
-                                    <h2><span
-                                        className="text-uppercase text-primary fw-bolder ">Sommelier’s Selection</span>
-                                    </h2>
-                                    <h3 className="text-uppercase text-primary fw-bolder ">WINE OF THE WEEK</h3>
-                                    <p className="p-xl grey-color fs-4">Porta semper lacus cursus, feugiat primis
-                                        ultrice a
-                                        ligula risus auctor an
-                                        tempus feugiat dolor lacinia cubilia curae integer orci congue and metus
-                                        mollislorem primis in integer
-                                        metus curae integer orci congue integer and primis in integer metus mollis
-                                        faucibus
-                                    </p>
-                                </div>
-                            </div>
+
+                <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px', marginTop: '50px'}}>
+                    <section>
+                        <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
+                            <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>Luxury Wine</h5>
+                            <h4 style={{color:'white', textAlign: 'center', fontSize: '2.2em', paddingTop:'30px', paddingBottom: '30px', textTransform: 'uppercase'}}>Get An Extra 10% off your first order</h4>
+                            <p style={{color:'white', textAlign: 'center', fontSize: '1em', paddingBottom:'70px', marginTop: '-30px'}}>With a large selection of popular spirits and hard to<br />find rare liquors, we are your one stop shop<br />for all your alcohol needs.</p>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
 
                 <section id="blog-1" className="wide-60 blog-section division ">
-                    <div className="container-sm ">
+                    <div className="container-sm">
                         <div className="row d-flex flex-wrap align-items-center justify-content-center "
                              style={{height: "30vh"}}>
-                            <div className="col-lg-8 ">
-                                <div className="  text-center">
+                            <div className="col-lg-12" style={{marginTop: '-40px', marginBottom: '40px'}}>
+                                <div className="text-center">
                                     <h2 className=" text-uppercase text-primary fw-bolder">Events &amp; Catering</h2>
-                                    <p className="fs-4">Aliquam a augue suscipit, luctus neque purus ipsum neque
+                                    <p style={{fontSize: '1em'}}>Aliquam a augue suscipit, luctus neque purus ipsum neque
                                         undo
                                         dolor
                                         primis libero tempus, blandit a cursus varius magna
                                     </p>
-
                                 </div>
                             </div>
                         </div>
-                        <div className="  mt-4 ">
+                        <div style={{marginTop:-60}}>
                             <Row className="align-items-center justify-content-center">
                                 <Col md='6' lg='3' className=" cursor-pointer ">
                                     <Card>
