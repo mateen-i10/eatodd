@@ -64,10 +64,11 @@ const winePayment = () => {
     })
 
     const handleSubmit = async (body) => {
+        setLoading(true)
         const res = await http._put(`${baseURL}winePackage/AssignToCustomer`, {...body})
+        console.log('response of add wine package', res)
         if (res && res.status === 200 && res.data.statusCode === 200) {
             setLoading(false)
-            console.log('response of add wine package', res)
             toast.success("Subscribed Successfully!!!")
             history.push('/home')
         } else {
@@ -99,7 +100,7 @@ const winePayment = () => {
                             country: billCountry,
                             address1: billAddress,
                             phoneNumber: billPhoneNo,
-                            zipCode: token.details.postalCode
+                            zipCode: token.details.billing.postalCode
                         }
                     }
                 }
@@ -157,16 +158,6 @@ const winePayment = () => {
                             <Row>
                                 <Col md='9' sm='12'>
                                     <Card>
-                                        {/*<Row className='justify-content-end'>*/}
-                                        {/*    <Col sm='3' className='mt-2 ms-3'> <FormGroup check inline>*/}
-                                        {/*        <Input type='checkbox' checked={useExistingCard}*/}
-                                        {/*               onChange={(e) => setExistingCard(e.target.checked)}*/}
-                                        {/*               id='basic-cb-checked'/>*/}
-                                        {/*        <Label for='basic-cb-checked' check>*/}
-                                        {/*            Use Existing card*/}
-                                        {/*        </Label>*/}
-                                        {/*    </FormGroup></Col>*/}
-                                        {/*</Row>*/}
                                         <Row className='mt-2 ms-2 text-start'>
                                             {useExistingCard &&
                                                 <Col sm='8'><CardText tag='h4'>You have already subscribed a
@@ -195,10 +186,11 @@ const winePayment = () => {
                                             <FormGroup check inline className='mt-1'>
                                                 <Button color="primary" className='text-uppercase'
                                                         onClick={() => handleSubmit({
-                                                            customerId,
-                                                            packageId: state.package.id,
-                                                            isAutoRenual: autoRenewable
-                                                        })}>Upgrade</Button>
+                                                                customerId,
+                                                                packageId: state.package.id,
+                                                                isAutoRenual: autoRenewable
+                                                            })
+                                                }>Upgrade</Button>
                                                 <Button color="secondary" className=' mx-2 text-uppercase'
                                                         onClick={() => {
                                                             history.push('/user')
