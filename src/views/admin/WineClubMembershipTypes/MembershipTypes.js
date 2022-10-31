@@ -141,7 +141,7 @@ const MembershipTypes = (props) => {
             label: 'Amount',
             placeholder: 'Enter Amount',
             name: 'amount',
-            isRequired: false,
+            isRequired: true,
             fieldGroupClasses: 'col-6'
         },
         {
@@ -173,7 +173,7 @@ const MembershipTypes = (props) => {
 
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
-        amount: Joi.number().greater(200).label("Amount")
+        amount: Joi.number().greater(200).required().label("Amount")
     })
 
     const toggle = () => {
