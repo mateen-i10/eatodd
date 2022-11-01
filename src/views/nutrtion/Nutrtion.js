@@ -98,15 +98,21 @@ const Nutrition = () => {
                         color: '#57ab00',
                         textTransform: 'uppercase'
                     }}>Select Your Meal for Nutrition Calculation</h3>
-                    <div className="row ms-0 me-1 align-items-center justify-content-center">
-                        {cartItems?.meals.map((item, i) => (
-                            <div key={i}
-                                 className="col-xl-2 col-md-3 col-sm-5 col-12 cursor-pointer text-start fw-bolder fs-4  mt-2 "
-                            >
-                                <CartMeals i={i} item={item} setSelectedItem={setSelectedItem}
-                                           nutritionData={nutritionData} selectedItem={selectedItem}/>
+                    <div className="row ms-0 me-1 align-items-center ">
+                        <div className="col-9 mx-auto">
+                            <div className="container-fluid">
+                                <div className="row mt-3">
+                                    {cartItems?.meals.map((item, i) => (
+                                        <div key={i}
+                                             className="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 cursor-pointer text-start fw-bolder fs-4  "
+                                        >
+                                            <CartMeals i={i} item={item} setSelectedItem={setSelectedItem}
+                                                       nutritionData={nutritionData} selectedItem={selectedItem}/>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>}
             {cartItems?.meals?.length > 0 ? <div className="mt-1">
