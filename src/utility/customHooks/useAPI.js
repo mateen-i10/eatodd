@@ -25,7 +25,6 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
                          setIsLoading(false)
                          if (isErrorToast) toast.error(e.message)
                      })
-
             }
         return () => {
             controller.abort()

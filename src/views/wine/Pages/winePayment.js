@@ -44,6 +44,8 @@ const winePayment = () => {
     const [billAddress, setBillAddress] = useState()
     const [autoRenewable, setAutoRenewable] = useState(false)
     const [errors, setErrors] = useState({})
+    const squareLocationId = process.env.REACT_APP_SQUARE_LOCATION_ID
+    console.log('squareLocationId', squareLocationId)
 
     useEffect(() => {
         if (state && state.currentPackage) {
@@ -84,7 +86,7 @@ const winePayment = () => {
             try {
                 const body = {
                     sourceId: token.token,
-                    locationId: 'L523E85DPXAJ5',  //process.env.SQUARE_LOCATION_ID,
+                    locationId: squareLocationId,
                     verificationToken: verifiedBuyer.token,
                     customerId,
                     packageId: state.package.id,
@@ -188,7 +190,8 @@ const winePayment = () => {
                                                         onClick={() => handleSubmit({
                                                                 customerId,
                                                                 packageId: state.package.id,
-                                                                isAutoRenual: autoRenewable
+                                                                isAutoRenual: autoRenewable,
+                                                                locationId: squareLocationId
                                                             })
                                                 }>Upgrade</Button>
                                                 <Button color="secondary" className=' mx-2 text-uppercase'
