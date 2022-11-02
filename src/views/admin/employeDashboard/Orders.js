@@ -15,12 +15,18 @@ import {getEmployeesOrders} from "../../../redux/employeeDashboard/employeeOrder
 import Select from "react-select"
 import {selectThemeColors} from "../../../utility/Utils"
 
-const colourOptions = [
-    { value: 'pending', label: 'Pending' },
-    { value: 'confirmed', label: 'Confirmed' },
-    { value: 'cooking', label: 'Cooking' },
-    { value: 'readyForDelivery', label: 'Ready for delivery' },
-    { value: 'foodTnTheWay', label: 'Food on the way' }
+const orderStatus = [
+    { value: '1', label: 'Paid' },
+    { value: '2', label: 'Pending' },
+    { value: '3', label: 'Cancelled' },
+    { value: '4', label: 'Completed' },
+    { value: '5', label: 'Cooking' },
+    { value: '6', label: 'Read To Deliver' },
+    { value: '7', label: 'Food On Th eWay' },
+    { value: '8', label: 'Delivered' },
+    { value: '9', label: 'Confirmed' },
+    { value: '10', label: 'Refunded' },
+    { value: '11', label: 'Scheduled' }
 ]
 
 const EmployeeOrders = () => {
@@ -106,8 +112,8 @@ const EmployeeOrders = () => {
                                             theme={selectThemeColors}
                                             className='react-select'
                                             classNamePrefix='select'
-                                            defaultValue={colourOptions[0]}
-                                            options={colourOptions}
+                                            defaultValue={orderStatus[1]}
+                                            options={orderStatus}
                                             isClearable={false}
                                         />
                                     </div>
@@ -133,7 +139,7 @@ const EmployeeOrders = () => {
                             <Table className="table table-responsive" paginationComponent={CustomPagination}>
                                 <thead>
                                 <tr>
-                                    <th>Job Name</th>
+                                    <th>Name</th>
                                     <th>Budget</th>
                                     <th>Estimated Hours</th>
                                 </tr>
