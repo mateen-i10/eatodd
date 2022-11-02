@@ -1,7 +1,7 @@
 import {apiCall} from "../../api/actions"
 import {setEmployeeOrders, setLoading} from "./reducer"
 
-const url = 'employeeDashboard/getPendingOrders'
+const url = 'employeeDashboard/GetOrderStatistic'
 
 export const getEmployeesOrders = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 1) => {
     return async dispatch => {
