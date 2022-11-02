@@ -121,7 +121,7 @@ const Routes = [
         }
     },
     {
-        path: '/dashboard/orders',
+        path: '/dashboard/orders/:id',
         component: lazy(() => import('../../views/restaurants/pages/Orders')),
         layout: 'VerticalLayout',
         exact: true,
@@ -131,7 +131,7 @@ const Routes = [
         }
     },
     {
-        path: '/dashboard/product',
+        path: '/dashboard/product/:id',
         component: lazy(() => import('../../views/restaurants/pages/product')),
         layout: 'VerticalLayout',
         exact: true,

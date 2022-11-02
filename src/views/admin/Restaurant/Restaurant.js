@@ -360,7 +360,7 @@ const Restaurant = (props) => {
     const productClick = (id, e) => {
         console.log('rId', id)
         e.preventDefault()
-        props.history.push(`/dashboard/product`, {id})
+        props.history.push(`/dashboard/product/${id}`)
     }
     /*const promotionClick = (e) => {
         e.preventDefault()

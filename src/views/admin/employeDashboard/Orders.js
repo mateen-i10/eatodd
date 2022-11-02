@@ -41,7 +41,7 @@ const EmployeeOrders = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getEmployeesOrders())
+        dispatch(getEmployeesOrders(1, 12, null, 1))
     }, [])
 
     // ** refs
