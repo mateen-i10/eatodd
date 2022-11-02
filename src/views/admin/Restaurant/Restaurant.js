@@ -355,7 +355,7 @@ const Restaurant = (props) => {
     const orderClick = (id, e) => {
         console.log('rid', id)
         e.preventDefault()
-        props.history.push(`/dashboard/orders`, {id})
+        props.history.push(`/dashboard/orders/${id}`)
     }
     const productClick = (id, e) => {
         console.log('rId', id)
@@ -368,7 +368,7 @@ const Restaurant = (props) => {
     }*/
     const customerClick = (id, e) => {
         e.preventDefault()
-        props.history.push(`/dashboard/customer`, {id})
+        props.history.push(`/dashboard/customer/${id}`)
     }
 
     const handleSubmit = (event) => {

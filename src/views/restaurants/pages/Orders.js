@@ -33,7 +33,7 @@ import UILoader from "../../../@core/components/ui-loader"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import {loadOrdersByRestaurant} from "../../../redux/restaurant/actions"
 import StatsCard from "../../../ui-elements/Cards/StatsCard"
-import {useHistory, useLocation} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom"
 
 
 const Orders = () => {
@@ -48,10 +48,12 @@ const Orders = () => {
     const [searchValue, setSearchValue] = useState('')
 
     //for restaurant id
-    const {state} = useLocation()
+    //const {state} = useLocation()
+    const { id } = useParams()
+    console.log('stateId', id)
 
     useEffect(() => {
-        dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, state.id))
+        dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, id))
     }, [])
 
     console.log(OrdersByRestaurantList, "hh")
@@ -60,14 +62,14 @@ const Orders = () => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadOrdersByRestaurant(currentPage + 1, pageSize, value, state.id))
+            dispatch(loadOrdersByRestaurant(currentPage + 1, pageSize, value, id))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadOrdersByRestaurant(page.selected + 1, pageSize, searchValue, state.id))
+        dispatch(loadOrdersByRestaurant(page.selected + 1, pageSize, searchValue, id))
         setCurrentPage(page.selected + 1)
     }
 
