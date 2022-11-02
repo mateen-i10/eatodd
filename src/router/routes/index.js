@@ -649,8 +649,8 @@ const Routes = [
         }
     },
     {
-        path: '/employeeDashboard/orders',
-        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        path: '/employeeDashboard/orders/:id',
+        component: lazy(() => import('../../views/admin/employeDashboard/Orders')),
         layout: 'VerticalLayout'
         // exact: true,
         // meta: {

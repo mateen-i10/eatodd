@@ -1,22 +1,24 @@
 import {createAction} from '@reduxjs/toolkit'
 
 const initialState = {
-    object: {},
+    list: [],
+    miscData: {},
     isLoading: false,
     isDetailLoading: false
 }
 
-export const setEmployeesDashboard = createAction("employeeDashboardReducer/setEmployeeDashboard")
-export const setLoading = createAction("employeeDashboardReducer/setLoading")
-export const setDetailLoading = createAction("employeeDashboardReducer/setDetailLoading")
+export const setEmployeeOrders = createAction("employeeOrderReducer/setEmployeeOrders")
+export const setLoading = createAction("employeeOrderReducer/setLoading")
+export const setDetailLoading = createAction("employeeOrderReducer/setDetailLoading")
 
-const employeeDashboardReducer = (state = initialState, action) => {
+const employeeOrderReducer = (state = initialState, action) => {
     console.log('state', state)
     switch (action.type) {
-        case setEmployeesDashboard.type:
+        case setEmployeeOrders.type:
             return {
                 ...state,
-                object: action.payload.data,
+                list: action.payload.data,
+                miscData: action.payload.miscData,
                 isLoading: false,
                 isDetailLoading: false
             }
@@ -35,4 +37,4 @@ const employeeDashboardReducer = (state = initialState, action) => {
     }
 }
 
-export default employeeDashboardReducer
+export default employeeOrderReducer
