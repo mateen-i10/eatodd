@@ -2,7 +2,7 @@ import {
     Row,
     Col,
     Table,
-    Input
+    Input, Label
 } from 'reactstrap'
 // ** React Imports
 import React, {useEffect, useState} from 'react'
@@ -12,6 +12,16 @@ import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
 import EmpCards from "../../../ui-elements/Cards/employeeDashboard/EmpCards"
 import {getEmployeesOrders} from "../../../redux/employeeDashboard/employeeOrders/action"
+import Select from "react-select"
+import {selectThemeColors} from "../../../utility/Utils"
+
+const colourOptions = [
+    { value: 'pending', label: 'Pending' },
+    { value: 'confirmed', label: 'Confirmed' },
+    { value: 'cooking', label: 'Cooking' },
+    { value: 'readyForDelivery', label: 'Ready for delivery' },
+    { value: 'foodTnTheWay', label: 'Food on the way' }
+]
 
 const EmployeeOrders = () => {
 
@@ -82,11 +92,28 @@ const EmployeeOrders = () => {
             <Row>
                 <Col xl={12} md={12} sm={12}>
                     <div className="card">
-                        <div className="card-header d-flex align-items-start pb-2">
-                            <div>
-                                <h3 className="font-weight-bolder">Pending Orders</h3>
-                            </div>
-                        </div>
+
+                            <Row>
+                                <Col xl={6} sm={12}>
+                                    <div className="card-header d-flex align-items-start pb-2">
+                                        <h3 className="font-weight-bolder">Orders List</h3>
+                                    </div>
+                                </Col>
+                                <Col xl={6} sm={12}>
+                                    <div>
+                                        <Label className='form-label pt-2'><b>Select Status</b></Label>
+                                        <Select
+                                            theme={selectThemeColors}
+                                            className='react-select'
+                                            classNamePrefix='select'
+                                            defaultValue={colourOptions[0]}
+                                            options={colourOptions}
+                                            isClearable={false}
+                                        />
+                                    </div>
+                                </Col>
+                            </Row>
+
                         <Row className='justify-content-end mx-0'>
                             <Col className='mt-1' md='12' sm='12'>
                                 <Input
