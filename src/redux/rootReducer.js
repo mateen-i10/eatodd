@@ -36,6 +36,7 @@ import cateringMenu from "./Catering/cateringMenu/reducer"
 import cateringMenuItem from "./Catering/cateringMenuItem/reducer"
 import subscriptionReducer from "./subscription/reducer"
 import customerCatering from "./Catering/CateringCustomers/reducer"
+import AdminDashReducer from "./adminDashboard/reducer"
 
 const rootReducer = {
     auth,
@@ -73,7 +74,8 @@ const rootReducer = {
     cateringMenuItem,
     subscriptionReducer,
     scrollSlice,
-    customerCatering
+    customerCatering,
+    AdminDashReducer
 }
 
 export default rootReducer

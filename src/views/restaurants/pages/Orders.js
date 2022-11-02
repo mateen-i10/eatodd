@@ -54,6 +54,8 @@ const Orders = () => {
         dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, state.id))
     }, [])
 
+    console.log(OrdersByRestaurantList, "hh")
+
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value

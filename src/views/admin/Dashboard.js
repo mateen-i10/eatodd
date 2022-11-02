@@ -2,16 +2,14 @@ import {
     Row,
     Col,
     Table,
-    Label,
     UncontrolledDropdown,
     DropdownMenu,
     DropdownItem,
     DropdownToggle,
-    Input,
     Badge,
     Card, CardBody, CardTitle, CardText
 } from 'reactstrap'
-import {Briefcase, DollarSign, Users, MoreVertical, Edit, Trash} from "react-feather"
+import {MoreVertical, Edit, Trash} from "react-feather"
 // ** React Imports
 import { useContext } from 'react'
 // ** Context
@@ -20,7 +18,7 @@ import { ThemeColors } from '../../utility/context/ThemeColors'
 // import CompanyTable from './CompanyTable'
 import Earnings from '../../ui-elements/Cards/analytics/Earnings'
 import CardMedal from '../../ui-elements/Cards/advance/CardMedal'
-import CardMeetup from '../../ui-elements/Cards/advance/CardMeetup'
+// import CardMeetup from '../../ui-elements/Cards/advance/CardMeetup'
 import StatsCard from '../../ui-elements/Cards/statistics/StatsCard'
 import CardTransactions from '../../ui-elements/Cards/advance/CardTransactions'
 import CardBrowserStates from '../../ui-elements/Cards/advance/CardBrowserState'
@@ -28,7 +26,6 @@ import CardBrowserStates from '../../ui-elements/Cards/advance/CardBrowserState'
 const Dashboard = () => {
     // ** Context
     const { colors } = useContext(ThemeColors)
-
 
     return (
         <div id='dashboard-ecommerce'>
