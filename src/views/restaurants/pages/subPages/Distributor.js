@@ -27,6 +27,7 @@ import {
     loadInvDistributor
 } from "../../../../redux/restaurantPages/Inventory/distributerReducer"
 import AddDistributor from "../forms/AddDistributor"
+import EmpCards from "../../../../ui-elements/Cards/employeeDashboard/EmpCards"
 
 const Distributor = (props) => {
     const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -207,6 +208,7 @@ const Distributor = (props) => {
     ]
     return (
         <Fragment>
+            <EmpCards />
             <Card>
                 <CardHeader className="border-bottom">
                     <CardTitle tag="h4">Distributors</CardTitle>

@@ -8,6 +8,7 @@ import memberShip from "./memberShipType/reducer"
 import restaurant from "./restaurant/reducer"
 import employee from "./employee/reducer"
 import employeeDashboard from "./employeeDashboard/reducer"
+import empOrder from "./employeeDashboard/employeeOrders/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
@@ -45,6 +46,7 @@ const rootReducer = {
     restaurant,
     employee,
     employeeDashboard,
+    empOrder,
     facebookPost,
     crmSms,
     customer,
