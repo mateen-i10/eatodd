@@ -2,7 +2,7 @@ import {
     Row,
     Col,
     Table,
-    Input
+    Input, Label
 } from 'reactstrap'
 // ** React Imports
 import React, {useEffect, useState} from 'react'
@@ -12,6 +12,22 @@ import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
 import EmpCards from "../../../ui-elements/Cards/employeeDashboard/EmpCards"
 import {getEmployeesOrders} from "../../../redux/employeeDashboard/employeeOrders/action"
+import Select from "react-select"
+import {selectThemeColors} from "../../../utility/Utils"
+
+const orderStatus = [
+    { value: '1', label: 'Paid' },
+    { value: '2', label: 'Pending' },
+    { value: '3', label: 'Cancelled' },
+    { value: '4', label: 'Completed' },
+    { value: '5', label: 'Cooking' },
+    { value: '6', label: 'Read To Deliver' },
+    { value: '7', label: 'Food On Th eWay' },
+    { value: '8', label: 'Delivered' },
+    { value: '9', label: 'Confirmed' },
+    { value: '10', label: 'Refunded' },
+    { value: '11', label: 'Scheduled' }
+]
 
 const EmployeeOrders = () => {
 
@@ -82,11 +98,28 @@ const EmployeeOrders = () => {
             <Row>
                 <Col xl={12} md={12} sm={12}>
                     <div className="card">
-                        <div className="card-header d-flex align-items-start pb-2">
-                            <div>
-                                <h3 className="font-weight-bolder">Pending Orders</h3>
-                            </div>
-                        </div>
+
+                            <Row>
+                                <Col xl={6} sm={12}>
+                                    <div className="card-header d-flex align-items-start pb-2">
+                                        <h3 className="font-weight-bolder">Orders List</h3>
+                                    </div>
+                                </Col>
+                                <Col xl={6} sm={12}>
+                                    <div>
+                                        <Label className='form-label pt-2'><b>Select Status</b></Label>
+                                        <Select
+                                            theme={selectThemeColors}
+                                            className='react-select'
+                                            classNamePrefix='select'
+                                            defaultValue={orderStatus[1]}
+                                            options={orderStatus}
+                                            isClearable={false}
+                                        />
+                                    </div>
+                                </Col>
+                            </Row>
+
                         <Row className='justify-content-end mx-0'>
                             <Col className='mt-1' md='12' sm='12'>
                                 <Input
@@ -106,7 +139,7 @@ const EmployeeOrders = () => {
                             <Table className="table table-responsive" paginationComponent={CustomPagination}>
                                 <thead>
                                 <tr>
-                                    <th>Job Name</th>
+                                    <th>Name</th>
                                     <th>Budget</th>
                                     <th>Estimated Hours</th>
                                 </tr>

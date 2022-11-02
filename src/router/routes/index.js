@@ -658,8 +658,8 @@ const Routes = [
         // }
     },
     {
-        path: '/employeeDashboard/product',
-        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        path: '/employeeDashboard/product/:id',
+        component: lazy(() => import('../../views/restaurants/pages/product')),
         layout: 'VerticalLayout'
         // exact: true
         // meta: {
@@ -678,7 +678,7 @@ const Routes = [
         // }
     },
     {
-        path: '/employeeDashboard/inventory/distributor',
+        path: '/employeeDashboard/inventory',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
         layout: 'VerticalLayout'
         // exact: true

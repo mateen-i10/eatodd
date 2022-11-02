@@ -5,7 +5,7 @@ import {
     Input, CardText, CardHeader, CardTitle, CardBody, Card
 } from 'reactstrap'
 // ** React Imports
-import React, {useContext, useEffect} from 'react'
+import React, {useEffect} from 'react'
 // ** Context
 import { ThemeColors } from '../../../utility/context/ThemeColors'
 // ** Demo Components
@@ -18,7 +18,7 @@ import Avatar from '@components/avatar'
 
 const EmployeeDashboard = () => {
     // ** Context
-    const { colors } = useContext(ThemeColors)
+    //const { colors } = useContext(ThemeColors)
 
     //getting data from store
     const isLoading = useSelector(state => state.employeeDashboard.isDetailLoading)
@@ -37,10 +37,10 @@ const EmployeeDashboard = () => {
 
             <div id='dashboard-ecommerce'>
                 <Row className='match-height'>
-                    <Col xl='4' md='6' xs='12'>
+                    {/*<Col xl='4' md='6' xs='12'>
                         <Earnings success={colors.success.main} />
-                    </Col>
-                    <Col xl='8' md='6' xs='12'>
+                    </Col>*/}
+                    <Col xl='12' md='6' xs='12'>
                         {/*<StatsCard cols={{ xl: '3', sm: '6' }} />*/}
                         <Card className='card-statistics'>
                             <CardHeader>
