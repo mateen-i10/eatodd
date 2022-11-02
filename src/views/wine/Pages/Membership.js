@@ -45,38 +45,51 @@ const Membership = ({}) => {
     }, [response])
 
     const handleSelected = (pkg) => {
-        isUserLoggedIn() && isCustomer() ? history.push('/winePayment', {package: pkg, currentPackage}) : history.push('/login', {returnURL: '/wine/membership'})
+        isUserLoggedIn() && isCustomer() ? history.push('/winePayment', {
+            package: pkg,
+            currentPackage
+        }) : history.push('/login', {returnURL: '/wine/membership'})
     }
 
     return (
         <div>
-            <Headerwine />
-            <HeroSection />
+            <Headerwine/>
+            <HeroSection/>
             <UILoader blocking={isLoading}>
-                <div className="container-sm membership-page">
-                <div className="row align-items-center justify-content-center">
-                    {packages && packages.length > 0 && packages.map(d => {
-                       return  <div className="col-md-4">
-                            <div className="member-card" style={{width: "100%", height:"30rem", boxShadow:"0 6px 20px 0 rgb(34 41 47 / 10%)"}}>
-                                <div className="card-body-sec d-flex flex-column align-items-center justify-content-center m-3">
-                                    <h2 className="mt-3 fw-bolder text-center">{d.name}</h2>
-                                    <h5 className="text-center" > {d.description}</h5>
-                                    <div className="mt-2 fw-bolder member-price"><span className="fs-5 doller-sign">$</span>{d.amount}</div>
-                                    <h5 className="fw-bolder text-center">{d.billType === 1 ? 'Weekly' : d.billType === 2 ? 'Monthly' : d.billType === 3 ? 'Yearly' : ''}</h5>
-                                    {currentPackage && currentPackage.winePackageId === d.id ? <div className="mt-2 btn fw-bolder btn-danger disabled">
-                                        Selected
-                                    </div> : <div className="mt-2 btn fw-bolder btn-green" onClick={() => handleSelected(d)}>
-                                        Join Now
-                                    </div>}
+                <div className="container-sm ">
+                    <div className="row align-items-center justify-content-center my-2">
+                        {packages && packages.length > 0 && packages.map(d => {
+                            return <div className="col-md-3 ">
+                                <div className="member-card card border" style={{
+                                    width: "100%",
+                                    height: "22rem"
+                                }}>
+                                    <div
+                                        className="card-body align-items-center justify-content-center">
+                                        <h2 className="fw-bolder text-center text-primary fs-1">{d.name}</h2>
+                                        <h5 className="fs-4 text-center text-capitalize"> {d.description}</h5>
+                                        <div className="mt-1 fw-bolder text-center"> <span
+                                            className="" style={{fontSize: "3.5rem"}}>{d.amount}</span><sub
+                                            className="fs-3 ">$</sub></div>
+                                        <h5 className="fw-bolder text-center">{d.billType === 1 ? 'Weekly' : d.billType === 2 ? 'Monthly' : d.billType === 3 ? 'Yearly' : ''}</h5>
+                                        <div className="row">
+                                            <div
+                                                className="col-7 mx-auto">{currentPackage && currentPackage.winePackageId === d.id ? <div className="mt-2 btn fw-bolder btn-danger mx-auto disabled">
+                                                    Selected
+                                                </div> : <div className="mt-2 fw-bolder btn btn-primary btn-join "
+                                                              onClick={() => handleSelected(d)}>
+                                                    Join Now
+                                                </div>}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    })}
+                        })}
+                    </div>
                 </div>
-            </div>
             </UILoader>
-            <NewsLetter />
-            <Footer />
+            <NewsLetter/>
+            <Footer/>
         </div>
     )
 }
