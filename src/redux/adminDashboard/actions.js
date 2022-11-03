@@ -1,18 +1,18 @@
 import {apiCall} from "../api/actions"
 import {
     setLoading,
-    setAdminDash, setAdmin
+    setAdminDash, setAdmin, restGetAll
 } from "./reducer"
 
 const url = 'AdminDashboard'
 
 // ** Get Customers Data
-export const loadAdminDashBoardOrderByStatData = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
+export const loadAdminDashBoardOrderByStatData = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0, Status) => {
     console.log("called")
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}/OrdersByStatus?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}&&Status=${2}`,
+            url: `${url}/OrdersByStatus?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}&&Status=${Status}`,
             data: {},
             method: 'get',
             onSuccess: setAdminDash.type
@@ -29,6 +29,19 @@ export const adminDashboardRestData = (RestaurantId = 1) => {
             data: {},
             method: 'get',
             onSuccess: setAdmin.type
+        }))
+    }
+}
+
+export const adminDashboardGetAll = (RestaurantId) => {
+    console.log("get all")
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/GetTotal/${RestaurantId}`,
+            data: {},
+            method: 'get',
+            onSuccess: restGetAll.type
         }))
     }
 }

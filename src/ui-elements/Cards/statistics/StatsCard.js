@@ -1,3 +1,4 @@
+import React from 'react'
 // ** Third Party Components
 import classnames from 'classnames'
 import { TrendingUp, User, Box, DollarSign } from 'react-feather'
