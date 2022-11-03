@@ -139,6 +139,7 @@ const EmployeeOrders = () => {
                             <Table className="table table-responsive" paginationComponent={CustomPagination}>
                                 <thead>
                                 <tr>
+                                    <th>Meal Name</th>
                                     <th>Quantity</th>
                                     <th>Total Price</th>
                                     <th>City</th>
@@ -149,10 +150,11 @@ const EmployeeOrders = () => {
                                 {empOrders && empOrders.map(e => {
                                     return <>
                                         <tr>
+                                            <td>{e.ordersDetail?.map(m => { return m.meal?.name })}</td>
                                             <td>{e.quantity}</td>
                                             <td>{e.totalPrice}</td>
                                             <td>{e.shippingAddress?.city}</td>
-                                            <td>{e.status}</td>
+                                            <td>{e.status === 1 ? "Paid" : e.status === 2 ? "Pending" : e.status === 3 ? "Cancelled" : e.status === 4 ? "Completed" : e.status === 5 ? "Cooking" : e.status === 6 ? "Read To Deliver" : e.status === 7 ? "Food On The Way" : e.status === 8 ? "Delivered" : e.status === 9 ? "Confirmed" : e.status === 10 ? "Refunded" : e.status === 11 ? "Scheduled" : ""}</td>
                                             {/*<td>{moment(new Date(d.expectedStartDate)).format('YYYY-MM-DD') }</td>
                                             <td>{moment(new Date(d.expectedEndDate)).format('YYYY-MM-DD') }</td>*/}
                                         </tr>
