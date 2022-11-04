@@ -6,41 +6,53 @@ import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {
     ArrowLeftCircle,
-    Book,
-    BookOpen,
-    ChevronDown,
-    Codesandbox,
-    DollarSign,
-    Edit,
-    FileText,
-    MoreVertical,
-    Trash,
-    UserPlus
+    ChevronDown
 } from 'react-feather'
 import {
     Card,
-    CardHeader,
     CardTitle,
-    Button,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Col
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
-import Swal from "sweetalert2"
-import Joi from "joi-browser"
 import UILoader from "../../../@core/components/ui-loader"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import {loadOrdersByRestaurant} from "../../../redux/restaurant/actions"
 import StatsCard from "../../../ui-elements/Cards/StatsCard"
+import StatCard from "../../../ui-elements/Cards/statistics/StatsCard"
 import {useHistory, useParams} from "react-router-dom"
+import {loadAdminDashBoardOrderByStatData} from "../../../redux/adminDashboard/actions"
+import AsyncSelect from "react-select/async"
 
 
 const Orders = () => {
-    const OrdersByRestaurantList = useSelector(state => state.restaurant.orderList)
+
+    // const OrdersByRestaurantList = useSelector(state => state.restaurant.orderList)
+
+    const OrdersByRestaurantList = useSelector(state => state.AdminDashReducer.list)
+    console.log(OrdersByRestaurantList, 'order by rest status')
+
+    const [status, setStatus] = useState(0)
+    console.log(status, "stats")
+
     const miscData = useSelector(state => state.restaurant.miscData)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const options = async () => [
+        { value: 1, label: 'Paid' },
+        { value: 2, label: 'Pending' },
+        { value: 3, label: 'Cancelled' },
+        { value: 4, label: 'Completed' },
+        { value: 5, label: 'Cooking' },
+        { value: 6, label: 'ReadyToDeliver' },
+        { value: 7, label: 'FoodOnTheWay' },
+        { value: 8, label: 'Deliverd' },
+        { value: 9, label: 'Confirmed' },
+        { value: 10, label: 'Refunded' },
+        { value: 11, label: 'Scheduled' }
+    ]
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -48,13 +60,13 @@ const Orders = () => {
     const [searchValue, setSearchValue] = useState('')
 
     //for restaurant id
-    //const {state} = useLocation()
     const { id } = useParams()
     console.log('stateId', id)
 
     useEffect(() => {
-        dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, id))
-    }, [])
+        // dispatch(loadOrdersByRestaurant(currentPage, pageSize, searchValue, id))
+        dispatch(loadAdminDashBoardOrderByStatData(1, 12, null, 1, status))
+    }, [status])
 
     console.log(OrdersByRestaurantList, "hh")
 
@@ -151,17 +163,34 @@ const Orders = () => {
                 <Col xs='12'>
                     <StatsCard cols={{xl: '2', sm: '6'}}/>
                 </Col>
+                <Col xs='12'>
+                    <StatCard cols={{xl: '2', sm: '6'}}/>
+                </Col>
                 <Card>
-                    <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-                        <div>
-                            <CardTitle tag='h4'>
-                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
-                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
-                                </span>
-                                   Orders by Restaurant
-                            </CardTitle>
-                        </div>
-                    </CardHeader>
+                        <section>
+                            <div className="mt-2 p-1">
+                                <Row>
+                                    <Col xl={8} lg={8} md={6}>
+                                        <CardTitle tag='h4' style={{marginTop: '4px'}}>
+                                            <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                                <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                            </span>
+                                                Orders by Restaurant
+                                        </CardTitle>
+                                    </Col>
+                                    <Col xl={4} lg={4} md={6}>
+                                        <AsyncSelect
+                                            loadOptions={options}
+                                            defaultOptions
+                                            isLoading={true}
+                                            onChange={e => setStatus(e.value)}
+                                        />
+                                    </Col>
+                                </Row>
+                            </div>
+                        </section>
+
+
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
                             <Input
