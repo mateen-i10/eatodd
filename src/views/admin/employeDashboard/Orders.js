@@ -65,10 +65,13 @@ const EmployeeOrders = () => {
     console.log('empOrdersStat', empOrdersStat)
 
     const [changeState, setChangeState] = useState({ value: 2, label: 'Pending' })
+    const [totalOrders, setTotalOrders] = useState(0)
+
 
     useEffect(() => {
         if (empOrdersStat !== null) {
             const totalOrder = empOrdersStat.confirmedCount += empOrdersStat.cookingCount += empOrdersStat.readyToDeliverCount += empOrdersStat.foodOnTheWayCount += empOrdersStat.deliveredCount += empOrdersStat.refundedCount += empOrdersStat.scheduledCount
+            setTotalOrders(totalOrder)
             console.log('total', totalOrder)
         }
     }, [empOrdersStat])
@@ -288,7 +291,7 @@ const EmployeeOrders = () => {
                                                             <img src={all} width={35}/>
                                                             <h6 style={{marginTop:'8px', marginLeft:'5px'}}>All</h6>
                                                         </div>
-                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>0</h4>
+                                                        <h4 style={{fontWeight: 'bolder', paddingTop: '5px'}}>{totalOrders}</h4>
                                                     </div>
                                                 </Col>
                                             </Row>
