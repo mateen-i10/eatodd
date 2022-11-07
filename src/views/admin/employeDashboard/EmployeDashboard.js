@@ -2,30 +2,28 @@ import {
     Row,
     Col,
     Table,
-    Input
+    Input, CardText, CardHeader, CardTitle, CardBody, Card
 } from 'reactstrap'
 // ** React Imports
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 // ** Context
 import { ThemeColors } from '../../../utility/context/ThemeColors'
 // ** Demo Components
 import Earnings from '../../../ui-elements/Cards/analytics/Earnings'
-import StatsCard from '../../../ui-elements/Cards/statistics/StatsCard'
-import ReactPaginate from "react-paginate"
 import {useDispatch, useSelector} from "react-redux"
 import {getEmployeesDashboard} from "../../../redux/employeeDashboard/action"
 import UILoader from "../../../@core/components/ui-loader"
-import EmpCards from "../../../ui-elements/Cards/employeeDashboard/EmpCards"
+import {Box, DollarSign, TrendingUp, User} from "react-feather"
+import Avatar from '@components/avatar'
 
 const EmployeeDashboard = () => {
     // ** Context
-    const { colors } = useContext(ThemeColors)
+    //const { colors } = useContext(ThemeColors)
 
     //getting data from store
     const isLoading = useSelector(state => state.employeeDashboard.isDetailLoading)
-    const miscData = useSelector(state => state.employeeDashboard.miscData)
-    const empDashboardOrders = useSelector(state => state.employeeDashboard.list)
-    console.log('emp', empDashboardOrders)
+    const empDashboard = useSelector(state => state.employeeDashboard.object)
+    console.log('empDash', empDashboard)
 
     // hooks
     const dispatch = useDispatch()
@@ -34,122 +32,66 @@ const EmployeeDashboard = () => {
         dispatch(getEmployeesDashboard())
     }, [])
 
-    // ** refs
-    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
-    const [pageSize] = useState(10)
-    const [searchValue, setSearchValue] = useState('')
-
-    const handleFilter = e => {
-        console.log('e.keyCode', e.keyCode)
-        const value = e.target.value
-        if (e.keyCode === 13) {
-            dispatch(getEmployeesDashboard(currentPage, pageSize, value))
-        }
-        setSearchValue(value)
-    }
-
-    const handlePagination = page => {
-        dispatch(getEmployeesDashboard(page.selected + 1, pageSize, searchValue))
-        setCurrentPage(page.selected + 1)
-    }
-
-    const CustomPagination = () => {
-        const count = miscData?.totalPages ?? 0
-
-        return <ReactPaginate
-            previousLabel={''}
-            nextLabel={''}
-            breakLabel='...'
-            pageCount={count || 1}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={2}
-            activeClassName='active'
-            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
-            onPageChange={page => handlePagination(page)}
-            pageClassName={'page-item'}
-            nextLinkClassName={'page-link'}
-            nextClassName={'page-item next'}
-            previousClassName={'page-item prev'}
-            previousLinkClassName={'page-link'}
-            pageLinkClassName={'page-link'}
-            breakClassName='page-item'
-            breakLinkClassName='page-link'
-            containerClassName={
-                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
-            }
-        />
-    }
-
     return (
         <UILoader blocking={isLoading}>
 
-            <EmpCards />
-
             <div id='dashboard-ecommerce'>
                 <Row className='match-height'>
-                    <Col xl='4' md='6' xs='12'>
+                    {/*<Col xl='4' md='6' xs='12'>
                         <Earnings success={colors.success.main} />
-                    </Col>
-                    <Col xl='8' md='6' xs='12'>
-                        <StatsCard cols={{ xl: '3', sm: '6' }} />
+                    </Col>*/}
+                    <Col xl='12' md='6' xs='12'>
+                        {/*<StatsCard cols={{ xl: '3', sm: '6' }} />*/}
+                        <Card className='card-statistics'>
+                            <CardHeader>
+                                <CardTitle tag='h4'>Statistics</CardTitle>
+                                <CardText className='card-text font-small-2 me-25 mb-0'>Updated 1 month ago</CardText>
+                            </CardHeader>
+                            <CardBody className='statistics-body'>
+                                <Row>
+                                    <Col xl={3} sm={6}>
+                                        <div className='d-flex align-items-center'>
+                                            <Avatar color='light-primary' icon={<TrendingUp size={24} />} className='me-2' />
+                                            <div className='my-auto'>
+                                                <h4 className='fw-bolder mb-0'>{empDashboard.totalSale}</h4>
+                                                <CardText className='font-small-3 mb-0'>Sales</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={3} sm={6}>
+                                        <div className='d-flex align-items-center'>
+                                            <Avatar color='light-info' icon={<User size={24} />} className='me-2' />
+                                            <div className='my-auto'>
+                                                <h4 className='fw-bolder mb-0'>{empDashboard.totalCustomer}</h4>
+                                                <CardText className='font-small-3 mb-0'>Customers</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={3} sm={6}>
+                                        <div className='d-flex align-items-center'>
+                                            <Avatar color='light-danger' icon={<Box size={24} />} className='me-2' />
+                                            <div className='my-auto'>
+                                                <h4 className='fw-bolder mb-0'>{empDashboard.totalProduct}</h4>
+                                                <CardText className='font-small-3 mb-0'>Products</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col xl={3} sm={6}>
+                                        <div className='d-flex align-items-center'>
+                                            <Avatar color='light-success' icon={<DollarSign size={24} />} className='me-2' />
+                                            <div className='my-auto'>
+                                                <h4 className='fw-bolder mb-0'>{empDashboard.totalRevenue}</h4>
+                                                <CardText className='font-small-3 mb-0'>Revenue</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </CardBody>
+                        </Card>
                     </Col>
                 </Row>
             </div>
 
-            <Row>
-                <Col xl={12} md={12} sm={12}>
-                    <div className="card">
-                        <div className="card-header d-flex align-items-start pb-2">
-                            <div>
-                                <h3 className="font-weight-bolder">Pending Orders</h3>
-                            </div>
-                        </div>
-                        <Row className='justify-content-end mx-0'>
-                            <Col className='mt-1' md='12' sm='12'>
-                                <Input
-                                    className='dataTable-filter mb-50'
-                                    type='text'
-                                    placeholder='Search'
-                                    bsSize='sm'
-                                    id='search-input'
-                                    value={searchValue}
-                                    onKeyUp={handleFilter}
-                                    onChange={handleFilter}
-                                />
-                            </Col>
-                        </Row>
-
-                        <div className="card-body">
-                            <Table className="table table-responsive" paginationComponent={CustomPagination}>
-                                <thead>
-                                <tr>
-                                    <th>Job Name</th>
-                                    <th>Budget</th>
-                                    <th>Estimated Hours</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {empDashboardOrders && empDashboardOrders.map(e => {
-                                    return <>
-                                        <tr>
-                                            <td>{e.name}</td>
-                                            <td>qw</td>
-                                            <td>qw</td>
-                                            {/*<td>{moment(new Date(d.expectedStartDate)).format('YYYY-MM-DD') }</td>
-                                            <td>{moment(new Date(d.expectedEndDate)).format('YYYY-MM-DD') }</td>*/}
-                                        </tr>
-                                    </>
-                                })
-
-                                }
-
-                                </tbody>
-                            </Table>
-                        </div>
-
-                    </div>
-                </Col>
-            </Row>
         </UILoader>
     )
 }

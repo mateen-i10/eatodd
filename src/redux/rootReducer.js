@@ -8,6 +8,7 @@ import memberShip from "./memberShipType/reducer"
 import restaurant from "./restaurant/reducer"
 import employee from "./employee/reducer"
 import employeeDashboard from "./employeeDashboard/reducer"
+import empOrder from "./employeeDashboard/employeeOrders/reducer"
 import facebookPost from './facebookPosts/reducer'
 import crmSms from './crmSMS/reducer'
 import customer from "./customer/reducer"
@@ -35,6 +36,8 @@ import cateringMenu from "./Catering/cateringMenu/reducer"
 import cateringMenuItem from "./Catering/cateringMenuItem/reducer"
 import subscriptionReducer from "./subscription/reducer"
 import customerCatering from "./Catering/CateringCustomers/reducer"
+import AdminDashReducer from "./adminDashboard/reducer"
+import contact from "./contact/reducer"
 
 const rootReducer = {
     auth,
@@ -45,6 +48,7 @@ const rootReducer = {
     restaurant,
     employee,
     employeeDashboard,
+    empOrder,
     facebookPost,
     crmSms,
     customer,
@@ -71,7 +75,9 @@ const rootReducer = {
     cateringMenuItem,
     subscriptionReducer,
     scrollSlice,
-    customerCatering
+    customerCatering,
+    AdminDashReducer,
+    contact
 }
 
 export default rootReducer

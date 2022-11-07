@@ -1,21 +1,21 @@
 import {apiCall} from "../api/actions"
-import {setEmployeesDashboard, setLoading} from "./reducer"
+import {setDetailLoading, setEmployeesDashboard} from "./reducer"
 
-const url = 'employeeDashboard/getPendingOrders'
+const url = 'employeeDashboard/GetTotal'
 
-/*export const getEmployeesDashboard = () => {
+export const getEmployeesDashboard = () => {
     return async dispatch => {
         dispatch(setDetailLoading(true))
         dispatch(apiCall({
             url,
             data: {},
             method: 'Get',
-            onSuccess: setEmployeeDashboard.type
+            onSuccess: setEmployeesDashboard.type
         }))
     }
-}*/
+}
 
-export const getEmployeesDashboard = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+/*export const getEmployeesDashboard = () => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
@@ -25,5 +25,5 @@ export const getEmployeesDashboard = (pageIndex = 1, pageSize =  12, searchQuery
             onSuccess: setEmployeesDashboard.type
         }))
     }
-}
+}*/
 

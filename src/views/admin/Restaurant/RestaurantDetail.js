@@ -9,10 +9,18 @@ import {getRestaurant} from "../../../redux/restaurant/actions"
 import {WeekDays} from "../../../utility/enums/WeekDays"
 import coverImage from '@src/assets/images/pages/vuexy-login-bg.jpg'
 import moment from "moment"
+import {adminDashboardGetAll} from "../../../redux/adminDashboard/actions"
 
 const RestaurantDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
+
+    const dat = useSelector(state => state.AdminDashReducer.restGetAll)
+    console.log(dat, "data to display")
+
+    useEffect(() => {
+        dispatch(adminDashboardGetAll(id))
+    }, [])
 
     //getting data from store
     const isLoading = useSelector(state => state.restaurant.isLoading)
@@ -77,7 +85,7 @@ const RestaurantDetail = ({match}) => {
                                                     </CardText>
                                                 </div>
                                             </Col>
-                                            <Col xl={12} className="p-0">
+                                            <Col xl={6} className="p-0">
                                                 <div className='mt-2 invoice-date-wrapper ps-1'>
                                                     <p className='fw-bolder'>Address:</p>
                                                     <CardText className="mmb-25 ms-1 mb-1">
@@ -85,11 +93,110 @@ const RestaurantDetail = ({match}) => {
                                                     </CardText>
                                                 </div>
                                             </Col>
-                                            <Col xl={12} className="p-0">
+                                            <Col xl={6} className="p-0">
                                                 <div className='mt-2 invoice-date-wrapper ps-1'>
                                                     <p className='fw-bolder'>Description:</p>
                                                     <CardText className="mmb-25 ms-1 mb-1">
                                                         {` ${restaurant.description}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>confirmed Orders:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.confirmedCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>cooking:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.cookingCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Customers:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.customers}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Delivered:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.deliveredCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Food On The Way:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.foodOnTheWayCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Products:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.products}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Ready To Deliver:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.readyToDeliverCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Refunded Count:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.refundedCount}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Revenue:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.revenue} `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Sales:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.sales}  `}
+                                                    </CardText>
+                                                </div>
+                                            </Col>
+                                            {/*//*/}
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Scheduled Count:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        {` ${dat.scheduledCount}  `}
                                                     </CardText>
                                                 </div>
                                             </Col>

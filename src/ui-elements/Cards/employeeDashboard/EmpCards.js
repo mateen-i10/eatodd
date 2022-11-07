@@ -106,7 +106,7 @@ const EmpCards = () => {
                                         <Col>
                                             <div style={{display:'flex'}}>
                                                 <img src={dashboard} width={20} height={20}/>
-                                                <h2 style={{marginLeft: '10px', marginTop: '-5px'}}>Dashboard</h2>
+                                                <h2 style={{marginLeft: '10px', marginTop: '-5px'}}>Orders</h2>
                                             </div>
                                         </Col>
                                     </Row>
@@ -138,7 +138,7 @@ const EmpCards = () => {
                             <Col md={5}>
                                 <div style={{display:'flex'}}>
                                     <img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>
-                                    <h4 style={{marginTop: '10px', marginLeft: '5px'}}>Dashboard order statistics</h4>
+                                    <h4 style={{marginTop: '10px', marginLeft: '5px'}}>Order statistics</h4>
                                 </div>
                             </Col>
                             <Col md={3}>

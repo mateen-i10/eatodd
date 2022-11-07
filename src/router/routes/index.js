@@ -121,7 +121,7 @@ const Routes = [
         }
     },
     {
-        path: '/dashboard/orders',
+        path: '/dashboard/orders/:id',
         component: lazy(() => import('../../views/restaurants/pages/Orders')),
         layout: 'VerticalLayout',
         exact: true,
@@ -131,7 +131,7 @@ const Routes = [
         }
     },
     {
-        path: '/dashboard/product',
+        path: '/dashboard/product/:id',
         component: lazy(() => import('../../views/restaurants/pages/product')),
         layout: 'VerticalLayout',
         exact: true,
@@ -151,7 +151,7 @@ const Routes = [
         }
     },
     {
-        path: '/dashboard/customer',
+        path: '/dashboard/customer/:id',
         component: lazy(() => import('../../views/restaurants/pages/Customer')),
         layout: 'VerticalLayout',
         exact: true,
@@ -649,8 +649,13 @@ const Routes = [
         }
     },
     {
-        path: '/employeeDashboard/orders',
-        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        path: '/employeeDashboard/Detail/:id',
+        component: lazy(() => import('../../views/admin/Restaurant/RestaurantDetail')),
+        layout: 'VerticalLayout'
+    },
+    {
+        path: '/employeeDashboard/orders/:id',
+        component: lazy(() => import('../../views/admin/employeDashboard/Orders')),
         layout: 'VerticalLayout'
         // exact: true,
         // meta: {
@@ -658,8 +663,8 @@ const Routes = [
         // }
     },
     {
-        path: '/employeeDashboard/product',
-        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        path: '/employeeDashboard/product/:id',
+        component: lazy(() => import('../../views/restaurants/pages/product')),
         layout: 'VerticalLayout'
         // exact: true
         // meta: {
@@ -668,8 +673,8 @@ const Routes = [
         // }
     },
     {
-        path: '/employeeDashboard/customer',
-        component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
+        path: '/employeeDashboard/customer/:id',
+        component: lazy(() => import('../../views/restaurants/pages/Customer')),
         layout: 'VerticalLayout'
         // exact: true
         // meta: {
@@ -678,7 +683,7 @@ const Routes = [
         // }
     },
     {
-        path: '/employeeDashboard/inventory/distributor',
+        path: '/employeeDashboard/inventory',
         component: lazy(() => import('../../views/restaurants/pages/subPages/Distributor')),
         layout: 'VerticalLayout'
         // exact: true
@@ -691,6 +696,18 @@ const Routes = [
         path: '/employeeDashboard',
         component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/contact/:id',
+        component: lazy(() => import('../../views/admin/Contact/ContactDetail')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/contact',
+        component: lazy(() => import('../../views/admin/Contact/Contact')),
+        layout: 'VerticalLayout',
+        exact: true
     }
 
 ]

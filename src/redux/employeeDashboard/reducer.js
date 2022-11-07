@@ -1,8 +1,7 @@
 import {createAction} from '@reduxjs/toolkit'
 
 const initialState = {
-    list: [],
-    miscData: {},
+    object: {},
     isLoading: false,
     isDetailLoading: false
 }
@@ -17,8 +16,7 @@ const employeeDashboardReducer = (state = initialState, action) => {
         case setEmployeesDashboard.type:
             return {
                 ...state,
-                list: action.payload.data,
-                miscData: action.payload.miscData,
+                object: action.payload.data,
                 isLoading: false,
                 isDetailLoading: false
             }

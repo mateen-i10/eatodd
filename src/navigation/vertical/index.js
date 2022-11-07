@@ -108,7 +108,12 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/section'
     },
-
+    {
+        id: 'contact',
+        title: 'Contact',
+        icon: <Package size={20}/>,
+        navLink: '/contact'
+    },
     {
         id: 'Wineclub',
         title: 'Wineclub',
@@ -180,41 +185,6 @@ export const branchManagerMenu = [
     },
     {
         header: 'Restaurants'
-    },
-    {
-        id: 'NorthEve',
-        title: 'North Eve',
-        children: [
-            {
-                id: 'Details',
-                title: 'Details',
-                icon: <Award size={20}/>
-                // navLink: '/Details'
-            },
-            {
-                id: 'Orders',
-                title: 'Orders',
-                icon: <UserCheck size={20}/>,
-                navLink: "/employeeDashboard/orders"
-            },
-            {
-                id: 'Products',
-                title: 'Products',
-                icon: <UserCheck size={20}/>,
-                navLink: '/employeeDashboard/product'
-            },
-            {
-                id: 'Customers',
-                title: 'Customers',
-                icon: <Mail size={20}/>,
-                navLink: '/employeeDashboard/customer'
-            },
-            {
-                id: 'Inventory',
-                title: 'Inventory',
-                icon: <Send size={20}/>,
-                navLink: '/employeeDashboard/inventory/distributor'
-            }
-        ]
     }
+
 ]
