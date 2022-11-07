@@ -62,6 +62,7 @@ const GenralProductReducer = (state = initialState, action) => {
                     generalProductIngredients: data.generalProductIngredients.map(i => {
                         return {label: i.ingredient.name, value: i.ingredientId}
                     }),
+                    flavour: {label: data.flavour, value: data.flavour},
                     category: {label: data.category.name, value: data.category.id},
                     optionType: {label: data.optionType === 1 ? "Default" : 'Numeric', value: data.optionType}
                 },
