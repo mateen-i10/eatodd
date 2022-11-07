@@ -34,8 +34,8 @@ const winePayment = () => {
     const billType = state.package.billType === WinePackageBillType.Monthly ? "Month" : state.package.billType === WinePackageBillType.Yearly ? "Year" : ''
 
     //local state
-    const [isActivePackage, setIsActivePackage] = useState(state && state.currentPackage)
-    const [useExistingCard, setExistingCard] = useState(state && state.currentPackage)
+    //const [isActivePackage, setIsActivePackage] = useState(state && state.currentPackage)
+    /*const [useExistingCard, setExistingCard] = useState(state && state.currentPackage)*/
     const [isLoading, setLoading] = useState(false)
     const [billCity, setBillCity] = useState()
     const [billState, setBillState] = useState()
@@ -49,11 +49,11 @@ const winePayment = () => {
 
     useEffect(() => {
         if (state && state.currentPackage) {
-            setIsActivePackage(true)
-            setExistingCard(true)
+            //setIsActivePackage(true)
+            /*setExistingCard(true)*/
         } else {
-            setIsActivePackage(false)
-            setExistingCard(false)
+            //setIsActivePackage(false)
+            /*setExistingCard(false)*/
         }
 
     }, [state])
@@ -160,13 +160,11 @@ const winePayment = () => {
                             <Row>
                                 <Col md='9' sm='12'>
                                     <Card>
-                                        <Row className='mt-2 ms-2 text-start'>
-                                            {useExistingCard &&
+                                        <Row className='mt-2 ms-2 text-start'>{/*
                                                 <Col sm='8'><CardText tag='h4'>You have already subscribed a
-                                                    plane </CardText></Col>}
-                                            {!useExistingCard &&
-                                                <Col sm='8'><CardText tag='h4'>Billing Address </CardText></Col>}
-                                            {!useExistingCard && <Col sm='4'>
+                                                    plane </CardText></Col>*/}
+                                                <Col sm='8'><CardText tag='h4'>Billing Address </CardText></Col>
+                                            <Col sm='4'>
                                                 <FormGroup check inline>
                                                     <Input type='checkbox' checked={autoRenewable}
                                                            onChange={(e) => setAutoRenewable(e.target.checked)}
@@ -175,10 +173,10 @@ const winePayment = () => {
                                                         Auto renew subscription every {billType}
                                                     </Label>
                                                 </FormGroup>
-                                            </Col>}
+                                            </Col>
                                         </Row>
-                                        {useExistingCard && isActivePackage && <CardBody className='ms-2'>
-                                            {/*<CardTitle tag='h4'>Card Title</CardTitle>*/}
+                                        {/*{useExistingCard && isActivePackage && <CardBody className='ms-2'>
+                                            <CardTitle tag='h4'>Card Title</CardTitle>
                                             <CardText>
                                                 Through the OMG wine club, you’ll sip on a wide variety of wines that
                                                 are pre-released or made in small batches. Exclusivity is key here. Each
@@ -199,8 +197,8 @@ const winePayment = () => {
                                                             history.push('/user')
                                                         }}>View Your Plane</Button>
                                             </FormGroup>
-                                        </CardBody>}
-                                        {!useExistingCard && <CardBody>
+                                        </CardBody>}*/}
+                                        {<CardBody>
                                             <Row>
                                                 <Col sm='3'>
                                                     <div className='mb-2'>
@@ -306,7 +304,7 @@ const winePayment = () => {
                                             <div className='amount-payable checkout-options'>
                                                 <Card>
                                                     <CardHeader>
-                                                        <FormGroup check inline>
+                                                        {/*{isActivePackage && <FormGroup check inline>
                                                             <Input type='checkbox' checked={useExistingCard}
                                                                    onChange={(e) => setExistingCard(e.target.checked)}
                                                                    id='basic-cb-checked'/>
@@ -315,7 +313,7 @@ const winePayment = () => {
                                                                    check>
                                                                 Use Existing card
                                                             </Label>
-                                                        </FormGroup>
+                                                        </FormGroup>}*/}
                                                         <CardTitle className='mt-1' tag='h4'>Price Details</CardTitle>
                                                     </CardHeader>
                                                     <CardBody>
@@ -340,10 +338,10 @@ const winePayment = () => {
                                         </Col>
                                     </Row>
                                 </Col>
-                                {!useExistingCard && <Col md='9' sm='12'>
+                                <Col md='9' sm='12'>
                                     <SquareCard cardVerificationFunc={cardVerification}
                                                 getTokenFunc={getToken}/>
-                                </Col>}
+                                </Col>
                             </Row>
                         </div>
                     </section>}
