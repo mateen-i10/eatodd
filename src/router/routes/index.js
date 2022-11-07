@@ -691,6 +691,18 @@ const Routes = [
         path: '/employeeDashboard',
         component: lazy(() => import('../../views/admin/employeDashboard/EmployeDashboard')),
         layout: 'VerticalLayout'
+    },
+    {
+        path: '/contact/:id',
+        component: lazy(() => import('../../views/admin/Contact/ContactDetail')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/contact',
+        component: lazy(() => import('../../views/admin/Contact/Contact')),
+        layout: 'VerticalLayout',
+        exact: true
     }
 
 ]

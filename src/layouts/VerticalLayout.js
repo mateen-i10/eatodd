@@ -58,7 +58,6 @@ const VerticalLayout = props => {
             })
             setMenuData([...branchManagerMenu, ...final])
         }
-
     }, [response])
     return (
         <Layout menuData={isAdmin() ? navigation : isBranchManager() ? menuData : []} {...props}>
