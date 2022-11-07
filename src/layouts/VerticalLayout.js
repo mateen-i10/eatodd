@@ -26,8 +26,8 @@ const VerticalLayout = props => {
                         {
                             id: 'Details',
                             title: 'Details',
-                            icon: <Award size={20}/>
-                            // navLink: '/Details'
+                            icon: <Award size={20}/>,
+                            navLink: `/employeeDashboard/Detail/${item.id}`
                         },
                         {
                             id: 'Orders',
