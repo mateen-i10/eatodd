@@ -60,6 +60,7 @@ const Catering = () => {
         }
         if (item.isWine) setWineSelected(true)
     }
+    console.log("selectedMenuId", selectedMenuId)
 
     return (
         <div>
@@ -69,7 +70,7 @@ const Catering = () => {
                     <div className="col-lg-4 col-md-5 col-sm-8 col-10 mx-auto">
                         <img style={{width: '100%'}} className="new mt-5"
                              src={require("../../../assets/images/images/catring-wine.png").default}
-                             height={400}
+                             height={400} alt="wine"
                         />
                     </div>
                     <div className="col-lg-8 col-md-7  col-12 mx-auto mt-5">
@@ -108,6 +109,7 @@ const Catering = () => {
                                      style={{lineHeight: "35px"}}
                                      onMouseOver={() => (setElHovered({...elHovered, [i]: true}))}
                                      onMouseLeave={() => (setElHovered({...elHovered, [i]: false}))}
+                                     onLoad={() => setSelectedMenuId(item.id)}
                                      onClick={() => {
                                          toggleList(item)
                                      }}
@@ -125,7 +127,7 @@ const Catering = () => {
                             md={md}
                             id={selectedMenuId}
                         />}
-                        {selectedMenuId === '1' ? <CateringSubForm /> : []}
+                        {selectedMenuId === '1' ? <CateringSubForm/> : []}
                     </div>
                 </div>
             </div> : <div className="m-5"><ComponentSpinner/></div>}

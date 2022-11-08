@@ -55,7 +55,7 @@ const productReducer = (state = initialState, action) => {
         case editproduct.type:
             const data = action.payload.data
             console.log(data, 'here is the cat id ')
-            data.options = data.options.filter(c => c.name !== "Default")
+            data.options = data.options.filter(c => c.name !== "Numeric" && c.name !== "Normal")
             data.optionsString = JSON.stringify(data.options)
             return {
                 ...state,

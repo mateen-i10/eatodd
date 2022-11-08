@@ -108,7 +108,12 @@ export default [
         icon: <Package size={20}/>,
         navLink: '/section'
     },
-
+    {
+        id: 'contact',
+        title: 'Contact',
+        icon: <Package size={20}/>,
+        navLink: '/contact'
+    },
     {
         id: 'Wineclub',
         title: 'Wineclub',
@@ -181,5 +186,5 @@ export const branchManagerMenu = [
     {
         header: 'Restaurants'
     }
-    
+
 ]
