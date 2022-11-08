@@ -94,17 +94,17 @@ const HeaderWine = ({isSimple}) => {
                     </div>
                 </div>
                 <div className="eatOMG mx-auto">
-                    <i className="ri-checkbox-blank-circle-fill"></i>
-                    <span className="seprator"></span>
+                    <i className="ri-checkbox-blank-circle-fill" />
+                    <span className="seprator" />
                     <p>Find a EatOMG</p>
                 </div>
-                <nav className="nav ">
+                <nav className="nav">
                     <div className="nav-sec-1 text-center">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
                     </div>
-                    <div className=" text-center">
+                    <div className="text-center">
                         <Link to="/home">
                             <Button.Ripple color='primary' className="fs-3"
                                            style={{width: "75%", marginTop: 30}}
@@ -120,9 +120,7 @@ const HeaderWine = ({isSimple}) => {
                         {/*        <span>AND REDEEM REWARDS</span></h2>*/}
                         {/*</div>*/}
                         <Button className="w-75 bg-secondary text-uppercase fs-3">
-                            <Link to="/signup" style={{color: "white"}}>Create
-                                an
-                                Account</Link>
+                            <Link to="/signup" style={{color: "white"}}>Create an Account</Link>
                         </Button>
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
