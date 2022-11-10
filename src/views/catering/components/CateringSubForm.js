@@ -1,106 +1,58 @@
-import React, {useRef, useState} from 'react'
-import {FieldTypes} from "../../../utility/enums/FieldType"
-import MyForm from "../../../components/MyForm"
-
-import Joi from "joi-browser"
-import moment from 'moment'
+import React, {useState} from 'react'
 import {useDispatch} from "react-redux"
 import {addContact} from "../../../redux/contact/action"
+import {Button, Col, Row} from "reactstrap"
+import {useForm} from 'react-hook-form'
+import Datetime from "react-datetime"
+import moment from "moment"
+
 // import {toast} from "react-toastify"
 
 const CateringSubForm = () => {
-    // ** React Imports
-    const formModalRef = useRef(null)
     const dispatch = useDispatch()
 
-    // const [dateError, setDateError] = useState(false)
+    //** useForm
+    const defaultValues = {
+        name: '',
+        contactNo: '',
+        email: '',
+        noOfAttendees: ''
+    }
+    const {
+        setError,
+        reset,
+        register,
+        handleSubmit,
+        formState: {errors}
+    } = useForm({defaultValues})
 
-    let today = moment(Date.now()).format('DD')
-    today = Number(today) + 7
-    let month = moment(Date.now()).format('MM')
-    let year = moment(Date.now()).format('YYYY')
+    const sevenDays = moment().add(7, 'days')
+    const [eventDate, setEventDate] = useState()
 
-    function daysInMonth(month, year) {
-        return new Date(year, month, 0).getDate()
+
+    const disablePastDt = current => {
+        return current.isAfter(sevenDays)
     }
 
-    console.log(daysInMonth(month, year), 'monthhs')
-    const totalDays = daysInMonth(month, year)
 
-    if (today >= totalDays) {
-        today = today - totalDays
-        month = Number(month) + 1
-    }
-    if (month > 12) {
-        year = Number(year) + 1
-    }
-
-    const d = new Date(`${month} ${today} ${year} 11:13:00`)
-
-    const validDate = moment(d).format('YYYY MM DD')
-
-
-    const [formState, setFormState] = useState({})
-    const [formData] = useState([
-        {
-            type: FieldTypes.Text,
-            label: 'Name',
-            placeholder: 'Enter your Name',
-            name: 'name',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Text,
-            label: 'Email',
-            placeholder: 'Enter your Email',
-            name: 'email',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-
-        {
-            type: FieldTypes.Text,
-            label: 'Contact No.',
-            placeholder: 'Enter your Contact No.',
-            name: 'contactNo',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Number,
-            label: 'Total Attendees',
-            placeholder: 'Enter total number of guests',
-            name: 'noOfAttendees',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
-        },
-        {
-            type: FieldTypes.Date,
-            label: 'Date of Event',
-            id: 'eventDate',
-            name: 'eventDate',
-            isRequired: true,
-            fieldGroupClasses: 'col-6'
+    const onSubmit = (data) => {
+        // console.log("data----", data)
+        if (Object.values(data).every(field => field.length > 0)) {
+            const abc = new moment(eventDate).format() // format date to avoid server time zone
+            const finalData = {...data, eventDate: abc}
+            // console.log('final Data', finalData)
+            dispatch(addContact(finalData))
+            reset()
+            return null
+        } else {
+            for (const key in data) {
+                if (data[key].length === 0) {
+                    setError(key, {
+                        type: 'manual'
+                    })
+                }
+            }
         }
-    ])
-
-    const schema = Joi.object({
-        email: Joi.string().required(),
-        name: Joi.string().required(),
-        noOfAttendees: Joi.number().required(),
-        date: Joi.date().required().greater(validDate)
-    })
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        const finalData = {...formState}
-        const isError = formModalRef.current.validate(formState)
-        dispatch(addContact(finalData))
-        console.log("isError", isError)
-        if (isError) return
-        console.log(finalData, 'final Data')
-
     }
 
     return (
@@ -118,15 +70,81 @@ const CateringSubForm = () => {
             <p style={{marginTop: '-10px', color: 'rgb(234, 84, 85)'}}>*OMG Offers Complete Event Catering, Wine
                 Selection and Event Design.</p>
 
-            <MyForm
-                ref={formModalRef}
-                formState={formState}
-                formData={formData}
-                setFormState={setFormState}
-                schema={schema}
-                primaryBtnLabel='Save'
-                handleSubmit={handleSubmit}
-            />
+
+            <div>
+                <form className='mt-2 ' onSubmit={handleSubmit(onSubmit)}>
+                    <Row>
+                        <Col sm='6' className='mb-1'>
+                            <label className='form-label' htmlFor='name'>
+                                Name :
+                            </label>
+                            <input id='name' className='form-control' placeholder='John' {...register('name', {
+                                required: true
+                            })} />
+                            {errors && errors.name?.type === "required" &&
+                                <p className='text-danger'>Name is Required</p>}
+                        </Col>
+                        <Col sm='6' className='mb-1'>
+                            <label className='form-label' htmlFor='email'>
+                                E-mail :
+                            </label>
+
+                            <input id='email' className='form-control' type='email' placeholder='Email'
+                                   {...register("email", {
+                                       required: true
+                                   })} />
+                            {errors && errors.email?.type === "required" &&
+                                <p className='text-danger'>Email is required</p>}
+                        </Col>
+                        <Col sm='6' className='mb-1'>
+                            <label className='form-label' htmlFor='contactNo'>
+                                Contact No. :
+                            </label>
+
+                            <input id='contactNo' className='form-control' type='number' placeholder='1 234 567 8900'
+                                   {...register("contactNo", {
+                                       required: true
+                                   })} />
+                            {errors && errors.contactNo?.type === "required" &&
+                                <p className='text-danger'>Please enter a valid Contact No</p>}
+                        </Col>
+                        <Col sm='6' className='mb-1'>
+                            <label className='form-label' htmlFor='noOfAttendees'>
+                                No. of Attendees :
+                            </label>
+                            <input id='noOfAttendees' className='form-control' type='number' placeholder='12'
+                                   {...register("noOfAttendees", {
+                                       required: true
+                                   })} />
+                            {errors && errors.noOfAttendees?.type === "required" &&
+                                <p className='text-danger'>Please enter a valid Number</p>}
+                        </Col>
+                        <Col sm='6' className='mb-1'>
+                            <label className='form-label' htmlFor='eventDate'>
+                                Event Date :
+                            </label>
+                            <Datetime
+                                id='eventDate'
+                                type='date'
+                                // timeFormat={false}
+                                // locale="en-gb"
+                                isValidDate={disablePastDt}
+                                inputProps="11-12-2022"
+                                value={eventDate}
+                                closeOnSelect={true}
+                                onChange={(e) => setEventDate(e.toDate())}
+                            />
+                            {eventDate === null &&
+                                <p className='text-danger'>Date is required</p>}
+                        </Col>
+                        <Col className='mt-2 text-end' sm='12'>
+                            <Button type='submit' className='me-1' color='primary'>
+                                Save
+                            </Button>
+                        </Col>
+                    </Row>
+                </form>
+            </div>
         </>
     )
 }

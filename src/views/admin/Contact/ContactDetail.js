@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {getContact} from "../../../redux/contact/action"
 import {Card, CardBody, Col, Row} from 'reactstrap'
 import UILoader from "../../../@core/components/ui-loader"
+import moment from "moment"
 
 
 const ContactDetail = ({match}) => {
@@ -14,23 +15,17 @@ const ContactDetail = ({match}) => {
 
     const contactList = useSelector(state => state.contact.object.result)
     const isLoading = useSelector(state => state.contact.isLoading)
+
     console.log('contactList', contactList)
     useEffect(() => {
         dispatch(getContact(id))
     }, [])
 
     function getFormattedDate(eventDate) {
-        const date = new Date(eventDate)
-        const year = date.getFullYear()
-
-        let month = (1 + date.getMonth()).toString()
-        month = month.length > 1 ? month : `0 ${month}`
-
-        let day = date.getDate().toString()
-        day = day.length > 1 ? day : `0 ${day}`
-
-        return `${day} - ${month} -  ${year}`
+        const eventDateFormat = moment(eventDate).format('lll')
+        return eventDateFormat
     }
+
 
     return (contactList !== undefined &&
         <UILoader blocking={isLoading}>
