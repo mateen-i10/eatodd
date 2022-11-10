@@ -59,13 +59,9 @@ const Membership = ({}) => {
                 <div className="container-sm ">
                     <div className="row align-items-center justify-content-center my-2">
                         {packages && packages.length > 0 && packages.map(d => {
-                            return <div className="col-md-3 ">
-                                <div className="member-card card border" style={{
-                                    width: "100%",
-                                    height: "22rem"
-                                }}>
-                                    <div
-                                        className="card-body align-items-center justify-content-center">
+                            return <div className="col-md-3" key={d}>
+                                <div className="member-card card border" style={{width: "100%", height: "22rem"}}>
+                                    <div className="card-body align-items-center justify-content-center">
                                         <h2 className="fw-bolder text-center text-primary fs-1">{d.name}</h2>
                                         <h5 className="fs-4 text-center text-capitalize"> {d.description}</h5>
                                         <div className="mt-1 fw-bolder text-center"> <span
