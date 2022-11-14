@@ -5,9 +5,7 @@ import Headerwine from "../../../shared/wine-header/Header-wine"
 
 import Footer from "../../../shared/footer/Footer"
 
-//talha's changes
-
-import luxurayWine from '../../../assets/images/wineClubStylingImages/wine.jpg'
+import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
 
 const Homepage = () => {
 
@@ -105,13 +103,10 @@ const Homepage = () => {
                                             <CardText>
                                                 Some quick example text to build on the card title and make up the
                                                 bulk
-
                                             </CardText>
                                             <CardText>
                                                 Cookie topping caramels jujubes gingerbread. Lollipop apple pie
                                                 cupcake
-
-
                                             </CardText>
                                         </CardBody>
                                     </Card>
