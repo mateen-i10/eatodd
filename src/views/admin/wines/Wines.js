@@ -237,7 +237,7 @@ const Wines = (props) => {
 
             finalSchema = Joi.object({
                 name: Joi.string().required().label('Name'),
-                wholePrice: Joi.string().required().label("WholePrice"),
+                wholePrice: Joi.number().required().label("WholePrice"),
                 category: Joi.required().label('Category'),
                 restaurant: Joi.required().label("Restaurant"),
                 optionType: Joi.required().label("OptionType")
@@ -263,6 +263,8 @@ const Wines = (props) => {
 
         delete finalData.modifiedById
         delete finalData.modifiedDate
+        delete finalData.attachmentId
+        delete finalData.createdById
 
         // call api
         setModalLoading(true)

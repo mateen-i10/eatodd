@@ -149,7 +149,7 @@ const MembershipTypes = (props) => {
             label: 'Bill Type',
             placeholder: 'Select Bill Type',
             name: 'billType',
-            isRequired: false,
+            isRequired: true,
             fieldGroupClasses: 'col-6',
             options: billTypes,
             isAsyncSelect: false,
@@ -173,7 +173,8 @@ const MembershipTypes = (props) => {
 
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
-        amount: Joi.number().greater(200).required().label("Amount")
+        amount: Joi.number().greater(200).required().label("Amount"),
+        billType: Joi.number().required().label("Bill Type")
     })
 
     const toggle = () => {

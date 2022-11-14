@@ -130,6 +130,21 @@ const GenralProducts = (props) => {
         name: Joi.string().required().label("Name"),
         wholePrice: Joi.number().required().label("Whole Price"),
         quantity: Joi.number().required().label("Quantity"),
+        discount: Joi.number().required().error(() => {
+            return {
+                message: '"Discount" is required or Enter 0'
+            }
+        }),
+        taxAmount: Joi.number().required().error(() => {
+            return {
+                message: '"Tax Amount" is required or Enter 0'
+            }
+        }),
+        taxPercentage: Joi.number().required().error(() => {
+            return {
+                message: '"Tax Percentage" is required or Enter 0'
+            }
+        }),
         optionType: Joi.required().label("OptionType"),
         category: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
             return {
@@ -154,10 +169,10 @@ const GenralProducts = (props) => {
         name: '',
         description: '',
         wholePrice: '',
-        discount: '',
-        quantity: '',
-        taxAmount: '',
-        taxPercentage: '',
+        //discount: '',
+        //quantity: '',
+        //taxAmount: '',
+        //taxPercentage: '',
         generalProductIngredients: [],
         optionType: null,
         category: null
@@ -189,10 +204,10 @@ const GenralProducts = (props) => {
             {type: FieldTypes.Text, label: 'Name', placeholder: 'Enter Product Name', name: 'name', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name: 'description', isRequired: false, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Whole Price', placeholder: 'Enter Whole Price', name: 'wholePrice', isRequired: true, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name: 'discount', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name: 'quantity', isRequired: true, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: false, fieldGroupClasses: 'col-6'},
-            {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: false, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Amount', placeholder: 'Enter Tax Amount', name: 'taxAmount', isRequired: true, fieldGroupClasses: 'col-6'},
+            {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6'},
@@ -203,6 +218,21 @@ const GenralProducts = (props) => {
             name: Joi.string().required().label("Name"),
             wholePrice: Joi.number().required().label("Whole Price"),
             quantity: Joi.number().required().label("Quantity"),
+            discount: Joi.number().required().error(() => {
+                return {
+                    message: '"Discount" is required or Enter 0'
+                }
+            }),
+            taxAmount: Joi.number().required().error(() => {
+                return {
+                    message: '"Tax Amount" is required or Enter 0'
+                }
+            }),
+            taxPercentage: Joi.number().required().error(() => {
+                return {
+                    message: '"Tax Percentage" is required or Enter 0'
+                }
+            }),
             optionType: Joi.required().label("OptionType"),
             category: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
                 return {

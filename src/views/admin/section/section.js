@@ -180,14 +180,17 @@ const Sections = (props) => {
     const [isModalLoading,  setModalLoading] = useState(false)
     const [formData] = useState([
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Type', placeholder: 'Select Type', name:'sectionType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionTypes, isAsyncSelect: false},
-        {type:FieldTypes.Select, label: 'Items Type', placeholder: 'Select Items Type', name:'sectionItemType', isRequired:false, fieldGroupClasses: 'col-6', options: sectionItemTypes, isAsyncSelect: false},
+        {type:FieldTypes.Number, label: 'Limit', placeholder: 'Enter Limit', name:'limit', isRequired:true, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Select, label: 'Type', placeholder: 'Select Type', name:'sectionType', isRequired:true, fieldGroupClasses: 'col-6', options: sectionTypes, isAsyncSelect: false},
+        {type:FieldTypes.Select, label: 'Items Type', placeholder: 'Select Items Type', name:'sectionItemType', isRequired:true, fieldGroupClasses: 'col-6', options: sectionItemTypes, isAsyncSelect: false},
         {type:FieldTypes.TextArea, label: 'Description', placeholder: 'Enter Description', name:'description', fieldGroupClasses: 'col-12'}
     ])
 
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        limit: Joi.number().required().label("Limit"),
+        sectionType: Joi.number().required().label("Section Type"),
+        sectionItemType: Joi.number().required().label("Section Item Type")
     })
 
     // ** Function to handle filter

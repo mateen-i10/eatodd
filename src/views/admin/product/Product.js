@@ -249,6 +249,7 @@ const Product = (props) => {
             finalSchema = Joi.object({
                 name: Joi.string().required().label('Name'),
                 wholePrice: Joi.number().required().label("WholePrice"),
+                quantity: Joi.number().required().label("Quantity"),
                 category: Joi.required().label('Category'),
                 restaurant: Joi.required().label("Restaurant"),
                 optionType: Joi.required().label("OptionType")
