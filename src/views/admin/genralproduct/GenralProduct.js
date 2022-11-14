@@ -252,7 +252,7 @@ const GenralProducts = (props) => {
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
         if (!subcategoryId || subcategoryId === 0) {
-            console.log('yyyyyyyyyyyyyyyy')
+            console.log('y')
             return
         }
 
