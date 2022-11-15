@@ -62,9 +62,9 @@ const employeeReducer = (state = initialState, action) => {
                     ...action.payload.data.applicationUser,
                     applicationUserId : action.payload.data.applicationUser.id,
                     id,
-                    permission: action.payload.data.applicationUser.permission.split(',').map(p => {
+                    permission: action.payload.data.applicationUser.permission ? action.payload.data.applicationUser.permission.split(',').map(p => {
                         return { label: p, value: p}
-                    }),
+                    }) : null,
                     restaurants: action.payload.data.restaurants?.map(i => {
                             return {label: i.restaurant.name, value: i.restaurant.id}
                         }

@@ -208,7 +208,7 @@ const Product = (props) => {
         setModalTitle('Edit Product')
         setEdit(true)
         setFormData([...commonFields])
-        setFormFeilds(3)
+        //setFormFeilds(3)
         setShowOption(true)
     }
 

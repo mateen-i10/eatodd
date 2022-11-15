@@ -88,7 +88,7 @@ const Sections = (props) => {
     useEffect(() => {
         if (formInitialState && formInitialState.sectionItems) {
             const final = formInitialState.sectionItems && formInitialState.sectionItems.length > 0 && formInitialState.sectionItems.map(p => {
-                return {...p, productId: {label: p.product.name, value: p.product.id}}
+                return {...p, productId: {label: p.product?.name, value: p.product?.id}}
             })
             setSectionItem(final)
         }
@@ -144,6 +144,7 @@ const Sections = (props) => {
                         <Input
                             placeholder='Name'
                             type= 'text'
+                            required
                             value={i.name}
                             onChange={(e) => onValueChange(index, 'name', e)}
                         />
