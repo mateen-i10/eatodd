@@ -103,6 +103,12 @@ export default [
         navLink: '/CrmSms'
     },
     {
+        id: 'campaign',
+        title: 'Campaign',
+        icon: <MessageSquare size={20}/>,
+        navLink: '/campaign'
+    },
+    {
         id: 'Section',
         title: 'Modifier/Addon',
         icon: <Package size={20}/>,

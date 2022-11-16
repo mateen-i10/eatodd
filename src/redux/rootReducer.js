@@ -38,6 +38,7 @@ import subscriptionReducer from "./subscription/reducer"
 import customerCatering from "./Catering/CateringCustomers/reducer"
 import AdminDashReducer from "./adminDashboard/reducer"
 import contact from "./contact/reducer"
+import campaign from "./campaign/reducer"
 
 const rootReducer = {
     auth,
@@ -77,7 +78,8 @@ const rootReducer = {
     scrollSlice,
     customerCatering,
     AdminDashReducer,
-    contact
+    contact,
+    campaign
 }
 
 export default rootReducer

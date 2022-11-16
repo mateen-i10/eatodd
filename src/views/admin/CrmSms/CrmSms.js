@@ -18,7 +18,7 @@ import {
 import {deleteCrmSms, getCrmSms, loadCrmSms} from "../../../redux/crmSMS/actions"
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
-import ScheduleSms from "./ScheduleSms"
+/*import ScheduleSms from "./ScheduleSms"*/
 
 const CrmSms = (props) => {
     const customerList = useSelector(state => state.crmSms.list)
@@ -30,7 +30,7 @@ const CrmSms = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const [filteredData, setFilteredData] = useState([])
     const [isModal, setModal] = useState(false)
-    const [editData, setEditData] = useState(0)
+    //const [editData, setEditData] = useState(0)
 
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const CrmSms = (props) => {
     const editClick = (data) => {
         toggle()
         dispatch(getCrmSms(data.id, true))
-        setEditData(data)
+        /*setEditData(data)*/
         console.log('id of the user', data.id, data.full_name)
     }
     const deleteClick = (id, e) => {
@@ -245,7 +245,7 @@ const CrmSms = (props) => {
                 />
             </Card>
 
-            <ScheduleSms isShow={isModal} setShow={toggle} data={editData} />
+            {/*<ScheduleSms isShow={isModal} setShow={toggle} data={editData} />*/}
 
         </Fragment>
     )
