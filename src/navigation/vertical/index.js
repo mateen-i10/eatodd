@@ -93,6 +93,12 @@ export default [
                 title: 'Designer',
                 icon: <PenTool size={20}/>,
                 navLink: '/designer'
+            },
+            {
+                id: 'template',
+                title: 'Template',
+                icon: <PenTool size={20}/>,
+                navLink: '/templates'
             }
         ]
     },
