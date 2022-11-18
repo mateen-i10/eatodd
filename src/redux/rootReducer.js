@@ -39,6 +39,7 @@ import customerCatering from "./Catering/CateringCustomers/reducer"
 import AdminDashReducer from "./adminDashboard/reducer"
 import contact from "./contact/reducer"
 import campaign from "./campaign/reducer"
+import template from "./template/reducer"
 
 const rootReducer = {
     auth,
@@ -79,7 +80,8 @@ const rootReducer = {
     customerCatering,
     AdminDashReducer,
     contact,
-    campaign
+    campaign,
+    template
 }
 
 export default rootReducer
