@@ -58,6 +58,7 @@ const Designer = (props) => {
     const onDesignLoad = (data) => {
         console.log('onDesignLoad', data)
     }
+
     const onLoad = () => {
         console.log('onLoad')
         emailEditorRef.current.editor.addEventListener(

@@ -16,31 +16,32 @@ import {
     Row,
     Col
 } from 'reactstrap'
-import {deleteFP} from "../../../redux/facebookPosts/actions"
 import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
 import moment from 'moment'
-import {loadTemplates} from "../../../redux/template/action"
+import {deleteTemplate, loadTemplates} from "../../../redux/template/action"
 import FormModal from "../../../components/FormModal"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import CrmForm from "./components/CrmForm"
-
+import UILoader from "../../../@core/components/ui-loader"
 
 const Template = (props) => {
     const customerList = useSelector(state => state.template.list)
     const dispatch = useDispatch()
+    const isLoading = useSelector(state => state.template.isLoading)
+    const isSuccess = useSelector(state => state.template.isSuccess)
 
     // ** local States
     const [currentPage, setCurrentPage] = useState(0)
-    // const [searchValue, setSearchValue] = useState('')
-    // const [filteredData, setFilteredData] = useState([])
+    const [searchValue, setSearchValue] = useState('')
+    const [filteredData, setFilteredData] = useState([])
     const [isModal, setModal] = useState(false)
     // const [editData, setEditData] = useState(0)
     // ** schema for validations
 
     useEffect(() => {
-        dispatch(loadTemplates())
-    }, [])
+        dispatch(loadTemplates(1, 12, null))
+    }, [isSuccess])
 
     // ** Function to handle filter
     const toggle = () => {
@@ -50,7 +51,6 @@ const Template = (props) => {
         e.preventDefault()
         toggle()
     }
-
     const deleteClick = (id, e) => {
         e.preventDefault()
         // show sweet alert here
@@ -64,7 +64,7 @@ const Template = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteFP(id))
+                dispatch(deleteTemplate(id))
             }
         })
     }
@@ -73,49 +73,12 @@ const Template = (props) => {
         console.log('call', props)
         props.history.push(`/designer/${id}`)
     }
-    // const handleFilter = e => {
-    //     const value = e.target.value
-    //     let updatedData = []
-    //     setSearchValue(value)
-    //
-    //     const status = {
-    //         1: { title: 'Current', color: 'light-primary' },
-    //         2: { title: 'Professional', color: 'light-success' },
-    //         3: { title: 'Rejected', color: 'light-danger' },
-    //         4: { title: 'Resigned', color: 'light-warning' },
-    //         5: { title: 'Applied', color: 'light-info' }
-    //     }
-
-    //     if (value.length) {
-    //         updatedData = data.filter(item => {
-    //             const startsWith =
-    //                 item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 item.email.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 item.age.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
-    //                 status[item.status].title.toLowerCase().startsWith(value.toLowerCase())
-    //
-    //             const includes =
-    //                 item.full_name.toLowerCase().includes(value.toLowerCase()) ||
-    //                 item.post.toLowerCase().includes(value.toLowerCase()) ||
-    //                 item.email.toLowerCase().includes(value.toLowerCase()) ||
-    //                 item.age.toLowerCase().includes(value.toLowerCase()) ||
-    //                 item.salary.toLowerCase().includes(value.toLowerCase()) ||
-    //                 item.start_date.toLowerCase().includes(value.toLowerCase()) ||
-    //                 status[item.status].title.toLowerCase().includes(value.toLowerCase())
-    //
-    //             if (startsWith) {
-    //                 return startsWith
-    //             } else if (!startsWith && includes) {
-    //                 return includes
-    //             } else return null
-    //         })
-    //         setFilteredData(updatedData)
-    //         setSearchValue(value)
-    //     }
-    // }
+    //some issues here...
+    const handleFilter = e => {
+        const value = e.target.value
+        setSearchValue(value)
+        setFilteredData(value)
+    }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
@@ -125,13 +88,25 @@ const Template = (props) => {
     const columns = [
         {
             name: 'Image',
-            selector: (row) => row.avatar,
+            selector: (row) => row.images,
             sortable: true,
             minWidth: '150px'
         },
         {
             name: 'Name',
-            selector: (row) => row.full_name,
+            selector: (row) => row.name,
+            sortable: true,
+            minWidth: '150px'
+        },
+        {
+            name: 'Subject',
+            selector: (row) => row.subject,
+            sortable: true,
+            minWidth: '150px'
+        },
+        {
+            name: 'Body',
+            selector: (row) => row.body,
             sortable: true,
             minWidth: '150px'
         },
@@ -156,7 +131,7 @@ const Template = (props) => {
             nextLabel=''
             forcePage={currentPage}
             onPageChange={page => handlePagination(page)}
-            // pageCount={searchValue.length ? filteredData.length / 7 : customerList.length / 7 || 1}
+            pageCount={searchValue.length ? filteredData.length / 7 : customerList.length / 7 || 1}
             breakLabel='...'
             pageRangeDisplayed={2}
             marginPagesDisplayed={2}
@@ -173,8 +148,17 @@ const Template = (props) => {
         />
     )
 
+    const dataToRender = () => {
+        if (customerList.length > 0) {
+            return customerList
+        }  else {
+            return customerList.slice(0, 12)
+        }
+    }
+
     return (
         <Fragment>
+            <UILoader blocking={isLoading}>
             <Card>
                 <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                     <div>
@@ -191,8 +175,8 @@ const Template = (props) => {
                             placeholder='Search'
                             bsSize='sm'
                             id='search-input'
-                            // value={searchValue}
-                            // onChange={handleFilter}
+                            value={searchValue}
+                            onChange={handleFilter}
                         />
                     </Col>
                 </Row>
@@ -205,7 +189,7 @@ const Template = (props) => {
                     sortIcon={<ChevronDown size={10} />}
                     paginationDefaultPage={currentPage + 1}
                     paginationComponent={CustomPagination}
-                    data={customerList}
+                    data={dataToRender()}
                 />
             </Card>
 
@@ -213,7 +197,7 @@ const Template = (props) => {
                 isModal = {isModal}
                 setModal = {setModal}
             />
-
+            </UILoader>
         </Fragment>
     )
 }
