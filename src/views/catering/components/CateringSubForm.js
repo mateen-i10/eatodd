@@ -11,6 +11,8 @@ import moment from "moment"
 const CateringSubForm = () => {
     const dispatch = useDispatch()
 
+    const [isSubmited, setIsSubmitted] = useState(false)
+
     //** useForm
     const defaultValues = {
         name: '',
@@ -42,7 +44,11 @@ const CateringSubForm = () => {
             const finalData = {...data, eventDate: abc}
             // console.log('final Data', finalData)
             dispatch(addContact(finalData))
+            setIsSubmitted(true)
             reset()
+            setTimeout(() => {
+                setIsSubmitted(false)
+            }, [3000])
             return null
         } else {
             for (const key in data) {
@@ -137,10 +143,13 @@ const CateringSubForm = () => {
                             {eventDate === null &&
                                 <p className='text-danger'>Date is required</p>}
                         </Col>
-                        <Col className='mt-2 text-end' sm='12'>
+                        <Col className='mt-2 ' sm='12'>
                             <Button type='submit' className='me-1' color='primary'>
-                                Save
+                                Submit
                             </Button>
+                            {isSubmited === true ? <div style={{marginTop: '15px', color: 'red'}}>
+                                <span>Your response has been submitted, we will Contact you soon.</span>
+                            </div> : []}
                         </Col>
                     </Row>
                 </form>
