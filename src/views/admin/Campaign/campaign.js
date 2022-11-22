@@ -1,5 +1,5 @@
 // ** React Imports
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import UILoader from "../../../@core/components/ui-loader"
 import {useDispatch, useSelector} from "react-redux"
 import {
@@ -15,14 +15,16 @@ import {
 import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from "react-feather"
 import DataTable from 'react-data-table-component'
 import Swal from "sweetalert2"
-import {deleteCampaign, loadCampaigns} from "../../../redux/campaign/action"
+import {addCampaign, deleteCampaign, loadCampaigns} from "../../../redux/campaign/action"
 import ReactPaginate from 'react-paginate'
 import AsyncSelect from "react-select/async"
 import { useForm } from 'react-hook-form'
-import {joiResolver} from "@hookform/resolvers/joi"
+//import {joiResolver} from "@hookform/resolvers/joi"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
 import Select from "react-select"
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 const defaultValues = {
     name: '',
@@ -37,8 +39,9 @@ const Campaign = () => {
 
     const campaignList = useSelector(state => state.campaign.list)
     const miscData = useSelector(state => state.campaign.miscData)
-    //const formInitialState = useSelector(state => state.campaign.object)
+    const formInitialState = useSelector(state => state.campaign.object)
     //const isRequestCompleted = useSelector(state => state.campaign.isRequestCompleted)
+    const isEdit = useSelector(state => state.campaign.isEdit)
     const isLoading = useSelector(state => state.campaign.isLoading)
 
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -51,7 +54,6 @@ const Campaign = () => {
     const [schedule, setSchedule] = useState([scheduleObject])
 
     const [date, setDate] = useState('')
-    console.log('ww', date)
 
     const [name, setName] = useState('')
     const [type, setType] = useState(0)
@@ -88,11 +90,11 @@ const Campaign = () => {
         setType(e)
     }
 
-    /*useEffect(() => {
+    useEffect(() => {
         if (formInitialState && formInitialState.schedules) {
             setSchedule([...formInitialState.schedules])
         }
-    }, [isEdit])*/
+    }, [isEdit])
 
     const removeSchedule = (index) => {
         const newArray = [...schedule]
@@ -148,9 +150,15 @@ const Campaign = () => {
         setSchedule(newArray)
     }
 
-    const campaignSchema = Joi.object({
-        /*name: Joi.string().required().label('Name'),
-        type: Joi.number().required().label('Type')*/
+    /*const campaignSchema = Joi.object({
+        name: Joi.string().required().label('Name'),
+        type: Joi.number().required().label('Type')
+        //MoveDate: yup.date().required("Move Date is required!")
+    })*/
+
+    const campaignSchema = yup.object().shape({
+        //name: yup.string().required().label('Name')
+        //type: yup.number().required().label('Type')
         //MoveDate: yup.date().required("Move Date is required!")
     })
 
@@ -159,7 +167,7 @@ const Campaign = () => {
         formState: { errors }
     } = useForm({
         defaultValues,
-        resolver: joiResolver(campaignSchema)
+        resolver: yupResolver(campaignSchema)
     })
 
     const deleteClick = (id, e) => {
@@ -185,11 +193,10 @@ const Campaign = () => {
         props.history.push(`/campaign/${id}`)
     }
 
-    const onSubmit = (event) => {
-        event.preventDefault()
-        console.log('event', event)
-
-
+    const onSubmit = (e) => {
+        e.preventDefault()
+        console.log('event', e)
+        dispatch(addCampaign())
     }
 
     const handleFilter = e => {
