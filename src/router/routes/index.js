@@ -525,7 +525,7 @@ const Routes = [
         layout: 'VerticalLayout'
     },*/
     {
-        path: '/designer',
+        path: '/designer/:id',
         component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
         layout: 'VerticalLayout',
         meta: {

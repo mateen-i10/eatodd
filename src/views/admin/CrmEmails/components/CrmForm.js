@@ -13,7 +13,8 @@ const CrmForm = (props) => {
     const [body, setBody] = useState("")
 
     // bool
-    const [isHtml, setIsHtml] = useState(true)
+    const [isHtml, setIsHtml] = useState(false)
+    const [isJson, setIsJson] = useState(false)
 
     // Schema
     const schema = Joi.object({
@@ -51,7 +52,8 @@ const CrmForm = (props) => {
             name,
             isHtml,
             subject,
-            body
+            body,
+            isJson
         }
 
         const isError = Joi.validate(data, schema, {abortEarly: false})
@@ -104,6 +106,14 @@ const CrmForm = (props) => {
                                         <Label for="html">IsHtml</Label>
                                         <div>
                                             <Input type="switch" name="html" value={isHtml} onChange={handleFeildsShow} />
+                                        </div>
+                                    </Col>
+                                    <Col lg={6} style={{marginTop:'10px', marginBottom:'10px'}}>
+                                        <Label for="json">IsJson</Label>
+                                        <div>
+                                            <Input type="switch" name="json" value={isJson} onChange={() => {
+                                                isJson === false ? setIsJson(true) : setIsJson(false)
+                                            }} />
                                         </div>
                                     </Col>
                                     {isHtml === true ? <Col lg={6} style={{marginTop:'10px', marginBottom:'10px'}}>
