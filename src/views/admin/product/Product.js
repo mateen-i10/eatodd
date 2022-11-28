@@ -35,6 +35,8 @@ import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import AsyncSelect from "react-select/async"
 
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const Product = (props) => {
 
@@ -58,13 +60,31 @@ const Product = (props) => {
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
 
+    const generalProducts = (input) => {
+        return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
+            .then(response => {
+                console.log(response, "gp response")
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
     const categories = async (input) => {
         return loadOptions('category', input, 1, 12)
     }
 
-    const generalProduct = async (input) => {
-        return loadOptions('GeneralProduct', input, 1, 12)
-    }
+    // const generalProduct = async (input) => {
+    //     return loadOptions('GeneralProduct', input, 1, 12)
+    // }
 
     const Restaurant = async (input) => {
         return loadOptions('Restaurant', input, 1, 12)
@@ -110,7 +130,7 @@ const Product = (props) => {
     const [formState, setFormState] = useState({})
     const [isModal, setModal] = useState(false)
     const [isModalLoading,  setModalLoading] = useState(false)
-    const [formData, setFormData] = useState([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false}])
+    const [formData, setFormData] = useState([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProducts, isAsyncSelect: true, isMulti:false}])
     const [formFeilds, setFormFeilds] = useState(0)
     const [showOption, setShowOption] = useState(true)
 
@@ -130,7 +150,7 @@ const Product = (props) => {
 
     const AddFromExistingData = () => {
         setFormData([
-            {type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProduct, isAsyncSelect: true, isMulti:false},
+            {type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProducts, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.Select, label: 'Select Restaurant', placeholder: 'Select Product', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
         ])
         setFormFeilds(0)
@@ -176,6 +196,7 @@ const Product = (props) => {
         setOptionType([showOptionObject])
         if (isModalLoading) setModalLoading(false)
     }
+
 
     // custom hooks
     useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
@@ -281,9 +302,8 @@ const Product = (props) => {
         console.log(finalSchema, "finalSchema")
 
         const isError = formModalRef.current.validateWithSchema(formState, finalSchema)
-        console.log(isError, 'errors')
+        console.log(isError, "errors")
          if (isError) return
-
 
         // call api
         setModalLoading(true)
