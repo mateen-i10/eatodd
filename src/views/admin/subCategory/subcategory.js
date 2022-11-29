@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Search, Trash, XSquare} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -32,10 +32,13 @@ import {
     deleteSubCategory,
     loadSubCategorys,
     getSubCategory,
-    updateSubCategory, addSubCategory
+    updateSubCategory, addSubCategory, loadSubCatsbyCatId
 } from "../../../redux/subcategory/actions"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
+
+//async select
+import AsyncSelect from "react-select/async"
 
 const SubCategory = (props) => {
 
@@ -54,6 +57,9 @@ const SubCategory = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
+
+    // for search by category
+    const [isCat, setIsCat] = useState(false)
 
     const categories = async (input) => {
         return httpService._get(`${baseURL}category?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
@@ -187,6 +193,18 @@ const SubCategory = (props) => {
         props.history.push(`/SubcategoryDetail/${id}`)
     }
 
+    const LoadByCatId = (e) => {
+        console.log(e.label, "label")
+        const catId = e.value
+        dispatch(loadSubCatsbyCatId(catId))
+        setIsCat(true)
+    }
+
+    const LoadAll = () => {
+        dispatch(loadSubCategorys(currentPage, pageSize, searchValue))
+        setIsCat(false)
+    }
+
     const columns = [
         {
             name: 'Name',
@@ -275,18 +293,31 @@ const SubCategory = (props) => {
                         </div>
                         <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Sub Category</Button.Ripple>
                     </CardHeader>
-                    <Row className='justify-content-end mx-0'>
-                        <Col className='mt-1' md='12' sm='12'>
+                    <Row className='justify-content-start mx-0'>
+                        <Col className='mt-1' md='6' sm='12'>
+                            <label>Search by SubCategory Name</label>
                             <Input
                                 className='dataTable-filter mb-50'
                                 type='text'
                                 placeholder='Search'
-                                bsSize='sm'
+                                bsSize='md'
                                 id='search-input'
                                 value={searchValue}
                                 onKeyUp={handleFilter}
                                 onChange={handleFilter}
                             />
+                        </Col>
+                        <Col className='mt-1'  md={`${isCat ? '5' : '6'}`} sm='12'>
+                                <label>Search by Category</label>
+                                <AsyncSelect
+                                    loadOptions={categories}
+                                    defaultOptions
+                                    isLoading={true}
+                                    onChange={(e) => LoadByCatId(e)}
+                                />
+                            </Col>
+                        <Col md='1' sm='12' style={{marginTop:'32px'}}>
+                            {isCat ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='danger' onClick={() => LoadAll()}><XSquare size={18}/></Button> : []}
                         </Col>
                     </Row>
                     <DataTable

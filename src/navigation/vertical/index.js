@@ -93,6 +93,12 @@ export default [
                 title: 'Designer',
                 icon: <PenTool size={20}/>,
                 navLink: '/designer'
+            },
+            {
+                id: 'template',
+                title: 'Template',
+                icon: <PenTool size={20}/>,
+                navLink: '/templates'
             }
         ]
     },
@@ -101,6 +107,12 @@ export default [
         title: 'CRM (SMS)',
         icon: <MessageSquare size={20}/>,
         navLink: '/CrmSms'
+    },
+    {
+        id: 'campaign',
+        title: 'Campaign',
+        icon: <MessageSquare size={20}/>,
+        navLink: '/campaign'
     },
     {
         id: 'Section',

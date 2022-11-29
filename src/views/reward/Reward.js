@@ -26,8 +26,8 @@ const Reward = () => {
                         </button>
                     </div>
                     <div className="col-md-6">
-                        <img style={{width: '500px'}} className="new mt-5"
-                             src={require("../../assets/images/images/cat-1.png").default}/>
+                        <img style={{width: '570px', height: '360px'}} className="new mt-5"
+                             src={require("../../assets/images/updated/position 3.jpeg").default}/>
                     </div>
                 </div>
             </div>

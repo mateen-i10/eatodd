@@ -86,6 +86,7 @@ export const updateCategory = (data) => {
     delete data.cateringId
     delete data.modifiedById
     delete data.modifiedDate
+    delete data.attachmentId
     return async dispatch => {
         dispatch(apiCall({
             url,

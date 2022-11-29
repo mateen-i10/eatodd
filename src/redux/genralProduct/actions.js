@@ -87,6 +87,7 @@ export const updateGenralProduct = (data) => {
     delete data.AttachmentId
     delete data.modifiedById
     delete data.modifiedDate
+    delete data.createdById
     delete data.category
 
     return async dispatch => {

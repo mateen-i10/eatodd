@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -28,6 +28,10 @@ import '@styles/react/libs/swiper/swiper.scss'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
+
+//importing images
+import img1 from '../../../../assets/images/updated/gallery 1.jpg'
+import img2 from '../../../../assets/images/updated/_DSC1188.jpeg'
 
 const Order = () => {
     //get redux state
@@ -224,13 +228,15 @@ const Order = () => {
                     <div className="promo col-11 col-md-5 container-fluid">
                         <div className="row">
                             <div className="text-container col-md-6 col-6">
-                                <h1 className="banner-title  mt-1">CATER YOUR NEXT PARTY</h1>
+                                <h1 className="banner-title mt-1">CATER YOUR NEXT PARTY</h1>
                                 <div className="banner-subtitle">
                                     <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so
                                         your
                                         guests can enjoy taste and flavor that happens to be healthy!.</p>
                                 </div>
+                                <Link to="/catering">
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                </Link>
                             </div>
                             <img
                                 src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
@@ -246,12 +252,12 @@ const Order = () => {
                                         benefits
                                         include vendor pricing on all offered wines!</p>
                                 </div>
-                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING
-                                </div>
+                                <Link to="/catering">
+                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                </Link>
                             </div>
-                            <video autoPlay="autoplay" muted="muted" loop="loop"
-                                   src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/misc--pages/healthcareheroes/HealthcareHeroes_TOUT_540x586.mp4"
-                                   className="img-container col-md-6 col-6"></video>
+                            <img src={img2} style={{height: '370px'}} className="img-container col-md-6 col-6"/>
+
                         </div>
                     </div>
                 </div>

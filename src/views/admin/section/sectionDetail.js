@@ -86,7 +86,7 @@ const SectionsDetail = ({match}) => {
                                                 {section && section.sectionItems && section.sectionItems.map(i => {
                                                     console.log('find application user', i.employee)
                                                     return <tr>
-                                                        <td>{i.product.name}</td>
+                                                        <td>{i.product?.name}</td>
                                                         <td>{i.name}</td>
                                                         <td>{i.price}</td>
                                                     </tr>

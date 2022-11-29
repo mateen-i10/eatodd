@@ -1,0 +1,522 @@
+// ** React Imports
+import React, {Fragment, useEffect, useState} from 'react'
+import UILoader from "../../../@core/components/ui-loader"
+import {useDispatch, useSelector} from "react-redux"
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardTitle, Col, DropdownItem,
+    DropdownMenu,
+    DropdownToggle, Form,
+    Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
+    UncontrolledDropdown
+} from "reactstrap"
+import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from "react-feather"
+import DataTable from 'react-data-table-component'
+import Swal from "sweetalert2"
+import {addCampaign, deleteCampaign, getCampaign, loadCampaigns, updateCampaign} from "../../../redux/campaign/action"
+import ReactPaginate from 'react-paginate'
+import AsyncSelect from "react-select/async"
+import Select from "react-select"
+import {toast} from "react-toastify"
+import {setDetailLoading} from "../../../redux/campaign/reducer"
+import moment from "moment"
+import {loadOptions} from "../../../utility/Utils"
+import Joi from "joi-browser"
+import Datetime from "react-datetime"
+
+const Campaign = (props) => {
+
+    const campaignList = useSelector(state => state.campaign.list)
+    const miscData = useSelector(state => state.campaign.miscData)
+    const formInitialState = useSelector(state => state.campaign.object)
+    //const isRequestCompleted = useSelector(state => state.campaign.isRequestCompleted)
+    const isSuccess = useSelector(state => state.campaign.isSuccess)
+    const isEdit = useSelector(state => state.campaign.isEdit)
+    const isLoading = useSelector(state => state.campaign.isLoading)
+
+    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [pageSize] = useState(10)
+    const [searchValue, setSearchValue] = useState('')
+    const dispatch = useDispatch()
+    const [formModal, setFormModal] = useState(false)
+    const [edit, setEdit] = useState(false)
+
+    const scheduleObject = {scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}
+    const [schedule, setSchedule] = useState([scheduleObject])
+
+    const [name, setName] = useState('')
+    const [type, setType] = useState(0)
+    const [templateId, setTemplateId] = useState(0)
+
+    //setting errors
+    const [errors, setErrors] = useState({})
+
+    const announceType = [
+        {label: 'SMS', value: 1},
+        {label: 'Email', value: 2}
+    ]
+
+    const templates = async (input) => {
+        return loadOptions('template', input, 1, 12)
+    }
+
+    const scheduleDays = [
+        {label: 'Today', value: 1},
+        {label: 'Tomorrow', value: 2},
+        {label: 'Next Week', value: 3},
+        {label: 'Pick A Date', value: 4}
+    ]
+
+    const repeat = [
+        {label: 'Daily', value: 1},
+        {label: 'Week Days', value: 2},
+        {label: 'Weekly', value: 3},
+        {label: 'Monthly', value: 4}
+    ]
+
+    const handleType = (e) => {
+        console.log('clickType', e)
+        setType(e)
+    }
+
+    useEffect(() => {
+        if (formInitialState && formInitialState.schedule) {
+            setSchedule([...formInitialState.schedule])
+        }
+    }, [isEdit])
+
+    useEffect(() => {
+        dispatch(loadCampaigns())
+    }, [isSuccess])
+
+    const removeSchedule = (index) => {
+        const newArray = [...schedule]
+        newArray.splice(index, 1)
+        setSchedule(newArray)
+    }
+
+    const addSchedule = () => {
+        const newArray = [...schedule, scheduleObject]
+        setSchedule(newArray)
+    }
+
+    const onValueScheduleDay = (index, e) => {
+        console.log('eee', e)
+        const newArray = schedule.map((s, i) => {
+            if (i === index) {
+                //const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
+                const date = moment(new Date(e.value)).format()
+                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+            }
+            return s
+        })
+        console.log('newArrayDay', newArray)
+        setSchedule(newArray)
+    }
+
+    const onDateChange = (index, event) => {
+        console.log('date', event)
+        const newArray = schedule.map((s, i) => {
+            if (i === index) {
+                s = {...s, scheduleDate: moment(event.toDate()).format() }
+            }
+            return s
+            console.log('s', s)
+        })
+        console.log('newArray', newArray)
+        setSchedule(newArray)
+    }
+
+    const onValueRepeat = (index, e) => {
+        const newArray = schedule.map((s, i) => {
+            if (i === index) {
+                s = {...s, repeat : e.value}
+            }
+            return s
+        })
+        console.log('newArrayRe', newArray)
+        setSchedule(newArray)
+    }
+
+    const campaignSchema = Joi.object({
+        name: Joi.string().required().label('Name'),
+        type: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Type" is required'
+            }
+        }),
+        templateId: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Template" is required'
+            }
+        })
+        //MoveDate: yup.date().required("Move Date is required!")
+    })
+
+    const deleteClick = (id, e) => {
+        e.preventDefault()
+        // show sweet alert here
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7367f0',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteCampaign(id))
+            }
+        })
+    }
+
+    const detailOptClick = (id, e) => {
+        e.preventDefault()
+        props.history.push(`/campaign/${id}`)
+    }
+
+    const handleClose = () => {
+        setName('')
+        setType(0)
+        setTemplateId(0)
+        setSchedule([scheduleObject.scheduleDay = 0])
+    }
+
+    const setData = () => {
+        try {
+            setName(name)
+            setType(type)
+            setTemplateId(templateId)
+            setSchedule(schedule)
+            //setEdit(true)
+        } catch (e) {
+            toast.error(e.message)
+        }
+
+    }
+
+    const editClick = (id) => {
+        console.log('idEdit', id)
+        dispatch(getCampaign(id, true))
+        console.log('idEdit123', dispatch(getCampaign(id, true)))
+        setFormModal(!formModal)
+        setData()
+        setEdit(true)
+        //setModalLoading(true)
+    }
+
+    const handleSubmit = () => {
+        try {
+            const data = {
+                name,
+                type,
+                templateId
+            }
+
+            const finalData = {
+                name,
+                type: type.value,
+                templateId: templateId.value,
+                schedules: schedule
+            }
+
+            const isError = Joi.validate(data, campaignSchema, {abortEarly: false})
+            console.log(isError, "errors")
+            const {error} = isError
+            if (!error) {
+                console.log('edit data', finalData)
+                dispatch(setDetailLoading(true))
+                edit ? dispatch(updateCampaign(finalData)) : dispatch(addCampaign(finalData))
+                handleClose()
+                setFormModal(!formModal)
+            } else {
+                const errorData = {}
+                for (const item of error?.details) {
+                    console.log("ITEM MSG", item)
+                    const name = item.path[0]
+                    const message = item.message
+                    errorData[name] = message
+                }
+                setErrors(errorData)
+            }
+
+        } catch (e) {
+            toast.error(e.message)
+        }
+
+    }
+
+    const handleFilter = e => {
+        console.log('e.keyCode', e.keyCode)
+        const value = e.target.value
+        if (e.keyCode === 13) {
+            dispatch(loadCampaigns(currentPage, pageSize, value))
+        }
+        setSearchValue(value)
+    }
+
+    // ** Function to handle Pagination
+    const handlePagination = page => {
+        dispatch(loadCampaigns(page.selected + 1, pageSize, searchValue))
+        setCurrentPage(page.selected + 1)
+    }
+
+    const columns = [
+        {
+            name: 'Name',
+            selector: (row) => row.name,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Type',
+            selector: (row) => `${row.type === 1 ? "SMS" : "Email"}`,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Template',
+            selector: (row) => `${row.template?.name}`,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Actions',
+            allowOverflow: true,
+            cell: row => {
+                return (
+                    <div className='d-flex'>
+                        <UncontrolledDropdown>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
+                                <MoreVertical size={15} />
+                            </DropdownToggle>
+                            <DropdownMenu end>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
+                                    <FileText size={15} />
+                                    <span className='align-middle ms-50'>Details</span>
+                                </DropdownItem>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                    <Trash size={15} />
+                                    <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
+                    </div>
+                )
+            }
+        }
+    ]
+
+    // ** Custom Pagination
+    const CustomPagination = () => {
+        const count = miscData?.totalPages ?? 0
+
+        return <ReactPaginate
+            previousLabel={''}
+            nextLabel={''}
+            breakLabel='...'
+            pageCount={count || 1}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={2}
+            activeClassName='active'
+            forcePage={currentPage !== 0 ? currentPage - 1 : 0}
+            onPageChange={page => handlePagination(page)}
+            pageClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            nextClassName={'page-item next'}
+            previousClassName={'page-item prev'}
+            previousLinkClassName={'page-link'}
+            pageLinkClassName={'page-link'}
+            breakClassName='page-item'
+            breakLinkClassName='page-link'
+            containerClassName={
+                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+            }
+        />
+    }
+
+    const dataToRender = () => {
+        if (campaignList.length > 0) {
+            return campaignList
+        }  else {
+            return campaignList.slice(0, pageSize)
+        }
+    }
+
+    return (
+        <>
+            <Fragment>
+                <UILoader blocking={isLoading}>
+                    <Card>
+                        <CardHeader className='row border-bottom'>
+                            <CardTitle tag='h4' className='col-4'>Campaigns</CardTitle>
+                            <div className='col-8 mt-md-0 mt-1'>
+                                <div className='row'>
+                                    <div className='col-8 ps-5'>
+                                        <Input
+                                            className='search-field'
+                                            type='text'
+                                            bsSize='sm'
+                                            id='search-input'
+                                            value={searchValue}
+                                            onKeyUp={handleFilter}
+                                            onChange={handleFilter}
+                                            placeholder= 'Search by name'
+                                        />
+                                    </div>
+                                    <div className='col-4'>
+                                        <Button className='float-end' color='primary' onClick={() => setFormModal(!formModal)}>
+                                            <Plus size={15} />
+                                            <span className='align-middle ms-50'>Add Campaign</span>
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardHeader>
+                        <DataTable
+                            noHeader
+                            pagination
+                            paginationServer
+                            className='react-dataTable'
+                            columns={columns}
+                            sortIcon={<ChevronDown size={10} />}
+                            paginationComponent={CustomPagination}
+                            data={dataToRender()}
+                        />
+                    </Card>
+                </UILoader>
+            </Fragment>
+
+
+            <div className='demo-inline-spacing'>
+                <div>
+                    <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} fade={true} backdrop="static" className='modal-lg'>
+                        <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
+
+                        <ModalBody>
+                                <Row>
+                                    <Col md={6}>
+                                        <div className='mb-2'>
+                                            <Label className='form-label' for='name'>Name:</Label>
+                                            <Input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} id='name' placeholder='Enter Name' />
+                                            {!name ? errors.name && (
+                                                <div className="text-danger">
+                                                    {errors.name}
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </Col>
+                                    <Col md={6}>
+                                        <div className='mb-2'>
+                                            <label>Type <span className='text-danger'>*</span></label>
+                                            <Select
+                                                options={announceType}
+                                                value={type}
+                                                onChange={handleType}
+                                            />
+                                            {!type ? errors.type && (
+                                                <div className="text-danger">
+                                                    {errors.type}
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </Col>
+                                    <Col md={6}>
+                                        <div className='mb-2'>
+                                            <label>Template <span className='text-danger'>*</span></label>
+                                            <AsyncSelect
+                                                defaultOptions
+                                                value={templateId}
+                                                onChange={e => setTemplateId(e)}
+                                                loadOptions={templates}
+                                                closeMenuOnSelect={true}
+                                                isMulti = {false}
+                                            />
+                                            {!templateId ? errors.templateId && (
+                                                <div className="text-danger">
+                                                    {errors.templateId}
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <div className='ms-1'>
+                                        <h5>Schedule List</h5>
+                                        {schedule.map((i, index) => {
+                                            return <div>
+                                                <div className='row mt-1'>
+                                                    <div className='col-3'>
+                                                        <Select
+                                                            onChange={(e) => {
+                                                                onValueScheduleDay(index, e)
+                                                            }}
+                                                            options={scheduleDays}
+                                                            closeMenuOnSelect={true}
+                                                            isMulti = {false}
+                                                        />
+                                                    </div>
+                                                    {i.isDate && <div className='col-4'>
+                                                        <Datetime
+                                                            placeholder='Schedule Date'
+                                                            value={i.scheduleDate}
+                                                            dateFormat={true}
+                                                            closeOnSelect={true}
+                                                            onChange={(e) => {
+                                                                onDateChange(index, e)
+                                                            }}
+                                                        />
+                                                    </div>}
+                                                    <div className='col-3'>
+                                                        <Select
+                                                            onChange={(e) => onValueRepeat(index, e)}
+                                                            options={repeat}
+                                                            closeMenuOnSelect={true}
+                                                            isMulti = {false}
+                                                        />
+                                                    </div>
+                                                    {schedule.length > 1 && <div className='col-1'>
+                                                        <Button.Ripple className='btn-icon' color='danger' onClick={() => removeSchedule(index)}>
+                                                            <Delete size={12}/>
+                                                        </Button.Ripple>
+                                                    </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        })}
+                                        <div className='col-2'>
+                                            <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addSchedule}>
+                                                <Plus size={12} />
+                                            </Button.Ripple>
+                                        </div>
+                                    </div>
+                                </Row>
+
+                        </ModalBody>
+                        <ModalFooter>
+                                <Button color='danger' onClick={() => {
+                                    setFormModal(!formModal)
+                                    handleClose()
+                                }}>
+                                    Close
+                                </Button>
+                                <Button color='primary' onClick={handleSubmit}>
+                                    Submit
+                                </Button>
+                            </ModalFooter>
+
+                    </Modal>
+                </div>
+            </div>
+
+        </>
+    )
+}
+
+export default Campaign

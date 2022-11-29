@@ -405,6 +405,24 @@ const Routes = [
         }
     },
     {
+        path: '/campaign/:id',
+        component: lazy(() => import('../../views/admin/Campaign/campaignDetail')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/campaign',
+        component: lazy(() => import('../../views/admin/Campaign/campaign')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
         path: '/SechduledSms',
         component: lazy(() => import('../../views/admin/CrmSms/ScheduleSms')),
         layout: 'VerticalLayout',
@@ -507,7 +525,7 @@ const Routes = [
         layout: 'VerticalLayout'
     },*/
     {
-        path: '/designer',
+        path: '/designer/:id',
         component: lazy(() => import('../../views/admin/CrmEmails/Designer')),
         layout: 'VerticalLayout',
         meta: {
@@ -706,6 +724,12 @@ const Routes = [
     {
         path: '/contact',
         component: lazy(() => import('../../views/admin/Contact/Contact')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
+        path: '/templates',
+        component: lazy(() => import('../../views/admin/CrmEmails/Template')),
         layout: 'VerticalLayout',
         exact: true
     }

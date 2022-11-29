@@ -8,6 +8,7 @@ import {
     setDetailLoading,
     setRequestCompleted, setIsSubCategoryError, setIsSubCategorySuccess, setIsEdit
 } from "./reducer"
+
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
 
@@ -21,6 +22,18 @@ export const loadSubCategorys = (pageIndex = 1, pageSize =  12, searchQuery = nu
         dispatch(apiCall({
             url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
             data: {},
+            method: 'get',
+            onSuccess: setSubCategorys.type
+        }))
+    }
+}
+
+export const loadSubCatsbyCatId = (CategoryId) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url:`${url}/GetSubCategories?CategoryId=${CategoryId}`,
+            data:{},
             method: 'get',
             onSuccess: setSubCategorys.type
         }))

@@ -74,7 +74,7 @@ const CateringMenus = (props) => {
             label: 'Priority',
             placeholder: 'Enter Priority',
             name: 'priority',
-            isRequired: false,
+            isRequired: true,
             fieldGroupClasses: 'col-6'
         },
         {
@@ -94,7 +94,8 @@ const CateringMenus = (props) => {
     ])
 
     const schema = Joi.object({
-        name: Joi.string().required().label("Name")
+        name: Joi.string().required().label("Name"),
+        priority: Joi.number().required().label("Priority")
     })
 
     // ** Function to handle filter
