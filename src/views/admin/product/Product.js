@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState, useEffect} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash, Search} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash, Search, AlertOctagon} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -12,7 +12,7 @@ import {
     Button,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledTooltip
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
@@ -418,7 +418,10 @@ const Product = (props) => {
                             <CardTitle tag='h4'>Product</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
+                        <UncontrolledTooltip placement='left' target='positionLeft'>
+                            To Load General products by Category and Subcategory Please apply the filters below before you open the form.
+                        </UncontrolledTooltip>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
