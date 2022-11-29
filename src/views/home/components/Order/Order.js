@@ -30,7 +30,6 @@ SwiperCore.use([Navigation, Pagination, Autoplay])
 
 
 //importing images
-import img1 from '../../../../assets/images/updated/gallery 1.jpg'
 import img2 from '../../../../assets/images/updated/_DSC1188.jpeg'
 
 const Order = () => {
@@ -256,7 +255,7 @@ const Order = () => {
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                                 </Link>
                             </div>
-                            <img src={img2} style={{height: '370px'}} className="img-container col-md-6 col-6"/>
+                            <img src={img2} style={{height: '370px'}} className="img-container col-md-6 col-6" alt="catering order"/>
 
                         </div>
                     </div>
