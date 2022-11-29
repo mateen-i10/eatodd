@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -11,6 +11,23 @@ import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
 import {isUserLoggedIn} from "../../../../auth/utils"
+import { Card, CardBody} from "reactstrap"
+import Avatar from "../../../../@core/components/avatar"
+import Rating from "react-rating"
+import {Star} from "react-feather"
+import {useRTL} from "../../../../utility/hooks/useRTL"
+import {ThemeColors} from "../../../../utility/context/ThemeColors"
+import {Swiper, SwiperSlide} from "swiper/react/swiper-react.js"
+import SwiperCore, {
+    Autoplay,
+    Navigation,
+    Pagination
+} from 'swiper'
+
+import '@styles/react/libs/swiper/swiper.scss'
+
+SwiperCore.use([Navigation, Pagination, Autoplay])
+
 
 const Order = () => {
     //get redux state
@@ -19,6 +36,12 @@ const Order = () => {
     const [mainCategory, setMainCategory] = useState([])
     const history = useHistory()
     const orderRef = useRef(null)
+
+    // rating
+    const [isRtl] = useRTL()
+    const themeColors = useContext(ThemeColors)
+    const dir = isRtl ? 'rtl' : 'ltr'
+    const filledColor = themeColors.colors.warning.main
 
 
     useEffect(() => {
@@ -57,7 +80,68 @@ const Order = () => {
         }, [])
     }
 
+    //testing data for customer review
+    const reviews = [
+        {
+            id: 1,
+            img: require("../../../../assets/images/avatars/1-small.png").default,
+            name: "John",
+            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
+                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        },
+        {
+            id: 2,
+            img: require("../../../../assets/images/avatars/2-small.png").default,
+            name: "Curtis Stone",
+            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
+                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        },
+        {
+            id: 3,
+            img: require("../../../../assets/images/avatars/3-small.png").default,
+            name: "Herry",
+            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
+                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        },
+        {
+            id: 4,
+            img: require("../../../../assets/images/avatars/4-small.png").default,
+            name: "William",
+            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
+                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        }
+    ]
 
+    const params = {
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        loop: true,
+        pagination: {
+            clickable: true
+        },
+        navigation: true,
+        breakpoints: {
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 10
+            }
+        }
+    }
     // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
@@ -150,7 +234,7 @@ const Order = () => {
                             </div>
                             <img
                                 src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
-                                className="img-container col-md-6 col-6"/>
+                                className="img-container col-md-6 col-6" alt="catering order"/>
                         </div>
                     </div>
                     <div className="promo col-11 col-md-5 container-fluid ">
@@ -220,6 +304,52 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="">
+                <div className="container-sm">
+                    <div className="row mb-2">
+                        <div className="col-12 d-flex flex-column align-items-center justify-content-center mt-4">
+                            <div className="text-uppercase text-primary fs-4 fw-bold">testimonial </div>
+                            <div className="text-uppercase text-black fs-1 fw-bolder">We Care About Our Customer Experience Too.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mt-2 ">
+                        <div className="col-12 mt-1 mb-2">
+                            <Swiper dir={dir} {...params}>
+                                {reviews.map((review) => (
+
+                                    <SwiperSlide key={review.id}>
+                                        <Card className='card-profile mt-5' >
+                                            {/*<CardImg className='img-fluid' src={coverImg} top />*/}
+                                            <CardBody>
+                                                <div className='profile-image-wrapper'>
+                                                    <div className='profile-image'>
+                                                        <Avatar img={review.img} alt="avatar"/>
+                                                    </div>
+                                                </div>
+                                                <h3>{review.name}</h3>
+                                                <h6 className='text-muted'>Chicago</h6>
+                                                <div className="mb-1">{review.reveiw}
+                                                </div>
+                                                <Rating
+                                                    readonly
+                                                    direction={dir}
+                                                    initialRating={4}
+                                                    emptySymbol={<Star size={24} fill='#babfc7' stroke='#babfc7' />}
+                                                    fullSymbol={<Star size={24} fill={filledColor} stroke={filledColor} />}
+                                                />
+                                            </CardBody>
+                                        </Card>
+
+                                    </SwiperSlide>
+
+                                ))}
+                            </Swiper>
                         </div>
                     </div>
                 </div>
@@ -397,7 +527,7 @@ const Order = () => {
                             <div className="col-md-4 col-lg-4">
                                 <div className=" text-center  coffee-color">
                                     <div className="abox-4-ico">
-                                        <img className="img-center" src={foodicon}/>
+                                        <img className="img-center" src={foodicon} alt="Recipes"/>
                                     </div>
                                     <h5 className="h5-lg text-uppercase">Original Recipes</h5>
                                     <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
@@ -409,9 +539,9 @@ const Order = () => {
                             <div className="col-md-4 col-lg-4">
                                 <div className=" text-center  coffee-color">
                                     <div className="abox-4-ico">
-                                        <img className="img-center" src={qualityicon}/>
+                                        <img className="img-center" src={qualityicon} alt="Quality Foods"/>
                                     </div>
-                                    <h5 className="h5-lg text-uppercase">Qualty Foods</h5>
+                                    <h5 className="h5-lg text-uppercase">Quality Foods</h5>
                                     <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
                                         feugiat dolor impedit
                                         felis magna dolor vitae
@@ -421,7 +551,7 @@ const Order = () => {
                             <div className="col-md-4 col-lg-4">
                                 <div className="text-center coffee-color">
                                     <div className="abox-4-ico">
-                                        <img className="img-center" src={deliveryicon}/>
+                                        <img className="img-center" src={deliveryicon} alt="Fastest Delivery"/>
                                     </div>
                                     <h5 className="h5-lg text-uppercase">Fastest Delivery</h5>
                                     <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
