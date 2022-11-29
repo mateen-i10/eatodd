@@ -1,9 +1,11 @@
-import React, { useRef } from 'react'
+import React, {useLayoutEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import { Button } from 'reactstrap'
 
 import EmailEditor from 'react-email-editor'
 import sample from './sample.json'
+import {useDispatch, useSelector} from "react-redux"
+import {getTemplate, updateTemplate} from "../../../redux/template/action"
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +26,7 @@ const Bar = styled.div`
     font-size: 16px;
     text-align: left;
     margin-top: 10px;
-  }
+  } 
   button {
     flex: 1;
     // padding: 10px;
@@ -36,12 +38,30 @@ const Bar = styled.div`
     cursor: pointer;
   }
 `
+
 // eslint-disable-next-line no-unused-vars
-const Designer = (props) => {
+const Designer = ({match}) => {
+    const id = match.params.id
+
+    const tempObj = useSelector(state => state.template.object)
+
+    //
+    const [body, setBody] = useState("")
+
+    const dispatch = useDispatch()
+
+    useLayoutEffect(() => {
+        dispatch(getTemplate(id))
+    }, [])
+
+
     const emailEditorRef = useRef(null)
     const saveDesign = () => {
         emailEditorRef.current.editor.saveDesign((design) => {
             console.log('saveDesign', design)
+            const finalData = {...tempObj, json:JSON.stringify(design)}
+            console.log(finalData, "all data")
+            dispatch(updateTemplate(finalData))
             alert('Design JSON has been logged in your developer console.')
         })
     }
@@ -51,23 +71,36 @@ const Designer = (props) => {
             // eslint-disable-next-line no-unused-vars
             const { design, html } = data
             console.log('exportHtml', html)
+            setBody(html)
+
             alert('Output HTML has been logged in your developer console.')
         })
     }
 
-    const onDesignLoad = (data) => {
-        console.log('onDesignLoad', data)
-    }
+    console.log(body, "body")
+
+    // const onDesignLoad = (data) => {
+    //     console.log('onDesignLoad', data)
+    // }
 
     const onLoad = () => {
         console.log('onLoad')
-        emailEditorRef.current.editor.addEventListener(
-            'design:loaded',
-            onDesignLoad
-        )
+        // emailEditorRef.current.editor.addEventListener(
+        //     'design:loaded',
+        //     onDesignLoad
+        // )
 
-        emailEditorRef.current.editor.loadDesign(sample)
+        const json = tempObj.json
+        console.log(json, ",mma")
+
+        if (json === null || json === undefined) emailEditorRef.current.editor.loadDesign(sample)
+
+        else emailEditorRef.current.editor.loadDesign(JSON.parse(json))
+
     }
+
+    // JSON.parse(d)
+
     const loadagain = () => {
         onLoad()
     }

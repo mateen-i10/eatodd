@@ -5,7 +5,7 @@ import {
     setIsTemplateSuccess,
     setRequestCompleted,
     setLoading,
-    setTemplates
+    setTemplates, setTemplate, setDetailLoading, setIsEdit
 } from "./reducer"
 
 const url = 'Template'
@@ -19,6 +19,18 @@ export const loadTemplates = (pageIndex = 1, pageSize =  12, searchQuery = null)
             method: 'get',
             onSuccess: setTemplates.type
         }))
+    }
+}
+
+export const getTemplate = (id) => {
+    return async dispatch => {
+            dispatch(setDetailLoading(true))
+            dispatch(apiCall({
+                url: `${url}/${id}`,
+                data: {},
+                method: 'get',
+                onSuccess: setTemplate.type
+            }))
     }
 }
 
@@ -50,5 +62,22 @@ export const deleteTemplate = (id) => {
             onError: setIsTemplateError.type,
             isSuccess: setIsTemplateSuccess.type
         }))
+    }
+}
+
+export const updateTemplate = (data) => {
+    console.log('updated data', data)
+    return async dispatch => {
+        dispatch(apiCall({
+            url,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Template Updated Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsTemplateError.type,
+            isSuccess: setIsTemplateSuccess.type
+        }))
+        dispatch(setIsEdit(false))
     }
 }

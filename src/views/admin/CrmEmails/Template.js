@@ -20,8 +20,7 @@ import {useDispatch, useSelector} from "react-redux"
 import Swal from "sweetalert2"
 import moment from 'moment'
 import {deleteTemplate, loadTemplates} from "../../../redux/template/action"
-import FormModal from "../../../components/FormModal"
-import {FieldTypes} from "../../../utility/enums/FieldType"
+
 import CrmForm from "./components/CrmForm"
 import UILoader from "../../../@core/components/ui-loader"
 

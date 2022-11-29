@@ -34,11 +34,12 @@ const ProductFormChild = (props) => {
                         </div>
                 </div>
             )}
-
             {props.formFeilds === 0 && (
-                <div className='col-md-12 mt-2 mb-3 text-end'>
-                    <Button type="button" color='primary' onClick={props.AddNewData}>Add new</Button>
-                </div>
+                <>
+                    <div className='col-md-12 mt-2 mb-3 text-end'>
+                        <Button type="button" color='primary' onClick={props.AddNewData}>Add new</Button>
+                    </div>
+                </>
             )}
             {props.formFeilds === 1 && (
                 <div className='col-md-12 mt-2 text-center mb-3'>
