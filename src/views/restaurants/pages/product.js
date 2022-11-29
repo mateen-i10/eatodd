@@ -161,6 +161,7 @@ const Products = () => {
                             </CardTitle>
                             {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                         </div>
+                        <Button.Ripple bssize='sm' color='primary' /*onClick={(e) => addClick(e)}*/>Add a new Product</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>
