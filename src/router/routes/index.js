@@ -405,8 +405,8 @@ const Routes = [
         }
     },
     {
-        path: '/campaign',
-        component: lazy(() => import('../../views/admin/Campaign/campaign')),
+        path: '/campaign/:id',
+        component: lazy(() => import('../../views/admin/Campaign/campaignDetail')),
         layout: 'VerticalLayout',
         meta: {
             authRoute: true,
@@ -414,8 +414,8 @@ const Routes = [
         }
     },
     {
-        path: '/campaign/:id',
-        component: lazy(() => import('../../views/admin/Campaign/campaignDetail')),
+        path: '/campaign',
+        component: lazy(() => import('../../views/admin/Campaign/campaign')),
         layout: 'VerticalLayout',
         meta: {
             authRoute: true,
