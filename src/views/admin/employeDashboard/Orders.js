@@ -87,7 +87,7 @@ const EmployeeOrders = () => {
 
     useEffect(() => {
         dispatch(getEmployeesOrders(1, 12, null, id, changeState.value))
-    }, [changeState])
+    }, [changeState, id])
 
     useEffect(() => {
         dispatch(getEmployeeOrdersStats(id))
