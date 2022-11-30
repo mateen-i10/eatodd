@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef, useState} from 'react'
+import React, {useLayoutEffect, useRef} from 'react'
 import styled from 'styled-components'
 import { Button } from 'reactstrap'
 
@@ -45,17 +45,14 @@ const Designer = ({match}) => {
 
     const tempObj = useSelector(state => state.template.object)
 
-    //
-    const [body, setBody] = useState("")
-
     const dispatch = useDispatch()
 
     useLayoutEffect(() => {
         dispatch(getTemplate(id))
     }, [])
 
-
     const emailEditorRef = useRef(null)
+
     const saveDesign = () => {
         emailEditorRef.current.editor.saveDesign((design) => {
             console.log('saveDesign', design)
@@ -65,37 +62,19 @@ const Designer = ({match}) => {
             alert('Design JSON has been logged in your developer console.')
         })
     }
-
+    console.log("*****", emailEditorRef, id)
     const exportHtml = () => {
         emailEditorRef.current.editor.exportHtml((data) => {
             // eslint-disable-next-line no-unused-vars
             const { design, html } = data
             console.log('exportHtml', html)
-            setBody(html)
 
             alert('Output HTML has been logged in your developer console.')
         })
     }
 
-    console.log(body, "body")
-
-    // const onDesignLoad = (data) => {
-    //     console.log('onDesignLoad', data)
-    // }
-
     const onLoad = () => {
         console.log('onLoad')
-        // emailEditorRef.current.editor.addEventListener(
-        //     'design:loaded',
-        //     onDesignLoad
-        // )
-
-        const json = tempObj.json
-        console.log(json, ",mma")
-
-        if (json === null || json === undefined) emailEditorRef.current.editor.loadDesign(sample)
-
-        else emailEditorRef.current.editor.loadDesign(JSON.parse(json))
 
     }
 
@@ -107,6 +86,14 @@ const Designer = ({match}) => {
 
     const onReady = () => {
         console.log('onReady')
+        console.log(emailEditorRef.current.editor, 'current ')
+
+        const json = tempObj.json
+        console.log(json, ",mma")
+
+        if (json === null || json === undefined) emailEditorRef.current?.editor?.loadDesign(sample)
+
+        else emailEditorRef.current?.editor?.loadDesign(JSON.parse(json))
     }
     return (
         <Container>
