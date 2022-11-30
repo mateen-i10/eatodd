@@ -55,6 +55,7 @@ const campaignReducer = (state = initialState, action) => {
             }
         case editCampaign.type:
             const data = action.payload.data
+            console.log('edit', data)
             return {
                 ...state,
                 object: {...data},

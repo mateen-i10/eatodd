@@ -15,32 +15,24 @@ import {
 import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from "react-feather"
 import DataTable from 'react-data-table-component'
 import Swal from "sweetalert2"
-import {addCampaign, deleteCampaign, loadCampaigns} from "../../../redux/campaign/action"
+import {addCampaign, deleteCampaign, getCampaign, loadCampaigns, updateCampaign} from "../../../redux/campaign/action"
 import ReactPaginate from 'react-paginate'
 import AsyncSelect from "react-select/async"
-import { useForm } from 'react-hook-form'
-//import {joiResolver} from "@hookform/resolvers/joi"
+import Select from "react-select"
+import {toast} from "react-toastify"
+import {setDetailLoading} from "../../../redux/campaign/reducer"
+import moment from "moment"
+import {loadOptions} from "../../../utility/Utils"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
-import Select from "react-select"
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 
-const defaultValues = {
-    name: '',
-    type: 0,
-    template: 0,
-    scheduleDate: '',
-    scheduleDay: 0,
-    repeat: 0
-}
-
-const Campaign = () => {
+const Campaign = (props) => {
 
     const campaignList = useSelector(state => state.campaign.list)
     const miscData = useSelector(state => state.campaign.miscData)
     const formInitialState = useSelector(state => state.campaign.object)
     //const isRequestCompleted = useSelector(state => state.campaign.isRequestCompleted)
+    const isSuccess = useSelector(state => state.campaign.isSuccess)
     const isEdit = useSelector(state => state.campaign.isEdit)
     const isLoading = useSelector(state => state.campaign.isLoading)
 
@@ -49,27 +41,26 @@ const Campaign = () => {
     const [searchValue, setSearchValue] = useState('')
     const dispatch = useDispatch()
     const [formModal, setFormModal] = useState(false)
+    const [edit, setEdit] = useState(false)
 
-    const scheduleObject = {scheduleDate: '', scheduleDay: 0, repeat: 0}
+    const scheduleObject = {scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}
     const [schedule, setSchedule] = useState([scheduleObject])
-
-    const [date, setDate] = useState('')
 
     const [name, setName] = useState('')
     const [type, setType] = useState(0)
-    const [template, setTemplate] = useState(0)
+    const [templateId, setTemplateId] = useState(0)
+
+    //setting errors
+    const [errors, setErrors] = useState({})
 
     const announceType = [
         {label: 'SMS', value: 1},
         {label: 'Email', value: 2}
     ]
 
-    const templates = async () => [
-        {label: 'Template 1', value: 1},
-        {label: 'Template 2', value: 2},
-        {label: 'Template 3', value: 3},
-        {label: 'Template 4', value: 4}
-    ]
+    const templates = async (input) => {
+        return loadOptions('template', input, 1, 12)
+    }
 
     const scheduleDays = [
         {label: 'Today', value: 1},
@@ -91,10 +82,14 @@ const Campaign = () => {
     }
 
     useEffect(() => {
-        if (formInitialState && formInitialState.schedules) {
-            setSchedule([...formInitialState.schedules])
+        if (formInitialState && formInitialState.schedule) {
+            setSchedule([...formInitialState.schedule])
         }
     }, [isEdit])
+
+    useEffect(() => {
+        dispatch(loadCampaigns())
+    }, [isSuccess])
 
     const removeSchedule = (index) => {
         const newArray = [...schedule]
@@ -107,67 +102,58 @@ const Campaign = () => {
         setSchedule(newArray)
     }
 
-   /* const onValueChange = (index, name, event) => {
-        const newArray = schedule.map((s, i) => {
-            if (i === index) {
-                s[name] = event.target.value
-            }
-            return s
-        })
-
-        setSchedule(newArray)
-    }*/
-
     const onValueScheduleDay = (index, e) => {
         console.log('eee', e)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                s = e.value
+                //const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
+                const date = moment(new Date(e.value)).format()
+                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
             }
             return s
         })
+        console.log('newArrayDay', newArray)
         setSchedule(newArray)
     }
 
     const onDateChange = (index, event) => {
+        console.log('date', event)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                s = event
+                s = {...s, scheduleDate: moment(event.toDate()).format() }
             }
             return s
+            console.log('s', s)
         })
-
+        console.log('newArray', newArray)
         setSchedule(newArray)
     }
 
     const onValueRepeat = (index, e) => {
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                s = e.value
+                s = {...s, repeat : e.value}
             }
             return s
         })
+        console.log('newArrayRe', newArray)
         setSchedule(newArray)
     }
 
-    /*const campaignSchema = Joi.object({
+    const campaignSchema = Joi.object({
         name: Joi.string().required().label('Name'),
-        type: Joi.number().required().label('Type')
+        type: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Type" is required'
+            }
+        }),
+        templateId: Joi.object({label: Joi.string().required(), value: Joi.number().required()}).error(() => {
+            return {
+                message: '"Template" is required'
+            }
+        })
         //MoveDate: yup.date().required("Move Date is required!")
-    })*/
-
-    const campaignSchema = yup.object().shape({
-        //name: yup.string().required().label('Name')
-        //type: yup.number().required().label('Type')
-        //MoveDate: yup.date().required("Move Date is required!")
-    })
-
-    const {
-        handleSubmit,
-        formState: { errors }
-    } = useForm({
-        defaultValues,
-        resolver: yupResolver(campaignSchema)
     })
 
     const deleteClick = (id, e) => {
@@ -193,10 +179,75 @@ const Campaign = () => {
         props.history.push(`/campaign/${id}`)
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        console.log('event', e)
-        dispatch(addCampaign())
+    const handleClose = () => {
+        setName('')
+        setType(0)
+        setTemplateId(0)
+        setSchedule([scheduleObject.scheduleDay = 0])
+    }
+
+    const setData = () => {
+        try {
+            setName(name)
+            setType(type)
+            setTemplateId(templateId)
+            setSchedule(schedule)
+            //setEdit(true)
+        } catch (e) {
+            toast.error(e.message)
+        }
+
+    }
+
+    const editClick = (id) => {
+        console.log('idEdit', id)
+        dispatch(getCampaign(id, true))
+        console.log('idEdit123', dispatch(getCampaign(id, true)))
+        setFormModal(!formModal)
+        setData()
+        setEdit(true)
+        //setModalLoading(true)
+    }
+
+    const handleSubmit = () => {
+        try {
+            const data = {
+                name,
+                type,
+                templateId
+            }
+
+            const finalData = {
+                name,
+                type: type.value,
+                templateId: templateId.value,
+                schedules: schedule
+            }
+
+            const isError = Joi.validate(data, campaignSchema, {abortEarly: false})
+            console.log(isError, "errors")
+            const {error} = isError
+            if (!error) {
+                console.log('edit data', finalData)
+                dispatch(setDetailLoading(true))
+                edit ? dispatch(updateCampaign(finalData)) : dispatch(addCampaign(finalData))
+                handleClose()
+                setFormModal(!formModal)
+            } else {
+                const errorData = {}
+                for (const item of error?.details) {
+                    console.log("ITEM MSG", item)
+                    const name = item.path[0]
+                    const message = item.message
+                    errorData[name] = message
+                }
+                setErrors(errorData)
+            }
+
+        } catch (e) {
+            toast.error(e.message)
+        }
+
     }
 
     const handleFilter = e => {
@@ -223,7 +274,13 @@ const Campaign = () => {
         },
         {
             name: 'Type',
-            selector: (row) => row.type,
+            selector: (row) => `${row.type === 1 ? "SMS" : "Email"}`,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Template',
+            selector: (row) => `${row.template?.name}`,
             sortable: true,
             minWidth: '50px'
         },
@@ -248,7 +305,7 @@ const Campaign = () => {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <span className='cursor-pointer' /*onClick={() => { editClick(row.id) }}*/><Edit size={15} /></span>
+                        <span className='cursor-pointer' onClick={() => { editClick(row.id) }}><Edit size={15} /></span>
                     </div>
                 )
             }
@@ -340,14 +397,18 @@ const Campaign = () => {
                 <div>
                     <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} fade={true} backdrop="static" className='modal-lg'>
                         <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
-                        <Form onSubmit={handleSubmit(onSubmit)}>
-                            <ModalBody>
+
+                        <ModalBody>
                                 <Row>
                                     <Col md={6}>
                                         <div className='mb-2'>
                                             <Label className='form-label' for='name'>Name:</Label>
                                             <Input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} id='name' placeholder='Enter Name' />
-                                            {errors.name && <span className="ml-1" style = {{ width: '100%', fontSize: '0.857rem', color: '#ea5455'}}>{errors.name.message}</span>}
+                                            {!name ? errors.name && (
+                                                <div className="text-danger">
+                                                    {errors.name}
+                                                </div>
+                                            ) : null}
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -355,12 +416,14 @@ const Campaign = () => {
                                             <label>Type <span className='text-danger'>*</span></label>
                                             <Select
                                                 options={announceType}
-                                                //defaultOptions
-                                                //isLoading={true}
                                                 value={type}
                                                 onChange={handleType}
                                             />
-                                            {errors.type && <span className="ml-1" style = {{ width: '100%', fontSize: '0.857rem', color: '#ea5455'}}>{errors.type.message}</span>}
+                                            {!type ? errors.type && (
+                                                <div className="text-danger">
+                                                    {errors.type}
+                                                </div>
+                                            ) : null}
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -368,16 +431,21 @@ const Campaign = () => {
                                             <label>Template <span className='text-danger'>*</span></label>
                                             <AsyncSelect
                                                 defaultOptions
-                                                value={template}
-                                                onChange={e => setTemplate(e)}
+                                                value={templateId}
+                                                onChange={e => setTemplateId(e)}
                                                 loadOptions={templates}
                                                 closeMenuOnSelect={true}
                                                 isMulti = {false}
                                             />
+                                            {!templateId ? errors.templateId && (
+                                                <div className="text-danger">
+                                                    {errors.templateId}
+                                                </div>
+                                            ) : null}
                                         </div>
-                                        {errors.template && <span className="ml-1" style = {{ width: '100%', fontSize: '0.857rem', color: '#ea5455'}}>{errors.template.message}</span>}
                                     </Col>
                                 </Row>
+
                                 <Row>
                                     <div className='ms-1'>
                                         <h5>Schedule List</h5>
@@ -386,26 +454,17 @@ const Campaign = () => {
                                                 <div className='row mt-1'>
                                                     <div className='col-3'>
                                                         <Select
-                                                            //defaultOptions
-                                                            value={i.scheduleDay}
                                                             onChange={(e) => {
                                                                 onValueScheduleDay(index, e)
-                                                                if (e.value === 4) {
-                                                                    setDate('4')
-                                                                } else {
-                                                                    setDate('')
-                                                                }
                                                             }}
                                                             options={scheduleDays}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
                                                     </div>
-                                                    {date === '4' && <div className='col-4'>
+                                                    {i.isDate && <div className='col-4'>
                                                         <Datetime
                                                             placeholder='Schedule Date'
-                                                            locale="en-gb"
-                                                            //initialViewMode={'date'}
                                                             value={i.scheduleDate}
                                                             dateFormat={true}
                                                             closeOnSelect={true}
@@ -416,8 +475,6 @@ const Campaign = () => {
                                                     </div>}
                                                     <div className='col-3'>
                                                         <Select
-                                                            //defaultOptions
-                                                            value={i.repeat}
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
                                                             closeMenuOnSelect={true}
@@ -440,16 +497,20 @@ const Campaign = () => {
                                         </div>
                                     </div>
                                 </Row>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color='danger' onClick={() => setFormModal(!formModal)}>
+
+                        </ModalBody>
+                        <ModalFooter>
+                                <Button color='danger' onClick={() => {
+                                    setFormModal(!formModal)
+                                    handleClose()
+                                }}>
                                     Close
                                 </Button>
-                                <Button color='primary'>
+                                <Button color='primary' onClick={handleSubmit}>
                                     Submit
                                 </Button>
                             </ModalFooter>
-                        </Form>
+
                     </Modal>
                 </div>
             </div>
