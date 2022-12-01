@@ -588,11 +588,11 @@ const Routes = [
     {
         path: '/productsDetail/:id',
         component: lazy(() => import('../../views/admin/product/componenets/ProductDetails')),
-        layout: 'VerticalLayout',
-        meta: {
+        layout: 'VerticalLayout'
+        /*meta: {
             authRoute: true,
             adminOnly: true
-        }
+        }*/
     },
     {
         path: '/generalProducts',
