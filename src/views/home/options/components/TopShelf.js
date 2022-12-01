@@ -19,8 +19,8 @@ const TopShelf = ({attachment, name, description, price}) => {
                              }}>
                             {name}
                         </div>
-                        <p className="text-primary fw-bolder "
-                           style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>{`$${price}/person`}</p>
+                        {price && <p className="text-primary fw-bolder "
+                           style={{fontSize: "1.8rem", textTransform: 'uppercase'}}>{`$${price}/person`}</p>}
                         <p style={{fontSize: "1.3rem ", lineHeight: 1.4, color: "black"}}>{description}</p>
                     </div>
                 </div>
