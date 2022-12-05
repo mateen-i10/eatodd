@@ -27,7 +27,7 @@ const ProductCard = ({
     console.log(item.flavour, "items coming from product card comp")
     const imgStyles = {
         width: "100%",
-        height: 99,
+        height: 100,
         backgroundColor: 'transparent',
         overflow: "hidden",
         objectFit: "cover"
