@@ -732,6 +732,24 @@ const Routes = [
         component: lazy(() => import('../../views/admin/CrmEmails/Template')),
         layout: 'VerticalLayout',
         exact: true
+    },
+    {
+        path: '/review/:id',
+        component: lazy(() => import('../../views/admin/Review/reviewDetail')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/review',
+        component: lazy(() => import('../../views/admin/Review/Review')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     }
 
 ]
