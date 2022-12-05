@@ -40,6 +40,7 @@ import AdminDashReducer from "./adminDashboard/reducer"
 import contact from "./contact/reducer"
 import campaign from "./campaign/reducer"
 import template from "./template/reducer"
+import review from "./review/reducer"
 
 const rootReducer = {
     auth,
@@ -81,7 +82,8 @@ const rootReducer = {
     AdminDashReducer,
     contact,
     campaign,
-    template
+    template,
+    review
 }
 
 export default rootReducer

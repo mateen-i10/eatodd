@@ -8,7 +8,7 @@ import {
     Mail,
     MessageSquare,
     Package,
-    PenTool,
+    PenTool, Phone,
     Send,
     User,
     UserCheck,
@@ -83,6 +83,12 @@ export default [
         navLink: '/Customers'
     },
     {
+        id: 'review',
+        title: 'Reviews',
+        icon: <MessageSquare size={20}/>,
+        navLink: '/review'
+    },
+    {
         id: 'CRMemails',
         title: 'CRM (Emails)',
         icon: <Mail size={20}/>,
@@ -123,7 +129,7 @@ export default [
     {
         id: 'contact',
         title: 'Contact',
-        icon: <Package size={20}/>,
+        icon: <Phone size={20}/>,
         navLink: '/contact'
     },
     {
