@@ -46,11 +46,10 @@ const Order = () => {
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
-                    // console.log("data", data)
                     const finalData = data.map(item => ({
                         attachment: item.attachment,
                         id: item.id,
@@ -73,11 +72,14 @@ const Order = () => {
                 toast.error(error.message)
             })
 
+        // httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
+        //     .then(response => {
+        //         console.log("********", response)
+        //     })
+
     }, [])
 
-    console.log("**********", modalClicked)
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
-    // console.log("*****************", scrollToOrder)
     if (scrollToOrder === 'order') {
         useEffect(() => {
             orderRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -146,10 +148,6 @@ const Order = () => {
             }
         }
     }
-    console.log("mein category", mainCategory)
-    console.log("selected category", selectedCategory)
-    console.log("omgPlate", omgPlate)
-    console.log("omgPlate", omgSandwich)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
