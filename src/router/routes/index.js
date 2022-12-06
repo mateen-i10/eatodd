@@ -588,11 +588,11 @@ const Routes = [
     {
         path: '/productsDetail/:id',
         component: lazy(() => import('../../views/admin/product/componenets/ProductDetails')),
-        layout: 'VerticalLayout',
-        meta: {
+        layout: 'VerticalLayout'
+        /*meta: {
             authRoute: true,
             adminOnly: true
-        }
+        }*/
     },
     {
         path: '/generalProducts',
@@ -732,6 +732,24 @@ const Routes = [
         component: lazy(() => import('../../views/admin/CrmEmails/Template')),
         layout: 'VerticalLayout',
         exact: true
+    },
+    {
+        path: '/review/:id',
+        component: lazy(() => import('../../views/admin/Review/reviewDetail')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/review',
+        component: lazy(() => import('../../views/admin/Review/Review')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
     }
 
 ]

@@ -65,7 +65,7 @@ export default function Header({isSimple}) {
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                         {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
                     </div>}
-                    {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled">
+                    {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled ms-1 ">
                         <UserDropdown/>
                     </ul>}
                     <div className="head-3 align-items-center cursor-pointer">
@@ -154,8 +154,8 @@ export default function Header({isSimple}) {
                             {isUserLoggedIn() ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
                         </div>
                     </div>
-                    {isUserLoggedIn() ? <div className="mt-3 mb-2" style={{marginLeft: "72%"}}>
-                        <ul className=" ">
+                    {isUserLoggedIn() ? <div className=" mt-3 mb-2" style={{marginLeft: "75%"}}>
+                        <ul className="ms-2 user-login list-unstyled" >
                             <UserDropdown/>
                         </ul>
                     </div> : <div className="nav-sec-2 text-uppercase">

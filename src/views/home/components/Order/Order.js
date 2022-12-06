@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
@@ -11,12 +11,10 @@ import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
 import {isUserLoggedIn} from "../../../../auth/utils"
-import { Card, CardBody} from "reactstrap"
+import { Card, CardBody, Modal, ModalBody, ModalHeader} from "reactstrap"
 import Avatar from "../../../../@core/components/avatar"
 import Rating from "react-rating"
 import {Star} from "react-feather"
-import {useRTL} from "../../../../utility/hooks/useRTL"
-import {ThemeColors} from "../../../../utility/context/ThemeColors"
 import {Swiper, SwiperSlide} from "swiper/react/swiper-react.js"
 import SwiperCore, {
     Autoplay,
@@ -37,31 +35,33 @@ const Order = () => {
     const {userLocation} = useSelector(state => state)
     const {scrollSlice} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
+    const [omgPlate, setOmgPlate] = useState([])
+    const [omgSandwich, setSandwich] = useState([])
+    const [modalClicked, setModalClicked] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState(0)
+
     const history = useHistory()
     const orderRef = useRef(null)
-
-    // rating
-    const [isRtl] = useRTL()
-    const themeColors = useContext(ThemeColors)
-    const dir = isRtl ? 'rtl' : 'ltr'
-    const filledColor = themeColors.colors.warning.main
-
 
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
-                    // console.log("data", data)
-                    const final = data.map(item => ({
+                    const finalData = data.map(item => ({
                         attachment: item.attachment,
                         id: item.id,
                         name: item.name,
                         description: item.description
                     }))
-                    setMainCategory(final)
+                    const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
+                    const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
+                    const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
+                    setOmgPlate(finalOmgPlate)
+                    setSandwich(finalSandwich)
+                    setMainCategory(finalCategory)
                 } else {
                     //general Error Action
                     toast.error(response.data.message)
@@ -72,11 +72,14 @@ const Order = () => {
                 toast.error(error.message)
             })
 
+        // httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
+        //     .then(response => {
+        //         console.log("********", response)
+        //     })
+
     }, [])
 
-
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
-    // console.log("*****************", scrollToOrder)
     if (scrollToOrder === 'order') {
         useEffect(() => {
             orderRef.current?.scrollIntoView({behavior: 'smooth'})
@@ -145,7 +148,6 @@ const Order = () => {
             }
         }
     }
-    // console.log("mein category", mainCategory)
     return (
         <div className="order-main">
             <div className="container-fluid unlock-section">
@@ -180,7 +182,15 @@ const Order = () => {
                             return item.name.toString().toLowerCase() !== "wine" ?
                                 <div className="col-md-3  col-12 top-level-menu" key={item.id}>
                                     <div className="menu-item-1" onClick={() => {
+                                        if (item.name.toString().trim().toLowerCase() === "omg plate") {
+                                            setModalClicked(!modalClicked)
+                                            setSelectedCategory(1)
+                                        } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
+                                            setModalClicked(!modalClicked)
+                                            setSelectedCategory(2)
+                                        } else {
                                         history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                        }
                                     }}>
                                         <div className="thumbnail ">
                                             <ProductImage attachment={item.attachment}
@@ -325,12 +335,11 @@ const Order = () => {
                     </div>
                     <div className="row mt-2 ">
                         <div className="col-12 mt-1 mb-2">
-                            <Swiper dir={dir} {...params}>
+                            <Swiper {...params}>
                                 {reviews.map((review) => (
 
                                     <SwiperSlide key={review.id}>
                                         <Card className='card-profile mt-5' >
-                                            {/*<CardImg className='img-fluid' src={coverImg} top />*/}
                                             <CardBody>
                                                 <div className='profile-image-wrapper'>
                                                     <div className='profile-image'>
@@ -343,10 +352,9 @@ const Order = () => {
                                                 </div>
                                                 <Rating
                                                     readonly
-                                                    direction={dir}
                                                     initialRating={4}
                                                     emptySymbol={<Star size={24} fill='#babfc7' stroke='#babfc7' />}
-                                                    fullSymbol={<Star size={24} fill={filledColor} stroke={filledColor} />}
+                                                    fullSymbol={<Star size={24} fill='#ff9f43' stroke='#ff9f43' />}
                                                 />
                                             </CardBody>
                                         </Card>
@@ -572,6 +580,45 @@ const Order = () => {
                 </div>
             </section>
             {/*about section end*/}
+            <Modal isOpen={modalClicked} toggle={() => setModalClicked(!modalClicked)} className='modal-dialog-centered modal-lg'>
+                <ModalHeader toggle={() => setModalClicked(!modalClicked)}>PLEASE SELECT</ModalHeader>
+                <ModalBody>
+                    <div className="container-sm">
+                        <div className="row">
+                    {selectedCategory === 1 && omgPlate.map((item) => (
+                            <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
+                                <div className=" ">
+                                    <ProductImage attachment={item.attachment}
+                                                  styles={{width: "200px", height: "200px", margin: "auto"}}/>
+                                </div>
+                                <div className="">
+                                    <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                </div>
+                    </div>))}
+                        </div>
+                    </div>
+                    <div className="container-sm">
+                        <div className="row">
+                            {selectedCategory === 2 && omgSandwich.map((item) => (
+                                <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
+                                    <div className=" ">
+                                        <ProductImage attachment={item.attachment}
+                                                      styles={{width: "200px", height: "200px", margin: "auto"}}/>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                    </div>
+                                </div>))}
+                        </div>
+                    </div>
+
+                </ModalBody>
+                {/*<ModalFooter>*/}
+                {/*    <Button color='primary' onClick={() => setOmgClicked(!omgClicked)}>*/}
+                {/*        Accept*/}
+                {/*    </Button>{' '}*/}
+                {/*</ModalFooter>*/}
+            </Modal>
         </div>
     )
 }

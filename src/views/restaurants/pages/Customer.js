@@ -52,7 +52,7 @@ const Customers = () => {
 
     useEffect(() => {
         dispatch(loadCustomersByRestaurant(currentPage, pageSize, searchValue, id))
-    }, [])
+    }, [id])
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)

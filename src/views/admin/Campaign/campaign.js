@@ -188,23 +188,27 @@ const Campaign = (props) => {
 
     const setData = () => {
         try {
-            setName(name)
-            setType(type)
-            setTemplateId(templateId)
-            setSchedule(schedule)
+            setName(formInitialState.name)
+            setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
+            setTemplateId({label: formInitialState.template.name, value: formInitialState.template.value})
+            setSchedule(formInitialState.schedules.map(s => {
+                return {scheduleDate: s.scheduleDate, scheduleDay: s.scheduleDay, repeat: s.repeat}
+            }))
             //setEdit(true)
         } catch (e) {
             toast.error(e.message)
         }
 
     }
+    useEffect(() => {
+        if (isEdit) setData()
+    }, [formInitialState, isEdit])
 
     const editClick = (id) => {
         console.log('idEdit', id)
         dispatch(getCampaign(id, true))
-        console.log('idEdit123', dispatch(getCampaign(id, true)))
+        //console.log('idEdit123', dispatch(getCampaign(id, true)))
         setFormModal(!formModal)
-        setData()
         setEdit(true)
         //setModalLoading(true)
     }
@@ -477,6 +481,7 @@ const Campaign = (props) => {
                                                         <Select
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
+                                                            defaultValue={}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
