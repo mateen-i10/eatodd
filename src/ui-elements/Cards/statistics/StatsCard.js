@@ -10,6 +10,7 @@ import Avatar from '@components/avatar'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col } from 'reactstrap'
 
 const StatsCard = ({ cols }) => {
+
   const data = [
     {
       title: '230k',
@@ -66,6 +67,13 @@ const StatsCard = ({ cols }) => {
       <CardHeader>
         <CardTitle tag='h4'>Statistics</CardTitle>
         <CardText className='card-text font-small-2 me-25 mb-0'>Updated 1 month ago</CardText>
+        {/*<Select className='col-md-4' options={options} />*/}
+        {/*<AsyncSelect*/}
+        {/*    loadOptions={categories}*/}
+        {/*    defaultOptions*/}
+        {/*    isLoading={true}*/}
+        {/*    onChange={e => setCatId(e.value)}*/}
+        {/*/>*/}
       </CardHeader>
       <CardBody className='statistics-body'>
         <Row>{renderData()}</Row>
