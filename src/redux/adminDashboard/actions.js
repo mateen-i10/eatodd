@@ -1,7 +1,7 @@
 import {apiCall} from "../api/actions"
 import {
     setLoading,
-    setAdminDash, setAdmin, restGetAll
+    setAdminDash, setAdmin, restGetAll, setRest, setRestt
 } from "./reducer"
 
 const url = 'AdminDashboard'
@@ -42,6 +42,30 @@ export const adminDashboardGetAll = (RestaurantId) => {
             data: {},
             method: 'get',
             onSuccess: restGetAll.type
+        }))
+    }
+}
+
+export const test = (restId) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/GetTotal/${restId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setRest.type
+        }))
+    }
+}
+
+export const tesst = (restId) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/AdminDashboard/${restId}`,
+            data: {},
+            method: 'get',
+            onSuccess: setRestt.type
         }))
     }
 }
