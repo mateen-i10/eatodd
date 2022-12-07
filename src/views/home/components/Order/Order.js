@@ -11,8 +11,7 @@ import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
 import {isUserLoggedIn} from "../../../../auth/utils"
-import { Card, CardBody, Modal, ModalBody, ModalHeader} from "reactstrap"
-import Avatar from "../../../../@core/components/avatar"
+import {Card, CardBody, Modal, ModalBody, ModalHeader} from "reactstrap"
 import Rating from "react-rating"
 import {Star} from "react-feather"
 import {Swiper, SwiperSlide} from "swiper/react/swiper-react.js"
@@ -26,7 +25,6 @@ import '@styles/react/libs/swiper/swiper.scss'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-
 //importing images
 import img2 from '../../../../assets/images/updated/_DSC1188.jpeg'
 
@@ -39,6 +37,7 @@ const Order = () => {
     const [omgSandwich, setSandwich] = useState([])
     const [modalClicked, setModalClicked] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState(0)
+    const [reviewList, setReviewList] = useState([])
 
     const history = useHistory()
     const orderRef = useRef(null)
@@ -46,7 +45,6 @@ const Order = () => {
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
-                // console.log(response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
@@ -74,11 +72,23 @@ const Order = () => {
 
         httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
             .then(response => {
-                console.log("Reviews ********", response)
-            })
 
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    const data = response.data.data
+                    console.log("Reviews ********", data)
+                    const finalData = data.map(item => ({
+                        address: item.address,
+                        id: item.id,
+                        name: item.personName,
+                        review: item.description,
+                        rating: item.rating
+                    }))
+                    setReviewList(finalData)
+                }
+            })
     }, [])
 
+    console.log("reviewList****", reviewList)
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     if (scrollToOrder === 'order') {
         useEffect(() => {
@@ -87,36 +97,7 @@ const Order = () => {
     }
 
     //testing data for customer review
-    const reviews = [
-        {
-            id: 1,
-            img: require("../../../../assets/images/avatars/1-small.png").default,
-            name: "John",
-            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
-                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        },
-        {
-            id: 2,
-            img: require("../../../../assets/images/avatars/2-small.png").default,
-            name: "Curtis Stone",
-            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
-                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        },
-        {
-            id: 3,
-            img: require("../../../../assets/images/avatars/3-small.png").default,
-            name: "Herry",
-            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
-                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        },
-        {
-            id: 4,
-            img: require("../../../../assets/images/avatars/4-small.png").default,
-            name: "William",
-            reveiw: "Lorem ipsum dolor sit amet, consectetur " +
-                "adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        }
-    ]
+
 
     const params = {
         autoplay: {
@@ -336,26 +317,26 @@ const Order = () => {
                     <div className="row mt-2 ">
                         <div className="col-12 mt-1 mb-2">
                             <Swiper {...params}>
-                                {reviews.map((review) => (
-
+                                {reviewList.map((review) => (
                                     <SwiperSlide key={review.id}>
-                                        <Card className='card-profile mt-5' >
-                                            <CardBody>
-                                                <div className='profile-image-wrapper'>
-                                                    <div className='profile-image'>
-                                                        <Avatar img={review.img} alt="avatar"/>
-                                                    </div>
+                                        <Card className='text-center mt-2' >
+                                            <CardBody >
+                                                {/*<div className='profile-image-wrapper'>*/}
+                                                {/*    <div className='profile-image'>*/}
+                                                {/*        <Avatar img={review.img} alt="avatar"/>*/}
+                                                {/*    </div>*/}
+                                                {/*</div>*/}
+                                                <h3 className="mt-0 fw-bolder mb-1">{review.name}</h3>
+                                                <h6 className='text-muted mb-1'>{review.address}</h6>
+                                                <div className="mb-1">{review.review}
                                                 </div>
-                                                <h3>{review.name}</h3>
-                                                <h6 className='text-muted'>Chicago</h6>
-                                                <div className="mb-1">{review.reveiw}
-                                                </div>
-                                                <Rating
+                                                <div className="mb-1"><Rating
                                                     readonly
-                                                    initialRating={4}
+                                                    initialRating={review.rating}
                                                     emptySymbol={<Star size={24} fill='#babfc7' stroke='#babfc7' />}
                                                     fullSymbol={<Star size={24} fill='#ff9f43' stroke='#ff9f43' />}
                                                 />
+                                                </div>
                                             </CardBody>
                                         </Card>
                                     </SwiperSlide>
@@ -609,13 +590,7 @@ const Order = () => {
                                 </div>))}
                         </div>
                     </div>
-
                 </ModalBody>
-                {/*<ModalFooter>*/}
-                {/*    <Button color='primary' onClick={() => setOmgClicked(!omgClicked)}>*/}
-                {/*        Accept*/}
-                {/*    </Button>{' '}*/}
-                {/*</ModalFooter>*/}
             </Modal>
         </div>
     )
