@@ -25,6 +25,7 @@ import moment from "moment"
 import {loadOptions} from "../../../utility/Utils"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
+//import {useLocation} from "react-router-dom"
 
 const Campaign = (props) => {
 
@@ -41,6 +42,7 @@ const Campaign = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const dispatch = useDispatch()
     const [formModal, setFormModal] = useState(false)
+
     const [edit, setEdit] = useState(false)
 
     const scheduleObject = {scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}
@@ -106,10 +108,10 @@ const Campaign = (props) => {
         console.log('eee', e)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                //const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
-                const date = moment(new Date(e.value)).format()
-                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
+                //const date = moment(new Date(e.value)).format()
                 s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
             }
             return s
         })
@@ -190,7 +192,7 @@ const Campaign = (props) => {
         try {
             setName(formInitialState.name)
             setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
-            setTemplateId({label: formInitialState.template.name, value: formInitialState.template.value})
+            setTemplateId({label: formInitialState.template.name, value: formInitialState.template.id})
             setSchedule(formInitialState.schedules.map(s => {
                 return {scheduleDate: s.scheduleDate, scheduleDay: s.scheduleDay, repeat: s.repeat}
             }))
@@ -207,10 +209,8 @@ const Campaign = (props) => {
     const editClick = (id) => {
         console.log('idEdit', id)
         dispatch(getCampaign(id, true))
-        //console.log('idEdit123', dispatch(getCampaign(id, true)))
         setFormModal(!formModal)
         setEdit(true)
-        //setModalLoading(true)
     }
 
     const handleSubmit = () => {
@@ -232,7 +232,7 @@ const Campaign = (props) => {
             console.log(isError, "errors")
             const {error} = isError
             if (!error) {
-                console.log('edit data', finalData)
+                console.log('submit data', finalData)
                 dispatch(setDetailLoading(true))
                 edit ? dispatch(updateCampaign(finalData)) : dispatch(addCampaign(finalData))
                 handleClose()
@@ -461,6 +461,7 @@ const Campaign = (props) => {
                                                             onChange={(e) => {
                                                                 onValueScheduleDay(index, e)
                                                             }}
+                                                            defaultValue={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
                                                             options={scheduleDays}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
@@ -481,7 +482,7 @@ const Campaign = (props) => {
                                                         <Select
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
-                                                            defaultValue={}
+                                                            defaultValue={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
