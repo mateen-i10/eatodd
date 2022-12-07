@@ -358,9 +358,7 @@ const Order = () => {
                                                 />
                                             </CardBody>
                                         </Card>
-
                                     </SwiperSlide>
-
                                 ))}
                             </Swiper>
                         </div>
