@@ -72,10 +72,10 @@ const Order = () => {
                 toast.error(error.message)
             })
 
-        // httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
-        //     .then(response => {
-        //         console.log("********", response)
-        //     })
+        httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
+            .then(response => {
+                console.log("Reviews ********", response)
+            })
 
     }, [])
 
