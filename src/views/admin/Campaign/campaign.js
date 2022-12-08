@@ -51,6 +51,7 @@ const Campaign = (props) => {
     const [name, setName] = useState('')
     const [type, setType] = useState(0)
     const [templateId, setTemplateId] = useState(0)
+    //const [scheduleDay, setScheduleDay] = useState(0)
 
     //setting errors
     const [errors, setErrors] = useState({})
@@ -83,11 +84,11 @@ const Campaign = (props) => {
         setType(e)
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (formInitialState && formInitialState.schedule) {
             setSchedule([...formInitialState.schedule])
         }
-    }, [isEdit])
+    }, [isEdit])*/
 
     useEffect(() => {
         dispatch(loadCampaigns())
@@ -108,10 +109,10 @@ const Campaign = (props) => {
         console.log('eee', e)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
-                //const date = moment(new Date(e.value)).format()
-                s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
-                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                const currentDate = new Date()
+                const date = e.value === 1 ? moment(currentDate.getDate()).format() : e.value === 2  ? moment(currentDate.setDate(currentDate.getDate() + 1)).format() : e.value === 3  ? moment(currentDate.setDate(currentDate.getDate() + 7)).format() : ''
+                console.log('dddd', date)
+                s =  {...s, scheduleDay: e.value, isDate: e.value === 4, scheduleDate: date}
             }
             return s
         })
@@ -185,16 +186,17 @@ const Campaign = (props) => {
         setName('')
         setType(0)
         setTemplateId(0)
-        setSchedule([scheduleObject.scheduleDay = 0])
+        setSchedule([])
     }
 
     const setData = () => {
         try {
+            //setId(formInitialState.id)
             setName(formInitialState.name)
             setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
             setTemplateId({label: formInitialState.template.name, value: formInitialState.template.id})
             setSchedule(formInitialState.schedules.map(s => {
-                return {scheduleDate: s.scheduleDate, scheduleDay: s.scheduleDay, repeat: s.repeat}
+                return {scheduleDate: moment(new Date(s.scheduleDate)).format(), scheduleDay: s.scheduleDay, repeat: s.repeat}
             }))
             //setEdit(true)
         } catch (e) {
@@ -205,6 +207,13 @@ const Campaign = (props) => {
     useEffect(() => {
         if (isEdit) setData()
     }, [formInitialState, isEdit])
+
+    const addClickBtn = () => {
+        setName('')
+        setType(0)
+        setTemplateId(0)
+        setSchedule([{scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}])
+    }
 
     const editClick = (id) => {
         console.log('idEdit', id)
@@ -234,8 +243,13 @@ const Campaign = (props) => {
             if (!error) {
                 console.log('submit data', finalData)
                 dispatch(setDetailLoading(true))
-                edit ? dispatch(updateCampaign(finalData)) : dispatch(addCampaign(finalData))
+                edit ? dispatch(updateCampaign({id: formInitialState.id,
+                    ...finalData,
+                    schedules: finalData.schedules.map(d => {
+                           return  {...d, scheduleDate: moment(new Date(d.scheduleDate)).format()}
+                    })})) : dispatch(addCampaign(finalData))
                 handleClose()
+                setEdit(false)
                 setFormModal(!formModal)
             } else {
                 const errorData = {}
@@ -374,7 +388,10 @@ const Campaign = (props) => {
                                         />
                                     </div>
                                     <div className='col-4'>
-                                        <Button className='float-end' color='primary' onClick={() => setFormModal(!formModal)}>
+                                        <Button className='float-end' color='primary' onClick={() => {
+                                            setFormModal(true)
+                                            addClickBtn()
+                                        }}>
                                             <Plus size={15} />
                                             <span className='align-middle ms-50'>Add Campaign</span>
                                         </Button>
@@ -399,8 +416,15 @@ const Campaign = (props) => {
 
             <div className='demo-inline-spacing'>
                 <div>
-                    <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} fade={true} backdrop="static" className='modal-lg'>
-                        <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
+                    <Modal isOpen={formModal} toggle={() => {
+                        setFormModal(!formModal)
+                        setEdit(false)
+                    }} fade={true} backdrop="static" className='modal-lg'>
+                        <ModalHeader toggle={() => {
+                            setFormModal(!formModal)
+                            setEdit(false)
+                            handleClose()
+                        }}>Campaign Form</ModalHeader>
 
                         <ModalBody>
                                 <Row>
@@ -461,17 +485,19 @@ const Campaign = (props) => {
                                                             onChange={(e) => {
                                                                 onValueScheduleDay(index, e)
                                                             }}
-                                                            defaultValue={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
+                                                            value={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
                                                             options={scheduleDays}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
                                                     </div>
-                                                    {i.isDate && <div className='col-4'>
+                                                    {(i.isDate || i.scheduleDay === 4) && <div className='col-4'>
                                                         <Datetime
                                                             placeholder='Schedule Date'
                                                             value={i.scheduleDate}
-                                                            dateFormat={true}
+                                                            //dateFormat={true}
+                                                            timeFormat={false}
+                                                            dateFormat="DD-MM-YY"
                                                             closeOnSelect={true}
                                                             onChange={(e) => {
                                                                 onDateChange(index, e)
@@ -482,7 +508,7 @@ const Campaign = (props) => {
                                                         <Select
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
-                                                            defaultValue={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
+                                                            value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
@@ -508,6 +534,7 @@ const Campaign = (props) => {
                         <ModalFooter>
                                 <Button color='danger' onClick={() => {
                                     setFormModal(!formModal)
+                                    setEdit(false)
                                     handleClose()
                                 }}>
                                     Close
