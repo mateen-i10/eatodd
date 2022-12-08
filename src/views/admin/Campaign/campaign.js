@@ -478,7 +478,7 @@ const Campaign = (props) => {
                                     <div className='ms-1'>
                                         <h5>Schedule List</h5>
                                         {schedule.map((i, index) => {
-                                            return <div>
+                                            return <div key={i.scheduleDay}>
                                                 <div className='row mt-1'>
                                                     <div className='col-3'>
                                                         <Select

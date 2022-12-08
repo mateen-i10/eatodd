@@ -82,7 +82,7 @@ const MembershipTypes = (props) => {
         return <div className='ms-1'>
             <h5>Package Items Information</h5>
             {packagesItem.map((i, index) => {
-                return <div className='row mt-1'>
+                return <div key={i.name} className='row mt-1'>
                     <div className='col-5'>
                         <Input
                             placeholder='Enter Name'
@@ -358,7 +358,7 @@ const MembershipTypes = (props) => {
                         <Col className='d-flex align-items-center justify-content-end mt-1' md='12' sm='12'>
                             <Input
                                 className='dataTable-filter mb-50'
-                                placeHolder="Search"
+                                placeholder="Search"
                                 type='text'
                                 bsSize='sm'
                                 id='search-input'
