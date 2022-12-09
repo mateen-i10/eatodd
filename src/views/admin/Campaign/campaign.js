@@ -22,10 +22,9 @@ import Select from "react-select"
 import {toast} from "react-toastify"
 import {setDetailLoading} from "../../../redux/campaign/reducer"
 import moment from "moment"
-import {loadOptions} from "../../../utility/Utils"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
-//import {useLocation} from "react-router-dom"
+import {loadOptions} from "../../../utility/Utils"
 
 const Campaign = (props) => {
 
@@ -49,9 +48,12 @@ const Campaign = (props) => {
     const [schedule, setSchedule] = useState([scheduleObject])
 
     const [name, setName] = useState('')
-    const [type, setType] = useState(0)
+    const [type, setType] = useState(null)
     const [templateId, setTemplateId] = useState(0)
-    //const [scheduleDay, setScheduleDay] = useState(0)
+    const [htmlSelected, setHtmlSelected] = useState(false)
+    console.log('html', htmlSelected)
+
+    const [isHTML, setIsHTML] = useState(false)
 
     //setting errors
     const [errors, setErrors] = useState({})
@@ -61,9 +63,46 @@ const Campaign = (props) => {
         {label: 'Email', value: 2}
     ]
 
-    const templates = async (input) => {
-        return loadOptions('template', input, 1, 12)
+    const templates = async (search) => {
+        return loadOptions('template/getByIsHTML', search, 1, 10, isHTML)
+
     }
+
+   /* const templates = async (pageIndex = 1, pageSize =  10, searchQuery = undefined, isHTML = false) => {
+          return await httpService._get(`${baseURL}template/getByIsHTML?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&isHTML=${isHTML}`)
+                .then(response => {
+
+                    // success case
+                    if (response.status === 200 && response.data.statusCode === 200) {
+                        console.log('success', response)
+                        const fnal = response.data.data.map(d =>  {
+                            return {label: `${d.name}`, value: d.id}
+                        })
+                        console.log('ffffff', fnal)
+                        return fnal
+
+                        //setisHTML(final)
+                    } else {
+                        //general Error Action
+                        toast.error(response.data.message)
+                    }
+                }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+*/
+    useEffect(() => {
+        console.log('cccccc')
+        if (type !== null) {
+            if (type.value === 1) {
+                setIsHTML(false)
+            } else {
+                setIsHTML(true)
+            }
+
+        }
+
+    }, [type])
 
     const scheduleDays = [
         {label: 'Today', value: 1},
@@ -82,13 +121,8 @@ const Campaign = (props) => {
     const handleType = (e) => {
         console.log('clickType', e)
         setType(e)
+        setHtmlSelected(true)
     }
-
-    /*useEffect(() => {
-        if (formInitialState && formInitialState.schedule) {
-            setSchedule([...formInitialState.schedule])
-        }
-    }, [isEdit])*/
 
     useEffect(() => {
         dispatch(loadCampaigns())
@@ -187,6 +221,7 @@ const Campaign = (props) => {
         setType(0)
         setTemplateId(0)
         setSchedule([])
+        setHtmlSelected(false)
     }
 
     const setData = () => {
@@ -454,7 +489,7 @@ const Campaign = (props) => {
                                             ) : null}
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    {type && type.value === 1 && <Col md={6}>
                                         <div className='mb-2'>
                                             <label>Template <span className='text-danger'>*</span></label>
                                             <AsyncSelect
@@ -465,13 +500,21 @@ const Campaign = (props) => {
                                                 closeMenuOnSelect={true}
                                                 isMulti = {false}
                                             />
-                                            {!templateId ? errors.templateId && (
-                                                <div className="text-danger">
-                                                    {errors.templateId}
-                                                </div>
-                                            ) : null}
                                         </div>
-                                    </Col>
+                                    </Col>}
+                                    {type && type.value === 2 && <Col md={6}>
+                                        <div className='mb-2'>
+                                            <label>Template <span className='text-danger'>*</span></label>
+                                            <AsyncSelect
+                                                defaultOptions
+                                                value={templateId}
+                                                onChange={e => setTemplateId(e)}
+                                                loadOptions={templates}
+                                                closeMenuOnSelect={true}
+                                                isMulti = {false}
+                                            />
+                                        </div>
+                                    </Col>}
                                 </Row>
 
                                 <Row>
