@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {
     Button,
-    CardFooter,
+    CardFooter, CardText, Col,
     Input,
     Modal,
     ModalBody,
@@ -10,7 +10,7 @@ import {
     OffcanvasBody,
     OffcanvasHeader
 } from 'reactstrap'
-import {UserPlus} from "react-feather"
+import {UserPlus, Star} from "react-feather"
 import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
@@ -26,6 +26,16 @@ import {Link, useHistory} from "react-router-dom"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import {useSelector} from "react-redux"
 import GroupOrderSideCart from "../../../views/GroupOrder/groupOrderSideCart"
+
+import img1 from '../../../assets/images/images/cat-1.png'
+import img2 from '../../../assets/images/images/cat-2.png'
+import img3 from '../../../assets/images/images/cat-3.png'
+import img4 from '../../../assets/images/images/cat-4.png'
+import img5 from '../../../assets/images/images/catring-wine.png'
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import '@styles/react/libs/swiper/swiper.scss'
+import '@styles/base/pages/app-ecommerce-details.scss'
+import SwiperCore, { Navigation } from 'swiper'
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -72,6 +82,73 @@ const Cart = (props) => {
         toggleCanvasStart()
         if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
         else history.push('/checkout')
+    }
+
+    SwiperCore.use([Navigation])
+
+    // ** Related products Slides
+    const slides = [
+        {
+            name: 'Apple Watch Series 6',
+            brand: 'Apple',
+            ratings: 4,
+            price: 399.98,
+            img: img1
+        },
+        {
+            name: 'Apple MacBook Pro - Silver',
+            brand: 'Apple',
+            ratings: 2,
+            price: 2449.49,
+            img: img2
+        },
+        {
+            name: 'Apple HomePod (Space Grey)',
+            brand: 'Apple',
+            ratings: 3,
+            price: 229.29,
+            img: img3
+        },
+        {
+            name: 'Magic Mouse 2 - Black',
+            brand: 'Apple',
+            ratings: 3,
+            price: 90.98,
+            img: img4
+        },
+        {
+            name: 'iPhone 12 Pro',
+            brand: 'Apple',
+            ratings: 4,
+            price: 1559.99,
+            img: img5
+        }
+    ]
+
+    // ** Slider params
+    const params = {
+        className: 'swiper-responsive-breakpoints swiper-container px-4 py-2',
+        slidesPerView: 5,
+        spaceBetween: 55,
+        navigation: true,
+        breakpoints: {
+            1600: {
+                slidesPerView: 4,
+                spaceBetween: 55
+            },
+            1300: {
+                slidesPerView: 3,
+                spaceBetween: 55
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 55
+            },
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 55
+            }
+        }
     }
 
     const RenderDuplicateModal = () => {
@@ -297,8 +374,35 @@ const Cart = (props) => {
 
                         </div>}
 
+                        <div>
+                            <div className='mt-4 mb-2 text-center'>
+                                <h4>Related Products</h4>
+                                <CardText>People also search for this items</CardText>
+                            </div>
+                            <Swiper {...params}>
+                                {slides.map(slide => {
+                                    return (
+                                        <SwiperSlide key={slide.name}>
+                                            <Col lg={12}>
+                                                <a href='/' onClick={e => e.preventDefault()}>
+                                                    <div className='img-container w-1500 mx-auto py-75'>
+                                                        <img src={slide.img} alt='swiper 1' className='img-fluid' />
+                                                    </div>
+                                                    <div className='item-heading'>
+                                                        <h5 className=' mb-0'>{slide.name}</h5>
+                                                    </div>
+                                                    <div className='item-meta'>
+                                                        <CardText className='text-primary mb-0'>${slide.price}</CardText>
+                                                    </div>
+                                                </a>
+                                            </Col>
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
+                        </div>
 
-                        {/* <Link to="/home"><Button
+                        {/*<Link to="/home"><Button
                                 outline
                                 color='secondary'
                                 onClick={toggleCanvasStart}

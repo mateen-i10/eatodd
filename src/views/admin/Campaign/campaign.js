@@ -99,7 +99,7 @@ const Campaign = (props) => {
             } else {
                 setIsHTML(true)
             }
-
+            //setTemplateId(0)
         }
 
     }, [type])
