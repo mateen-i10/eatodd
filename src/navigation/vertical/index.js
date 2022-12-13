@@ -95,14 +95,8 @@ export default [
         navLink: '/CrmEmails',
         children: [
             {
-                id: 'designer',
-                title: 'Designer',
-                icon: <PenTool size={20}/>,
-                navLink: '/designer'
-            },
-            {
                 id: 'template',
-                title: 'Template',
+                title: 'Templates',
                 icon: <PenTool size={20}/>,
                 navLink: '/templates'
             }

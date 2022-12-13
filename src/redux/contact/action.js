@@ -56,7 +56,7 @@ export const addContact = (data) => {
             data,
             method: 'post',
             isSuccessToast: true,
-            successMessage: 'Added Successfully',
+            successMessage: 'Send Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsContactError.type,
             isSuccess: setIsContactSuccess.type

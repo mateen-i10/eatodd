@@ -10,6 +10,7 @@ const DefaultRoute = '/home'
 const Routes = [
     {
         path: '/home',
+        exact: true,
         component: lazy(() => import('../../views/home/Home')),
         layout: 'BlankLayout',
         meta: {
@@ -55,11 +56,6 @@ const Routes = [
     {
         path: '/cateringMenuOrder/:id',
         component: lazy(() => import('../../views/catering/Pages/COMenu')),
-        layout: 'BlankLayout'
-    },
-    {
-        path: '/ourvalues',
-        component: lazy(() => import('../../views/OurValues/OurValues')),
         layout: 'BlankLayout'
     },
     {

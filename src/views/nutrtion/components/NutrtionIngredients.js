@@ -1,11 +1,6 @@
 import React from 'react'
 import {PlusCircle} from "react-feather"
 import '../stylesheet/Nutrition.css'
-import chipotleChilli from "../../OurValues/images/ChipotleChile-md.png"
-import blackBeans from "../../OurValues/images/BlackBeans-sm.png"
-import tomatoPaste from "../../OurValues/images/TomatoPaste-sm.png"
-import romanLattuce from "../../OurValues/images/RomainLettuce-sm.png"
-import '../../OurValues/OurValues.css'
 
 const NutrtionIngredients = () => {
 
@@ -23,30 +18,30 @@ const NutrtionIngredients = () => {
 
             <div className="RealIngredients__ingredients" style={{marginTop:40}}>
                 <div className="RealIngredients__ingredients_list">
-                    <div className="Ingredient">
-                        <div className="Ingredient__img-container">
-                            <img className="" src={chipotleChilli} alt="Black Beans"/>
-                        </div>
-                        <span className="mt-1 Ingredient__text">Black Beans</span>
-                    </div>
-                    <div className="Ingredient">
-                        <div className="Ingredient__img-container">
-                            <img src={blackBeans} alt="Black Beans"/>
-                        </div>
-                        <span className="mt-1 Ingredient__text">Black Beans</span>
-                    </div>
-                    <div className=" Ingredient">
-                        <div className="Ingredient__img-container">
-                            <img src={tomatoPaste} alt="Black Beans"/>
-                        </div>
-                        <span className="mt-1 Ingredient__text">Black Beans</span>
-                    </div>
-                    <div className="Ingredient">
-                        <div className="Ingredient__img-container">
-                            <img src={romanLattuce} alt="Black Beans"/>
-                        </div>
-                        <span className="mt-1 Ingredient__text">Black Beans</span>
-                    </div>
+                    {/*<div className="Ingredient">*/}
+                    {/*    <div className="Ingredient__img-container">*/}
+                    {/*        <img className="" src={chipotleChilli} alt="Black Beans"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span className="mt-1 Ingredient__text">Black Beans</span>*/}
+                    {/*</div>*/}
+                    {/*<div className="Ingredient">*/}
+                    {/*    <div className="Ingredient__img-container">*/}
+                    {/*        <img src={blackBeans} alt="Black Beans"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span className="mt-1 Ingredient__text">Black Beans</span>*/}
+                    {/*</div>*/}
+                    {/*<div className=" Ingredient">*/}
+                    {/*    <div className="Ingredient__img-container">*/}
+                    {/*        <img src={tomatoPaste} alt="Black Beans"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span className="mt-1 Ingredient__text">Black Beans</span>*/}
+                    {/*</div>*/}
+                    {/*<div className="Ingredient">*/}
+                    {/*    <div className="Ingredient__img-container">*/}
+                    {/*        <img src={romanLattuce} alt="Black Beans"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span className="mt-1 Ingredient__text">Black Beans</span>*/}
+                    {/*</div>*/}
                 </div>
             </div>
 

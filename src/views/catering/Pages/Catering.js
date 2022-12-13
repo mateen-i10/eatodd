@@ -7,6 +7,7 @@ import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 import CateringSubForm from "../components/CateringSubForm"
+import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
 
 const Catering = () => {
     const [elHovered, setElHovered] = useState({})
@@ -65,34 +66,45 @@ const Catering = () => {
     return (
         <div>
             <Header/>
-            <div className="container-sm">
-                <div className="row">
-                    <div className="col-lg-4 col-md-5 col-sm-8 col-10 mx-auto">
-                        <img style={{width: '100%'}} className="new mt-5"
-                             src={require("../../../assets/images/images/catring-wine.png").default}
-                             height={400} alt="wine"
-                        />
+            <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px'}}>
+                <section>
+                    <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
+                        <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>Catering</h5>
+                        <h4 style={{color:'white', textAlign: 'center', fontSize: '2.2em', paddingTop:'30px', paddingBottom: '30px', textTransform: 'uppercase'}}>A Warm, Charming Atmosphere</h4>
+                        <p style={{color:'white', textAlign: 'center', fontSize: '1em', paddingBottom:'70px', marginTop: '-30px'}}>Allow us to make your next special event extra special. We cater for all sized<br />functions, ideal for your larger functions or an intimate gathering, our team can<br />curate a menu to suit your taste.</p>
                     </div>
-                    <div className="col-lg-8 col-md-7  col-12 mx-auto mt-5">
+                </section>
+            </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6 mt-5" style={{paddingTop:'100px'}}>
+                        <p className="text-primary fs-2 fw-bolder">OMG Catering
+                        </p>
                         <h1 className="text-black text-uppercase fw-bolder" style={{fontSize: '40px', lineHeight: 1.1}}>
                             ADD WINE TO YOUR <br/>OMG CATERING ORDER
                         </h1>
-                        <div className="fs-4 mb-3 mt-2">
+                        <div className="fs-4 mb-1">
                             <p>OMG will streamline your event planning by taking care of your food + WINE. We offer the
                                 ability to Mix and Match your wine selection to make sure no guest leaves thirsty. </p>
-                            <div className="" style={{fontSize: "15px"}}>*all wine will be sold at wholesale
+                            <div className="" style={{fontSize: "15px"}}>*All wine will be sold at wholesale
                                 prices
                                 <br/>*$120 service fee added to all event orders that include wine <br/>
                                 *please provide 48-hour notice so we can make sure we have your selected wines in stock
                             </div>
                         </div>
+                        {/*<button type="button" className="btn fs-4 "*/}
+                        {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
+                        {/*</button>*/}
                     </div>
-
+                    <div className="col-md-6">
+                        <img className="new mt-5"
+                             src={require("../../../assets/images/images/catring-wine.png").default}
+                             height={500} style={{marginLeft: "100px"}}  alt="wine"
+                        />
+                    </div>
                 </div>
             </div>
-
-            <div className="fs-1 fw-bolder text-primary mb-5 mt-5 text-center">Build for your loved one's</div>
-
+            <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"100px", paddingBottom:"100px"}}>Build for your loved One's</div>
             {cateringMenu.length ? <div className="container-sm mb-3">
                 <div className="row mt-3 justify-content-center">
                     <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>

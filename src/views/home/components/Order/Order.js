@@ -252,59 +252,6 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-            <div className="featured-container-full">
-                <div className="featured-container container ">
-                    <div className=" row">
-                        <div
-                            className="header col-12 d-flex flex-column align-items-center justify-content-center mt-4">
-                            <h2 className="card-title">1-Tap Orders</h2>
-                            <div className="sub-header-text">Sometimes it's hard to choose. We made it
-                                easy with these favorites.
-                            </div>
-                        </div>
-                        <div className="universal-pce">
-                            <div className="container-sm">
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <div className="meal-card">
-                                            <img
-                                                src="https://jthemes.net/themes/html/testo/files/images/offer-5.jpg"
-                                                alt="Meal Image"
-                                                className="meal-img"/>
-                                            <div className="meal-info">
-                                                <div className="meal-name">Meal Name 1</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div className="meal-card">
-                                            <img
-                                                src="https://jthemes.net/themes/html/testo/files/images/offer-11.jpg"
-                                                alt="Meal Image"
-                                                className="meal-img"/>
-                                            <div className="meal-info">
-                                                <div className="meal-name">Meal Name 2</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div className="meal-card col-md-4">
-                                            <img
-                                                src="https://jthemes.net/themes/html/testo/files/images/offer-7.jpg"
-                                                alt="Meal Image"
-                                                className="meal-img "/>
-                                            <div className="meal-info">
-                                                <div className="meal-name">Meal Name 3</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div className="">
                 <div className="container-sm">
                     <div className="row mb-2">

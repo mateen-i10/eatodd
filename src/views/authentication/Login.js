@@ -125,20 +125,20 @@ const LoginCover = () => {
                         <div className='divider my-2'>
                             <div className='divider-text'>or</div>
                         </div>
-                        <div className='auth-footer-btn d-flex justify-content-center'>
-                            <Button color='facebook'>
-                                <Facebook size={14} />
-                            </Button>
-                            <Button color='twitter'>
-                                <Twitter size={14} />
-                            </Button>
-                            <Button color='google'>
-                                <Mail size={14} />
-                            </Button>
-                            <Button className='me-0' color='github'>
-                                <GitHub size={14} />
-                            </Button>
-                        </div>
+                        {/*<div className='auth-footer-btn d-flex justify-content-center'>*/}
+                        {/*    <Button color='facebook'>*/}
+                        {/*        <Facebook size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button color='twitter'>*/}
+                        {/*        <Twitter size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button color='google'>*/}
+                        {/*        <Mail size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button className='me-0' color='github'>*/}
+                        {/*        <GitHub size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*</div>*/}
                     </Col>
                 </Col>
             </Row>
