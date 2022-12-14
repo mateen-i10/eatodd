@@ -85,30 +85,17 @@ const ProductCard = ({
 
                     if (selectedItem.optionType === ProductTypes.Default) {
                         if (lmt === '1' && selectedItem.id === item.id) {
-                            return <div style={{
-                                position: "absolute",
-                                top: "17%",
-                                left: "6%"
-                            }}><CheckSign styles={{marginLeft: 10}} key={`${selectedItem.id}-${index}`}/></div>
+                            return <div className='check3'>
+                                <CheckSign styles={{marginLeft: 10}} key={`${selectedItem.id}-${index}`}/>
+                            </div>
                         } else if (selectedItem.id === item.id) {
-                            return <div className="" style={{
-                                position: "absolute",
-                                top: "17%",
-                                left: "6%"
-                            }}><ExtraQty value={lmt} key={`${selectedItem.id}-${index}`}/></div>
+                            return <div className="check3">
+                                <ExtraQty value={lmt} key={`${selectedItem.id}-${index}`}/>
+                            </div>
                         }
                     } else if (selectedItem.optionType === ProductTypes.Numeric && selectedItem.id === item.id) {
                         const option = selectedItem.options.find(p => p.isSelected)
-                        return <div className="" style={{
-                            marginTop: 11,
-                            marginLeft: 8,
-                            position: 'absolute',
-                            top: "1%",
-                            left: "-41%",
-                            backgroundColor: 'transparent',
-                            zIndex: 1
-
-                        }}>
+                        return <div className="class2" >
                             <Counter
                                 min={option ? option.min : 1}
                                 max={option ? option.max : 0}

@@ -26,11 +26,10 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                     <div className="row g-0">
                         <div className=" col-4">
                             {isChecked &&
-                                <div className=" " style={{
-                                    position: "absolute",
-                                    top: "17%",
-                                    left: "4.6%"
-                                }}><CheckSign styles={{marginLeft: 0}}/>
+                                <div className="check3" >
+                                    <div>
+                                        <CheckSign />
+                                    </div>
                                 </div>}
                             <ProductImage
                                 attachment={attachment}
