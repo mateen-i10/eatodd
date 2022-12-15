@@ -129,7 +129,7 @@ const Sections = (props) => {
         return <div className='ms-1'>
             <h5>Section Item</h5>
             {sectionItems.map((i, index) => {
-                return <div className='row mt-1'>
+                return <div key={i.productId} className='row mt-1'>
                     <div className='col-4'>
                         <AsyncSelect
                             defaultOptions

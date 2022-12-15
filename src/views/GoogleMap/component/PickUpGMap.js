@@ -93,4 +93,3 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
 }
 
 export default React.memo(PickUpGMap)
-

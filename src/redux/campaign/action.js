@@ -11,7 +11,7 @@ import {
 
 const url = 'campaign'
 
-export const loadCampaigns = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadCampaigns = (pageIndex = 1, pageSize =  10, searchQuery = null) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({

@@ -9,9 +9,7 @@ const BussinessDetailsForm = (props) => {
                 <CardHeader>
                     <h3>{props.FormTitle}</h3>
                 </CardHeader>
-
                 <hr/>
-
                 <CardBody>
                     <form className="row g-3">
                         <div className="col-md-6">

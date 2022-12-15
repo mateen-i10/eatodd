@@ -28,16 +28,7 @@
 /*        padding: 0;*/
 /*    }*/
 /*}*/
-.FoodHasThePower__power{
 
-    height: 100vh;
-    width: 100%;
-    background-image: url("images/background-tile.jpg");
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-}
 .FoodHasThePower__power_img{
     width: 92%;
     height: 90%;
@@ -56,10 +47,7 @@
     color: rgb(69 20 0);
     font-family: Gotham-Medium, Arial, sans-serif;
 }
-.FoodHasThePower__bowl{
-    background-image: url("images/background-tile.jpg");
-    /*width: 99.77vw;*/
-}
+
 
 .FoodHasThePower__hero-bowl_img{
     height: auto;
@@ -83,13 +71,7 @@ img {
 .FoodHasThePower__hero-burrito_img{
     width: 100%;
 }
-.FoodHasThePower__thought-animation{
-    background-image: url("images/background-tile.jpg");
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 .FoodHasThePower__thought-animation img{
     width: 70%;
 }

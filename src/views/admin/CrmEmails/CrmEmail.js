@@ -236,7 +236,7 @@ const CrmEmail = () => {
                             className='dataTable-filter mb-50'
                             type='text'
                             bsSize='sm'
-                            PlaceHolder='Search'
+                            placeholder='Search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}
@@ -271,7 +271,7 @@ const CrmEmail = () => {
                             className='dataTable-filter mb-50'
                             type='text'
                             bsSize='sm'
-                            PlaceHolder='Search'
+                            placeholder='Search'
                             id='search-input'
                             value={searchValue}
                             onChange={handleFilter}

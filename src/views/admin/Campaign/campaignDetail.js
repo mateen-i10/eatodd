@@ -77,14 +77,14 @@ const campaignDetail = ({match}) => {
                                                     <p className='fw-bolder'>Template Name:</p>
                                                     <CardText className="mmb-25 ms-1 mb-1">{`${campaign.template?.name}`}</CardText>
                                                 </div>
-                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                {/*<div className='mt-2 invoice-date-wrapper ps-1'>
                                                     <p className='fw-bolder'>isHTML:</p>
                                                     <CardText className="mmb-25 ms-1 mb-1">
                                                         <Badge className="" color={'light-success'} pill>
-                                                            {campaign.template?.isHtml}
+                                                            {campaign.template?.isHtml ? 'True' : 'False'}
                                                         </Badge>
                                                     </CardText>
-                                                </div>
+                                                </div>*/}
                                             </Col>
                                             <Col xl={6} className="p-0">
                                                 <div className='mt-2 invoice-date-wrapper ps-1'>
