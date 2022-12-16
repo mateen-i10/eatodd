@@ -28,6 +28,7 @@ export const loadRestaurants = (pageIndex = 1, pageSize =  12, searchQuery = nul
         }))
     }
 }
+
 export const getRestaurant = (id, isEdit = false) => {
     console.log("dataGet", isEdit)
     return async dispatch => {
@@ -92,6 +93,22 @@ export const updateRestaurant = (data) => {
             isSuccess: setIsRestaurantSuccess.type
         }))
         dispatch(setIsEdit(false))
+    }
+}
+
+export const addLocationToRestaurant = (data) => {
+    console.log('resDataLocation', data)
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/AssignLocationToRestaurant`,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Location Added to Restaurant Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsRestaurantError.type,
+            isSuccess: setIsRestaurantSuccess.type
+        }))
     }
 }
 
