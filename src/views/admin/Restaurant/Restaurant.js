@@ -9,7 +9,6 @@ import {
     BookOpen,
     ChevronDown,
     Codesandbox,
-    DollarSign,
     Edit,
     FileText,
     MoreVertical,
@@ -160,10 +159,8 @@ const Restaurant = (props) => {
                 }
                 return element
             })
-
             setRestaurantSchedule(newArray)
         }
-
     }
 
     const child = () => {

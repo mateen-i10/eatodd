@@ -60,6 +60,8 @@ const Product = (props) => {
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
 
+    const [d, setD] = useState()
+
     const generalProducts = (input) => {
         return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
             .then(response => {
@@ -67,6 +69,7 @@ const Product = (props) => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response.data.data.map(d =>  {
+                        setD(response.data.data)
                         return {label: `${d.name}`, value: d.id}
                     })
                 } else {
@@ -114,7 +117,7 @@ const Product = (props) => {
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'WholePrice', placeholder: 'Enter WholePrice', name:'wholePrice', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Discount', placeholder: 'Enter Discount', name:'discount', isRequired:false, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Number, label: 'Quantity', placeholder: 'Enter Quantity', name:'quantity', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxAmount', placeholder: 'Enter TaxAmount', name:'taxAmount', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'TaxPercentage', placeholder: 'Enter TaxPercentage', name:'taxPercentage', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Select, label: 'Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false},
@@ -287,7 +290,7 @@ const Product = (props) => {
                restaurant: Joi.required().label("Restaurant")
            })
 
-           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value}
+           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value, optionType: d[formState.generalProduct?.value].optionType}
        }
 
        const keys = Object.keys(finalData)
@@ -298,6 +301,7 @@ const Product = (props) => {
         }
 
         console.log(finalData, "lets see")
+        console.log(d, "the d")
         console.log(formState, "formState")
         console.log(finalSchema, "finalSchema")
 

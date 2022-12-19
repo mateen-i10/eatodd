@@ -481,7 +481,6 @@ const Campaign = (props) => {
                                                         <Select
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
-                                                            defaultValue={}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
