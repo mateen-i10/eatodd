@@ -1,18 +1,11 @@
 import React from 'react'
-import {FaCheck} from "react-icons/all"
+import { Check } from "react-feather"
 
 const CheckSign = ({styles}) => {
     return (
-        <div
-            className='rounded-circle border-white text-white '
-            style={{
-                position: "absolute",
-                height: 60,
-                width: 60,
-                backgroundColor: 'rgba(129, 190, 65, .9)'
-            }}>
-            <div style={{...styles, marginTop: 12}}>
-                <FaCheck size={35}/>
+        <div className='rounded-circle border-white text-white checkStyle'>
+            <div>
+                <Check style={{...styles}} size={35}/>
             </div>
         </div>
     )

@@ -22,9 +22,9 @@ import Select from "react-select"
 import {toast} from "react-toastify"
 import {setDetailLoading} from "../../../redux/campaign/reducer"
 import moment from "moment"
-import {loadOptions} from "../../../utility/Utils"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
+import {loadOptions} from "../../../utility/Utils"
 
 const Campaign = (props) => {
 
@@ -41,14 +41,19 @@ const Campaign = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const dispatch = useDispatch()
     const [formModal, setFormModal] = useState(false)
+
     const [edit, setEdit] = useState(false)
 
     const scheduleObject = {scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}
     const [schedule, setSchedule] = useState([scheduleObject])
 
     const [name, setName] = useState('')
-    const [type, setType] = useState(0)
+    const [type, setType] = useState(null)
     const [templateId, setTemplateId] = useState(0)
+    const [htmlSelected, setHtmlSelected] = useState(false)
+    console.log('html', htmlSelected)
+
+    const [isHTML, setIsHTML] = useState(false)
 
     //setting errors
     const [errors, setErrors] = useState({})
@@ -58,9 +63,46 @@ const Campaign = (props) => {
         {label: 'Email', value: 2}
     ]
 
-    const templates = async (input) => {
-        return loadOptions('template', input, 1, 12)
+    const templates = async (search) => {
+        return loadOptions('template/getByIsHTML', search, 1, 10, isHTML)
+
     }
+
+   /* const templates = async (pageIndex = 1, pageSize =  10, searchQuery = undefined, isHTML = false) => {
+          return await httpService._get(`${baseURL}template/getByIsHTML?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&isHTML=${isHTML}`)
+                .then(response => {
+
+                    // success case
+                    if (response.status === 200 && response.data.statusCode === 200) {
+                        console.log('success', response)
+                        const fnal = response.data.data.map(d =>  {
+                            return {label: `${d.name}`, value: d.id}
+                        })
+                        console.log('ffffff', fnal)
+                        return fnal
+
+                        //setisHTML(final)
+                    } else {
+                        //general Error Action
+                        toast.error(response.data.message)
+                    }
+                }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+*/
+    useEffect(() => {
+        console.log('cccccc')
+        if (type !== null) {
+            if (type.value === 1) {
+                setIsHTML(false)
+            } else {
+                setIsHTML(true)
+            }
+            //setTemplateId(0)
+        }
+
+    }, [type])
 
     const scheduleDays = [
         {label: 'Today', value: 1},
@@ -79,13 +121,8 @@ const Campaign = (props) => {
     const handleType = (e) => {
         console.log('clickType', e)
         setType(e)
+        setHtmlSelected(true)
     }
-
-    useEffect(() => {
-        if (formInitialState && formInitialState.schedule) {
-            setSchedule([...formInitialState.schedule])
-        }
-    }, [isEdit])
 
     useEffect(() => {
         dispatch(loadCampaigns())
@@ -106,10 +143,10 @@ const Campaign = (props) => {
         console.log('eee', e)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                //const date = e.value === 1 ? moment(new Date().getDate()).format() : e.value === 2  ? moment(new Date().getDate() + 1).format() : e.value === 3  ? moment(new Date().getDate() + 7).format() : ''
-                const date = moment(new Date(e.value)).format()
-                //s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
-                s =  {...s, scheduleDay: e.value === 4 ? e.value : date, isDate: e.value === 4}
+                const currentDate = new Date()
+                const date = e.value === 1 ? moment(currentDate.getDate()).format() : e.value === 2  ? moment(currentDate.setDate(currentDate.getDate() + 1)).format() : e.value === 3  ? moment(currentDate.setDate(currentDate.getDate() + 7)).format() : ''
+                console.log('dddd', date)
+                s =  {...s, scheduleDay: e.value, isDate: e.value === 4, scheduleDate: date}
             }
             return s
         })
@@ -183,16 +220,18 @@ const Campaign = (props) => {
         setName('')
         setType(0)
         setTemplateId(0)
-        setSchedule([scheduleObject.scheduleDay = 0])
+        setSchedule([])
+        setHtmlSelected(false)
     }
 
     const setData = () => {
         try {
+            //setId(formInitialState.id)
             setName(formInitialState.name)
             setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
-            setTemplateId({label: formInitialState.template.name, value: formInitialState.template.value})
+            setTemplateId({label: formInitialState.template.name, value: formInitialState.template.id})
             setSchedule(formInitialState.schedules.map(s => {
-                return {scheduleDate: s.scheduleDate, scheduleDay: s.scheduleDay, repeat: s.repeat}
+                return {scheduleDate: moment(new Date(s.scheduleDate)).format(), scheduleDay: s.scheduleDay, repeat: s.repeat}
             }))
             //setEdit(true)
         } catch (e) {
@@ -204,13 +243,18 @@ const Campaign = (props) => {
         if (isEdit) setData()
     }, [formInitialState, isEdit])
 
+    const addClickBtn = () => {
+        setName('')
+        setType(0)
+        setTemplateId(0)
+        setSchedule([{scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}])
+    }
+
     const editClick = (id) => {
         console.log('idEdit', id)
         dispatch(getCampaign(id, true))
-        //console.log('idEdit123', dispatch(getCampaign(id, true)))
         setFormModal(!formModal)
         setEdit(true)
-        //setModalLoading(true)
     }
 
     const handleSubmit = () => {
@@ -232,10 +276,15 @@ const Campaign = (props) => {
             console.log(isError, "errors")
             const {error} = isError
             if (!error) {
-                console.log('edit data', finalData)
+                console.log('submit data', finalData)
                 dispatch(setDetailLoading(true))
-                edit ? dispatch(updateCampaign(finalData)) : dispatch(addCampaign(finalData))
+                edit ? dispatch(updateCampaign({id: formInitialState.id,
+                    ...finalData,
+                    schedules: finalData.schedules.map(d => {
+                           return  {...d, scheduleDate: moment(new Date(d.scheduleDate)).format()}
+                    })})) : dispatch(addCampaign(finalData))
                 handleClose()
+                setEdit(false)
                 setFormModal(!formModal)
             } else {
                 const errorData = {}
@@ -374,7 +423,10 @@ const Campaign = (props) => {
                                         />
                                     </div>
                                     <div className='col-4'>
-                                        <Button className='float-end' color='primary' onClick={() => setFormModal(!formModal)}>
+                                        <Button className='float-end' color='primary' onClick={() => {
+                                            setFormModal(true)
+                                            addClickBtn()
+                                        }}>
                                             <Plus size={15} />
                                             <span className='align-middle ms-50'>Add Campaign</span>
                                         </Button>
@@ -399,8 +451,15 @@ const Campaign = (props) => {
 
             <div className='demo-inline-spacing'>
                 <div>
-                    <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} fade={true} backdrop="static" className='modal-lg'>
-                        <ModalHeader toggle={() => setFormModal(!formModal)}>Login Form</ModalHeader>
+                    <Modal isOpen={formModal} toggle={() => {
+                        setFormModal(!formModal)
+                        setEdit(false)
+                    }} fade={true} backdrop="static" className='modal-lg'>
+                        <ModalHeader toggle={() => {
+                            setFormModal(!formModal)
+                            setEdit(false)
+                            handleClose()
+                        }}>Campaign Form</ModalHeader>
 
                         <ModalBody>
                                 <Row>
@@ -430,7 +489,7 @@ const Campaign = (props) => {
                                             ) : null}
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    {type && type.value === 1 && <Col md={6}>
                                         <div className='mb-2'>
                                             <label>Template <span className='text-danger'>*</span></label>
                                             <AsyncSelect
@@ -441,36 +500,47 @@ const Campaign = (props) => {
                                                 closeMenuOnSelect={true}
                                                 isMulti = {false}
                                             />
-                                            {!templateId ? errors.templateId && (
-                                                <div className="text-danger">
-                                                    {errors.templateId}
-                                                </div>
-                                            ) : null}
                                         </div>
-                                    </Col>
+                                    </Col>}
+                                    {type && type.value === 2 && <Col md={6}>
+                                        <div className='mb-2'>
+                                            <label>Template <span className='text-danger'>*</span></label>
+                                            <AsyncSelect
+                                                defaultOptions
+                                                value={templateId}
+                                                onChange={e => setTemplateId(e)}
+                                                loadOptions={templates}
+                                                closeMenuOnSelect={true}
+                                                isMulti = {false}
+                                            />
+                                        </div>
+                                    </Col>}
                                 </Row>
 
                                 <Row>
                                     <div className='ms-1'>
                                         <h5>Schedule List</h5>
                                         {schedule.map((i, index) => {
-                                            return <div>
+                                            return <div key={i.scheduleDay}>
                                                 <div className='row mt-1'>
                                                     <div className='col-3'>
                                                         <Select
                                                             onChange={(e) => {
                                                                 onValueScheduleDay(index, e)
                                                             }}
+                                                            value={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
                                                             options={scheduleDays}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
                                                     </div>
-                                                    {i.isDate && <div className='col-4'>
+                                                    {(i.isDate || i.scheduleDay === 4) && <div className='col-4'>
                                                         <Datetime
                                                             placeholder='Schedule Date'
                                                             value={i.scheduleDate}
-                                                            dateFormat={true}
+                                                            //dateFormat={true}
+                                                            timeFormat={false}
+                                                            dateFormat="DD-MM-YY"
                                                             closeOnSelect={true}
                                                             onChange={(e) => {
                                                                 onDateChange(index, e)
@@ -481,6 +551,7 @@ const Campaign = (props) => {
                                                         <Select
                                                             onChange={(e) => onValueRepeat(index, e)}
                                                             options={repeat}
+                                                            value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
                                                             closeMenuOnSelect={true}
                                                             isMulti = {false}
                                                         />
@@ -506,6 +577,7 @@ const Campaign = (props) => {
                         <ModalFooter>
                                 <Button color='danger' onClick={() => {
                                     setFormModal(!formModal)
+                                    setEdit(false)
                                     handleClose()
                                 }}>
                                     Close

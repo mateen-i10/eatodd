@@ -46,6 +46,7 @@ import Datetime from "react-datetime"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import moment from "moment"
+import CompareData from "./CompareData"
 
 const Restaurant = (props) => {
 
@@ -123,6 +124,17 @@ const Restaurant = (props) => {
         }
     ]
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
+
+    const [modalIsOpen, setIsOpen] = useState(false)
+
+    const openFromParent = () => {
+        setIsOpen(true)
+    }
+
+    const handleCloseModal = (event) => {
+        console.log(event)
+        setIsOpen(false)
+    }
 
     useEffect(() => {
         if (formInitialState && formInitialState.restaurantSchedules) {
@@ -318,6 +330,10 @@ const Restaurant = (props) => {
         setModalTitle('Add Restaurant')
         toggle()
     }
+ /*   const addCompareModal = (e) => {
+        console.log('clicked', e)
+    }*/
+
 
     const editClick = (id) => {
         console.log("edit", id)
@@ -513,6 +529,7 @@ const Restaurant = (props) => {
                             <CardTitle tag='h4'>Restaurant</CardTitle>
                             <h6 className='mt-1'>{date.toLocaleTimeString('en-us', { weekday:"long", month:"long", year:"numeric", day:"numeric"})}</h6>
                         </div>
+                        <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} >Assign Location To Restaurant</Button.Ripple>
                         <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
@@ -554,6 +571,10 @@ const Restaurant = (props) => {
                        isLoading = {isModalLoading}
                        handleSubmit={handleSubmit}
                        children={child()}
+            />
+
+            <CompareData IsModalOpened={modalIsOpen}
+                         onCloseModal={handleCloseModal}
             />
 
         </Fragment>

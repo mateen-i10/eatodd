@@ -224,7 +224,7 @@ const CrmSms = (props) => {
                         <Input
                             className='dataTable-filter mb-50'
                             type='text'
-                            size='sm'
+                            bsSize='sm'
                             placeholder='search'
                             id='search-input'
                             value={searchValue}
