@@ -302,7 +302,7 @@ const Product = (props) => {
                restaurant: Joi.required().label("Restaurant")
            })
 
-           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value, optionType: d[formState.generalProduct?.value].optionType}
+           finalData = {generalProductId: formState.generalProduct?.value, restaurantId: formState.restaurant?.value, optionType: d[formState.generalProduct?.value]?.optionType}
        }
 
        const keys = Object.keys(finalData)
