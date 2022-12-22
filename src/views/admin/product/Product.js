@@ -37,6 +37,7 @@ import AsyncSelect from "react-select/async"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
+import AssignItems from "./AssignItems"
 
 const Product = (props) => {
 
@@ -61,6 +62,17 @@ const Product = (props) => {
     const [searchValue, setSearchValue] = useState('')
 
     const [d, setD] = useState()
+
+    const [modalIsOpen, setIsOpen] = useState(false)
+    const openFromParent = () => {
+        setIsOpen(true)
+    }
+
+    const handleCloseModal = (event) => {
+        console.log(event)
+        setIsOpen(false)
+    }
+
 
     const generalProducts = (input) => {
         return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
@@ -422,6 +434,7 @@ const Product = (props) => {
                             <CardTitle tag='h4'>Product</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
+                        <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} >Assign Items to Product</Button.Ripple>
                         <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
                         <UncontrolledTooltip placement='left' target='positionLeft'>
                             To Load General products by Category and Subcategory Please apply the filters below before you open the form.
@@ -499,6 +512,10 @@ const Product = (props) => {
                            optionType={formState.optionType?.value}
                            isFormSubmit={isSubmit}
                        />}
+            />
+
+            <AssignItems IsModalOpened={modalIsOpen}
+                         onCloseModal={handleCloseModal}
             />
 
         </Fragment>

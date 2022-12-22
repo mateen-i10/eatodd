@@ -117,3 +117,19 @@ export const updateImage = (data) => {
         })
     }
 }
+
+export const addItemsToProduct = (data) => {
+    console.log('resDataPro', data)
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/MapSquareItem`,
+            data,
+            method: 'put',
+            isSuccessToast: true,
+            successMessage: 'Items Added to Product Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsproductError.type,
+            isSuccess: setIsproductSuccess.type
+        }))
+    }
+}
