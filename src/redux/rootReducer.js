@@ -41,6 +41,7 @@ import contact from "./contact/reducer"
 import campaign from "./campaign/reducer"
 import template from "./template/reducer"
 import review from "./review/reducer"
+import generalRecommendation from "./generalRecommendation/reducer"
 
 const rootReducer = {
     auth,
@@ -83,7 +84,8 @@ const rootReducer = {
     contact,
     campaign,
     template,
-    review
+    review,
+    generalRecommendation
 }
 
 export default rootReducer

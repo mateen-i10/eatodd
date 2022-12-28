@@ -38,6 +38,7 @@ import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import AssignItems from "./AssignItems"
+import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
 
 const Product = (props) => {
 
@@ -73,6 +74,14 @@ const Product = (props) => {
         setIsOpen(false)
     }
 
+    const [recommendedModalIsOpen, setRecommendedModalIsOpen] = useState(false)
+    const openRecommendedFromParent = () => {
+        setRecommendedModalIsOpen(true)
+    }
+    const handleRecommendedCloseModal = (event) => {
+        console.log(event)
+        setRecommendedModalIsOpen(false)
+    }
 
     const generalProducts = (input) => {
         return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
@@ -435,6 +444,7 @@ const Product = (props) => {
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
                         <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} >Assign Items to Product</Button.Ripple>
+                        <Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} >Assign General Recommendations to Product</Button.Ripple>
                         <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
                         <UncontrolledTooltip placement='left' target='positionLeft'>
                             To Load General products by Category and Subcategory Please apply the filters below before you open the form.
@@ -516,6 +526,10 @@ const Product = (props) => {
 
             <AssignItems IsModalOpened={modalIsOpen}
                          onCloseModal={handleCloseModal}
+            />
+
+            <AssignGeneralRecommendation IsModalOpened={recommendedModalIsOpen}
+                         onCloseModal={handleRecommendedCloseModal}
             />
 
         </Fragment>
