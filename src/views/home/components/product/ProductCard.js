@@ -146,11 +146,12 @@ const ProductCard = ({
                 <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 &&
                         <div className=" moreAddon cursor-pointer me-2" id={item?.id}
-                             onClick={() => setCustomize(!customize)}>
+                             onMouseOver={() => setCustomize(!customize)}>
                             <MoreVertical size={25}/>
                         </div>}
-                    <h5 className=" fw-bolder text-dark me-2 "
-                        style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}</h5>
+                    {/*<h5 className=" fw-bolder text-dark me-2 "
+                        style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
+                    </h5>*/}
                 </div>
             </div>
             }

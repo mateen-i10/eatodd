@@ -14,6 +14,9 @@ import http, {baseURL} from "../../../utility/http"
 import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch} from "react-redux"
+import OrdersList from "./OrdersList"
+
+
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -59,6 +62,15 @@ const Menu = () => {
         }
 
     }, [response])
+
+    const [canvasOpen, setCanvasOpen] = useState(false)
+    //console.log('canvas', canvasOpen)
+
+    useEffect(() => {
+        if (selectedProducts.length > 0) {
+            setCanvasOpen(true)
+        }
+    }, [selectedProducts])
 
     const dispatchingItems = () => {
         // calculating meal total price
@@ -227,6 +239,7 @@ const Menu = () => {
                 dispatchingItems={dispatchingItems}
                 setMealName={setMealName}
             />
+            <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
         </>
     )
 }
