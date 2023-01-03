@@ -1,6 +1,7 @@
 import React from 'react'
 import CheckSign from "../../home/options/components/Utility/CheckSign"
 import ProductImage from "../../home/components/product/ProductImage"
+import {Input, Label} from "reactstrap"
 
 
 const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
@@ -21,7 +22,7 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                  borderWidth: 1,
                  borderColor: "black"
              }}>
-            <div className="row ">
+            <div className="row cursor-pointer">
                 <div className=" col-9 ">
                     <div className="row g-0">
                         <div className=" col-4">
@@ -48,6 +49,7 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                                 <div
                                     className="card-title mb-0 text-start text-uppercase text-primary fw-bolder"
                                     style={{fontSize: '1.2rem'}}>{product.name}
+                                   <h5 className=" fw-bolder text-dark me-2 text-lowercase" style={{marginTop: 15}}> ${product.price}</h5>
                                 </div>
                                 <p className="text-dark">{product.description}</p>
                             </div>
@@ -55,7 +57,19 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                     </div>
                 </div>
                 <div className=" col-3 mt-2 text-end">
-                    <h5 className=" fw-bolder text-dark me-2 " style={{marginTop: 25}}>add ${product.price}</h5>
+                    <div className='demo-inline-spacing'>
+                        <div className='form-check form-check-success'>
+                            {isChecked ? <Input type='checkbox' id='success-checkbox' checked/> : <Input type='checkbox' id='success-checkbox' />}
+                            {isChecked ? <Label className='form-check-label' for='success-checkbox'>
+                                Remove
+                            </Label> : <Label className='form-check-label' for='success-checkbox'>
+                                Add
+                            </Label>}
+                            {/*<Label className='form-check-label' for='success-checkbox'>
+                                Add
+                            </Label>*/}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
