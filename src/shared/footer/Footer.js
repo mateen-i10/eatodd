@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
             <footer className="footer">
                 <div className="container-sm">
-                    <Row>
+                    <Row className='mt-5'>
                         <Col md={3}>
                             <div className="footer-info mb-40">
                                 <div className="footer-logo"><img src={logo} alt="footer-logo"/></div>

@@ -3,6 +3,8 @@ import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
+import gallery_1 from "../../../../assets/images/gallery_1.jpg"
+import gallery_4 from "../../../../assets/images/gallery_4.jpg"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
@@ -24,9 +26,6 @@ import SwiperCore, {
 import '@styles/react/libs/swiper/swiper.scss'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
-
-//importing images
-import img2 from '../../../../assets/images/updated/_DSC1188.jpeg'
 
 const Order = () => {
     //get redux state
@@ -142,8 +141,8 @@ const Order = () => {
                         {isUserLoggedIn() ? null : <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
-                                    <Link to='/signup'>
-                                        <div>Create an Account</div>
+                                    <Link to='/wine/membership'>
+                                        <div>Go To Membership</div>
                                     </Link>
                                 </div>
                                 <div className="fw-bolder text-black m-1 text-uppercase ">OR</div>
@@ -189,29 +188,6 @@ const Order = () => {
                         }) : <ComponentSpinner/>
                         // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                     }
-                    {/*{mainCategory.length ? <div*/}
-                    {/*    className=" top-wine-menu col-md-3 col-12 d-flex flex-column align-items-center justify-content-center zindex-2 cursor-pointer ">*/}
-                    {/*    <div className="wine-item "*/}
-                    {/*         onClick={() => {*/}
-                    {/*             history.push("/wine/homepage")*/}
-                    {/*         }}*/}
-                    {/*    >*/}
-                    {/*        <div className="wine-thumbnail align-items-center justify-content-center">*/}
-                    {/*            <img*/}
-                    {/*                src={require("../../../../assets/images/wineClub/Ferrari Carrano.png").default}*/}
-                    {/*                alt="wine"*/}
-                    {/*                width={150}*/}
-                    {/*                height={180}*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*        <div className="text-center">*/}
-                    {/*            <div className="wine-name fs-3 fw-bolder text-primary">Wine</div>*/}
-                    {/*            <div className="wine-order fs-4 text-black fw-bolder">Order*/}
-                    {/*                <div className="arrow-right" style={{height: 20, width: 20}}></div>*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div> : ""}*/}
                 </div>
             </div>
             <div className="promo-banner container-fluid  ">
@@ -222,16 +198,13 @@ const Order = () => {
                                 <h1 className="banner-title mt-1">CATER YOUR NEXT PARTY</h1>
                                 <div className="banner-subtitle">
                                     <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so
-                                        your
-                                        guests can enjoy taste and flavor that happens to be healthy!.</p>
+                                        your guests can enjoy taste and flavor that happens to be healthy!.</p>
                                 </div>
                                 <Link to="/catering">
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                                 </Link>
                             </div>
-                            <img
-                                src="https://www.chipotle.com/content/dam/chipotle/global-site-design/en/catering1/cinco-de-mayo/CMG_SpringCatering_Cinco_ST_Desktop.png"
-                                className="img-container col-md-6 col-6" alt="catering order"/>
+                            <img src={gallery_1} className="img-container col-md-6 col-6" alt="catering order"/>
                         </div>
                     </div>
                     <div className="promo col-11 col-md-5 container-fluid ">
@@ -247,7 +220,7 @@ const Order = () => {
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                                 </Link>
                             </div>
-                            <img src={img2} style={{height: '370px'}} className="img-container col-md-6 col-6" alt="catering order"/>
+                            <img src={gallery_4} style={{height: '370px'}} className="img-container col-md-6 col-6" alt="catering order"/>
 
                         </div>
                     </div>

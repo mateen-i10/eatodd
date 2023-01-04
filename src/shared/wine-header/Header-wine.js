@@ -65,7 +65,7 @@ const HeaderWine = ({isSimple}) => {
                     <div className="head-sec-2">
                         <Link to="/wine/homepage"><h2>Home</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
-                        <Link to="/wine/faq"><h2>F.A.Q's</h2></Link>
+                        <Link to="/wine/faq"><h2 className='pe-1'>F.A.Q's</h2></Link>
                         <Link to="#" style={{marginTop: '-10px'}}>
                             {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled">
                                 <UserDropdown/>

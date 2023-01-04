@@ -1,5 +1,6 @@
 import React from 'react'
 import './HeroSection.css'
+import {Link} from "react-router-dom"
 const HeroSection = () => {
     return (
         <div id="faqs-page" className="page-hero-section division">
@@ -13,7 +14,7 @@ const HeroSection = () => {
                                         <div className="breadcrumb-nav">
                                             <nav aria-label="breadcrumb">
                                                 <ol className="breadcrumb d-flex flex-wrap">
-                                                    <li className="breadcrumb-item d-flex"><a href="demo-1.html">Home</a>
+                                                    <li className="breadcrumb-item d-flex"><Link to='/home'>Home</Link>
                                                     </li>
                                                     <li className="breadcrumb-item active d-flex"
                                                         aria-current="page">Wine
