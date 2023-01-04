@@ -9,7 +9,7 @@ const TopShelf = ({attachment, name, description, price}) => {
                     <div className="col-md-4 col-11  ">
                         <ProductImage
                             attachment={attachment}
-                            styles={{width: "100%", height: "270px", borderRadius: 20}}/>
+                            styles={{height: "270px", borderRadius: 20, float: "right"}}/>
                     </div>
                     <div className="col-md-7 col-11 mt-1 ">
                         <div className="align-middle">

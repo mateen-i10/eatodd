@@ -259,7 +259,7 @@ const userReview = (props) => {
             breakClassName='page-item'
             breakLinkClassName='page-link'
             containerClassName={
-                'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
+             'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
             }
         />
     }

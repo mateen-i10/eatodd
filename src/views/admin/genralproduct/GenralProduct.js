@@ -426,7 +426,6 @@ const GenralProducts = (props) => {
 
     const callFunc = () => {
         const refId = subcategoryId
-
         if (refId !== 0) dispatch(loadGenralProducts(currentPage, pageSize, "", refId))
         else console.log('please select a value to search for')
     }

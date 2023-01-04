@@ -156,7 +156,13 @@ const Products = (props) => {
     const AddNewData = () => {
         setFormData([
             ...commonFields,
-            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+            {
+                type:FieldTypes.File,
+                label: 'Image',
+                placeholder: 'image',
+                name:'image',
+                isRequired:false,
+                fieldGroupClasses: 'col-6'}
         ])
         setFormFeilds(1)
         setShowOption(true)
