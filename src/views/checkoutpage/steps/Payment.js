@@ -21,7 +21,8 @@ import http, {baseURL} from "../../../utility/http"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import SquareCard from "../../../components/SquareCard"
 
-const Payment = () => {
+const Payment = (props) => {
+    const {stepper} = props
     const restaurantId = localStorage.getItem('restaurantId')
     const cartData = getCartData()
     const isCatering = cartData && cartData.catering && cartData.catering.length > 0
@@ -217,8 +218,10 @@ const Payment = () => {
                             <Col md='9' sm='12'>
                                 <div className="container-sm">
                                     <SquareCard getTokenFunc={getToken}
-                                                cardVerificationFunc={cardVerification} />
+                                                cardVerificationFunc={cardVerification} stepper={stepper} />
+
                                 </div>
+
                             </Col>
                             <Col md='3' sm='12'>
                                 <div className='amount-payable checkout-options'>

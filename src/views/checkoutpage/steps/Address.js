@@ -372,17 +372,18 @@ const Address = props => {
                                 <CardBody>
                                     <CardText>{shipAddress !== undefined ? `Shipping Address: ${shipAddress}` : ''}</CardText>
                                     <CardText>{shipPhoneNo !== undefined ? `Phone Number: ${shipPhoneNo}` : ''}</CardText>
-                                </CardBody>
+
 
                                 {shipAddress !== undefined ? <Button
                                     block
                                     type='button'
                                     color='primary'
                                     onClick={onSubmit}
-                                    className="btn-next delivery-address w-50"
+                                    className="btn-next delivery-address text-uppercase"
                                 >
                                     Deliver To This Address
                                 </Button> : []}
+                                </CardBody>
                             </Card>
                         </div>
                     </Col>

@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Button, Card, CardBody, Col, Input, InputGroup, InputGroupText, Row, Table} from 'reactstrap'
+import {Button, Card, CardBody, Col, Input, InputGroup, Row, Table} from 'reactstrap'
 import {cartTotalPrice, getCartData} from "../../../utility/Utils"
 
 // ** Styles
@@ -142,7 +142,7 @@ const Cart = props => {
                                         <div className='price-details'>
                                             <h6 className='price-title'>All Price Details</h6>
                                             {item.map((e, index) => (
-                                                <ul key={index} className='list-unstyled' key={e.mealTitle}>
+                                                <ul key={index} className='list-unstyled' >
                                                     <li className='price-detail d-flex'>
                                                         <div className='detail-title flex-fill'>{e.mealTitle}</div>
                                                         <div
@@ -153,7 +153,7 @@ const Cart = props => {
                                             <label className='mb-1'>Enter Coupon Number</label>
                                             <InputGroup className='input-group-merge coupons'>
                                                 <Input placeholder='Coupons'/>
-                                                <InputGroupText className='text-primary ms-0'>Apply</InputGroupText>
+                                                <Button color='primary' className='text-primary ms-0 cursor-pointer'>Apply</Button>
                                             </InputGroup>
                                             <hr/>
                                             <ul className='list-unstyled my-2'>
