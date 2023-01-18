@@ -1,10 +1,9 @@
 import React, {memo, useEffect, useState} from "react"
 import useAPI from "../../../../utility/customHooks/useAPI"
 
-import wineBottle from "../../../../assets/images/wineClub/Duckhorn Vinyards red.png"
-
 const ProductImage = ({attachment, classes}) => {
-    const [imageURL, setImageURL] = useState(wineBottle)
+    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
+    const [imageURL, setImageURL] = useState(defaultImage)
     const [imagePath, setImagePath] = useState('')
 
     // hooks
