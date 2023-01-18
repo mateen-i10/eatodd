@@ -529,8 +529,12 @@ const Restaurant = (props) => {
                             <CardTitle tag='h4'>Restaurant</CardTitle>
                             <h6 className='mt-1'>{date.toLocaleTimeString('en-us', { weekday:"long", month:"long", year:"numeric", day:"numeric"})}</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} >Assign Location To Restaurant</Button.Ripple>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
+                        <row>
+                            <Col className='d-flex justify-content-end'>
+                                <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} style={{marginRight:'4px'}}>Assign Location To Restaurant</Button.Ripple>
+                                <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Restaurant</Button.Ripple>
+                            </Col>
+                        </row>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

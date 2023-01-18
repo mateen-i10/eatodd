@@ -146,6 +146,16 @@ const ProductDetail = ({match}) => {
                                             </div>
                                         </div>
                                     </Col>
+                                    <Col xl={6}>
+                                        <div className='mt-2 row'>
+                                            <div className='col-5'>
+                                                <h5 className='mb-75'>Whole Price:</h5>
+                                            </div>
+                                            <div className='col-7'>
+                                                <CardText>{genralProduct.wholePrice}</CardText>
+                                            </div>
+                                        </div>
+                                    </Col>
                                 </Row>
                             </CardBody>
                         </Col>
