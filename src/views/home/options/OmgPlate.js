@@ -8,7 +8,7 @@ import useAPI from "../../../utility/customHooks/useAPI"
 import {toast} from "react-toastify"
 import ProductsSubcategoryMenu from "../../../components/Products/ProductsSubcategoryMenu"
 import Wines from "../../wine/Pages/wines"
-import NutritionPrefModel from "./components/NutrtionPrefModel"
+// import NutritionPrefModel from "./components/NutrtionPrefModel"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
 import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
@@ -209,7 +209,7 @@ const Menu = () => {
                     description={category?.description}
                 />
                 <hr className="text-dark"/>
-                <NutritionPrefModel/>
+                {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
                     <div className="container-sm">
                         {products && products.length > 0 && products.map(prod => {

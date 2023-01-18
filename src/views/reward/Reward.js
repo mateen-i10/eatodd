@@ -19,14 +19,14 @@ const Reward = () => {
                         <div className="fs-4 mb-1">
                             <p>Earn points while enjoying your favorite flavorful plates and sandwiches, and cash them
                                 out in a variety of ways in the Loyalists Trade Desk! Not a member yet? </p>
-                            <a className="text-decoration-underline " href="#">Program Term</a>
+                            {/*<a className="text-decoration-underline " href="#">Program Term</a>*/}
                         </div>
-                        <button type="button" className="btn fs-4 "
-                                style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now
-                        </button>
+                        {/*<button type="button" className="btn fs-4 "*/}
+                        {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
+                        {/*</button>*/}
                     </div>
                     <div className="col-md-6">
-                        <img style={{width: '570px', height: '360px'}} className="new mt-5"
+                        <img style={{width: '570px', height: '360px'}} className="new mt-5" alt='image'
                              src={require("../../assets/images/updated/position 3.jpeg").default}/>
                     </div>
                 </div>
@@ -36,13 +36,13 @@ const Reward = () => {
                 <div className="row align-items-center justify-content-center g-2">
                     <h1 className="text-center text-primary fw-bolder mb-3 mt-3"> HOW IT WORKS</h1>
                     <div className="col-md-3 col-12 text-center mb-2 ">
-                        <img className="mx-auto mb-3" style={{height: 100, width: 100}}
+                        <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'
                              src={require("../../assets/images/rewards/earn-point.png").default}/>
                         <p className=" fs-4"> 10 points for every $1 spent in the restaurant, in the app, or
                             online.</p>
                     </div>
                     <div className="col-md-3 col-12 text-center mb-2">
-                        <img className="mx-auto mb-3" style={{height: 100, width: 100}}
+                        <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'
                              src={require("../../assets/images/rewards/birthday-cake.png").default}/>
                         <p className=" fs-4"> Let’s just say we won’t forget you on your birthday.</p>
                     </div>
@@ -51,7 +51,7 @@ const Reward = () => {
                             height: 100,
                             width: 100,
                             color: "green"
-                        }} src={require("../../assets/images/rewards/free-food.png").default}/>
+                        }}  src={require("../../assets/images/rewards/free-food.png").default} alt='image'/>
                         <p className=" fs-4">Free Chips & Guac after your first purchase as a
                             member.</p>
                     </div>
