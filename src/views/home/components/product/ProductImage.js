@@ -1,9 +1,10 @@
 import React, {memo, useEffect, useState} from "react"
 import useAPI from "../../../../utility/customHooks/useAPI"
 
-const ProductImage = ({attachment, styles, classes}) => {
-    const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
-    const [imageURL, setImageURL] = useState(defaultImage)
+import wineBottle from "../../../../assets/images/wineClub/Duckhorn Vinyards red.png"
+
+const ProductImage = ({attachment, classes}) => {
+    const [imageURL, setImageURL] = useState(wineBottle)
     const [imagePath, setImagePath] = useState('')
 
     // hooks
@@ -25,7 +26,9 @@ const ProductImage = ({attachment, styles, classes}) => {
     }, [response])
 
     return <>
-        <img src={imageURL} className={classes} alt="product image" style={{...styles}}/>
+        <div style={{justifyContent: "center", display: "flex"}} >
+            <img src={imageURL} className={classes} alt="product image" style={{width: "85%", marginTop: "14px", height: "170px"}} />
+        </div>
     </>
 }
 

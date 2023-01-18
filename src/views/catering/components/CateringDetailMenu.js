@@ -36,8 +36,7 @@ const CateringDetailMenu = ({md, id}) => {
             return <Fragment>
                 <Row className="align-items-center ">
                     {omgCorporateItems.length ? omgCorporateItems.map(item => (
-                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id}
-                                                                                                          item={item}/>
+                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id} item={item}/>
                         </div>
                     )) : <UILoader/>}
                 </Row>
@@ -47,8 +46,7 @@ const CateringDetailMenu = ({md, id}) => {
             return <Fragment>
                 <Row className="align-items-center ">
                     {omgCorporateItems.length ? omgCorporateItems.map(item => (
-                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id}
-                                                                                                          item={item}/>
+                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto"><CateringMenuItems key={item.id} item={item}/>
                         </div>
                     )) : <UILoader/>}
                 </Row>
@@ -58,8 +56,7 @@ const CateringDetailMenu = ({md, id}) => {
             return <Fragment>
                 <Row className="align-items-center ">
                     {omgCorporateItems.length ? omgCorporateItems.map((item) => (
-                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto" key={item.id}><CateringMenuItems
-                            item={item}/>
+                        <div key={item.id} className="col-lg-4 col-sm-6 col-9 mx-auto" key={item.id}><CateringMenuItems item={item}/>
                         </div>
                     )) : <UILoader/>}
                 </Row>
