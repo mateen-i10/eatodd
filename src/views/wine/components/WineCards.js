@@ -11,6 +11,7 @@ const WineCards = (props) => {
             <Card className='mb-3  justify-content-center bg-transparent'>
                 <ProductImage
                     attachment={item.attachment ? item.attachment : null}
+                    styles={{width: "85%", marginTop: "14px", height: "170px"}}
                 />
                 {/*<CardImg top
                          src={item.image}
