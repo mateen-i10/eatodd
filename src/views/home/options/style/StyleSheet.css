@@ -1,11 +1,15 @@
 .add {
-    border-color: lightgrey;
-    border-width: 1px;
+    border-color: rgba(235,235,235, 0.9);
+    border-width: 2px;
+
 }
 
 .add:hover {
     border-color: black;
     border-width: 2px;
+    /*box-sizing: border-box;*/
+    /*border-color: transparent; */
+    /*box-shadow: 0 0 0 2px blue;*/
 }
 
 .showCard {

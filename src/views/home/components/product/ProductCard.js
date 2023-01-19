@@ -51,11 +51,13 @@ const ProductCard = ({
                  marginBottom: 25,
                  maxHeight: 98,
                  minHeight: 98,
-                 borderWidth: 1,
+                 borderWidth: 2,
                  borderColor: "black"
              }}>
             {customize ? <div
-                className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}>
+                className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}
+                onMouseLeave={() => setCustomize(!customize)}
+            >
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
                     const cols = index === 0 ? Math.ceil(10 / item.options.length) : Math.floor(10 / item.options.length)
                     return <div key={`optionsKey-${index}`}
@@ -135,7 +137,7 @@ const ProductCard = ({
                                             fontSize: '1.1em',
                                             lineHeight: "18px",
                                             marginTop: "-6px"
-                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20}/>}</div>
+                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20} alt="image"/>}</div>
                                     <p className="mb-0 text-dark  ">{item?.description}</p>
 
                                 </div>
@@ -146,8 +148,10 @@ const ProductCard = ({
                 <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 &&
                         <div className=" moreAddon cursor-pointer me-2" id={item?.id}
-                             onMouseOver={() => setCustomize(!customize)}>
-                            <MoreVertical size={25}/>
+                             onMouseOver={() => setCustomize(!customize)}
+                        >
+                            <MoreVertical size={25}
+                            />
                         </div>}
                     {/*<h5 className=" fw-bolder text-dark me-2 "
                         style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
