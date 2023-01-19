@@ -221,7 +221,6 @@ const Product = (props) => {
         if (isModalLoading) setModalLoading(false)
     }
 
-
     // custom hooks
     useLoadData(isSuccess, loadproducts, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
@@ -443,12 +442,16 @@ const Product = (props) => {
                             <CardTitle tag='h4'>Product</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} >Assign Items to Product</Button.Ripple>
-                        <Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} >Assign General Recommendations to Product</Button.Ripple>
-                        <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
-                        <UncontrolledTooltip placement='left' target='positionLeft'>
-                            To Load General products by Category and Subcategory Please apply the filters below before you open the form.
-                        </UncontrolledTooltip>
+                        <row>
+                            <Col className='d-flex justify-content-end'>
+                                <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} style={{marginRight:'4px'}}>Assign Items to Product</Button.Ripple>
+                                <Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} style={{marginRight:'4px'}}>Assign General Recommendations to Product</Button.Ripple>
+                                <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
+                                <UncontrolledTooltip placement='left' target='positionLeft'>
+                                    To Load General products by Category and Subcategory Please apply the filters below before you open the form.
+                                </UncontrolledTooltip>
+                            </Col>
+                        </row>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

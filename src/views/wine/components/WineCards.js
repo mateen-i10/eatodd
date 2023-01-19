@@ -11,7 +11,6 @@ const WineCards = (props) => {
             <Card className='mb-3  justify-content-center bg-transparent'>
                 <ProductImage
                     attachment={item.attachment ? item.attachment : null}
-                    styles={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
                 />
                 {/*<CardImg top
                          src={item.image}
@@ -19,8 +18,8 @@ const WineCards = (props) => {
                          style={{marginLeft: "23%", marginTop: "15px", height: "100%", width: "55%"}}
                 />*/}
                 <CardBody>
-                    <CardTitle tag='h4' className="text-start ">{item.title}</CardTitle>
-                    <div className="fw-bolder fs-4 text-primary text-end mb-1">${item.price}</div>
+                    <CardTitle tag='h4' className="text-center" style={{marginBottom: "0px"}}>{item.title}</CardTitle>
+                    <div className="fw-bolder fs-4 text-primary text-center mb-1" style={{marginBottom: "0px"}}>${item.price}</div>
                     <Col className='d-grid' sm='12'>
                         <Button color='primary' className="text-uppercase fw-bolder" onClick={() => onAddToCart({...item.product, price: item.price})}>
                             Add To Cart

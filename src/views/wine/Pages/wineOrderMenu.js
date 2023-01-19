@@ -28,7 +28,6 @@ const WineOrderMenu = () => {
         })
         setWines([...items])
     }
-
     }, [response])
 
     // functions

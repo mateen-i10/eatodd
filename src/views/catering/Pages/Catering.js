@@ -1,7 +1,7 @@
 import Header from "../../../shared/header/Header"
 import Footer from "../../../shared/footer/Footer"
 import '../components/stylesheet/Menu.css'
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useLayoutEffect, useState} from "react"
 import CateringDetailMenu from "../components/CateringDetailMenu"
 import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
@@ -12,10 +12,9 @@ import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
 const Catering = () => {
     const [elHovered, setElHovered] = useState({})
     const [cateringMenu, setCateringMenu] = useState([])
-    const [selectedMenuId, setSelectedMenuId] = useState(0)
+    const [selectedMenuId, setSelectedMenuId] = useState()
     const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
-
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
@@ -46,8 +45,10 @@ const Catering = () => {
 
 
     }, [response])
-    useEffect(() => {
-        setSelectedMenuId(cateringMenu.length ? cateringMenu[0].id : 0)
+
+
+    useLayoutEffect(() => {
+        setSelectedMenuId(cateringMenu.length !== null && 1)
         setWineSelected(false)
     }, [cateringMenu])
 

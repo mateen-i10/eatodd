@@ -76,7 +76,7 @@ const AssignGeneralRecommendation = (props) => {
                                 />
                             </div>
                             <div className='col-6'>
-                                <Label className='form-label' for='name'>Select Location:</Label>
+                                <Label className='form-label' for='name'>Select Mutiple Items For Recomendation:</Label>
                                 <AsyncSelect
                                     cacheOptions
                                     defaultOptions

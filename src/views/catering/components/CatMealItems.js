@@ -59,10 +59,10 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                 <div className=" col-3 mt-2 text-end">
                     <div className='demo-inline-spacing'>
                         <div className='form-check form-check-success'>
-                            {isChecked ? <Input type='checkbox' id='success-checkbox' checked/> : <Input type='checkbox' id='success-checkbox' />}
-                            {isChecked ? <Label className='form-check-label' for='success-checkbox'>
+                            {isChecked ? <Input type='checkbox' id='success-checkbox' checked /> : <Input type='checkbox' />}
+                            {isChecked ? <Label className='form-check-label'>
                                 Remove
-                            </Label> : <Label className='form-check-label' for='success-checkbox'>
+                            </Label> : <Label className='form-check-label'>
                                 Add
                             </Label>}
                             {/*<Label className='form-check-label' for='success-checkbox'>

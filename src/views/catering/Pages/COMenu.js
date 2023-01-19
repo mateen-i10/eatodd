@@ -18,7 +18,7 @@ const COMenu = () => {
     const [menuItem, setMenuItem] = useState({})
     const [sections, setSections] = useState([])
     const [selectedItems, setSelectedItems] = useState([])
-
+    console.log(selectedItems, "see")
     // hooks
     const [isLoading, response] = useAPI(`cateringMenuItem/${id}`, 'get', {}, {}, true)
     useEffect(() => {
