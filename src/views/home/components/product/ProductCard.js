@@ -2,12 +2,11 @@ import React, {memo, useEffect, useState} from "react"
 import {MdArrowBackIos} from "react-icons/all"
 import CheckSign from "../../options/components/Utility/CheckSign"
 import {ExtraQty} from "../../options/components/Utility/LighExSid"
-import {MoreVertical} from "react-feather"
+import {ArrowRight, Plus} from "react-feather"
 import '../../options/style/StyleSheet.css'
 import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
-
 import chilli from '../../../../assets/images/ORDER/chilli.png'
 
 const ProductCard = ({
@@ -51,11 +50,13 @@ const ProductCard = ({
                  marginBottom: 25,
                  maxHeight: 98,
                  minHeight: 98,
-                 borderWidth: 1,
+                 borderWidth: 2,
                  borderColor: "black"
              }}>
             {customize ? <div
-                className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}>
+                className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}
+                onMouseLeave={() => setCustomize(!customize)}
+            >
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
                     const cols = index === 0 ? Math.ceil(10 / item.options.length) : Math.floor(10 / item.options.length)
                     return <div key={`optionsKey-${index}`}
@@ -106,7 +107,7 @@ const ProductCard = ({
                     }
 
                 })}
-                <div className="col-md-10 col-10 " onClick={() => {
+                <div className="col-md-10 col-10 "  onClick={() => {
                     onItemClick(item, subCatId, limit)
                     setValue(!value)
                     if (limit !== 0 && selectedItems.length === limit) {
@@ -135,19 +136,29 @@ const ProductCard = ({
                                             fontSize: '1.1em',
                                             lineHeight: "18px",
                                             marginTop: "-6px"
-                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20}/>}</div>
+                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20} alt="image"/>}</div>
                                     <p className="mb-0 text-dark  ">{item?.description}</p>
 
                                 </div>
                             </div>
+                            {item && item.options && item.options.length > 1 && <div className='bg-primary tooltipAdd d-none fs-5 text-white' style={{
+                                position: 'absolute',
+                                zIndex: 2,
+                                top: 15,
+                                right: 50,
+                                paddingLeft: 8,
+                                paddingRight: 2
+                            }}>Add Quantity <ArrowRight style={{marginTop: 2}} size={18}/></div> }
                         </div>
                     </div>
                 </div>
                 <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 &&
                         <div className=" moreAddon cursor-pointer me-2" id={item?.id}
-                             onMouseOver={() => setCustomize(!customize)}>
-                            <MoreVertical size={25}/>
+                             onMouseOver={() => setCustomize(!customize)}
+                        >
+                            <Plus size={20}
+                            />
                         </div>}
                     {/*<h5 className=" fw-bolder text-dark me-2 "
                         style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
