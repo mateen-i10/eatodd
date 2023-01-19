@@ -11,7 +11,10 @@
     /*border-color: transparent; */
     /*box-shadow: 0 0 0 2px blue;*/
 }
-
+.add:hover .tooltipAdd {
+    display: flex !important;
+    border-radius: 10px;
+}
 .showCard {
     display: flex;
     z-index: 4;
