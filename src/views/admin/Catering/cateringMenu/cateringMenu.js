@@ -71,7 +71,7 @@ const CateringMenus = (props) => {
         },
         {
             type: FieldTypes.Number,
-            label: 'Priority',
+            label: ' ',
             placeholder: 'Enter Priority',
             name: 'priority',
             isRequired: true,
@@ -209,8 +209,7 @@ const CateringMenus = (props) => {
                                 <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100'
-                                              onClick={e => detailOptClick(row.id, e)}>
+                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => detailOptClick(row.id, e)}>
                                     <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>

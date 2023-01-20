@@ -56,7 +56,7 @@ const HeaderWine = ({isSimple}) => {
             <div className="sticky-top">
                 <header className="w-header1">
                     <div className="head-sec-1">
-                        <img className="logo" src={logo}/>
+                        <Link to="/wine/homepage"><img className="logo" src={logo}/></Link>
                         {isUserLoggedIn() ? null : <div className="headlogin">
                             <img className="usericon" src={usericon}/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
