@@ -16,7 +16,6 @@ import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch} from "react-redux"
 import OrdersList from "./OrdersList"
 
-
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
