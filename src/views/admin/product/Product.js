@@ -42,8 +42,6 @@ import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
 
 const Product = (props) => {
 
-    //setting the drop down
-
     const [catId, setCatId] = useState(0)
 
     const productList = useSelector(state => state.product.list)
