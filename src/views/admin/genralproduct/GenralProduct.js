@@ -39,9 +39,9 @@ import {
     updateGenralProduct
 } from "../../../redux/genralProduct/actions"
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
-import Child from '../../admin/product/ProductFormChild'
 import AsyncSelect from "react-select/async"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
+import GeneralProductFormChild from "./GeneralProductFormChild"
 
 
 const GenralProducts = (props) => {
@@ -79,10 +79,10 @@ const GenralProducts = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const [subcategoryId, setSubcategoryId] = useState(0)
 
-    const [showOption] = useState(true)
+    const [showOption, setShowOption] = useState(false)
 
     const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
-    const [optionType, setOptionType] = useState([showOptionObject])
+    const [optionType, setOptionType] = useState([])
 
     useEffect(() => {
         if (formInitialState && formInitialState.options) {
@@ -101,6 +101,7 @@ const GenralProducts = (props) => {
         const newArray = [...optionType, showOptionObject]
         setOptionType(newArray)
     }
+    console.log("optiontype-------", optionType)
     const onValueChange = (index, name, event) => {
         const newArray = optionType.map((option, i) => {
             if (i === index) {
@@ -159,7 +160,7 @@ const GenralProducts = (props) => {
         if (isSubmit) setSubmit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
-        setOptionType([showOptionObject])
+        // setOptionType([showOptionObject])
         if (isModalLoading) setModalLoading(false)
     }
 
@@ -500,10 +501,11 @@ const GenralProducts = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading={isModalLoading}
                        handleSubmit={handleSubmit}
-                       children={<Child
+                       children={<GeneralProductFormChild
                                 subcategoryId={subcategoryId}
                                 setSubcategoryId={setSubcategoryId}
                                 showOption={showOption}
+                                setShowOption={setShowOption}
                                 removeOption={removeOption}
                                 addOption={addOption}
                                 onValueChange={onValueChange}
