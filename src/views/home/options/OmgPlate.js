@@ -20,6 +20,9 @@ import OrdersList from "./OrdersList"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
+
+    // const [, set] = useState({})
+
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")

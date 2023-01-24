@@ -11,6 +11,7 @@ const useEdit = (isEdit, setModalLoading, setFormState, formInitialState, setEdi
             dispatch(editAction(false))
         } else {
             dispatch(setObjectAction({ data: { ...data }}))
+            console.log(data, "data from custom hook")
         }
     }, [isEdit])
 }
