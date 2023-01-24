@@ -1,13 +1,11 @@
 // ** React Imports
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Badge, Table, Button, Label, Input} from 'reactstrap'
+import {Card, CardBody, CardText, Row, Col, Button, Label, Input} from 'reactstrap'
 // ** Styles
 import '../../../../@core/scss/base/pages/app-invoice.scss'
-// import tempimg from '../../../../../src/assets/images/images/images.jpg'
 import UILoader from "../../../../@core/components/ui-loader"
 import {getGenralProduct, updateImage} from '../../../../redux/genralProduct/actions'
-// import {default as defaultImage} from "../../../../assets/images/default/defaultImage.png"
 import useAPI from "../../../../utility/customHooks/useAPI"
 
 const ProductDetail = ({match}) => {
@@ -17,7 +15,6 @@ const ProductDetail = ({match}) => {
     //getting data from store
     // const isLoading = useSelector(state => state.genralProduct.isLoading)
     const genralProduct = useSelector(state => state.genralProduct.object)
-    console.log('genralProduct', genralProduct)
 
     const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
     const [imageURL, setImageURL] = useState(!genralProduct.attachment || !genralProduct.attachment?.path ? defaultImage : '')
@@ -45,18 +42,17 @@ const ProductDetail = ({match}) => {
             setImageURL(reader.result)
         }
         reader.readAsDataURL(files[0])
-
         const formData = new FormData()
         formData.append("image",  e.target.files[0])
-        formData.append("attachmentId", genralProduct.id === 0 ? genralProduct.attachmentId : 0)
-        formData.append("entityId", genralProduct.attachmentId === 0 ? genralProduct.id : 0)
+        formData.append("attachmentId", genralProduct.attachmentId !== null ? genralProduct.attachmentId : 0)
+        formData.append("entityId", genralProduct.attachmentId === null ? genralProduct.id : 0)
         formData.append("entityName", null)
-
         dispatch(updateImage(formData))
     }
 
     useEffect(() => {
         dispatch(getGenralProduct(id))
+        console.log(imageURL, 'image url')
     }, [])
 
     return (

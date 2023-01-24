@@ -16,7 +16,6 @@ import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch} from "react-redux"
 import OrdersList from "./OrdersList"
 
-
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -50,7 +49,7 @@ const Menu = () => {
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
-                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault).price : null
+                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault)?.price : null
                 if (currentValue.options && currentValue.options.length > 0) currentValue.options[0].isSelected = true
                 acc[currentValue.subCategory['name']] = {
                     id: currentValue.subCategory['id'],

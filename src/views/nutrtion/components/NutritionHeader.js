@@ -207,8 +207,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategor
             <div style={{backgroundColor: '#e3e3e3'}}>
                 <div className="container-sm">
                     <div className="row">
-                        {mealCategoryName.length > 0 ? <div className="col-lg-4 col-12  text-center"
-                                                            style={{marginTop: 60, marginBottom: 10}}>
+                        {mealCategoryName.length > 0 ? <div className="col-lg-4 col-12  text-center" style={{marginTop: 85, marginBottom: 10}}>
 
                             <h1 style={{
                                 color: '#262626',
@@ -223,7 +222,7 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategor
                             <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
                                 Statement</a>
                         </div> : <div className="col-lg-4 col-12  text-center"
-                                      style={{marginTop: 60, marginBottom: 10}}>
+                                      style={{marginTop: 85, marginBottom: 10}}>
                             <h5 style={{
                                 color: '#2a2a2a',
                                 fontSize: '1.3em',
@@ -240,10 +239,10 @@ const NutritionHeader = ({cartItems, customerMealName, nutritionCal, mealCategor
                             }}>Nutrtion</h1>
                             <p style={{color: '#6b6b6b', fontWeight: 450}}>See your meal calorie, carb and nutrition
                                 information based on your selected meal below using the nutrition calculator.</p>
-                            <a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen
-                                Statement</a>
+                            {/*<a style={{color: '#57ab00', textDecoration: 'underline', fontWeight: 'bolder'}} href="#">Allergen*/}
+                            {/*    Statement</a>*/}
                         </div>}
-                        <div className="col-lg-4 col-6 mb-3 " style={{paddingTop: 70}}>
+                        <div className="col-lg-4 col-6 mb-3 " style={{paddingTop: 95}}>
                             <div className="text-center">
                                 <h1 className=""
                                     style={{
