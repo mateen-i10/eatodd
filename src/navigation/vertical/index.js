@@ -71,12 +71,6 @@ export default [
         navLink: '/products'
     },
     {
-        id: 'FaceBookAutoPost',
-        title: 'FaceBook Auto Post',
-        icon: <Facebook size={20}/>,
-        navLink: '/Facebook'
-    },
-    {
         id: 'Customers',
         title: 'Customers',
         icon: <User size={20}/>,
