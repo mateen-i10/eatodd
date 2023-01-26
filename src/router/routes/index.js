@@ -573,6 +573,24 @@ const Routes = [
         }
     },
     {
+        path: '/GeneralRecommendations',
+        component: lazy(() => import('../../views/admin/GeneralRecommendation/generalRecommendation')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/GeneralRecommendation/:id',
+        component: lazy(() => import('../../views/admin/GeneralRecommendation/generalRecommendationDetail')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
         path: '/products',
         component: lazy(() => import('../../views/admin/product/Product')),
         layout: 'VerticalLayout',

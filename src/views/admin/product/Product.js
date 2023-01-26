@@ -74,14 +74,14 @@ const Product = (props) => {
         setIsOpen(false)
     }
 
-    const [recommendedModalIsOpen, setRecommendedModalIsOpen] = useState(false)
+    /*const [recommendedModalIsOpen, setRecommendedModalIsOpen] = useState(false)
     const openRecommendedFromParent = () => {
         setRecommendedModalIsOpen(true)
-    }
-    const handleRecommendedCloseModal = (event) => {
+    }*/
+    /*const handleRecommendedCloseModal = (event) => {
         console.log(event)
         setRecommendedModalIsOpen(false)
-    }
+    }*/
 
     const generalProducts = (input) => {
         return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
@@ -531,9 +531,9 @@ const Product = (props) => {
                          onCloseModal={handleCloseModal}
             />
 
-            <AssignGeneralRecommendation IsModalOpened={recommendedModalIsOpen}
+           {/* <AssignGeneralRecommendation IsModalOpened={recommendedModalIsOpen}
                          onCloseModal={handleRecommendedCloseModal}
-            />
+            />*/}
 
         </Fragment>
     )
