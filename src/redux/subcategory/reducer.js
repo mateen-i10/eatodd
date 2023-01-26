@@ -39,7 +39,7 @@ const SubCategoryReducer = (state = initialState, action) => {
             console.log(data1, "some data")
             return {
                 ...state,
-                object:{...data1, category: {label: data1.category?.name, value: data1.categoryId}},
+                object:{...data1, category: {label: data1.category?.name, value: data1.categoryId}, isBlank: data1.isBlank, subCatId: data1.subCatId},
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
@@ -59,7 +59,7 @@ const SubCategoryReducer = (state = initialState, action) => {
             console.log(data, "some data 2")
             return {
                 ...state,
-                object: {...data, category: {label: data.category?.name, value: data.categoryId}},
+                object: {...data, category: {label: data.category?.name, value: data.categoryId}, isBlank: data.isBlank, subCatId: data.subCatId},
                 isEdit: true
             }
         case setRequestCompleted.type:

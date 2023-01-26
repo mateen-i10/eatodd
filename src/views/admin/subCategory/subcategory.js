@@ -39,6 +39,8 @@ import {toast} from "react-toastify"
 
 //async select
 import AsyncSelect from "react-select/async"
+import Child from "./SubCatChild/SubCatChild"
+import {isObjEmpty} from "../../../utility/Utils"
 
 const SubCategory = (props) => {
 
@@ -49,6 +51,10 @@ const SubCategory = (props) => {
     const isLoading = useSelector(state => state.subCategory.isLoading)
     const isError = useSelector(state => state.subCategory.isError)
     const isSuccess = useSelector(state => state.subCategory.isSuccess)
+
+    const [subcategoryId, setSubcategoryId] = useState(0)
+    const [isSubmit, setSubmit] = useState(false)
+
     const dispatch = useDispatch()
 
     // ** refs
@@ -83,7 +89,9 @@ const SubCategory = (props) => {
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false}
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.CheckBox, label: 'No Case', name:'isBlank', isRequired:true, fieldGroupClasses: 'col-6 mt-2'},
+        {type:FieldTypes.Number, label: 'Priority', placeholder: 'Enter Priority', name:'priority', isRequired:true, fieldGroupClasses: 'col-6'}
     ])
 
     // ** local States
@@ -122,7 +130,9 @@ const SubCategory = (props) => {
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setSubCategory, {
         name: '',
         description:'',
-        fillingLimit:''
+        fillingLimit:'',
+        priority:'',
+        isBlank: false
     })
     useModalError(isError, setModalLoading, setIsSubCategoryError)
 
@@ -136,7 +146,7 @@ const SubCategory = (props) => {
     }
 
     const editClick = (id) => {
-        console.log("edit", id)
+        console.log("editing row id: ", id)
         toggle()
         dispatch(getSubCategory(id, true))
         setFormData([...commonFields])
@@ -163,7 +173,9 @@ const SubCategory = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const finalData = {...formState, categoryId: formState.category?.value}
+        setSubmit(true)
+        console.log(subcategoryId, "Subcategory iD")
+        const finalData = {...formState, subCatId: subcategoryId, categoryId: formState.category?.value}
         console.log("final Data", finalData)
         const isError = formModalRef.current.validate(formState)
         if (isError) return
@@ -344,6 +356,13 @@ const SubCategory = (props) => {
                        secondaryBtnLabel='Cancel'
                        isLoading = {isModalLoading}
                        handleSubmit={handleSubmit}
+                       children={<Child
+                           subcategoryId={subcategoryId}
+                           setSubcategoryId={setSubcategoryId}
+                           categoryId = {formState && formState.category && !isObjEmpty(formState.category) ? formState.category.value : null}
+                           isFormSubmit={isSubmit}
+                           formState={formState}
+                       />}
             />
 
         </Fragment>

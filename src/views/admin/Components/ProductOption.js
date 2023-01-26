@@ -49,7 +49,7 @@ const ProductOption = (props) => {
                 />
             </div>
         )}
-        {props.optionsLength > 1 && <div className='col-1'>
+        {props.optionsLength >= 1 && <div className='col-1'>
             <Button.Ripple className='btn-icon' color='danger' onClick={() => props.removeOption(props.index)}>
                 <Delete size={12}/>
             </Button.Ripple>

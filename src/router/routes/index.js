@@ -230,24 +230,6 @@ const Routes = [
         }
     },
     {
-        path: '/Facebook',
-        component: lazy(() => import('../../views/admin/FacebookAutoPost/FaceBookAuto')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
-        path: '/AddFacebookPost',
-        component: lazy(() => import('../../views/admin/FacebookAutoPost/AddFacebookPostForm')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
         path: '/Customers',
         component: lazy(() => import('../../views/admin/Customers/Customers')),
         layout: 'VerticalLayout',

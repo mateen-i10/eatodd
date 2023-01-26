@@ -40,7 +40,6 @@ const ProductCard = ({
     }, [isLength])
 
     return <>
-
         <div className="card add mb-lg-2 mb-1 overflow-hidden "
              style={!value ? {
                  marginBottom: 25,
@@ -148,21 +147,20 @@ const ProductCard = ({
                                 right: 50,
                                 paddingLeft: 8,
                                 paddingRight: 2
-                            }}>Add Quantity <ArrowRight style={{marginTop: 2}} size={18}/></div> }
+                            }}>Add Quantity<ArrowRight style={{marginTop: 2}} size={18}/></div> }
                         </div>
                     </div>
                 </div>
                 <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 &&
                         <div className=" moreAddon cursor-pointer me-2" id={item?.id}
-                             onMouseOver={() => setCustomize(!customize)}
-                        >
+                             onMouseOver={() => setCustomize(!customize)}>
                             <Plus size={20}
                             />
                         </div>}
-                    {/*<h5 className=" fw-bolder text-dark me-2 "
+                    <h5 className=" fw-bolder text-dark me-2 "
                         style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
-                    </h5>*/}
+                    </h5>
                 </div>
             </div>
             }

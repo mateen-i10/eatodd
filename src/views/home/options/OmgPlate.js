@@ -19,6 +19,9 @@ import OrdersList from "./OrdersList"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
+
+    // const [, set] = useState({})
+
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
@@ -29,6 +32,7 @@ const Menu = () => {
     console.log('iss', isPageLoading)
     // hooks
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
+
     useEffect(() => {
         console.log('isLoading', isLoading)
         if (response && response.data) {
@@ -38,19 +42,23 @@ const Menu = () => {
                 id: data.id,
                 description: data.description,
                 attachment: data.attachment,
-                isWinePaired: data.isWinePaired
+                isWinePaired: data.isWinePaired,
+                isBlank: data.isBlank,
+                priority: data.priority
             })
-
             // grouping products by sub category
             const final = data.products && data.products.length > 0 ? data.products.reduce((acc, currentValue) => {
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
-                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault).price : null
-                if (currentValue.options && currentValue.options.length > 0) currentValue.options[0].isSelected = true
+                console.log('currentValue.options', currentValue.options)
+                currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault)?.price : null
+                if (currentValue.options && currentValue.options.length > 0 && currentValue.options.find(op => op.isDefault))  currentValue.options.find(op => op.isDefault).isSelected = true
                 acc[currentValue.subCategory['name']] = {
                     id: currentValue.subCategory['id'],
                     name: currentValue.subCategory['name'],
+                    isBlank: currentValue.subCategory['isBlank'],
+                    priority: currentValue.subCategory['priority'],
                     fillingLimit: currentValue.subCategory['fillingLimit'],
                     products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, currentValue] : [currentValue]
                 }
@@ -58,6 +66,7 @@ const Menu = () => {
             }, {}) : []
             const values = Object.values(final)
             setProducts([...values])
+            console.log('final m', final)
         }
 
     }, [response])
@@ -212,11 +221,14 @@ const Menu = () => {
                 <div className="container-sm">
                     <div className="container-sm">
                         {products && products.length > 0 && products.map(prod => {
+                            console.log('m products ----', products)
                             return <ProductsSubcategoryMenu
                                 heading={prod.name}
                                 limit={prod.fillingLimit}
                                 products={prod.products}
                                 subCatId={prod.id}
+                                // isBlank={prod.isBlank}
+                                ispriority={prod.priority}
                                 handleSelectOption={handleSelectOption}
                                 handleChangeQuantity={handleChangeQuantity}
                                 handleSelectProduct={handleSelectProduct}

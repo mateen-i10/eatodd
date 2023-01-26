@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import "./Header.css"
-import logo from "../../assets/images/my-images/OMG_logo.png"
+import logo from "../../assets/images/logo/OMG_logo.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
 import {Link, useHistory} from "react-router-dom"
 import SideCart from "./components/SideCart"

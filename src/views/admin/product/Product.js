@@ -4,7 +4,7 @@ import React, {Fragment, useRef, useState, useEffect} from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash, Search, AlertOctagon} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Trash, Search} from 'react-feather'
 import {
     Card,
     CardHeader,
@@ -41,8 +41,6 @@ import AssignItems from "./AssignItems"
 import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
 
 const Product = (props) => {
-
-    //setting the drop down
 
     const [catId, setCatId] = useState(0)
 
@@ -160,7 +158,7 @@ const Product = (props) => {
 
     // my work
     const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
-    const [optionType, setOptionType] = useState([showOptionObject])
+    const [optionType, setOptionType] = useState([])
     // my work ends
 
     const AddNewData = () => {
@@ -217,7 +215,7 @@ const Product = (props) => {
         if (isModal) setEdit(false)
         setModal(!isModal)
         setFormState({...formInitialState})
-        setOptionType([showOptionObject])
+        // setOptionType([showOptionObject])
         if (isModalLoading) setModalLoading(false)
     }
 
