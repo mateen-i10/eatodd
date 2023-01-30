@@ -488,7 +488,7 @@ const Order = () => {
                                                   styles={{width: "200px", height: "200px", margin: "auto"}}/>
                                 </div>
                                 <div className="">
-                                    <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                    <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg plate" ? "build your own plate" : item.name}</div>
                                 </div>
                     </div>))}
                         </div>
@@ -502,7 +502,7 @@ const Order = () => {
                                                       styles={{width: "200px", height: "200px", margin: "auto"}}/>
                                     </div>
                                     <div className="">
-                                        <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                        <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg sandwich" ? "build your own sandwich" : item.name}</div>
                                     </div>
                                 </div>))}
                         </div>
