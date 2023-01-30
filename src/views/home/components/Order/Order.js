@@ -9,7 +9,7 @@ import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
 import {toast} from "react-toastify"
-import {Link, useHistory} from "react-router-dom"
+import {Link, useHistory, useLocation} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
 import {isUserLoggedIn} from "../../../../auth/utils"
@@ -37,6 +37,8 @@ const Order = () => {
     const [modalClicked, setModalClicked] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState(0)
     const [reviewList, setReviewList] = useState([])
+    const {state} = useLocation()
+    console.log('state omgplate-----', state)
 
     const history = useHistory()
     const orderRef = useRef(null)
@@ -88,6 +90,8 @@ const Order = () => {
     }, [])
 
     console.log("reviewList****", reviewList)
+    console.log("mainCategory****", mainCategory)
+    console.log("userlocation****", userLocation)
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     if (scrollToOrder === 'order') {
         useEffect(() => {
@@ -170,7 +174,7 @@ const Order = () => {
                                             setModalClicked(!modalClicked)
                                             setSelectedCategory(2)
                                         } else {
-                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id })
                                         }
                                     }}>
                                         <div className="thumbnail ">
