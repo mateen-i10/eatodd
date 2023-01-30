@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, memo} from 'react'
 import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
@@ -19,7 +19,6 @@ import OrdersList from "./OrdersList"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-
     // const [, set] = useState({})
 
     const [isPageLoading, setIsLoading] = useState(false)
@@ -256,4 +255,4 @@ const Menu = () => {
         </>
     )
 }
-export default Menu
+export default memo(Menu)

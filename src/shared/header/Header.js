@@ -8,7 +8,7 @@ import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {useDispatch, useSelector} from "react-redux"
 import {Button} from "reactstrap"
-import {isUserLoggedIn} from "../../auth/utils"
+import {isCustomer, isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 import {isJoinedByLink} from "../../utility/Utils"
 
@@ -63,7 +63,7 @@ export default function Header({isSimple}) {
                         <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
-                        {isUserLoggedIn() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
+                        {isCustomer() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
                     </div>}
                     {!isSimple && isUserLoggedIn() && <ul className="user-login list-unstyled ms-1 ">
                         <UserDropdown/>
