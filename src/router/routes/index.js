@@ -230,24 +230,6 @@ const Routes = [
         }
     },
     {
-        path: '/Facebook',
-        component: lazy(() => import('../../views/admin/FacebookAutoPost/FaceBookAuto')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
-        path: '/AddFacebookPost',
-        component: lazy(() => import('../../views/admin/FacebookAutoPost/AddFacebookPostForm')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
         path: '/Customers',
         component: lazy(() => import('../../views/admin/Customers/Customers')),
         layout: 'VerticalLayout',
@@ -566,6 +548,24 @@ const Routes = [
     {
         path: '/cuisine',
         component: lazy(() => import('../../views/admin/cuisine/Cuisine')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/GeneralRecommendations',
+        component: lazy(() => import('../../views/admin/GeneralRecommendation/generalRecommendation')),
+        layout: 'VerticalLayout',
+        meta: {
+            authRoute: true,
+            adminOnly: true
+        }
+    },
+    {
+        path: '/GeneralRecommendation/:id',
+        component: lazy(() => import('../../views/admin/GeneralRecommendation/generalRecommendationDetail')),
         layout: 'VerticalLayout',
         meta: {
             authRoute: true,

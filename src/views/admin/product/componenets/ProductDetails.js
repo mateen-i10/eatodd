@@ -54,7 +54,6 @@ const ProductDetail = ({match}) => {
         formData.append("attachmentId", product.attachmentId !== null ? product.attachmentId : 0)
         formData.append("entityId",  product.attachmentId === null ? product.id : 0)
         formData.append("entityName", null)
-
         dispatch(updateImage(formData))
     }
 
@@ -74,10 +73,10 @@ const ProductDetail = ({match}) => {
                                     <img src={imageURL} alt="product image" height='100' width='100' />
                                 </div>
                                 <div className='text-center align-items-end mt-75 ms-1'>
-                                        <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
-                                            Change Image
-                                            <Input type='file' onChange={onChange} hidden accept='image/*' />
-                                        </Button>
+                                   <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
+                                      Change Image
+                                      <Input type='file' onChange={onChange} hidden accept='image/*' />
+                                   </Button>
                                 </div>
                             </div>
                         </Col>

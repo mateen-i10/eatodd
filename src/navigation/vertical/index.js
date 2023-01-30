@@ -71,6 +71,12 @@ export default [
         navLink: '/products'
     },
     {
+        id: 'GeneralRecommendations',
+        title: 'General Recommendations',
+        icon: <Package size={20}/>,
+        navLink: '/GeneralRecommendations'
+    },
+    {
         id: 'FaceBookAutoPost',
         title: 'FaceBook Auto Post',
         icon: <Facebook size={20}/>,

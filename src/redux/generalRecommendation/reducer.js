@@ -54,11 +54,12 @@ const generalRecommendationReducer = (state = initialState, action) => {
                 isDetailLoading: action.payload
             }
         case editGeneralRecommendation.type:
-            //const {data} = action.payload
+            const data = action.payload.data
+            console.log('editData', data, data.product)
             return {
                 ...state,
-                //object: {...data, unit: {value: data.unit, label: data.unit}},
-                object: action.payload.data,
+                object: {...data, productId: {label: data.product.name, value: data.product.id}, recommendedProducts: data.recoProducts.map(r => { return {label: r.name, value: r.id} })},
+                //object: action.payload.data,
                 isEdit: true
             }
         case setRequestCompleted.type:
