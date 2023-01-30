@@ -486,6 +486,7 @@ const Order = () => {
                     <div className="container-sm">
                         <div className="row">
                     {selectedCategory === 1 && omgPlate.map((item) => (
+
                             <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
                                 <div className=" ">
                                     <ProductImage attachment={item.attachment}

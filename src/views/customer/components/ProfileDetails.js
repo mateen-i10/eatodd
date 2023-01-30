@@ -40,6 +40,7 @@ const ProfileDetails = ({}) => {
     const isSuccess = useSelector(state => state.customer.isSuccess)
 
     console.log("customerObj", customerObj)
+    console.log("customerId", customerId)
 
     const  [showEdit, setShowEdit] = useState(false)
     const [firstName, setFirstName] = useState('')
@@ -181,7 +182,7 @@ const ProfileDetails = ({}) => {
                                     <Label className='form-label' for='contactNo'>
                                         Phone Number
                                     </Label>
-                                    <Input value={contactNo} onChange={e => setContactNo(e.target.value)} className='form-control' placeholder='1 234 567 8900'/>
+                                    <Input type="Number" value={contactNo} onChange={e => setContactNo(e.target.value)} className='form-control' placeholder='1 234 567 8900'/>
                                 </Col>}
                             </Row>
                         </Form>
