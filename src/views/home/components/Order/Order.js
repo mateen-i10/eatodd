@@ -37,10 +37,8 @@ const Order = () => {
     const [modalClicked, setModalClicked] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState(0)
     const [reviewList, setReviewList] = useState([])
-
     const history = useHistory()
     const orderRef = useRef(null)
-
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
@@ -86,8 +84,6 @@ const Order = () => {
                 }
             })
     }, [])
-
-    console.log("reviewList****", reviewList)
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     if (scrollToOrder === 'order') {
         useEffect(() => {
@@ -170,7 +166,7 @@ const Order = () => {
                                             setModalClicked(!modalClicked)
                                             setSelectedCategory(2)
                                         } else {
-                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id })
                                         }
                                     }}>
                                         <div className="thumbnail ">

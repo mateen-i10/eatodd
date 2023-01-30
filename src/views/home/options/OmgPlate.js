@@ -13,7 +13,7 @@ import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
 import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
 
 const Menu = () => {
@@ -24,13 +24,15 @@ const Menu = () => {
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
+    const {userLocation} = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
     const {state} = useLocation()
     const {categoryId, restaurantId} = state
     console.log('iss', isPageLoading)
+
     // hooks
-    const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
+    const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
 
     useEffect(() => {
         console.log('isLoading', isLoading)
@@ -235,7 +237,7 @@ const Menu = () => {
                             />
                         })}
                         {category?.isWinePaired && <Wines
-                            restaurantId={restaurantId}
+                            restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
                             handleSelectOption={handleSelectOption}
                             handleChangeQuantity={handleChangeQuantity}
                             handleSelectProduct={handleSelectProduct}

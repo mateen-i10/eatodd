@@ -39,7 +39,7 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                                 }}>
                                     <Button className='text-uppercase mt-1' color='primary' outline onClick={() => {
                                         dispatch(locationAdded(place))
-                                        if (userLocation !== null) dispatch(userLocationAdded(userLocation))
+                                        if (userLocation !== null) dispatch(userLocationAdded({...userLocation, restaurantId: place.id}))
                                     }}>
                                         Select
                                     </Button>
