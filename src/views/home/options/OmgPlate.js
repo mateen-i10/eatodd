@@ -29,8 +29,6 @@ const Menu = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const {state} = useLocation()
-    console.log("userlocation****", userLocation)
-    console.log('state omgplate-----', state)
     const {categoryId, restaurantId} = state
     console.log('iss', isPageLoading)
 
