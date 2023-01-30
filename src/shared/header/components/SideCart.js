@@ -260,17 +260,19 @@ const Cart = (props) => {
                                 style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                         </div>
                     </div>
-                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
+                    {isCustomer() && (
+                        <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
-                        {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
-                            <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <Link to="/groupOrder">
-                                <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
-                                    Make It a group Order.
-                                </h1>
-                            </Link>
-                        </div>}
-                    </OffcanvasHeader>
+                            {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
+                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
+                                <Link to="/groupOrder">
+                                    <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
+                                        Make It a group Order.
+                                    </h1>
+                                </Link>
+                            </div>}
+                        </OffcanvasHeader>
+                    )}
                     {openModel === true && (
                         <div>
                             <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
