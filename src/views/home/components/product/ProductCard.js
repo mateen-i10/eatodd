@@ -26,10 +26,10 @@ const ProductCard = ({
     console.log(item.flavour, "items coming from product card comp")
     const imgStyles = {
         width: "100%",
-        height: 100,
+        height: "120px",
         backgroundColor: 'transparent',
         overflow: "hidden",
-        objectFit: "cover"
+        objectFit: "fill"
     }
 
     // hooks
@@ -123,7 +123,7 @@ const ProductCard = ({
                                     ...imgStyles,
                                     backgroundColor: 'transparent',
                                     overflow: "hidden",
-                                    objectFit: "cover"
+                                    objectFit: "fill"
                                 }}/>
                         </div>
                         <div className="col-lg-8 col-md-8 col-7">

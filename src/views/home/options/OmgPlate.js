@@ -66,6 +66,10 @@ const Menu = () => {
                 return acc
             }, {}) : []
             const values = Object.values(final)
+            // const ArrValues = [...values]
+            // ArrValues.sort((a, b) => a?.priority - b?.priority)
+            // console.log("arrayValues", ArrValues)
+            // setProducts([...ArrValues])
             setProducts([...values])
             console.log('final m', final)
         }
