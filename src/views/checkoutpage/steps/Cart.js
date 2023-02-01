@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import {Button, Card, CardBody, Col, Input, InputGroup, Row, Table} from 'reactstrap'
 import {cartTotalPrice, getCartData} from "../../../utility/Utils"
 
@@ -17,16 +17,18 @@ const Cart = props => {
     const catOrder = cartItems?.catering
     const wines = cartItems?.wines
 
+    // const [code, setCode] = useState()
+
     console.log('meals, catorder or wines', meals, catOrder, wines)
     console.log(cartItems)
-    const [item] = useState([])
+    // const [item] = useState([])
     return (
         <>
             <div className='list-view product-checkout' style={{marginBottom: 60}}>
 
                 <div className='container-sm'>
                     <Row>
-                        {meals && meals?.length ? <Col xl={9}>
+                        {meals && meals?.length ? <Col xl={12}>
                             <Card className='ecommerce-card'>
                                 <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
                                     {meals.map((item, index) => (
@@ -40,13 +42,23 @@ const Cart = props => {
                                             <Table responsive>
                                                 <tbody>
                                                 <tr className=' '>
-                                                    <td className='text-start text-uppercase fw-bolder fs-3'>
-                                                        Total Price
-                                                    </td>
-                                                    <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}
-                                                    </td>
+                                                        <td className='text-start text-uppercase fw-bolder fs-3'>
+                                                            Total Price
+                                                        </td>
+                                                        <td className='text-center  text-uppercase fw-bolder fs-3'>${cartTotalPrice()}</td>
                                                 </tr>
                                                 </tbody>
+                                                <div style={{width: "137%", justifyContent: "end", display:"flex"}}>
+                                                    <Button
+                                                        style={{width: "20%"}}
+                                                        color='primary'
+                                                        // disabled={!products.length}
+                                                        onClick={() => stepper.next()}
+                                                        classnames='btn-next'
+                                                    >
+                                                        Place Order
+                                                    </Button>
+                                                </div>
                                             </Table>
                                         </Col>
                                     </Row>
@@ -135,47 +147,47 @@ const Cart = props => {
                                 </CardBody>
                             </Card>
                         </Col> : <Col lg={9}/>}
-                        <Col xl={3}>
-                            <div className='checkout-options'>
-                                <Card>
-                                    <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>
-                                        <div className='price-details'>
-                                            <h6 className='price-title'>All Price Details</h6>
-                                            {item.map((e, index) => (
-                                                <ul key={index} className='list-unstyled' >
-                                                    <li className='price-detail d-flex'>
-                                                        <div className='detail-title flex-fill'>{e.mealTitle}</div>
-                                                        <div
-                                                            className='detail-amt discount-amt text-success'>{e.totalPrice}</div>
-                                                    </li>
-                                                </ul>), [])}
-                                            <hr/>
-                                            <label className='mb-1'>Enter Coupon Number</label>
-                                            <InputGroup className='input-group-merge coupons'>
-                                                <Input placeholder='Coupons'/>
-                                                <Button color='primary' className='text-primary ms-0 cursor-pointer'>Apply</Button>
-                                            </InputGroup>
-                                            <hr/>
-                                            <ul className='list-unstyled my-2'>
-                                                <li className='price-detail d-flex'>
-                                                    <div className='detail-title detail-total flex-fill'>Total</div>
-                                                    <div className='detail-amt fw-bolder'>${cartTotalPrice()}</div>
-                                                </li>
-                                            </ul>
-                                            <Button
-                                                block
-                                                color='primary'
-                                                // disabled={!products.length}
-                                                onClick={() => stepper.next()}
-                                                classnames='btn-next place-order'
-                                            >
-                                                Place Order
-                                            </Button>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </div>
-                        </Col>
+                        {/*<Col xl={3}>*/}
+                        {/*    <div className='checkout-options'>*/}
+                        {/*        <Card>*/}
+                        {/*            <CardBody style={{border: 'solid 1px #a1f542', borderRadius: '5px'}}>*/}
+                        {/*                <div className='price-details'>*/}
+                        {/*                    <h6 className='price-title'>All Price Details</h6>*/}
+                        {/*                    {item.map((e, index) => (*/}
+                        {/*                        <ul key={index} className='list-unstyled' >*/}
+                        {/*                            <li className='price-detail d-flex'>*/}
+                        {/*                                <div className='detail-title flex-fill'>{e.mealTitle}</div>*/}
+                        {/*                                <div*/}
+                        {/*                                    className='detail-amt discount-amt text-success'>{e.totalPrice}</div>*/}
+                        {/*                            </li>*/}
+                        {/*                        </ul>), [])}*/}
+                        {/*                    <hr/>*/}
+                        {/*                    <label className='mb-1'>Enter Coupon Number</label>*/}
+                        {/*                    <InputGroup className='input-group-merge coupons'>*/}
+                        {/*                        <Input placeholder='Coupons' value={code} onChange={e => setCode(e.target.value)} />*/}
+                        {/*                        <Button color='primary' onClick={() => console.log("Coupon code", code)} className='text-primary ms-0 cursor-pointer'>Apply</Button>*/}
+                        {/*                    </InputGroup>*/}
+                        {/*                    <hr/>*/}
+                        {/*                    <ul className='list-unstyled my-2'>*/}
+                        {/*                        <li className='price-detail d-flex'>*/}
+                        {/*                            <div className='detail-title detail-total flex-fill'>Total</div>*/}
+                        {/*                            <div className='detail-amt fw-bolder'>${cartTotalPrice()}</div>*/}
+                        {/*                        </li>*/}
+                        {/*                    </ul>*/}
+                        {/*                    <Button*/}
+                        {/*                        block*/}
+                        {/*                        color='primary'*/}
+                        {/*                        // disabled={!products.length}*/}
+                        {/*                        onClick={() => stepper.next()}*/}
+                        {/*                        classnames='btn-next place-order'*/}
+                        {/*                    >*/}
+                        {/*                        Place Order*/}
+                        {/*                    </Button>*/}
+                        {/*                </div>*/}
+                        {/*            </CardBody>*/}
+                        {/*        </Card>*/}
+                        {/*    </div>*/}
+                        {/*</Col>*/}
                     </Row>
                 </div>
             </div>

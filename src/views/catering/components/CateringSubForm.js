@@ -32,6 +32,8 @@ const CateringSubForm = () => {
     const [eventDate, setEventDate] = useState()
 
     const [participantsError, setParticipantsError] = useState(false)
+    const [participentErrMsg, setParticipentErrMsg] = useState("")
+    const [dateErrMsg, setdateErrMsg] = useState("")
     const [dateVal, setDateVal] = useState(false)
 
     const disablePastDt = current => {
@@ -42,8 +44,11 @@ const CateringSubForm = () => {
         // console.log("data----", data)
         if (p?.value < 25) {
             setParticipantsError(true)
-            console.log("please enter a value that is greater then 25")
+            setParticipentErrMsg("Participants must be greater then 25")
             return
+        } else if (p?.value > 300) {
+            setParticipantsError(true)
+            setParticipentErrMsg("Participants must be less than 300")
         } else if (p?.value > 25) {
             setParticipantsError(false)
         }
@@ -55,7 +60,17 @@ const CateringSubForm = () => {
         }
 
         if (Object.values(data).every(field => field.length > 0)) {
-            const abc = new moment(eventDate).format() // format date to avoid server time zone
+            const abc = new moment(eventDate).format()// format date to avoid server time zone
+            const yearCheck = moment(abc).format("YYYY")
+            let today = moment(new Date()).format("YYYY")
+            today = Number(today) + 2
+            console.log(today, "year today")
+            console.log(yearCheck, "year check")
+
+            if (yearCheck > today) {
+                setdateErrMsg("Max Catering time is 2 years.")
+               return console.log("year check enabled")
+            }
             const finalData = {...data, eventDate: abc}
             dispatch(addContact(finalData))
             setIsSubmitted(true)
@@ -119,7 +134,7 @@ const CateringSubForm = () => {
                             </label>
                             <input id='noOfAttendees' className='form-control' type='number' placeholder='25' {...register("noOfAttendees", { required: true })} />
                             {errors && errors.noOfAttendees?.type === "required" && <p className='text-danger'>Please enter a valid Number</p>}
-                            {participantsError && <p className='text-danger'>Participants should be greater then 25</p>}
+                            {participantsError && <p className='text-danger'>{participentErrMsg}</p>}
                         </Col>
                         <Col sm='6' className='mb-1'>
                             <label className='form-label' htmlFor='eventDate'>
@@ -135,7 +150,8 @@ const CateringSubForm = () => {
                                 value={eventDate}
                                 closeOnSelect={true}
                                 onChange={(e) => setEventDate(e.toDate())} />
-                                {eventDate === null && <p className='text-danger'>Date is required</p>}
+                                {dateErrMsg && <p className='text-danger'>{dateErrMsg}</p>}
+                                {eventDate === null ? <p className='text-danger'>Date is required</p> : ""}
                                 {dateVal && <p className='text-danger'>Date is required</p>}
                         </Col>
                         <Col className='mt-2 ' sm='12'>

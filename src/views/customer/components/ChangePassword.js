@@ -51,7 +51,19 @@ const SecurityTab = () => {
         formState: {errors}
     } = useForm({defaultValues, resolver: yupResolver(SignupSchema)})
 
+    console.log(localStorage.getItem("password"), "current user password")
     const onSubmit = data => {
+
+        if (data.currentPassword === data.newPassword) {
+            toast.error("New Password cant be same as old password")
+            return
+        }
+
+        if (data.currentPassword !== localStorage.getItem("password")) {
+            toast.error("Current Password is Incorrect")
+            return
+        }
+
         trigger()
         // console.log(data)
         httpService._patch(`${baseURL}Auth/ChangePassword`, {
@@ -63,9 +75,11 @@ const SecurityTab = () => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     toast.success(response.data.message)
+                    localStorage.setItem("password", data.newPassword)
                     return response
                 } else {
                     //general Error Action
+                    console.log(response, "msg")
                     toast.error(response.data.message)
                     return null
                 }

@@ -12,7 +12,7 @@ import {isCustomer, isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 import {isJoinedByLink} from "../../utility/Utils"
 
-export default function Header({isSimple}) {
+export default function Header({isSimple, setKey}) {
     const totalItems = useSelector(state => state.cartItems.total)
     const history = useHistory()
     const [width, setWidth] = useState(window.innerWidth)
@@ -206,7 +206,7 @@ export default function Header({isSimple}) {
                                 </span>
                             </div>
                             {openDrawer && (<div>
-                                    <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer}/>
+                                    <SideCart openDrawer={SetOpenDrawer} isOpenDrawer={openDrawer} setKey={setKey}/>
                                 </div>
                             )}
                         </div>

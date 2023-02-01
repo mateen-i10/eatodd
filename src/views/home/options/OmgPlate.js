@@ -19,7 +19,6 @@ import OrdersList from "./OrdersList"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-    // const [, set] = useState({})
 
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -208,6 +207,8 @@ const Menu = () => {
         setSelectedProducts([...final])
     }
 
+    console.log(selectedProducts, "letss see the selection")
+
     return (
         <>
             <Header/>
@@ -250,6 +251,7 @@ const Menu = () => {
                 mealName={mealName}
                 dispatchingItems={dispatchingItems}
                 setMealName={setMealName}
+                productList={selectedProducts}
             />
             <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
         </>
