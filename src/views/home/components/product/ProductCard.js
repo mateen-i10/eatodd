@@ -62,6 +62,7 @@ const ProductCard = ({
                                 className={`col-${cols} ${op.isSelected ? 'bg-primary text-white' : 'text-dark'} text-center cursor-pointer`}
                                 style={{maxHeight: 98, minHeight: 98}}
                                 onClick={() => {
+                                    setValue(true)
                                     setCustomize(false)
                                     onOptionClick(item, index, limit, subCatId)
                                 }}>
@@ -81,8 +82,7 @@ const ProductCard = ({
                 }
             </div> : <div className="row g-0">
                 {selectedItems && selectedItems.map((selectedItem, index) => {
-                    const lmt = selectedItems.length <= 1 || limit <= 1 ? '1' : `1/${limit}`
-
+                    const lmt = selectedItems.length === 1 || limit <= 1 ? '1' : `1/${limit}`
                     if (selectedItem.optionType === ProductTypes.Default) {
                         if (lmt === '1' && selectedItem.id === item.id) {
                             return <div className='check3'>
@@ -90,7 +90,7 @@ const ProductCard = ({
                             </div>
                         } else if (selectedItem.id === item.id) {
                             return <div className="check3">
-                                <ExtraQty value={lmt} key={`${selectedItem.id}-${index}`}/>
+                                <ExtraQty value={lmt} selectedItems={selectedItems} selectedItem={selectedItem} key={`${selectedItem.id}-${index}`}/>
                             </div>
                         }
                     } else if (selectedItem.optionType === ProductTypes.Numeric && selectedItem.id === item.id) {
@@ -158,9 +158,9 @@ const ProductCard = ({
                             <Plus size={20}
                             />
                         </div>}
-                    <h5 className=" fw-bolder text-dark me-2 "
+                    <div className=" fs-5 fw-bolder text-dark me-2 "
                         style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
-                    </h5>
+                    </div>
                 </div>
             </div>
             }

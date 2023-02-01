@@ -71,7 +71,6 @@ const Menu = () => {
             // console.log("arrayValues", ArrValues)
             // setProducts([...ArrValues])
             setProducts([...values])
-            console.log('final m', final)
         }
 
     }, [response])
@@ -182,10 +181,9 @@ const Menu = () => {
     }
     const handleSelectOption = (product, index, limit, subCatId) => {
         const final = [...selectedProducts]
-
         // if selected products list in not empty
         if (final && final.length > 0) {
-            const proIndex = final.indexOf(product)
+            const proIndex = final.findIndex((item) => item.id === product.id)
             // existing product case
             if (proIndex > -1) {
                 final[proIndex].options.forEach(op => { op.isSelected = false })
@@ -226,7 +224,6 @@ const Menu = () => {
                 <div className="container-sm">
                     <div className="container-sm">
                         {products && products.length > 0 && products.map(prod => {
-                            console.log('m products ----', products)
                             return <ProductsSubcategoryMenu
                                 heading={prod.name}
                                 limit={prod.fillingLimit}
