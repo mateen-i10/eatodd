@@ -4,6 +4,7 @@ import useAPI from "../../../utility/customHooks/useAPI"
 import {addCateringItem} from "../../../utility/Utils"
 import {useLocation} from "react-router-dom"
 import UILoader from "../../../@core/components/ui-loader"
+// import {toast} from "react-toastify"
 
 const WineOrderMenu = () => {
     const xl = 3
@@ -32,6 +33,7 @@ const WineOrderMenu = () => {
 
     // functions
     const handleAddToCart = (wine) => {
+        // toast.info("OrderMenu Removed")
         addCateringItem(wine, true)
     }
     return (

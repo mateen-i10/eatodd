@@ -8,8 +8,8 @@ const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedPr
     const testArray = [1, 2, 3]
     return <>
         <div className='text-center text-uppercase text-primary fw-bolder my-2'>
-            <h1 className="text-primary">{heading}</h1>
-            {(limit && limit > 1) ? <h4 className="text-dark">Choose up to {limit}</h4> : ''}
+            <div className="text-primary fs-1">{heading}</div>
+            {(limit && limit > 1) ? <div className="text-dark h4">Choose up to {limit}</div> : ''}
         </div>
         <div className="row align-items-center justify-content-center ">
             {products && products.length > 0 && products.map((element) => {

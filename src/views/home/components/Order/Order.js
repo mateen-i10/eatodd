@@ -37,10 +37,8 @@ const Order = () => {
     const [modalClicked, setModalClicked] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState(0)
     const [reviewList, setReviewList] = useState([])
-
     const history = useHistory()
     const orderRef = useRef(null)
-
     useEffect(() => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
@@ -86,8 +84,6 @@ const Order = () => {
                 }
             })
     }, [])
-
-    console.log("reviewList****", reviewList)
     const scrollToOrder = scrollSlice[0]?.action.payload.toLowerCase() || ""
     if (scrollToOrder === 'order') {
         useEffect(() => {
@@ -170,7 +166,7 @@ const Order = () => {
                                             setModalClicked(!modalClicked)
                                             setSelectedCategory(2)
                                         } else {
-                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})
+                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id })
                                         }
                                     }}>
                                         <div className="thumbnail ">
@@ -486,13 +482,14 @@ const Order = () => {
                     <div className="container-sm">
                         <div className="row">
                     {selectedCategory === 1 && omgPlate.map((item) => (
+
                             <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
                                 <div className=" ">
                                     <ProductImage attachment={item.attachment}
                                                   styles={{width: "200px", height: "200px", margin: "auto"}}/>
                                 </div>
                                 <div className="">
-                                    <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                    <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg plate" ? "build your own plate" : item.name}</div>
                                 </div>
                     </div>))}
                         </div>
@@ -506,7 +503,7 @@ const Order = () => {
                                                       styles={{width: "200px", height: "200px", margin: "auto"}}/>
                                     </div>
                                     <div className="">
-                                        <div className="text-uppercase fs-3 fw-bolder">{item.name}</div>
+                                        <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg sandwich" ? "build your own sandwich" : item.name}</div>
                                     </div>
                                 </div>))}
                         </div>

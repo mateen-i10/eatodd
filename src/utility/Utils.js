@@ -169,6 +169,10 @@ export const addCateringItem = (item, isWine = false) => {
   } else {
     finalCatering.push(item)
   }
+  if (cart.wines?.length === undefined) {
+    toast.info("Order menu has been removed")
+    console.log("now the wines are added there is one wine init at this point.")
+  }
 
   localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering], wines: [...finalWines] }))
   toast.success(`'${item.name}' added to cart`)

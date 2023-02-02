@@ -38,7 +38,7 @@ import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import AssignItems from "./AssignItems"
-import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
+// import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
 
 const Product = (props) => {
 

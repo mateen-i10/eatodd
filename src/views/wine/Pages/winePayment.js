@@ -1,5 +1,4 @@
 import {
-    Button,
     Card,
     CardBody,
     CardHeader,
@@ -47,6 +46,9 @@ const winePayment = () => {
     const squareLocationId = process.env.REACT_APP_SQUARE_LOCATION_ID
     console.log('squareLocationId', squareLocationId)
 
+    const url = document.URL
+    console.log(url, "url lets see")
+
     useEffect(() => {
         if (state && state.currentPackage) {
             //setIsActivePackage(true)
@@ -67,6 +69,7 @@ const winePayment = () => {
 
     const handleSubmit = async (body) => {
         setLoading(true)
+        console.log(body, "lets see what is in body")
         const res = await http._put(`${baseURL}winePackage/AssignToCustomer`, {...body})
         console.log('response of add wine package', res)
         if (res && res.status === 200 && res.data.statusCode === 200) {
@@ -106,6 +109,7 @@ const winePayment = () => {
                         }
                     }
                 }
+                console.log("called before submitting body")
                 await handleSubmit(body)
             } catch (e) {
                 toast.error(e.message)
@@ -339,8 +343,7 @@ const winePayment = () => {
                                     </Row>
                                 </Col>
                                 <Col md='9' sm='12'>
-                                    <SquareCard cardVerificationFunc={cardVerification}
-                                                getTokenFunc={getToken}/>
+                                    <SquareCard cardVerificationFunc={cardVerification} getTokenFunc={getToken} url={url}/>
                                 </Col>
                             </Row>
                         </div>

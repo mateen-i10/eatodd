@@ -39,30 +39,30 @@ const Checkout = () => {
             id: 'cart',
             title: 'Cart',
             subtitle: 'Your Cart Items',
-            icon: <ShoppingCart size={18}/>,
+            icon: <ShoppingCart size={18} />,
             content: (
-                <Cart stepper={stepper} data={newarr}/>
+                <Cart stepper={stepper} data={newarr} />
             )
         },
         {
             id: 'Address',
             title: 'Address',
             subtitle: 'Enter Your Address',
-            icon: <Home size={18}/>,
-            content: <Address stepper={stepper}/>
+            icon: <Home size={18} />,
+            content: <Address stepper={stepper} />
         },
         {
             id: 'payment',
             title: 'Payment',
             subtitle: 'Select Payment Method',
-            icon: <CreditCard size={18}/>,
-            content: <Payment stepper={stepper}/>
+            icon: <CreditCard size={18} />,
+            content: <Payment stepper={stepper} />
         }
     ]
 
     return (
         <Fragment>
-            <Header/>
+            <Header />
             <div className="">
                 <Wizard
                     style={{paddingLeft: 30}}
@@ -74,7 +74,7 @@ const Checkout = () => {
                         linear: true
                     }}
                 />
-                <Footer/>
+                <Footer />
             </div>
         </Fragment>
     )

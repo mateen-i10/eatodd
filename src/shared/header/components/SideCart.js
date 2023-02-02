@@ -173,6 +173,12 @@ const Cart = (props) => {
         }
     }
 
+    // console.log(cartItems, "lets see coming from cart")
+    //
+    // if (cartItems.meals) {
+    //     toast.success("worked its the meals")
+    // }
+
     const RenderDuplicateModal = () => {
         return (
             <div className='basic-modal'>
@@ -282,17 +288,19 @@ const Cart = (props) => {
                                 style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                         </div>
                     </div>
-                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
+                    {isCustomer() && (
+                        <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
-                        {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
-                            <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <Link to="/groupOrder">
-                                <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
-                                    Make It a group Order.
-                                </h1>
-                            </Link>
-                        </div>}
-                    </OffcanvasHeader>
+                            {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
+                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
+                                <Link to="/groupOrder">
+                                    <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
+                                        Make It a group Order.
+                                    </h1>
+                                </Link>
+                            </div>}
+                        </OffcanvasHeader>
+                    )}
                     {openModel === true && (
                         <div>
                             <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
@@ -327,6 +335,7 @@ const Cart = (props) => {
                                         </div> : null
                                     })}
                                     {cartItems && cartItems.wines && cartItems.wines.length > 0 && <div className="row">
+
                                         <div className='col-9 fs-3 fw-bolder text-uppercase'>wines</div>
                                         <div className='col-md-2' style={{marginLeft: -15}}>
                                             <h6 style={{

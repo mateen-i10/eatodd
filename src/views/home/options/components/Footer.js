@@ -1,12 +1,21 @@
 import React, {useState} from 'react'
 import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
 import "./Plate.css"
+import {toast} from "react-toastify"
+import {cartName} from "../../../../utility/constants"
 
 const Footer = (props) => {
 
-    const {dispatchingItems, setMealName, mealName} = props
+    const items = localStorage.getItem(cartName)
+    const cart = JSON.parse(items)
+
+    console.log(cart.meals, "cart")
+
+    const {dispatchingItems, setMealName, mealName, productList} = props
 
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
+
+    console.log(productList, "product list coming from footer")
 
     const RenderMealNameModal = () => {
         return (
@@ -34,6 +43,9 @@ const Footer = (props) => {
                                 Cancel
                             </Button>
                             <Button color='primary' disabled={mealName.length < 1} onClick={() => {
+                                if (cart.meals?.length === undefined) {
+                                    toast.info("Catering has been removed")
+                                }
                                     dispatchingItems()
                                     setBasicNameFoodModal(!basicNameFoodModal)
                             }}>
@@ -84,7 +96,11 @@ const Footer = (props) => {
                                 borderRadius: "5px"
                             }}
                             onClick={() => {
+                                if (productList.length !== 0) {
                                 setBasicNameFoodModal((!basicNameFoodModal))
+                                } else {
+                                    toast.error(". Select a meal to continue")
+                                }
                             }}>
                             ADD TO BAG
                         </button>

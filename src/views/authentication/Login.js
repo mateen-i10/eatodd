@@ -48,6 +48,7 @@ const LoginCover = () => {
     const onSubmit = () => {
         if (errors && Object.keys(errors).length !== 1) {
             const {email, password} = control._fields
+            localStorage.setItem("password", password._f.value)
             setBlock(true)
             dispatch(login(email._f.value, password._f.value, rememberMe, history, state && state.returnURL ? state.returnURL : null))
         }

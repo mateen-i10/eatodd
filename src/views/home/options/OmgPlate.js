@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, memo} from 'react'
 import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
@@ -13,25 +13,25 @@ import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import http, {baseURL} from "../../../utility/http"
 import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
 
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
 
-    // const [, set] = useState({})
-
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
+    const {userLocation} = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
     const {state} = useLocation()
     const {categoryId, restaurantId} = state
     console.log('iss', isPageLoading)
+
     // hooks
-    const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${restaurantId} `, 'get', {}, '', true)
+    const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
 
     useEffect(() => {
         console.log('isLoading', isLoading)
@@ -65,8 +65,11 @@ const Menu = () => {
                 return acc
             }, {}) : []
             const values = Object.values(final)
+            // const ArrValues = [...values]
+            // ArrValues.sort((a, b) => a?.priority - b?.priority)
+            // console.log("arrayValues", ArrValues)
+            // setProducts([...ArrValues])
             setProducts([...values])
-            console.log('final m', final)
         }
 
     }, [response])
@@ -177,10 +180,9 @@ const Menu = () => {
     }
     const handleSelectOption = (product, index, limit, subCatId) => {
         const final = [...selectedProducts]
-
         // if selected products list in not empty
         if (final && final.length > 0) {
-            const proIndex = final.indexOf(product)
+            const proIndex = final.findIndex((item) => item.id === product.id)
             // existing product case
             if (proIndex > -1) {
                 final[proIndex].options.forEach(op => { op.isSelected = false })
@@ -207,6 +209,8 @@ const Menu = () => {
         setSelectedProducts([...final])
     }
 
+    console.log(selectedProducts, "letss see the selection")
+
     return (
         <>
             <Header/>
@@ -221,7 +225,6 @@ const Menu = () => {
                 <div className="container-sm">
                     <div className="container-sm">
                         {products && products.length > 0 && products.map(prod => {
-                            console.log('m products ----', products)
                             return <ProductsSubcategoryMenu
                                 heading={prod.name}
                                 limit={prod.fillingLimit}
@@ -236,7 +239,7 @@ const Menu = () => {
                             />
                         })}
                         {category?.isWinePaired && <Wines
-                            restaurantId={restaurantId}
+                            restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
                             handleSelectOption={handleSelectOption}
                             handleChangeQuantity={handleChangeQuantity}
                             handleSelectProduct={handleSelectProduct}
@@ -249,9 +252,10 @@ const Menu = () => {
                 mealName={mealName}
                 dispatchingItems={dispatchingItems}
                 setMealName={setMealName}
+                productList={selectedProducts}
             />
             <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
         </>
     )
 }
-export default Menu
+export default memo(Menu)
