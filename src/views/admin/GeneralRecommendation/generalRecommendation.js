@@ -59,7 +59,7 @@ const AssignGeneralRecommendation = (props) => {
     }, [isSuccess])
 
     const products = async (search) => {
-        return loadOptions('product', search, 1, 10)
+        return loadOptions('product', search, 1, 100)
     }
 
     const onSelectProduct = (e) => {

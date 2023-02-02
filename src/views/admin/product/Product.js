@@ -443,7 +443,7 @@ const Product = (props) => {
                         <row>
                             <Col className='d-flex justify-content-end'>
                                 <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} style={{marginRight:'4px'}}>Assign Items to Product</Button.Ripple>
-                                <Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} style={{marginRight:'4px'}}>Assign General Recommendations to Product</Button.Ripple>
+                                {/*<Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} style={{marginRight:'4px'}}>Assign General Recommendations to Product</Button.Ripple>*/}
                                 <Button.Ripple bssize='sm' color='primary' id='positionLeft' onClick={(e) => addClick(e)}>Add a new Product</Button.Ripple>
                                 <UncontrolledTooltip placement='left' target='positionLeft'>
                                     To Load General products by Category and Subcategory Please apply the filters below before you open the form.

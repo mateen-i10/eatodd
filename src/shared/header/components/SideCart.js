@@ -24,18 +24,20 @@ import {
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import GroupOrderSideCart from "../../../views/GroupOrder/groupOrderSideCart"
 
-/*import img1 from '../../../assets/images/images/cat-1.png'
+import img1 from '../../../assets/images/images/cat-1.png'
 import img2 from '../../../assets/images/images/cat-2.png'
 import img3 from '../../../assets/images/images/cat-3.png'
 import img4 from '../../../assets/images/images/cat-4.png'
-import img5 from '../../../assets/images/images/catring-wine.png'*/
+import img5 from '../../../assets/images/images/catring-wine.png'
+
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
 import '@styles/react/libs/swiper/swiper.scss'
 import '@styles/base/pages/app-ecommerce-details.scss'
 import SwiperCore, { Navigation } from 'swiper'
+import {loadGeneralRecommendationsAgainstProduct} from "../../../redux/generalRecommendation/action"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -46,16 +48,36 @@ const Cart = (props) => {
     const [isDeleted, setDeleted] = useState(false)
     const history = useHistory()
 
+    const dispatch = useDispatch()
+
     const {userLocation} = useSelector(state => state)
     const isCartEmpty = !cartItems || isObjEmpty(cartItems) || (cartItems &&
         (!cartItems.meals || (cartItems.meals && cartItems.meals.length === 0)) &&
         (!cartItems.wines || (cartItems.wines && cartItems.wines.length === 0)) &&
         (!cartItems.catering || (cartItems.catering && cartItems.catering.length === 0)))
 
+    console.log('cartItems', cartItems)
+
     useEffect(() => {
         setCartItems({...getCartData()})
         if (isDeleted) setDeleted(false)
     }, [isDeleted])
+
+    useEffect(() => {
+        const ids = cartItems && cartItems.catering ? cartItems?.catering?.map(c => {
+            console.log('c', c)
+            const selected = c.selectedProducts?.map(s => { return s.productId })
+            return selected
+        }).toString() : cartItems && cartItems.meals ? cartItems?.meals?.map(c => {
+            console.log('c', c)
+            const selected = c.selectedProducts?.map(s => { return s.id })
+            return selected
+        }).toString() : ''
+        console.log('ids', ids)
+        if (ids) {
+            dispatch(loadGeneralRecommendationsAgainstProduct(ids))
+        }
+    }, [cartItems])
 
 // methods
     const handleRemove = (index, isCatering) => {
@@ -87,7 +109,7 @@ const Cart = (props) => {
     SwiperCore.use([Navigation])
 
     // ** Related products Slides
-    /*const slides = [
+    const slides = [
         {
             name: 'Apple Watch Series 6',
             brand: 'Apple',
@@ -123,10 +145,10 @@ const Cart = (props) => {
             price: 1559.99,
             img: img5
         }
-    ]*/
+    ]
 
     // ** Slider params
-    /*const params = {
+    const params = {
         className: 'swiper-responsive-breakpoints swiper-container px-4 py-2',
         slidesPerView: 5,
         spaceBetween: 55,
@@ -149,7 +171,7 @@ const Cart = (props) => {
                 spaceBetween: 55
             }
         }
-    }*/
+    }
 
     const RenderDuplicateModal = () => {
         return (
@@ -374,7 +396,7 @@ const Cart = (props) => {
 
                         </div>}
 
-                        {/*<div>
+                        <div>
                             <div className='mt-4 mb-2 text-center'>
                                 <h4>Related Products</h4>
                                 <CardText>People also search for this items</CardText>
@@ -400,7 +422,7 @@ const Cart = (props) => {
                                     )
                                 })}
                             </Swiper>
-                        </div>*/}
+                        </div>
 
                         {/*<Link to="/home"><Button
                                 outline
