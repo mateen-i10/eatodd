@@ -113,15 +113,17 @@ const Cart = (props) => {
                 .then(response => {
                     console.log('resGeneral', response)
                     if (response.status === 200 && response.data.statusCode === 200) {}
-                    const data = response.data.data
-                    const finalData = data.map(item => ({
-                        img: item.attachment,
-                        id: item.id,
-                        name: item.name,
-                        price: item.wholePrice
-                    }))
-                    console.log('finalData', finalData)
-                    setRecomendedList(finalData)
+                    const data = response.data?.data
+                    if (data) {
+                        const finalData = data.map(item => ({
+                            img: item.attachment,
+                            id: item.id,
+                            name: item.name,
+                            price: item.wholePrice
+                        }))
+                        console.log('finalData', finalData)
+                        setRecomendedList(finalData)
+                    }
                 })
 
             /*dispatch(loadGeneralRecommendationsAgainstProduct(ids))
