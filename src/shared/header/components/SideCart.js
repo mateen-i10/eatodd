@@ -59,7 +59,7 @@ const Cart = (props) => {
         (!cartItems.wines || (cartItems.wines && cartItems.wines.length === 0)) &&
         (!cartItems.catering || (cartItems.catering && cartItems.catering.length === 0)))
 
-    console.log('cartItems', cartItems)
+    console.log('cartItems-----------------', getCartData())
 
     useEffect(() => {
         setCartItems({...getCartData()})

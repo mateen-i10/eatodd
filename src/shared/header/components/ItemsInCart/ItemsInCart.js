@@ -4,7 +4,7 @@ import {Button} from "reactstrap"
 
 const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, isCatering}) => {
 
-    const {selectedProducts} = foodItems
+    const {selectedProducts, guestName} = foodItems
     const mealName = mainSectionName
     const categoryName = menuName
     const totalPrice = foodItems.totalPrice
@@ -21,7 +21,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                 </div>
             </div>
             <div className="row">
-                <div className='col-9 fs-3 fw-bolder text-uppercase'> {mealName}</div>
+                <div className='col-9 fs-3 fw-bolder text-uppercase'> {mealName} {guestName && `(${guestName}'s Meal)`}</div>
                 <div className='col-md-2' style={{marginLeft: -15}}>
                     <h6 style={{
                         fontSize: 20,

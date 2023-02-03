@@ -16,7 +16,7 @@ const GroupOrderSideCart = () => {
     const [cartItems, setCartItems] = useState(null)
     const customerId = isUserLoggedIn() && isCustomer() ? getUserData().customerId : localStorage.getItem(groupOrderCustomerId) ? localStorage.getItem(groupOrderCustomerId) : 0
     const [url, setUrl] =  useState(`/groupOrder/getActive/${customerId}`)
-    const [isLoading, response] = useAPI(url, 'get', {}, {}, true)
+    const [isLoading, response] = useAPI(url, 'get', {}, {}, false)
 
     const handleRemove = (index) => {
         const meal = getCartData() && getCartData().meals ? getCartData().meals[index] : null
@@ -43,12 +43,15 @@ const GroupOrderSideCart = () => {
         setCartItems({...getCartData()})
         const interval = setInterval(() => {
             setUrl(`/groupOrder/getActive/${customerId}`)
-        }, 4000)
+        }, 5000)
 
         return () => {
             clearInterval(interval)
         }
     }, [isLoading, response])
+
+    // console.log("CartItems----2", cartItems)
+    // console.log("respnse----2", response)
     return (
         <div className='col-md-12 '>
             {!isJoinedByLink() && <GroupOrderCreated
@@ -56,7 +59,7 @@ const GroupOrderSideCart = () => {
                 isJoinedPeople={true}
                 noOfPeople={response?.data?.noOfMembers}
             />}
-            {cartItems && cartItems.meals && cartItems.meals.map((meal, index) => {
+            {cartItems && cartItems?.meals && cartItems?.meals.map((meal, index) => {
                 return !isObjEmpty(meal) ? <div key={`ItemsInCart-${index}`}>
                     <ItemsInCart foodItems={meal}
                                  index={index}
