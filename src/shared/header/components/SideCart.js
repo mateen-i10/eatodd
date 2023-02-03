@@ -24,20 +24,22 @@ import {
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
-import {useDispatch, useSelector} from "react-redux"
+import { useSelector} from "react-redux"
 import GroupOrderSideCart from "../../../views/GroupOrder/groupOrderSideCart"
 
-import img1 from '../../../assets/images/images/cat-1.png'
+/*import img1 from '../../../assets/images/images/cat-1.png'
 import img2 from '../../../assets/images/images/cat-2.png'
 import img3 from '../../../assets/images/images/cat-3.png'
 import img4 from '../../../assets/images/images/cat-4.png'
-import img5 from '../../../assets/images/images/catring-wine.png'
+import img5 from '../../../assets/images/images/catring-wine.png'*/
 
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
 import '@styles/react/libs/swiper/swiper.scss'
 import '@styles/base/pages/app-ecommerce-details.scss'
 import SwiperCore, { Navigation } from 'swiper'
-import {loadGeneralRecommendationsAgainstProduct} from "../../../redux/generalRecommendation/action"
+//import {loadGeneralRecommendationsAgainstProduct} from "../../../redux/generalRecommendation/action"
+import httpService, {baseURL} from "../../../utility/http"
+import ProductImage from "../../../views/home/components/product/ProductImage"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -46,9 +48,10 @@ const Cart = (props) => {
     const [openModel, SetModelOpen] = useState(false)
     const [cartItems, setCartItems] = useState()
     const [isDeleted, setDeleted] = useState(false)
+    const [recomendedList, setRecomendedList] = useState([])
     const history = useHistory()
 
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
 
     const {userLocation} = useSelector(state => state)
     const isCartEmpty = !cartItems || isObjEmpty(cartItems) || (cartItems &&
@@ -63,6 +66,37 @@ const Cart = (props) => {
         if (isDeleted) setDeleted(false)
     }, [isDeleted])
 
+   /* useEffect(() => {
+        httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
+            .then(response => {
+                console.log('resGeberal', response)
+                // success case
+              /!*  if (response.status === 200 && response.data.statusCode === 200) {
+                    const data = response.data.data
+                    const finalData = data.map(item => ({
+                        attachment: item.attachment,
+                        id: item.id,
+                        name: item.name,
+                        description: item.description
+                    }))
+                    const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
+                    const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
+                    const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
+                    setOmgPlate(finalOmgPlate)
+                    setSandwich(finalSandwich)
+                    setMainCategory(finalCategory)
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                    return null
+                }*!/
+            })
+            /!*.catch(error => {
+                toast.error(error.message)
+            })*!/
+
+    }, [])*/
+
     useEffect(() => {
         const ids = cartItems && cartItems.catering ? cartItems?.catering?.map(c => {
             console.log('c', c)
@@ -75,7 +109,23 @@ const Cart = (props) => {
         }).toString() : ''
         console.log('ids', ids)
         if (ids) {
-            dispatch(loadGeneralRecommendationsAgainstProduct(ids))
+            httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
+                .then(response => {
+                    console.log('resGeneral', response)
+                    if (response.status === 200 && response.data.statusCode === 200) {}
+                    const data = response.data.data
+                    const finalData = data.map(item => ({
+                        img: item.attachment,
+                        id: item.id,
+                        name: item.name,
+                        price: item.wholePrice
+                    }))
+                    console.log('finalData', finalData)
+                    setRecomendedList(finalData)
+                })
+
+            /*dispatch(loadGeneralRecommendationsAgainstProduct(ids))
+            console.log('ids2', ids)*/
         }
     }, [cartItems])
 
@@ -109,7 +159,7 @@ const Cart = (props) => {
     SwiperCore.use([Navigation])
 
     // ** Related products Slides
-    const slides = [
+    /*const slides = [
         {
             name: 'Apple Watch Series 6',
             brand: 'Apple',
@@ -145,7 +195,7 @@ const Cart = (props) => {
             price: 1559.99,
             img: img5
         }
-    ]
+    ]*/
 
     // ** Slider params
     const params = {
@@ -411,18 +461,18 @@ const Cart = (props) => {
                                 <CardText>People also search for this items</CardText>
                             </div>
                             <Swiper {...params}>
-                                {slides.map(slide => {
+                                {recomendedList.map(slide => {
                                     return (
-                                        <SwiperSlide key={slide.name}>
+                                        <SwiperSlide key={slide.id}>
                                             <Col lg={12}>
                                                 <a href='/' onClick={e => e.preventDefault()}>
                                                     <div className='img-container w-1500 mx-auto py-75'>
-                                                        <img src={slide.img} alt='swiper 1' className='img-fluid' />
+                                                        <ProductImage attachment={slide.img} classes='img-fluid' styles={{width: "85px", height: "85px", margin: "auto"}}/>
                                                     </div>
-                                                    <div className='item-heading'>
+                                                    <div className='item-heading text-center'>
                                                         <h5 className=' mb-0'>{slide.name}</h5>
                                                     </div>
-                                                    <div className='item-meta'>
+                                                    <div className='item-meta text-center'>
                                                         <CardText className='text-primary mb-0'>${slide.price}</CardText>
                                                     </div>
                                                 </a>
