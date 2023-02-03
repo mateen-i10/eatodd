@@ -10,7 +10,7 @@ import ProductImage from "../home/components/product/ProductImage"
 import Header from "../../shared/header/Header"
 import useAPI from "../../utility/customHooks/useAPI"
 import {clearGroupOrder, clearJoinByLink, isGroupOrderMemberName, joinByLink, setMemberName} from "../../utility/Utils"
-import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
+import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap"
 
 
 const GroupOrderMenu = () => {
@@ -19,6 +19,10 @@ const GroupOrderMenu = () => {
     const [mainCategory, setMainCategory] = useState([])
     const [isModal, setModal] = useState(false)
     const [mealName, setMealName] = useState('')
+    const [omgPlate, setOmgPlate] = useState([])
+    const [omgSandwich, setSandwich] = useState([])
+    const [modalClicked, setModalClicked] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState(0)
     const history = useHistory()
     const {code} = useParams()
     const orderRef = useRef(null)
@@ -44,16 +48,21 @@ const GroupOrderMenu = () => {
         httpService._get(`${baseURL}Category?pageIndex=1&&pageSize=12`)
             .then(response => {
                 // success case
+                // new changes
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
-                    // console.log("data", data)
-                    const final = data.map(item => ({
+                    const finalData = data.map(item => ({
                         attachment: item.attachment,
                         id: item.id,
                         name: item.name,
                         description: item.description
                     }))
-                    setMainCategory(final)
+                    const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
+                    const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
+                    const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
+                    setOmgPlate(finalOmgPlate)
+                    setSandwich(finalSandwich)
+                    setMainCategory(finalCategory)
                 } else {
                     //general Error Action
                     toast.error(response.data.message)
@@ -141,21 +150,26 @@ const GroupOrderMenu = () => {
                         {
                             mainCategory.length ? mainCategory.map(item => {
                                 // eslint-disable-next-line multiline-ternary
-                                return item.name.toString().toLowerCase() !== "wine" ?
+                                // item.name.toString().toLowerCase() !== "wine" ?
+                                return (
                                     <div className="col-md-3  col-12 top-level-menu" key={item.id}>
                                         <div className="menu-item-1" onClick={() => {
-                                            history.push("/OmgPlate", {
-                                                categoryId: item.id,
-                                                restaurantId: response?.data?.restaurantId
-                                            })
+                                            if (item.name.toString().trim().toLowerCase() === "omg plate") {
+                                                setModalClicked(!modalClicked)
+                                                setSelectedCategory(1)
+                                            } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
+                                                setModalClicked(!modalClicked)
+                                                setSelectedCategory(2)
+                                            } else {
+                                                history.push("/OmgPlate", {
+                                                    categoryId: item.id,
+                                                    restaurantId: response?.data?.restaurantId
+                                                })
+                                            }
                                         }}>
                                             <div className="thumbnail ">
                                                 <ProductImage attachment={item.attachment}
-                                                              styles={{
-                                                                  width: "200px",
-                                                                  height: "180px",
-                                                                  margin: "auto"
-                                                              }}/>
+                                                              styles={{width: "200px", height: "180px", margin: "auto"}}/>
                                             </div>
                                             <div className="text2">
                                                 <div className="display-name">{item.name}</div>
@@ -164,7 +178,7 @@ const GroupOrderMenu = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> : ""
+                                    </div>)
                             }) : <ComponentSpinner/>
                             // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                         }
@@ -194,6 +208,46 @@ const GroupOrderMenu = () => {
                     </div>
                 </div>
             </div>
+            <Modal  isOpen={modalClicked} toggle={() => setModalClicked(!modalClicked)} className='modal-dialog-centered modal-lg'>
+                <ModalHeader toggle={() => setModalClicked(!modalClicked)}>PLEASE SELECT</ModalHeader>
+                <ModalBody>
+                    <div className="container-sm">
+                        <div className="row">
+                            {selectedCategory === 1 && omgPlate.map((item) => (
+
+                                <div className="col-6 text-center cursor-pointer " onClick={() => history.push("/OmgPlate", {
+                                    categoryId: item.id,
+                                    restaurantId: response?.data?.restaurantId
+                                })}>
+                                    <div className=" ">
+                                        <ProductImage attachment={item.attachment}
+                                                      styles={{width: "200px", height: "200px", margin: "auto"}}/>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg plate" ? "build your own plate" : item.name}</div>
+                                    </div>
+                                </div>))}
+                        </div>
+                    </div>
+                    <div className="container-sm">
+                        <div className="row">
+                            {selectedCategory === 2 && omgSandwich.map((item) => (
+                                <div className="col-6 text-center cursor-pointer " onClick={() => history.push("/OmgPlate", {
+                                    categoryId: item.id,
+                                    restaurantId: response?.data?.restaurantId
+                                })}>
+                                    <div className=" ">
+                                        <ProductImage attachment={item.attachment}
+                                                      styles={{width: "200px", height: "200px", margin: "auto"}}/>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-uppercase fs-3 fw-bolder">{item.name.toString().trim().toLowerCase() === "omg sandwich" ? "build your own sandwich" : item.name}</div>
+                                    </div>
+                                </div>))}
+                        </div>
+                    </div>
+                </ModalBody>
+            </Modal>
         </>
     )
 }
