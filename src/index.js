@@ -38,6 +38,7 @@ import './assets/scss/style.scss'
 
 // ** Service Worker
 import * as serviceWorker from './serviceWorker'
+// import PlaySound from "./views/PlaySound"
 
 
 // ** Lazy load app
@@ -45,6 +46,7 @@ const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
       <Provider store={store}>
+          {/*<PlaySound />*/}
         <Suspense fallback={<Spinner />}>
               <ThemeContext>
                 <LazyApp />
@@ -58,4 +60,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register()
+serviceWorker.unregister()

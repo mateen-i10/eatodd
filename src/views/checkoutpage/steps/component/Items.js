@@ -5,12 +5,9 @@ import {Col, Row, Table} from "reactstrap"
 const Items = (props) => {
     const {item, isQuantity} = props
     console.log('foodItems', item)
-
-
     return (
         <section>
             <div className='container-sm' style={{maxHeight: 'auto'}}>
-
                 <Row>
                     <Col xl={12}>
                         <Row>
@@ -35,7 +32,7 @@ const Items = (props) => {
                                     <tr>
                                         <th className='text-start'>Name</th>
                                         {isQuantity === true ? <th className='text-center'>Quantity</th> : null}
-                                        <th className='text-center'>Price</th>
+                                        {/*<th className='text-center'>Price</th>*/}
                                         <th className='text-center'>Total Price</th>
                                     </tr>
                                     </thead>
@@ -44,11 +41,11 @@ const Items = (props) => {
                                             <td className='text-start'>
                                                 {subItem.name}
                                             </td>
-                                            {isQuantity === true ? <td className='text-center'>{subItem.selectedQuantity}
-                                                </td> : null}
-                                            <td className='text-center'>
-                                                $ {subItem.price}
-                                            </td>
+                                            {/*{isQuantity === true ? <td className='text-center'>{subItem.selectedQuantity}*/}
+                                            {/*    </td> : null}*/}
+                                            {/*<td className='text-center'>*/}
+                                            {/*    $ {subItem.price}*/}
+                                            {/*</td>*/}
                                             <td className='text-center'>$ {subItem.calculatedPrice}
                                             </td>
                                         </tr>
@@ -60,7 +57,6 @@ const Items = (props) => {
                     </Col>
                 </Row>
                 <div className="mt-2"/>
-
             </div>
         </section>
     )

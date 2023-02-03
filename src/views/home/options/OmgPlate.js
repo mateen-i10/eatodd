@@ -119,7 +119,7 @@ const Menu = () => {
                     setIsLoading(false)
                     if (res.status === 200 && res.data && res.data.statusCode === 200) {
                         dispatch(calculateTotalItems(res?.data.data?.mealCount))
-                        toast.success(`${mealName} added to cart`)
+                        toast.success(`${mealName} Added to cart`)
                         isJoinedByLink() ? history.goBack() : history.push('/home')
                     } else {
                         toast.error(res.data.message)
