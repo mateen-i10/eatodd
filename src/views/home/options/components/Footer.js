@@ -9,7 +9,7 @@ const Footer = (props) => {
     const items = localStorage.getItem(cartName)
     const cart = JSON.parse(items)
 
-    console.log(cart.meals, "cart")
+    console.log(cart, "cart")
 
     const {dispatchingItems, setMealName, mealName, productList} = props
 
@@ -43,7 +43,7 @@ const Footer = (props) => {
                                 Cancel
                             </Button>
                             <Button color='primary' disabled={mealName.length < 1} onClick={() => {
-                                if (cart.meals?.length === undefined) {
+                                if (cart?.meals?.length === undefined) {
                                     toast.info("Catering has been removed")
                                 }
                                     dispatchingItems()
