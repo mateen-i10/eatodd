@@ -124,7 +124,7 @@ const GroupOrderMenu = () => {
             <Header isSimple={true}/>
             {memberNameModal()}
             <div className="order-main">
-                {friendName.length > 0 ? <div className="container-fluid mt-5">
+                {friendName?.length > 0 ? <div className="container-fluid mt-5">
                     <div className="row align-items-center justify-content-center section-joined">
                         <div className="col-12 text-center">
                             {/*<img className=" d-lg-inline-flex d-none me-2" src={icon}*/}
