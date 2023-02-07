@@ -17,10 +17,20 @@ const Footer = (props) => {
 
     console.log(productList, "product list coming from footer")
 
+    // methods
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            // 👇️ your logic here
+            event.preventDefault()
+            dispatchingItems()
+            setBasicNameFoodModal(!basicNameFoodModal)
+        }
+    }
+
     const RenderMealNameModal = () => {
         return (
             <div className='basic-modal '>
-                <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}>
+                <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}  >
                     <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
                     <Form>
                         <ModalBody>
@@ -29,7 +39,9 @@ const Footer = (props) => {
                                     <Input type='text' placeholder='Enter Meal Name' invalid={mealName.length === 0}
                                            style={{color: '#81be41'}}
                                            value={mealName}
-                                           onChange={e => setMealName(e.target.value)}/>
+                                           onChange={e => setMealName(e.target.value)}
+                                           onKeyDown={handleKeyDown}
+                                    />
                                     <FormFeedback>
                                         Meal Name is required
                                     </FormFeedback>
@@ -42,13 +54,15 @@ const Footer = (props) => {
                             }}>
                                 Cancel
                             </Button>
-                            <Button color='primary' disabled={mealName.length < 1} onClick={() => {
-                                if (cart?.meals?.length === undefined) {
-                                    toast.info("Catering has been removed")
-                                }
-                                    dispatchingItems()
-                                    setBasicNameFoodModal(!basicNameFoodModal)
-                            }}>
+                            <Button color='primary' disabled={mealName.length < 1}
+                                    onClick={() => {
+                                        if (cart?.meals?.length === undefined) {
+                                            toast.info("Catering has been removed")
+                                        }
+                                        dispatchingItems()
+                                        setBasicNameFoodModal(!basicNameFoodModal)
+                                    }}
+                            >
                                 Save
                             </Button>
                         </ModalFooter>
