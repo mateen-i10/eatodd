@@ -8,6 +8,9 @@ import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
 import chilli from '../../../../assets/images/ORDER/chilli.png'
+import {getUserData} from "../../../../auth/utils"
+import {getWinePackageByCustomer} from "../../../../redux/memberShipType/action"
+import {useDispatch, useSelector} from "react-redux"
 
 const ProductCard = ({
                          item,
@@ -24,6 +27,8 @@ const ProductCard = ({
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
     console.log(item.flavour, "items coming from product card comp")
+
+    console.log(item, "lets see the items")
     const imgStyles = {
         width: "100%",
         height: "120px",
@@ -31,6 +36,17 @@ const ProductCard = ({
         overflow: "hidden",
         objectFit: "fill"
     }
+
+    const dispatch = useDispatch()
+
+    const customerId = getUserData()?.customerId
+
+    useEffect(() => {
+        dispatch(getWinePackageByCustomer(customerId))
+    }, [])
+
+    const membershipObj = useSelector(state => state.memberShip.object)
+    console.log('data for price section', membershipObj.id)
 
     // hooks
     useEffect(() => {
@@ -155,12 +171,9 @@ const ProductCard = ({
                     {item && item.options && item.options.length > 1 &&
                         <div className=" moreAddon cursor-pointer me-2" id={item?.id}
                              onMouseOver={() => setCustomize(!customize)}>
-                            <Plus size={20}
-                            />
+                            <Plus size={20} />
                         </div>}
-                    <div className=" fs-5 fw-bolder text-dark me-2 "
-                        style={{marginTop: 25}}>{item && item.price ? `$${item.price}` : ''}
-                    </div>
+                            <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>{membershipObj.id ? `${item.retailPrice ? item.retailPrice : item.price}` : `${item.wholePrice ? item.wholePrice : item.price}`}</div>
                 </div>
             </div>
             }
