@@ -20,6 +20,18 @@ export const loadGeneralRecommendations = (pageIndex = 1, pageSize =  12, search
     }
 }
 
+export const loadGeneralRecommendationsAgainstProduct = (ids  = "") => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/GetGeneralRecommendation?ids=${ids}`,
+            data: {},
+            method: 'get',
+            onSuccess: setGeneralRecommendations.type
+        }))
+    }
+}
+
 export const getGeneralRecommendation = (id, isEdit = false) => {
     console.log("dataGet", isEdit)
     return async dispatch => {

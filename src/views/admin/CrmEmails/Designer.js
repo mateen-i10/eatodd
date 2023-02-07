@@ -44,6 +44,7 @@ const Designer = ({match}) => {
     const id = match.params.id
 
     const tempObj = useSelector(state => state.template.object)
+    console.log("tempObj", tempObj)
 
     const dispatch = useDispatch()
 
@@ -54,12 +55,16 @@ const Designer = ({match}) => {
     const emailEditorRef = useRef(null)
 
     const saveDesign = () => {
-        emailEditorRef.current.editor.saveDesign((design) => {
+        // console.log(emailEditorRef.current.editor)
+        // return
+        emailEditorRef.current.editor.exportHtml((data) => {
+            const {design, html} = data
             console.log('saveDesign', design)
+            console.log('saveHTML', html)
             const finalData = {...tempObj, json:JSON.stringify(design)}
             console.log(finalData, "all data")
             dispatch(updateTemplate(finalData))
-            alert('Design JSON has been logged in your developer console.')
+            // alert('Design JSON has been logged in your developer console.')
         })
     }
     console.log("*****", emailEditorRef, id)
@@ -69,7 +74,7 @@ const Designer = ({match}) => {
             const { design, html } = data
             console.log('exportHtml', html)
 
-            alert('Output HTML has been logged in your developer console.')
+            // alert('Output HTML has been logged in your developer console.')
         })
     }
 
@@ -89,7 +94,7 @@ const Designer = ({match}) => {
         console.log(emailEditorRef.current.editor, 'current ')
 
         const json = tempObj.json
-        console.log(json, ",mma")
+        console.log("JSON", json)
 
         if (json === null || json === undefined) emailEditorRef.current?.editor?.loadDesign(sample)
 
