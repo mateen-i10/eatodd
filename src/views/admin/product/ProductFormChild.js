@@ -1,12 +1,23 @@
 import React from 'react'
-import {Button} from "reactstrap"
+import {Button, Input} from "reactstrap"
 import {Plus} from "react-feather"
 import ProductOption from "../Components/ProductOption"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 
 const ProductFormChild = (props) => {
+    // console.log(props.formState.retailPrice, "llslslsa")
+    // if (props.formState.retailPrice) {
+    //     props.setPrice(props.formState?.retailPrice)
+    // }
+
     return (
         <>
+            {/*{props.formState.category?.label === "Wine" && (*/}
+            {/*    <div className="mb-3">*/}
+            {/*        <label>Price</label>*/}
+            {/*        <Input type="text" name='retailPrice' onChange={e => props.setPrice(e.target.value)} className="col-lg-6" placeholder="Enter the Price" style={{width: "24rem"}} />*/}
+            {/*    </div>*/}
+            {/*)}*/}
             {props.showOption === true && (
                 <div>
                     <SubcategoryDropdown
