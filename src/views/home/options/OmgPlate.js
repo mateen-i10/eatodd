@@ -24,6 +24,7 @@ const Menu = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const {userLocation} = useSelector(state => state)
+    // const data = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
     const {state} = useLocation()

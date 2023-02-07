@@ -168,10 +168,7 @@ export default function Header({isSimple, setKey}) {
                         </Button>
                         <div className=" fs-4 mt-2 mb-2 fw-bold">
                             <p>Already a member</p>
-                            <Button
-                                className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login"
-                                                                                                     style={{color: "white"}}>Sign
-                                In</Link></Button>
+                            <Button className="w-100 bg-secondary text-center fs-3 text-uppercase"><Link to="/login" style={{color: "white"}}>Sign In</Link></Button>
                         </div>
                         <div className="state">
                             <div className="rounded-circle"
