@@ -329,8 +329,7 @@ const Cart = (props) => {
                            toggle={toggleCanvasStart}>
                     <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 54}}>
                         <div className="img-separator">
-                                <span><img src={require("../../../assets/images/logo/logo.png").default}
-                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 2}}/> </span>
+                                <span><img src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 33, marginLeft: -8, marginTop: 2}}/> </span>
                         </div>
                         <div className="delivery-text">
                             <div className="deliver-to-1">Deliver to
@@ -407,7 +406,6 @@ const Cart = (props) => {
                                             <CartItem item={wine} index={index} removeItem={handleRemoveWine}/>
                                         </div> : null
                                     })}
-
                                 </div>
                             </div>
 
