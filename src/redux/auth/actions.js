@@ -141,6 +141,7 @@ export const resendEmail = (email) => {
     }
 }
 export const unAuthorize = () => {
+    localStorage.removeItem("isMember")
     return dispatch => {
         dispatch(handleLogout())
         dispatch(push('/login'))

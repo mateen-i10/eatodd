@@ -45,6 +45,7 @@ const Membership = ({}) => {
     }, [response])
 
     const handleSelected = (pkg) => {
+        localStorage.setItem("isMember", pkg.id)
         isUserLoggedIn() && isCustomer() ? history.push('/winePayment', {
             package: pkg,
             currentPackage

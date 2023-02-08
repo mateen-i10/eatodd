@@ -104,10 +104,6 @@ const Product = (props) => {
         return loadOptions('category', input, 1, 12)
     }
 
-    // const generalProduct = async (input) => {
-    //     return loadOptions('GeneralProduct', input, 1, 12)
-    // }
-
     const Restaurant = async (input) => {
         return loadOptions('Restaurant', input, 1, 12)
     }
@@ -161,14 +157,29 @@ const Product = (props) => {
     const [optionType, setOptionType] = useState([])
     // my work ends
 
+    console.log(formState.category?.label, "formState is here")
+
     const AddNewData = () => {
-        setFormData([
-            ...commonFields,
-            {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
-        ])
+        if (formState.category?.label === 'Wine') {
+            setFormData([
+                ...commonFields,
+                {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
+                {type:FieldTypes.Number, label: 'Retail Price', placeholder: 'Enter Price', name:'retailPrice', isRequired:true, fieldGroupClasses: 'col-6'}
+            ])
+        } else {
+            setFormData([
+                ...commonFields,
+                {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+            ])
+        }
+
         setFormFeilds(1)
         setShowOption(true)
     }
+
+    useEffect(() => {
+        AddNewData()
+    }, [formState.category?.label])
 
     const AddFromExistingData = () => {
         setFormData([
@@ -210,6 +221,8 @@ const Product = (props) => {
         setOptionType(newArray)
     }
 
+    // console.log(formState, "hello")
+
     // ** Function to handle filter
     const toggle = () => {
         if (isModal) setEdit(false)
@@ -226,13 +239,12 @@ const Product = (props) => {
         description:'',
         wholePrice: '',
         discount: '',
-        // optionType: [],
         taxAmount: '',
         taxPercentage: '',
-        // restaurant: [],
-        // category: [],
         isDrink: false,
-        isSpicy: false
+        isSpicy: false,
+        retailPrice: ''
+
     })
     useModalError(isError,
         setModalLoading, setIsproductError)
@@ -300,7 +312,7 @@ const Product = (props) => {
            const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
-           finalData  = {...formState, flavour: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
+           finalData  = {...formState, retailPrice: formState.retailPrice, flavour: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
            delete finalData.generalProductId
        } else if (formFeilds === 0) {
            finalSchema = Joi.object({
