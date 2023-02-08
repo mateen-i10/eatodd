@@ -16,7 +16,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
             <div className='row'>
                 <div className='col-12'>
                     <Button className='btn-icon btn-sm rounded-circle float-end' outline color='danger' onClick={() => removeMeal(index, isCatering)}>
-                        <X size='12'/>
+                        <X size='12' />
                     </Button>
                 </div>
             </div>
@@ -27,7 +27,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                         fontSize: 20,
                         marginLeft: -15,
                         fontWeight: 'bolder'
-                    }}>${totalPrice}</h6>
+                    }}>${Math.round(totalPrice).toFixed(2)}</h6>
                 </div>
             </div>
             {categoryName && <div className="row">
