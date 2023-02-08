@@ -64,7 +64,7 @@ const AssignGeneralRecommendation = (props) => {
 
     const onSelectProduct = (e) => {
         console.log('eee', e)
-        setProduct({productId: e.value, recommendedProducts: product.recommendedProducts})
+        setProduct({productId: e, recommendedProducts: product.recommendedProducts})
     }
 
     const onSelectRecommendedProduct = (e) => {
@@ -133,13 +133,13 @@ const AssignGeneralRecommendation = (props) => {
         try {
             console.log('recommendedProduct', product)
             const finalData = {
-                productId: product.productId,
+                productId: product.productId.value,
                 recommendedProducts: product.recommendedProducts.map(p => p.value).toString()
             }
             dispatch(setDetailLoading(true))
             edit ? dispatch(updateGeneralRecommendationProduct({ id: formInitialState.id,
                 ...finalData,
-                productId: finalData.productId.value
+                productId: product.productId.value
             })) : dispatch(addGeneralRecommendationProduct(finalData))
             console.log('finalData', finalData)
             onModalClose()
@@ -309,12 +309,12 @@ const AssignGeneralRecommendation = (props) => {
                             </div>
                             <Row tag='form' className='gy-1 pt-75'>
                                 <div className='col-6'>
-                                    <Label className='form-label' for='name'>Select General Product:</Label>
+                                    <Label className='form-label' for='name'>Select Product:</Label>
                                     <AsyncSelect
                                         cacheOptions
                                         defaultOptions
                                         value={product.productId}
-                                        //defaultValue={product.productId}
+                                        //defaultValue={product.productId.value}
                                         onChange={(e) => onSelectProduct(e)}
                                         loadOptions={products}
                                         closeMenuOnSelect={true}
@@ -322,12 +322,12 @@ const AssignGeneralRecommendation = (props) => {
                                     />
                                 </div>
                                 <div className='col-6'>
-                                    <Label className='form-label' for='name'>Select Mutiple Items For Recomendation:</Label>
+                                    <Label className='form-label' for='name'>Select Multiple Product For Recommendation:</Label>
                                     <AsyncSelect
                                         cacheOptions
                                         defaultOptions
                                         value={product.recommendedProducts}
-                                        //defaultValue={productId}
+                                        //defaultValue={product.recommendedProducts}
                                         onChange={(e) => onSelectRecommendedProduct(e)}
                                         loadOptions={products}
                                         closeMenuOnSelect={true}
