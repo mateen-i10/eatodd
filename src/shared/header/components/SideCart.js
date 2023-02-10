@@ -10,7 +10,7 @@ import {
     OffcanvasBody,
     OffcanvasHeader
 } from 'reactstrap'
-import {UserPlus, Star} from "react-feather"
+import {UserPlus} from "react-feather"
 import './side-cart.css'
 import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
@@ -327,9 +327,9 @@ const Cart = (props) => {
             </div> : <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
-                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 54}}>
-                        <div className="img-separator">
-                                <span><img src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 33, marginLeft: -8, marginTop: 2}}/> </span>
+                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 58}}>
+                        <div className="my-auto">
+                                <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 33, marginLeft: -8}}/> </span>
                         </div>
                         <div className="delivery-text">
                             <div className="deliver-to-1">Deliver to

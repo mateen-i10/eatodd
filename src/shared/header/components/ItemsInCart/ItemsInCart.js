@@ -27,7 +27,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                         fontSize: 20,
                         marginLeft: -15,
                         fontWeight: 'bolder'
-                    }}>${Math.round(totalPrice).toFixed(2)}</h6>
+                    }}>${totalPrice.toFixed(2)}</h6>
                 </div>
             </div>
             {categoryName && <div className="row">
