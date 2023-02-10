@@ -72,7 +72,7 @@ const Order = () => {
 
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
-                    console.log("Reviews ********", data)
+                    // console.log("Reviews ********", data)
                     const finalData = data.map(item => ({
                         address: item.address,
                         id: item.id,
@@ -169,9 +169,9 @@ const Order = () => {
                                         history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id })
                                         }
                                     }}>
-                                        <div className="thumbnail ">
+                                        <div className="thumbnail">
                                             <ProductImage attachment={item.attachment}
-                                                          styles={{width: "200px", height: "180px", margin: "auto"}}/>
+                                                          styles={{width: "200px", height: "180px", margin: "auto"}} classes="categoryImage"/>
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>

@@ -4,7 +4,7 @@
 }
 
 .order-main {
-    margin-top: 0px;
+    margin-top: 0;
     background-color: white;
 }
 
@@ -25,7 +25,7 @@
 
 .unlock-img {
     height: 50px;
-    margin: -10px 0px 2px 5px;
+    margin: -10px 0 2px 5px;
 }
 
 .loyalty-text {
@@ -105,12 +105,12 @@
         max-width: 110%;
     }
 
-    . text2 {
-        font-size: 0.7rem !important;
-    }
+    /*. text2 {*/
+    /*    font-size: 0.7rem !important;*/
+    /*}*/
 }
 
-.top-level-menu:hover .thumbnail > img {
+.top-level-menu:hover .categoryImage {
     transform: scale(1.1);
 }
 
@@ -158,19 +158,19 @@
     background-image: url("../../../../assets/images/icons/arrow-black.svg");
 }
 
-.top-wine-menu:hover .wine-thumbnail > img {
-    transform: scale(1.1);
-}
+/*.top-wine-menu:hover .wine-thumbnail > img {*/
+/*    transform: scale(1.1);*/
+/*}*/
 
-.wine-order {
-    text-transform: uppercase;
-    visibility: hidden;
+/*.wine-order {*/
+/*    text-transform: uppercase;*/
+/*    visibility: hidden;*/
 
-}
+/*}*/
 
-.top-wine-menu:hover .wine-order {
-    visibility: visible !important;
-}
+/*.top-wine-menu:hover .wine-order {*/
+/*    visibility: visible !important;*/
+/*}*/
 
 .promo-banner {
     height: 100%;
@@ -252,7 +252,7 @@
 .find-slot-wrapper {
     background-color: #81be41;
     color: whitesmoke;
-    border-radius: 0px;
+    border-radius: 0;
     margin: 10px 10px 3% 10px;
 }
 
@@ -283,7 +283,7 @@
 
 @media only screen and (max-width: 768px) {
     .meal-card {
-        margin-left: 0px;
+        margin-left: 0;
     }
 }
 
@@ -384,7 +384,7 @@
     background-color: #81be41 !important;
     border: none !important;
     text-transform: uppercase;
-    border-radius: 0px;
+    /*border-radius: 0;*/
     font-size: 1rem;
     color: rgb(255 255 255);
     user-select: none;
