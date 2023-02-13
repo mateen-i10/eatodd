@@ -193,6 +193,8 @@ const GenralProducts = (props) => {
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
             {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+            {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+            {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false},
             {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false}
         ])
@@ -211,7 +213,9 @@ const GenralProducts = (props) => {
             {type: FieldTypes.Number, label: 'Tax Percentage', placeholder: 'Enter Percentage', name: 'taxPercentage', isRequired: true, fieldGroupClasses: 'col-6'},
             {type: FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name: 'generalProductIngredients', isRequired: false, fieldGroupClasses: 'col-12', loadOptions: Ingredient, isAsyncSelect: true, isMulti: true},
             {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
-            {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6'},
+            {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+            {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+            {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false},
             {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false}
         ])
@@ -287,7 +291,7 @@ const GenralProducts = (props) => {
             return
         }
 
-        console.log("Final Data", finalData)
+        console.log("Final Datamm", finalData)
 
         // call api
         setModalLoading(true)
