@@ -1,18 +1,24 @@
-import React, {memo} from "react"
+import React, {memo, useState} from "react"
 import ProductDetail from "../../views/home/components/product/ProductCard"
 // import NoCard from "../../views/home/components/NoCard/NoCard"
-import SampleCard from "../../views/home/options/components/SampleCard"
+// import SampleCard from "../../views/home/options/components/SampleCard"
 
 const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedProducts, handleSelectProduct, handleSelectOption, handleChangeQuantity}) => {
     // const [noneSelected, setNoneSelected] = useState(false)
+    const [showExtra, setShowExtra] = useState(false)
+    console.log("Extra ------------", showExtra)
     // const testArray = [1, 2, 3]
+    console.log("Products----- ---- ---", products)
+    const mainProducts = products?.filter(product => product.isExtra === false)
+    const extraProducts = products?.filter(product => product.isExtra === true)
+    console.log("extraProducts----- ---- ---", extraProducts)
     return <>
         <div className='text-center text-uppercase text-primary fw-bolder my-2'>
             <div className="text-primary fs-1">{heading}</div>
             {(limit && limit > 1) ? <div className="text-dark h4">Choose up to{limit}</div> : ''}
         </div>
         <div className="row align-items-center justify-content-center ">
-            {products && products.length > 0 && products.map((element) => {
+            {mainProducts && mainProducts.length > 0 && mainProducts.map((element) => {
                 return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}>
                     <ProductDetail
                         item={element}
@@ -23,6 +29,8 @@ const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedPr
                         subCatId={subCatId}
                         onOptionClick={handleSelectOption}
                         onQuantityChange={handleChangeQuantity}
+                        setShowExtra={setShowExtra}
+                        showExtra={showExtra}
                     />
                 </div>
             })}
@@ -65,13 +73,21 @@ const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedPr
         {/*    </div>*/}
         {/*) : null}*/}
 
-        {/*{noneSelected ? <div className="row align-items-center justify-content-center"> {testArray.map(() => (<div className="col-xl-5 col-lg-6">*/}
-        {/*    <div className="row g-0 ">*/}
-        {/*        <SampleCard/>*/}
-        {/*    </div>*/}
-        {/*    </div>))*/}
-        {/*}*/}
-        {/*</div> : null}*/}
+        {showExtra ? <div className="row align-items-center justify-content-center"> {extraProducts && extraProducts.length > 0 && extraProducts.map((element) => (<div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}>
+            <ProductDetail
+                item={element}
+                attachment={element.attachment}
+                selectedItems={selectedProducts}
+                onItemClick={handleSelectProduct}
+                limit={limit}
+                subCatId={subCatId}
+                onOptionClick={handleSelectOption}
+                onQuantityChange={handleChangeQuantity}
+
+            />
+        </div>))
+        }
+        </div> : null}
 
     </>
 }

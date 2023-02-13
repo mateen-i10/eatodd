@@ -12,7 +12,6 @@ import useAPI from "../../utility/customHooks/useAPI"
 import {clearGroupOrder, clearJoinByLink, isGroupOrderMemberName, joinByLink, setMemberName} from "../../utility/Utils"
 import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap"
 
-
 const GroupOrderMenu = () => {
     //get redux state
     const {scrollSlice} = useSelector(state => state)
