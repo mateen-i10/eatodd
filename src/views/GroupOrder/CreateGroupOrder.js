@@ -68,8 +68,7 @@ const CreateGroupOrder = () => {
                 <div className="row justify-content-center align-items-center">
                     <div className="col-sm-8 col-10 text-center">
                         <div className="text-uppercase fw-bolder text-black mt-2 mb-2"
-                             style={{fontSize: 27}}> create a group
-                            order
+                             style={{fontSize: 27}}>Create a group order
                         </div>
                     </div>
                 </div>
@@ -93,18 +92,13 @@ const CreateGroupOrder = () => {
                         </div>
 
                         <div className="mb-2">
-                            <Button
-                            onClick= {createGroupOrder}
-                            style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">
+                            <Button onClick= {createGroupOrder} style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">
                                 Create Group order
                             </Button>
                         </div>
                         <div className="mb-1" style={{fontSize: "1.1rem"}}>Need more than 20 participant meals?</div>
                         <Link to="/catering">
-                            <div className="text-decoration-underline text-black fw-bold mb-2 cursor-pointer"
-                                 style={{fontSize: "1.1rem"}}>Try
-                                Catering
-                            </div>
+                            <div className="text-decoration-underline text-black fw-bold mb-2 cursor-pointer" style={{fontSize: "1.1rem"}}>Try Catering</div>
                         </Link>
                     </div>
                 </div>
