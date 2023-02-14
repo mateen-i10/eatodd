@@ -31,7 +31,6 @@ const ProductCard = ({
     console.log(item.flavour, "items coming from product card comp")
 
     // console.log(item, "lets see the items")
-    console.log("showExtra--- -- ---- ", showExtra)
     const imgStyles = {
         width: "100%",
         height: "120px",
