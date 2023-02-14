@@ -42,7 +42,7 @@ const ProductCard = ({
     const customerId = getUserData()?.customerId
 
     useEffect(() => {
-        dispatch(getWinePackageByCustomer(customerId))
+        if (customerId) dispatch(getWinePackageByCustomer(customerId))
     }, [])
 
     const membershipObj = useSelector(state => state.memberShip.object)
