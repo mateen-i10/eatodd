@@ -143,7 +143,7 @@ const Menu = () => {
     }
     const handleSelectProduct = (product, subCatId, limit) => {
         const finalProducts = [...selectedProducts]
-
+        if (product.isBlank) return
         if (selectedProducts && selectedProducts.length > 0) {
             const index = selectedProducts.findIndex(pro => pro.id === product.id)
             if (index > -1) {

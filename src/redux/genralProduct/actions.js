@@ -88,6 +88,7 @@ export const updateGenralProduct = (data) => {
     delete data.modifiedById
     delete data.modifiedDate
     delete data.createdById
+    delete data.retailPrice
     delete data.category
 
     return async dispatch => {

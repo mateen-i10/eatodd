@@ -21,7 +21,15 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   height: 60px;
   width: 60px;
   padding-top: 12px;
+  z-index: 2;
   background-color: rgba(129, 190, 65, .9);
+}
+.checkStyle1 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  padding-top: 12px;
+  background-color: lightgray;
 }
 .check1 {
   position: absolute;
