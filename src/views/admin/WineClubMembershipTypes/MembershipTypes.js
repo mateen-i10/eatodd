@@ -173,7 +173,7 @@ const MembershipTypes = (props) => {
 
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
-        amount: Joi.number().greater(200).required().label("Amount"),
+        amount: Joi.number().required().label("Amount"),
         billType: Joi.number().required().label("Bill Type")
     })
 
