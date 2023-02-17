@@ -72,12 +72,12 @@ const GroupOrderCreated = ({groupCode, isAddMealBtn, isJoinedPeople, noOfPeople}
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={10}> <h4 className='pt-2'> People Have Joined </h4></Col>
+                        <Col xs={10}><h4 className='pt-2'> People Have Joined </h4></Col>
                     </Row>
                 </div>}
                 <div className="col-12 text-center">
                     <h6 className='my-1'> Copy this link and share with up to 10 people </h6>
-                    <Input type='text' ref={inputRef} readOnly className='my-2' value={`http://${window.location.hostname}:3000/group-order-menu/${groupCode ? see : groupCode}`} />
+                    <Input type='text' ref={inputRef} readOnly className='my-2' value={`http://${window.location.hostname}/group-order-menu/${groupCode ? see : groupCode}`} />
                     <Button onClick = {onCopyCLick} className='btn btn-success'>Copy</Button>
                     {isAddMealBtn && <div className='mt-2'>
                      <Link to="/home">

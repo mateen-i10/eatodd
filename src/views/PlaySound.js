@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import Howler from 'react-howler'
 import Switch from 'react-switch'
-import sound from '../../src/assets/videos/mixkit-tech.mp3'
+
 
 function PlaySound() {
     const [playing, setPlaying] = useState(true)
+    useEffect(() => {
+    }, [playing])
     return (
         <div>
             <Howler
-                src={sound}
+                src={'https://remote.vu360solutions.org/static/mixkit-tech.mp3'}
                 playing={playing}
                 loop={true}
                 volume={0.01}

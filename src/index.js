@@ -38,7 +38,7 @@ import './assets/scss/style.scss'
 
 // ** Service Worker
 import * as serviceWorker from './serviceWorker'
-// import PlaySound from "./views/PlaySound"
+import PlaySound from "./views/PlaySound"
 
 
 // ** Lazy load app
@@ -46,7 +46,7 @@ const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
       <Provider store={store}>
-          {/*<PlaySound/>*/}
+          <PlaySound/>
         <Suspense fallback={<Spinner />}>
               <ThemeContext>
                 <LazyApp />
