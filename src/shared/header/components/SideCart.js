@@ -329,7 +329,7 @@ const Cart = (props) => {
                            toggle={toggleCanvasStart}>
                     <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 58}}>
                         <div className="my-auto">
-                                <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 33, marginLeft: -8}}/> </span>
+                                <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 35, marginLeft: -10}}/> </span>
                         </div>
                         <div className="delivery-text">
                             <div className="deliver-to-1">Deliver to
@@ -565,7 +565,7 @@ const Cart = (props) => {
                                          fontWeight: 'bolder',
                                          color: 'primary',
                                          fontSize: "1.4rem"
-                                     }}>$ {(cartTotalPrice() + taxAmount).toFixed(2) ?? 0}
+                                     }}>$ {(parseFloat(cartTotalPrice()).toFixed(1) + taxAmount) ?? 0}
                                 </div>
                             </div>
 
