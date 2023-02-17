@@ -10,7 +10,6 @@ import React, {useEffect, useState} from 'react'
 import ReactPaginate from "react-paginate"
 import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
-import EmpCards from "../../../ui-elements/Cards/employeeDashboard/EmpCards"
 import {getEmployeeOrdersStats, getEmployeesOrders} from "../../../redux/employeeDashboard/employeeOrders/action"
 import Select from "react-select"
 import {selectThemeColors} from "../../../utility/Utils"

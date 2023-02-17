@@ -1,29 +1,80 @@
 import {
     Row,
     Col,
-    Table,
-    Input, CardText, CardHeader, CardTitle, CardBody, Card
+    CardText, CardTitle, CardBody, Card, Badge
 } from 'reactstrap'
 // ** React Imports
-import React, {useEffect} from 'react'
-// ** Context
-import { ThemeColors } from '../../../utility/context/ThemeColors'
-// ** Demo Components
-import Earnings from '../../../ui-elements/Cards/analytics/Earnings'
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react'
+
 import {useDispatch, useSelector} from "react-redux"
-import {getEmployeesDashboard} from "../../../redux/employeeDashboard/action"
+import {getEmployeesDashboard, getRestStatus} from "../../../redux/employeeDashboard/action"
 import UILoader from "../../../@core/components/ui-loader"
 import {Box, DollarSign, TrendingUp, User} from "react-feather"
 import Avatar from '@components/avatar'
+import growth from "../../../assets/images/empDashboard/growth.png"
+import Select from "react-select"
+import useAPI from "../../../utility/customHooks/useAPI"
+import {isBranchManager} from "../../../auth/utils"
+import CardBrowserStates from "../../../ui-elements/Cards/advance/CardBrowserState"
+import CardTransactions from "../../../ui-elements/Cards/advance/CardTransactions"
+import {ThemeColors} from "../../../utility/context/ThemeColors"
+import {getInvDistributorData} from "../../../tempData/fakeData"
+import Earnings from "../../../ui-elements/Cards/analytics/Earnings"
+import {getRestaurant} from "../../../redux/restaurant/actions"
+
+import restImg from "../../../assets/images/empDashboard/cooking.png"
 
 const EmployeeDashboard = () => {
     // ** Context
     //const { colors } = useContext(ThemeColors)
 
+    const restaurant = useSelector(state => state.restaurant.object)
+    console.log('restaurant', restaurant)
+
+    const { colors } = useContext(ThemeColors)
+
+    const status = useSelector(state => state.employeeDashboard.status)
+    console.log(status, "lets see what we get here")
     //getting data from store
     const isLoading = useSelector(state => state.employeeDashboard.isDetailLoading)
     const empDashboard = useSelector(state => state.employeeDashboard.object)
+
+    const [opt] = useState([])
+
+    const [selectedRestaurant, setSelectedRestaurant] = useState(0)
+
+    const [IsLoading, response] = useAPI(isBranchManager() ? 'EmployeeDashboard/GetRestaurantList?PageIndex=1&PageSize=12' : '', 'get')
+
+    const InvDistributorData = getInvDistributorData()
+
+    console.log(response?.data, "lets see the response we getting")
+    useLayoutEffect(() => {
+        if (response?.data !== null) {
+            response?.data.map(obj => {
+                opt.push({value: obj.id, label: obj.name})
+                console.log(obj, "let us see the obj")
+            })
+        }
+    }, [response])
+
+    console.log(opt, "letss see if it works")
+
     console.log('empDash', empDashboard)
+
+    const customStyles = {
+        control: base => ({
+            ...base,
+            height: 35,
+            minHeight: 35,
+            fontSize: '15px'
+        })
+    }
+
+    // const options = [
+    //     { value: 'Overall Stats', label: 'Overall Stats' },
+    //     { value: 'Todays Stats', label: 'Todays Stats' },
+    //     { value: 'This Month Stats', label: 'This Month Stats' }
+    // ]
 
     // hooks
     const dispatch = useDispatch()
@@ -31,6 +82,14 @@ const EmployeeDashboard = () => {
     useEffect(() => {
         dispatch(getEmployeesDashboard())
     }, [])
+
+    useEffect(() => {
+        if (selectedRestaurant !== 0) {
+            console.log(selectedRestaurant, "use eff value ")
+            dispatch(getRestStatus(selectedRestaurant))
+            dispatch(getRestaurant(selectedRestaurant))
+        }
+    }, [selectedRestaurant])
 
     return (
         <UILoader blocking={isLoading}>
@@ -43,10 +102,23 @@ const EmployeeDashboard = () => {
                     <Col xl='12' md='6' xs='12'>
                         {/*<StatsCard cols={{ xl: '3', sm: '6' }} />*/}
                         <Card className='card-statistics'>
-                            <CardHeader>
-                                <CardTitle tag='h4'>Statistics</CardTitle>
-                                <CardText className='card-text font-small-2 me-25 mb-0'>Updated 1 month ago</CardText>
-                            </CardHeader>
+
+                                <CardTitle>
+                                    <section>
+                                        <Row style={{justifyContent: 'space-between', padding: '15px', marginBottom: '-36px'}}>
+                                            <Col lg={9}>
+                                                <div style={{display:'flex'}}>
+                                                    <img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>
+                                                    <h4 style={{marginTop: '10px', marginLeft: '5px'}}>statistics</h4>
+                                                </div>
+                                            </Col>
+                                            <Col lg={3}>
+                                                <Select options={opt} styles={customStyles} maxMenuHeight={100} onChange={e => setSelectedRestaurant(e.value)}/>
+                                            </Col>
+                                        </Row>
+                                    </section>
+                                </CardTitle>
+
                             <CardBody className='statistics-body'>
                                 <Row>
                                     <Col xl={3} sm={6}>
@@ -91,6 +163,53 @@ const EmployeeDashboard = () => {
                     </Col>
                 </Row>
             </div>
+
+            <Row className='match-height'>
+                <Col lg='12' md='4'>
+                    <Row className='match-height'>
+                        <Col lg='6' md='6' xs='12'>
+                            <Earnings success={colors.success.main} />
+                        </Col>
+                        <Col lg='6' md='6' xs='12'>
+                            <Card className='earnings-card'>
+                                <CardBody>
+                                    <Row>
+                                        <Col xs='6'>
+                                            <CardTitle className='mb-1'>Top Restaurant</CardTitle>
+                                            <img src={restImg} style={{width: "50px", height: "50px", marginBottom: "10px", marginLeft: "36px"}} />
+                                            <div className='font-small-2'>
+                                                <Badge className=""
+                                                       style={{marginLeft: "35px"}}
+                                                       color={restaurant.isActive ? 'light-success' : 'light-danger'}
+                                                       pill>
+                                                    {restaurant.isActive ? 'Active' : 'In Active'}
+                                                </Badge>
+                                            </div>
+                                        </Col>
+                                        <Col xs='6'>
+                                            <h5 className='mb-1'>{restaurant.name ? restaurant.name : "Featured Restaurant"}</h5>
+                                            <h6 className='mb-1'>{restaurant.address?.address1}</h6>
+                                            <CardText className='text-muted font-small-2'>
+                                                <span className='fw-bolder'>{restaurant.phoneNo}</span>
+                                                <span> Contact</span>
+                                            </CardText>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+
+            <Row className='match-height'>
+                <Col lg='6' md='6' xs='12'>
+                    <CardBrowserStates colors={colors} InvDistributorData={InvDistributorData} />
+                </Col>
+                <Col lg='6' md='6' xs='12'>
+                    <CardTransactions selectedRestaurant={selectedRestaurant} />
+                </Col>
+            </Row>
 
         </UILoader>
     )
