@@ -106,7 +106,7 @@ export const cartTotalPrice = () => {
     if (cart.catering && cart.catering.length > 0) cart.catering.forEach(c => {
       totalPrice = totalPrice + c.totalPrice
     })
-    return Math.round(Number(totalPrice))
+    return parseFloat(totalPrice).toFixed(2)
   }
 }
 export const cartTotalItems = () => {

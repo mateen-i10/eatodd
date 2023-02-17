@@ -46,9 +46,9 @@ export default function Header({isSimple, setKey}) {
             <div className="sticky-top">
                 <header className="header1">
                     <div className="head-sec-1">
-                        <Link to="/"><img className="logo" src={logo}/></Link>
+                        <Link to="/"><img className="logo" src={logo} alt="EatOMG"/></Link>
                         {isUserLoggedIn() ? null : <div className="headlogin">
-                            <img className="usericon " src={usericon}/>
+                            <img className="usericon " src={usericon} alt="User"/>
                             <Link className="signtext" to="/login"><b>Sign In</b></Link>
                         </div>}
                     </div>
@@ -60,7 +60,7 @@ export default function Header({isSimple, setKey}) {
                             dispatch(scrollToOrderAdded("order"))
                         }}>ORDER</h2></Link>
                         <h2 onClick={onCateringClick} className='cursor-pointer'>CATERING</h2>
-                        <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
+                        <Link to="/wine/homepage"><h2 className="text-nowrap">WINE CLUB</h2></Link>
                         <Link to="/reward"><h2>REWARDS</h2></Link>
                         <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                         {isCustomer() && <Link to="/user"><h2>ACCOUNT</h2></Link>}
@@ -72,7 +72,7 @@ export default function Header({isSimple, setKey}) {
                         {!isSimple && <div className=" delivery-addr-bar">
                             <div className="img-separator">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
-                                           style={{height: 25, width: 33, marginLeft: -8, marginTop: 6}}/> </span>
+                                           style={{height: 25, width: 35, marginLeft: -10, marginTop: 6}} alt="EatOMG"/> </span>
                             </div>
                             <div className="delivery-text">
                                 <div className="deliver-to-1">Deliver to
@@ -148,7 +148,7 @@ export default function Header({isSimple, setKey}) {
                             <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("home"))}>HOME</h2></Link>
                             <Link to="/"><h2 onClick={() => dispatch(scrollToOrderAdded("order"))}>ORDER</h2></Link>
                             <Link to="/catering"><h2>CATERING</h2></Link>
-                            <Link to="/wine/homepage"><h2>WINE CLUB</h2></Link>
+                            <Link to="/wine/homepage"><h2 className="text-nowrap">WINE CLUB</h2></Link>
                             <Link to="/reward"><h2>REWARDS</h2></Link>
                             <Link to="/nutrtion"><h2>NUTRITION</h2></Link>
                             {isUserLoggedIn() ? <Link to="/user"><h2>ACCOUNT</h2></Link> : null}
@@ -182,7 +182,7 @@ export default function Header({isSimple, setKey}) {
                             <div className="m-delivery-addr-bar">
                                 <div className="">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
-                                           style={{height: 25, width: 32, marginLeft: -7, marginTop: 7}}/> </span>
+                                           style={{height: 25, width: 32, marginLeft: -7, marginTop: 7}} alt="EatOMG"/> </span>
                                 </div>
                                 <div className="m-delivery-text">
                                     <div className="m-deliver-to-1">Deliver to

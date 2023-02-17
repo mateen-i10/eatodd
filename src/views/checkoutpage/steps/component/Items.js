@@ -18,7 +18,7 @@ const Items = (props) => {
                                         <td className='text-start text-primary text-uppercase fw-bolder fs-4'>
                                             {item?.mealName ? item.mealName : item.name}
                                         </td>
-                                        <td className='text-end text-primary text-uppercase fw-bolder fs-4'>$ {item?.totalPrice}
+                                        <td className='text-end text-primary text-uppercase fw-bolder fs-4'>$ {item?.totalPrice.toFixed(2)}
                                         </td>
                                     </tr>
                                     </tbody>

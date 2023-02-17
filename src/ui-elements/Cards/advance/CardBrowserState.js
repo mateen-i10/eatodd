@@ -6,7 +6,6 @@ import { MoreVertical } from 'react-feather'
 import {
   Card,
   CardBody,
-  CardText,
   CardTitle,
   CardHeader,
   DropdownMenu,
@@ -15,7 +14,12 @@ import {
   UncontrolledDropdown
 } from 'reactstrap'
 
-const CardBrowserState = ({ colors, trackBgColor }) => {
+import image from '../../../assets/images/portrait/small/avatar-s-1.jpg'
+const CardBrowserState = ({ colors, trackBgColor, InvDistributorData }) => {
+
+
+  console.log(InvDistributorData, "..")
+
   const statesArr = [
     {
       avatar: require('@src/assets/images/icons/google-chrome.png').default,
@@ -271,8 +275,7 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
     <Card className='card-browser-states'>
       <CardHeader>
         <div>
-          <CardTitle tag='h4'>Browser States</CardTitle>
-          <CardText className='font-small-2'>Counter August 2020</CardText>
+          <CardTitle tag='h4'>{InvDistributorData?.length !== undefined ? "Distributors" : "Browser States" }</CardTitle>
         </div>
         <UncontrolledDropdown className='chart-dropdown'>
           <DropdownToggle color='' className='bg-transparent btn-sm border-0 p-50'>
@@ -285,7 +288,18 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
           </DropdownMenu>
         </UncontrolledDropdown>
       </CardHeader>
-      <CardBody>{renderStates()}</CardBody>
+      <CardBody>
+        {InvDistributorData !== undefined ? InvDistributorData.map(obj => (
+            <div key={obj.id} className='browser-states'>
+              <div className='d-flex'>
+                <img className='rounded me-1' src={image} height='30' />
+                <h6 className='align-self-center mb-0'>{obj.name}</h6>
+              </div>
+              <div className='d-flex align-items-center'>
+                <div className='fw-bold text-body-heading me-1'>{obj.email}</div>
+              </div>
+            </div>)) : renderStates()}
+      </CardBody>
     </Card>
   )
 }
