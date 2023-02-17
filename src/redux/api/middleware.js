@@ -1,10 +1,15 @@
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
 import {apiCall} from "./actions"
+import {isUserLoggedIn} from "../../auth/utils"
+import {unAuthorize} from "../auth/actions"
+// import {useNavigate} from "react-router"
 
 const apiMiddleware = ({dispatch}) => (next) => (action) => {
     if (action.type !== apiCall.type) return next(action)
     const { url, onSuccess, onError, method, data : semiFinal, isSuccessToast, requestCompleted, successMessage, isSuccess, isFormData} = action.payload
+
+    // const navigate = useNavigate()
 
     let data = null
     // to pass form-data
@@ -45,12 +50,16 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
             }
         }).catch(error => {
         // action called on every response if provided
-        console.log('err', error)
+        console.log('err here', error)
+
+        if (isUserLoggedIn) {
+            dispatch(unAuthorize())
+        }
+
         if (requestCompleted) dispatch({type: requestCompleted, payload: true})
         if (onError) dispatch({type: onError, payload: true})
         toast.error(error.message)
     })
-
 }
 
 export default apiMiddleware
