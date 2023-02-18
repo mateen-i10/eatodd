@@ -12,7 +12,6 @@ import {
 } from 'reactstrap'
 import {UserPlus} from "react-feather"
 import './side-cart.css'
-import LoginModal from "./loginModal/LoginModal"
 import ItemsInCart from "./ItemsInCart/ItemsInCart"
 import {
     cartTotalPrice,
@@ -45,7 +44,6 @@ const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
     const [canvasOpen, setCanvasOpen] = useState(true)
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-    const [openModel, SetModelOpen] = useState(false)
     const [cartItems, setCartItems] = useState()
     const [isDeleted, setDeleted] = useState(false)
     const [recomendedList, setRecomendedList] = useState([])
@@ -274,19 +272,14 @@ const Cart = (props) => {
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen} toggle={toggleCanvasStart}>
                     <OffcanvasHeader toggle={toggleCanvasStart}
                                      style={{marginTop: 10, justifyContent: 'center'}}>
-                        <div className="cursor-pointer" onClick={() => SetModelOpen(true)}>
+                        <Link to='/login' className="cursor-pointer">
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <span className="fs-3 me-3 text-secondary  mt-2"
-                            > Register Your Self
+                            <span className="fs-3 me-3 text-black text-capitalize  mt-2"
+                            > Sign In or Register Your Self
                             </span>
-                        </div>
+                        </Link>
                     </OffcanvasHeader>
 
-                    {openModel === true && (
-                        <div>
-                            <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
-                        </div>
-                    )}
                     <hr/>
                     <OffcanvasBody style={{paddingBottom: 0}}>
                         <div className="container" style={{
@@ -327,36 +320,34 @@ const Cart = (props) => {
             </div> : <div className='demo-inline-spacing'>
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
                            toggle={toggleCanvasStart}>
-                    <div className="mx-auto delivery-addr-bar mt-1 " style={{width: "50%", height: 58}}>
-                        <div className="my-auto">
-                                <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 35, marginLeft: -10}}/> </span>
-                        </div>
-                        <div className="delivery-text">
-                            <div className="deliver-to-1">Deliver to
+                    <div className="container" style={{height: 35}}>
+                        <div className='row'>
+                            <div className="border border-1 border-primary round w-50 mx-auto d-flex mt-1 text-primary" style={{height: 35}}>
+                                <div className="my-auto">
+                                    <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 35, marginLeft: -10}}/> </span>
+                                </div>
+                                <div className="my-auto text-uppercase">
+                                    <div className="fs-6">Deliver to
+                                    </div>
+                                    {userLocation.length ? <div
+                                        className=" fw-bolder"
+                                        style={{fontSize: "0.8rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
+                                </div>
                             </div>
-                            {userLocation.length ? <div
-                                className="address-1 fw-bolder"
-                                style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                         </div>
                     </div>
-                    {isCustomer() && (
+
                         <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
 
-                            {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div style={{display: 'flex'}}>
-                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                                <Link to="/groupOrder">
-                                    <h1 className='header-offCanvas fw-bolder mb-1' onClick={() => toggleCanvasStart()}>
-                                        Make It a group Order.
+                            {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div className="d-flex ">
+                                <UserPlus className='ms-1 me-1 mt-1 text-primary'/>
+                                <Link className='me-1' to={isCustomer() ? "/groupOrder" : "/login"}>
+                                    <h1 className={`fw-bolder mb-1 fs-3 text-uppercase mt-1 text-decoration-underline makeOrderLink`} onClick={() => toggleCanvasStart()}>
+                                        Make It a group Order
                                     </h1>
                                 </Link>
                             </div>}
                         </OffcanvasHeader>
-                    )}
-                    {openModel === true && (
-                        <div>
-                            <LoginModal setModal={SetModelOpen} IsModelOpen={openModel}/>
-                        </div>
-                    )}
 
                     <hr/>
                     <OffcanvasBody style={{paddingBottom: 0}}>
@@ -483,37 +474,12 @@ const Cart = (props) => {
                             </Swiper>
                         </div>
 
-                        {/*<Link to="/home"><Button
-                                outline
-                                color='secondary'
-                                onClick={toggleCanvasStart}
-                                style={{
-                                    marginBottom: 30,
-                                    borderRadius: 0,
-                                    height: 55,
-                                    fontSize: "1.5rem",
-                                    textTransform: 'uppercase'
-                                }}
-                                {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
-                            >
-                                Add menu item
-                            </Button>
-                            </Link>*/}
-
                         <div style={{backgroundColor: '', marginLeft: -20, marginRight: -20, padding: 20}}>
-                            {/*<div className="row">
-                                    <div className="col-9 text-uppercase"
-                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>Bag Total
-                                    </div>
-                                    <div className="col-3"
-                                         style={{fontWeight: 500, color: 'primary', fontSize: "1.4rem"}}>$ {bagPrice() ?? 0}
-                                    </div>
-                                </div>*/}
 
                             {!isUserLoggedIn() && !isJoinedByLink() && <Button
                                 color='secondary'
                                 outline
-                                onClick={() => SetModelOpen(true)}
+                                onClick={() => history.push('/login')}
                                 style={{
                                     marginBottom: 20,
                                     marginTop: 30,

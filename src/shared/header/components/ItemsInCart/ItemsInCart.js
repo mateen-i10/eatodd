@@ -12,7 +12,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
     const wines = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => p.isWine)] : []
 
     return (
-        <div>
+        <div className='text-uppercase'>
             <div className='row'>
                 <div className='col-12'>
                     <Button className='btn-icon btn-sm rounded-circle float-end' outline color='danger' onClick={() => removeMeal(index, isCatering)}>
@@ -50,7 +50,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4">{item.calculatedPrice && item.selectedQuantity ? `${item.selectedQuantity} x $${item.price } = $${item.calculatedPrice}` : item.calculatedPrice ? `1 x $${item.price } = $${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice && item.selectedQuantity ? `${item.selectedQuantity} x $${item.price } = $${item.calculatedPrice.toFixed(2)}` : item.calculatedPrice ? `1 x $${item.price } = $${item.calculatedPrice.toFixed(2)}` : `-`}</div>
                     </div>
                 </div>
             ))}
@@ -64,7 +64,7 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
                 <div className="container-fluid" key={`products-${id}`}>
                     <div className="row">
                         <div className="col-8 fs-4 font-medium-1">{item.name}</div>
-                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice}` : `-`}</div>
+                        <div className="col-4">{item.calculatedPrice ? `${item.selectedQuantity} x $${item.price} = $${item.calculatedPrice.toFixed(2)}` : `-`}</div>
                     </div>
                 </div>
             ))}
