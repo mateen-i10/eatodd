@@ -107,7 +107,7 @@ const Template = (props) => {
             name: 'Body',
             selector: (row) => row.body,
             sortable: true,
-            minWidth: '150px'
+            width: '250px'
         },
         {
             name: 'Actions',

@@ -106,7 +106,7 @@ export const cartTotalPrice = () => {
     if (cart.catering && cart.catering.length > 0) cart.catering.forEach(c => {
       totalPrice = totalPrice + c.totalPrice
     })
-    return Math.round(Number(totalPrice))
+    return Number(totalPrice)
   }
 }
 export const cartTotalItems = () => {
@@ -134,6 +134,21 @@ export const addItemToCart = (item, isToast = true) => {
   if (isToast) toast.success(`'${item.mealName}' added to cart`)
   store.dispatch(calculateTotalItems())
   return true
+}
+
+export const editItemInCart = (item, itemIndex, isToast = true) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  const cart = JSON.parse(items)
+  const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
+  if (itemIndex > -1) {
+    finalMeals.splice(itemIndex, 1, {...item})
+    localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
+    if (isToast) toast.success(`'${item.mealName}' Updated to cart`)
+    store.dispatch(calculateTotalItems())
+    return true
+  }
+  return false
 }
 export const removeItemFromCart = (index, isWine = false) => {
   //getting existing cart items
@@ -252,7 +267,6 @@ export const setGroupOrderMeals = (data) => {
 
       const meal = {
         guestName: m?.guestName,
-        mealId: m.id,
         mealName: m.name,
         totalPrice,
         categoryName: m.category?.name,
