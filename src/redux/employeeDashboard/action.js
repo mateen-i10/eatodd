@@ -1,5 +1,5 @@
 import {apiCall} from "../api/actions"
-import {setDetailLoading, setEmployeesDashboard} from "./reducer"
+import {setDetailLoading, setEmployeesDashboard, setRestaurantStatus} from "./reducer"
 
 const url = 'employeeDashboard/GetTotal'
 
@@ -11,6 +11,18 @@ export const getEmployeesDashboard = () => {
             data: {},
             method: 'Get',
             onSuccess: setEmployeesDashboard.type
+        }))
+    }
+}
+
+export const getRestStatus = (id) => {
+    return async dispatch => {
+        dispatch(setDetailLoading(true))
+        dispatch(apiCall({
+            url: `EmployeeDashboard/GetDashboardStatistics/${id}`,
+            data: {},
+            method: 'Get',
+            onSuccess: setRestaurantStatus.type
         }))
     }
 }

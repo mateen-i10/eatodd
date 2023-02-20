@@ -140,7 +140,9 @@ const Product = (props) => {
         {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.SwitchButton, label: 'Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
+        {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+        {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
+        {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
     ])
 
     const [edit, setEdit] = useState(false)
@@ -156,29 +158,38 @@ const Product = (props) => {
     const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
     const [optionType, setOptionType] = useState([])
     // my work ends
-
-    console.log(formState.category?.label, "formState is here")
-
     const AddNewData = () => {
-        if (formState.category?.label === 'Wine') {
-            setFormData([
-                ...commonFields,
-                {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
-                {type:FieldTypes.Number, label: 'Retail Price', placeholder: 'Enter Price', name:'retailPrice', isRequired:true, fieldGroupClasses: 'col-6'}
-            ])
-        } else {
             setFormData([
                 ...commonFields,
                 {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
             ])
-        }
-
         setFormFeilds(1)
         setShowOption(true)
     }
 
     useEffect(() => {
-        AddNewData()
+        if (formState.category?.label === 'Wine' && formFeilds === 3) {
+            setFormData([
+                ...commonFields,
+                {type:FieldTypes.Number, label: 'Retail Price', placeholder: 'Enter Price', name:'retailPrice', isRequired:true, fieldGroupClasses: 'col-6'}
+            ])
+        } else if (formState.category?.label === 'Wine' && formFeilds === 1) {
+            setFormData([
+                ...commonFields,
+                {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'},
+                {type:FieldTypes.Number, label: 'Retail Price', placeholder: 'Enter Price', name:'retailPrice', isRequired:true, fieldGroupClasses: 'col-6'}
+            ])
+
+        } else if (formFeilds === 1) {
+            setFormData([
+                ...commonFields,
+                {type:FieldTypes.File, label: 'Image', placeholder: 'image', name:'image', isRequired:false, fieldGroupClasses: 'col-6'}
+            ])
+
+        } else {
+            setFormData([...commonFields])
+        }
+        // AddNewData()
     }, [formState.category?.label])
 
     const AddFromExistingData = () => {
@@ -188,7 +199,6 @@ const Product = (props) => {
         ])
         setFormFeilds(0)
         setShowOption(false)
-
     }
 
     useEffect(() => {
@@ -254,7 +264,6 @@ const Product = (props) => {
         toggle()
         return AddFromExistingData()
     }
-
     const editClick = (id) => {
         console.log("edit", id)
         toggle()
@@ -262,7 +271,7 @@ const Product = (props) => {
         setModalTitle('Edit Product')
         setEdit(true)
         setFormData([...commonFields])
-        //setFormFeilds(3)
+        setFormFeilds(3)
         setShowOption(true)
     }
 
@@ -452,7 +461,7 @@ const Product = (props) => {
                             <CardTitle tag='h4'>Product</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
-                        <row>
+                        <Row>
                             <Col className='d-flex justify-content-end'>
                                 <Button.Ripple bssize='sm' color='primary' onClick={openFromParent} style={{marginRight:'4px'}}>Assign Items to Product</Button.Ripple>
                                 {/*<Button.Ripple bssize='sm' color='primary' onClick={openRecommendedFromParent} style={{marginRight:'4px'}}>Assign General Recommendations to Product</Button.Ripple>*/}
@@ -461,7 +470,7 @@ const Product = (props) => {
                                     To Load General products by Category and Subcategory Please apply the filters below before you open the form.
                                 </UncontrolledTooltip>
                             </Col>
-                        </row>
+                        </Row>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

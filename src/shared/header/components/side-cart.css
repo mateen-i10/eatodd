@@ -1,18 +1,5 @@
-.header-offCanvas {
-    font-size: 18px;
-    font-weight: bolder;
-    text-decoration: underline;
-    margin-top: 3px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 
-}
-
-.header-offCanvas:hover {
-    color: rgb(129 190 65);
-}
-
-.button-hovered:hover {
+.makeOrderLink:hover {
     color: rgb(129 190 65);
 }
 

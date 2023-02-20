@@ -1,6 +1,6 @@
 import { useSkin } from '@hooks/useSkin'
 import {Link, useHistory, useLocation} from 'react-router-dom'
-import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
+// import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import {Row, Col, CardTitle, CardText, Form, Label, Input, Button, FormFeedback} from 'reactstrap'
 import '@styles/react/pages/page-authentication.scss'
@@ -58,8 +58,8 @@ const LoginCover = () => {
         <UILoader blocking={isBlock}>
         <div className='auth-wrapper auth-cover'>
                 <Row className='auth-inner m-0'>
-                <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
-                    <img src={icon} style={{ width: '100px'}}/>
+                <Link className='brand-logo' to='/home'>
+                    <img src={icon} style={{ width: '100px'}} alt='EATOMG'/>
                     {/*<h2 className='brand-text text-primary ms-1' style={{ paddingTop:'10px'}}>EATOMG</h2>*/}
                 </Link>
                 <Col className='d-none d-lg-flex align-items-center p-5' lg='8' sm='12'>

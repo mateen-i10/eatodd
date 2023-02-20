@@ -20,7 +20,9 @@ const ProductCard = ({
                          attachment,
                          subCatId,
                          onOptionClick,
-                         onQuantityChange
+                         onQuantityChange,
+                         setShowExtra,
+                         showExtra
                      }) => {
     //local state
     const [customize, setCustomize] = useState(false)
@@ -28,7 +30,7 @@ const ProductCard = ({
     const [isLength, setIsLength] = useState(false)
     console.log(item.flavour, "items coming from product card comp")
 
-    console.log(item, "lets see the items")
+    // console.log(item, "lets see the items")
     const imgStyles = {
         width: "100%",
         height: "120px",
@@ -42,7 +44,7 @@ const ProductCard = ({
     const customerId = getUserData()?.customerId
 
     useEffect(() => {
-        dispatch(getWinePackageByCustomer(customerId))
+        if (customerId) dispatch(getWinePackageByCustomer(customerId))
     }, [])
 
     const membershipObj = useSelector(state => state.memberShip.object)
@@ -123,16 +125,22 @@ const ProductCard = ({
 
                 })}
                 <div className="col-md-10 col-10 "  onClick={() => {
+                  if (showExtra !== undefined && item.isBlank === true) setShowExtra(!showExtra)
                     onItemClick(item, subCatId, limit)
                     setValue(!value)
                     if (limit !== 0 && selectedItems.length === limit) {
-                        setIsLength(true)
-                        setValue(false)
+                        if (item.isBlank === true) {
+                            setValue(!value)
+                        }  else {
+                            setIsLength(true)
+                            setValue(false)
+                        }
+
                     }
                 }}>
                     <div className="row g-0">
                         <div className="col-lg-4  col-md-4 col-5">
-                            <ProductImage
+                            {item.isBlank ? <div className='check3' > <CheckSign styles={{marginLeft: 10}} checkStyle1={`${value ? 'checkStyle' : 'checkStyle1'}`}/> </div> : <ProductImage
                                 attachment={attachment}
                                 classes={"img-fluid rounded-start"}
                                 styles={!value ? imgStyles : {
@@ -140,7 +148,7 @@ const ProductCard = ({
                                     backgroundColor: 'transparent',
                                     overflow: "hidden",
                                     objectFit: "fill"
-                                }}/>
+                                }}/>}
                         </div>
                         <div className="col-lg-8 col-md-8 col-7">
                             <div className="card-body ">
@@ -173,7 +181,7 @@ const ProductCard = ({
                              onMouseOver={() => setCustomize(!customize)}>
                             <Plus size={20} />
                         </div>}
-                            <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>{membershipObj.id ? `${item.retailPrice ? item.retailPrice : item.price}` : `${item.wholePrice ? item.wholePrice : item.price}`}</div>
+                            <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>$ {membershipObj.id ? `${item.retailPrice ? item.retailPrice : item.price}` : `${item.wholePrice ? item.wholePrice : item.price}`}</div>
                 </div>
             </div>
             }

@@ -6,8 +6,25 @@ import * as Icon from 'react-feather'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
+import {useEffect, useState} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {loadProductsByRestaurant} from "../../../redux/restaurant/actions"
 
-const CardTransactions = () => {
+const CardTransactions = ({selectedRestaurant}) => {
+
+  const miscData = useSelector(state => state.restaurant.miscData)
+  const [currentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+  const [pageSize] = useState(10)
+  const [searchValue] = useState('')
+  const dispatch = useDispatch()
+
+  const productList = useSelector(state => state.restaurant.productList)
+  console.log(productList, "lets see")
+
+  useEffect(() => {
+    dispatch(loadProductsByRestaurant(currentPage, pageSize, searchValue, selectedRestaurant))
+  }, [selectedRestaurant])
+
   const transactionsArr = [
     {
       title: 'Wallet',
@@ -47,8 +64,8 @@ const CardTransactions = () => {
       Icon: Icon['TrendingUp']
     }
   ]
-
   const renderTransactions = () => {
+
     return transactionsArr.map(item => {
       return (
         <div key={item.title} className='transaction-item'>
@@ -65,13 +82,26 @@ const CardTransactions = () => {
     })
   }
 
+  console.log(selectedRestaurant, "lets see")
   return (
     <Card className='card-transaction'>
       <CardHeader>
-        <CardTitle tag='h4'>Transactions</CardTitle>
+        <CardTitle tag='h4'>{productList.length ? "Product by restaurant" : "Transactions"}</CardTitle>
         <Icon.MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
-      <CardBody>{renderTransactions()}</CardBody>
+      <CardBody>
+        {productList.length !== 0 ? productList.map(obj => (
+          <div key={obj.name} className='transaction-item'>
+            <div className='d-flex'>
+              <Avatar className='rounded' color={obj.color}/>
+              <div>
+                <h6 className='transaction-title'>{obj.name}</h6>
+                {/*<small>{item.subtitle}</small>*/}
+              </div>
+            </div>
+            <div>{obj.wholePrice}</div>
+          </div>)) : renderTransactions()}
+      </CardBody>
     </Card>
   )
 }
