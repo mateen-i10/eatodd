@@ -135,6 +135,21 @@ export const addItemToCart = (item, isToast = true) => {
   store.dispatch(calculateTotalItems())
   return true
 }
+
+export const editItemInCart = (item, itemIndex, isToast = true) => {
+  //getting existing cart items
+  const items = localStorage.getItem(cartName)
+  const cart = JSON.parse(items)
+  const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
+  if (itemIndex > -1) {
+    finalMeals.splice(itemIndex, 1, {...item})
+    localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
+    if (isToast) toast.success(`'${item.mealName}' Updated to cart`)
+    store.dispatch(calculateTotalItems())
+    return true
+  }
+  return false
+}
 export const removeItemFromCart = (index, isWine = false) => {
   //getting existing cart items
   const items = localStorage.getItem(cartName)
@@ -252,7 +267,6 @@ export const setGroupOrderMeals = (data) => {
 
       const meal = {
         guestName: m?.guestName,
-        mealId: m.id,
         mealName: m.name,
         totalPrice,
         categoryName: m.category?.name,
