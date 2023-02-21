@@ -487,9 +487,9 @@ const Cart = (props) => {
                                 <CardText>People also search for these items</CardText>
                             </div>
                             <Swiper {...params}>
-                                {recommendedList.map(slide => {
+                                {recommendedList.map((slide, index) => {
                                     return (
-                                        <SwiperSlide key={slide.id}>
+                                        <SwiperSlide key={`optionsKey-${index}`}>
                                             <Col lg={12}>
                                                 <a href='/' onClick={e => {
                                                     addRecommended(slide, e)
