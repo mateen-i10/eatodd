@@ -28,7 +28,7 @@ const ProductCard = ({
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
-    console.log(item.flavour, "items coming from product card comp")
+    console.log(item, "items")
 
     // console.log(item, "lets see the items")
     const imgStyles = {
@@ -42,6 +42,7 @@ const ProductCard = ({
     const dispatch = useDispatch()
 
     const customerId = getUserData()?.customerId
+    const diff = []
 
     useEffect(() => {
         if (customerId) dispatch(getWinePackageByCustomer(customerId))
@@ -75,6 +76,17 @@ const ProductCard = ({
                 onMouseLeave={() => setCustomize(!customize)}
             >
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
+                    console.log("op", op)
+
+                    const diffDouble = op.name === "Double" ? op.price : 0
+                    const diffNormal = op.name === "Normal" ? op.price : 0
+                    if (diffDouble > 0) {
+                        diff.push(diffDouble)
+                    } else if (diffNormal > 0) {
+                        diff.push(diffNormal)
+                    }
+                    console.log("diff", diff)
+
                     const cols = index === 0 ? Math.ceil(10 / item.options.length) : Math.floor(10 / item.options.length)
                     return <div key={`optionsKey-${index}`}
                                 className={`col-${cols} ${op.isSelected ? 'bg-primary text-white' : 'text-dark'} text-center cursor-pointer`}
@@ -85,7 +97,8 @@ const ProductCard = ({
                                     onOptionClick(item, index, limit, subCatId)
                                 }}>
                         <div style={{marginTop: 32, fontSize: 16, fontWeight: 440}}>
-                            {`${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}
+                            {/*{`${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}*/}
+                            {op.name === "Normal" ? `${op?.name} ${op?.price ? ` - $${op.price}` : ''}` : op.name === "Double" ? `${op?.name}   + $${diff?.length === 2 ? diff[1] - diff[0] : ''}` : `${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}
                         </div>
                     </div>
                 })}
