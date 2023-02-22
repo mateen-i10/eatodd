@@ -13,17 +13,19 @@ const Homepage = () => {
         <>
             <Headerwine/>
             <VideoHero/>
+
             <div className="about-page">
                 <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-sm ">
                         <div className="row d-flex align-items-center justify-content-center h-75 ">
-                            <div className="col-lg-3 col-12">
+                            <div className="col-lg-6 col-12">
                                 <div className="about-3-img text-center mb-40 ">
-                                    <img className="img-fluid" style={{width: "200%", height: "200%"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
+                                    <img className="img-fluid" style={{marginLeft: "60px"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
                                 </div>
                             </div>
-                            <div className="col-lg-9 col-12 text-start ">
-                                <div className="about-3-txt mb-40">
+                            <div className="col-lg-6 col-12 text-start ">
+                                <div className="about-3-txt mb-40" style={{marginLeft: "-65px", marginRight: "44px"}}>
+                                    <hr/>
                                     <p className="p-md fs-5 fw-bold mt-1" style={{color: "grey", lineHeight: "25px"}}>The
                                         OMG Wine Club was created to make you say OMG at your savings! We are the 1st
                                         wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
@@ -39,9 +41,9 @@ const Homepage = () => {
                                         to OMG.As our way to say THANK YOU, we are extending you the
                                         opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
                                         with our food, we figured
-                                        why not let YOU PAY WHAT WE PAY?! We are not complicated;
+                                        why not let YOU PAY WHAT WE PAY?! We are not complicated.
                                     </p>
-
+                                    <hr/>
                                 </div>
                             </div>
                         </div>
