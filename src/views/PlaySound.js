@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Howler from 'react-howler'
 import Switch from 'react-switch'
 
-
 function PlaySound() {
     const [playing, setPlaying] = useState(true)
-    useEffect(() => {
-    }, [playing])
     return (
         <div>
             <Howler

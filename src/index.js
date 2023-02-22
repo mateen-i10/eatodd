@@ -46,7 +46,9 @@ const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
       <Provider store={store}>
-          <PlaySound/>
+          <div className="switch-container">
+              Pause /Play<PlaySound/>
+          </div>
         <Suspense fallback={<Spinner />}>
               <ThemeContext>
                 <LazyApp />

@@ -39,7 +39,6 @@ const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedPr
                 subCatId={subCatId}
                 onOptionClick={handleSelectOption}
                 onQuantityChange={handleChangeQuantity}
-
             />
         </div>))
         }
