@@ -10,8 +10,7 @@ const CateringMenuItems = (props) => {
 
         <div className="card" style={{height: "380px", paddingBottom: "15px"}}>
             <div>
-                <ProductImage attachment={item.attachment} classes="card-img-top"
-                              styles={{height: 185, objectFit: "cover"}}/>
+                <ProductImage attachment={item.attachment} classes="card-img-top" styles={{height: 185, objectFit: "cover"}}/>
                 {/*<img src={item.image} className="card-img-top" style={{height: 185, objectFit: "cover"}} alt="..."/>*/}
             </div>
             <div style={{

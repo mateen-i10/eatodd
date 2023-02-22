@@ -40,7 +40,7 @@ const JoinGroupOrder = () => {
                                 <Button
                                     style={{width: "100%", fontSize: "1.2rem", textTransform: "uppercase"}} color="primary">Join
                                     Group
-                                    order
+                                    Order
                                 </Button>
                             </Link>
                         </div>
@@ -48,8 +48,7 @@ const JoinGroupOrder = () => {
                         <div className="mb-1" style={{fontSize: "1.1rem"}}>Need more than 20 participant meals?</div>
                         <Link to="/catering">
                             <div className="text-decoration-underline text-black fw-bold mb-2 cursor-pointer"
-                                 style={{fontSize: "1.1rem"}}>Try
-                                Catering
+                                 style={{fontSize: "1.1rem"}}>Try Catering
                             </div>
                         </Link>
                     </div>

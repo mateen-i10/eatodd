@@ -146,7 +146,7 @@ export const unAuthorize = () => {
         dispatch(handleLogout())
         dispatch(push('/login'))
         location.reload()  // (temporary) until find a solution to update route using redux
-        toast.error('Sign in to continue...')
+        toast.error('Sign in to Continue...')
     }
 
 }

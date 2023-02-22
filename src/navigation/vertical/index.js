@@ -77,12 +77,6 @@ export default [
         navLink: '/GeneralRecommendations'
     },
     {
-        id: 'FaceBookAutoPost',
-        title: 'FaceBook Auto Post',
-        icon: <Facebook size={20}/>,
-        navLink: '/Facebook'
-    },
-    {
         id: 'Customers',
         title: 'Customers',
         icon: <User size={20}/>,
@@ -107,12 +101,6 @@ export default [
                 navLink: '/templates'
             }
         ]
-    },
-    {
-        id: 'CRMsms',
-        title: 'CRM (SMS)',
-        icon: <MessageSquare size={20}/>,
-        navLink: '/CrmSms'
     },
     {
         id: 'campaign',

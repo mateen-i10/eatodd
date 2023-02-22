@@ -89,7 +89,7 @@ const SubCategory = (props) => {
         {type:FieldTypes.Text, label: 'Name', placeholder: 'Enter Category Name', name:'name', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Filling Limit', placeholder: 'Enter Filling limits', name:'fillingLimit', isRequired:true, fieldGroupClasses: 'col-6'},
-        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name:'category', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.CheckBox, label: 'No Case', name:'isBlank', isRequired:true, fieldGroupClasses: 'col-6 mt-2'},
         {type:FieldTypes.Number, label: 'Priority', placeholder: 'Enter Priority', name:'priority', isRequired:true, fieldGroupClasses: 'col-6'}
     ])

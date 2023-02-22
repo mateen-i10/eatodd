@@ -447,8 +447,6 @@ const Campaign = (props) => {
                     </Card>
                 </UILoader>
             </Fragment>
-
-
             <div className='demo-inline-spacing'>
                 <div>
                     <Modal isOpen={formModal} toggle={() => {
@@ -516,7 +514,6 @@ const Campaign = (props) => {
                                         </div>
                                     </Col>}
                                 </Row>
-
                                 <Row>
                                     <div className='ms-1'>
                                         <h5>Schedule List</h5>
@@ -572,7 +569,6 @@ const Campaign = (props) => {
                                         </div>
                                     </div>
                                 </Row>
-
                         </ModalBody>
                         <ModalFooter>
                                 <Button color='danger' onClick={() => {
