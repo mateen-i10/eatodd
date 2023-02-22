@@ -8,13 +8,20 @@ import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 import CateringSubForm from "../components/CateringSubForm"
 import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
+import {Col, Row} from "reactstrap"
 
 const Catering = () => {
-    const [elHovered, setElHovered] = useState({})
+    //const [elHovered, setElHovered] = useState({})
     const [cateringMenu, setCateringMenu] = useState([])
     const [selectedMenuId, setSelectedMenuId] = useState()
     const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
+
+    const [formComponent, setFormComponent] = useState(false)
+
+    /*const showFormComponent = () => {
+        setFormComponent(true)
+    }*/
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
@@ -53,15 +60,18 @@ const Catering = () => {
     }, [cateringMenu])
 
     // console.log(cateringMenu)
-    const xl = "6"
-    const md = "6"
-    const toggleList = item => {
+
+    /*const xl = "6"
+    const md = "6"*/
+
+ /*   const toggleList = item => {
         // console.log("Item", item)
         if (selectedMenuId !== item.id) {
             setSelectedMenuId(item.id)
         }
         if (item.isWine) setWineSelected(true)
-    }
+    }*/
+
     console.log("selectedMenuId", selectedMenuId)
 
     return (
@@ -105,10 +115,11 @@ const Catering = () => {
                     </div>
                 </div>
             </div>
-            <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"100px", paddingBottom:"100px"}}>Build for your loved One's</div>
-            {cateringMenu.length ? <div className="container-sm mb-3">
-                <div className="row mt-3 justify-content-center">
-                    <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
+            <section className='mt-2 mb-2' style={{backgroundColor: '#f5f8fb'}}>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>Build for your loved One's</div>
+                {cateringMenu.length ? <div className="container-sm mb-3">
+                    <div className="row mt-3">
+                        {/*<div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
                         <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
                         <hr/>
                         <div
@@ -133,17 +144,43 @@ const Catering = () => {
                                 </div>
                             ))}
                         </div>
+                    </div>*/}
+                        <div className="col-md-12">
+                            {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
+                                /*xl={xl}
+                                md={md}*/
+                                id={selectedMenuId}
+                            />}
+
+                        </div>
                     </div>
-                    <div className="col-md-9 col-12 ">
-                        {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
-                            xl={xl}
-                            md={md}
-                            id={selectedMenuId}
-                        />}
-                        {selectedMenuId === '1' ? <CateringSubForm/> : []}
-                    </div>
-                </div>
-            </div> : <div className="m-5"><ComponentSpinner/></div>}
+                    <Row style={{textAlign: "center"}}>
+                        <Col md={12}>
+                            <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
+                            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}></Col>
+                        <Col lg={4} style={{textAlign: "center"}}>
+                            <button className='btn btn-primary mt-2 mb-2' onClick={() => setFormComponent(!formComponent)}>Show More</button>
+                        </Col>
+                        <Col lg={4}></Col>
+                    </Row>
+                    {formComponent ? <>
+                    <Row>
+                        <Col lg={2}></Col>
+                        <Col lg={8}>
+                            <CateringSubForm/>
+                        </Col>
+                        <Col lg={2}></Col>
+                    </Row>
+                    </> : ''}
+
+                    {/*{selectedMenuId === '1' ? <CateringSubForm/> : []}*/}
+                </div> : <div className="m-5"><ComponentSpinner/></div>}
+            </section>
+
             <Footer/>
         </div>
     )

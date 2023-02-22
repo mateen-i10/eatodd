@@ -92,9 +92,9 @@ const CateringSubForm = () => {
 
     return (
         <>
-            <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
-            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
-            <p style={{color: 'rgb(234, 84, 85)'}}>*Requires 1 week notice for all orders.</p>
+            {/*<h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
+            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>*/}
+            <p className='mt-5' style={{color: 'rgb(234, 84, 85)'}}>*Requires 1 week notice for all orders.</p>
             <p>Our OMG Grazing Tables are the perfect way to entertain and feed larger groups. They provide a beautiful
                 statement piece at your gathering. Styled to perfection with high quality artisanal products. Components
                 include a Variety of Premium Cheeses, Grilled & Cured Meats, Antipasto Items, Jams, Nuts, Dried Fruit,
@@ -155,7 +155,7 @@ const CateringSubForm = () => {
                                 {dateVal && <p className='text-danger'>Date is required</p>}
                         </Col>
                         <Col className='mt-2 ' sm='12'>
-                            <Button type='submit' className='me-1' color='primary'>
+                            <Button type='submit' className='me-1 mb-2' color='primary'>
                                 Submit
                             </Button>
                             {isSubmited === true ? <div style={{marginTop: '15px', color: 'red'}}>
