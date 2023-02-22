@@ -18,10 +18,8 @@ const Catering = () => {
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
 
     const [formComponent, setFormComponent] = useState(false)
+    const [wineShow, setWineShow] = useState(false)
 
-    /*const showFormComponent = () => {
-        setFormComponent(true)
-    }*/
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
@@ -75,8 +73,9 @@ const Catering = () => {
     console.log("selectedMenuId", selectedMenuId)
 
     return (
-        <div>
+        <>
             <Header/>
+
             <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px'}}>
                 <section>
                     <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
@@ -86,36 +85,8 @@ const Catering = () => {
                     </div>
                 </section>
             </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5" style={{paddingTop:'100px'}}>
-                        <p className="text-primary fs-2 fw-bolder">OMG Catering
-                        </p>
-                        <h1 className="text-black text-uppercase fw-bolder" style={{fontSize: '40px', lineHeight: 1.1}}>
-                            ADD WINE TO YOUR <br/>OMG CATERING ORDER
-                        </h1>
-                        <div className="fs-4 mb-1">
-                            <p>OMG will streamline your event planning by taking care of your food + WINE. We offer the
-                                ability to Mix and Match your wine selection to make sure no guest leaves thirsty. </p>
-                            <div className="" style={{fontSize: "15px"}}>*All wine will be sold at wholesale
-                                prices
-                                <br/>*$120 service fee added to all event orders that include wine <br/>
-                                *please provide 48-hour notice so we can make sure we have your selected wines in stock
-                            </div>
-                        </div>
-                        {/*<button type="button" className="btn fs-4 "*/}
-                        {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
-                        {/*</button>*/}
-                    </div>
-                    <div className="col-md-6">
-                        <img className="new mt-5"
-                             src={require("../../../assets/images/images/catring-wine.png").default}
-                             height={500} style={{marginLeft: "100px"}}  alt="wine"
-                        />
-                    </div>
-                </div>
-            </div>
-            <section className='mt-2 mb-2' style={{backgroundColor: '#f5f8fb'}}>
+
+            <section>
                 <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>Build for your loved One's</div>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3">
@@ -181,8 +152,56 @@ const Catering = () => {
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>
 
+            <section className="container" style={{backgroundColor: '#f5f8fb'}}>
+                <Row>
+                    <Col lg={7}>
+                        <div className='ps-5 mt-5'>
+                            <p className="text-primary fs-2 fw-bolder">
+                                OMG Catering
+                            </p>
+                            <h1 className="text-black text-uppercase fw-bolder mb-2" style={{fontSize: '40px', lineHeight: 1.1}}>
+                                ADD WINE TO YOUR <br/>OMG CATERING ORDER
+                            </h1>
+                            <div className="fs-4 mb-2">
+                                <p>
+                                    OMG will streamline your event planning by taking care of your food + WINE. We offer the
+                                    ability to Mix and Match your wine selection to make sure no guest leaves thirsty.
+                                </p>
+                                <div className="mb-2" style={{fontSize: "15px"}}>
+                                    *All wine will be sold at wholesale prices
+                                    <br/>
+                                    *$120 service fee added to all event orders that include wine
+                                    <br/>
+                                    *please provide 48-hour notice so we can make sure we have your selected wines in stock
+                                </div>
+                            </div>
+                            <button type="button" className="btn fs-4 mt-3 mb-2" onClick={() => setWineShow(!wineShow)}
+                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Show Wine Packages
+                            </button>
+                        </div>
+                    </Col>
+                    <Col lg={5}>
+                        <div style={{textAlign: 'center'}}>
+                            <img className="mt-5"
+                                 src={require("../../../assets/images/images/catring-wine.png").default}
+                                 height={400} alt="wine" style={{display: "initial"}}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+
+                {wineShow ? <>
+                    <Row>
+                        <Col lg={12}>
+                            <WineOrderMenu/>
+                        </Col>
+                    </Row>
+                </> : ''}
+
+            </section>
+
             <Footer/>
-        </div>
+        </>
     )
 }
 
