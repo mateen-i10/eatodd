@@ -8,13 +8,18 @@ import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 import CateringSubForm from "../components/CateringSubForm"
 import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
+import {Col, Row} from "reactstrap"
 
 const Catering = () => {
-    const [elHovered, setElHovered] = useState({})
+    //const [elHovered, setElHovered] = useState({})
     const [cateringMenu, setCateringMenu] = useState([])
     const [selectedMenuId, setSelectedMenuId] = useState()
     const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
+
+    const [formComponent, setFormComponent] = useState(false)
+    const [wineShow, setWineShow] = useState(false)
+
 
     useEffect(() => {
         if (response !== null && response.statusCode === 200) {
@@ -53,20 +58,24 @@ const Catering = () => {
     }, [cateringMenu])
 
     // console.log(cateringMenu)
-    const xl = "6"
-    const md = "6"
-    const toggleList = item => {
+
+    /*const xl = "6"
+    const md = "6"*/
+
+ /*   const toggleList = item => {
         // console.log("Item", item)
         if (selectedMenuId !== item.id) {
             setSelectedMenuId(item.id)
         }
         if (item.isWine) setWineSelected(true)
-    }
+    }*/
+
     console.log("selectedMenuId", selectedMenuId)
 
     return (
-        <div>
+        <>
             <Header/>
+
             <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px'}}>
                 <section>
                     <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
@@ -76,39 +85,12 @@ const Catering = () => {
                     </div>
                 </section>
             </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 mt-5" style={{paddingTop:'100px'}}>
-                        <p className="text-primary fs-2 fw-bolder">OMG Catering
-                        </p>
-                        <h1 className="text-black text-uppercase fw-bolder" style={{fontSize: '40px', lineHeight: 1.1}}>
-                            ADD WINE TO YOUR <br/>OMG CATERING ORDER
-                        </h1>
-                        <div className="fs-4 mb-1">
-                            <p>OMG will streamline your event planning by taking care of your food + WINE. We offer the
-                                ability to Mix and Match your wine selection to make sure no guest leaves thirsty. </p>
-                            <div className="" style={{fontSize: "15px"}}>*All wine will be sold at wholesale
-                                prices
-                                <br/>*$120 service fee added to all event orders that include wine <br/>
-                                *please provide 48-hour notice so we can make sure we have your selected wines in stock
-                            </div>
-                        </div>
-                        {/*<button type="button" className="btn fs-4 "*/}
-                        {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
-                        {/*</button>*/}
-                    </div>
-                    <div className="col-md-6">
-                        <img className="new mt-5"
-                             src={require("../../../assets/images/images/catring-wine.png").default}
-                             height={500} style={{marginLeft: "100px"}}  alt="wine"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"100px", paddingBottom:"100px"}}>Build for your loved One's</div>
-            {cateringMenu.length ? <div className="container-sm mb-3">
-                <div className="row mt-3 justify-content-center">
-                    <div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
+
+            <section>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>Build for your loved One's</div>
+                {cateringMenu.length ? <div className="container-sm mb-3">
+                    <div className="row mt-3">
+                        {/*<div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
                         <div className="text-center fs-2 fw-bolder text-primary">Menu</div>
                         <hr/>
                         <div
@@ -133,19 +115,93 @@ const Catering = () => {
                                 </div>
                             ))}
                         </div>
+                    </div>*/}
+                        <div className="col-md-12">
+                            {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
+                                /*xl={xl}
+                                md={md}*/
+                                id={selectedMenuId}
+                            />}
+
+                        </div>
                     </div>
-                    <div className="col-md-9 col-12 ">
-                        {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
-                            xl={xl}
-                            md={md}
-                            id={selectedMenuId}
-                        />}
-                        {selectedMenuId === '1' ? <CateringSubForm/> : []}
-                    </div>
-                </div>
-            </div> : <div className="m-5"><ComponentSpinner/></div>}
+                    <Row style={{textAlign: "center"}}>
+                        <Col md={12}>
+                            <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
+                            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={4}></Col>
+                        <Col lg={4} style={{textAlign: "center"}}>
+                            <button className='btn btn-primary mt-2 mb-2' onClick={() => setFormComponent(!formComponent)}>Show More</button>
+                        </Col>
+                        <Col lg={4}></Col>
+                    </Row>
+                    {formComponent ? <>
+                    <Row>
+                        <Col lg={2}></Col>
+                        <Col lg={8}>
+                            <CateringSubForm/>
+                        </Col>
+                        <Col lg={2}></Col>
+                    </Row>
+                    </> : ''}
+
+                    {/*{selectedMenuId === '1' ? <CateringSubForm/> : []}*/}
+                </div> : <div className="m-5"><ComponentSpinner/></div>}
+            </section>
+
+            <section className="container" style={{backgroundColor: '#f5f8fb'}}>
+                <Row>
+                    <Col lg={7}>
+                        <div className='ps-5 mt-5'>
+                            <p className="text-primary fs-2 fw-bolder">
+                                OMG Catering
+                            </p>
+                            <h1 className="text-black text-uppercase fw-bolder mb-2" style={{fontSize: '40px', lineHeight: 1.1}}>
+                                ADD WINE TO YOUR <br/>OMG CATERING ORDER
+                            </h1>
+                            <div className="fs-4 mb-2">
+                                <p>
+                                    OMG will streamline your event planning by taking care of your food + WINE. We offer the
+                                    ability to Mix and Match your wine selection to make sure no guest leaves thirsty.
+                                </p>
+                                <div className="mb-2" style={{fontSize: "15px"}}>
+                                    *All wine will be sold at wholesale prices
+                                    <br/>
+                                    *$120 service fee added to all event orders that include wine
+                                    <br/>
+                                    *please provide 48-hour notice so we can make sure we have your selected wines in stock
+                                </div>
+                            </div>
+                            <button type="button" className="btn fs-4 mt-3 mb-2" onClick={() => setWineShow(!wineShow)}
+                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Show Wine Packages
+                            </button>
+                        </div>
+                    </Col>
+                    <Col lg={5}>
+                        <div style={{textAlign: 'center'}}>
+                            <img className="mt-5"
+                                 src={require("../../../assets/images/images/catring-wine.png").default}
+                                 height={400} alt="wine" style={{display: "initial"}}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+
+                {wineShow ? <>
+                    <Row>
+                        <Col lg={12}>
+                            <WineOrderMenu/>
+                        </Col>
+                    </Row>
+                </> : ''}
+
+            </section>
+
             <Footer/>
-        </div>
+        </>
     )
 }
 
