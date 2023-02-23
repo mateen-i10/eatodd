@@ -179,7 +179,6 @@ const SubCategory = (props) => {
         console.log("final Data", finalData)
         const isError = formModalRef.current.validate(formState)
         if (isError) return
-
         // call api
         setModalLoading(true)
         edit ? dispatch(updateSubCategory(finalData)) : dispatch(addSubCategory(finalData))

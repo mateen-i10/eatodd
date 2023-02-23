@@ -52,8 +52,8 @@ left: 4.6%;
 }
 .switch-container {
   position: fixed;
-  top: 30%;
-  left: 20px; /* Adjust this value to position the switch where you want it */
+  top: 40%;
+  right: 20px; /* Adjust this value to position the switch where you want it */
   transform: translateY(-50%);
   z-index: 9999; /* Make sure the switch appears on top of other elements */
 }
