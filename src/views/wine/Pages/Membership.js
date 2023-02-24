@@ -8,6 +8,8 @@ import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
 import useAPI from "../../../utility/customHooks/useAPI"
 import {useHistory} from "react-router-dom"
 import UILoader from "../../../@core/components/ui-loader"
+import cardImage from "../../../assets/images/pricing-plan-standard.png"
+import {Col, ListGroup, ListGroupItem, Row} from "reactstrap"
 
 const Membership = ({}) => {
 
@@ -59,16 +61,30 @@ const Membership = ({}) => {
             <UILoader blocking={isLoading}>
                 <div className="container-sm ">
                     <div className="row align-items-center justify-content-center my-2">
-                        {packages && packages.length > 0 && packages.map(d => {
-                            return <div className="col-md-3" key={d}>
-                                <div className="member-card card border" style={{width: "100%", height: "22rem"}}>
+                        {packages && packages.length > 0 && packages.map((d, index) => {
+                            return <div className="col-md-3" key={`optionsKey=${index}`}>
+                                <div className="member-card card border" style={{width: "100%", height: "auto"}}>
                                     <div className="card-body align-items-center justify-content-center">
-                                        <h2 className="fw-bolder text-center text-primary fs-1">{d.name}</h2>
-                                        <h5 className="fs-4 text-center text-capitalize"> {d.description}</h5>
-                                        <div className="mt-1 fw-bolder text-center"> <span
-                                            className="" style={{fontSize: "3.5rem"}}>{d.amount}</span><sub
-                                            className="fs-3 ">$</sub></div>
-                                        <h5 className="fw-bolder text-center">{d.billType === 1 ? 'Weekly' : d.billType === 2 ? 'Monthly' : d.billType === 3 ? 'Yearly' : ''}</h5>
+                                        <Row>
+                                            <Col lg={12} className='text-center'>
+                                                <img className='imgCenter' width="140" src={cardImage} height="140" alt="standard-plan-img"/>
+                                            </Col>
+                                        </Row>
+                                        <h2 className="fw-bolder text-center text-primary fs-1" style={{fontSize: '22px'}}>{d.name}</h2>
+                                        <h5 className=" text-capitalize text-center mt-2"> {d.description}</h5>
+                                        <div className="mt-1 fw-bolder text-center amountMargin">
+                                            <sup className="fs-4 dollarSign text-primary">$</sup>
+                                            <span className="text-primary" style={{fontSize: "2rem"}}>{d.amount}</span>
+                                            <span> /</span>
+                                            <span className="fw-bolder text-center">{d.billType === 1 ? 'Weekly' : d.billType === 2 ? 'Monthly' : d.billType === 3 ? 'Yearly' : ''}</span>
+                                        </div>
+                                        <ListGroup tag='ul' className='list-group-circle text-start mb-2'>
+                                            {d.packageItems.map((p, i) => (
+                                                <ListGroupItem key={`optionsKey=${i}`} tag='li'>
+                                                    {p.description}
+                                                </ListGroupItem>
+                                            ))}
+                                        </ListGroup>
                                         <div className="row">
                                             <div
                                                 className="col-7 mx-auto">{currentPackage && currentPackage.winePackageId === d.id ? <div className="mt-2 btn fw-bolder btn-danger mx-auto disabled">
