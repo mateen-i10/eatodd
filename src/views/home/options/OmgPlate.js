@@ -215,7 +215,20 @@ const Menu = () => {
     return (
         <>
             <Header/>
-            <div className="container-sm ">
+
+            <div className="sticky-top headerScroll">
+                <div className="" style={{marginBottom: 0, height: "45px"}}>
+                    <div className="">
+                        <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                             onClick={() => {
+                                 history.push('/#orderSection')
+                             }}>Return to Menu
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container-sm" style={{marginTop: '45px'}}>
                 <TopShelf
                     attachment={category?.attachment}
                     name={category?.name}

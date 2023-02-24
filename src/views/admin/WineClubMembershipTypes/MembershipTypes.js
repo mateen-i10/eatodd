@@ -68,13 +68,14 @@ const MembershipTypes = (props) => {
         setPackagesItem(newArray)
     }
     const onValueChange = (index, name, event) => {
+        console.log('index, name, event', index, name, event)
         const newArray = packagesItem.map((packages, i) => {
             if (i === index) {
                 packages[name] = event.target.value
             }
             return packages
         })
-
+        console.log('newArray', newArray)
         setPackagesItem(newArray)
     }
 
@@ -82,7 +83,7 @@ const MembershipTypes = (props) => {
         return <div className='ms-1'>
             <h5>Package Items Information</h5>
             {packagesItem.map((i, index) => {
-                return <div key={i.name} className='row mt-1'>
+                return <div key={`optionsKey=${index}`} className='row mt-1'>
                     <div className='col-5'>
                         <Input
                             placeholder='Enter Name'

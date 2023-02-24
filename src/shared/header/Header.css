@@ -293,7 +293,7 @@ img {
 }
 
 .header2 .eatOMG {
-    display: flex;
+    display: none;
     background-color: #81be41;
     width: 200px;
     justify-content: space-evenly;
@@ -303,6 +303,45 @@ img {
     align-items: center;
     border-radius: 25px;
 
+}
+
+@media screen and (min-width: 1200px) {
+    .returnBtn {
+        margin-top: 30px;
+        margin-left: 195px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .returnBtn {
+        margin-top: 15px;
+        margin-left: 130px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .headerScroll {
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .headerScroll {
+        width: fit-content;
+    }
+}
+
+.imgCenter {
+    display: initial !important;
+}
+
+.amountMargin {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
+
+.dollarSign {
+    margin: 0.625rem 0.125rem 0px 0px;
 }
 
 .header2 .eatOMG p {
