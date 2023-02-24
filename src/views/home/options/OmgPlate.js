@@ -16,10 +16,11 @@ import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
 
+
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-
+    const [subCatIdToShow, setSubCatIdToShow] = useState(null)
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
@@ -38,6 +39,7 @@ const Menu = () => {
         console.log('isLoading', isLoading)
         if (response && response.data) {
             const {data} = response
+            console.log(response)
             setCategory({
                 name: data.categoryName,
                 id: data.id,
@@ -61,6 +63,7 @@ const Menu = () => {
                     isBlank: currentValue.subCategory['isBlank'],
                     priority: currentValue.subCategory['priority'],
                     fillingLimit: currentValue.subCategory['fillingLimit'],
+                    subCatId: currentValue.subCategory['subCatId'],
                     products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, currentValue] : [currentValue]
                 }
                 return acc
@@ -70,6 +73,7 @@ const Menu = () => {
             // ArrValues.sort((a, b) => a?.priority - b?.priority)
             // console.log("arrayValues", ArrValues)
             // setProducts([...ArrValues])
+            console.log('mmmm', final)
             setProducts([...values])
         }
 
@@ -204,13 +208,26 @@ const Menu = () => {
             setSelectedProducts([product])
         }
     }
+    function filterProductsBySubCatId(products, subCatId) {
+        return products.filter(prod => prod.id !== subCatId)
+    }
+    function toggleSubcategory(subCatId) {
+        console.log('mmm toggle function call')
+        if (subCatId === subCatIdToShow) {
+            setSubCatIdToShow(null)
+        } else {
+            setSubCatIdToShow(subCatId)
+        }
+    }
+
+    const filteredProducts = subCatIdToShow ? filterProductsBySubCatId(products, subCatIdToShow) : products
     const handleChangeQuantity = (index, value) => {
         const final = [...selectedProducts]
         final[index].selectedQuantity = value
         setSelectedProducts([...final])
     }
 
-    console.log(selectedProducts, "letss see the selection")
+    console.log(selectedProducts, "Lets see the selection")
 
     return (
         <>
@@ -225,19 +242,36 @@ const Menu = () => {
                 {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
                     <div className="container-sm">
-                        {products && products.length > 0 && products.map(prod => {
-                            return <ProductsSubcategoryMenu
-                                heading={prod.name}
-                                limit={prod.fillingLimit}
-                                products={prod.products}
-                                subCatId={prod.id}
-                                // isBlank={prod.isBlank}
-                                ispriority={prod.priority}
-                                handleSelectOption={handleSelectOption}
-                                handleChangeQuantity={handleChangeQuantity}
-                                handleSelectProduct={handleSelectProduct}
-                                selectedProducts={selectedProducts}
-                            />
+                        {products && products.length > 0 && filteredProducts.map(prod => {
+                            console.log('mmm', prod)
+                            // if (prod.subCatId !== null) {
+                            //     if (prod.id === prod.subCatId) {
+                            //         toggleSubcategory(prod.subCatId)
+                            //     }
+                            // }
+                             return (
+                                 <div key={prod.id}>
+                                     <ProductsSubcategoryMenu
+                                         heading={prod.name}
+                                         limit={prod.fillingLimit}
+                                         products={prod.products}
+                                         subCatId={prod.id}
+                                         isBlank={prod.isBlank}
+                                         ispriority={prod.priority}
+                                         handleSelectOption={handleSelectOption}
+                                         handleChangeQuantity={handleChangeQuantity}
+                                         handleSelectProduct={handleSelectProduct}
+                                         selectedProducts={selectedProducts}
+                                     />
+                                     {prod.subCatId && (
+                                         <div className="row">
+                                             <div className="col-md-6">
+                                                 <button onClick={() => toggleSubcategory(prod.subCatId)}>Toggle Test subcategory</button>
+                                             </div>
+                                         </div>
+                                     )}
+                                 </div>
+                            )
                         })}
                         {category?.isWinePaired && <Wines
                             restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}

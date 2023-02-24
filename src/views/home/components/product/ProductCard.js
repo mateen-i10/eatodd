@@ -33,7 +33,7 @@ const ProductCard = ({
     // console.log(item, "lets see the items")
     const imgStyles = {
         width: "100%",
-        height: "120px",
+        height: "100%",
         backgroundColor: 'transparent',
         overflow: "hidden",
         objectFit: "fill"
@@ -173,7 +173,7 @@ const ProductCard = ({
                                             lineHeight: "18px",
                                             marginTop: "-6px"
                                         }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20} alt="image"/>}</div>
-                                    <p className="mb-0 text-dark  ">{item?.description}</p>
+                                    <p className="mb-0 text-dark">{item?.description}</p>
 
                                 </div>
                             </div>
