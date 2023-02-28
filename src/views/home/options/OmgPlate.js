@@ -15,16 +15,18 @@ import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
+import {FaTimes} from "react-icons/all"
 
 
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-    const [subCatIdToShow, setSubCatIdToShow] = useState(null)
+    //const [subCatIdToShow, setSubCatIdToShow] = useState(null)
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const {userLocation} = useSelector(state => state)
+    const [filteredProducts, setFilteredProducts] =  useState([])
     // const data = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -34,7 +36,36 @@ const Menu = () => {
 
     // hooks
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
+    /*function filterProductsBySubCatId(products, subCatId) {
+        return products.filter(prod => prod.id !== subCatId)
+    }*/
+    function toggleSubcategory(subCatId) {
+        const found = filteredProducts.find(c => c.id === subCatId)
+        const remaining = filteredProducts.filter(c => c.id !== subCatId)
+        const updatedFound = {...found, isHidden: !found.isHidden}
+        setFilteredProducts([...remaining, updatedFound])
+        console.log('mmm toggle function Call', subCatId)
+        console.log('mmm toggle function Remaining', remaining)
+        console.log('mmm toggle function Found', found)
+    }
 
+    useEffect(() => {
+            if (products && products.length > 0) {
+                const subCatIdToHide = products.map(pro => {
+                     if (products.find(prod => pro.id === prod.subCatId)) {
+                        pro.isHidden = true
+                    }
+                     return pro
+                })
+                setFilteredProducts([...subCatIdToHide])
+                console.log('setFilteredProducts', filteredProducts)
+                /*if (subCatIdToHide) {
+                    toggleSubcategory(subCatIdToHide.id)
+                }*/
+            }
+
+
+    }, [products])
     useEffect(() => {
         console.log('isLoading', isLoading)
         if (response && response.data) {
@@ -208,19 +239,6 @@ const Menu = () => {
             setSelectedProducts([product])
         }
     }
-    function filterProductsBySubCatId(products, subCatId) {
-        return products.filter(prod => prod.id !== subCatId)
-    }
-    function toggleSubcategory(subCatId) {
-        console.log('mmm toggle function call')
-        if (subCatId === subCatIdToShow) {
-            setSubCatIdToShow(null)
-        } else {
-            setSubCatIdToShow(subCatId)
-        }
-    }
-
-    const filteredProducts = subCatIdToShow ? filterProductsBySubCatId(products, subCatIdToShow) : products
     const handleChangeQuantity = (index, value) => {
         const final = [...selectedProducts]
         final[index].selectedQuantity = value
@@ -232,7 +250,6 @@ const Menu = () => {
     return (
         <>
             <Header/>
-
             <div className="sticky-top headerScroll">
                 <div className="" style={{marginBottom: 0, height: "45px"}}>
                     <div className="">
@@ -257,14 +274,9 @@ const Menu = () => {
                     <div className="container-sm">
                         {products && products.length > 0 && filteredProducts.map(prod => {
                             console.log('mmm', prod)
-                            // if (prod.subCatId !== null) {
-                            //     if (prod.id === prod.subCatId) {
-                            //         toggleSubcategory(prod.subCatId)
-                            //     }
-                            // }
                              return (
                                  <div key={prod.id}>
-                                     <ProductsSubcategoryMenu
+                                     {!prod.isHidden && <ProductsSubcategoryMenu
                                          heading={prod.name}
                                          limit={prod.fillingLimit}
                                          products={prod.products}
@@ -275,11 +287,20 @@ const Menu = () => {
                                          handleChangeQuantity={handleChangeQuantity}
                                          handleSelectProduct={handleSelectProduct}
                                          selectedProducts={selectedProducts}
-                                     />
+                                     />}
                                      {prod.subCatId && (
                                          <div className="row">
-                                             <div className="col-md-6">
-                                                 <button onClick={() => toggleSubcategory(prod.subCatId)}>Toggle Test subcategory</button>
+                                             <div className="col-md-6" style={{ margin: 'auto' }}>
+                                                 <div onClick={() => toggleSubcategory(prod.subCatId)}
+                                                     className={`card add mb-lg-2 mb-1 overflow-hidden`}
+                                                     style={{ maxHeight: '98px', minHeight: '98px', width: '500px', margin: 'auto', cursor:'pointer' }}>
+                                                     <div className="row" style={{marginTop:"auto", marginBottom: "auto"}}>
+                                                         <div className="col-md-3 col-lg-3">
+                                                             <FaTimes className="close-icon" size={50} />
+                                                         </div>
+                                                         <div className="col-md-9 col-lg-9"><h2 style={{textTransform:'uppercase', paddingTop:'8px'}}>NO {prod.name}</h2></div>
+                                                     </div>
+                                                 </div>
                                              </div>
                                          </div>
                                      )}

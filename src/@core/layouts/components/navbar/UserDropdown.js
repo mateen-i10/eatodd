@@ -58,11 +58,11 @@ const UserDropdown = () => {
                 <div className='user-nav d-sm-flex d-none'>
                     <section>
                         <Row>
-                            <Col lg={3} style={{padding:0}}>
-                                <Avatar style={{marginTop:3}} img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
+                            <Col lg={7} style={{marginTop:12, marginRight:27}}>
+                                <span style={{fontSize: "1.2rem"}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
                             </Col>
-                            <Col lg={7} style={{marginTop:15, marginRight:10, padding:0, marginLeft:-40}}>
-                                <span style={{marginRight: 50, marginLeft: 50, fontSize: "1.2rem", fontWeight: 'bold'}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
+                            <Col lg={3} style={{padding:0}}>
+                                <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
                             </Col>
                         </Row>
                     </section>

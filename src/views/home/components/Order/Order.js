@@ -171,7 +171,7 @@ const Order = () => {
                                     }}>
                                         <div className="thumbnail">
                                             <ProductImage attachment={item.attachment}
-                                                          styles={{width: "200px", height: "180px", margin: "auto"}} classes="categoryImage"/>
+                                                          styles={{width: "180px", height: "180px", margin: "auto"}} classes="categoryImage"/>
                                         </div>
                                         <div className="text2">
                                             <div className="display-name">{item.name}</div>
@@ -191,33 +191,34 @@ const Order = () => {
                     <div className="promo col-11 col-md-5 container-fluid">
                         <div className="row">
                             <div className="text-container col-md-6 col-6">
-                                <h1 className="banner-title mt-1">CATER YOUR NEXT PARTY</h1>
+                                <h1 className="banner-title mt-4">CATER YOUR NEXT PARTY</h1>
                                 <div className="banner-subtitle">
-                                    <p>OMG offers catering for groups from 6 to 600! Easy to order and customizable so
-                                        your guests can enjoy taste and flavor that happens to be healthy!.</p>
+                                    <p>OMG offers catering for groups from 20-2000! Easy to order and customizable so your guests can enjoy taste & flavor that happens to be healthy. </p>
                                 </div>
                                 <Link to="/catering">
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                                 </Link>
                             </div>
-                            <img src={gallery_1} className="img-container col-md-6 col-6" alt="catering order"/>
+                            <div className="col-md-6 col-6">
+                                <img src={gallery_1} style={{height: '370px', width: '100%'}} className="img-container col-md-6 col-6" alt="catering order"/>
+                            </div>
                         </div>
                     </div>
                     <div className="promo col-11 col-md-5 container-fluid ">
-                        <div className="row ">
+                        <div className="row">
                             <div className="text-container col-md-6 col-6">
-                                <h1 className="banner-title mt-1">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
+                                <h1 className="banner-title mt-4">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
                                 <div className="banner-subtitle">
                                     <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club
-                                        benefits
-                                        include vendor pricing on all offered wines!</p>
+                                        benefits include vendor pricing on all offered wines!</p>
                                 </div>
-                                <Link to="/catering">
-                                <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
+                                <Link to="/wine/membership">
+                                <div className="slot-wrapper btn btn-primary mb-2">JOIN NOW</div>
                                 </Link>
                             </div>
-                            <img src={gallery_4} style={{height: '370px'}} className="img-container col-md-6 col-6" alt="catering order"/>
-
+                            <div className="col-md-6 col-6">
+                                <img src={gallery_4} style={{height: '370px', width: '100%'}} className="img-container col-md-6 col-6" alt="catering order"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -268,7 +269,7 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-4 col-md-4 col-9 ">
+                            <div className="col-xxl-6 col-md-4 col-9 ">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
@@ -303,11 +304,10 @@ const Order = () => {
                                         <div className="">
                                             <ul className=""
                                             >
-                                                <li>From 6 to 600 people</li>
-                                                <li>Starting at $15.00 / person</li>
-                                                <li>Build Your Own</li>
-                                                <li>Boxed Lunches</li>
-                                                <li>A La Carte</li>
+                                                <li>From 20 to 2000 people</li>
+                                                <li>Starting at $15 per person</li>
+                                                <li>Build Your Own/Boxed Lunches/A La Carte</li>
+                                                <li>Custom OMG Grazing Events</li>
                                                 <li><b>Requires 24 hour notice</b></li>
                                             </ul>
                                         </div>
@@ -322,7 +322,7 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-9 ">
+                            <div className="col-xxl-6 col-md-4 col-9 ">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
@@ -361,7 +361,7 @@ const Order = () => {
                                                 <li>Full menu</li>
                                                 <li>Personalized meals</li>
                                                 <li>Organizer pays</li>
-                                                <li><b>Order and eat today</b></li>
+                                                <li><b>Order and Eat today</b></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -375,55 +375,55 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-4 col-md-4 col-9 ">
-                                <div className="card ">
-                                    <div style={{position: "relative"}}>
-                                        <img className='img-fluid'
-                                             src={require("../../../../assets/images/images/home-crowd-pleaser3.jpg").default}
-                                             alt='Crowd Pleaser' width="100%"/>
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            height: "100%",
-                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                                            width: "100%"
-                                        }}>
-                                            <div className="text-center text-white fw-bolder"
-                                                 style={{
-                                                     fontSize: "1.7rem",
-                                                     position: 'absolute',
-                                                     top: "50%",
-                                                     left: "50%",
-                                                     transform: "translate(-50%, -50%)",
-                                                     width: "100%"
-                                                 }}
-                                            >OMG CHARCUTERIE BOARDS
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body" style={{
-                                        maxHeight: 170,
-                                        minHeight: 170,
-                                        textOverflow: 'ellipsis',
-                                        overflow: "hidden"
-                                    }}>
-                                        <div className="">
-                                            <ul className=" ">
-                                                <li>*Serves 10 people</li>
-                                                <li>Cheese and Charcuterie Platter - $100</li>
-                                                <li>Fruit Platter - $90</li>
-                                                <li>Crudites Platter - $90</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="">
-                                        <div className="text-center text-uppercase">
-                                            <div className="btn btn-primary mb-2 fw-bolder ">Start Order
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {/*<div className="col-xxl-4 col-md-4 col-9 ">*/}
+                            {/*    <div className="card ">*/}
+                            {/*        <div style={{position: "relative"}}>*/}
+                            {/*            <img className='img-fluid'*/}
+                            {/*                 src={require("../../../../assets/images/images/home-crowd-pleaser3.jpg").default}*/}
+                            {/*                 alt='Crowd Pleaser' width="100%"/>*/}
+                            {/*            <div style={{*/}
+                            {/*                position: 'absolute',*/}
+                            {/*                top: 0,*/}
+                            {/*                height: "100%",*/}
+                            {/*                backgroundColor: 'rgba(0, 0, 0, 0.4)',*/}
+                            {/*                width: "100%"*/}
+                            {/*            }}>*/}
+                            {/*                <div className="text-center text-white fw-bolder"*/}
+                            {/*                     style={{*/}
+                            {/*                         fontSize: "1.7rem",*/}
+                            {/*                         position: 'absolute',*/}
+                            {/*                         top: "50%",*/}
+                            {/*                         left: "50%",*/}
+                            {/*                         transform: "translate(-50%, -50%)",*/}
+                            {/*                         width: "100%"*/}
+                            {/*                     }}*/}
+                            {/*                >OMG CHARCUTERIE BOARDS*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*        <div className="card-body" style={{*/}
+                            {/*            maxHeight: 170,*/}
+                            {/*            minHeight: 170,*/}
+                            {/*            textOverflow: 'ellipsis',*/}
+                            {/*            overflow: "hidden"*/}
+                            {/*        }}>*/}
+                            {/*            <div className="">*/}
+                            {/*                <ul className=" ">*/}
+                            {/*                    <li>*Serves 10 people</li>*/}
+                            {/*                    <li>Cheese and Charcuterie Platter - $100</li>*/}
+                            {/*                    <li>Fruit Platter - $90</li>*/}
+                            {/*                    <li>Crudites Platter - $90</li>*/}
+                            {/*                </ul>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*        <div className="">*/}
+                            {/*            <div className="text-center text-uppercase">*/}
+                            {/*                <div className="btn btn-primary mb-2 fw-bolder ">Start Order*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

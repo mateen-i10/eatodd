@@ -77,7 +77,6 @@ img {
     width: 18%;
     color: black;
     align-items: center;
-    font-family: 'Oswald', sans-serif;
 }
 
 .w-head-sec-1 {
@@ -136,7 +135,6 @@ img {
     /*border: 2px solid brown;*/
     width: 70%;
     align-items: center;
-    margin-top: 10px;
     justify-content: right;
     /*font-family: 'Oswald', sans-serif;*/
 }

@@ -13,7 +13,6 @@ const Homepage = () => {
         <>
             <Headerwine/>
             <VideoHero/>
-
             <div className="about-page">
                 <section id="about-3" className="wide-60 about-section division mt-5">
                     <div className="container-sm ">
@@ -33,10 +32,8 @@ const Homepage = () => {
                                         opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
                                         with our food, we figured
                                         why not let YOU PAY WHAT WE PAY?! We are not complicated; we just want you to
-                                        EAT. LIVE. LOVE – now with
-                                        your favorite glass of wine. Cheers Friends!
-                                        The
-                                        OMG Wine Club was created to make you say OMG at your savings! We are the 1st
+                                        EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
+                                        The OMG Wine Club was created to make you say OMG at your savings! We are the 1st
                                         wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
                                         to OMG.As our way to say THANK YOU, we are extending you the
                                         opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
@@ -128,7 +125,6 @@ const Homepage = () => {
                                                 Cookie topping caramels jujubes gingerbread. Lollipop apple pie
                                                 cupcake
                                                 candy canes cookie ice cream.
-
                                             </CardText>
                                         </CardBody>
                                     </Card>

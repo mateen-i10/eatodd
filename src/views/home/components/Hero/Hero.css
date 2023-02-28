@@ -47,7 +47,6 @@
 .banner-text {
     user-select: none;
     text-align: center;
-    font-weight: bold;
     font-size: 50px;
     /*padding-bottom: 30px;*/
     line-height: 50px;

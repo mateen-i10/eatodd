@@ -16,7 +16,7 @@ const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedPr
                 // if (element.isBlank === true) {
                 //     console.log('element mmm', element)
                 // }
-                return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`}>
+                return <div className="col-xl-5 col-lg-6" key={`productDetail-${element.id}`} style={{cursor:'pointer'}}>
                     <ProductDetail
                         item={element}
                         attachment={element.attachment}
