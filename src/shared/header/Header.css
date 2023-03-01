@@ -184,7 +184,7 @@ img {
 .head-3 {
     height: 39px;
     display: flex;
-    width: 23%;
+    /*width: 23%;*/
     justify-content: flex-end;
     padding: 0 1.25em;
     align-items: center;
@@ -200,7 +200,7 @@ img {
     border-radius: 25px;
     border: 1px solid #81be41;
     color: #81be41;
-    margin-right: 10px;
+    margin-right: 40px;
     margin-top: 1px;
 }
 
@@ -530,7 +530,7 @@ img {
 }
 
 .signtext {
-    padding-top: 15px;
+    padding-top: 13px;
     font-size: 1.375rem;
     width: 90px
 }

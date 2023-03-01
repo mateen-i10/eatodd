@@ -47,10 +47,7 @@ export default function Header({isSimple, setKey}) {
                 <header className="header1">
                     <div className="head-sec-1">
                         <Link to="/"><img className="logo" src={logo} alt="EatOMG"/></Link>
-                        {isUserLoggedIn() ? null : <div className="headlogin">
-                            <img className="usericon " src={usericon} alt="User"/>
-                            <Link className="signtext" to="/login"><b>Sign In</b></Link>
-                        </div>}
+                        {/*here signin Link*/}
                     </div>
                     {!isSimple && <div className="head-sec-2">
                         <Link to="/"><h2 onClick={() => {
@@ -69,7 +66,7 @@ export default function Header({isSimple, setKey}) {
                         <UserDropdown/>
                     </ul>}
                     <div className="head-3 align-items-center cursor-pointer">
-                        {!isSimple && <div className=" delivery-addr-bar">
+                        {/*{!isSimple && <div className=" delivery-addr-bar">
                             <div className="img-separator">
                                 <span><img src={require("../../assets/images/logo/logo.png").default}
                                            style={{height: 25, width: 35, marginLeft: -10, marginTop: 6}} alt="EatOMG"/> </span>
@@ -81,7 +78,16 @@ export default function Header({isSimple, setKey}) {
                                     className="address-1 fw-bolder"
                                     style={{fontSize: "0.9rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
                             </div>
+                        </div>}*/}
+
+
+                        {isUserLoggedIn() ? null : <div className="delivery-addr-bar" style={{width: '60%', border: 'none'}}>
+                            <div className="headlogin">
+                            <img className="usericon " src={usericon} alt="User"/>
+                            <Link className="signtext" to="/login"><b>Sign In</b></Link>
+                        </div>
                         </div>}
+
                         <div className='position-relative'>
                             <ShoppingCart onClick={() => {
                                 SetOpenDrawer(true)

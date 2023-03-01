@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Minus, Plus} from "react-feather"
 
-const Counter = ({min, max, setProductQuantity, selectedProductIndex}) => {
+const Counter = ({min, max, setProductQuantity, selectedProductIndex, handleSelectProduct, product}) => {
 
     const [value, setValue] = useState(min)
+
     useEffect(() => {
         setProductQuantity(selectedProductIndex, value)
     }, [value])
@@ -31,6 +32,8 @@ const Counter = ({min, max, setProductQuantity, selectedProductIndex}) => {
                         <Minus color='black' size={25} onClick={() => {
                             if (value > min) {
                                 setValue(value - 1)
+                            } else if (value === 1) {
+                                handleSelectProduct(product)
                             }
                         }}/>
                     </div>

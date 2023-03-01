@@ -125,10 +125,12 @@ const ProductCard = ({   item,
                         const option = selectedItem.options.find(p => p.isSelected)
                         return <div className="class2" >
                             <Counter
-                                min={option ? option.min : 0}
+                                min={option ? option.min : 1}
                                 max={option ? option.max : 1}
                                 selectedProductIndex={index}
                                 setProductQuantity={onQuantityChange}
+                                handleSelectProduct={onItemClick}
+                                product={item}
                             />
                         </div>
                     }
