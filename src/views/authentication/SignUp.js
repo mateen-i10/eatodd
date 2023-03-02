@@ -39,8 +39,16 @@ const SignUp = () => {
 
     // ** schema for validations
     const schema = Joi.object({
-        firstName: Joi.string().required().label("First Name"),
-        lastName: Joi.string().required().label("Last Name"),
+        firstName: Joi.string().regex(/^[a-z A-Z]+$/).required().error(() => {
+            return {
+                message: 'First Name is required, Only Alphabets Required.'
+            }
+        }),
+        lastName: Joi.string().regex(/^[a-z A-Z]+$/).required().error(() => {
+            return {
+                message: 'Last Name is required, Only Alphabets Required.'
+            }
+        }),
         userName: Joi.string().required().label("User Name"),
         email: Joi.string().required().label("Email"),
         password: Joi.string().required().label("Password"),
