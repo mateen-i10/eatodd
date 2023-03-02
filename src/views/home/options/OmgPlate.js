@@ -26,7 +26,8 @@ const Menu = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const {userLocation} = useSelector(state => state)
-    const [filteredProducts, setFilteredProducts] =  useState([])
+    const [hiddenSubcategories, setHiddenSubcategories] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([...products, ...hiddenSubcategories.map(subCat => ({...subCat, isHidden: true}))])
     // const data = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -42,11 +43,14 @@ const Menu = () => {
     function toggleSubcategory(subCatId) {
         const found = filteredProducts.find(c => c.id === subCatId)
         const remaining = filteredProducts.filter(c => c.id !== subCatId)
-        const updatedFound = {...found, isHidden: !found.isHidden}
-        setFilteredProducts([...remaining, updatedFound])
-        console.log('mmm toggle function Call', subCatId)
-        console.log('mmm toggle function Remaining', remaining)
-        console.log('mmm toggle function Found', found)
+
+        if (found.isHidden) {
+            setHiddenSubcategories(hiddenSubcategories.filter(c => c.id !== subCatId))
+        } else {
+            setHiddenSubcategories([...hiddenSubcategories, found])
+        }
+
+        setFilteredProducts([...remaining, {...found, isHidden: !found.isHidden}])
     }
 
     useEffect(() => {
@@ -272,41 +276,48 @@ const Menu = () => {
                 {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
                     <div className="container-sm">
-                        {products && products.length > 0 && filteredProducts.map(prod => {
-                            console.log('mmm', prod)
-                             return (
-                                 <div key={prod.id}>
-                                     {!prod.isHidden && <ProductsSubcategoryMenu
-                                         heading={prod.name}
-                                         limit={prod.fillingLimit}
-                                         products={prod.products}
-                                         subCatId={prod.id}
-                                         isBlank={prod.isBlank}
-                                         ispriority={prod.priority}
-                                         handleSelectOption={handleSelectOption}
-                                         handleChangeQuantity={handleChangeQuantity}
-                                         handleSelectProduct={handleSelectProduct}
-                                         selectedProducts={selectedProducts}
-                                     />}
-                                     {prod.subCatId && (
-                                         <div className="row">
-                                             <div className="col-md-6" style={{ margin: 'auto' }}>
-                                                 <div onClick={() => toggleSubcategory(prod.subCatId)}
-                                                     className={`card add mb-lg-2 mb-1 overflow-hidden`}
-                                                     style={{ maxHeight: '98px', minHeight: '98px', width: '500px', margin: 'auto', cursor:'pointer' }}>
-                                                     <div className="row" style={{marginTop:"auto", marginBottom: "auto"}}>
-                                                         <div className="col-md-3 col-lg-3">
-                                                             <FaTimes className="close-icon" size={50} />
-                                                         </div>
-                                                         <div className="col-md-9 col-lg-9"><h2 style={{textTransform:'uppercase', paddingTop:'8px'}}>NO {prod.name}</h2></div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     )}
-                                 </div>
-                            )
-                        })}
+                        {filteredProducts.map(prod => (
+                            <div key={prod.id}>
+                                {!prod.isHidden && (
+                                    <ProductsSubcategoryMenu
+                                        heading={prod.name}
+                                        limit={prod.fillingLimit}
+                                        products={prod.products}
+                                        subCatId={prod.id}
+                                        isBlank={prod.isBlank}
+                                        ispriority={prod.priority}
+                                        handleSelectOption={handleSelectOption}
+                                        handleChangeQuantity={handleChangeQuantity}
+                                        handleSelectProduct={handleSelectProduct}
+                                        selectedProducts={selectedProducts}
+                                    />
+                                )}
+                                {prod.subCatId && (
+                                    <div className="row">
+                                        <div className="col-md-6" style={{margin: 'auto'}}>
+                                            <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px'}}>
+                                                <h2 style={{margin: 'auto'}}>No {prod.name}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                {prod.subCatId && hiddenSubcategories.filter(subCat => subCat.subCatId === prod.id).map(subCat => (
+                                    <ProductsSubcategoryMenu
+                                        key={subCat.id}
+                                        heading={subCat.name}
+                                        limit={subCat.fillingLimit}
+                                        products={subCat.products}
+                                        subCatId={subCat.id}
+                                        isBlank={subCat.isBlank}
+                                        ispriority={subCat.priority}
+                                        handleSelectOption={handleSelectOption}
+                                        handleChangeQuantity={handleChangeQuantity}
+                                        handleSelectProduct={handleSelectProduct}
+                                        selectedProducts={selectedProducts}
+                                    />
+                                ))}
+                            </div>
+                        ))}
                         {category?.isWinePaired && <Wines
                             restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
                             handleSelectOption={handleSelectOption}

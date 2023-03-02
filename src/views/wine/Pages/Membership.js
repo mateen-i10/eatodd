@@ -10,6 +10,7 @@ import {useHistory} from "react-router-dom"
 import UILoader from "../../../@core/components/ui-loader"
 import cardImage from "../../../assets/images/pricing-plan-standard.png"
 import {Col, ListGroup, ListGroupItem, Row} from "reactstrap"
+import WineFooter from "../../../shared/wine-footer/Wine-footer"
 
 const Membership = ({}) => {
 
@@ -102,7 +103,7 @@ const Membership = ({}) => {
                 </div>
             </UILoader>
             <NewsLetter/>
-            <Footer/>
+            <WineFooter/>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import './Faq.css'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import NewsLetter from "../components/NewsLetter"
-import Footer from "../../../shared/footer/Footer"
+import WineFooter from "../../../shared/wine-footer/Wine-footer"
 
 const Faq = () => {
     return (
@@ -85,8 +85,8 @@ const Faq = () => {
                     </div>
                 </section>
             </div>
-            <NewsLetter/>
-            <Footer/>
+            {/*<NewsLetter/>*/}
+            <WineFooter/>
         </div>
 
     )
