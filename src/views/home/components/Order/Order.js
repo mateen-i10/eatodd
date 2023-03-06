@@ -3,8 +3,8 @@ import "./Order.css"
 import foodicon from "../../../../assets/images/icons/food.png"
 import qualityicon from "../../../../assets/images/icons/quality.png"
 import deliveryicon from "../../../../assets/images/icons/delivery.png"
-import gallery_1 from "../../../../assets/images/gallery_1.jpg"
-import gallery_4 from "../../../../assets/images/gallery_4.jpg"
+import gallery_1 from "../../../../assets/images/gallery_1.png"
+import gallery_4 from "../../../../assets/images/gallery_4.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
 import {useSelector} from "react-redux"
 import httpService, {baseURL} from "../../../../utility/http"
@@ -269,7 +269,7 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-6 col-md-4 col-9 ">
+                            <div className="col-xxl-4 col-md-4 col-9">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
@@ -322,11 +322,11 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-6 col-md-4 col-9 ">
+                            <div className="col-xxl-4 col-md-4 col-9">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
-                                             src={require("../../../../assets/images/images/home-crowd-pleaser2.jpg").default}
+                                             src={require("../../../../assets/images/images/home-crowd-pleaser2.png").default}
                                              alt='Crowd Pleaser' width="100%"/>
                                         <div style={{
                                             position: 'absolute',
@@ -375,55 +375,55 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/*<div className="col-xxl-4 col-md-4 col-9 ">*/}
-                            {/*    <div className="card ">*/}
-                            {/*        <div style={{position: "relative"}}>*/}
-                            {/*            <img className='img-fluid'*/}
-                            {/*                 src={require("../../../../assets/images/images/home-crowd-pleaser3.jpg").default}*/}
-                            {/*                 alt='Crowd Pleaser' width="100%"/>*/}
-                            {/*            <div style={{*/}
-                            {/*                position: 'absolute',*/}
-                            {/*                top: 0,*/}
-                            {/*                height: "100%",*/}
-                            {/*                backgroundColor: 'rgba(0, 0, 0, 0.4)',*/}
-                            {/*                width: "100%"*/}
-                            {/*            }}>*/}
-                            {/*                <div className="text-center text-white fw-bolder"*/}
-                            {/*                     style={{*/}
-                            {/*                         fontSize: "1.7rem",*/}
-                            {/*                         position: 'absolute',*/}
-                            {/*                         top: "50%",*/}
-                            {/*                         left: "50%",*/}
-                            {/*                         transform: "translate(-50%, -50%)",*/}
-                            {/*                         width: "100%"*/}
-                            {/*                     }}*/}
-                            {/*                >OMG CHARCUTERIE BOARDS*/}
-                            {/*                </div>*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*        <div className="card-body" style={{*/}
-                            {/*            maxHeight: 170,*/}
-                            {/*            minHeight: 170,*/}
-                            {/*            textOverflow: 'ellipsis',*/}
-                            {/*            overflow: "hidden"*/}
-                            {/*        }}>*/}
-                            {/*            <div className="">*/}
-                            {/*                <ul className=" ">*/}
-                            {/*                    <li>*Serves 10 people</li>*/}
-                            {/*                    <li>Cheese and Charcuterie Platter - $100</li>*/}
-                            {/*                    <li>Fruit Platter - $90</li>*/}
-                            {/*                    <li>Crudites Platter - $90</li>*/}
-                            {/*                </ul>*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*        <div className="">*/}
-                            {/*            <div className="text-center text-uppercase">*/}
-                            {/*                <div className="btn btn-primary mb-2 fw-bolder ">Start Order*/}
-                            {/*                </div>*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                            <div className="col-xxl-4 col-md-4 col-9 ">
+                                <div className="card ">
+                                    <div style={{position: "relative"}}>
+                                        <img className='img-fluid'
+                                             src={require("../../../../assets/images/images/home-crowd-pleaser3.jpg").default}
+                                             alt='Crowd Pleaser' width="100%"/>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            height: "100%",
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            width: "100%"
+                                        }}>
+                                            <div className="text-center text-white fw-bolder"
+                                                 style={{
+                                                     fontSize: "1.7rem",
+                                                     position: 'absolute',
+                                                     top: "50%",
+                                                     left: "50%",
+                                                     transform: "translate(-50%, -50%)",
+                                                     width: "100%"
+                                                 }}
+                                            >OMG CHARCUTERIE BOARDS
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card-body" style={{
+                                        maxHeight: 170,
+                                        minHeight: 170,
+                                        textOverflow: 'ellipsis',
+                                        overflow: "hidden"
+                                    }}>
+                                        <div className="">
+                                            <ul className=" ">
+                                                <li>*Serves 10 people</li>
+                                                <li>Cheese and Charcuterie Platter - $100</li>
+                                                <li>Fruit Platter - $90</li>
+                                                <li>Crudites Platter - $90</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="">
+                                        <div className="text-center text-uppercase">
+                                            <div className="btn btn-primary mb-2 fw-bolder ">Start Order
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

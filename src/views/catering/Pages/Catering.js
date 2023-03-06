@@ -79,9 +79,9 @@ const Catering = () => {
             <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px'}}>
                 <section>
                     <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
-                        <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>Catering</h5>
+                        <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>OMG Catering</h5>
                         <h4 style={{color:'white', textAlign: 'center', fontSize: '2.2em', paddingTop:'30px', paddingBottom: '30px', textTransform: 'uppercase'}}>A Warm, Charming Atmosphere</h4>
-                        <p style={{color:'white', textAlign: 'center', fontSize: '1em', paddingBottom:'70px', marginTop: '-30px'}}>Allow us to make your next special event extra special. We cater for all sized<br />functions, ideal for your larger functions or an intimate gathering, our team can<br />curate a menu to suit your taste.</p>
+                        <p style={{color:'white', textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px', marginTop: '-30px'}}>Allow us to make your next special event extra special. We cater for all sized<br />functions, ideal for your larger functions or an intimate gathering, our team can<br />curate a menu to suit your taste.</p>
                     </div>
                 </section>
             </div>
@@ -154,7 +154,7 @@ const Catering = () => {
 
             <section className="container" style={{backgroundColor: '#f5f8fb'}}>
                 <Row>
-                    <Col lg={7}>
+                    <Col lg={7} style={{paddingBottom:'50px'}}>
                         <div className='ps-5 mt-5'>
                             <p className="text-primary fs-2 fw-bolder">
                                 OMG Catering
@@ -176,14 +176,14 @@ const Catering = () => {
                                 </div>
                             </div>
                             <button type="button" className="btn fs-4 mt-3 mb-2" onClick={() => setWineShow(!wineShow)}
-                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Show Wine Packages
+                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Add Wine to Catering
                             </button>
                         </div>
                     </Col>
                     <Col lg={5}>
                         <div style={{textAlign: 'center'}}>
                             <img className="mt-5"
-                                 src={require("../../../assets/images/images/catring-wine.png").default}
+                                 src={require("../../../assets/images/wineClub/Beaulieu Vineyard.png").default}
                                  height={400} alt="wine" style={{display: "initial"}}
                             />
                         </div>

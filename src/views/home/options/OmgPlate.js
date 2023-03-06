@@ -21,7 +21,7 @@ import {FaTimes} from "react-icons/all"
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-    //const [subCatIdToShow, setSubCatIdToShow] = useState(null)
+    const [subcategoryVisible, setSubcategoryVisible] = useState([])
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
@@ -51,6 +51,14 @@ const Menu = () => {
         }
 
         setFilteredProducts([...remaining, {...found, isHidden: !found.isHidden}])
+        setSubcategoryVisible(prevState => {
+            const index = prevState.indexOf(subCatId)
+            if (index === -1) {
+                return [...prevState, subCatId]
+            } else {
+                return prevState.filter(id => id !== subCatId)
+            }
+        })
     }
 
     useEffect(() => {
@@ -295,8 +303,9 @@ const Menu = () => {
                                 {prod.subCatId && (
                                     <div className="row">
                                         <div className="col-md-6" style={{margin: 'auto'}}>
-                                            <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px'}}>
-                                                <h2 style={{margin: 'auto'}}>No {prod.name}</h2>
+                                            <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px', position: 'relative', width: '550px', margin:'auto', cursor:'pointer'}}>
+                                                <i className="fas fa-times-circle" style={{position: 'absolute', left: '20%', transform: 'translateX(-50%)', color: subcategoryVisible === prod.subCatId ? 'red' : 'black', fontSize: '40px', marginTop: '25px', cursor: 'pointer'}}></i>
+                                                <h2 style={{margin: 'auto', display: 'inline-block'}}>No {prod.name}</h2>
                                             </div>
                                         </div>
                                     </div>

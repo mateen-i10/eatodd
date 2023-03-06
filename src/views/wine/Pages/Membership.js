@@ -87,8 +87,7 @@ const Membership = ({}) => {
                                             ))}
                                         </ListGroup>
                                         <div className="row">
-                                            <div
-                                                className="col-7 mx-auto">{currentPackage && currentPackage.winePackageId === d.id ? <div className="mt-2 btn fw-bolder btn-danger mx-auto disabled">
+                                            <div className="col-7 mx-auto">{currentPackage && currentPackage.winePackageId === d.id ? <div className="mt-2 btn fw-bolder btn-danger mx-auto disabled">
                                                     Selected
                                                 </div> : <div className="mt-2 fw-bolder btn btn-primary btn-join ms-2"
                                                               onClick={() => handleSelected(d)}>
