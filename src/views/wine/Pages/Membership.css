@@ -14,3 +14,33 @@
     background-color: white !important;
 }
 
+.imgStyle {
+    max-width: 70px !important;
+    opacity: 0.2;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 15px;
+}
+
+.imgBefore::before{
+    margin-left: 10px;
+    margin-right: 10px;
+    content: "";
+    display: inline-block;
+    width: 100px;
+    height: 1px;
+    background: #e5e5e5;
+    vertical-align: middle;
+}
+
+.imgBefore::after{
+    margin-left: 10px;
+    margin-right: 10px;
+    content: "";
+    display: inline-block;
+    width: 100px;
+    height: 1px;
+    background: #e5e5e5;
+    vertical-align: middle;
+}
+
