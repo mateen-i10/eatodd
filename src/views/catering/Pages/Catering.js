@@ -87,7 +87,9 @@ const Catering = () => {
             </div>
 
             <section>
-                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>Build for your loved One's</div>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>OMG CATERING PACKAGES
+                </div>
+            <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px'}}>Treat your group to Taste & Flavor that happens to be Healthy!<br />*24 hour advance notice requested</p>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3">
                         {/*<div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
@@ -127,8 +129,9 @@ const Catering = () => {
                     </div>
                     <Row style={{textAlign: "center"}}>
                         <Col md={12}>
-                            <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
-                            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
+                            <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>OMG GRAZING TABLE
+                            </div>
+                            <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px'}}>CATERING PACKAGE SERVES 25+ PEOPLE</p>
                         </Col>
                     </Row>
                     <Row>
