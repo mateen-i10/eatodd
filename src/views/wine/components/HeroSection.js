@@ -10,7 +10,7 @@ const HeroSection = () => {
                     <Row style={{marginTop: '125px'}}>
                         <Col lg={12}>
                             <div>
-                                <Link className='btn-lg btn-primary' to='/wine/membership'>JOIN NOW</Link>
+                                {/*<Link className='btn-lg btn-primary' to='/wine/membership'>JOIN NOW</Link>*/}
                             </div>
                         </Col>
                     </Row>

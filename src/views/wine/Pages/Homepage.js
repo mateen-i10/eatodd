@@ -4,8 +4,8 @@ import VideoHero from '../../wine/components/Carousel/Carousel'
 import Headerwine from "../../../shared/wine-header/Header-wine"
 import bgimg from "../../../assets/images/wineClub/JToday.png"
 import WineFooter from "../../../shared/wine-footer/Wine-footer"
-
-// import luxurayWine from "../../../assets/images/wineClubStylingImages/wine.jpg"
+import cardImage from "../../../assets/images/pages/wine/about/Layer-456.png"
+import './Homepage.css'
 
 const Homepage = () => {
 
@@ -14,36 +14,55 @@ const Homepage = () => {
             <Headerwine/>
             <VideoHero/>
             <div className="about-page">
-                <section id="about-3" className="wide-60 about-section division mt-5">
-                    <div className="container-sm ">
-                        <div className="row d-flex align-items-center justify-content-center h-75 ">
-                            <div className="col-lg-6 col-12">
-                                <div className="about-3-img text-center mb-40 ">
+
+                <section>
+                    <div className="container" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
+                        <Row>
+                            <Col lg={6} sm={12}>
+                                <div style={{marginTop: '75px'}}>
                                     <img className="img-fluid" style={{marginLeft: "60px"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
                                 </div>
-                            </div>
-                            <div className="col-lg-6 col-12 text-start ">
-                                <div className="about-3-txt mb-40" style={{marginLeft: "-65px", marginRight: "44px"}}>
-                                    <hr/>
-                                    <p className="p-md fs-5 fw-bold mt-1" style={{color: "grey", lineHeight: "25px"}}>The
-                                        OMG Wine Club was created to make you say OMG at your savings! We are the 1st
-                                        wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
-                                        to OMG.As our way to say THANK YOU, we are extending you the
-                                        opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
-                                        with our food, we figured
-                                        why not let YOU PAY WHAT WE PAY?! We are not complicated; we just want you to
-                                        EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
-                                        The OMG Wine Club was created to make you say OMG at your savings! We are the 1st
-                                        wine club that was created to SAVE YOU MONEY! We appreciate you and your loyalty
-                                        to OMG.As our way to say THANK YOU, we are extending you the
-                                        opportunity to purchase your favorite wines AT COST!Since wine pairs PERFECTLY
-                                        with our food, we figured
-                                        why not let YOU PAY WHAT WE PAY?! We are not complicated.
+                            </Col>
+                            <Col lg={6} sm={12}>
+                                <div style={{marginTop: '185px'}}>
+                                    <Row>
+                                        <Col lg={12} className='text-center imgBefore'>
+                                            <img className='imgCenter imgStyle' width="140" src={cardImage} height="140" alt="standard-plan-img"/>
+                                        </Col>
+                                    </Row>
+                                    <p className="p-md fw-bold mt-1" style={{color: "grey", fontSize: '18px', lineHeight: "25px", fontFamily: 'Rubik'}}>The
+                                        The OMG Wine Club was created to make you say OMG at your savings! We are the 1st wine club that
+                                        was created to SAVE YOU MONEY! We appreciate you and your loyalty to OMG. As our way to say THANK
+                                        YOU, we are extending you the opportunity to purchase your favorite wines AT COST! Since wine pairs
+                                        PERFECTLY with our food, we figured why not let YOU PAY WHAT WE PAY?! We are not complicated;
+                                        we just want you to EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
                                     </p>
-                                    <hr/>
                                 </div>
-                            </div>
-                        </div>
+                            </Col>
+                        </Row>
+
+                    </div>
+                </section>
+
+                <section>
+                    <div className="container" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
+                        <Row>
+                            <Col className='' lg={6} sm={12} style={{textAlign: '-webkit-center'}}>
+                                <div style={{marginTop: '75px'}}>
+                                    <h2 className='text-primary' style={{fontFamily: 'Lucida Handwriting', fontWeight: '600'}}>Sommelier’s Selection</h2>
+                                    <h3 className='text-primary' style={{fontWeight: '800', fontSize: '23px'}}>WINE OF THE WEEK</h3>
+                                    <img className="img-fluid border" src={require('../../../assets/images/wineClub/Veuve Clicquot.png').default} alt="about-image" style={{paddingTop: '25px', width: '30%'}}/>
+                                    <h3 className='mt-1 text-primary' style={{fontFamily: 'Rubik'}}>Caymus</h3>
+                                    <h4 className='text-primary mb-4' style={{fontFamily: 'Lucida Handwriting'}}>$66.00</h4>
+                                </div>
+                            </Col>
+                            <Col lg={6} sm={12} style={{textAlign: '-webkit-center'}}>
+                                <div style={{marginTop: '75px'}}>
+                                    <img className="img-fluid" src={require('../../../assets/images/wineClub/450x390-450x390.jpg').default} alt="about-image"/>
+                                </div>
+                            </Col>
+                        </Row>
+
                     </div>
                 </section>
 
@@ -57,8 +76,8 @@ const Homepage = () => {
                 {/*    </section>*/}
                 {/*</div>*/}
 
-                <section id="blog-1" className="wide-60 blog-section division mt-4">
-                    <div className="container-sm">
+                <section id="blog-1" className="wide-60 blog-section division">
+                    <div className="container" style={{paddingLeft: '0px', paddingRight: '0px'}}>
                         {/*<div className="row d-flex flex-wrap align-items-center justify-content-center "*/}
                         {/*     style={{height: "30vh"}}>*/}
                         {/*    <div className="col-lg-12" style={{marginTop: '-40px', marginBottom: '40px'}}>*/}
@@ -78,8 +97,7 @@ const Homepage = () => {
                                 backgroundPosition: 'center',
                                 paddingTop: '200px',
                                 paddingBottom: '200px',
-                                marginBottom: '100px',
-                                marginTop: '100px'
+                                marginBottom: '100px'
                             }}>
                             </Row>
                         </div>
