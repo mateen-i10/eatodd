@@ -16,20 +16,20 @@ const Homepage = () => {
             <div className="about-page">
 
                 <section>
-                    <div className="container" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
-                        <Row>
-                            <Col lg={6} sm={12}>
+                    <div className="container-sm" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
+                        <div className='row'>
+                            <div className='col-lg-6 col-sm-12' style={{textAlign: '-webkit-center'}}>
                                 <div style={{marginTop: '75px'}}>
-                                    <img className="img-fluid" style={{marginLeft: "60px"}} src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
+                                    <img className="img-fluid" src={require('../../../assets/images/my-images/wine1.jpg').default} alt="about-image"/>
                                 </div>
-                            </Col>
-                            <Col lg={6} sm={12}>
+                            </div>
+                            <div className='col-lg-6 col-sm-12 text-center'>
                                 <div style={{marginTop: '185px'}}>
-                                    <Row>
-                                        <Col lg={12} className='text-center imgBefore'>
+                                    <div className='row'>
+                                        <div lg={12} className='col-lg-6 col-sm-12 text-center imgBefore'>
                                             <img className='imgCenter imgStyle' width="140" src={cardImage} height="140" alt="standard-plan-img"/>
-                                        </Col>
-                                    </Row>
+                                        </div>
+                                    </div>
                                     <p className="p-md fw-bold mt-1" style={{color: "grey", fontSize: '18px', lineHeight: "25px", fontFamily: 'Rubik'}}>The
                                         The OMG Wine Club was created to make you say OMG at your savings! We are the 1st wine club that
                                         was created to SAVE YOU MONEY! We appreciate you and your loyalty to OMG. As our way to say THANK
@@ -38,16 +38,16 @@ const Homepage = () => {
                                         we just want you to EAT. LIVE. LOVE – now with your favorite glass of wine. Cheers Friends!
                                     </p>
                                 </div>
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
 
                     </div>
                 </section>
 
                 <section>
-                    <div className="container" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
-                        <Row>
-                            <Col className='' lg={6} sm={12} style={{textAlign: '-webkit-center'}}>
+                    <div className="container-sm" style={{backgroundColor: 'rgb(244, 246, 249)'}}>
+                        <div className='row'>
+                            <div className='col-lg-6 col-sm-12' style={{textAlign: '-webkit-center'}}>
                                 <div style={{marginTop: '75px'}}>
                                     <h2 className='text-primary' style={{fontFamily: 'Lucida Handwriting', fontWeight: '600'}}>Sommelier’s Selection</h2>
                                     <h3 className='text-primary' style={{fontWeight: '800', fontSize: '23px'}}>WINE OF THE WEEK</h3>
@@ -55,13 +55,13 @@ const Homepage = () => {
                                     <h3 className='mt-1 text-primary' style={{fontFamily: 'Rubik'}}>Caymus</h3>
                                     <h4 className='text-primary mb-4' style={{fontFamily: 'Lucida Handwriting'}}>$66.00</h4>
                                 </div>
-                            </Col>
-                            <Col lg={6} sm={12} style={{textAlign: '-webkit-center'}}>
+                            </div>
+                            <div className='col-lg-6 col-sm-12' style={{textAlign: '-webkit-center'}}>
                                 <div style={{marginTop: '75px'}}>
                                     <img className="img-fluid" src={require('../../../assets/images/wineClub/450x390-450x390.jpg').default} alt="about-image"/>
                                 </div>
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
 
                     </div>
                 </section>
@@ -77,7 +77,7 @@ const Homepage = () => {
                 {/*</div>*/}
 
                 <section id="blog-1" className="wide-60 blog-section division">
-                    <div className="container" style={{paddingLeft: '0px', paddingRight: '0px'}}>
+                    <div className="container-sm" style={{paddingLeft: '0px', paddingRight: '0px'}}>
                         {/*<div className="row d-flex flex-wrap align-items-center justify-content-center "*/}
                         {/*     style={{height: "30vh"}}>*/}
                         {/*    <div className="col-lg-12" style={{marginTop: '-40px', marginBottom: '40px'}}>*/}
@@ -90,7 +90,7 @@ const Homepage = () => {
                         {/*    </div>*/}
                         {/*</div>*/}
                         <div>
-                            <Row className="align-items-center justify-content-center" style={{
+                            <div className="row align-items-center justify-content-center" style={{
                                 margin: '0px',
                                 backgroundImage: `url(${bgimg})`,
                                 backgroundSize: 'cover',
@@ -99,7 +99,7 @@ const Homepage = () => {
                                 paddingBottom: '200px',
                                 marginBottom: '100px'
                             }}>
-                            </Row>
+                            </div>
                         </div>
                     </div>
                 </section>

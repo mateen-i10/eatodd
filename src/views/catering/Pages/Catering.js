@@ -155,7 +155,7 @@ const Catering = () => {
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>
 
-            <section className="container" style={{backgroundColor: '#f5f8fb'}}>
+            <section className="container-sm" style={{backgroundColor: '#f5f8fb'}}>
                 <Row>
                     <Col lg={7} style={{paddingBottom:'50px'}}>
                         <div className='ps-5 mt-5'>

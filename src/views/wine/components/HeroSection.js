@@ -5,7 +5,7 @@ import {Col, Row} from "reactstrap"
 const HeroSection = () => {
     return (
         <section>
-            <div className='container' style={{paddingLeft: '0px', paddingRight: '0px'}}>
+            <div className='container-sm' style={{paddingLeft: '0px', paddingRight: '0px'}}>
                 <div id="faqs-page" className="page-hero-section division text-center white-color">
                     <Row style={{marginTop: '125px'}}>
                         <Col lg={12}>

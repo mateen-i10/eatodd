@@ -10,7 +10,7 @@ const Faq = () => {
         <div>
             <Headerwine/>
             <section>
-                <div className='container' style={{paddingLeft: '0px', paddingRight: '0px'}}>
+                <div className='container-sm' style={{paddingLeft: '0px', paddingRight: '0px'}}>
                     <div id="faqs-page1" className="a division text-center white-color">
                         <Row style={{marginTop: '125px'}}>
                             <Col lg={11}>
@@ -22,7 +22,7 @@ const Faq = () => {
                     </div>
                 </div>
 
-                <div className="container" style={{backgroundColor: "#f4f6f9"}}>
+                <div className="container-sm" style={{backgroundColor: "#f4f6f9"}}>
 
                     <div className="row" style={{paddingTop: '120px'}}>
                         <div className="col-lg-6">
@@ -51,8 +51,8 @@ const Faq = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-6" style={{textAlign: '-webkit-center'}}>
-                            <img src='http://eatomg.com/wineclub/wp-content/uploads/2022/01/02-1.jpeg' style={{height: '80%'}}/>
+                        <div className="col-lg-6 col-sm-12" style={{textAlign: '-webkit-center'}}>
+                            <img className='faqImg' src='http://eatomg.com/wineclub/wp-content/uploads/2022/01/02-1.jpeg' style={{height: '80%'}}/>
                         </div>
 
 
