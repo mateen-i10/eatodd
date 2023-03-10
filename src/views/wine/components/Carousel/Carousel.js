@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
 import "../../../home/components/Hero/Hero.css"
 import "./Carousel.css"
-/*import wineSlider from '../../../../assets/images/wineClub/YouPlanTheParty-1770x950-1.png'
-import wine2 from '../../../../assets/images/wineClub/head2.png'
-import wine3 from '../../../../assets/images/wineClubStylingImages/luxurayWine.jpg'*/
 import {Link} from "react-router-dom"
 import {Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem} from "reactstrap"
 import sliderImage1 from '../../../../assets/images/wineClub/YouPlanTheParty-1770x950-1.png'
@@ -66,16 +63,16 @@ const VideoHero = () => {
     }
     const slides = images.map(item => {
         return (
-            <CarouselItem className='text-center' onExiting={onExiting} onExited={onExited} key={item.id}>
+            <CarouselItem style={{display: 'block'}} className='text-center' onExiting={onExiting} onExited={onExited} key={item.id}>
                 <img src={item.src} className='img-fluid' alt={item.id} />
-                <CarouselCaption captionHeader={<span className="text-center"><Link className='btn-lg btn-primary' to='/wine/membership'>JOIN NOW</Link></span>}/>
+                <CarouselCaption style={{display: 'block'}} captionHeader={<span className="text-center"><Link className='btn-lg btn-primary' to='/wine/membership'>JOIN NOW</Link></span>}/>
             </CarouselItem>
         )
     })
 
         return (
             <>
-                <div className='container' style={{paddingLeft: '0px', paddingRight: '0px'}}>
+                <div className='container-sm' style={{paddingLeft: '0px', paddingRight: '0px'}}>
                     <Carousel activeIndex={activeIndex} next={next} previous={previous} keyboard={false}>
                         <CarouselIndicators items={images} activeIndex={activeIndex} onClickHandler={goToIndex} />
                         {slides}

@@ -122,7 +122,7 @@ const COMenu = () => {
                         <h1>{s.name}</h1>
                         <div className="row align-items-center justify-content-center my-1">
                             {s.items.map((product) => (
-                                <div className="col-9 col-xl-5" key={product.id}>
+                                <div className="col-12 col-xl-5" key={product.id}>
                                     <CatMealItems
                                         product={product}
                                         handleSelect={handleSelect}

@@ -67,11 +67,6 @@ const Membership = ({}) => {
                                 return <div className="col-md-5 mt-5" key={`optionsKey=${index}`}>
                                     <div className="member-card card border" style={{width: "100%", height: "auto"}}>
                                         <div className="card-body align-items-center justify-content-center">
-                                            {/*<Row>
-                                            <Col lg={12} className='text-center'>
-                                                <img className='imgCenter' width="140" src={cardImage} height="140" alt="standard-plan-img"/>
-                                            </Col>
-                                        </Row>*/}
                                             <h2 className="fw-bolder text-center text-primary fs-1" style={{fontSize: '22px', fontFamily: 'Lucida Handwriting', textTransform: 'capitalize'}}>{d.name}</h2>
                                             <Row>
                                                 <Col lg={12} className='text-center imgBefore'>

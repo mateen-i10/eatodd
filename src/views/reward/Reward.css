@@ -262,4 +262,37 @@
     font-weight: bolder;
  }
 
+@media screen and (max-width: 2000px) {
+    .imgWidth {
+        width: 590px;
+        height: 360px;
+    }
+}
+
+@media screen and (max-width: 1239px) {
+    .imgWidth {
+        width: 350px;
+        height: 360px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .imgWidth {
+        width: 350px;
+        height: 360px;
+    }
+}
+@media screen and (max-width: 380px) {
+    .imgWidth {
+        width: 250px;
+        height: 360px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .imgWidth {
+        width: 150px;
+        height: 360px;
+    }
+}
 
