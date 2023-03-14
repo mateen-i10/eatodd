@@ -142,8 +142,8 @@ const Routes = [
         layout: 'VerticalLayout',
         exact: true,
         meta: {
-            authRoute: true,
-            adminOnly: true
+            authRoute: true
+            //adminOnly: true
         }
     },
     {
@@ -460,8 +460,8 @@ const Routes = [
         component: lazy(() => import('../../views/admin/subCategory/subcategory')),
         layout: 'VerticalLayout',
         meta: {
-            authRoute: true,
-            adminOnly: true
+            authRoute: true
+            //adminOnly: true
         }
     },
     /*{
@@ -595,8 +595,8 @@ const Routes = [
         component: lazy(() => import('../../views/admin/Category/CategoryDetail')),
         layout: 'VerticalLayout',
         meta: {
-            authRoute: true,
-            adminOnly: true
+            authRoute: true
+            //adminOnly: true
         }
     },
     {
@@ -613,8 +613,8 @@ const Routes = [
         component: lazy(() => import('../../views/admin/subCategory/SubCategoryDetail')),
         layout: 'VerticalLayout',
         meta: {
-            authRoute: true,
-            adminOnly: true
+            authRoute: true
+            //adminOnly: true
         }
     },
     {

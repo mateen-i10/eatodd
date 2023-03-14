@@ -59,7 +59,7 @@ const SubCategoryReducer = (state = initialState, action) => {
             console.log(data, "some data 2")
             return {
                 ...state,
-                object: {...data, category: {label: data.category?.name, value: data.categoryId}, isBlank: data.isBlank, subCatId: data.subCatId},
+                object: {...data, category: {label: data.category?.name, value: data.categoryId}, isBlank: data.isBlank, subCatId: {label: data.subCat?.name, value: data.subCat?.id}},
                 isEdit: true
             }
         case setRequestCompleted.type:
@@ -70,7 +70,7 @@ const SubCategoryReducer = (state = initialState, action) => {
         case setIsEdit.type:
             return {
                 ...state,
-                isEdit: action.payload
+                isEdit: action.payload.data
             }
         case setIsSubCategoryError.type:
             return {

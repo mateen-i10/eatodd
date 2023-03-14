@@ -1,5 +1,5 @@
 // ** React Imports
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -53,6 +53,7 @@ const SubCategory = (props) => {
     const isSuccess = useSelector(state => state.subCategory.isSuccess)
 
     const [subcategoryId, setSubcategoryId] = useState(0)
+    console.log('formInitial', formInitialState)
     const [isSubmit, setSubmit] = useState(false)
 
     const dispatch = useDispatch()
@@ -124,6 +125,12 @@ const SubCategory = (props) => {
         setFormState({...formInitialState})
         if (isModalLoading) setModalLoading(false)
     }
+
+    useEffect(() => {
+        if (formInitialState && formInitialState.subCatId) {
+           setSubcategoryId(formInitialState.subCatId.value)
+        }
+    }, [formInitialState])
 
     // custom hooks
     useLoadData(isSuccess, loadSubCategorys, isModal, toggle, currentPage, pageSize, searchValue)
