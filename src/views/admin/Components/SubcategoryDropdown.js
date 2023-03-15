@@ -6,6 +6,7 @@ import {toast} from "react-toastify"
 const SubcategoryDropdown = ({ categoryId, subcategoryId, setSubcategory, isFormSubmit }) => {
 
     const [subCategories, setSubCategories] = useState([])
+    console.log('subcatID', subcategoryId)
     const loadSubCategories = async (input, categoryId) => {
         console.log('CategoryId', categoryId)
         if (categoryId) {

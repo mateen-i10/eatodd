@@ -37,13 +37,23 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
   left: 6%;
 }
 .class2{
-  margin-top: 11px;
+
+  /*margin-top: 11px;
   margin-left: 8px;
   position: absolute;
   top: 1%;
   left: -41%;
   background-color: transparent;
-  z-index: 1;
+  z-index: 1;*/
+
+  position: absolute;
+  /* height: 60px; */
+  width: 60px;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  /* background-color: rgba(129, 190, 65, 0.9); */
+  margin-left: 10px;
 }
 .check3{
 position: absolute;
@@ -52,8 +62,8 @@ left: 4.6%;
 }
 .switch-container {
   position: fixed;
-  top: 30%;
-  left: 20px; /* Adjust this value to position the switch where you want it */
+  top: 40%;
+  right: 20px; /* Adjust this value to position the switch where you want it */
   transform: translateY(-50%);
   z-index: 9999; /* Make sure the switch appears on top of other elements */
 }

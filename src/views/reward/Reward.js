@@ -25,8 +25,8 @@ const Reward = () => {
                         {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
                         {/*</button>*/}
                     </div>
-                    <div className="col-md-6">
-                        <img style={{width: '570px', height: '360px'}} className="new mt-5" alt='image'
+                    <div className="col-md-6" style={{textAlign: '-webkit-center'}}>
+                        <img className="new mt-5 imgWidth" alt='image'
                              src={require("../../assets/images/updated/position 3.jpeg").default}/>
                     </div>
                 </div>

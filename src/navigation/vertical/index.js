@@ -190,6 +190,18 @@ export const branchManagerMenu = [
         navLink: '/employeeDashboard'
     },
     {
+        id: 'category',
+        title: 'Category',
+        icon: <Grid size={12}/>,
+        navLink: '/dashboard/category'
+    },
+    {
+        id: 'subCategory',
+        title: 'SubCategory',
+        icon: <Copy size={12}/>,
+        navLink: '/subCategory'
+    },
+    {
         header: 'Restaurants'
     }
 

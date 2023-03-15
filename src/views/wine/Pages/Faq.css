@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
-#faqs-page {
-    background-image: url("/src/assets/images/pages/wine/about/kamil-unsplash.jpg");
+#faqs-page1 {
+    background-image: url("/src/assets/images/wineClub/WeveGotYouCovered-1770x476-1.png");
 }
 
 .faq-page {
@@ -138,4 +138,42 @@
     color: rgb(255 255 255) !important;
     background-color: #81be41 !important;
     border-color: #81be41 !important;
+}
+
+.a {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll !important;
+    padding-top: 110px;
+    padding-bottom: 120px;
+}
+.textHead {
+    font-family: Rubik;
+    line-height: 30px;
+    letter-spacing: 1.1px;
+    font-weight: 900;
+    font-style: normal;
+    color: #363636;
+    font-size: 25px;
+    padding-left: 50px !important;
+}
+
+.textP {
+    padding-left: 50px;
+    font-family: Rubik;
+    font-size: 18px;
+    padding-top: 5px !important;
+}
+
+@media screen and (max-width: 1239px) {
+    .faqImg {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .faqImg {
+        width: 250px;
+    }
 }

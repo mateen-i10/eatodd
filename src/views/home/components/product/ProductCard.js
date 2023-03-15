@@ -12,8 +12,7 @@ import {getUserData} from "../../../../auth/utils"
 import {getWinePackageByCustomer} from "../../../../redux/memberShipType/action"
 import {useDispatch, useSelector} from "react-redux"
 
-const ProductCard = ({
-                         item,
+const ProductCard = ({   item,
                          limit,
                          selectedItems,
                          onItemClick,
@@ -33,7 +32,7 @@ const ProductCard = ({
     // console.log(item, "lets see the items")
     const imgStyles = {
         width: "100%",
-        height: "120px",
+        height: "100%",
         backgroundColor: 'transparent',
         overflow: "hidden",
         objectFit: "fill"
@@ -49,7 +48,7 @@ const ProductCard = ({
     }, [])
 
     const membershipObj = useSelector(state => state.memberShip.object)
-    console.log('data for price section', membershipObj.id)
+    console.log('Data for price section', membershipObj.id)
 
     // hooks
     useEffect(() => {
@@ -73,11 +72,9 @@ const ProductCard = ({
              }}>
             {customize ? <div
                 className={customize ? "row showCard justify-content-center align-items-center " : "hiddenCard"}
-                onMouseLeave={() => setCustomize(!customize)}
-            >
+                onMouseLeave={() => setCustomize(!customize)}>
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
                     console.log("op", op)
-
                     const diffDouble = op.name === "Double" ? op.price : 0
                     const diffNormal = op.name === "Normal" ? op.price : 0
                     if (diffDouble > 0) {
@@ -129,9 +126,11 @@ const ProductCard = ({
                         return <div className="class2" >
                             <Counter
                                 min={option ? option.min : 1}
-                                max={option ? option.max : 0}
+                                max={option ? option.max : 1}
                                 selectedProductIndex={index}
                                 setProductQuantity={onQuantityChange}
+                                handleSelectProduct={onItemClick}
+                                product={item}
                             />
                         </div>
                     }
@@ -152,7 +151,7 @@ const ProductCard = ({
                     }
                 }}>
                     <div className="row g-0">
-                        <div className="col-lg-4  col-md-4 col-5">
+                        <div className="col-lg-3  col-md-3 col-5">
                             {item.isBlank ? <div className='check3' > <CheckSign styles={{marginLeft: 10}} checkStyle1={`${value ? 'checkStyle' : 'checkStyle1'}`}/> </div> : <ProductImage
                                 attachment={attachment}
                                 classes={"img-fluid rounded-start"}
@@ -163,7 +162,7 @@ const ProductCard = ({
                                     objectFit: "fill"
                                 }}/>}
                         </div>
-                        <div className="col-lg-8 col-md-8 col-7">
+                        <div className="col-lg-9 col-md-9 col-7">
                             <div className="card-body ">
                                 <div className=''>
                                     <div
@@ -173,8 +172,7 @@ const ProductCard = ({
                                             lineHeight: "18px",
                                             marginTop: "-6px"
                                         }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20} alt="image"/>}</div>
-                                    <p className="mb-0 text-dark  ">{item?.description}</p>
-
+                                    <p className="mb-0 text-dark">{item?.description}</p>
                                 </div>
                             </div>
                             {item && item.options && item.options.length > 1 && <div className='bg-primary tooltipAdd d-none fs-5 text-white' style={{
@@ -190,7 +188,7 @@ const ProductCard = ({
                 </div>
                 <div className="col-md-2 col-2 pt-1 text-end">
                     {item && item.options && item.options.length > 1 &&
-                        <div className=" moreAddon cursor-pointer me-2" id={item?.id}
+                        <div className="moreAddon cursor-pointer me-2" id={item?.id}
                              onMouseOver={() => setCustomize(!customize)}>
                             <Plus size={20} />
                         </div>}

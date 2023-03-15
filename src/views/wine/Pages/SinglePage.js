@@ -1,7 +1,7 @@
 import React from 'react'
 import './SinglePage.css'
 import Headerwine from "../../../shared/wine-header/Header-wine"
-import Footer from "../../../shared/footer/Footer"
+import WineFooter from "../../../shared/wine-footer/Wine-footer"
 
 const SinglePage = () => {
     return (
@@ -264,7 +264,7 @@ const SinglePage = () => {
                     </div>
                 </section>
             </div>
-            <Footer />
+            <WineFooter />
         </div>
 
     )

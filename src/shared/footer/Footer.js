@@ -17,65 +17,64 @@ export default function Footer() {
                         </Col>
                         <Col md={3}>
                             <div className="footer-contacts mb-40">
-                                <h5 className="h5-sm">FRENCH MARKET</h5>
-                                <p>131 N. Clinton Ave,<br/>
-                                    Chicago, IL 60661</p>
-                                {/*<p className="foo-email txt-500 mt-15"><a*/}
-                                {/*    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>*/}
-                                <p><span className="yellow-color"><a href="tel:123456789">(312) 526-3105</a></span></p>
-                            </div>
-                        </Col>
-                        <Col md={3}>
-                            <div className="footer-contacts mb-40">
                                 <h5 className="h5-sm">LINCOLN PARK</h5>
                                 <p>1001 W. North Ave,<br/>
-                                    Chicago, IL 60642</p>
+                                    Chicago</p>
                                 {/*<p className="foo-email txt-500 mt-15"><a*/}
                                 {/*    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>*/}
-                                <p><span className="yellow-color"><a href="tel:123456789">(312) 274-5525</a></span></p>
+                                {/*<p><span className="yellow-color"><a href="tel:3125263105">(312) 526-3105</a></span></p>*/}
                             </div>
                         </Col>
                         <Col md={3}>
                             <div className="footer-contacts mb-40">
-                                <h5 className="h5-sm">VAN BUREN</h5>
-                                <p>186 W. Van Buren,<br/>
-                                    Chicago, IL 60605</p>
+                                <h5 className="h5-sm">EVANSTON</h5>
+                                <p>1743 Sherman Ave,<br/>
+                                    Evanston</p>
                                 {/*<p className="foo-email txt-500 mt-15"><a*/}
                                 {/*    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>*/}
-                                <p><span className="yellow-color"><a href="tel:123456789">(312) 754-0483</a></span></p>
+                                {/*<p><span className="yellow-color"><a href="tel:3122745525">(312) 274-5525</a></span></p>*/}
+                            </div>
+                        </Col>
+                        <Col md={3}>
+                            <div className="footer-contacts mb-40">
+                                <h5 className="h5-sm">LITTLE ITALY</h5>
+                                <p>1516 W. Taylor St,<br/>
+                                    Chicago</p>
+                                {/*<p className="foo-email txt-500 mt-15"><a*/}
+                                {/*    href="mailto:yourdomain@mail.com">hello@yourdomain.com</a></p>*/}
+                                {/*<p><span className="yellow-color"><a href="tel:3127540483">(312) 754-0483</a></span></p>*/}
                             </div>
                         </Col>
                         <div className="bottom-footer">
                             <div className="row d-flex align-items-center">
                                 <div className="col-md-5 col-lg-6">
                                     <div className="footer-copyright">
-                                        <p>© 2022 EATOMG. Handcrafted with love by Olive Team</p>
+                                        <p>© 2023 EATOMG. Handcrafted with Love by Olive Team</p>
                                     </div>
                                 </div>
-                                <div className="col-md-7 col-lg-6 align-content-end">
-                                    <ul className="bottom-footer-list clearfix">
-                                        <li>
-                                            <p className="first-list-link">
-                                                <a href="#">
-                                                    <i className="fab fa-facebook-f"></i> Facebook</a>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                <a href="#"><i className="fab fa-twitter"></i> Twitter</a>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p><a href="#"><i className="fab fa-youtube"></i> YouTube</a>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p className="last-li"><a href="#">
-                                                <i className="fab fa-yelp"></i> Yelp</a>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {/*<div className="col-md-7 col-lg-6 align-content-end">*/}
+                                {/*    <ul className="bottom-footer-list clearfix">*/}
+                                {/*        <li>*/}
+                                {/*            <p className="first-list-link">*/}
+                                {/*                <a href="#"><i className="fab fa-facebook-f"></i> Facebook</a>*/}
+                                {/*            </p>*/}
+                                {/*        </li>*/}
+                                {/*        <li>*/}
+                                {/*            <p>*/}
+                                {/*                <a href="#"><i className="fab fa-twitter"></i> Twitter</a>*/}
+                                {/*            </p>*/}
+                                {/*        </li>*/}
+                                {/*        <li>*/}
+                                {/*            <p><a href="#"><i className="fab fa-youtube"></i> YouTube</a>*/}
+                                {/*            </p>*/}
+                                {/*        </li>*/}
+                                {/*        <li>*/}
+                                {/*            <p className="last-li"><a href="#">*/}
+                                {/*                <i className="fab fa-yelp"></i> Yelp</a>*/}
+                                {/*            </p>*/}
+                                {/*        </li>*/}
+                                {/*    </ul>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </Row>

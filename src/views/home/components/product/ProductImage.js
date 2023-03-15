@@ -25,7 +25,7 @@ const ProductImage = ({attachment, classes, styles}) => {
     }, [response])
 
     return <>
-        <div style={{justifyContent: "center", display: "flex"}} >
+        <div style={{justifyContent: "center", display: "flex" }} >
             <img src={imageURL} className={classes} alt="product image" style={styles} />
         </div>
     </>

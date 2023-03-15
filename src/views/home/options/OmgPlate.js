@@ -15,15 +15,19 @@ import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
+import {FaTimes} from "react-icons/all"
+
 
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
-
+    //const [subCatIdToShow, setSubCatIdToShow] = useState(null)
     const [isPageLoading, setIsLoading] = useState(false)
     const [selectedProducts, setSelectedProducts] = useState([])
     const [mealName, setMealName] = useState("")
     const {userLocation} = useSelector(state => state)
+    const [hiddenSubcategories, setHiddenSubcategories] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([...products, ...hiddenSubcategories.map(subCat => ({...subCat, isHidden: true}))])
     // const data = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -33,11 +37,44 @@ const Menu = () => {
 
     // hooks
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
+    /*function filterProductsBySubCatId(products, subCatId) {
+        return products.filter(prod => prod.id !== subCatId)
+    }*/
+    function toggleSubcategory(subCatId) {
+        const found = filteredProducts.find(c => c.id === subCatId)
+        const remaining = filteredProducts.filter(c => c.id !== subCatId)
 
+        if (found.isHidden) {
+            setHiddenSubcategories(hiddenSubcategories.filter(c => c.id !== subCatId))
+        } else {
+            setHiddenSubcategories([...hiddenSubcategories, found])
+        }
+
+        setFilteredProducts([...remaining, {...found, isHidden: !found.isHidden}])
+    }
+
+    useEffect(() => {
+            if (products && products.length > 0) {
+                const subCatIdToHide = products.map(pro => {
+                     if (products.find(prod => pro.id === prod.subCatId)) {
+                        pro.isHidden = true
+                    }
+                     return pro
+                })
+                setFilteredProducts([...subCatIdToHide])
+                console.log('setFilteredProducts', filteredProducts)
+                /*if (subCatIdToHide) {
+                    toggleSubcategory(subCatIdToHide.id)
+                }*/
+            }
+
+
+    }, [products])
     useEffect(() => {
         console.log('isLoading', isLoading)
         if (response && response.data) {
             const {data} = response
+            console.log(response)
             setCategory({
                 name: data.categoryName,
                 id: data.id,
@@ -61,6 +98,7 @@ const Menu = () => {
                     isBlank: currentValue.subCategory['isBlank'],
                     priority: currentValue.subCategory['priority'],
                     fillingLimit: currentValue.subCategory['fillingLimit'],
+                    subCatId: currentValue.subCategory['subCatId'],
                     products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, currentValue] : [currentValue]
                 }
                 return acc
@@ -70,6 +108,7 @@ const Menu = () => {
             // ArrValues.sort((a, b) => a?.priority - b?.priority)
             // console.log("arrayValues", ArrValues)
             // setProducts([...ArrValues])
+            console.log('mmmm', final)
             setProducts([...values])
         }
 
@@ -210,12 +249,24 @@ const Menu = () => {
         setSelectedProducts([...final])
     }
 
-    console.log(selectedProducts, "letss see the selection")
+    console.log(selectedProducts, "Lets see the selection")
 
     return (
         <>
             <Header/>
-            <div className="container-sm ">
+            <div className="sticky-top headerScroll">
+                <div className="" style={{marginBottom: 0, height: "45px"}}>
+                    <div className="">
+                        <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                             onClick={() => {
+                                 history.push('/#orderSection')
+                             }}>Return to Menu
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container-sm" style={{marginTop: '45px'}}>
                 <TopShelf
                     attachment={category?.attachment}
                     name={category?.name}
@@ -225,20 +276,48 @@ const Menu = () => {
                 {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
                     <div className="container-sm">
-                        {products && products.length > 0 && products.map(prod => {
-                            return <ProductsSubcategoryMenu
-                                heading={prod.name}
-                                limit={prod.fillingLimit}
-                                products={prod.products}
-                                subCatId={prod.id}
-                                // isBlank={prod.isBlank}
-                                ispriority={prod.priority}
-                                handleSelectOption={handleSelectOption}
-                                handleChangeQuantity={handleChangeQuantity}
-                                handleSelectProduct={handleSelectProduct}
-                                selectedProducts={selectedProducts}
-                            />
-                        })}
+                        {filteredProducts.map(prod => (
+                            <div key={prod.id}>
+                                {!prod.isHidden && (
+                                    <ProductsSubcategoryMenu
+                                        heading={prod.name}
+                                        limit={prod.fillingLimit}
+                                        products={prod.products}
+                                        subCatId={prod.id}
+                                        isBlank={prod.isBlank}
+                                        ispriority={prod.priority}
+                                        handleSelectOption={handleSelectOption}
+                                        handleChangeQuantity={handleChangeQuantity}
+                                        handleSelectProduct={handleSelectProduct}
+                                        selectedProducts={selectedProducts}
+                                    />
+                                )}
+                                {prod.subCatId && (
+                                    <div className="row">
+                                        <div className="col-md-6" style={{margin: 'auto'}}>
+                                            <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px'}}>
+                                                <h2 style={{margin: 'auto'}}>No {prod.name}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                {prod.subCatId && hiddenSubcategories.filter(subCat => subCat.subCatId === prod.id).map(subCat => (
+                                    <ProductsSubcategoryMenu
+                                        key={subCat.id}
+                                        heading={subCat.name}
+                                        limit={subCat.fillingLimit}
+                                        products={subCat.products}
+                                        subCatId={subCat.id}
+                                        isBlank={subCat.isBlank}
+                                        ispriority={subCat.priority}
+                                        handleSelectOption={handleSelectOption}
+                                        handleChangeQuantity={handleChangeQuantity}
+                                        handleSelectProduct={handleSelectProduct}
+                                        selectedProducts={selectedProducts}
+                                    />
+                                ))}
+                            </div>
+                        ))}
                         {category?.isWinePaired && <Wines
                             restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
                             handleSelectOption={handleSelectOption}

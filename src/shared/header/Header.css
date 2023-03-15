@@ -77,7 +77,6 @@ img {
     width: 18%;
     color: black;
     align-items: center;
-    font-family: 'Oswald', sans-serif;
 }
 
 .w-head-sec-1 {
@@ -136,7 +135,6 @@ img {
     /*border: 2px solid brown;*/
     width: 70%;
     align-items: center;
-    margin-top: 10px;
     justify-content: right;
     /*font-family: 'Oswald', sans-serif;*/
 }
@@ -186,7 +184,7 @@ img {
 .head-3 {
     height: 39px;
     display: flex;
-    width: 23%;
+    /*width: 23%;*/
     justify-content: flex-end;
     padding: 0 1.25em;
     align-items: center;
@@ -202,7 +200,7 @@ img {
     border-radius: 25px;
     border: 1px solid #81be41;
     color: #81be41;
-    margin-right: 10px;
+    margin-right: 40px;
     margin-top: 1px;
 }
 
@@ -293,7 +291,7 @@ img {
 }
 
 .header2 .eatOMG {
-    display: flex;
+    display: none;
     background-color: #81be41;
     width: 200px;
     justify-content: space-evenly;
@@ -303,6 +301,45 @@ img {
     align-items: center;
     border-radius: 25px;
 
+}
+
+@media screen and (min-width: 1200px) {
+    .returnBtn {
+        margin-top: 30px;
+        margin-left: 195px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .returnBtn {
+        margin-top: 15px;
+        margin-left: 130px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .headerScroll {
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .headerScroll {
+        width: fit-content;
+    }
+}
+
+.imgCenter {
+    display: initial !important;
+}
+
+.amountMargin {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
+
+.dollarSign {
+    margin: 0.625rem 0.125rem 0px 0px;
 }
 
 .header2 .eatOMG p {
@@ -493,7 +530,7 @@ img {
 }
 
 .signtext {
-    padding-top: 15px;
+    padding-top: 13px;
     font-size: 1.375rem;
     width: 90px
 }
