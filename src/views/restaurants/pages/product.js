@@ -52,7 +52,7 @@ const Products = (props) => {
 
     const [catId, setCatId] = useState(0)
 
-    const productsByRestaurantList = useSelector(state => state.restaurant.productList)
+    const productsByRestaurantList = useSelector(state => state.product.list)
     const miscData = useSelector(state => state.restaurant.miscData)
 
     const formInitialState = useSelector(state => state.product.object)
@@ -110,12 +110,10 @@ const Products = (props) => {
     const Ingredient = async (input) => {
         return loadOptions('Ingredient', input, 1, 12)
     }
-
     const options = async () => [
         { value: 1, label: 'Default' },
         { value: 2, label: 'Numeric' }
     ]
-
     const Flavour = async () => [
         { value: 'Spicy', label: 'Spicy' },
         { value: 'Normal', label: 'Normal' }
@@ -223,11 +221,8 @@ const Products = (props) => {
         description:'',
         wholePrice: '',
         discount: '',
-        // optionType: [],
         taxAmount: '',
         taxPercentage: '',
-        // restaurant: [],
-        // category: [],
         isDrink: false,
         isSpicy: false
     })
@@ -323,7 +318,7 @@ const Products = (props) => {
     const callFunc = () => {
         const refId = subcategoryId
 
-        if (refId !== 0) dispatch(loadProductsByRestaurant(currentPage, pageSize, "", refId))
+        if (refId !== 0) dispatch(loadproducts(currentPage, pageSize, "", refId))
         else console.log('please select a value to search for')
     }
     //Product Add Working End
@@ -333,14 +328,16 @@ const Products = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadProductsByRestaurant(currentPage, pageSize, value, id))
+            // dispatch(loadProductsByRestaurant(currentPage, pageSize, value, id))
+            dispatch(loadproducts(currentPage, pageSize, value))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadProductsByRestaurant(page.selected + 1, pageSize, searchValue, id))
+        dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
+        // dispatch(loadProductsByRestaurant(page.selected + 1, pageSize, searchValue, id))
         setCurrentPage(page.selected + 1)
     }
 
