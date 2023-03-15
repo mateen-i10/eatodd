@@ -199,7 +199,7 @@ const Employees = (props) => {
 
        const final = {
             id: formState.id,
-           applicationUser: {...formState, id: formState.applicationUserId, permission: formState.permission.map(p => p.value).toString(), passwordHash: formState.password, username: formState.email},
+           applicationUser: {...formState, id: formState.applicationUserId, permission: formState.permission.map(p => p.value).toString(), passwordHash: formState.password, username: formState.firstName},
            restaurants: formState.restaurants.map(r => {
            return { restaurantId: r.value }
            })}
