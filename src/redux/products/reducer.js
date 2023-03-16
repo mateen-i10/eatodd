@@ -1,6 +1,7 @@
 import {createAction} from '@reduxjs/toolkit'
 const initialState = {
     list: [],
+    dataaa:[],
     object: {},
     miscData: {},
     isRequestCompleted: false,
@@ -21,6 +22,8 @@ export const setIsproductError = createAction("productReducer/setIsproductError"
 export const setIsproductSuccess = createAction("productReducer/setIsproductSuccess")
 export const setRequestCompleted = createAction("productReducer/setRequestCompleted")
 
+export const getpro = createAction("productReducer/getpro")
+
 const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case setproducts.type:
@@ -28,6 +31,16 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 list: action.payload.data,
                 miscData: action.payload.miscData,
+                isLoading: false,
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
+            }
+        case getpro.type:
+            return {
+                ...state,
+                dataaa: action.payload.data,
                 isLoading: false,
                 isDetailLoading: false,
                 isEdit: false,

@@ -6,7 +6,7 @@ import {
     setproduct,
     editproduct,
     setDetailLoading,
-    setRequestCompleted, setIsproductError, setIsproductSuccess, setIsEdit
+    setRequestCompleted, setIsproductError, setIsproductSuccess, setIsEdit, getpro
 } from "./reducer"
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
@@ -23,6 +23,18 @@ export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, 
             data: {},
             method: 'get',
             onSuccess: setproducts.type
+        }))
+    }
+}
+
+export const getProductByrest = (RestId, SubCatId) => {
+    return async dispatch => {
+        dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/ProductByRestaurant?RestaurantId=${RestId}&&SubCategoryId=${SubCatId}}`,
+            data: {},
+            method: 'get',
+            onSuccess: getpro.type
         }))
     }
 }

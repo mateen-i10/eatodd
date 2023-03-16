@@ -1,21 +1,16 @@
 // ** React Imports
-import React, {Fragment, useEffect, useState, useRef} from 'react'
+import React, {Fragment, useEffect, useLayoutEffect, useState, useRef} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
 import {
     ArrowLeftCircle,
-    Book,
-    BookOpen,
     ChevronDown,
-    Codesandbox,
-    DollarSign,
     Edit,
     FileText,
     MoreVertical, Search,
-    Trash,
-    UserPlus
+    Trash
 } from 'react-feather'
 import {
     Card,
@@ -36,7 +31,14 @@ import {toast} from "react-toastify"
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import {FieldTypes} from "../../../utility/enums/FieldType"
 import useLoadData from "../../../utility/customHooks/useLoadData"
-import {addproduct, deleteproduct, getproduct, loadproducts, updateproduct} from "../../../redux/products/actions"
+import {
+    addproduct,
+    deleteproduct,
+    getproduct,
+    // getProductByrest,
+    loadproducts,
+    updateproduct
+} from "../../../redux/products/actions"
 import useEdit from "../../../utility/customHooks/useEdit"
 import {setIsEdit, setIsproductError, setproduct} from "../../../redux/products/reducer"
 import useModalError from "../../../utility/customHooks/useModalError"
@@ -53,8 +55,9 @@ const Products = (props) => {
     const [catId, setCatId] = useState(0)
 
     const productsByRestaurantList = useSelector(state => state.product.list)
-    const miscData = useSelector(state => state.restaurant.miscData)
+    // const miscData =
 
+    const [miscData, setMiscData] = useState(useSelector(state => state.product.miscData))
     const formInitialState = useSelector(state => state.product.object)
     const isEdit = useSelector(state => state.product.isEdit)
     const isLoading = useSelector(state => state.product.isLoading)
@@ -68,6 +71,8 @@ const Products = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
+
+    const [dispData, setDispData] = useState([])
 
     //for restaurant id
     //const {state} = useLocation()
@@ -88,6 +93,30 @@ const Products = (props) => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response.data.data.map(d =>  {
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    useLayoutEffect(() => {
+    }, [dispData])
+
+
+    const letsSee = (id, subCatId) => {
+        return httpService._get(`${baseURL}Product/ProductByRestaurant?pageIndex=${currentPage}&&pageSize=${pageSize}&&RestaurantId=${id}&&SubCategoryId=${subCatId}`)
+            .then(response => {
+                console.log(response.data, "letss see")
+                setMiscData(response.data.miscData)
+                setDispData(response.data.data.products)
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.products.map(d =>  {
                         return {label: `${d.name}`, value: d.id}
                     })
                 } else {
@@ -173,7 +202,6 @@ const Products = (props) => {
         ])
         setFormFeilds(0)
         setShowOption(false)
-
     }
 
     useEffect(() => {
@@ -316,12 +344,16 @@ const Products = (props) => {
     }
 
     const callFunc = () => {
-        const refId = subcategoryId
+         const refId = subcategoryId
 
-        if (refId !== 0) dispatch(loadproducts(currentPage, pageSize, "", refId))
-        else console.log('please select a value to search for')
+        // if (refId !== 0) dispatch(loadproducts(currentPage, pageSize, "", refId))
+        // if (refId !== 0) dispatch(getProductByrest(id, refId))
+        letsSee(id, refId)
+        // else console.log('please select a value to search for')
     }
     //Product Add Working End
+
+    console.log(dispData, "coming from the function")
 
     //Products by Restaurant Search
     const handleFilter = e => {
@@ -336,8 +368,8 @@ const Products = (props) => {
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
-        // dispatch(loadProductsByRestaurant(page.selected + 1, pageSize, searchValue, id))
+        // dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
+        dispatch(loadProductsByRestaurant(page.selected + 1, pageSize, searchValue, id))
         setCurrentPage(page.selected + 1)
     }
 
@@ -427,9 +459,11 @@ const Products = (props) => {
     }
 
     const dataToRender = () => {
-        if (productsByRestaurantList.length > 0) {
+        if (dispData.length !== 0) {
+            return dispData
+        } else if (productsByRestaurantList.length > 0) {
             return productsByRestaurantList
-        }  else {
+        } else {
             return productsByRestaurantList.slice(0, pageSize)
         }
     }
