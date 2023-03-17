@@ -27,11 +27,11 @@ export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, 
     }
 }
 
-export const getProductByrest = (RestId, SubCatId) => {
+export const getProductByrest = (currentPage, pageSize, SearchQuery, RestId) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}/ProductByRestaurant?RestaurantId=${RestId}&&SubCategoryId=${SubCatId}}`,
+            url: `${url}/ProductByRestaurant?pageIndex=${currentPage}&&pageSize=${pageSize}&&SearchQuery=${SearchQuery}&&RestaurantId=${RestId}`,
             data: {},
             method: 'get',
             onSuccess: getpro.type

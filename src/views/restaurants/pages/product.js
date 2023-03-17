@@ -55,6 +55,10 @@ const Products = (props) => {
     const [catId, setCatId] = useState(0)
 
     const productsByRestaurantList = useSelector(state => state.product.list)
+
+    const data = useSelector(state => state.product.dataaa)
+
+    console.log(data, "lets see if data updates on search")
     // const miscData =
 
     const [miscData, setMiscData] = useState(useSelector(state => state.product.miscData))
@@ -70,7 +74,7 @@ const Products = (props) => {
     const [subcategoryId, setSubcategoryId] = useState(0)
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
-    const [searchValue, setSearchValue] = useState('')
+    const [searchValue] = useState('')
 
     const [dispData, setDispData] = useState([])
 
@@ -107,7 +111,6 @@ const Products = (props) => {
     useLayoutEffect(() => {
     }, [dispData])
 
-
     const letsSee = (id, subCatId) => {
         return httpService._get(`${baseURL}Product/ProductByRestaurant?pageIndex=${currentPage}&&pageSize=${pageSize}&&RestaurantId=${id}&&SubCategoryId=${subCatId}`)
             .then(response => {
@@ -116,7 +119,7 @@ const Products = (props) => {
                 setDispData(response.data.data.products)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
-                    return response.data.data.products.map(d =>  {
+                    return response.data.data.products.map(d => {
                         return {label: `${d.name}`, value: d.id}
                     })
                 } else {
@@ -356,15 +359,16 @@ const Products = (props) => {
     console.log(dispData, "coming from the function")
 
     //Products by Restaurant Search
-    const handleFilter = e => {
-        console.log('e.keyCode', e.keyCode)
-        const value = e.target.value
-        if (e.keyCode === 13) {
-            // dispatch(loadProductsByRestaurant(currentPage, pageSize, value, id))
-            dispatch(loadproducts(currentPage, pageSize, value))
-        }
-        setSearchValue(value)
-    }
+    // const handleFilter = e => {
+    //     // console.log('e.keyCode', e.keyCode)
+    //     // const value = e.target.value
+    //     // setSearchValue(value)
+    //     // console.log(value, "lets see the value")
+    //     if (e.key === 'Enter') {
+    //         console.log("about to dispatch")
+    //         dispatch(getProductByrest(currentPage, pageSize, searchValue, id))
+    //     }
+    // }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
@@ -488,17 +492,18 @@ const Products = (props) => {
                         </UncontrolledTooltip>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
-                        <Col className='mt-1' md='12' sm='12'>
-                            <Input
-                                className='dataTable-filter mb-50'
-                                type='text'
-                                placeholder='Search'
-                                bsSize='sm'
-                                id='search-input'
-                                value={searchValue}
-                                onChange={handleFilter}
-                            />
-                        </Col>
+                        {/*<Col className='mt-1' md='12' sm='12'>*/}
+                        {/*    <Input*/}
+                        {/*        className='dataTable-filter mb-50'*/}
+                        {/*        type='text'*/}
+                        {/*        placeholder='Search'*/}
+                        {/*        bsSize='sm'*/}
+                        {/*        id='search-input'*/}
+                        {/*        value={searchValue}*/}
+                        {/*        onChange={e => setSearchValue(e.target.value)}*/}
+                        {/*        onKeyDown={handleFilter}*/}
+                        {/*    />*/}
+                        {/*</Col>*/}
                         <Col className='mt-1' md='5' sm='12'>
                             <label>Search by Category <span className='text-danger'>*</span></label>
                             <AsyncSelect
