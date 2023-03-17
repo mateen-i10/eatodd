@@ -72,7 +72,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Tuesday',
@@ -80,7 +81,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Wednesday',
@@ -88,7 +90,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Thursday',
@@ -96,7 +99,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Friday',
@@ -104,7 +108,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Saturday',
@@ -112,7 +117,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         },
         {
             name: 'Sunday',
@@ -120,7 +126,8 @@ const Restaurant = (props) => {
             startDate: null,
             endDate: null,
             isClosed: false,
-            isTwentyFourHoursOpened: false
+            isTwentyFourHoursOpened: false,
+            isError: false
         }
     ]
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
@@ -141,14 +148,11 @@ const Restaurant = (props) => {
             const final = formInitialState.restaurantSchedules.map((i, index) => {
                 return {...i, name : resSchedules[index].name}
             })
-            console.log('final', final)
             setRestaurantSchedule([...final])
         }
     }, [isEdit])
 
     const onValueChange = (index, name, event) => {
-        console.log("event.target.checked", event.target.checked)
-        console.log("event.target", event.target)
         const newArray = restaurantSchedule.map((element, i) => {
             if (i === index) {
                 if (event.target.type === "checkbox") {
@@ -205,6 +209,7 @@ const Restaurant = (props) => {
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'startDate')}
                             />
+                            {r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}
                         </td>
                         <td>
                             <Datetime
@@ -215,6 +220,7 @@ const Restaurant = (props) => {
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'endDate')}
                             />
+                            {r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}
                         </td>
                         <td>
                             <div className="form-check">
@@ -251,7 +257,6 @@ const Restaurant = (props) => {
     const cuisines = async (input) => {
         return httpService._get(`${baseURL}cuisine?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
-                console.log('response', response)
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     return response.data.data.map(d =>  {
@@ -277,6 +282,10 @@ const Restaurant = (props) => {
         {type:FieldTypes.Text, label: 'Description', placeholder: 'Enter Description', name:'description', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'Address', placeholder: 'Enter Address', name:'address1', isRequired:true, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Text, label: 'phone Number', placeholder: 'Enter Phone Number', name:'phoneNo', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'City', placeholder: 'Enter City', name:'city', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'State', placeholder: 'Enter State', name:'state', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'Country', placeholder: 'Enter Country', name:'country', isRequired:false, fieldGroupClasses: 'col-6'},
+        {type:FieldTypes.Text, label: 'ZipCode', placeholder: 'Enter ZipCode', name:'zipCode', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Latitude', placeholder: 'Enter Latitude', name:'latitude', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Number, label: 'Longitude', placeholder: 'Enter Longitude', name:'longitude', isRequired:false, fieldGroupClasses: 'col-6'},
         {type:FieldTypes.Select, label: 'Cuisine', placeholder: 'Select Cuisine', name:'cuisines', isRequired:false, fieldGroupClasses: 'col-12', loadOptions:cuisines, isAsyncSelect: true, isMulti:true},
@@ -300,6 +309,8 @@ const Restaurant = (props) => {
     const schema = Joi.object({
         name: Joi.string().required().label("Name"),
         address1: Joi.string().required().label("Address")
+        /*startDate: Joi.date().required().label("Start Date"),
+        endDate: Joi.date().required().label("End Date")*/
     })
 
     // ** Function to handle filter
@@ -318,6 +329,10 @@ const Restaurant = (props) => {
         description:'',
         address: {},
         phoneNo: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: '',
         cuisines: [],
         restaurantSchedules:[],
         isAvailableForDelivery: false,
@@ -336,7 +351,6 @@ const Restaurant = (props) => {
 
 
     const editClick = (id) => {
-        console.log("edit", id)
         toggle()
         dispatch(getRestaurant(id, true))
         setModalTitle('Edit Restaurant')
@@ -366,12 +380,10 @@ const Restaurant = (props) => {
     }
 
     const orderClick = (id, e) => {
-        console.log('rid', id)
         e.preventDefault()
         props.history.push(`/dashboard/orders/${id}`)
     }
     const productClick = (id, e) => {
-        console.log('rId', id)
         e.preventDefault()
         props.history.push(`/dashboard/product/${id}`)
     }
@@ -385,17 +397,37 @@ const Restaurant = (props) => {
     }
 
     const handleSubmit = (event) => {
-        console.log('restaurantSchedule', restaurantSchedule)
+        event.preventDefault()
         console.log('formState', formState)
         const finalData = {...formState,
-            address: {address1: formState.address1, longitude: formState.longitude, latitude: formState.latitude},
+            address: {
+                address1: formState.address1,
+                longitude: formState.longitude,
+                latitude: formState.latitude,
+                city: formState.city,
+                state: formState.state,
+                country: formState.country,
+                zipCode: formState.zipCode
+            },
             restaurantSchedules: restaurantSchedule,
             cuisines: formState.cuisines.map(e => { return {cuisineId: e.value} })
         }
-        console.log('finalData', finalData)
-        event.preventDefault()
+
         const isError = formModalRef.current.validate(formState)
         if (isError) return
+
+        if (restaurantSchedule && restaurantSchedule.length > 0) {
+            const temp = [...restaurantSchedule]
+            const final = temp.map(r => {
+                if (!r.startDate || !r.endDate) {
+                    return {...r, isError: true}
+                }
+                return {...r, isError: false}
+            })
+            const error = final.find((f) => f.isError)
+            setRestaurantSchedule([...final])
+            if (error) return
+        }
 
         // call api
         setModalLoading(true)
@@ -403,7 +435,6 @@ const Restaurant = (props) => {
     }
 
     const handleFilter = e => {
-        console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
             dispatch(loadRestaurants(currentPage, pageSize, value))

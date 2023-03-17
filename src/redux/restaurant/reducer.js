@@ -67,6 +67,10 @@ const RestaurantReducer = (state = initialState, action) => {
                     address1: action.payload.data.address.address1,
                     latitude: action.payload.data.address.latitude,
                     longitude: action.payload.data.address.longitude,
+                    city: action.payload.data.address.city,
+                    state: action.payload.data.address.state,
+                    country: action.payload.data.address.country,
+                    zipCode: action.payload.data.address.zipCode,
                     cuisines: action.payload.data.cuisines?.map(i => {
                             return {label: i.cuisine?.name, value: i.cuisine.id}
                         }
