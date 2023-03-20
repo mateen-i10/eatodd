@@ -1,15 +1,18 @@
 // ** React Imports
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import {Card, CardBody, CardText, Row, Col, Button, Label, Input, Badge} from 'reactstrap'
+import {Card, CardBody, CardText, Row, Col, Button, Label, Input, Badge, CardTitle} from 'reactstrap'
 // ** Styles
 import '../../../@core/scss/base/pages/app-invoice.scss'
 import UILoader from "../../../@core/components/ui-loader"
 import {getCustomer} from '../../../redux/customer/actions'
+import {ArrowLeftCircle} from "react-feather"
+import {useHistory} from "react-router-dom"
 
 const CustomerDetail = ({match}) => {
     const id = match.params.id
     const dispatch = useDispatch()
+    const history = useHistory()
 
     //getting data from store
     const isLoading = useSelector(state => state.customer.isLoading)
@@ -22,14 +25,27 @@ const CustomerDetail = ({match}) => {
         dispatch(getCustomer(id))
     }, [])
 
+    const goPackagesPage = () => {
+        history.push('/customers')
+    }
+
     return (
         <div>
             <UILoader blocking={isLoading}>
                 <Card>
+                    <Row>
+                        <Col xl={12} lg={12} md={12}>
+                            <CardTitle tag='h4' style={{paddingTop: '40px', paddingLeft: '30px', marginBottom: '0px'}}>
+                                <span onClick={goPackagesPage} className='cursor-pointer me-1'>
+                                    <ArrowLeftCircle size={30} style={{color: "#81be41"}}/>
+                                </span>
+                                Customer Detail
+                            </CardTitle>
+                        </Col>
+                    </Row>
                     <Row className='p-2'>
                         <Col md='12' xs='12'>
                             <CardBody style={{maxHeight: 450}}>
-                                <h2 className='mb-75'>Customer Detail</h2>
                                 <Row>
                                     <Col xl={6}>
                                         <div className='mt-2 row'>
