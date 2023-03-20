@@ -11,13 +11,13 @@ import {
     CardTitle,
     Input,
     Row,
-    Col
+    Col, Button
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
 import '@styles/react/libs/flatpickr/flatpickr.scss'
-import {loadCustomers} from "../../../redux/customer/actions"
+import {getCustomersFromSquare, loadCustomers} from "../../../redux/customer/actions"
 import {getUserData} from "../../../auth/utils"
 // my changes
 
@@ -25,11 +25,12 @@ const Customers = (props) => {
 
     const customerList = useSelector(state => state.customer.list)
     const miscData = useSelector(state => state.customer.miscData)
-    // const isLoading = useSelector(state => state.customer.isLoading)
+    const isLoading = useSelector(state => state.customer.isLoading)
+    const isSuccess = useSelector(state => state.product.isSuccess)
     const dispatch = useDispatch()
 
     const customerId = getUserData().customerId
-    console.log(customerId, "dataof user")
+    console.log(customerId, "dataOf user")
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -38,7 +39,11 @@ const Customers = (props) => {
 
     useEffect(() => {
         dispatch(loadCustomers(currentPage, pageSize, searchValue, customerId))
-    }, [])
+    }, [isSuccess])
+
+    const addClick = () => {
+        dispatch(getCustomersFromSquare())
+    }
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
@@ -124,13 +129,16 @@ const Customers = (props) => {
 
     return (
         <Fragment>
-            <UILoader>
+            <UILoader blocking={isLoading}>
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Customers</CardTitle>
                             <h6>Friday June 10, 2022, 08:10 AM</h6>
                         </div>
+                        <Button.Ripple bssize='sm' color='primary' onClick={addClick}>
+                            Get Customers
+                        </Button.Ripple>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

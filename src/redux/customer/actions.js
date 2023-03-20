@@ -8,6 +8,8 @@ import {
     setRequestCompleted,
     setIsCustomerError, setIsCustomerSuccess, setIsEdit, setCustomerAddress, editCustomerAddress
 } from "./reducer"
+import httpService, {baseURL} from "../../utility/http"
+import {toast} from "react-toastify"
 
 const url = 'customer'
 
@@ -43,6 +45,28 @@ export const getCustomer = (id, isEdit = false) => {
                 onSuccess: setCustomer.type
             }))
         }
+    }
+}
+
+export const getCustomersFromSquare = () => {
+
+    return async () => {
+        return httpService._get(`${baseURL}Webhook`)
+            .then(response => {
+            // success case
+            if (response.status === 200) {
+                toast.success('Get Customers from Square Successfully')
+                /*window.location.reload(true)*/
+                setTimeout(() => {
+                    window.location.reload(true)
+                }, 5000)
+            } else {
+                //general Error Action
+                toast.error(response.data.message)
+            }
+        }).catch(error => {
+            toast.error(error.message)
+        })
     }
 }
 
