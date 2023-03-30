@@ -1,6 +1,5 @@
 // ** React Imports
 import React, {Fragment, useEffect, useRef, useState} from 'react'
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -47,6 +46,7 @@ import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import moment from "moment"
 import CompareData from "./CompareData"
+import '../../../shared/style/style.css'
 
 const Restaurant = (props) => {
 
@@ -585,7 +585,7 @@ const Restaurant = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable'
+                        className='react-dataTable my-dataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10} />}
                         paginationComponent={CustomPagination}

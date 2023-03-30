@@ -15,7 +15,6 @@ import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
-import {FaTimes} from "react-icons/all"
 
 
 const Menu = () => {
@@ -300,7 +299,7 @@ const Menu = () => {
                                         selectedProducts={selectedProducts}
                                     />
                                 )}
-                                {prod.subCatId && (
+                                {prod.subCatId && !prod.isHidden && (
                                     <div className="row">
                                         <div className="col-md-6" style={{margin: 'auto'}}>
                                             <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px', position: 'relative', width: '550px', margin:'auto', cursor:'pointer'}}>
@@ -318,11 +317,13 @@ const Menu = () => {
                                         products={subCat.products}
                                         subCatId={subCat.id}
                                         isBlank={subCat.isBlank}
+                                        prodsubId={prod.subCatId}
                                         ispriority={subCat.priority}
                                         handleSelectOption={handleSelectOption}
                                         handleChangeQuantity={handleChangeQuantity}
                                         handleSelectProduct={handleSelectProduct}
                                         selectedProducts={selectedProducts}
+                                        toggleSubcategory={toggleSubcategory}
                                     />
                                 ))}
                             </div>

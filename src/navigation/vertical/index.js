@@ -72,7 +72,7 @@ export default [
     },
     {
         id: 'GeneralRecommendations',
-        title: 'General Recommendations',
+        title: 'Recommendations',
         icon: <Package size={20}/>,
         navLink: '/GeneralRecommendations'
     },
@@ -107,12 +107,6 @@ export default [
         title: 'Campaign',
         icon: <MessageSquare size={20}/>,
         navLink: '/campaign'
-    },
-    {
-        id: 'Section',
-        title: 'Modifier/Addon',
-        icon: <Package size={20}/>,
-        navLink: '/section'
     },
     {
         id: 'contact',
@@ -172,6 +166,12 @@ export default [
                 title: 'Catering Menu Items',
                 icon: <Package size={20}/>,
                 navLink: '/cateringMenuItem'
+            },
+            {
+                id: 'Section',
+                title: 'Modifier/Addon',
+                icon: <Package size={20}/>,
+                navLink: '/section'
             },
             {
                 id: 'Customers',

@@ -58,10 +58,10 @@ const UserDropdown = () => {
                 <div className='user-nav d-sm-flex d-none'>
                     <section>
                         <Row>
-                            <Col lg={7} style={{marginTop:12, marginRight:27}}>
+                            <Col lg={7} style={{marginTop:12}}>
                                 <span style={{fontSize: "1.2rem"}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
                             </Col>
-                            <Col lg={3} style={{padding:0}}>
+                            <Col lg={3}>
                                 <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
                             </Col>
                         </Row>

@@ -18,7 +18,7 @@ const SquareCard = ({cardVerificationFunc, getTokenFunc, stepper, url}) => {
                           cardTokenizeResponseReceived={getTokenFunc}>
                               <CreditCard/>
                      </PaymentForm>
-                    {url === "http://localhost:3000/winePayment" ? [] : <div className='btn btn-primary btn-sm my-2' onClick={() => stepper.previous()}>Go Back</div>}
+                    {url === "https://dev.eatomg.com/winePayment" ? [] : <div className='btn btn-primary btn-sm my-2' onClick={() => stepper.previous()}>Go Back</div>}
                 </CardBody>
             </Card>
 }

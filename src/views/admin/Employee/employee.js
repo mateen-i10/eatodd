@@ -158,7 +158,7 @@ const Employees = (props) => {
             email: Joi.string().required().label("Email"),
             restaurants: Joi.array().min(1).error(() => {
                 return {
-                    message: '"Restaurants" is required'
+                    message: '"Restaurants" is Required'
                 }
             })
         }))
