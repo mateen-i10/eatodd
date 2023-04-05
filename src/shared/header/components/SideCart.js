@@ -163,7 +163,7 @@ const Cart = (props) => {
         return (
             <div className='basic-modal '>
                 <Modal isOpen={recommendedProductModal} toggle={() => setRecommendedProductModal(!recommendedProductModal)}  >
-                    <div className='name-meal-model text-center my-1'><h2>Select meal to assign recommended product</h2></div>
+                    <div className='name-meal-model text-center my-1'><h2>Select Meal to Assign Recommended Product</h2></div>
                     <Form>
                         <ModalBody>
                             <FormGroup>
@@ -276,7 +276,7 @@ const Cart = (props) => {
                             fontWeight: 'bolder',
                             marginTop: 50,
                             color: '#451400'
-                        }}>give this meal a name</p></div>
+                        }}>Give this meal a name</p></div>
                     <ModalBody>
                         <div className='col-8' style={{marginLeft: 80}}>
                             <Input type='text' placeholder='Enter Meal Name' style={{
@@ -307,12 +307,13 @@ const Cart = (props) => {
                 <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen} toggle={toggleCanvasStart}>
                     <OffcanvasHeader toggle={toggleCanvasStart}
                                      style={{marginTop: 10, justifyContent: 'center'}}>
+                        {!isUserLoggedIn() &&
                         <Link to='/login' className="cursor-pointer">
                             <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
                             <span className="fs-3 me-3 text-black text-capitalize  mt-2"
                             > Sign In or Register Your Self
                             </span>
-                        </Link>
+                        </Link>}
                     </OffcanvasHeader>
 
                     <hr/>
@@ -434,51 +435,6 @@ const Cart = (props) => {
                                     })}
                                 </div>
                             </div>
-
-                            {/*<div style={{marginTop: 20}}>
-                                    <h5 style={{
-                                        textAlign: 'center',
-                                        fontSize: "1.3rem",
-                                        fontWeight: 'bolder',
-                                        marginBottom: 15,
-                                        textTransform: "uppercase"
-                                    }}>Complete your meal</h5>
-                                    <div className="row" style={{justifyContent: 'center'}}>
-                                        <div className="col-md-3" style={{padding: 0}}>
-                                            <img src={chips} alt="chips"
-                                                 style={{backgroundColor: 'transparent', width: 100, height: 100}}/>
-                                            <h6 style={{
-                                                textAlign: 'center',
-                                                fontSize: "1.2rem",
-                                                marginTop: 10
-                                            }}>Chips</h6>
-                                            <p style={{
-                                                textAlign: 'center',
-                                                marginTop: 22,
-                                                fontSize: "1.1rem"
-                                            }}>$1.95</p>
-                                        </div>
-                                        <div className="col-md-3" style={{padding: 0, marginLeft: 35, marginRight: 35}}>
-                                            <img className="img-fluid" src={chips} alt="chips"
-                                                 style={{backgroundColor: 'transparent', width: 100, height: 100}}/>
-                                            <h6 style={{textAlign: 'center', fontSize: "1.2rem", marginTop: 10}}>Chips &
-                                                Guac</h6>
-                                            <p style={{
-                                                textAlign: 'center',
-                                                marginTop: 22,
-                                                fontSize: "1.1rem"
-                                            }}>$4.80</p>
-                                        </div>
-                                        <div className="col-md-3" style={{padding: 0}}>
-                                            <img src={drink1} alt="coco-cola"
-                                                 style={{backgroundColor: 'transparent', width: 100, height: 100}}/>
-                                            <h6 style={{textAlign: 'center', fontSize: "1.2rem", marginTop: 10}}>Mexican
-                                                Coco-Cola</h6>
-                                            <p style={{textAlign: 'center', fontSize: "1.1rem"}}>$3.65</p>
-                                        </div>
-                                    </div>
-                                </div>*/}
-
                         </div>}
 
                         <div>
@@ -527,7 +483,7 @@ const Cart = (props) => {
                                 }}
                                 {...(canvasPlacement === 'start' || canvasPlacement === 'end' ? {block: true} : {})}
                             >
-                                sign in to use rewards
+                                sign in to use Rewards
                             </Button>}
 
 

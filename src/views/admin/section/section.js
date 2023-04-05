@@ -281,6 +281,12 @@ const Sections = (props) => {
             minWidth: '50px'
         },
         {
+            name: 'Section Type',
+            selector: (row) => `${row.sectionType === 1 ? 'Modifier' : row.sectionType === 2 ? 'Add-on' : ''}`,
+            minWidth: '50px',
+            sortable: true
+        },
+        {
             name: 'Limit',
             selector: (row) => row.limit,
             sortable: true,
