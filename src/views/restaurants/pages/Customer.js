@@ -40,7 +40,7 @@ const Customers = () => {
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
-    const [pageSize] = useState(10)
+    const [pageSize] = useState(12)
     const [searchValue, setSearchValue] = useState('')
 
     //for restaurant id

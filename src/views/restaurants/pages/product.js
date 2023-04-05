@@ -54,14 +54,15 @@ const Products = (props) => {
 
     const [catId, setCatId] = useState(0)
 
-    const productsByRestaurantList = useSelector(state => state.product.list)
+    const productsByRestaurantList = useSelector(state => state.restaurant.productList)
+    const miscDataPro = useSelector(state => state.restaurant.miscData)
 
-    const data = useSelector(state => state.product.dataaa)
+    const [miscData, setMiscData] = useState(useSelector(state => state.restaurant.miscData))
 
-    console.log(data, "lets see if data updates on search")
-    // const miscData =
+    //const data = useSelector(state => state.product.dataaa)
 
-    const [miscData, setMiscData] = useState(useSelector(state => state.product.miscData))
+    console.log(productsByRestaurantList, "lets see if data updates on search", miscDataPro, miscData)
+
     const formInitialState = useSelector(state => state.product.object)
     const isEdit = useSelector(state => state.product.isEdit)
     const isLoading = useSelector(state => state.product.isLoading)
@@ -72,8 +73,9 @@ const Products = (props) => {
     // ** refs
     const formModalRef = useRef(null)
     const [subcategoryId, setSubcategoryId] = useState(0)
-    const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
-    const [pageSize] = useState(10)
+    //const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
+    const [currentPage, setCurrentPage] = useState(miscDataPro && miscDataPro.pageIndex ? miscDataPro.pageIndex : 1)
+    const [pageSize] = useState(12)
     const [searchValue] = useState('')
 
     const [dispData, setDispData] = useState([])
@@ -436,7 +438,7 @@ const Products = (props) => {
 
     // ** Custom Pagination
     const CustomPagination = () => {
-        const count = miscData?.totalPages ?? 0
+        const count = miscDataPro?.totalPages ?? 0
 
         return <ReactPaginate
             previousLabel={''}
@@ -471,6 +473,14 @@ const Products = (props) => {
             return productsByRestaurantList.slice(0, pageSize)
         }
     }
+
+  /*  const dataToRender = () => {
+        if (productsByRestaurantList.length > 0) {
+            return productsByRestaurantList
+        }  else {
+            return productsByRestaurantList.slice(0, pageSize)
+        }
+    }*/
 
     return (
         <Fragment>

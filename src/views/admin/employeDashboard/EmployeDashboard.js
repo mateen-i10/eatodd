@@ -4,7 +4,7 @@ import {
     CardText, CardTitle, CardBody, Card, Badge
 } from 'reactstrap'
 // ** React Imports
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react'
+import React, { useEffect, useLayoutEffect, useState} from 'react'
 
 import {useDispatch, useSelector} from "react-redux"
 import {getEmployeesDashboard, getRestStatus} from "../../../redux/employeeDashboard/action"
@@ -23,6 +23,7 @@ import Earnings from "../../../ui-elements/Cards/analytics/Earnings"
 import {getRestaurant} from "../../../redux/restaurant/actions"
 
 import restImg from "../../../assets/images/empDashboard/cooking.png"
+import statImg from "../../../assets/images/graphic-illustration-2.png"
 
 const EmployeeDashboard = () => {
     // ** Context
@@ -31,7 +32,7 @@ const EmployeeDashboard = () => {
     const restaurant = useSelector(state => state.restaurant.object)
     console.log('restaurant', restaurant)
 
-    const { colors } = useContext(ThemeColors)
+    //const { colors } = useContext(ThemeColors)
 
     const status = useSelector(state => state.employeeDashboard.status)
     console.log(status, "lets see what we get here")
@@ -102,24 +103,23 @@ const EmployeeDashboard = () => {
                     <Col xl='12' md='6' xs='12'>
                         {/*<StatsCard cols={{ xl: '3', sm: '6' }} />*/}
                         <Card className='card-statistics'>
+                            <CardTitle>
+                                <section>
+                                    <Row style={{justifyContent: 'space-between', padding: '15px', marginBottom: '-36px'}}>
+                                        <Col lg={9}>
+                                            <div style={{display:'flex'}}>
+                                                {/*<img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>*/}
+                                                <h4 style={{marginTop: '10px', marginLeft: '5px'}}>Employee Dashboard</h4>
+                                            </div>
+                                        </Col>
+                                        <Col lg={3}>
+                                            <Select className='mb-1' options={opt} styles={customStyles} maxMenuHeight={100} onChange={e => setSelectedRestaurant(e.value)}/>
+                                        </Col>
+                                    </Row>
+                                </section>
+                            </CardTitle>
 
-                                <CardTitle>
-                                    <section>
-                                        <Row style={{justifyContent: 'space-between', padding: '15px', marginBottom: '-36px'}}>
-                                            <Col lg={9}>
-                                                <div style={{display:'flex'}}>
-                                                    <img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>
-                                                    <h4 style={{marginTop: '10px', marginLeft: '5px'}}>statistics</h4>
-                                                </div>
-                                            </Col>
-                                            <Col lg={3}>
-                                                <Select options={opt} styles={customStyles} maxMenuHeight={100} onChange={e => setSelectedRestaurant(e.value)}/>
-                                            </Col>
-                                        </Row>
-                                    </section>
-                                </CardTitle>
-
-                            <CardBody className='statistics-body'>
+                            {/*<CardBody className='statistics-body'>
                                 <Row>
                                     <Col xl={3} sm={6}>
                                         <div className='d-flex align-items-center'>
@@ -158,7 +158,7 @@ const EmployeeDashboard = () => {
                                         </div>
                                     </Col>
                                 </Row>
-                            </CardBody>
+                            </CardBody>*/}
                         </Card>
                     </Col>
                 </Row>
@@ -167,19 +167,78 @@ const EmployeeDashboard = () => {
             <Row className='match-height'>
                 <Col lg='12' md='4'>
                     <Row className='match-height'>
+
                         <Col lg='6' md='6' xs='12'>
-                            <Earnings success={colors.success.main} />
+                            {/*<Earnings success={colors.success.main} />*/}
+                            <Card className='card-statistics' style={{background: '#d9fab7'}}>
+                                <CardTitle style={{justifyContent: 'space-between', padding: '15px', marginBottom: '-36px'}}>
+                                    <div style={{display:'flex'}}>
+                                        <img src={growth} width={20} height={20} style={{marginTop:'8px'}}/>
+                                        <h4 style={{marginTop: '10px', marginLeft: '5px'}}>Statistics</h4>
+                                    </div>
+                                </CardTitle>
+                                <CardBody className='statistics-body'>
+                                    <Row>
+
+                                        <Col xl={6} sm={12}>
+                                            <Row>
+                                                <Col xl={6} sm={12} className='mt-3'>
+                                                    <div className='d-flex align-items-center'>
+                                                        <Avatar color='light-primary' icon={<TrendingUp size={24} />} className='me-2' />
+                                                        <div className='my-auto'>
+                                                            <h4 className='fw-bolder mb-0'>{empDashboard.totalSale}</h4>
+                                                            <CardText className='font-small-3 mb-0'>Sales</CardText>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                                <Col xl={6} sm={6} className='mt-3'>
+                                                    <div className='d-flex align-items-center'>
+                                                        <Avatar color='light-info' icon={<User size={24} />} className='me-2' />
+                                                        <div className='my-auto'>
+                                                            <h4 className='fw-bolder mb-0'>{empDashboard.totalCustomer}</h4>
+                                                            <CardText className='font-small-3 mb-0'>Customers</CardText>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                                <Col xl={6} sm={6} className='mt-3'>
+                                                    <div className='d-flex align-items-center'>
+                                                        <Avatar color='light-danger' icon={<Box size={24} />} className='me-2' />
+                                                        <div className='my-auto'>
+                                                            <h4 className='fw-bolder mb-0'>{empDashboard.totalProduct}</h4>
+                                                            <CardText className='font-small-3 mb-0'>Products</CardText>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                                <Col xl={6} sm={6} className='mt-3'>
+                                                    <div className='d-flex align-items-center'>
+                                                        <Avatar color='light-success' icon={<DollarSign size={24} />} className='me-2' />
+                                                        <div className='my-auto'>
+                                                            <h4 className='fw-bolder mb-0'>{empDashboard.totalRevenue}</h4>
+                                                            <CardText className='font-small-3 mb-0'>Revenue</CardText>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Col>
+
+                                        <Col xl={6} sm={12}>
+                                            <img src={statImg} style={{width: "auto", height: "145px", marginLeft: "72px", marginTop: '15%'}} />
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
                         </Col>
+
                         <Col lg='6' md='6' xs='12'>
-                            <Card className='earnings-card'>
+                            <Card className='earnings-card' style={{background: 'rgba(40, 199, 111, 0.12)'}}>
                                 <CardBody>
                                     <Row>
                                         <Col xs='6'>
                                             <CardTitle className='mb-1'>Top Restaurant</CardTitle>
-                                            <img src={restImg} style={{width: "50px", height: "50px", marginBottom: "10px", marginLeft: "36px"}} />
+                                            <img src={restImg} style={{width: "100px", height: "100px", marginBottom: "40px", marginTop: '25px', marginLeft: "20px"}} />
                                             <div className='font-small-2'>
                                                 <Badge className=""
-                                                       style={{marginLeft: "35px"}}
+                                                       style={{marginLeft: "30px", fontSize: '15px'}}
                                                        color={restaurant.isActive ? 'light-success' : 'light-danger'}
                                                        pill>
                                                     {restaurant.isActive ? 'Active' : 'In Active'}
@@ -187,11 +246,13 @@ const EmployeeDashboard = () => {
                                             </div>
                                         </Col>
                                         <Col xs='6'>
-                                            <h5 className='mb-1'>{restaurant.name ? restaurant.name : "Featured Restaurant"}</h5>
+                                            <CardTitle className='mb-1'>Featured Restaurant</CardTitle>
+                                            {/*<h5 className='mb-1'>{restaurant.name ? restaurant.name : "Featured Restaurant"}</h5>*/}
+                                            <h5 className='mb-1'>{restaurant.name}</h5>
                                             <h6 className='mb-1'>{restaurant.address?.address1}</h6>
                                             <CardText className='text-muted font-small-2'>
-                                                <span className='fw-bolder'>{restaurant.phoneNo}</span>
-                                                <span> Contact</span>
+                                                <span style={{color: "black"}}> Contact: </span>
+                                                <span className='fw-bolder' style={{color: "black", marginLeft: '5px'}}>{restaurant.phoneNo}</span>
                                             </CardText>
                                         </Col>
                                     </Row>
@@ -202,14 +263,14 @@ const EmployeeDashboard = () => {
                 </Col>
             </Row>
 
-            <Row className='match-height'>
+            {/*<Row className='match-height'>
                 <Col lg='6' md='6' xs='12'>
                     <CardBrowserStates colors={colors} InvDistributorData={InvDistributorData} />
                 </Col>
                 <Col lg='6' md='6' xs='12'>
                     <CardTransactions selectedRestaurant={selectedRestaurant} />
                 </Col>
-            </Row>
+            </Row>*/}
 
         </UILoader>
     )

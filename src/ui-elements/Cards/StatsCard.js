@@ -26,12 +26,11 @@ const StatsCard = () => {
     const dispatch = useDispatch()
 
     const AdminDash = useSelector(state => state.AdminDashReducer.object)
+    console.log('AdminDash', AdminDash)
 
     useEffect(() => {
         dispatch(adminDashboardRestData(1))
     }, [])
-
-    console.log(AdminDash, 'lets see')
 
     const today = () => {
         const d = new Date()
@@ -68,7 +67,7 @@ const StatsCard = () => {
                             <Avatar color='light-info' icon={<BarChart size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "blue"}}>{AdminDash.cookingCount}</h4>
-                                <CardText className='font-small-3 mb-0'>cookingCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Cooking</CardText>
                             </div>
                         </div>
                     </Col> {/*//*/}
@@ -77,7 +76,7 @@ const StatsCard = () => {
                             <Avatar color='light-success' icon={<User size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.customers}</h4>
-                                <CardText className='font-small-3 mb-0'>customers</CardText>
+                                <CardText className='font-small-3 mb-0'>Customers</CardText>
                             </div>
                         </div>
                     </Col>
@@ -87,7 +86,7 @@ const StatsCard = () => {
                             <Avatar color='light-danger' icon={<BarChart2 size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "red"}}>{AdminDash.deliveredCount}</h4>
-                                <CardText className='font-small-3 mb-0'>deliveredCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Delivered</CardText>
                             </div>
                         </div>
                     </Col>
@@ -97,7 +96,7 @@ const StatsCard = () => {
                             <Avatar color='light-primary' icon={<Compass size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.foodOnTheWayCount}</h4>
-                                <CardText className='font-small-3 mb-0'>foodOnTheWayCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Food On The Way</CardText>
                             </div>
                         </div>
                     </Col>
@@ -107,7 +106,7 @@ const StatsCard = () => {
                             <Avatar color='light-info' icon={<Box size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "blue"}}>{AdminDash.products}</h4>
-                                <CardText className='font-small-3 mb-0'>products</CardText>
+                                <CardText className='font-small-3 mb-0'>Products</CardText>
                             </div>
                         </div>
                     </Col>
@@ -117,7 +116,7 @@ const StatsCard = () => {
                             <Avatar color='light-success' icon={<CheckSquare size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.readyToDeliverCount}</h4>
-                                <CardText className='font-small-3 mb-0'>readyToDeliverCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Ready To Deliver</CardText>
                             </div>
                         </div>
                     </Col>
@@ -127,7 +126,7 @@ const StatsCard = () => {
                             <Avatar color='light-danger' icon={<RefreshCcw size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "red"}}>{AdminDash.refundedCount}</h4>
-                                <CardText className='font-small-3 mb-0'>refundedCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Refunded</CardText>
                             </div>
                         </div>
                     </Col>
@@ -137,7 +136,7 @@ const StatsCard = () => {
                             <Avatar color='light-primary' icon={<DollarSign size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.revenue}</h4>
-                                <CardText className='font-small-3 mb-0'>revenue</CardText>
+                                <CardText className='font-small-3 mb-0'>Revenue</CardText>
                             </div>
                         </div>
                     </Col> {/*//*/}
@@ -146,7 +145,7 @@ const StatsCard = () => {
                             <Avatar color='light-info' icon={<TrendingUp size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.sales}</h4>
-                                <CardText className='font-small-3 mb-0'>sales</CardText>
+                                <CardText className='font-small-3 mb-0'>Sales</CardText>
                             </div>
                         </div>
                     </Col> {/*//*/}
@@ -155,7 +154,7 @@ const StatsCard = () => {
                             <Avatar color='light-success' icon={<Percent size={24}/>} className='me-2'/>
                             <div className='my-auto'>
                                 <h4 className='fw-bolder mb-0' style={{color: "green"}}>{AdminDash.scheduledCount}</h4>
-                                <CardText className='font-small-3 mb-0'>scheduledCount</CardText>
+                                <CardText className='font-small-3 mb-0'>Scheduled</CardText>
                             </div>
                         </div>
                     </Col>
