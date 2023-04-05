@@ -62,7 +62,7 @@ const Menu = () => {
                      return pro
                 })
                 setFilteredProducts([...subCatIdToHide])
-                console.log('setFilteredProducts', filteredProducts)
+                console.log('setFilteredProducts', subCatIdToHide, products)
                 /*if (subCatIdToHide) {
                     toggleSubcategory(subCatIdToHide.id)
                 }*/
@@ -86,6 +86,7 @@ const Menu = () => {
             })
             // grouping products by sub category
             const final = data.products && data.products.length > 0 ? data.products.reduce((acc, currentValue) => {
+                const a = currentValue['squareItemId']
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
@@ -99,8 +100,10 @@ const Menu = () => {
                     priority: currentValue.subCategory['priority'],
                     fillingLimit: currentValue.subCategory['fillingLimit'],
                     subCatId: currentValue.subCategory['subCatId'],
-                    products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, currentValue] : [currentValue]
+                    products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, {...currentValue }] : [{...currentValue}]
                 }
+                console.log('ccc', a)
+                console.log('ccc2', acc)
                 return acc
             }, {}) : []
             const values = Object.values(final)
@@ -109,6 +112,7 @@ const Menu = () => {
             // console.log("arrayValues", ArrValues)
             // setProducts([...ArrValues])
             console.log('mmmm', final)
+            console.log('mmmm', values)
             setProducts([...values])
         }
 
@@ -182,6 +186,7 @@ const Menu = () => {
     }
     const handleSelectProduct = (product, subCatId, limit) => {
         const finalProducts = [...selectedProducts]
+        console.log('proorrrr', product)
         if (product.isBlank) return
         if (selectedProducts && selectedProducts.length > 0) {
             const index = selectedProducts.findIndex(pro => pro.id === product.id)
