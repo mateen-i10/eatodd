@@ -79,15 +79,17 @@ const Catering = () => {
             <div style={{backgroundImage: `url(${luxurayWine})`, backgroundSize: '1200px'}}>
                 <section>
                     <div className="continer-sm" style={{backgroundColor: 'rgba(0, 13, 26, .5)'}}>
-                        <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>Catering</h5>
+                        <h5 style={{color:'white', textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase'}}>OMG Catering</h5>
                         <h4 style={{color:'white', textAlign: 'center', fontSize: '2.2em', paddingTop:'30px', paddingBottom: '30px', textTransform: 'uppercase'}}>A Warm, Charming Atmosphere</h4>
-                        <p style={{color:'white', textAlign: 'center', fontSize: '1em', paddingBottom:'70px', marginTop: '-30px'}}>Allow us to make your next special event extra special. We cater for all sized<br />functions, ideal for your larger functions or an intimate gathering, our team can<br />curate a menu to suit your taste.</p>
+                        <p style={{color:'white', textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px', marginTop: '-30px'}}>Allow us to make your next special event extra special. We cater for all sized<br />functions, ideal for your larger functions or an intimate gathering, our team can<br />curate a menu to suit your taste.</p>
                     </div>
                 </section>
             </div>
 
             <section>
-                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>Build for your loved One's</div>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>OMG CATERING PACKAGES
+                </div>
+            <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px'}}>Treat your group to Taste & Flavor that happens to be Healthy!<br />*24 hour advance notice requested</p>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3">
                         {/*<div className="col-md-3 col-9 mx-auto mb-3" style={{marginLeft: '-50px'}}>
@@ -127,8 +129,9 @@ const Catering = () => {
                     </div>
                     <Row style={{textAlign: "center"}}>
                         <Col md={12}>
-                            <h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
-                            <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>
+                            <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop:"50px", paddingBottom:"20px"}}>OMG GRAZING TABLE
+                            </div>
+                            <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom:'70px'}}>CATERING PACKAGE SERVES 25+ PEOPLE</p>
                         </Col>
                     </Row>
                     <Row>
@@ -154,7 +157,7 @@ const Catering = () => {
 
             <section className="container-sm" style={{backgroundColor: '#f5f8fb'}}>
                 <Row>
-                    <Col lg={7}>
+                    <Col lg={7} style={{paddingBottom:'50px'}}>
                         <div className='ps-5 mt-5'>
                             <p className="text-primary fs-2 fw-bolder">
                                 OMG Catering
@@ -176,14 +179,14 @@ const Catering = () => {
                                 </div>
                             </div>
                             <button type="button" className="btn fs-4 mt-3 mb-2" onClick={() => setWineShow(!wineShow)}
-                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Show Wine Packages
+                                    style={{backgroundColor: '#57ab00', color: 'white'}}>Add Wine to Catering
                             </button>
                         </div>
                     </Col>
                     <Col lg={5}>
                         <div style={{textAlign: 'center'}}>
                             <img className="mt-5"
-                                 src={require("../../../assets/images/images/catring-wine.png").default}
+                                 src={require("../../../assets/images/wineClub/Beaulieu Vineyard.png").default}
                                  height={400} alt="wine" style={{display: "initial"}}
                             />
                         </div>
