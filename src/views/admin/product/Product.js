@@ -195,7 +195,7 @@ const Product = (props) => {
     const AddFromExistingData = () => {
         setFormData([
             {type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProducts, isAsyncSelect: true, isMulti:false},
-            {type:FieldTypes.Select, label: 'Select Restaurant', placeholder: 'Select Product', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
+            {type:FieldTypes.Select, label: 'Select Restaurant', placeholder: 'Select Restaurant', name:'restaurant', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Restaurant, isAsyncSelect: true, isMulti:false}
         ])
         setFormFeilds(0)
         setShowOption(false)
