@@ -42,7 +42,8 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
                 if (isSuccess) {
                     dispatch({type: isSuccess, payload: true})
                 }
-
+            } else if (response.data.statusCode === 401) {
+                dispatch(unAuthorize())
             } else {
                 //general Error Action
                 toast.error(response.data.message)

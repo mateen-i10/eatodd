@@ -70,36 +70,36 @@ const Cart = (props) => {
         if (isDeleted) setDeleted(false)
     }, [isDeleted])
 
-   /* useEffect(() => {
-        httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
-            .then(response => {
-                console.log('resGeberal', response)
-                // success case
-              /!*  if (response.status === 200 && response.data.statusCode === 200) {
-                    const data = response.data.data
-                    const finalData = data.map(item => ({
-                        attachment: item.attachment,
-                        id: item.id,
-                        name: item.name,
-                        description: item.description
-                    }))
-                    const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
-                    const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
-                    const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
-                    setOmgPlate(finalOmgPlate)
-                    setSandwich(finalSandwich)
-                    setMainCategory(finalCategory)
-                } else {
-                    //general Error Action
-                    toast.error(response.data.message)
-                    return null
-                }*!/
-            })
-            /!*.catch(error => {
-                toast.error(error.message)
-            })*!/
-
-    }, [])*/
+   // /* useEffect(() => {
+   //      httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
+   //          .then(response => {
+   //              console.log('resGeberal', response)
+   //              // success case
+   //            /!*  if (response.status === 200 && response.data.statusCode === 200) {
+   //                  const data = response.data.data
+   //                  const finalData = data.map(item => ({
+   //                      attachment: item.attachment,
+   //                      id: item.id,
+   //                      name: item.name,
+   //                      description: item.description
+   //                  }))
+   //                  const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
+   //                  const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
+   //                  const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
+   //                  setOmgPlate(finalOmgPlate)
+   //                  setSandwich(finalSandwich)
+   //                  setMainCategory(finalCategory)
+   //              } else {
+   //                  //general Error Action
+   //                  toast.error(response.data.message)
+   //                  return null
+   //              }*!/
+   //          })
+   //          /!*.catch(error => {
+   //              toast.error(error.message)
+   //          })*!/
+   //
+   //  }, [])*/
 
     useEffect(() => {
         const ids = cartItems && cartItems.catering ? cartItems?.catering?.map(c => {
@@ -163,7 +163,7 @@ const Cart = (props) => {
         return (
             <div className='basic-modal '>
                 <Modal isOpen={recommendedProductModal} toggle={() => setRecommendedProductModal(!recommendedProductModal)}  >
-                    <div className='name-meal-model text-center my-1'><h2>Select Meal to Assign Recommended Product</h2></div>
+                    <div className='name-meal-model text-center my-1'><h2>Select Meal to Assign Product</h2></div>
                     <Form>
                         <ModalBody>
                             <FormGroup>
@@ -324,7 +324,7 @@ const Cart = (props) => {
                         }}>
                             <div className="row align-items-center justify-content-center">
                                 <div className="col-12 fs-1 fw-bolder text-uppercase text-primary text-center ">Your
-                                    bag
+                                    Bag
                                     is empty
                                 </div>
                                 <div className="col-12 fs-3 fw-bold text-uppercase text-secondary text-center">Start
@@ -372,9 +372,7 @@ const Cart = (props) => {
                             </div>
                         </div>
                     </div>
-
                         <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
-
                             {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div className="d-flex ">
                                 <UserPlus className='ms-1 me-1 mt-1 text-primary'/>
                                 <Link className='me-1' to={isCustomer() ? "/groupOrder" : "/login"}>
@@ -451,7 +449,7 @@ const Cart = (props) => {
                                                     addRecommended(slide, e)
                                                 }}>
                                                     <div className='img-container w-1500 mx-auto py-75'>
-                                                        <ProductImage attachment={slide.img} classes='img-fluid' styles={{width: "85px", height: "85px", margin: "auto"}}/>
+                                                        <ProductImage attachment={slide.img} className='img-fluid' styles={{width: "85px", height: "85px", margin: "auto"}}/>
                                                     </div>
                                                     <div className='item-heading text-center'>
                                                         <h5 className=' mb-0'>{slide.name}</h5>
@@ -524,12 +522,12 @@ const Cart = (props) => {
                                          fontWeight: 'bolder',
                                          color: 'primary',
                                          fontSize: "1.4rem"
-                                     }}>$ {(parseFloat(cartTotalPrice()).toFixed(1) + taxAmount) ?? 0}
+                                     }}>$ {(parseFloat(cartTotalPrice()) + taxAmount) ?? 0}
                                 </div>
                             </div>
 
                             <p style={{color: 'primary', marginTop: 20, fontSize: "1.2rem"}}>Delivery includes
-                                higher
+                                Higher
                                 menu
                                 prices and additional
                                 fees to help offset the costs of delivery.</p>
