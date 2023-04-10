@@ -32,6 +32,8 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 import {deleteWine, loadWines, getWine, addWine, updateWine} from "../../../redux/wines/actions"
 import Child from '../../admin/product/ProductFormChild'
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const Wines = (props) => {
 
@@ -57,8 +59,27 @@ const Wines = (props) => {
 
     console.log(categories, "Categories")
 
-    const generalProduct = async (input) => {
-        return loadOptions('Product/GetWineProducts', input, 1, 12)
+    // const generalProduct = async (input) => {
+    //     return loadOptions('Product/GetWineProducts', input, 1, 12)
+    // }
+
+    const generalProduct = (input) => {
+        return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${subcategoryId}`)
+            .then(response => {
+                console.log(response, "gp response")
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.map(d =>  {
+                        // setD(response.data.data)
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
     }
 
     const Restaurant = async (input) => {
