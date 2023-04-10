@@ -34,6 +34,7 @@ import Child from '../../admin/product/ProductFormChild'
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
+import ProductImage from "../../home/components/product/ProductImage"
 
 const Wines = (props) => {
 
@@ -57,7 +58,7 @@ const Wines = (props) => {
         return loadOptions('category', input, 1, 12)
     }
 
-    console.log(categories, "Categories")
+    // console.log(categories, "Categories")
 
     // const generalProduct = async (input) => {
     //     return loadOptions('Product/GetWineProducts', input, 1, 12)
@@ -308,6 +309,18 @@ const Wines = (props) => {
     }
 
     const columns = [
+        {
+            name: 'Photo',
+            sortable: true,
+            minWidth: '250px',
+            cell: row => (
+                <div className='d-flex align-items-center'>
+                    <div className="thumbnail ">
+                        <ProductImage attachment={row.attachment} styles={{width: "50px", height: "50px", margin: "5px"}}/>
+                    </div>
+                </div>
+            )
+        },
         {
             name: 'Name',
             selector: (row) => row.name,

@@ -38,12 +38,29 @@ import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import AssignItems from "./AssignItems"
+import {useHistory, useLocation} from "react-router-dom"
+import ProductImage from "../../home/components/product/ProductImage"
 // import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
 
+const getQueryParams = (search) => {
+    return search ? (/^[?#]/.test(search) ? search.slice(1) : search)
+        .split("&")
+        .reduce((params, param) => {
+            const [key, value] = param.split("=")
+            params[key] = value ? decodeURIComponent(value.replace(/\+/g, " ")) : ""
+            return params
+        }, {}) : {}
+}
 const Product = (props) => {
 
-    const [catId, setCatId] = useState(0)
+    const history = useHistory()
+    const location = useLocation()
 
+    const queryParams = getQueryParams(location.search)
+    const [subcategoryId, setSubcategoryId] = useState(
+        queryParams.subcategoryId ? parseInt(queryParams.subcategoryId, 10) : 0
+    )
+    const [catId, setCatId] = useState(queryParams.categoryId ? parseInt(queryParams.categoryId, 10) : 0)
     const productList = useSelector(state => state.product.list)
     const formInitialState = useSelector(state => state.product.object)
     const miscData = useSelector(state => state.product.miscData)
@@ -55,7 +72,6 @@ const Product = (props) => {
 
     // ** refs
     const formModalRef = useRef(null)
-    const [subcategoryId, setSubcategoryId] = useState(0)
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
@@ -371,11 +387,27 @@ const Product = (props) => {
     const callFunc = () => {
         const refId = subcategoryId
 
-        if (refId !== 0) dispatch(loadproducts(currentPage, pageSize, "", refId))
-        else console.log('please select a value to search for')
+        if (refId !== 0) {
+            history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
+            dispatch(loadproducts(currentPage, pageSize, "", refId))
+        } else {
+            console.log("please select a value to search for")
+        }
     }
 
     const columns = [
+        {
+            name: 'Photo',
+            sortable: true,
+            minWidth: '250px',
+            cell: row => (
+                <div className='d-flex align-items-center'>
+                    <div className="thumbnail ">
+                        <ProductImage attachment={row.attachment} styles={{width: "50px", height: "50px", margin: "5px"}}/>
+                    </div>
+                </div>
+            )
+        },
         {
             name: 'Name',
             selector: (row) => row.name,
@@ -385,6 +417,24 @@ const Product = (props) => {
         {
             name: 'Description',
             selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'WholePrice',
+            selector: (row) => row.wholePrice,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Discount',
+            selector: (row) => row.discount,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Quantity',
+            selector: (row) => row.quantity,
             sortable: true,
             minWidth: '50px'
         },
@@ -458,8 +508,8 @@ const Product = (props) => {
                 <Card>
                     <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
-                            <CardTitle tag='h4'>Product</CardTitle>
-                            <h6>Friday June 10, 2022, 08:10 AM</h6>
+                            <CardTitle tag='h4'>Products</CardTitle>
+                            {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                         </div>
                         <Row>
                             <Col className='d-flex justify-content-end'>
@@ -490,16 +540,19 @@ const Product = (props) => {
                                 loadOptions={categories}
                                 defaultOptions
                                 isLoading={true}
-                                onChange={e => setCatId(e.value)}
+                                onChange={e => {
+                                    setCatId(e.value)
+                                    history.push(`${location.pathname}?subcategoryId=${subcategoryId}&categoryId=${e.value}`)
+                                }}
                             />
                         </Col>
                         <Col className='mt-1' md='5' sm='12'>
-                            {catId !== 0 ? <SubcategoryDropdown
+                            <SubcategoryDropdown
                                 categoryId={catId}
                                 subcategoryId={subcategoryId}
                                 setSubcategory={setSubcategoryId}
                                 isFormSubmit={isSubmit}
-                            /> : []}
+                            />
                         </Col>
                         <Col md='2' sm='12' style={{marginTop:'32px'}}>
                             {catId !== 0 ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='primary' onClick={() => callFunc()}><Search size={18}/></Button> : []}

@@ -49,15 +49,6 @@ class Hero extends Component {
                          loop="loop"
                          src={'https://remote.vu360solutions.org/static/eatomg.mp4'}
                          className="background-video" />
-                {/*<div className="banner">*/}
-                {/*    <div className="banner-content">*/}
-                {/*        <p className="banner-text">Enjoy your Favorite Bottles of Wine at Vendor Prices!</p>*/}
-                {/*        <p className="text-center" style={{fontWeight:'bold'}}>Membership is only $9.99 per month!</p>*/}
-                {/*        <Link to="/wine/membership">*/}
-                {/*        <div className="btn btn-danger">JOIN NOW</div>*/}
-                {/*        </Link>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         )
     }

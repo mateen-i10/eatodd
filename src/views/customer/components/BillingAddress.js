@@ -59,7 +59,7 @@ const BillingAddress = () => {
 
     const setData = () => {
         try {
-            billingAddress : {
+            {
                 setBillingCity(addressObj.billingAddress?.city)
                 setBillingState(addressObj.billingAddress?.state)
                 setBillingCountry(addressObj.billingAddress?.country)
@@ -67,7 +67,7 @@ const BillingAddress = () => {
                 setBillingPhoneNumber(addressObj.billingAddress?.phoneNumber)
                 setBillingAddress1(addressObj.billingAddress?.address1)
             }
-            shippingAddress : {
+            {
                 setShippingCity(addressObj.shippingAddress?.city)
                 setShippingState(addressObj.shippingAddress?.state)
                 setShippingCountry(addressObj.shippingAddress?.country)

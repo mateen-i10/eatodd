@@ -27,7 +27,7 @@ const JoinGroupOrder = () => {
                         </div>
 
                         <div className=" fw-bold mb-2" style={{fontSize: "2.3rem", color: "black", textTransform: 'capitalize'}}>
-                            User has invited you to eat EatOmg today.
+                            User has invited you to Eat today.
                         </div>
 
                         <div style={{textAlign: 'start'}}>

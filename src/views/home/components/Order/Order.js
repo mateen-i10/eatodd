@@ -368,7 +368,7 @@ const Order = () => {
                                     <div className="">
                                         <div className="text-center text-uppercase">
                                             <div className="btn btn-primary mb-2 fw-bolder " onClick={() => {
-                                                history.push("/order/group/create")
+                                                history.push("/groupOrder")
                                             }}>Start Order
                                             </div>
                                         </div>
