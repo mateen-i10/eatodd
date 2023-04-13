@@ -67,14 +67,14 @@ const Membership = ({}) => {
                                 return <div className="col-md-5 mt-5" key={`optionsKey=${index}`}>
                                     <div className="member-card card border" style={{width: "100%", height: "auto"}}>
                                         <div className="card-body align-items-center justify-content-center">
-                                            <h2 className="fw-bolder text-center text-primary fs-1" style={{fontSize: '22px', fontFamily: 'Lucida Handwriting', textTransform: 'capitalize'}}>{d.name}</h2>
+                                            <h2 className="fw-bolder text-center text-primary fs-1" style={{fontSize: '22px', textTransform: 'capitalize'}}>{d.name}</h2>
                                             <Row>
                                                 <Col lg={12} className='text-center imgBefore'>
                                                     <img className='imgCenter imgStyle' width="140" src={cardImage} height="140" alt="standard-plan-img"/>
                                                 </Col>
                                             </Row>
-                                            <h5 className=" text-capitalize text-center mt-2" style={{fontFamily: 'Rubik', fontSize: '18px', fontWeight: '500'}}> {d.description}</h5>
-                                            <div className="mt-1 fw-bolder text-center amountMargin" style={{fontFamily: 'Lucida Handwriting'}}>
+                                            <h5 className=" text-capitalize text-center mt-2" style={{fontSize: '18px', fontWeight: '500'}}> {d.description}</h5>
+                                            <div className="mt-1 fw-bolder text-center amountMargin">
                                                 <sup className="fs-4 dollarSign text-primary"></sup>
                                                 <span className="text-primary" style={{fontSize: "2rem"}}>${d.amount}</span>
                                                 <span className="fw-bolder text-primary text-center"> / </span>
@@ -82,7 +82,7 @@ const Membership = ({}) => {
                                             </div>
                                             <ListGroup tag='ul' className='list-group-circle text-start mb-2'>
                                                 {d.packageItems.map((p, i) => (
-                                                    <ListGroupItem key={`optionsKey=${i}`} tag='li' style={{fontFamily: 'Rubik', fontSize: '16px', fontWeight: '400'}}>
+                                                    <ListGroupItem key={`optionsKey=${i}`} tag='li' style={{fontSize: '16px', fontWeight: '400'}}>
                                                         {p.description}
                                                     </ListGroupItem>
                                                 ))}

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState} from 'react'
 import "./Order.css"
-import foodicon from "../../../../assets/images/icons/food.png"
-import qualityicon from "../../../../assets/images/icons/quality.png"
-import deliveryicon from "../../../../assets/images/icons/delivery.png"
+// import foodicon from "../../../../assets/images/icons/food.png"
+// import qualityicon from "../../../../assets/images/icons/quality.png"
+// import deliveryicon from "../../../../assets/images/icons/delivery.png"
 import gallery_1 from "../../../../assets/images/gallery_1.png"
 import gallery_4 from "../../../../assets/images/gallery_4.png"
 import icon from "../../../../assets/images/my-images/OMG_icon.png"
@@ -90,10 +90,7 @@ const Order = () => {
             orderRef.current?.scrollIntoView({behavior: 'smooth'})
         }, [])
     }
-
     //testing data for customer review
-
-
     const params = {
         autoplay: {
             delay: 3000,
@@ -227,7 +224,7 @@ const Order = () => {
                 <div className="container-sm">
                     <div className="row mb-2">
                         <div className="col-12 d-flex flex-column align-items-center justify-content-center mt-4">
-                            <div className="text-uppercase text-primary fs-4 fw-bold">testimonial </div>
+                            <div className="text-uppercase text-primary fs-4 fw-bold">Testimonial </div>
                             <div className="text-uppercase text-black fs-1 fw-bolder">We Care About Our Customer Experience Too.
                             </div>
                         </div>
@@ -429,52 +426,52 @@ const Order = () => {
                 </div>
             </div>
             {/*about section*/}
-            <section id="about-7" className="about-section division">
-                <div className="container-sm">
-                    <div className="abox-4-wrapper ico-80">
-                        <div className="row">
-                            <div className="col-md-4 col-lg-4">
-                                <div className=" text-center  coffee-color">
-                                    <div className="abox-4-ico">
-                                        <img className="img-center" src={foodicon} alt="Recipes"/>
-                                    </div>
-                                    <h5 className="h5-lg text-uppercase">Original Recipes</h5>
-                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
-                                        feugiat dolor impedit
-                                        felis magna dolor vitae
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-4">
-                                <div className=" text-center  coffee-color">
-                                    <div className="abox-4-ico">
-                                        <img className="img-center" src={qualityicon} alt="Quality Foods"/>
-                                    </div>
-                                    <h5 className="h5-lg text-uppercase">Quality Foods</h5>
-                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
-                                        feugiat dolor impedit
-                                        felis magna dolor vitae
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-4 col-lg-4">
-                                <div className="text-center coffee-color">
-                                    <div className="abox-4-ico">
-                                        <img className="img-center" src={deliveryicon} alt="Fastest Delivery"/>
-                                    </div>
-                                    <h5 className="h5-lg text-uppercase">Fastest Delivery</h5>
-                                    <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus
-                                        feugiat dolor impedit
-                                        felis magna dolor vitae
-                                    </p>
-                                </div>
-                            </div>
-                            {/* eslint-disable-next-line no-tabs */}
-                        </div>
-                    </div>
-                    {/* eslint-disable-next-line no-tabs */}
-                </div>
-            </section>
+            {/*<section id="about-7" className="about-section division">*/}
+            {/*    <div className="container-sm">*/}
+            {/*        <div className="abox-4-wrapper ico-80">*/}
+            {/*            <div className="row">*/}
+            {/*                <div className="col-md-4 col-lg-4">*/}
+            {/*                    <div className=" text-center  coffee-color">*/}
+            {/*                        <div className="abox-4-ico">*/}
+            {/*                            <img className="img-center" src={foodicon} alt="Recipes"/>*/}
+            {/*                        </div>*/}
+            {/*                        <h5 className="h5-lg text-uppercase">Original Recipes</h5>*/}
+            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
+            {/*                            feugiat dolor impedit*/}
+            {/*                            felis magna dolor vitae*/}
+            {/*                        </p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className="col-md-4 col-lg-4">*/}
+            {/*                    <div className=" text-center  coffee-color">*/}
+            {/*                        <div className="abox-4-ico">*/}
+            {/*                            <img className="img-center" src={qualityicon} alt="Quality Foods"/>*/}
+            {/*                        </div>*/}
+            {/*                        <h5 className="h5-lg text-uppercase">Quality Foods</h5>*/}
+            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
+            {/*                            feugiat dolor impedit*/}
+            {/*                            felis magna dolor vitae*/}
+            {/*                        </p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className="col-md-4 col-lg-4">*/}
+            {/*                    <div className="text-center coffee-color">*/}
+            {/*                        <div className="abox-4-ico">*/}
+            {/*                            <img className="img-center" src={deliveryicon} alt="Fastest Delivery"/>*/}
+            {/*                        </div>*/}
+            {/*                        <h5 className="h5-lg text-uppercase">Fastest Delivery</h5>*/}
+            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
+            {/*                            feugiat dolor impedit*/}
+            {/*                            felis magna dolor vitae*/}
+            {/*                        </p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                /!* eslint-disable-next-line no-tabs *!/*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*        /!* eslint-disable-next-line no-tabs *!/*/}
+            {/*    </div>*/}
+            {/*</section>*/}
             {/*about section end*/}
             <Modal isOpen={modalClicked} toggle={() => setModalClicked(!modalClicked)} className='modal-dialog-centered modal-lg'>
                 <ModalHeader toggle={() => setModalClicked(!modalClicked)}>PLEASE SELECT</ModalHeader>

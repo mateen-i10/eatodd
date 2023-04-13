@@ -135,19 +135,20 @@ export default [
                 title: 'Membership Types',
                 icon: <UserCheck size={20}/>,
                 navLink: '/membershipTypes'
-            },
-            {
-                id: 'crmEmail',
-                title: 'CRM (Email)',
-                icon: <Mail size={20}/>,
-                navLink: '/CrmEmails'
-            },
-            {
-                id: 'crmSms',
-                title: 'CRM (Sms)',
-                icon: <Send size={20}/>,
-                navLink: '/CrmSms'
             }
+            // ,
+            // {
+            //     id: 'crmEmail',
+            //     title: 'CRM (Email)',
+            //     icon: <Mail size={20}/>,
+            //     navLink: '/CrmEmails'
+            // },
+            // {
+            //     id: 'crmSms',
+            //     title: 'CRM (Sms)',
+            //     icon: <Send size={20}/>,
+            //     navLink: '/CrmSms'
+            // }
         ]
     },
     {
@@ -163,7 +164,7 @@ export default [
             },
             {
                 id: 'CateringMenuItem',
-                title: 'Catering Menu Items',
+                title: 'Menu Items',
                 icon: <Package size={20}/>,
                 navLink: '/cateringMenuItem'
             },
