@@ -77,7 +77,7 @@ const CreateGroupOrder = () => {
 
                         <img src={require("../../assets/images/Menu&Order/dancing-veggies.gif").default}
                              alt="vegeis" height={200} width={"100%"}/>
-                        <div className=" fw-bold mb-2" style={{fontSize: "1.2rem", color: "black"}}>Sign in to start a
+                        <div className=" fw-bold mb-2" style={{fontSize: "1.2rem", color: "black"}}>{!isUserLoggedIn() && `Sign in to` } start a
                             group
                             order, earn rewards
                             and get status

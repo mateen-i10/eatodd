@@ -42,6 +42,7 @@ import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import AsyncSelect from "react-select/async"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import GeneralProductFormChild from "./GeneralProductFormChild"
+import ProductImage from "../../home/components/product/ProductImage"
 
 
 const GenralProducts = (props) => {
@@ -315,6 +316,18 @@ const GenralProducts = (props) => {
 
     const columns = [
         {
+            name: 'Photo',
+            sortable: true,
+            minWidth: '250px',
+            cell: row => (
+                <div className='d-flex align-items-center'>
+                    <div className="thumbnail ">
+                        <ProductImage attachment={row.attachment} styles={{width: "50px", height: "50px", margin: "5px"}}/>
+                    </div>
+                </div>
+            )
+        },
+        {
             name: 'Name',
             selector: (row) => row.name,
             sortable: true,
@@ -356,12 +369,6 @@ const GenralProducts = (props) => {
             sortable: true,
             minWidth: '50px'
         },
-        /*{
-            name: 'Image',
-            selector: (row) => row.image,
-            sortable: true,
-            minWidth: '50px'
-        },*/
         {
             name: 'Actions',
             allowOverflow: true,
@@ -373,12 +380,12 @@ const GenralProducts = (props) => {
                                 <MoreVertical size={15}/>
                             </DropdownToggle>
                             <DropdownMenu end>
-                                <DropdownItem tag='a' href='/' className='w-100'
+                                <DropdownItem tag='a' className='w-100'
                                               onClick={e => detailOptClick(row.id, e)}>
                                     <FileText size={15}/>
                                     <span className='align-middle ms-50'>Details</span>
                                 </DropdownItem>
-                                <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
+                                <DropdownItem tag='a' className='w-100' onClick={e => deleteClick(row.id, e)}>
                                     <Trash size={15}/>
                                     <span className='align-middle ms-50'>Delete</span>
                                 </DropdownItem>
@@ -443,7 +450,7 @@ const GenralProducts = (props) => {
                         className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
                         <div>
                             <CardTitle tag='h4'>Genral Products</CardTitle>
-                            <h6>Friday June 10, 2022, 08:10 AM</h6>
+                            {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                         </div>
                         <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Genral
                             Product</Button.Ripple>
