@@ -11,6 +11,7 @@ import {Button} from "reactstrap"
 import {isCustomer, isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 import {isJoinedByLink} from "../../utility/Utils"
+import checkOut from "../../views/checkoutpage/CheckOut"
 
 export default function Header({isSimple, setKey}) {
     const totalItems = useSelector(state => state.cartItems.total)
@@ -117,7 +118,7 @@ export default function Header({isSimple, setKey}) {
                         <div className="col-3 me-0 text-end" style={{}}>
                             <div className='btn btn-primary btn-sm text-uppercase me-1'
                                  onClick={() => {
-                                     history.push('/checkout')
+                                     checkOut()
                                  }}>Checkout
                             </div>
                             <div className='btn btn-danger btn-sm text-uppercase'

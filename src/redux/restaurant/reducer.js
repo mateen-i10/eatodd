@@ -17,6 +17,7 @@ const initialState = {
 export const setRestaurants = createAction("RestaurantReducer/setRestaurants")
 export const setOrdersByRestaurant = createAction("RestaurantReducer/setOrdersByRestaurant")
 export const setProductsByRestaurant = createAction("RestaurantReducer/setProductsByRestaurant")
+export const setProductsByRestaurantSubcategory = createAction("RestaurantReducer/setProductsByRestaurantSubcategory")
 export const setCustomersByRestaurant = createAction("RestaurantReducer/setCustomersByRestaurant")
 export const setRestaurant = createAction("RestaurantReducer/setRestaurant")
 export const setLoading = createAction("RestaurantReducer/setLoading")
@@ -113,6 +114,17 @@ const RestaurantReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productList: action.payload.data,
+                miscData: action.payload.miscData,
+                isLoading: false,
+                isDetailLoading: false,
+                isEdit: false,
+                isError: false,
+                isSuccess: false
+            }
+            case setProductsByRestaurantSubcategory.type:
+            return {
+                ...state,
+                productList: action.payload.data.products,
                 miscData: action.payload.miscData,
                 isLoading: false,
                 isDetailLoading: false,
