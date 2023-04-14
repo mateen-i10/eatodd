@@ -10,7 +10,7 @@ const Reward = () => {
             <Header/>
             <div className="container-sm">
                 <div className="row">
-                    <div className="col-md-6 mt-5">
+                    <div className="col-md-6" style={{marginTop:"120px"}}>
                         <p className="text-primary fs-2 fw-bolder">OMG LOYALISTS
                         </p>
                         <h1 className="text-black text-uppercase" style={{fontSize: '45px'}}>
@@ -31,32 +31,31 @@ const Reward = () => {
                     </div>
                 </div>
             </div>
-            <div className="container-fluid mt-5 mb-5"
-                 style={{paddingTop: '20px', paddingBottom: '20px', backgroundColor: "#efffd5"}}>
-                <div className="row align-items-center justify-content-center g-2">
-                    <h1 className="text-center text-primary fw-bolder mb-3 mt-3"> HOW IT WORKS</h1>
-                    <div className="col-md-3 col-12 text-center mb-2 ">
-                        <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'
-                             src={require("../../assets/images/rewards/earn-point.png").default}/>
-                        <p className=" fs-4"> 10 points for every $1 spent in the restaurant, in the app, or
-                            online.</p>
-                    </div>
-                    <div className="col-md-3 col-12 text-center mb-2">
-                        <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'
-                             src={require("../../assets/images/rewards/birthday-cake.png").default}/>
-                        <p className=" fs-4"> Let’s just say we won’t forget you on your birthday.</p>
-                    </div>
-                    <div className="col-md-3 col-12 text-center mb-2">
-                        <img className="mx-auto mb-3" style={{
-                            height: 100,
-                            width: 100,
-                            color: "green"
-                        }}  src={require("../../assets/images/rewards/free-food.png").default} alt='image'/>
-                        <p className=" fs-4">Free Chips & Guac after your first purchase as a
-                            member.</p>
-                    </div>
-                </div>
-            </div>
+            {/*<div className="container-fluid mt-5 mb-5"*/}
+            {/*     style={{paddingTop: '20px', paddingBottom: '20px', backgroundColor: "#efffd5"}}>*/}
+            {/*    <div className="row align-items-center justify-content-center g-2">*/}
+            {/*        <h1 className="text-center text-primary fw-bolder mb-3 mt-3"> HOW IT WORKS</h1>*/}
+            {/*        <div className="col-md-3 col-12 text-center mb-2 ">*/}
+            {/*            <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'*/}
+            {/*                 src={require("../../assets/images/rewards/earn-point.png").default}/>*/}
+            {/*            <p className=" fs-4"> 10 points for every $1 spent in the restaurant, in the app, or*/}
+            {/*                online.</p>*/}
+            {/*        </div>*/}
+            {/*        <div className="col-md-3 col-12 text-center mb-2">*/}
+            {/*            <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'*/}
+            {/*                 src={require("../../assets/images/rewards/birthday-cake.png").default}/>*/}
+            {/*            <p className=" fs-4"> Let’s just say we won’t forget you on your birthday.</p>*/}
+            {/*        </div>*/}
+            {/*        <div className="col-md-3 col-12 text-center mb-2">*/}
+            {/*            <img className="mx-auto mb-3" style={{*/}
+            {/*                height: 100,*/}
+            {/*                width: 100,*/}
+            {/*                color: "green"*/}
+            {/*            }}  src={require("../../assets/images/rewards/free-food.png").default} alt='image'/>*/}
+            {/*            <p className=" fs-4">Free Chips & Guac after your first purchase as a Member.</p>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <Footer/>
         </div>
     )
