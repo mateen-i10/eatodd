@@ -32,6 +32,7 @@ import SwiperCore, { Navigation } from 'swiper'
 import httpService, {baseURL} from "../../../utility/http"
 import ProductImage from "../../../views/home/components/product/ProductImage"
 import Select from "react-select"
+import {toast} from "react-toastify"
 
 const Cart = (props) => {
     const [canvasPlacement, setCanvasPlacement] = useState('end')
@@ -226,8 +227,10 @@ const Cart = (props) => {
 
     const checkOut = () => {
         toggleCanvasStart()
+        const totalPrice = cartTotalPrice()
         if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
-        else history.push('/checkout')
+        else if (!totalPrice || totalPrice <= 0) toast.info(" You have selected add-on items.")
+        else if (totalPrice && totalPrice > 0) history.push('/checkout')
     }
 
     SwiperCore.use([Navigation])

@@ -8,9 +8,10 @@ import {ShoppingCart} from "react-feather"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {useDispatch, useSelector} from "react-redux"
 import {Button} from "reactstrap"
-import {isCustomer, isUserLoggedIn} from "../../auth/utils"
+import {getUserData, isCustomer, isUserLoggedIn} from "../../auth/utils"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
-import {isJoinedByLink} from "../../utility/Utils"
+import {cartTotalPrice, isJoinedByLink} from "../../utility/Utils"
+import {toast} from "react-toastify"
 
 export default function Header({isSimple, setKey}) {
     const totalItems = useSelector(state => state.cartItems.total)
@@ -37,6 +38,14 @@ export default function Header({isSimple, setKey}) {
     useEffect(() => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
+
+    const checkOut = () => {
+        /*toggleCanvasStart()*/
+        const totalPrice = cartTotalPrice()
+        if (!getUserData() || !isCustomer()) history.push('/login', {returnURL: '/checkout'})
+        else if (!totalPrice || totalPrice <= 0) toast.info(" You have selected add-on items.")
+        else if (totalPrice && totalPrice > 0) history.push('/checkout')
+    }
 
     const onCateringClick = () => {
         history.push('/gmap', {returnURL: 'catering', isCatering: true})
@@ -117,7 +126,7 @@ export default function Header({isSimple, setKey}) {
                         <div className="col-3 me-0 text-end" style={{}}>
                             <div className='btn btn-primary btn-sm text-uppercase me-1'
                                  onClick={() => {
-                                     history.push('/checkout')
+                                     checkOut()
                                  }}>Checkout
                             </div>
                             <div className='btn btn-danger btn-sm text-uppercase'
