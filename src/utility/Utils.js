@@ -131,7 +131,7 @@ export const addItemToCart = (item, isToast = true) => {
   const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
     finalMeals.push(item)
   localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
-  if (isToast) toast.success(`'${item.mealName}' added to cart`)
+  if (isToast) toast.success(`'${item.mealName}' Added to cart`)
   store.dispatch(calculateTotalItems())
   return true
 }

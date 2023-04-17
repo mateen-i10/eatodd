@@ -2,7 +2,7 @@ import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
 import {apiCall} from "./actions"
 // import {isUserLoggedIn} from "../../auth/utils"
-// import {unAuthorize} from "../auth/actions"
+import {unAuthorize} from "../auth/actions"
 // import {useNavigate} from "react-router"
 
 const apiMiddleware = ({dispatch}) => (next) => (action) => {
@@ -42,9 +42,10 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
                 if (isSuccess) {
                     dispatch({type: isSuccess, payload: true})
                 }
-            // } else if (response.data.statusCode === 401) {
-            //     dispatch(unAuthorize())
-            } else {
+            } else if (response.status === 401) {
+                // dispatch unAuthorize() if the response status is 401
+                dispatch(unAuthorize()) 
+} else {
                 //general Error Action
                 toast.error(response.data.message)
                 if (onError) dispatch({type: onError, payload: true})
@@ -52,10 +53,6 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
         }).catch(error => {
         // action called on every response if provided
         console.log('err here', error)
-
-        // if (isUserLoggedIn) {
-        //     dispatch(unAuthorize())
-        // }
 
         if (requestCompleted) dispatch({type: requestCompleted, payload: true})
         if (onError) dispatch({type: onError, payload: true})
