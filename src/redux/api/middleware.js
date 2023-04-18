@@ -44,19 +44,23 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
                 }
             } else if (response.status === 401) {
                 // dispatch unAuthorize() if the response status is 401
-                dispatch(unAuthorize()) 
-} else {
+                dispatch(unAuthorize())
+            } else {
                 //general Error Action
                 toast.error(response.data.message)
                 if (onError) dispatch({type: onError, payload: true})
             }
         }).catch(error => {
         // action called on every response if provided
-        console.log('err here', error)
-
         if (requestCompleted) dispatch({type: requestCompleted, payload: true})
-        if (onError) dispatch({type: onError, payload: true})
-        toast.error(error.message)
+        console.log('err here', error)
+        if (error.response && error.response.status === 401) {
+            // dispatch unAuthorize() if the response status is 401
+            dispatch(unAuthorize())
+        } else {
+            if (onError) dispatch({type: onError, payload: true})
+            toast.error(error.message)
+        }
     })
 }
 
