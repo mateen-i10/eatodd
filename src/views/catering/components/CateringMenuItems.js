@@ -24,7 +24,7 @@ const CateringMenuItems = (props) => {
             </div>
             <div style={{position: 'absolute', marginTop: 155, width: "100%"}}>
                 <h5 className="text-center"
-                    style={{fontStyle: 'bold', fontSize: 25, color: 'white'}}>{item.title.toUpperCase()}</h5>
+                    style={{fontSize: 25, color: 'white', fontFamily: 'Gotham Bold'}}>{item.title.toUpperCase()}</h5>
             </div>
             <div className="card-body" style={{
                 maxHeight: 120,

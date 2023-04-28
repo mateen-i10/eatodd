@@ -25,6 +25,7 @@ import moment from "moment"
 import Joi from "joi-browser"
 import Datetime from "react-datetime"
 import {loadOptions} from "../../../utility/Utils"
+import '../style.css'
 
 const Campaign = (props) => {
 
@@ -438,7 +439,7 @@ const Campaign = (props) => {
                             noHeader
                             pagination
                             paginationServer
-                            className='react-dataTable'
+                            className='react-dataTable my-dataTable'
                             columns={columns}
                             sortIcon={<ChevronDown size={10} />}
                             paginationComponent={CustomPagination}

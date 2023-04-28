@@ -46,7 +46,7 @@ import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import moment from "moment"
 import CompareData from "./CompareData"
-import '../../../shared/style/style.css'
+import '../style.css'
 
 const Restaurant = (props) => {
 
@@ -130,6 +130,7 @@ const Restaurant = (props) => {
             isError: false
         }
     ]
+
     const [restaurantSchedule, setRestaurantSchedule] = useState([...resSchedules])
 
     const [modalIsOpen, setIsOpen] = useState(false)
@@ -585,7 +586,7 @@ const Restaurant = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable my-dataTable'
+                        className='react-dataTable myDataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10} />}
                         paginationComponent={CustomPagination}

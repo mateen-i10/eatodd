@@ -1,6 +1,9 @@
 @import '../../../base/bootstrap-extended/include';
 @import '../../../base/components/include';
-
+.myDataTable {
+  min-height: 400px !important;
+  overflow-y: auto !important;
+}
 .react-dataTable {
   border-radius: 0;
   .rdt_TableHead {
@@ -129,7 +132,6 @@
       background-color: $theme-dark-card-bg;
       color: $theme-dark-body-color;
     }
-
     .rdt_Table {
       background: $theme-dark-table-header-bg;
       color: $theme-dark-body-color;

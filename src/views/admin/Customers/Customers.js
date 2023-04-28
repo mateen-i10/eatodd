@@ -1,6 +1,6 @@
 // ** React Imports
 import React, {Fragment, useEffect, useState} from 'react'
-
+import '../style.css'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -30,7 +30,7 @@ const Customers = (props) => {
     const dispatch = useDispatch()
 
     const customerId = getUserData().customerId
-    console.log(customerId, "dataOf user")
+    console.log(customerId, "Data of User")
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -159,6 +159,7 @@ const Customers = (props) => {
                         pagination
                         paginationServer
                         className='react-dataTable'
+                        style={{minHeight:'400px !important', overflowY: "auto"}}
                         columns={columns}
                         sortIcon={<ChevronDown size={10} />}
                         paginationComponent={CustomPagination}
