@@ -95,7 +95,7 @@ const ProductCard = ({   item,
                                 }}>
                         <div style={{marginTop: 32, fontSize: 16, fontWeight: 440}}>
                             {/*{`${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}*/}
-                            {op.name === "Normal" ? `${op?.name} ${op?.price ? ` - $${op.price}` : ''}` : op.name === "Double" ? `${op?.name}   + $${diff?.length === 2 ? diff[1] - diff[0] : ''}` : `${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}
+                            {op.name === "Normal" ? `${op?.price ? `$${op.price}` : ''}` : op.name === "Double" ? `${op?.name}   + $${diff?.length === 2 ? diff[1] - diff[0] : ''}` : `${op?.name} ${op?.price ? ` + $${op.price - item.wholePrice}` : ''}`}
                         </div>
                     </div>
                 })}
@@ -192,7 +192,17 @@ const ProductCard = ({   item,
                              onMouseOver={() => setCustomize(!customize)}>
                             <Plus size={20} />
                         </div>}
-                            <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>$ {membershipObj.id ? `${item.retailPrice ? item.retailPrice : item.price}` : `${item.wholePrice ? item.wholePrice : item.price}`}</div>
+                    <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>
+                        {membershipObj.id ? (
+                            item.retailPrice || item.price ? (
+                                `$${item.retailPrice ? item.retailPrice : item.price}`
+                            ) : null
+                        ) : (
+                            item.wholePrice || item.price ? (
+                                `$${item.wholePrice ? item.wholePrice : item.price}`
+                            ) : null
+                        )}
+                    </div>
                 </div>
             </div>
             }

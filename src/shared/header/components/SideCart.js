@@ -327,8 +327,7 @@ const Cart = (props) => {
                         }}>
                             <div className="row align-items-center justify-content-center">
                                 <div className="col-12 fs-1 fw-bolder text-uppercase text-primary text-center ">Your
-                                    Bag
-                                    is empty
+                                    Bag is empty
                                 </div>
                                 <div className="col-12 fs-3 fw-bold text-uppercase text-secondary text-center">Start
                                     an

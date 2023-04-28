@@ -77,7 +77,9 @@ export const deleteSubCategory = (id) => {
 }
 export const addSubCategory = (data) => {
     console.log('resData', data)
-
+    if (data.isBlank === false) {
+        delete data.subCatId
+    }
     return async dispatch => {
         dispatch(apiCall({
             url,
@@ -97,6 +99,13 @@ export const updateSubCategory = (data) => {
     delete data.attachmentId
     delete data.modifiedById
     delete data.modifiedDate
+    delete data.createdById
+    if (data.isBlank === false) {
+        delete data.subCatId
+    }
+    if (data.priority === null) {
+        delete data.priority
+    }
     return async dispatch => {
         dispatch(apiCall({
             url,

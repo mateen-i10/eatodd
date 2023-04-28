@@ -67,3 +67,13 @@ left: 4.6%;
   transform: translateY(-50%);
   z-index: 9999; /* Make sure the switch appears on top of other elements */
 }
+@font-face {
+  font-family: 'Gotham Light';
+  src: url('./../../assets/fonts/Gotham-Light.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Gotham Light', sans-serif;
+}

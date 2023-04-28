@@ -206,16 +206,20 @@ const Menu = () => {
                 const existingProducts = product.isWine ? selectedProducts.filter(p => p.isWine) : selectedProducts.filter(p => !p.isWine && p?.subCategory?.id === subCatId)
                 let updatedProducts = [...selectedProducts]
                 const sectionLimit = existingProducts.length
-                if (limit !== 0 && sectionLimit === limit) {
+
+                if (limit === 0) {
+                    if (sectionLimit === 1) {
+                        toast.info(`You can only select one item from '${product?.subCategory?.name?.toUpperCase()}'`)
+                        return
+                    }
+                } else if (limit !== 0 && sectionLimit === limit) {
                     const message = product.isWine ? `You can select up to ${limit} wines` : `You can select up to ${limit} items from '${product?.subCategory?.name?.toUpperCase()}'`
                     toast.info(message)
                     return
                 } else if (limit !== 0 && sectionLimit > 0 && sectionLimit < limit && !product.isWine) {
                     updatedProducts = [
                         ...selectedProducts.filter(p => p.subCategory.id !== subCatId || p.isWine),
-                        ...existingProducts.map(p => (
-                        {...p, selectedQuantity: 1 / limit}
-                    ))
+                        ...existingProducts.map(p => ({ ...p, selectedQuantity: 1 / limit }))
                     ]
                     product.selectedQuantity = 1 / limit
                 } else {
