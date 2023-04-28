@@ -209,7 +209,7 @@ const Restaurant = (props) => {
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'startDate')}
                             />
-                            {r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}
+                            {/*{r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}*/}
                         </td>
                         <td>
                             <Datetime
@@ -220,7 +220,7 @@ const Restaurant = (props) => {
                                 closeOnSelect={true}
                                 onChange={(e) => handleDateChange(index, e, 'endDate')}
                             />
-                            {r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}
+                            {/*{r.isError && <span style={{color: 'rgb(234, 84, 85)', fontSize: '12px'}}>Field is required</span>}*/}
                         </td>
                         <td>
                             <div className="form-check">
@@ -416,7 +416,7 @@ const Restaurant = (props) => {
         const isError = formModalRef.current.validate(formState)
         if (isError) return
 
-        if (restaurantSchedule && restaurantSchedule.length > 0) {
+        /*if (restaurantSchedule && restaurantSchedule.length > 0) {
             const temp = [...restaurantSchedule]
             const final = temp.map(r => {
                 if (!r.startDate || !r.endDate) {
@@ -427,7 +427,7 @@ const Restaurant = (props) => {
             const error = final.find((f) => f.isError)
             setRestaurantSchedule([...final])
             if (error) return
-        }
+        }*/
 
         // call api
         setModalLoading(true)
