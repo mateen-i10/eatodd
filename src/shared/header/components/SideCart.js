@@ -23,12 +23,12 @@ import {
 import CartItem from "./CartItem"
 import {Link, useHistory} from "react-router-dom"
 import {getUserData, isCustomer, isUserLoggedIn} from "../../../auth/utils"
-import { useSelector} from "react-redux"
+import {useSelector} from "react-redux"
 import GroupOrderSideCart from "../../../views/GroupOrder/groupOrderSideCart"
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import {Swiper, SwiperSlide} from 'swiper/react/swiper-react'
 import '@styles/react/libs/swiper/swiper.scss'
 import '@styles/base/pages/app-ecommerce-details.scss'
-import SwiperCore, { Navigation } from 'swiper'
+import SwiperCore, {Navigation} from 'swiper'
 import httpService, {baseURL} from "../../../utility/http"
 import ProductImage from "../../../views/home/components/product/ProductImage"
 import Select from "react-select"
@@ -71,50 +71,24 @@ const Cart = (props) => {
         if (isDeleted) setDeleted(false)
     }, [isDeleted])
 
-   // /* useEffect(() => {
-   //      httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
-   //          .then(response => {
-   //              console.log('resGeberal', response)
-   //              // success case
-   //            /!*  if (response.status === 200 && response.data.statusCode === 200) {
-   //                  const data = response.data.data
-   //                  const finalData = data.map(item => ({
-   //                      attachment: item.attachment,
-   //                      id: item.id,
-   //                      name: item.name,
-   //                      description: item.description
-   //                  }))
-   //                  const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
-   //                  const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
-   //                  const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
-   //                  setOmgPlate(finalOmgPlate)
-   //                  setSandwich(finalSandwich)
-   //                  setMainCategory(finalCategory)
-   //              } else {
-   //                  //general Error Action
-   //                  toast.error(response.data.message)
-   //                  return null
-   //              }*!/
-   //          })
-   //          /!*.catch(error => {
-   //              toast.error(error.message)
-   //          })*!/
-   //
-   //  }, [])*/
-
     useEffect(() => {
         const ids = cartItems && cartItems.catering ? cartItems?.catering?.map(c => {
-            const selected = c.selectedProducts?.map(s => { return s.productId })
+            const selected = c.selectedProducts?.map(s => {
+                return s.productId
+            })
             return selected
         }).toString() : cartItems && cartItems.meals ? cartItems?.meals?.map(c => {
-            const selected = c.selectedProducts?.map(s => { return s.id })
+            const selected = c.selectedProducts?.map(s => {
+                return s.id
+            })
             return selected
         }).toString() : ''
         if (ids) {
             httpService._get(`${baseURL}GeneralRecommendation/GetGeneralRecommendation?ids=${ids}`)
                 .then(response => {
                     console.log('resGet', response)
-                    if (response.status === 200 && response.data.statusCode === 200) {}
+                    if (response.status === 200 && response.data.statusCode === 200) {
+                    }
                     const data = response.data?.data
                     if (data) {
                         const finalData = data.map(item => ({
@@ -135,7 +109,9 @@ const Cart = (props) => {
     }, [cartItems])
 
     useEffect(() => {
-        const mealsOptions1 = cartItems?.meals?.map((m, index) => { return {label: m.mealName, value: index} })
+        const mealsOptions1 = cartItems?.meals?.map((m, index) => {
+            return {label: m.mealName, value: index}
+        })
         setMealsOptions(mealsOptions1)
     }, [recommendedProductModal])
 
@@ -149,7 +125,8 @@ const Cart = (props) => {
         const meal = cartItems && cartItems?.meals ? cartItems.meals[selectMeal.value] : undefined
         console.log('mealOnSave1', meal)
         if (meal) {
-            meal.selectedProducts.push({...getRecommendedProduct,
+            meal.selectedProducts.push({
+                ...getRecommendedProduct,
                 selectedQuantity: Number(selectedQuantity),
                 price: getRecommendedProduct.wholePrice,
                 calculatedPrice: getRecommendedProduct.wholePrice * Number(selectedQuantity)
@@ -163,7 +140,8 @@ const Cart = (props) => {
     const RenderRecommendedProductsModal = () => {
         return (
             <div className='basic-modal '>
-                <Modal isOpen={recommendedProductModal} toggle={() => setRecommendedProductModal(!recommendedProductModal)}  >
+                <Modal isOpen={recommendedProductModal}
+                       toggle={() => setRecommendedProductModal(!recommendedProductModal)}>
                     <div className='name-meal-model text-center my-1'><h2>Select Meal to Assign Product</h2></div>
                     <Form>
                         <ModalBody>
@@ -177,7 +155,8 @@ const Cart = (props) => {
                                     />
                                 </div>
                                 <div className='col-8 mt-2' style={{marginLeft: 80}}>
-                                    <Input type='number' onChange={e => setSelectedQuantity(e.target.value)} placeholder='Enter Quantity' style={{
+                                    <Input type='number' onChange={e => setSelectedQuantity(e.target.value)}
+                                           placeholder='Enter Quantity' style={{
                                         color: '#451400'
                                     }}/>
                                 </div>
@@ -307,16 +286,17 @@ const Cart = (props) => {
     return (
         <>
             {!isGroupOrder() && isCartEmpty ? <div className='demo-inline-spacing'>
-                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen} toggle={toggleCanvasStart}>
+                <Offcanvas style={{width: 500}} direction={canvasPlacement} isOpen={canvasOpen}
+                           toggle={toggleCanvasStart}>
                     <OffcanvasHeader toggle={toggleCanvasStart}
                                      style={{marginTop: 10, justifyContent: 'center'}}>
                         {!isUserLoggedIn() &&
-                        <Link to='/login' className="cursor-pointer">
-                            <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
-                            <span className="fs-3 me-3 text-black text-capitalize  mt-2"
-                            > Sign In or Register Your Self
+                            <Link to='/login' className="cursor-pointer">
+                                <UserPlus style={{marginRight: 10, color: 'rgb(129 190 65)', marginTop: 3}}/>
+                                <span className="fs-3 me-3 text-black text-capitalize  mt-2"
+                                > Sign In or Register Your Self
                             </span>
-                        </Link>}
+                            </Link>}
                     </OffcanvasHeader>
 
                     <hr/>
@@ -360,9 +340,11 @@ const Cart = (props) => {
                            toggle={toggleCanvasStart}>
                     <div className="container" style={{height: 35}}>
                         <div className='row'>
-                            <div className="border border-1 border-primary round w-50 mx-auto d-flex mt-1 text-primary" style={{height: 35}}>
+                            <div className="border border-1 border-primary round w-50 mx-auto d-flex mt-1 text-primary"
+                                 style={{height: 35}}>
                                 <div className="my-auto">
-                                    <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default} style={{height: 25, width: 35, marginLeft: -10}}/> </span>
+                                    <span><img alt="img" src={require("../../../assets/images/logo/logo.png").default}
+                                               style={{height: 25, width: 35, marginLeft: -10}}/> </span>
                                 </div>
                                 <div className="my-auto text-uppercase">
                                     <div className="fs-6">Deliver to
@@ -374,16 +356,18 @@ const Cart = (props) => {
                             </div>
                         </div>
                     </div>
-                        <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
-                            {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 && <div className="d-flex ">
+                    <OffcanvasHeader toggle={toggleCanvasStart} style={{marginTop: 1, justifyContent: 'center'}}>
+                        {!isGroupOrder() && !isJoinedByLink() && cartItems && cartItems.meals && cartItems.meals.length > 0 &&
+                            <div className="d-flex ">
                                 <UserPlus className='ms-1 me-1 mt-1 text-primary'/>
                                 <Link className='me-1' to={isCustomer() ? "/groupOrder" : "/login"}>
-                                    <h1 className={`fw-bolder mb-1 fs-3 text-uppercase mt-1 text-decoration-underline makeOrderLink`} onClick={() => toggleCanvasStart()}>
+                                    <h1 className={`fw-bolder mb-1 fs-3 text-uppercase mt-1 text-decoration-underline makeOrderLink`}
+                                        onClick={() => toggleCanvasStart()}>
                                         Make It a group Order
                                     </h1>
                                 </Link>
                             </div>}
-                        </OffcanvasHeader>
+                    </OffcanvasHeader>
 
                     <hr/>
                     <OffcanvasBody style={{paddingBottom: 0}}>
@@ -451,13 +435,19 @@ const Cart = (props) => {
                                                     addRecommended(slide, e)
                                                 }}>
                                                     <div className='img-container w-1500 mx-auto py-75'>
-                                                        <ProductImage attachment={slide.img} className='img-fluid' styles={{width: "85px", height: "85px", margin: "auto"}}/>
+                                                        <ProductImage attachment={slide.img} className='img-fluid'
+                                                                      styles={{
+                                                                          width: "85px",
+                                                                          height: "85px",
+                                                                          margin: "auto"
+                                                                      }}/>
                                                     </div>
                                                     <div className='item-heading text-center'>
                                                         <h5 className=' mb-0'>{slide.name}</h5>
                                                     </div>
                                                     <div className='item-meta text-center'>
-                                                        <CardText className='text-primary mb-0'>${slide.wholePrice}</CardText>
+                                                        <CardText
+                                                            className='text-primary mb-0'>${slide.wholePrice}</CardText>
                                                     </div>
                                                 </a>
                                             </Col>

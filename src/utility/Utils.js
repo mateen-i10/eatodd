@@ -125,12 +125,26 @@ export const clearCart = () => {
 
 // meal items
 export const addItemToCart = (item, isToast = true) => {
-  //getting existing cart items
+  // Getting existing cart items
   const items = localStorage.getItem(cartName)
   const cart = JSON.parse(items)
   const finalMeals = cart && cart.meals && cart.meals.length > 0 ? [...cart.meals] : []
+  let mealExists = false
+
+  finalMeals.forEach((meal, index) => {
+    if (meal.categoryId === item.categoryId) {
+      mealExists = true
+      finalMeals[index].totalPrice += item.totalPrice
+      finalMeals[index].selectedProducts.push(...item.selectedProducts)
+    }
+  })
+
+  if (!mealExists) {
     finalMeals.push(item)
-  localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals]}))
+  }
+
+  localStorage.setItem(cartName, JSON.stringify({ meals: [...finalMeals] }))
+
   if (isToast) toast.success(`'${item.mealName}' Added to cart`)
   store.dispatch(calculateTotalItems())
   return true
