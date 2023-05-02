@@ -8,11 +8,11 @@ import {
 } from "./reducer"
 const url = 'GeneralRecommendation'
 
-export const loadGeneralRecommendations = (pageIndex = 1, pageSize =  12, searchQuery = null) => {
+export const loadGeneralRecommendations = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}`,
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
             data: {},
             method: 'get',
             onSuccess: setGeneralRecommendations.type

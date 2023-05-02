@@ -15,7 +15,7 @@ import {
     UncontrolledDropdown
 } from "reactstrap"
 import AsyncSelect from "react-select/async"
-import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from "react-feather"
+import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Search, Trash} from "react-feather"
 import {loadOptions} from "../../../utility/Utils"
 import {setDetailLoading} from "../../../redux/generalRecommendation/reducer"
 import {
@@ -27,6 +27,18 @@ import Swal from "sweetalert2"
 import ReactPaginate from "react-paginate"
 import DataTable from "react-data-table-component"
 import UILoader from "../../../@core/components/ui-loader"
+import SubcategoryDropdown from "../Components/SubcategoryDropdown"
+import {useHistory, useLocation} from "react-router-dom"
+
+const getQueryParams = (search) => {
+    return search ? (/^[?#]/.test(search) ? search.slice(1) : search)
+        .split("&")
+        .reduce((params, param) => {
+            const [key, value] = param.split("=")
+            params[key] = value ? decodeURIComponent(value.replace(/\+/g, " ")) : ""
+            return params
+        }, {}) : {}
+}
 
 const AssignGeneralRecommendation = (props) => {
 
@@ -47,16 +59,33 @@ const AssignGeneralRecommendation = (props) => {
 
     const [edit, setEdit] = useState(false)
 
+    const history = useHistory()
+    const location = useLocation()
+
     const RecommendedObject = {productId: 0, recommendedProducts: []}
     const [product, setProduct] = useState(RecommendedObject)
 
+    const queryParams = getQueryParams(location.search)
+    const [subcategoryId, setSubcategoryId] = useState(
+        queryParams.subcategoryId ? parseInt(queryParams.subcategoryId, 10) : 0
+    )
+    const [catId, setCatId] = useState(queryParams.categoryId ? parseInt(queryParams.categoryId, 10) : 0)
+
+    const [isSubmit, setSubmit] = useState(false)
+
     console.log('product', product)
+    console.log('setSubmit', setSubmit)
+    console.log('subcategoryId', subcategoryId)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(loadGeneralRecommendations())
     }, [isSuccess])
+
+    const categories = async (input) => {
+        return loadOptions('category', input, 1, 12)
+    }
 
     const products = async (search) => {
         return loadOptions('product', search, 1, 100)
@@ -130,6 +159,7 @@ const AssignGeneralRecommendation = (props) => {
 
 
     const handleSubmit = () => {
+        /*setSubmit(true)*/
         try {
             console.log('recommendedProduct', product)
             const finalData = {
@@ -161,8 +191,21 @@ const AssignGeneralRecommendation = (props) => {
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadGeneralRecommendations(page.selected + 1, pageSize, searchValue))
+        const refId = subcategoryId
+        dispatch(loadGeneralRecommendations(page.selected + 1, pageSize, searchValue, refId))
         setCurrentPage(page.selected + 1)
+    }
+
+    const callFunc = () => {
+        const refId = subcategoryId
+        console.log('refId', refId)
+
+        if (refId !== 0) {
+            history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
+            dispatch(loadGeneralRecommendations(currentPage, pageSize, "", refId))
+        } else {
+            console.log("please select a value to search for")
+        }
     }
 
     const columns = [
@@ -275,6 +318,31 @@ const AssignGeneralRecommendation = (props) => {
                             </div>
                         </div>
                     </CardHeader>
+                    <Row className='justify-content-end mx-0'>
+                        <Col className='mt-1' md='5' sm='12'>
+                            <label>Search by Category <span className='text-danger'>*</span></label>
+                            <AsyncSelect
+                                loadOptions={categories}
+                                defaultOptions
+                                isLoading={true}
+                                onChange={e => {
+                                    setCatId(e.value)
+                                    history.push(`${location.pathname}?subcategoryId=${subcategoryId}&categoryId=${e.value}`)
+                                }}
+                            />
+                        </Col>
+                        <Col className='mt-1' md='5' sm='12'>
+                            <SubcategoryDropdown
+                                categoryId={catId}
+                                subcategoryId={subcategoryId}
+                                setSubcategory={setSubcategoryId}
+                                isFormSubmit={isSubmit}
+                            />
+                        </Col>
+                        <Col md='2' sm='12' style={{marginTop:'32px'}}>
+                            {catId !== 0 ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='primary' onClick={() => callFunc()}><Search size={18}/></Button> : []}
+                        </Col>
+                    </Row>
                     <DataTable
                         noHeader
                         pagination
