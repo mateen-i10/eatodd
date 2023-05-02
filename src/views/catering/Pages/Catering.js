@@ -7,7 +7,7 @@ import useAPI from "../../../utility/customHooks/useAPI"
 import ComponentSpinner from "../../../@core/components/spinner/Loading-spinner"
 import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 import CateringSubForm from "../components/CateringSubForm"
-import luxurayWine from "../../../assets/images/images/DSC1371.jpeg"
+import luxurayWine from "../../../assets/images/images/DSC1371.jpg"
 import {Col, Row} from "reactstrap"
 
 const Catering = () => {
