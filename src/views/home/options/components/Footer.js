@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Button, Form, FormFeedback, FormGroup, Input, Modal, ModalBody, ModalFooter} from "reactstrap"
 import "./Plate.css"
 import {toast} from "react-toastify"
@@ -11,66 +11,66 @@ const Footer = (props) => {
 
     console.log(cart, "cart")
 
-    const {dispatchingItems, setMealName, mealName, productList} = props
+    const {dispatchingItems, productList} = props
 
-    const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
+    // const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
 
     console.log(productList, "product list coming from footer")
 
     // methods
-    const handleKeyDown = event => {
-        if (event.key === 'Enter') {
-            // 👇️ your logic here
-            event.preventDefault()
-            dispatchingItems()
-            setBasicNameFoodModal(!basicNameFoodModal)
-        }
-    }
+    // const handleKeyDown = event => {
+    //     if (event.key === 'Enter') {
+    //         // 👇️ your logic here
+    //         event.preventDefault()
+    //         dispatchingItems()
+    //         setBasicNameFoodModal(!basicNameFoodModal)
+    //     }
+    // }
 
-    const RenderMealNameModal = () => {
-        return (
-            <div className='basic-modal '>
-                <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}  >
-                    <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
-                    <Form>
-                        <ModalBody>
-                            <FormGroup>
-                                <div className='col-8' style={{marginLeft: 80}}>
-                                    <Input type='text' placeholder='Enter Meal Name' invalid={mealName.length === 0}
-                                           style={{color: '#81be41'}}
-                                           value={mealName}
-                                           onChange={e => setMealName(e.target.value)}
-                                           onKeyDown={handleKeyDown}
-                                    />
-                                    <FormFeedback>
-                                        Meal Name is required
-                                    </FormFeedback>
-                                </div>
-                            </FormGroup>
-                        </ModalBody>
-                        <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
-                            <Button color='danger' onClick={() => {
-                                setBasicNameFoodModal(!basicNameFoodModal)
-                            }}>
-                                Cancel
-                            </Button>
-                            <Button color='primary' disabled={mealName.length < 1}
-                                    onClick={() => {
-                                        if (cart?.meals?.length === undefined) {
-                                            toast.info("Catering has been removed")
-                                        }
-                                        dispatchingItems()
-                                        setBasicNameFoodModal(!basicNameFoodModal)
-                                    }}
-                            >
-                                Save
-                            </Button>
-                        </ModalFooter>
-                    </Form>
-                </Modal>
-            </div>
-        )
-    }
+    // const RenderMealNameModal = () => {
+    //     return (
+    //         <div className='basic-modal '>
+    //             <Modal isOpen={basicNameFoodModal} toggle={() => setBasicNameFoodModal(!basicNameFoodModal)}  >
+    //                 <div className='name-meal-model text-center my-1'><h1>Give this meal a name</h1></div>
+    //                 <Form>
+    //                     <ModalBody>
+    //                         <FormGroup>
+    //                             <div className='col-8' style={{marginLeft: 80}}>
+    //                                 <Input type='text' placeholder='Enter Meal Name' invalid={mealName.length === 0}
+    //                                        style={{color: '#81be41'}}
+    //                                        value={mealName}
+    //                                        onChange={e => setMealName(e.target.value)}
+    //                                        onKeyDown={handleKeyDown}
+    //                                 />
+    //                                 <FormFeedback>
+    //                                     Meal Name is required
+    //                                 </FormFeedback>
+    //                             </div>
+    //                         </FormGroup>
+    //                     </ModalBody>
+    //                     <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>
+    //                         <Button color='danger' onClick={() => {
+    //                             setBasicNameFoodModal(!basicNameFoodModal)
+    //                         }}>
+    //                             Cancel
+    //                         </Button>
+    //                         <Button color='primary' disabled={mealName.length < 1}
+    //                                 onClick={() => {
+    //                                     if (cart?.meals?.length === undefined) {
+    //                                         toast.info("Catering has been removed")
+    //                                     }
+    //                                     dispatchingItems()
+    //                                     setBasicNameFoodModal(!basicNameFoodModal)
+    //                                 }}
+    //                         >
+    //                             Save
+    //                         </Button>
+    //                     </ModalFooter>
+    //                 </Form>
+    //             </Modal>
+    //         </div>
+    //     )
+    // }
     return (
         <>
             <div className="container-fluid mt-2"
@@ -100,7 +100,7 @@ const Footer = (props) => {
                                 Beans and Rice</strong>
                         </div>*/}
                         <button
-                            type="button" /*disabled={!proteinVege.length || !Rice.length || !Beans.length}*/
+                            type="button"
                             style={{
                                 width: '90%',
                                 height: 60,
@@ -111,17 +111,21 @@ const Footer = (props) => {
                             }}
                             onClick={() => {
                                 if (productList.length !== 0) {
-                                setBasicNameFoodModal((!basicNameFoodModal))
+                                    if (cart?.meals?.length === undefined) {
+                                        toast.info("Catering has been removed")
+                                    }
+                                    dispatchingItems()
                                 } else {
-                                    toast.error(". Select a meal to continue")
+                                    toast.error("Select a meal to continue")
                                 }
-                            }}>
+                            }}
+                        >
                             ADD TO BAG
                         </button>
                     </div>
                 </div>
             </div>
-            {RenderMealNameModal()}
+            {/*{RenderMealNameModal()}*/}
         </>
     )
 }

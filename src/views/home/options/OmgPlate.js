@@ -227,6 +227,7 @@ const Menu = () => {
                 }
 
                 setSelectedProducts([...updatedProducts, product])
+                console.log('mmmss', ...updatedProducts, product)
             }
         } else {
             // empty list case
