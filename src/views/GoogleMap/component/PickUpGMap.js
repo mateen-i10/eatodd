@@ -1,28 +1,28 @@
-import React, {useState} from 'react'
-// import GoogleMapReact from "google-map-react"
-import {GoogleMap, InfoWindow, LoadScript, Marker} from '@react-google-maps/api'
-import "./index.css"
-import {useSelector} from "react-redux"
-// import {HiLocationMarker} from "react-icons/all"
-
+import React, { useState } from 'react'
+import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api'
+import './index.css'
+import { useSelector } from 'react-redux'
 
 const containerStyle = {
     width: '100%',
     height: '100%'
 }
 
-
-function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
+function PickUpGMap({ places, setSelectedSidebar, setMarkerClicked }) {
     const [activeMarker, setActiveMarker] = useState(null)
 
-    const {restaurantLocation} = useSelector(state => state)
-    console.log("restaurantLocation", restaurantLocation)
+    const { restaurantLocation } = useSelector((state) => state)
+    console.log('restaurantLocation', restaurantLocation)
 
-    const handleActiveMarker = (marker) => {
+    const saveSelectedPlaceToLocalStorage = (place) => {
+        localStorage.setItem('selectedPlace', JSON.stringify(place))
+    }
+    const handleActiveMarker = (marker, place) => {
         if (marker === activeMarker) {
             return
         }
         setActiveMarker(marker)
+        saveSelectedPlaceToLocalStorage(place)
     }
     const defaultPlaces = [
         {
@@ -68,14 +68,12 @@ function PickUpGMap({places, setSelectedSidebar, setMarkerClicked}) {
                     lng: -87.64085700264113
                 }}
             >
-                { /* Child components, such as markers, info windows, etc. */}
-                {places.map(({id, name, position}) => (
+                {places.map(({ id, name, position }) => (
                     <Marker
                         key={id}
                         position={position}
-                        // className="locationIcon"
                         onClick={() => {
-                            handleActiveMarker(position)
+                            handleActiveMarker(position, { id, name, position })
                             setSelectedSidebar(true)
                             setMarkerClicked(id)
                         }}

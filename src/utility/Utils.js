@@ -121,6 +121,7 @@ export const cartTotalItems = () => {
 }
 export const clearCart = () => {
   localStorage.removeItem(cartName)
+  localStorage.removeItem(restaurantId)
 }
 
 // meal items
@@ -200,7 +201,7 @@ export const addCateringItem = (item, isWine = false) => {
   }
 
   localStorage.setItem(cartName, JSON.stringify({ catering: [...finalCatering], wines: [...finalWines] }))
-  toast.success(`'${item.name}' added to cart`)
+  toast.success(`'${item.name}' Added to cart`)
   store.dispatch(calculateTotalItems())
   return true
 }

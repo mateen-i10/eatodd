@@ -31,9 +31,20 @@ const Menu = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const {state} = useLocation()
-    const {categoryId, restaurantId} = state
+    const {categoryId} = state
     console.log('iss', isPageLoading)
+    const initialRestaurantId = localStorage.getItem("restaurantId") || ""
+    const [restaurantId, setRestaurantId] = useState(initialRestaurantId)
 
+    useEffect(() => {
+        const storedRestaurantId = localStorage.getItem("restaurantId")
+        if (storedRestaurantId) {
+            setRestaurantId(storedRestaurantId)
+        }
+        if (!storedRestaurantId) {
+            history.push('/gmap')
+        }
+    }, [])
     // hooks
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
     /*function filterProductsBySubCatId(products, subCatId) {
