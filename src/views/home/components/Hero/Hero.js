@@ -23,7 +23,7 @@ const Hero = () => {
                             }}
                         ></div>
                         <div className="banner-content" style={{position: 'absolute', zIndex: 1}}>
-                            <h1 className="banner-text" style={{color: '#000000', fontWeight: '700'}}>
+                            <h1 className="banner-text" style={{color: 'white', fontWeight: '700'}}>
                                 OMG OFFERS BOTTLES OF WINE WITH ZERO MARK UP
                             </h1>
                             <h3 style={{color: 'white'}}>

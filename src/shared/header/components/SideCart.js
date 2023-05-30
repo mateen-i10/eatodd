@@ -45,7 +45,7 @@ const Cart = (props) => {
     const [mealsOptions, setMealsOptions] = useState(null)
     const [getRecommendedProduct, setGetRecommendedProduct] = useState(null)
     const [selectMeal, setSelectMeal] = useState(null)
-
+    const [restaurantId, setRestaurantId] = useState(null)
     const [selectedQuantity, setSelectedQuantity] = useState(0)
 
     console.log('selectedQ', selectedQuantity)
@@ -107,7 +107,18 @@ const Cart = (props) => {
             console.log('ids2', ids)*/
         }
     }, [cartItems])
+    useEffect(() => {
+        const id = localStorage.getItem("restaurantId")
+        setRestaurantId(id)
+    }, [])
 
+    console.log('restaurantId', restaurantId)
+    if (restaurantId) {
+        httpService._get(`${baseURL}Restaurant/${restaurantId}`)
+                .then(response => {
+                    console.log('restGetbuid', response)
+                })
+    }
     useEffect(() => {
         const mealsOptions1 = cartItems?.meals?.map((m, index) => {
             return {label: m.mealName, value: index}
