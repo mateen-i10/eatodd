@@ -7,12 +7,12 @@ const OrderConfirmation = () => {
     const {state} = useLocation()
     console.log('state', state)
 
-    const date = new Date(state.data.response.createdDate)
+    const date = new Date(state.data.createdDate)
     const date_str = [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('-')
     const time_str = [date.getHours(), date.getMinutes()].join(':')
 
     // let total = 0
-    const cateringOrderSectionItems = state.data?.response?.cateringOrderSectionItems
+    const cateringOrderSectionItems = state.data?.cateringOrderSectionItems
     // if (cateringOrderSectionItems && cateringOrderSectionItems?.length > 0) {
     //     for (const i in cateringOrderSectionItems) {
     //         total = total + (cateringOrderSectionItems[i]?.unitPrice * cateringOrderSectionItems[i]?.quantity)
@@ -25,8 +25,8 @@ const OrderConfirmation = () => {
     // const mealProducts =
     // console.log(mealName)
 
-    const billingAddress = state.data?.response?.billingAddress
-    const shippingAddress = state.data?.response?.shippingAddress
+    const billingAddress = state.data?.billingAddress
+    const shippingAddress = state.data?.shippingAddress
 
     return (
         <>
@@ -36,7 +36,7 @@ const OrderConfirmation = () => {
                 <div className="row mt-2">
                     <p className="col-11 mt-1 text-center text-uppercase fw-bolder fs-5">Thank you for your order.</p>
                     <div className="col-11 mt-1 text-center  fs-5">Your
-                        order <b> #{state.data?.response?.orderNo || state.data?.response?.cateringOrderNo} </b> has
+                        order <b> #{state.data?.orderNo || state.data?.cateringOrderNo} </b> has
                         been
                         placed.
                     </div>
@@ -53,7 +53,7 @@ const OrderConfirmation = () => {
                     <div className="col-7 mx-auto">
                         <hr className="col-10"/>
                     </div>
-                    {state.data?.response?.orderDetail?.length && state.data?.response?.orderDetail[0].meal ? state.data?.response?.orderDetail.map((mealItem, i) => (
+                    {state.data?.orderDetail?.length && state.data?.orderDetail[0].meal ? state.data?.orderDetail.map((mealItem, i) => (
                         <div key={i} className="col-7 mx-auto">
 
                             <div className="row mt-1">
@@ -81,12 +81,12 @@ const OrderConfirmation = () => {
                             <hr className="col-10 "/>
 
                             {/* eslint-disable-next-line multiline-ternary */}
-                        </div>)) : state.data?.response?.cateringOrderMenuItems && state.data?.response?.cateringOrderWines &&
+                        </div>)) : state.data?.cateringOrderMenuItems && state.data?.cateringOrderWines &&
                     // eslint-disable-next-line multiline-ternary
-                    state.data?.response?.cateringOrderMenuItems.length > 0 && state.data?.response?.cateringOrderWines.length > 0 ?
+                    state.data?.cateringOrderMenuItems.length > 0 && state.data?.cateringOrderWines.length > 0 ?
                         // eslint-disable-next-line multiline-ternary
                         <div className="col-7 mx-auto">
-                            {state.data.response?.cateringOrderMenuItems.map((catItem, i) => (
+                            {state.data?.cateringOrderMenuItems.map((catItem, i) => (
                                 <div key={i} className="row mt-1">
                                     <div
                                         className="col-6  text-uppercase fw-bolder fs-4 text-primary">{catItem.cateringMenuItem.name}</div>
@@ -116,7 +116,7 @@ const OrderConfirmation = () => {
                                 className="text-uppercase fw-bolder text-primary fs-4 mt-3">Wines
                             </div>
                             <hr className="col-10 "/>
-                            {state.data.response?.cateringOrderWines.map((wineItem, i) => (
+                            {state.data?.cateringOrderWines.map((wineItem, i) => (
                                 <div key={i} className="row mt-1">
                                     <div
                                         className="col-6  text-uppercase fw-bolder fs-5 ">{wineItem.wine.name}
@@ -129,10 +129,10 @@ const OrderConfirmation = () => {
                             <hr className="col-10 "/>
                         </div>
 
-                        : state.data?.response?.cateringOrderMenuItems &&
+                        : state.data?.cateringOrderMenuItems &&
                         // eslint-disable-next-line multiline-ternary
-                        state.data?.response?.cateringOrderMenuItems.length > 0 ? <div className="col-7 mx-auto">{
-                                state.data.response?.cateringOrderMenuItems.map((catItem, i) => (
+                        state.data?.cateringOrderMenuItems.length > 0 ? <div className="col-7 mx-auto">{
+                                state.data?.cateringOrderMenuItems.map((catItem, i) => (
 
                                     <div key={i} className="row mt-1">
                                         <div
@@ -158,13 +158,13 @@ const OrderConfirmation = () => {
                                 ))}
                                 <hr className="col-10 "/>
                             </div>
-                            : state.data?.response?.orderDetail && state.data?.response?.orderDetail.length > 0 ? <div
+                            : state.data?.orderDetail && state.data?.orderDetail.length > 0 ? <div
                                 className="col-7 mx-auto">
                                 <div
                                     className="text-uppercase fw-bolder text-primary fs-4 mt-3">Wines
                                 </div>
                                 <hr className="col-10 "/>
-                                {state.data.response?.orderDetail.map((wineItem, i) => (
+                                {state.data?.orderDetail.map((wineItem, i) => (
                                     <div key={i}>
 
                                         {wineItem.product ? <div className="row mt-1">
@@ -188,11 +188,11 @@ const OrderConfirmation = () => {
                         <hr className='col-10 mt-1'/>
                         <div className="row mt-1">
                             <div className="col-6">SubTotal</div>
-                            <div className="col-4 text-end">$ {state.data.response.totalPrice}</div>
+                            <div className="col-4 text-end">$ {state.data.totalPrice}</div>
                         </div>
                         <div className="row mt-1">
                             <div className="col-6">Discount</div>
-                            <div className="col-4 text-end">$ {state.data.response?.discount || 0}</div>
+                            <div className="col-4 text-end">$ {state.data?.discount || 0}</div>
                         </div>
                         {/*<div className="row mt-1">*/}
                         {/*    <div className="col-6">Shipping Charges</div>*/}
@@ -205,7 +205,7 @@ const OrderConfirmation = () => {
                         <div className="row  fs-4 text-uppercase fw-bolder">
                             <div className="col-6">Total Price</div>
                             <div
-                                className="col-4 text-end">${state.data.response.totalPrice - state.data.response.discount}</div>
+                                className="col-4 text-end">${state.data.totalPrice - state.data.discount}</div>
                         </div>
                     </div>
                 </div>
