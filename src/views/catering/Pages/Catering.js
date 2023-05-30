@@ -16,7 +16,6 @@ const Catering = () => {
     const [selectedMenuId, setSelectedMenuId] = useState()
     const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
-
     const [formComponent, setFormComponent] = useState(false)
     const [wineShow, setWineShow] = useState(false)
 
@@ -62,7 +61,6 @@ const Catering = () => {
     return (
         <>
             <Header/>
-
             <div style={{backgroundImage: `url(${luxurayWine})`, height: '300px', backgroundSize: '100%'}}>
             </div>
             <section style={{paddingTop:'50px', paddingBottom: '50px'}}>

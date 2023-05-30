@@ -156,6 +156,9 @@ const Order = () => {
                             return (
                                 <div className="col-md-3  col-12 top-level-menu" key={item.id}>
                                     <div className="menu-item-1" onClick={() => {
+                                        const storedRestaurantId = localStorage.getItem('restaurantId')
+                                        const redirectTo = storedRestaurantId ? "/OmgPlate" : "/gmap"
+
                                         if (item.name.toString().trim().toLowerCase() === "omg plate") {
                                             setModalClicked(!modalClicked)
                                             setSelectedCategory(1)
@@ -163,7 +166,7 @@ const Order = () => {
                                             setModalClicked(!modalClicked)
                                             setSelectedCategory(2)
                                         } else {
-                                        history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id })
+                                            history.push(redirectTo, { categoryId: item.id })
                                         }
                                     }}>
                                         <div className="thumbnail">
@@ -376,54 +379,6 @@ const Order = () => {
                     </div>
                 </div>
             </div>
-            {/*about section*/}
-            {/*<section id="about-7" className="about-section division">*/}
-            {/*    <div className="container-sm">*/}
-            {/*        <div className="abox-4-wrapper ico-80">*/}
-            {/*            <div className="row">*/}
-            {/*                <div className="col-md-4 col-lg-4">*/}
-            {/*                    <div className=" text-center  coffee-color">*/}
-            {/*                        <div className="abox-4-ico">*/}
-            {/*                            <img className="img-center" src={foodicon} alt="Recipes"/>*/}
-            {/*                        </div>*/}
-            {/*                        <h5 className="h5-lg text-uppercase">Original Recipes</h5>*/}
-            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
-            {/*                            feugiat dolor impedit*/}
-            {/*                            felis magna dolor vitae*/}
-            {/*                        </p>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*                <div className="col-md-4 col-lg-4">*/}
-            {/*                    <div className=" text-center  coffee-color">*/}
-            {/*                        <div className="abox-4-ico">*/}
-            {/*                            <img className="img-center" src={qualityicon} alt="Quality Foods"/>*/}
-            {/*                        </div>*/}
-            {/*                        <h5 className="h5-lg text-uppercase">Quality Foods</h5>*/}
-            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
-            {/*                            feugiat dolor impedit*/}
-            {/*                            felis magna dolor vitae*/}
-            {/*                        </p>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*                <div className="col-md-4 col-lg-4">*/}
-            {/*                    <div className="text-center coffee-color">*/}
-            {/*                        <div className="abox-4-ico">*/}
-            {/*                            <img className="img-center" src={deliveryicon} alt="Fastest Delivery"/>*/}
-            {/*                        </div>*/}
-            {/*                        <h5 className="h5-lg text-uppercase">Fastest Delivery</h5>*/}
-            {/*                        <p>Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor tempus*/}
-            {/*                            feugiat dolor impedit*/}
-            {/*                            felis magna dolor vitae*/}
-            {/*                        </p>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
-            {/*                /!* eslint-disable-next-line no-tabs *!/*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        /!* eslint-disable-next-line no-tabs *!/*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-            {/*about section end*/}
             <Modal isOpen={modalClicked} toggle={() => setModalClicked(!modalClicked)} className='modal-dialog-centered modal-lg'>
                 <ModalHeader toggle={() => setModalClicked(!modalClicked)}>PLEASE SELECT</ModalHeader>
                 <ModalBody>

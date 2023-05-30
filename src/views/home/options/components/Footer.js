@@ -73,7 +73,7 @@ const Footer = (props) => {
     // }
     return (
         <>
-            <div className="container-fluid mt-2"
+            <div className="container-fluid mt-2 pb-2"
                  style={{
                      backgroundColor: 'whitesmoke',
                      position: "sticky",
@@ -82,15 +82,15 @@ const Footer = (props) => {
                      zIndex: 10
 
                  }}>
-                <div className="row mb-2">
+                <div className="row">
                     <div className="col-lg-7 col-12 mt-1 mb-2 d-lg-block d-none" style={{}}>
-                        <div className="text-center text-uppercase fw-bolder"
-                             style={{color: 'black', fontSize: "1.6rem"}}>Your
-                            Menu Items
-                        </div>
-                        <div className="text-center fw-bolder" style={{color: 'black', fontSize: "1.3rem"}}>Select a
-                            protein or vegie to get started
-                        </div>
+                        {/*<div className="text-center text-uppercase fw-bolder"*/}
+                        {/*     style={{color: 'black', fontSize: "1.6rem"}}>Your*/}
+                        {/*    Menu Items*/}
+                        {/*</div>*/}
+                        {/*<div className="text-center fw-bolder" style={{color: 'black', fontSize: "1.3rem"}}>Select a*/}
+                        {/*    protein or vegie to get started*/}
+                        {/*</div>*/}
                     </div>
                     <div className="col-lg-5 col-12 mt-1 mb-1 mb-lg-0 " style={{textAlign: 'center'}}>
                         {/*<div
