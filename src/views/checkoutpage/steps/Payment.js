@@ -37,10 +37,11 @@ const Payment = (props) => {
     // hooks
     const history = useHistory()
     const dispatch = useDispatch()
-    const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, {}, true, false)
+    const [isLoading, response] = useAPI(placeOrder.url, 'post', {...placeOrder.order}, null, true, false)
 
     useEffect(() => {
         setLoading(isLoading)
+        console.log('order', response)
         if (response && response.data) {
             history.push('/confirmOrder', {data: response.data})
             //isCatering ? history.push('/catering') : history.push('/home')
@@ -54,6 +55,7 @@ const Payment = (props) => {
     const placeMealOrder = (paymentId, paymentDateTime) => {
         const orderDetails = []
         if (cartData) {
+            console.log('cartData', cartData)
             // adding meals to order
             if (cartData.meals && cartData.meals.length > 0) cartData.meals.forEach(m => {
                 orderDetails.push({
@@ -61,11 +63,13 @@ const Payment = (props) => {
                         name: m.mealName,
                         categoryId: m.categoryId,
                         mealProducts: m.selectedProducts && m.selectedProducts.length > 0 ? m.selectedProducts.map(p => {
+                            console.log('p', p)
                             return {
                                 productId: p.id,
                                 quantity: p.selectedQuantity,
                                 unitPrice: p.price,
-                                optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
+                                optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null,
+                                squareItemId: p.squareItemId
                             }
                         }) : []
                     }
@@ -87,7 +91,7 @@ const Payment = (props) => {
                 shippingAddress: shippingAddress ? shippingAddress.payload : null,
                 billingAddress: billingAddress ? billingAddress.payload : null,
                 ordersDetail: [...orderDetails],
-                totalPrice: cartTotalPrice(),
+                totalPrice: Number(cartTotalPrice()),
                 customerId: getUserData()?.customerId,
                 quantity: orderDetails.length,
                 restaurantId: Number(restaurantId),
@@ -95,10 +99,12 @@ const Payment = (props) => {
                 paymentDateTime,
                 groupOrderId : getGroupOrderId() ? Number(getGroupOrderId()) : null
             }
+            console.log("Final data afte call", order)
             setPlaceOrder({url: 'order', order: {...order}})
         }
     }
     const placeCateringOrder = (paymentId, paymentDateTime) => {
+        console.log('yes')
         const cateringOrderMenuItems = []
         const cateringOrderSectionItems = []
         const cateringOrderWines = []
@@ -152,6 +158,7 @@ const Payment = (props) => {
 
     }
     const submitOrder = (payment) => {
+        console.log("payemtn", payment)
         if (isCatering) placeCateringOrder(payment.id, payment.createdAt)
         else placeMealOrder(payment.id, payment.createdAt)
     }
@@ -162,25 +169,29 @@ const Payment = (props) => {
         if (token && token.token && token.status === "OK" && verifiedBuyer && verifiedBuyer.token) {
             const body = {
                 sourceId: token.token,
-                locationId: process.env.SQUARE_LOCATION_ID,
+                locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
                 verificationToken: verifiedBuyer.token,
                 customerEmail: getUserData().email,
                 amountMoney: {
-                    amount: cartTotalPrice(),
+                    amount: Number(cartTotalPrice() * 100),
                     currency: 'USD'
                 }
             }
             setLoading(true)
             setLoadingMessage('Payment InProgress...')
+            console.log('body data:', body)
             const res = await http._post(`${baseURL}payment`, {...body})
-            if (res && res.status === 200 && res.data.statusCode === 200) {
+            console.log('final data:', res)
+            if (res && res.data.statusCode === 200) {
+                console.log('final data inside:', res)
                 setLoadingMessage('Booking Order...')
-                submitOrder(res.data.data)
+                submitOrder(res.data.data.payment)
             } else {
                 setLoading(false)
                 toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
             }
             console.info('payment details', res)
+            console.log('final data after:', res)
         }
 
     }

@@ -7,11 +7,12 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
     const [response, setResponse] = useState(null)
 
     useEffect(() => {
-        const controller = new AbortController()
+        //const controller = new AbortController()
             if (url && url !== '') {
                 setIsLoading(true)
-                 http._request({baseURL, url, method, data, responseType, signal: controller.signal })
+                 http._request({baseURL, url, method, data, responseType /*signal: controller.signal*/ })
                     .then(res => {
+                        console.log('res', res)
                         if (res && res.status === 200 && (res.data instanceof Blob || res.data.statusCode === 200)) {
                             setIsLoading(false)
                             setResponse(res.data)
@@ -22,13 +23,14 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
                         }
                     }
                 ).catch(e => {
+                     console.log('abc', e)
                          setIsLoading(false)
                          if (isErrorToast) toast.error(e.message)
                      })
             }
-        return () => {
+       /* return () => {
             controller.abort()
-        }
+        }*/
 
     }, [url])
 
