@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {FaCheck} from "react-icons/all"
+import {FaCheck} from "react-icons/fa"
 
 const CartMeals = ({item, setSelectedItem, nutritionData, i, selectedItem}) => {
 

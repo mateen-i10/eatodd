@@ -1,5 +1,4 @@
 import React, {memo, useEffect, useState} from "react"
-import {MdArrowBackIos} from "react-icons/all"
 import CheckSign from "../../options/components/Utility/CheckSign"
 import {ExtraQty} from "../../options/components/Utility/LighExSid"
 import {ArrowRight, Plus} from "react-feather"
@@ -11,6 +10,7 @@ import chilli from '../../../../assets/images/ORDER/chilli.png'
 import {getUserData} from "../../../../auth/utils"
 import {getWinePackageByCustomer} from "../../../../redux/memberShipType/action"
 import {useDispatch, useSelector} from "react-redux"
+import {MdArrowBackIos} from "react-icons/md"
 
 const ProductCard = ({   item,
                          limit,
