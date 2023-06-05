@@ -47,7 +47,7 @@ const Cart = (props) => {
     const [selectMeal, setSelectMeal] = useState(null)
     const [restaurantId, setRestaurantId] = useState(null)
     const [selectedQuantity, setSelectedQuantity] = useState(0)
-
+    const [restaurantDetails, setRestaurantDetails] = useState(null)
     console.log('selectedQ', selectedQuantity)
 
     console.log('getRecommendedProduct', getRecommendedProduct)
@@ -107,18 +107,26 @@ const Cart = (props) => {
             console.log('ids2', ids)*/
         }
     }, [cartItems])
+
     useEffect(() => {
         const id = localStorage.getItem("restaurantId")
         setRestaurantId(id)
+        if (id) {
+            httpService
+                ._get(`${baseURL}Restaurant/${id}`)
+                .then(response => {
+                    console.log(restaurantId)
+                    console.log('restGetbuid', response.data)
+                    // Assuming the restaurant details are present in the response's "data" field
+                    setRestaurantDetails(response.data)
+                })
+                .catch(error => {
+                    // Handle error if API call fails
+                    console.log(error)
+                })
+        }
     }, [])
 
-    console.log('restaurantId', restaurantId)
-    if (restaurantId) {
-        httpService._get(`${baseURL}Restaurant/${restaurantId}`)
-                .then(response => {
-                    console.log('restGetbuid', response)
-                })
-    }
     useEffect(() => {
         const mealsOptions1 = cartItems?.meals?.map((m, index) => {
             return {label: m.mealName, value: index}
@@ -358,12 +366,32 @@ const Cart = (props) => {
                                                style={{height: 25, width: 35, marginLeft: -10}}/> </span>
                                 </div>
                                 <div className="my-auto text-uppercase">
-                                    <div className="fs-6">Deliver to
-                                    </div>
-                                    {userLocation.length ? <div
-                                        className=" fw-bolder"
-                                        style={{fontSize: "0.8rem"}}>{userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}</div> : ""}
+                                    {!restaurantDetails ? (
+                                        <div className="fs-6">Deliver to</div>
+                                    ) : (
+                                        <div className="fs-6">Pick from</div>
+                                    )}
+                                    {userLocation.length ? (
+                                        <div className="fw-bolder" style={{ fontSize: "0.8rem" }}>
+                                            {userLocation[0].action.payload.formatted_address ? userLocation[0].action.payload.formatted_address : userLocation[0].action.payload.name}
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
+                                {restaurantDetails && (
+                                    <div className="d-flex align-items-center">
+                                        <div className="my-auto fw-bolder" style={{ fontSize: "0.9rem", marginLeft: "5px" }}>
+                                            {restaurantDetails.data.name}
+                                        </div>
+                                        <span
+                                            className="ms-2 cursor-pointer"
+                                            onClick={() => {
+                                                localStorage.removeItem("restaurantId")
+                                                setRestaurantDetails(null)
+                                            }}>&#10005;</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
