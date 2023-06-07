@@ -4,13 +4,14 @@ import ProductImage from "../../home/components/product/ProductImage"
 
 const WineCards = (props) => {
     const {item, xl, md, onAddToCart} = props
+    console.log('item', item)
 
     return (
 
         <Col xl={xl} md={md}>
             <Card className='mb-3  justify-content-center bg-transparent'>
                 <ProductImage
-                    attachment={item.attachment ? item.attachment : null}
+                    attachment={item.product.attachment ? item.product.attachment : null}
                     styles={{width: "85%", marginTop: "14px", height: "170px"}}
                 />
                 {/*<CardImg top
