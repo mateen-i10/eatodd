@@ -12,7 +12,7 @@ import {
     Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
     UncontrolledDropdown
 } from "reactstrap"
-import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Trash} from "react-feather"
+import {ChevronDown, Delete, Edit, FileText, Minus, MoreVertical, Plus, Trash} from "react-feather"
 import DataTable from 'react-data-table-component'
 import Swal from "sweetalert2"
 import {addCampaign, deleteCampaign, getCampaign, loadCampaigns, updateCampaign} from "../../../redux/campaign/action"
@@ -26,6 +26,10 @@ import Joi from "joi-browser"
 import Datetime from "react-datetime"
 import {loadOptions} from "../../../utility/Utils"
 import '../style.css'
+import DateTimePicker from "react-datetime-picker"
+import 'react-datetime-picker/dist/DateTimePicker.css'
+import 'react-calendar/dist/Calendar.css'
+import 'react-clock/dist/Clock.css'
 
 const Campaign = (props) => {
 
@@ -51,13 +55,50 @@ const Campaign = (props) => {
     const [name, setName] = useState('')
     const [type, setType] = useState(null)
     const [templateId, setTemplateId] = useState(0)
+    const [restaurantIds, setRestaurantIds] = useState([])
+
     const [htmlSelected, setHtmlSelected] = useState(false)
     console.log('html', htmlSelected)
+    console.log('restaurantIds', restaurantIds)
+    console.log('formInitialState', formInitialState)
+
+    const [isSchedulesSend, setIsSchedulesSend] = useState(false)
+
+    const [checkState, setCheckState] = React.useState(false)
 
     const [isHTML, setIsHTML] = useState(false)
 
     //setting errors
     const [errors, setErrors] = useState({})
+
+    const [excelFile, setExcelFile] = useState(null)
+    const [typeError, setTypeError] = useState(null)
+
+    console.log('excelFile', excelFile)
+
+    const handleFile = (e) => {
+        const  fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv']
+
+        const selectedFile = e.target.files[0]
+
+        if (selectedFile) {
+            console.log(selectedFile.type)
+            if (selectedFile && fileTypes.includes(selectedFile.type)) {
+                setTypeError(null)
+
+                const reader = new FileReader()
+                reader.readAsArrayBuffer(selectedFile)
+                reader.onload = (e) => {
+                    setExcelFile(e.target.result)
+                }
+            } else {
+                setTypeError("Please select only excel file!")
+                setExcelFile(null)
+            }
+        } else {
+            console.log("Please Select Your File")
+        }
+    }
 
     const announceType = [
         {label: 'SMS', value: 1},
@@ -68,6 +109,11 @@ const Campaign = (props) => {
         return loadOptions('template/getByIsHTML', search, 1, 10, isHTML)
 
     }
+
+     const restaurants = async (search) => {
+         return loadOptions('restaurant', search, 1, 10, isHTML)
+
+     }
 
    /* const templates = async (pageIndex = 1, pageSize =  10, searchQuery = undefined, isHTML = false) => {
           return await httpService._get(`${baseURL}template/getByIsHTML?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&isHTML=${isHTML}`)
@@ -119,11 +165,38 @@ const Campaign = (props) => {
         {label: 'Monthly', value: 4}
     ]
 
+    /*const category = [
+        {label: 'All', value: 1},
+        {label: 'Meal', value: 2},
+        {label: 'Catering', value: 3},
+        {label: 'Wine Club', value: 4}
+    ]*/
+
     const handleType = (e) => {
         console.log('clickType', e)
         setType(e)
         setHtmlSelected(true)
     }
+
+    const handleCheck = () => {
+        setCheckState(!checkState)
+        if (checkState === true) {
+            setRestaurantIds([])
+        }
+    }
+
+    const handleSchedules = (e) => {
+        console.log('eee', e)
+        setIsSchedulesSend(!isSchedulesSend)
+        if (isSchedulesSend === false) {
+            setSchedule([])
+        }
+    }
+
+    /*const onSelectCategory = (e) => {
+        console.log('clickCategory', e)
+        setCategoryId(e)
+    }*/
 
     useEffect(() => {
         dispatch(loadCampaigns())
@@ -159,7 +232,7 @@ const Campaign = (props) => {
         console.log('date', event)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
-                s = {...s, scheduleDate: moment(event.toDate()).format() }
+                s = {...s, scheduleDate: moment(event).format() }
             }
             return s
             console.log('s', s)
@@ -219,10 +292,12 @@ const Campaign = (props) => {
 
     const handleClose = () => {
         setName('')
-        setType(0)
+        setType(null)
         setTemplateId(0)
+        setRestaurantIds([])
+        //setCategoryId(0)
         setSchedule([])
-        setHtmlSelected(false)
+        //setIsExcel(false)
     }
 
     const setData = () => {
@@ -230,7 +305,10 @@ const Campaign = (props) => {
             //setId(formInitialState.id)
             setName(formInitialState.name)
             setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
+            //setCategoryId(formInitialState.category === 1 ? {label: 'All', value: 1} : formInitialState.category === 2 ? {label: 'Meal', value: 2} : formInitialState.category === 3 ? {label: 'Catering', value: 3} : {label: 'Wine Club', value: 4})
             setTemplateId({label: formInitialState.template.name, value: formInitialState.template.id})
+            //setRestaurantIds({label: formInitialState.restaurants.name, value: formInitialState.restaurants.id})
+            setRestaurantIds(formInitialState.restaurants.map(r => { return {label: r.name, value: r.id} }))
             setSchedule(formInitialState.schedules.map(s => {
                 return {scheduleDate: moment(new Date(s.scheduleDate)).format(), scheduleDay: s.scheduleDay, repeat: s.repeat}
             }))
@@ -246,8 +324,11 @@ const Campaign = (props) => {
 
     const addClickBtn = () => {
         setName('')
-        setType(0)
+        setType(null)
         setTemplateId(0)
+        setRestaurantIds([])
+        //setCategoryId(0)
+        //setIsExcel(false)
         setSchedule([{scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}])
     }
 
@@ -256,6 +337,7 @@ const Campaign = (props) => {
         dispatch(getCampaign(id, true))
         setFormModal(!formModal)
         setEdit(true)
+        //setIsExcel(false)
     }
 
     const handleSubmit = () => {
@@ -264,13 +346,21 @@ const Campaign = (props) => {
                 name,
                 type,
                 templateId
+                //restaurantIds
+                //category,
+                //emailList,
+                //schedules
             }
 
             const finalData = {
                 name,
                 type: type.value,
                 templateId: templateId.value,
-                schedules: schedule
+                restaurantIds: restaurantIds.map(p => p.value).toString(),
+                category: 1,
+                emailList: excelFile,
+                schedules: isSchedulesSend === true ? schedule : [],
+                scheduleString: isSchedulesSend === true ? JSON.stringify(schedule) : null
             }
 
             const isError = Joi.validate(data, campaignSchema, {abortEarly: false})
@@ -488,6 +578,7 @@ const Campaign = (props) => {
                                             ) : null}
                                         </div>
                                     </Col>
+
                                     {type && type.value === 1 && <Col md={6}>
                                         <div className='mb-2'>
                                             <label>Template <span className='text-danger'>*</span></label>
@@ -514,62 +605,152 @@ const Campaign = (props) => {
                                             />
                                         </div>
                                     </Col>}
+
+                                    <Col md={6}>
+                                        <div className="form-check mt-2">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                //value={isExcel}
+                                                //checked={isExcel}
+                                                onChange={handleCheck}
+                                            />
+                                            <label className="form-check-label">
+                                                Is Excel Sheet
+                                            </label>
+                                        </div>
+                                    </Col>
+
+                                    {checkState === true && <div className='mt-3'>
+                                        <Col md={12}>
+                                            <div className='mb-2'>
+                                                <label>Select Excel File</label>
+                                                <input className='mt-1 form-control' type='file' onChange={handleFile} />
+                                                {typeError && <>
+                                                    <div className='alert alert-danger mt-1 p-1' role="alert">{typeError}</div>
+                                                </>}
+                                            </div>
+                                        </Col>
+
+                                    </div>}
+
+                                    {checkState === false && <>
+                                        <Col md={6}>
+                                            <div className='mb-2'>
+                                                <label>Select Restaurant</label>
+                                                <AsyncSelect
+                                                    defaultOptions
+                                                    value={restaurantIds}
+                                                    onChange={e => setRestaurantIds(e)}
+                                                    loadOptions={restaurants}
+                                                    closeMenuOnSelect={true}
+                                                    isMulti = {true}
+                                                />
+                                            </div>
+                                        </Col>
+
+                                        {/*<Col md={6}>
+                                            <div className='mb-2'>
+                                                <label>Select Category</label>
+                                                <Select
+                                                    options={category}
+                                                    //value={categoryId}
+                                                    defaultValue={{label: "All", value: 1}}
+                                                    onChange={onSelectCategory}
+                                                />
+                                            </div>
+                                        </Col>*/}
+                                    </>}
+
                                 </Row>
+                            <hr />
+
                                 <Row>
                                     <div className='ms-1'>
-                                        <h5>Schedule List</h5>
-                                        {schedule.map((i, index) => {
-                                            return <div key={i.scheduleDay}>
-                                                <div className='row mt-1'>
-                                                    <div className='col-3'>
-                                                        <Select
-                                                            onChange={(e) => {
-                                                                onValueScheduleDay(index, e)
-                                                            }}
-                                                            value={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
-                                                            options={scheduleDays}
-                                                            closeMenuOnSelect={true}
-                                                            isMulti = {false}
-                                                        />
+                                        <h4 style={{color: "red", marginTop: '25px'}}>Important Note</h4>
+                                        <p>If you don't want to select Schedules, email will send to selected customers immediately.</p>
+
+                                        {isSchedulesSend === false && <div className="form-check mt-2">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                //value={isExcel}
+                                                checked={isSchedulesSend}
+                                                onChange={handleSchedules}
+                                            />
+                                            <label className="form-check-label">
+                                                Is Add Schedule
+                                            </label>
+                                        </div>}
+
+                                        {isSchedulesSend === true && <div className="form-check mt-2">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                //value={isExcel}
+                                                checked={isSchedulesSend}
+                                                onChange={handleSchedules}
+                                            />
+                                            <label className="form-check-label">
+                                                Is Remove Schedule
+                                            </label>
+                                        </div>}
+
+                                        {isSchedulesSend === true && <>
+                                            <h3>Schedule List</h3>
+                                            {schedule.map((i, index) => {
+                                                return <div key={i.scheduleDay}>
+                                                    <div className='row mt-1'>
+                                                        <div className='col-3'>
+                                                            <Select
+                                                                onChange={(e) => {
+                                                                    onValueScheduleDay(index, e)
+                                                                }}
+                                                                value={{label: i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '', value: i.scheduleDay}}
+                                                                options={scheduleDays}
+                                                                closeMenuOnSelect={true}
+                                                                isMulti = {false}
+                                                            />
+                                                        </div>
+                                                        {(i.isDate || i.scheduleDay === 4) && <div className='col-4'>
+                                                            <DateTimePicker
+                                                                className='dateStyles'
+                                                                placeholder='Schedule Date'
+                                                                value={i.scheduleDate}
+                                                                closeOnSelect={true}
+                                                                clearIcon={null}
+                                                                onChange={(e) => {
+                                                                    onDateChange(index, e)
+                                                                }}
+                                                            />
+                                                        </div>}
+                                                        <div className='col-3'>
+                                                            <Select
+                                                                onChange={(e) => onValueRepeat(index, e)}
+                                                                options={repeat}
+                                                                value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
+                                                                closeMenuOnSelect={true}
+                                                                isMulti = {false}
+                                                            />
+                                                        </div>
+                                                        {schedule.length > 1 && <div className='col-1'>
+                                                            <Button.Ripple className='btn-icon' color='danger' onClick={() => removeSchedule(index)}>
+                                                                <Delete size={12}/>
+                                                            </Button.Ripple>
+                                                        </div>
+                                                        }
                                                     </div>
-                                                    {(i.isDate || i.scheduleDay === 4) && <div className='col-4'>
-                                                        <Datetime
-                                                            placeholder='Schedule Date'
-                                                            value={i.scheduleDate}
-                                                            //dateFormat={true}
-                                                            timeFormat={false}
-                                                            dateFormat="DD-MM-YY"
-                                                            closeOnSelect={true}
-                                                            onChange={(e) => {
-                                                                onDateChange(index, e)
-                                                            }}
-                                                        />
-                                                    </div>}
-                                                    <div className='col-3'>
-                                                        <Select
-                                                            onChange={(e) => onValueRepeat(index, e)}
-                                                            options={repeat}
-                                                            value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
-                                                            closeMenuOnSelect={true}
-                                                            isMulti = {false}
-                                                        />
-                                                    </div>
-                                                    {schedule.length > 1 && <div className='col-1'>
-                                                        <Button.Ripple className='btn-icon' color='danger' onClick={() => removeSchedule(index)}>
-                                                            <Delete size={12}/>
-                                                        </Button.Ripple>
-                                                    </div>
-                                                    }
                                                 </div>
+                                            })}
+                                            <div className='col-2'>
+                                                <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addSchedule}>
+                                                    <Plus size={12} />
+                                                </Button.Ripple>
                                             </div>
-                                        })}
-                                        <div className='col-2'>
-                                            <Button.Ripple className='btn-icon mt-1 ms-1' color='primary' onClick={addSchedule}>
-                                                <Plus size={12} />
-                                            </Button.Ripple>
-                                        </div>
+                                        </>}
                                     </div>
                                 </Row>
+
                         </ModalBody>
                         <ModalFooter>
                                 <Button color='danger' onClick={() => {

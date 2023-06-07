@@ -68,6 +68,16 @@ const campaignDetail = ({match}) => {
                                                     </CardText>
                                                 </div>
                                             </Col>
+                                            <Col xl={6} className="p-0">
+                                                <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                    <p className='fw-bolder'>Restaurants:</p>
+                                                    <CardText className="mmb-25 ms-1 mb-1">
+                                                        <Badge className="" color={'light-success'} pill>
+                                                            {campaign?.restaurants?.map(r =>  `${r.name}`)}
+                                                        </Badge>
+                                                    </CardText>
+                                                </div>
+                                            </Col>
                                         </Row>
                                         <hr />
                                         <Row>

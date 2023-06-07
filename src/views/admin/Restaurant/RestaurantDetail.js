@@ -228,7 +228,7 @@ const RestaurantDetail = ({match}) => {
                                             <td>{WeekDays[i.day]}</td>
                                             <td>{i.startDate ? moment(i.startDate).format('hh:mm:A') : '--'}</td>
                                             <td>{i.startDate ? moment(i.endDate).format('hh:mm:A') : '--'}</td>
-                                            <td>{i.isClosed ? "Closed" : "Not Closed"}</td>
+                                            <td>{i.isClosed ? "Closed" : "Open"}</td>
                                         </tr>
                                         </tbody>
                                     ))}

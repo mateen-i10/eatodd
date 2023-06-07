@@ -58,7 +58,7 @@ const generalRecommendationReducer = (state = initialState, action) => {
             console.log('editData', data, data.product)
             return {
                 ...state,
-                object: {...data, productId: {label: data.product.name, value: data.product.id}, recommendedProducts: data.recoProducts.map(r => { return {label: r.name, value: r.id} })},
+                object: {...data, productId: {label: data.product.name, value: data.product.id}, categoryId: {label: data.category.name, value: data.category.id}, recommendedProducts: data.recoProducts.map(r => { return {label: r.name, value: r.id} })},
                 //object: action.payload.data,
                 isEdit: true
             }

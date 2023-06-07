@@ -58,7 +58,7 @@ const campaignReducer = (state = initialState, action) => {
             console.log('edit', data)
             return {
                 ...state,
-                object: {...data},
+                object: {...data, restaurantIds: data.restaurants.map(r => { return {label: r.name, value: r.id} })},
                 isEdit: true
             }
         case setRequestCompleted.type:

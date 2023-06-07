@@ -29,7 +29,14 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
 
 // my changes
-import {deleteproduct, loadproducts, getproduct, addproduct, updateproduct} from "../../../redux/products/actions"
+import {
+    deleteproduct,
+    loadproducts,
+    getproduct,
+    addproduct,
+    updateproduct
+    //getProductOnSearch
+} from "../../../redux/products/actions"
 import Child from './ProductFormChild'
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import AsyncSelect from "react-select/async"
@@ -169,6 +176,8 @@ const Product = (props) => {
     const [formData, setFormData] = useState([{type:FieldTypes.Select, label: 'Select Product', placeholder: 'Select Product', name:'generalProduct', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:generalProducts, isAsyncSelect: true, isMulti:false}])
     const [formFeilds, setFormFeilds] = useState(0)
     const [showOption, setShowOption] = useState(true)
+
+    //const [restaurantProduct, setRestaurantProduct] = useState(0)
 
     // my work
     const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
@@ -314,6 +323,11 @@ const Product = (props) => {
         props.history.push(`/productsDetail/${id}`)
     }
 
+    /*const productClick = (id, e) => {
+        e.preventDefault()
+        dispatch(loadProductsByRestaurant(currentPage, pageSize, searchValue, id))
+    }*/
+
     const handleSubmit = (event) => {
         console.log('subcatId', subcategoryId)
         console.log('the option type wala!!!', optionType)
@@ -386,6 +400,8 @@ const Product = (props) => {
 
     const callFunc = () => {
         const refId = subcategoryId
+        //const restId = restaurantProduct?.value
+        //console.log('restId', restId)
 
         if (refId !== 0) {
             history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
@@ -557,7 +573,26 @@ const Product = (props) => {
                         <Col md='2' sm='12' style={{marginTop:'32px'}}>
                             {catId !== 0 ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='primary' onClick={() => callFunc()}><Search size={18}/></Button> : []}
                         </Col>
+
                     </Row>
+                    <hr />
+                    {/*<Row>
+                        <Col md={5}>
+                            <div className='mb-2 ms-1'>
+                                <label>Select Restaurant for Products</label>
+                                <AsyncSelect
+                                    defaultOptions
+                                    value={restaurantProduct}
+                                    onChange={e => setRestaurantProduct(e)}
+                                    loadOptions={Restaurant}
+                                    //onClick={e => productClick(row.id, e)}
+                                    closeMenuOnSelect={true}
+                                    isMulti = {false}
+                                />
+                            </div>
+                        </Col>
+                    </Row>*/}
+
                     <DataTable
                         noHeader
                         pagination

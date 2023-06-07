@@ -29,6 +29,7 @@ import DataTable from "react-data-table-component"
 import UILoader from "../../../@core/components/ui-loader"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import {useHistory, useLocation} from "react-router-dom"
+import httpService, {baseURL} from "../../../utility/http"
 
 const getQueryParams = (search) => {
     return search ? (/^[?#]/.test(search) ? search.slice(1) : search)
@@ -64,6 +65,7 @@ const AssignGeneralRecommendation = (props) => {
 
     const RecommendedObject = {productId: 0, recommendedProducts: []}
     const [product, setProduct] = useState(RecommendedObject)
+    const [categoryProduct, setCategoryProduct] = useState(RecommendedObject)
 
     const queryParams = getQueryParams(location.search)
     const [subcategoryId, setSubcategoryId] = useState(
@@ -71,11 +73,13 @@ const AssignGeneralRecommendation = (props) => {
     )
     const [catId, setCatId] = useState(queryParams.categoryId ? parseInt(queryParams.categoryId, 10) : 0)
 
+    const [modalCategory, setModalCategory] = useState(null)
+    const [modalCategoryProducts, setModalCategoryProducts] = useState([])
+
     const [isSubmit, setSubmit] = useState(false)
 
     console.log('product', product)
     console.log('setSubmit', setSubmit)
-    console.log('subcategoryId', subcategoryId)
 
     const dispatch = useDispatch()
 
@@ -90,9 +94,45 @@ const AssignGeneralRecommendation = (props) => {
     const products = async (search) => {
         return loadOptions('product', search, 1, 100)
     }
+    const loadModalProducts = async (search) => {
+        console.log('search', search)
+        const final = []
+        //return loadOptions(`}`, search, 1, 100)
+        await httpService._get(`${baseURL}product/categoryProducts?categoryId=${modalCategory.value}`)
+            .then(response => {
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    console.log('data in category products', response.data)
+                      response.data.data.products.map(d =>  {
+                        final.push({label: `${d.name}`, value: d.id})
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
+
+        return final
+
+    }
+    const modalProductOptions = async (search) => {
+        const final = await loadModalProducts(search)
+        console.log('fff', final)
+        setModalCategoryProducts([...final])
+    }
+
+    useEffect(() => {
+        if (modalCategory) {
+            modalProductOptions("")
+        }
+
+
+    }, [modalCategory])
 
     const onSelectProduct = (e) => {
         console.log('eee', e)
+        setCategoryProduct(e)
         setProduct({productId: e, recommendedProducts: product.recommendedProducts})
     }
 
@@ -103,6 +143,7 @@ const AssignGeneralRecommendation = (props) => {
 
     const handleClose = () => {
         setProduct({productId: 0, recommendedProducts: []})
+        setModalCategory(null)
     }
 
     const onModalClose = (event) => {
@@ -136,7 +177,10 @@ const AssignGeneralRecommendation = (props) => {
 
     const setData = () => {
         try {
-            setProduct({productId: {...formInitialState.productId}, recommendedProducts: formInitialState.recommendedProducts})
+            console.log('form', formInitialState)
+            setProduct({productId: {label: formInitialState.product?.name, value: formInitialState.product?.id}, recommendedProducts: formInitialState.recommendedProducts})
+            setModalCategory({ label: formInitialState.category.name, value: formInitialState.category.id})
+            setCategoryProduct({label: formInitialState.product?.name, value: formInitialState.product?.id})
         } catch (e) {
             toast.error(e.message)
         }
@@ -148,6 +192,8 @@ const AssignGeneralRecommendation = (props) => {
 
     const addClickBtn = () => {
         setProduct({productId: 0, RecommendedProducts: []})
+        setModalCategory(null)
+        setCategoryProduct(null)
     }
 
     const editClick = (id) => {
@@ -155,6 +201,7 @@ const AssignGeneralRecommendation = (props) => {
         dispatch(getGeneralRecommendation(id, true))
         setFormModal(!formModal)
         setEdit(true)
+        //setData()
     }
 
 
@@ -163,6 +210,7 @@ const AssignGeneralRecommendation = (props) => {
         try {
             console.log('recommendedProduct', product)
             const finalData = {
+                categoryId: modalCategory?.value,
                 productId: product.productId.value,
                 recommendedProducts: product.recommendedProducts.map(p => p.value).toString()
             }
@@ -212,6 +260,12 @@ const AssignGeneralRecommendation = (props) => {
         {
             name: 'Product Name',
             selector: (row) => row.product.name,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Category Name',
+            selector: (row) => row.category.name,
             sortable: true,
             minWidth: '50px'
         },
@@ -377,16 +431,35 @@ const AssignGeneralRecommendation = (props) => {
                             </div>
                             <Row tag='form' className='gy-1 pt-75'>
                                 <div className='col-6'>
-                                    <Label className='form-label' for='name'>Select Product:</Label>
+                                    <Label className='form-label' for='name'>Select Category:</Label>
                                     <AsyncSelect
                                         cacheOptions
                                         defaultOptions
-                                        value={product.productId}
-                                        //defaultValue={product.productId.value}
-                                        onChange={(e) => onSelectProduct(e)}
-                                        loadOptions={products}
+                                        value={modalCategory}
+                                        onChange={(e) => {
+                                            setModalCategory(e)
+                                            /*setProduct(RecommendedObject.productId === null)*/
+                                        }}
+                                        loadOptions={categories}
                                         closeMenuOnSelect={true}
                                         isMulti = {false}
+                                        isDisabled={edit}
+                                    />
+                                </div>
+                                <div className='col-6'>
+                                    <Label className='form-label' for='name'>Select Product:</Label>
+                                    <AsyncSelect
+                                        //defaultOptions
+                                        cacheOptions
+                                        isClearable={true}
+                                        value={categoryProduct}
+                                        defaultOptions={modalCategoryProducts}
+                                        onChange={(e) => onSelectProduct(e)}
+                                        loadOptions={modalProductOptions}
+                                        options={modalCategoryProducts}
+                                        closeMenuOnSelect={true}
+                                        isMulti = {false}
+                                        isDisabled={edit}
                                     />
                                 </div>
                                 <div className='col-6'>

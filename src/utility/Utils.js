@@ -74,7 +74,6 @@ export const loadOptions = async (url, input, pageIndex = 1, pageSize = 12, extr
   return httpService._get(`${baseURL}${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${input}&&isHtml=${extra}`)
       .then(response => {
         if (response.status === 200 && response.data.statusCode === 200) {
-          console.log('dataaa', response.data.data)
           return response.data.data.map(d =>  {
             return {label: `${d.name}`, value: d.id}
           })
