@@ -1,5 +1,6 @@
 import React from 'react'
-import {CgClose, RiDirectionFill} from "react-icons/all"
+import { CgClose } from "react-icons/cg"
+import { RiDirectionFill } from "react-icons/ri"
 import {Badge} from "reactstrap"
 
 const DetailSidebar = ({places, markerClicked, setSelectedSidebar}) => {

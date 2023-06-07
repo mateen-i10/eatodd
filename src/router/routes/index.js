@@ -365,15 +365,6 @@ const Routes = [
         }
     },*/
     {
-        path: '/CrmEmails',
-        component: lazy(() => import('../../views/admin/CrmEmails/CrmEmail')),
-        layout: 'VerticalLayout',
-        meta: {
-            authRoute: true,
-            adminOnly: true
-        }
-    },
-    {
         path: '/campaign/:id',
         component: lazy(() => import('../../views/admin/Campaign/campaignDetail')),
         layout: 'VerticalLayout',
