@@ -6,7 +6,7 @@ import {
     setproduct,
     editproduct,
     setDetailLoading,
-    setRequestCompleted, setIsproductError, setIsproductSuccess, setIsEdit, getpro
+    setRequestCompleted, setIsproductError, setIsproductSuccess, setIsEdit
 } from "./reducer"
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
@@ -15,11 +15,11 @@ const url = 'product'
 
 
 // ** Get All products Data
-export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0) => {
+export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0, restId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
+            url: `${url}/GetAll?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}&&restaurantId=${restId}`,
             data: {},
             method: 'get',
             onSuccess: setproducts.type
@@ -27,14 +27,14 @@ export const loadproducts = (pageIndex = 1, pageSize =  12, searchQuery = null, 
     }
 }
 
-export const getProductOnSearch = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0, restId = 0) => {
+export const getProductOnSearch = (pageIndex = 1, pageSize =  12, searchQuery = null, subcategoryId = 0, restId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}/productByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}&&restId=${restId}`,
+            url: `${url}/productByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&subcategoryId=${subcategoryId}&&restaurantId=${restId}`,
             data: {},
             method: 'get',
-            onSuccess: getpro.type
+            onSuccess: setproducts.type
         }))
     }
 }

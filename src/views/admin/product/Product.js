@@ -35,7 +35,6 @@ import {
     getproduct,
     addproduct,
     updateproduct
-    //getProductOnSearch
 } from "../../../redux/products/actions"
 import Child from './ProductFormChild'
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
@@ -177,7 +176,7 @@ const Product = (props) => {
     const [formFeilds, setFormFeilds] = useState(0)
     const [showOption, setShowOption] = useState(true)
 
-    //const [restaurantProduct, setRestaurantProduct] = useState(0)
+    const [restaurantProduct, setRestaurantProduct] = useState(0)
 
     // my work
     const showOptionObject = {name: '', description: '', price: 0, min: 0, max: 0}
@@ -387,28 +386,34 @@ const Product = (props) => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(loadproducts(currentPage, pageSize, value))
+            const refId = subcategoryId
+            const restId = restaurantProduct?.value
+            dispatch(loadproducts(currentPage, pageSize, value, refId, restId))
         }
         setSearchValue(value)
     }
 
     // ** Function to handle Pagination
     const handlePagination = page => {
-        dispatch(loadproducts(page.selected + 1, pageSize, searchValue))
+        const refId = subcategoryId
+        const restId = restaurantProduct?.value
+        dispatch(loadproducts(page.selected + 1, pageSize, searchValue, refId, restId))
         setCurrentPage(page.selected + 1)
     }
 
     const callFunc = () => {
         const refId = subcategoryId
-        //const restId = restaurantProduct?.value
-        //console.log('restId', restId)
+        const restId = restaurantProduct?.value
+        console.log('restId', restId)
 
-        if (refId !== 0) {
-            history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
-            dispatch(loadproducts(currentPage, pageSize, "", refId))
+        history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
+        dispatch(loadproducts(currentPage, pageSize, "", refId, restId))
+
+        /*if (refId !== 0) {
+
         } else {
-            console.log("please select a value to search for")
-        }
+            console.log("Please select a value to search for")
+        }*/
     }
 
     const columns = [
@@ -576,7 +581,7 @@ const Product = (props) => {
 
                     </Row>
                     <hr />
-                    {/*<Row>
+                    <Row>
                         <Col md={5}>
                             <div className='mb-2 ms-1'>
                                 <label>Select Restaurant for Products</label>
@@ -591,7 +596,10 @@ const Product = (props) => {
                                 />
                             </div>
                         </Col>
-                    </Row>*/}
+                        <Col md='2' sm='12' style={{marginTop:'20px'}}>
+                            {restaurantProduct !== 0 ? <Button style={{borderRadius: '50px', padding:'10px'}} type="button" color='primary' onClick={() => callFunc()}><Search size={18}/></Button> : []}
+                        </Col>
+                    </Row>
 
                     <DataTable
                         noHeader
