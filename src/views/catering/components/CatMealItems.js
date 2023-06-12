@@ -1,12 +1,23 @@
 import React from 'react'
 import CheckSign from "../../home/options/components/Utility/CheckSign"
 import ProductImage from "../../home/components/product/ProductImage"
-import {Input, Label} from "reactstrap"
+import {
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    FormFeedback,
+    FormGroup,
+    Input,
+    Label,
+    UncontrolledDropdown
+} from "reactstrap"
+import {ChevronDown} from "react-feather"
 
 
 const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
     const isChecked = selectedItems && selectedItems.find(i => i.id === product.id)
     return (
+        <>
         <div className="card mb-lg-2 mb-1 overflow-hidden" onClick={() => {
             handleSelect(product?.item)
         }}
@@ -73,6 +84,7 @@ const CatMealItems = ({product, handleSelect, selectedItems, attachment}) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

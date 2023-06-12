@@ -8,7 +8,7 @@ const CateringMenuItems = (props) => {
 
     return (
 
-        <div className="card" style={{height: "380px", paddingBottom: "15px"}}>
+        <div className="card" style={{height: "450px", paddingBottom: "15px"}}>
             <div>
                 <ProductImage attachment={item.attachment} classes="card-img-top" styles={{height: 185, objectFit: "cover"}}/>
                 {/*<img src={item.image} className="card-img-top" style={{height: 185, objectFit: "cover"}} alt="..."/>*/}
@@ -39,7 +39,7 @@ const CateringMenuItems = (props) => {
                 }}>{item.detail}</p>
             </div>
             <div style={{display: 'flex', justifyContent: 'space-around', marginTop: "-29px", marginBottom: 10}}>
-                <h6 className="mt-1">${`${item.price}/persons`}</h6>
+                <h6 className="mt-5">${`${item.price}/persons`}</h6>
             </div>
             <div className="text-center text-uppercase ">
                 <Link to={`/cateringMenuOrder/${item.id}`}>

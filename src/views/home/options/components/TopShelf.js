@@ -6,12 +6,12 @@ const TopShelf = ({attachment, name, description, price}) => {
         <>
             <div className="container-sm mb-0">
                 <div className="row mt-2 mx-auto align-items-center">
-                    <div className="col-md-4 col-11  ">
+                    <div className="col-md-5">
                         <ProductImage
                             attachment={attachment}
-                            styles={{height: "270px", borderRadius: 20, float: "right"}}/>
+                            styles={{height: "270px", borderRadius: 20, float: "left"}}/>
                     </div>
-                    <div className="col-md-7 col-11 mt-1 ">
+                    <div className="col-md-7">
                         <div className="align-middle">
                         <div className="text-primary fw-bolder "
                              style={{

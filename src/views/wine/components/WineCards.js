@@ -21,7 +21,7 @@ const WineCards = (props) => {
                 />*/}
                 <CardBody>
                     <CardTitle tag='h4' className="text-center" style={{marginBottom: "0px"}}>{item.title}</CardTitle>
-                    <div className="fw-bolder fs-4 text-primary text-center mb-1" style={{marginBottom: "0px"}}>${item.price}</div>
+                    <div className="fw-bolder fs-4 text-primary text-center mb-1 mt-5" style={{marginBottom: "0px"}}>${item.price}</div>
                     <Col className='d-grid' sm='12'>
                         <Button color='primary' className="text-uppercase fw-bolder" onClick={() => onAddToCart({...item.product, price: item.price})}>
                             Add To Cart

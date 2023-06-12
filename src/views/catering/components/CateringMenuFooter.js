@@ -56,17 +56,17 @@ const Footer = ({addToCartClick}) => {
                                                 <DropdownItem onClick={() => setValue(10)}>
                                                     10 People
                                                 </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(15)}>
+                                                    15 People
+                                                </DropdownItem>
                                                 <DropdownItem onClick={() => setValue(20)}>
                                                     20 People
                                                 </DropdownItem>
+                                                <DropdownItem onClick={() => setValue(25)}>
+                                                    25 People
+                                                </DropdownItem>
                                                 <DropdownItem onClick={() => setValue(30)}>
                                                     30 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(40)}>
-                                                    40 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(50)}>
-                                                    50 People
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     onClick={() => setValue(100)}>100 People</DropdownItem>

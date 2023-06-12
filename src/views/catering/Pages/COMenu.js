@@ -9,6 +9,19 @@ import UILoader from "../../../@core/components/ui-loader"
 import {SectionItemType} from "../../../utility/enums/Types"
 import {addCateringItem, isObjEmpty} from "../../../utility/Utils"
 import CateringMenuFooter from "../components/CateringMenuFooter"
+import {
+    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle, Form, FormFeedback,
+    FormGroup, Input,
+    Label,
+    ModalBody, ModalFooter,
+    Row,
+    UncontrolledDropdown
+} from "reactstrap"
+import {ChevronDown} from "react-feather"
 
 const COMenu = () => {
     const {id} = useParams()
@@ -19,6 +32,9 @@ const COMenu = () => {
     const [sections, setSections] = useState([])
     const [selectedItems, setSelectedItems] = useState([])
     console.log(selectedItems, "see")
+
+    const [value, setValue] = useState(10)
+
     // hooks
     const [isLoading, response] = useAPI(`cateringMenuItem/${id}`, 'get', {}, {}, true)
     useEffect(() => {
@@ -117,12 +133,64 @@ const COMenu = () => {
                     />
                     <hr className="text-dark mt-1"/>
                 </div>
+                <Row>
+                    <Col md={2}></Col>
+                    <Col md={8}>
+                        <Form>
+                            <div className='col-8'>
+                                <h2 className='form-label mt-2' htmlFor='qty' style={{fontSize: '20px'}}>
+                                    Select Quantity:
+                                </h2>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-around',
+                                    marginTop: "-36px",
+                                    marginBottom: 10
+                                }}>
+                                    <UncontrolledDropdown style={{width: '0%'}}>
+                                        <DropdownToggle caret color="transparent" style={{
+                                            border: "1px solid #81be41",
+                                            color: '#81be41',
+                                            fontWeight: 700
+                                        }}>
+                                            {value} <ChevronDown size={18}/>
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                            <DropdownItem onClick={() => setValue(10)}>
+                                                10 People
+                                            </DropdownItem>
+                                            <DropdownItem onClick={() => setValue(15)}>
+                                                15 People
+                                            </DropdownItem>
+                                            <DropdownItem onClick={() => setValue(20)}>
+                                                20 People
+                                            </DropdownItem>
+                                            <DropdownItem onClick={() => setValue(25)}>
+                                                25 People
+                                            </DropdownItem>
+                                            <DropdownItem onClick={() => setValue(30)}>
+                                                30 People
+                                            </DropdownItem>
+                                            <DropdownItem
+                                                onClick={() => setValue(100)}>100 People</DropdownItem>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </div>
+
+                                <FormFeedback>
+                                    Quantity is required
+                                </FormFeedback>
+                            </div>
+                        </Form>
+                    </Col>
+                    <Col md={2}></Col>
+                </Row>
                 {sections.map(s => {
-                    return <div className="container-sm mt-3 mb-4 text-center">
+                    return <div key={`${s.name}`} className="container-sm mt-3 mb-4 text-center">
                         <h1>{s.name}</h1>
                         <div className="row align-items-center justify-content-center my-1">
                             {s.items.map((product) => (
-                                <div className="col-12 col-xl-5" key={product.id}>
+                                <div className="col-12 col-xl-5" key={`${product.id}`}>
                                     <CatMealItems
                                         product={product}
                                         handleSelect={handleSelect}
