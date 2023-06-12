@@ -271,7 +271,7 @@ const AssignGeneralRecommendation = (props) => {
         },
         {
             name: 'Recommended Product',
-            selector: (row) => row.recoProducts.map(r => { return <Badge key={r.id} className="" color={'light-primary'} pill>{r.name}</Badge> }),
+            selector: (row) => row.recoProducts.map(r => { return <Badge key={`${r.id}`} className="" color={'light-primary'} pill>{r.name}</Badge> }),
             sortable: true,
             minWidth: '50px'
         },

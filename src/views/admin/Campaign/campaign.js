@@ -3,6 +3,7 @@ import React, {Fragment, useEffect, useState} from 'react'
 import UILoader from "../../../@core/components/ui-loader"
 import {useDispatch, useSelector} from "react-redux"
 import {
+    Badge,
     Button,
     Card,
     CardHeader,
@@ -49,7 +50,7 @@ const Campaign = (props) => {
 
     const [edit, setEdit] = useState(false)
 
-    const scheduleObject = {scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}
+    const scheduleObject = {scheduleDate:'', isDate: false, repeat:0, weekDay: null, repeatDateTime: ''}
     const [schedule, setSchedule] = useState([scheduleObject])
 
     const [name, setName] = useState('')
@@ -138,6 +139,7 @@ const Campaign = (props) => {
             })
     }
 */
+
     useEffect(() => {
         console.log('cccccc')
         if (type !== null) {
@@ -151,18 +153,28 @@ const Campaign = (props) => {
 
     }, [type])
 
-    const scheduleDays = [
+    /*const scheduleDays = [
         {label: 'Today', value: 1},
         {label: 'Tomorrow', value: 2},
         {label: 'Next Week', value: 3},
         {label: 'Pick A Date', value: 4}
-    ]
+    ]*/
 
     const repeat = [
         {label: 'Daily', value: 1},
-        {label: 'Week Days', value: 2},
-        {label: 'Weekly', value: 3},
-        {label: 'Monthly', value: 4}
+        {label: 'Weekly', value: 2},
+        {label: 'Monthly', value: 3},
+        {label: 'Yearly', value: 4}
+    ]
+
+    const weekDaysOptions = [
+        {label: 'Sunday', value: 0},
+        {label: 'Monday', value: 1},
+        {label: 'Tuesday', value: 2},
+        {label: 'Wednesday', value: 3},
+        {label: 'Thursday', value: 4},
+        {label: 'Friday', value: 5},
+        {label: 'Saturday', value: 6}
     ]
 
     /*const category = [
@@ -185,8 +197,8 @@ const Campaign = (props) => {
         }
     }
 
-    const handleSchedules = (e) => {
-        console.log('eee', e)
+    const handleSchedules = () => {
+
         setIsSchedulesSend(!isSchedulesSend)
         if (isSchedulesSend === false) {
             setSchedule([])
@@ -213,7 +225,7 @@ const Campaign = (props) => {
         setSchedule(newArray)
     }
 
-    const onValueScheduleDay = (index, e) => {
+    /*const onValueScheduleDay = (index, e) => {
         console.log('eee', e)
         const newArray = schedule.map((s, i) => {
             if (i === index) {
@@ -226,7 +238,7 @@ const Campaign = (props) => {
         })
         console.log('newArrayDay', newArray)
         setSchedule(newArray)
-    }
+    }*/
 
     const onDateChange = (index, event) => {
         console.log('date', event)
@@ -241,10 +253,35 @@ const Campaign = (props) => {
         setSchedule(newArray)
     }
 
+    const onRepeatDateTimeChange = (index, event) => {
+        console.log('date', event)
+        const newArray = schedule.map((s, i) => {
+            if (i === index) {
+                s = {...s, repeatDateTime: moment(event).format() }
+            }
+            return s
+            console.log('s', s)
+        })
+        console.log('newArray', newArray)
+        setSchedule(newArray)
+    }
+
     const onValueRepeat = (index, e) => {
         const newArray = schedule.map((s, i) => {
             if (i === index) {
                 s = {...s, repeat : e.value}
+            }
+            return s
+        })
+        console.log('newArrayRe', newArray)
+        setSchedule(newArray)
+    }
+
+    const onWeekDaysSelect = (index, e) => {
+        console.log("dayE", e, index)
+        const newArray = schedule.map((s, i) => {
+            if (i === index) {
+                s = {...s, weekDay : e.value}
             }
             return s
         })
@@ -290,34 +327,38 @@ const Campaign = (props) => {
         props.history.push(`/campaign/${id}`)
     }
 
-    const handleClose = () => {
-        setName('')
-        setType(null)
-        setTemplateId(0)
-        setRestaurantIds([])
-        //setCategoryId(0)
-        setSchedule([])
-        //setIsExcel(false)
-    }
 
     const setData = () => {
         try {
-            //setId(formInitialState.id)
             setName(formInitialState.name)
             setType(formInitialState.type === 1 ? {label: 'SMS', value: 1} : {label: 'Email', value: 2})
-            //setCategoryId(formInitialState.category === 1 ? {label: 'All', value: 1} : formInitialState.category === 2 ? {label: 'Meal', value: 2} : formInitialState.category === 3 ? {label: 'Catering', value: 3} : {label: 'Wine Club', value: 4})
             setTemplateId({label: formInitialState.template.name, value: formInitialState.template.id})
-            //setRestaurantIds({label: formInitialState.restaurants.name, value: formInitialState.restaurants.id})
             setRestaurantIds(formInitialState.restaurants.map(r => { return {label: r.name, value: r.id} }))
-            setSchedule(formInitialState.schedules.map(s => {
-                return {scheduleDate: moment(new Date(s.scheduleDate)).format(), scheduleDay: s.scheduleDay, repeat: s.repeat}
-            }))
+            if (formInitialState.schedules.length > 0) {
+                    setIsSchedulesSend(true)
+                    setSchedule(formInitialState.schedules.map(s => {
+                        return {scheduleDate: moment(new Date(s.scheduleDate)).format(), repeat: s.repeat, weekDay: s.weekDay, repeatDateTime: moment(new Date(s.repeatDateTime)).format()}
+                    }))
+            } else {
+                setIsSchedulesSend(false)
+            }
+
             //setEdit(true)
         } catch (e) {
             toast.error(e.message)
         }
 
     }
+
+    const handleClose = () => {
+        setName('')
+        setType(null)
+        setTemplateId(0)
+        setRestaurantIds([])
+        setSchedule([])
+        setIsSchedulesSend(false)
+    }
+
     useEffect(() => {
         if (isEdit) setData()
     }, [formInitialState, isEdit])
@@ -327,9 +368,7 @@ const Campaign = (props) => {
         setType(null)
         setTemplateId(0)
         setRestaurantIds([])
-        //setCategoryId(0)
-        //setIsExcel(false)
-        setSchedule([{scheduleDate:'', scheduleDay:0, repeat:0, isDate: false}])
+        setSchedule([])
     }
 
     const editClick = (id) => {
@@ -337,7 +376,7 @@ const Campaign = (props) => {
         dispatch(getCampaign(id, true))
         setFormModal(!formModal)
         setEdit(true)
-        //setIsExcel(false)
+        setIsSchedulesSend(isSchedulesSend)
     }
 
     const handleSubmit = () => {
@@ -346,10 +385,6 @@ const Campaign = (props) => {
                 name,
                 type,
                 templateId
-                //restaurantIds
-                //category,
-                //emailList,
-                //schedules
             }
 
             const finalData = {
@@ -372,7 +407,10 @@ const Campaign = (props) => {
                 edit ? dispatch(updateCampaign({id: formInitialState.id,
                     ...finalData,
                     schedules: finalData.schedules.map(d => {
-                           return  {...d, scheduleDate: moment(new Date(d.scheduleDate)).format()}
+                           return  {...d,
+                               scheduleDate: moment(new Date(d.scheduleDate)).format(),
+                               repeatDateTime: moment(new Date(d.repeatDateTime)).format()
+                           }
                     })})) : dispatch(addCampaign(finalData))
                 handleClose()
                 setEdit(false)
@@ -428,6 +466,12 @@ const Campaign = (props) => {
             sortable: true,
             minWidth: '50px'
         },
+        /*{
+            name: 'Restaurants',
+            selector: (row) => row.restaurant.map(r => { return <Badge key={`${r.id}`} color={'light-primary'} pill>{r.name}</Badge> }),
+            sortable: true,
+            minWidth: '50px'
+        },*/
         {
             name: 'Actions',
             allowOverflow: true,
@@ -554,7 +598,7 @@ const Campaign = (props) => {
                                 <Row>
                                     <Col md={6}>
                                         <div className='mb-2'>
-                                            <Label className='form-label' for='name'>Name:</Label>
+                                            <Label className='form-label' for='name'>Name: <span className='text-danger'>*</span></Label>
                                             <Input type='text' name='name' value={name} onChange={(e) => setName(e.target.value)} id='name' placeholder='Enter Name' />
                                             {!name ? errors.name && (
                                                 <div className="text-danger">
@@ -663,45 +707,50 @@ const Campaign = (props) => {
                                     </>}
 
                                 </Row>
-                            <hr />
+
+                                <hr />
 
                                 <Row>
                                     <div className='ms-1'>
                                         <h4 style={{color: "red", marginTop: '25px'}}>Important Note</h4>
                                         <p>If you don't want to select Schedules, email will send to selected customers immediately.</p>
 
-                                        {isSchedulesSend === false && <div className="form-check mt-2">
+                                        <div className="form-check mt-2">
                                             <input
                                                 className="form-check-input"
                                                 type="checkbox"
-                                                //value={isExcel}
                                                 checked={isSchedulesSend}
                                                 onChange={handleSchedules}
                                             />
+                                            {isSchedulesSend === false ? <div>
                                             <label className="form-check-label">
-                                                Is Add Schedule
+                                                 Add Schedule
                                             </label>
-                                        </div>}
+                                            </div> : <label className="form-check-label">
+                                                 Remove Schedule
+                                            </label>
+                                        }
+                                        </div>
 
-                                        {isSchedulesSend === true && <div className="form-check mt-2">
+                                        {/*{isSchedulesSend === true && <div className="form-check mt-2">
                                             <input
                                                 className="form-check-input"
                                                 type="checkbox"
                                                 //value={isExcel}
-                                                checked={isSchedulesSend}
+                                                //checked={isSchedulesSend}
                                                 onChange={handleSchedules}
                                             />
                                             <label className="form-check-label">
                                                 Is Remove Schedule
                                             </label>
                                         </div>}
-
+*/}
                                         {isSchedulesSend === true && <>
-                                            <h3>Schedule List</h3>
+                                            <h3 className='mt-2'>Schedule List</h3>
                                             {schedule.map((i, index) => {
-                                                return <div key={i.scheduleDay}>
+                                                return <div key={`${i.scheduleDate}`}>
                                                     <div className='row mt-1'>
-                                                        <div className='col-3'>
+                                                        {/*<div className='col-3'>
                                                             <Select
                                                                 onChange={(e) => {
                                                                     onValueScheduleDay(index, e)
@@ -711,11 +760,11 @@ const Campaign = (props) => {
                                                                 closeMenuOnSelect={true}
                                                                 isMulti = {false}
                                                             />
-                                                        </div>
-                                                        {(i.isDate || i.scheduleDay === 4) && <div className='col-4'>
+                                                        </div>*/}
+                                                        <div className='col-5'>
+                                                            <label className='fw-bolder'>Select Date</label>
                                                             <DateTimePicker
                                                                 className='dateStyles'
-                                                                placeholder='Schedule Date'
                                                                 value={i.scheduleDate}
                                                                 closeOnSelect={true}
                                                                 clearIcon={null}
@@ -723,23 +772,52 @@ const Campaign = (props) => {
                                                                     onDateChange(index, e)
                                                                 }}
                                                             />
-                                                        </div>}
-                                                        <div className='col-3'>
+                                                        </div>
+
+                                                        <div className='col-5'>
+                                                            <label className='fw-bolder'>Select Repeat</label>
                                                             <Select
                                                                 onChange={(e) => onValueRepeat(index, e)}
                                                                 options={repeat}
-                                                                value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : ''}}
+                                                                value={{label: i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Weekly' : i.repeat === 3 ? 'Monthly' : i.repeat === 4 ? 'Yearly' : ''}}
                                                                 closeMenuOnSelect={true}
                                                                 isMulti = {false}
                                                             />
                                                         </div>
+
+                                                        {i.repeat === 2 && <>
+                                                            <div className='col-5'>
+                                                                <label className='fw-bolder'>Select Day</label>
+                                                                <Select
+                                                                    onChange={(e) => onWeekDaysSelect(index, e)}
+                                                                    options={weekDaysOptions}
+                                                                    value={{label: i.weekDay === 0 ? 'Sunday' : i.weekDay === 1 ? 'Monday' : i.weekDay === 2 ? 'Tuesday' : i.weekDay === 3 ? 'Wednesday' : i.weekDay === 4 ? 'Thursday' : i.weekDay === 5 ? 'Friday' : i.weekDay === 6 ? 'Saturday' : ''}}
+                                                                    closeMenuOnSelect={true}
+                                                                    isMulti = {false}
+                                                                />
+                                                            </div>
+                                                        </>}
+
+                                                        {(i.repeat === 1 || i.repeat === 2 || i.repeat === 3 || i.repeat === 4) && <div className='col-5'>
+                                                            <label className='fw-bolder'>Select Date Time</label>
+                                                            <DateTimePicker
+                                                                className='dateStyles'
+                                                                value={i.repeatDateTime}
+                                                                closeOnSelect={true}
+                                                                clearIcon={null}
+                                                                onChange={(e) => { onRepeatDateTimeChange(index, e) }}
+                                                            />
+                                                        </div>}
+
                                                         {schedule.length > 1 && <div className='col-1'>
-                                                            <Button.Ripple className='btn-icon' color='danger' onClick={() => removeSchedule(index)}>
+                                                            <Button.Ripple className='btn-icon mt-2' color='danger'
+                                                                           onClick={() => removeSchedule(index)}>
                                                                 <Delete size={12}/>
                                                             </Button.Ripple>
                                                         </div>
                                                         }
                                                     </div>
+                                                    <hr />
                                                 </div>
                                             })}
                                             <div className='col-2'>

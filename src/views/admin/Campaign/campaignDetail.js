@@ -73,7 +73,7 @@ const campaignDetail = ({match}) => {
                                                     <p className='fw-bolder'>Restaurants:</p>
                                                     <CardText className="mmb-25 ms-1 mb-1">
                                                         <Badge className="" color={'light-success'} pill>
-                                                            {campaign?.restaurants?.map(r =>  `${r.name}`)}
+                                                            {campaign?.restaurants?.map(r =>  `${r.name}  , `)}
                                                         </Badge>
                                                     </CardText>
                                                 </div>
@@ -130,17 +130,21 @@ const campaignDetail = ({match}) => {
                                 <Table responsive>
                                     <thead>
                                     <tr>
-                                        <th>Schedule Day</th>
-                                        <th>Date</th>
+
+                                        <th>Date Time</th>
                                         <th>Repeat</th>
+                                        <th>Repeat Week Day</th>
+                                        <th>Repeat Date Time</th>
                                     </tr>
                                     </thead>
                                     {campaign.schedules?.map(i => (
-                                        <tbody key={i.scheduleDay}>
+                                        <tbody key={`${i.scheduleDate}`}>
                                         <tr>
-                                            <td>{i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '--'}</td>
+                                            {/*<td>{i.scheduleDay === 1 ? 'Today' : i.scheduleDay === 2 ? 'Tomorrow' : i.scheduleDay === 3 ? 'Next Week' : i.scheduleDay === 4 ? 'Pick A Date' : '--'}</td>*/}
                                             <td>{i.scheduleDate ? moment(i.scheduleDate).format('DD-MM-YY, hh:mm:A') : '--'}</td>
                                             <td>{i.repeat === 1 ? 'Daily' : i.repeat === 2 ? 'Week Days' : i.repeat === 3 ? 'Weekly' : i.repeat === 4 ? 'Monthly' : '--' }</td>
+                                            <td>{i.weekDay === 0 ? 'Sunday' : i.weekDay === 1 ? 'Monday' : i.weekDay === 2 ? 'Tuesday' : i.weekDay === 3 ? 'Wednesday' : i.weekDay === 4 ? 'Thursday' : i.weekDay === 5 ? 'Friday' : i.weekDay === 6 ? 'Saturday' : '--'}</td>
+                                            <td>{i.repeatDateTime ? moment(i.repeatDateTime).format('DD-MM-YY, hh:mm:A') : '--'}</td>
                                         </tr>
                                         </tbody>
                                     ))}
