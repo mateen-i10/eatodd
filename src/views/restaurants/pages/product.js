@@ -30,7 +30,7 @@ import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import {isObjEmpty, loadOptions} from "../../../utility/Utils"
 import {FieldTypes} from "../../../utility/enums/FieldType"
-import useLoadData from "../../../utility/customHooks/useLoadData"
+//import useLoadData from "../../../utility/customHooks/useLoadData"
 import {
     addproduct,
     deleteproduct,
@@ -40,7 +40,7 @@ import {
     updateproduct
 } from "../../../redux/products/actions"
 import useEdit from "../../../utility/customHooks/useEdit"
-import {setIsEdit, setIsproductError, setproduct} from "../../../redux/products/reducer"
+import {setIsEdit, setIsproductError, setIsproductSuccess, setproduct} from "../../../redux/products/reducer"
 import useModalError from "../../../utility/customHooks/useModalError"
 import Swal from "sweetalert2"
 import Joi from "joi-browser"
@@ -57,6 +57,7 @@ const Products = (props) => {
 
     const productsByRestaurantList = useSelector(state => state.restaurant.productList)
     const miscDataPro = useSelector(state => state.restaurant.miscData)
+    //const isSuccessDataPro = useSelector(state => state.restaurant.isSuccess)
 
     const data = useSelector(state => state.product.dataaa)
 
@@ -88,10 +89,6 @@ const Products = (props) => {
     console.log('stateId', id)
 
     const history = useHistory()
-
-    useEffect(() => {
-        dispatch(loadProductsByRestaurant(currentPage, pageSize, searchValue, id))
-    }, [id])
 
     //Product Add Working Start
     const generalProducts = (input) => {
@@ -250,8 +247,18 @@ const Products = (props) => {
         if (isModalLoading) setModalLoading(false)
     }
 
+    useEffect(() => {
+        dispatch(loadProductsByRestaurant(currentPage, pageSize, searchValue, id))
+        console.log("isSuccess", isSuccess)
+        if (isSuccess) {
+            setModal(false)
+            setModalLoading(isModalLoading)
+            dispatch(setIsproductSuccess(false))
+        }
+    }, [id, isSuccess])
+
     // custom hooks
-    useLoadData(isSuccess, loadProductsByRestaurant, isModal, toggle, currentPage, pageSize, searchValue)
+    //useLoadData(isSuccess, loadProductsByRestaurant, isModal, toggle, currentPage, pageSize, searchValue)
     useEdit(isEdit, setModalLoading, setFormState, formInitialState, setEdit, setIsEdit, setproduct, {
         name: '',
         description:'',
@@ -307,8 +314,9 @@ const Products = (props) => {
 
     const handleSubmit = (event) => {
         console.log('event', event)
+        event.preventDefault()
+
         setSubmit(true)
-        //event.preventDefault()
 
         let finalData = {}
         let finalSchema = {}

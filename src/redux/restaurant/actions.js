@@ -126,11 +126,11 @@ export const loadOrdersByRestaurant = (pageIndex = 1, pageSize =  12, searchQuer
 }
 
 // ** Get All Products by Restaurants Data
-export const loadProductsByRestaurant = (pageIndex = 1, pageSize =  12, searchQuery = null, RefId = 0) => {
+export const loadProductsByRestaurant = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0) => {
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}/ProductByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&RefId=${RefId}`,
+            url: `${url}/ProductByRestaurant?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
             data: {},
             method: 'get',
             onSuccess: setProductsByRestaurant.type
