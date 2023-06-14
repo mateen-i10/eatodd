@@ -22,6 +22,7 @@ import {
     UncontrolledDropdown
 } from "reactstrap"
 import {ChevronDown} from "react-feather"
+import Select from "react-select"
 
 const COMenu = () => {
     const {id} = useParams()
@@ -33,7 +34,7 @@ const COMenu = () => {
     const [selectedItems, setSelectedItems] = useState([])
     console.log(selectedItems, "see")
 
-    const [value, setValue] = useState(10)
+    const [quantity, setQuantity] = useState(10)
 
     // hooks
     const [isLoading, response] = useAPI(`cateringMenuItem/${id}`, 'get', {}, {}, true)
@@ -57,7 +58,7 @@ const COMenu = () => {
                             name: i.name,
                             image: require("../../../assets/images/eatOmg pics 100size/Lamb Sandwich.jpg").default,
                             description: '',
-                            price: i.price,
+                            price: i.price * quantity,
                             attachment: i.attachment,
                             item: {
                                 ...i,
@@ -71,7 +72,7 @@ const COMenu = () => {
                 setSections([...sec])
             }
         }
-    }, [response])
+    }, [response, quantity])
 
     // functions
     const handleSelect = (item) => {
@@ -89,7 +90,7 @@ const COMenu = () => {
         }
         setSelectedItems([...finalItems])
     }
-    const addToCart = (quantity, instructions) => {
+    const addToCart = (instructions) => {
         // calculating meal total price
         let finalItems = []
         let totalPrice = 0
@@ -99,8 +100,8 @@ const COMenu = () => {
             finalItems = selectedItems.map(item => {
                 if (!isObjEmpty(item)) {
                     const price = item.price
-                    totalPrice = totalPrice + price
-                    return {...item, calculatedPrice: price, price}
+                    totalPrice = totalPrice + (price * quantity)
+                    return {...item, selectedQuantity: quantity, calculatedPrice: price * quantity, price}
                 }
             })
         }
@@ -147,32 +148,35 @@ const COMenu = () => {
                                     marginTop: "-36px",
                                     marginBottom: 10
                                 }}>
+                                    {/*<Select>
+                                        <option value={10} onClick={() => setQuantity(10)} > 10 People</option>
+                                    </Select>*/}
                                     <UncontrolledDropdown style={{width: '0%'}}>
                                         <DropdownToggle caret color="transparent" style={{
                                             border: "1px solid #81be41",
                                             color: '#81be41',
                                             fontWeight: 700
                                         }}>
-                                            {value} <ChevronDown size={18}/>
+                                            {quantity} <ChevronDown size={18}/>
                                         </DropdownToggle>
                                         <DropdownMenu>
-                                            <DropdownItem onClick={() => setValue(10)}>
+                                            <DropdownItem onClick={() => setQuantity(10)}>
                                                 10 People
                                             </DropdownItem>
-                                            <DropdownItem onClick={() => setValue(15)}>
+                                            <DropdownItem onClick={() => setQuantity(15)}>
                                                 15 People
                                             </DropdownItem>
-                                            <DropdownItem onClick={() => setValue(20)}>
+                                            <DropdownItem onClick={() => setQuantity(20)}>
                                                 20 People
                                             </DropdownItem>
-                                            <DropdownItem onClick={() => setValue(25)}>
+                                            <DropdownItem onClick={() => setQuantity(25)}>
                                                 25 People
                                             </DropdownItem>
-                                            <DropdownItem onClick={() => setValue(30)}>
+                                            <DropdownItem onClick={() => setQuantity(30)}>
                                                 30 People
                                             </DropdownItem>
                                             <DropdownItem
-                                                onClick={() => setValue(100)}>100 People</DropdownItem>
+                                                onClick={() => setQuantity(100)}>100 People</DropdownItem>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </div>

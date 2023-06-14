@@ -19,10 +19,9 @@ import {ChevronDown} from "react-feather"
 const Footer = ({addToCartClick}) => {
 
     const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-    const [value, setValue] = useState(10)
     const [instructions, setInstructions] = useState('')
     const onSaveClick = () => {
-        addToCartClick(value, instructions)
+        addToCartClick(instructions)
         setBasicNameFoodModal(!basicNameFoodModal)
     }
 
@@ -35,54 +34,11 @@ const Footer = ({addToCartClick}) => {
                         <ModalBody>
                             <FormGroup>
                                 <div className='col-8' style={{marginLeft: 80}}>
-                                    <Label className='form-label' for='qty'>
-                                        Quantity:
-                                    </Label>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-around',
-                                        marginTop: "-29px",
-                                        marginBottom: 10
-                                    }}>
-                                        <UncontrolledDropdown>
-                                            <DropdownToggle
-                                                caret
-                                                color="transparent"
-                                                style={{border: "1px solid #81be41", color: '#81be41', fontWeight: 700}}
-                                            >
-                                                {value} <ChevronDown size={18}/>
-                                            </DropdownToggle>
-                                            <DropdownMenu>
-                                                <DropdownItem onClick={() => setValue(10)}>
-                                                    10 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(15)}>
-                                                    15 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(20)}>
-                                                    20 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(25)}>
-                                                    25 People
-                                                </DropdownItem>
-                                                <DropdownItem onClick={() => setValue(30)}>
-                                                    30 People
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    onClick={() => setValue(100)}>100 People</DropdownItem>
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                    </div>
-
-                                    <FormFeedback>
-                                        Quantity is required
-                                    </FormFeedback>
                                     <Label className='form-label' for='instructions'>
                                         Instructions:
                                     </Label>
                                     <Input value={instructions} onChange={e => setInstructions(e.target.value)} id="instructions" type='textarea'/>
                                 </div>
-
                             </FormGroup>
                         </ModalBody>
                         <ModalFooter style={{justifyContent: 'center', marginBottom: 20, marginTop: 30}}>

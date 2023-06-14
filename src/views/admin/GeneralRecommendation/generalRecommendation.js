@@ -84,7 +84,9 @@ const AssignGeneralRecommendation = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(loadGeneralRecommendations())
+        const refId = subcategoryId
+        console.log('refId', refId)
+        dispatch(loadGeneralRecommendations(currentPage, pageSize, "", refId))
     }, [isSuccess])
 
     const categories = async (input) => {

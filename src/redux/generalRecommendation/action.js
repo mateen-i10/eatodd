@@ -9,10 +9,11 @@ import {
 const url = 'GeneralRecommendation'
 
 export const loadGeneralRecommendations = (pageIndex = 1, pageSize =  12, searchQuery = null, refId = 0) => {
+    console.log('refIdAction', refId)
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
+            url: `${url}/GetRecos?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
             data: {},
             method: 'get',
             onSuccess: setGeneralRecommendations.type
