@@ -11,7 +11,7 @@ import {addCateringItem, isObjEmpty} from "../../../utility/Utils"
 import CateringMenuFooter from "../components/CateringMenuFooter"
 import {
     Button,
-    Col,
+    Col, Container,
     DropdownItem,
     DropdownMenu,
     DropdownToggle, Form, FormFeedback,
@@ -134,61 +134,67 @@ const COMenu = () => {
                     />
                     <hr className="text-dark mt-1"/>
                 </div>
-                <Row>
-                    <Col md={2}></Col>
-                    <Col md={8}>
-                        <Form>
-                            <div className='col-8'>
-                                <h2 className='form-label mt-2' htmlFor='qty' style={{fontSize: '20px'}}>
-                                    Select Quantity:
-                                </h2>
-                                <div style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-around',
-                                    marginTop: "-36px",
-                                    marginBottom: 10
-                                }}>
-                                    {/*<Select>
-                                        <option value={10} onClick={() => setQuantity(10)} > 10 People</option>
-                                    </Select>*/}
-                                    <UncontrolledDropdown style={{width: '0%'}}>
-                                        <DropdownToggle caret color="transparent" style={{
-                                            border: "1px solid #81be41",
-                                            color: '#81be41',
-                                            fontWeight: 700
-                                        }}>
-                                            {quantity} <ChevronDown size={18}/>
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem onClick={() => setQuantity(10)}>
-                                                10 People
-                                            </DropdownItem>
-                                            <DropdownItem onClick={() => setQuantity(15)}>
-                                                15 People
-                                            </DropdownItem>
-                                            <DropdownItem onClick={() => setQuantity(20)}>
-                                                20 People
-                                            </DropdownItem>
-                                            <DropdownItem onClick={() => setQuantity(25)}>
-                                                25 People
-                                            </DropdownItem>
-                                            <DropdownItem onClick={() => setQuantity(30)}>
-                                                30 People
-                                            </DropdownItem>
-                                            <DropdownItem
-                                                onClick={() => setQuantity(100)}>100 People</DropdownItem>
-                                        </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                </div>
 
-                                <FormFeedback>
-                                    Quantity is required
-                                </FormFeedback>
-                            </div>
-                        </Form>
-                    </Col>
-                    <Col md={2}></Col>
-                </Row>
+                <div className='container-sm'>
+                    <div className="row g-0">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-8">
+                            <Form>
+                                <div className=''>
+                                    <div className="col-md-4">
+                                        <h2 className='form-label mt-2' htmlFor='qty' style={{fontSize: '20px', float: 'left'}}>
+                                            Select Quantity:
+                                        </h2>
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div style={{
+                                            //display: 'flex',
+                                            //justifyContent: 'space-around',
+                                            marginTop: "13px",
+                                            marginBottom: 10,
+                                            float: 'left',
+                                            marginLeft: '50px'
+                                        }}>
+                                            <UncontrolledDropdown style={{}}>
+                                                <DropdownToggle caret color="transparent" style={{
+                                                    border: "1px solid #81be41",
+                                                    color: '#81be41',
+                                                    fontWeight: 700
+                                                }}>
+                                                    {quantity} <ChevronDown size={18}/>
+                                                </DropdownToggle>
+                                                <DropdownMenu>
+                                                    <DropdownItem onClick={() => setQuantity(10)}>
+                                                        10 People
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => setQuantity(15)}>
+                                                        15 People
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => setQuantity(20)}>
+                                                        20 People
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => setQuantity(25)}>
+                                                        25 People
+                                                    </DropdownItem>
+                                                    <DropdownItem onClick={() => setQuantity(30)}>
+                                                        30 People
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        onClick={() => setQuantity(100)}>100 People</DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </div>
+
+                                        <FormFeedback>
+                                            Quantity is required
+                                        </FormFeedback>
+                                    </div>
+                                </div>
+                            </Form>
+                        </div>
+                        <div className="col-md-2"></div>
+                    </div>
+                </div>
                 {sections.map(s => {
                     return <div key={`${s.name}`} className="container-sm mt-3 mb-4 text-center">
                         <h1>{s.name}</h1>

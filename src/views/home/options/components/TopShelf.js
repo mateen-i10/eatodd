@@ -1,15 +1,17 @@
 import React from 'react'
 import ProductImage from "../../components/product/ProductImage"
+import UILoader from "../../../../@core/components/ui-loader"
 
 const TopShelf = ({attachment, name, description, price}) => {
     return (
         <>
-            <div className="container-sm mb-0">
+            <UILoader>
+                <div className="container-sm mb-0">
                 <div className="row mt-2 mx-auto align-items-center">
                     <div className="col-md-5">
                         <ProductImage
                             attachment={attachment}
-                            styles={{height: "270px", borderRadius: 20, float: "left"}}/>
+                            styles={{height: "270px", width: '100%', borderRadius: 20, float: "left"}}/>
                     </div>
                     <div className="col-md-7">
                         <div className="align-middle">
@@ -27,6 +29,7 @@ const TopShelf = ({attachment, name, description, price}) => {
                     </div>
                 </div>
             </div>
+            </UILoader>
         </>
     )
 }

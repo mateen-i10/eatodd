@@ -1,5 +1,6 @@
 import React, {memo, useEffect, useState} from "react"
 import useAPI from "../../../../utility/customHooks/useAPI"
+import UILoader from "../../../../@core/components/ui-loader"
 
 const ProductImage = ({attachment, classes, styles}) => {
     const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
@@ -25,9 +26,11 @@ const ProductImage = ({attachment, classes, styles}) => {
     }, [response])
 
     return <>
-        <div style={{justifyContent: "center", display: "flex" }} >
-            <img src={imageURL} className={classes} alt="product image" style={styles} />
-        </div>
+        <UILoader blocking={isLoading}>
+            <div style={{justifyContent: "center", display: "flex" }} >
+                <img src={imageURL} className={classes} alt="product image" style={styles} />
+            </div>
+        </UILoader>
     </>
 }
 
