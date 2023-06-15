@@ -466,12 +466,6 @@ const Campaign = (props) => {
             sortable: true,
             minWidth: '50px'
         },
-        /*{
-            name: 'Restaurants',
-            selector: (row) => row.restaurant.map(r => { return <Badge key={`${r.id}`} color={'light-primary'} pill>{r.name}</Badge> }),
-            sortable: true,
-            minWidth: '50px'
-        },*/
         {
             name: 'Actions',
             allowOverflow: true,

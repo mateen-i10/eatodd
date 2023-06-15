@@ -697,6 +697,12 @@ const Routes = [
         exact: true
     },
     {
+        path: '/rewardConfiguration',
+        component: lazy(() => import('../../views/admin/Reward/RewardConfiguration')),
+        layout: 'VerticalLayout',
+        exact: true
+    },
+    {
         path: '/templates',
         component: lazy(() => import('../../views/admin/CrmEmails/Template')),
         layout: 'VerticalLayout',

@@ -115,6 +115,12 @@ export default [
         navLink: '/contact'
     },
     {
+        id: 'rewardConfiguration',
+        title: 'Reward Configuration',
+        icon: <Grid size={20}/>,
+        navLink: '/rewardConfiguration'
+    },
+    {
         id: 'Wineclub',
         title: 'Wineclub',
         children: [

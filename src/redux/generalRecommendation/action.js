@@ -13,7 +13,7 @@ export const loadGeneralRecommendations = (pageIndex = 1, pageSize =  12, search
     return async dispatch => {
         dispatch(setLoading(true))
         dispatch(apiCall({
-            url: `${url}/GetRecos?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
+            url: `${url}?pageIndex=${pageIndex}&&pageSize=${pageSize}&&searchQuery=${searchQuery}&&refId=${refId}`,
             data: {},
             method: 'get',
             onSuccess: setGeneralRecommendations.type

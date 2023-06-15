@@ -42,6 +42,7 @@ import campaign from "./campaign/reducer"
 import template from "./template/reducer"
 import review from "./review/reducer"
 import generalRecommendation from "./generalRecommendation/reducer"
+import reward from "./Reward/reducer"
 
 const rootReducer = {
     auth,
@@ -85,7 +86,8 @@ const rootReducer = {
     campaign,
     template,
     review,
-    generalRecommendation
+    generalRecommendation,
+    reward
 }
 
 export default rootReducer
