@@ -8,8 +8,6 @@ import {toast} from "react-toastify"
 const RewardConfiguration = () => {
 
     const rewardsList = useSelector(state => state.reward.list)
-    //const miscData = useSelector(state => state.reward.miscData)
-    //const formInitialState = useSelector(state => state.reward.list)
     const isSuccess = useSelector(state => state.reward.isSuccess)
     //const isEdit = useSelector(state => state.reward.isEdit)
     const isLoading = useSelector(state => state.reward.isLoading)
@@ -23,11 +21,11 @@ const RewardConfiguration = () => {
     const newMiniAllowedPoints = newReward?.miniAllowedPoints
     const newDiscountOnMiniAllowedPoints = newReward?.discountOnMiniAllowedPoints
 
-    const [usd, setUsd] = useState(localStorage.getItem('myComponentValue') || newUsd)
-    const [omgPoints, setOmgPoints] = useState(localStorage.getItem('myComponentValue1') || newOmgPoints)
-    const [miniOrderAmount, setMiniOrderAmount] = useState(localStorage.getItem('myComponentValue2') || newMiniOrderAmount)
-    const [miniAllowedPoints, setMiniAllowedPoints] = useState(localStorage.getItem('myComponentValue3') || newMiniAllowedPoints)
-    const [discountOnMiniAllowedPoints, setDiscountOnMiniAllowedPoints] = useState(localStorage.getItem('myComponentValue4') || newDiscountOnMiniAllowedPoints)
+    const [usd, setUsd] = useState(localStorage.getItem('usd') || newUsd)
+    const [omgPoints, setOmgPoints] = useState(localStorage.getItem('newOmgPoints') || newOmgPoints)
+    const [miniOrderAmount, setMiniOrderAmount] = useState(localStorage.getItem('newMiniOrderAmount') || newMiniOrderAmount)
+    const [miniAllowedPoints, setMiniAllowedPoints] = useState(localStorage.getItem('newMiniAllowedPoints') || newMiniAllowedPoints)
+    const [discountOnMiniAllowedPoints, setDiscountOnMiniAllowedPoints] = useState(localStorage.getItem('newDiscountOnMiniAllowedPoints') || newDiscountOnMiniAllowedPoints)
 
     const dispatch = useDispatch()
 
@@ -36,12 +34,13 @@ const RewardConfiguration = () => {
     }, [isSuccess])
 
     useEffect(() => {
-        localStorage.setItem('myComponentValue', newUsd)
-        localStorage.setItem('myComponentValue1', newOmgPoints)
-        localStorage.setItem('myComponentValue2', newMiniOrderAmount)
-        localStorage.setItem('myComponentValue3', newMiniAllowedPoints)
-        localStorage.setItem('myComponentValue4', newDiscountOnMiniAllowedPoints)
-    }, [usd, omgPoints, miniOrderAmount, miniAllowedPoints, discountOnMiniAllowedPoints])
+        localStorage.setItem('usd', newUsd)
+        localStorage.setItem('newOmgPoints', newOmgPoints)
+        localStorage.setItem('newMiniOrderAmount', newMiniOrderAmount)
+        localStorage.setItem('newMiniAllowedPoints', newMiniAllowedPoints)
+        localStorage.setItem('newDiscountOnMiniAllowedPoints', newDiscountOnMiniAllowedPoints)
+    }, [usd, omgPoints, miniOrderAmount, miniAllowedPoints, discountOnMiniAllowedPoints, rewardsList])
+
 
     const handleSubmit = () => {
         try {
@@ -78,7 +77,7 @@ const RewardConfiguration = () => {
                                 <div className='col-md-6'>
                                     <div className='mb-2'>
                                         <Label className='form-label fw-bolder font-medium-1' for='usd'>USD: </Label>
-                                        <Input type='number' defaultValue={usd} onChange={(e) => setUsd(e.target.value)} id='' placeholder='' />
+                                        <Input type='number' name='usd' defaultValue={usd} onChange={(e) => setUsd(e.target.value)} id='' placeholder='' />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
