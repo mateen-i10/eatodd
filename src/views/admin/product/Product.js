@@ -141,7 +141,11 @@ const Product = (props) => {
 
     const Flavour = async () => [
         { value: 'Spicy', label: 'Spicy' },
-        { value: 'Normal', label: 'Normal' }
+        { value: 'Normal', label: 'Normal' },
+        { value: 'Contains Almonds', label: 'Contains Almonds' },
+        { value: 'Vegan', label: 'Vegan' },
+        { value: 'Gluten free', label: 'Gluten free' },
+        { value: 'Vegetarian', label: 'Vegetarian' }
     ]
 
     // ** local States

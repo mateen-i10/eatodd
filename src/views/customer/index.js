@@ -10,6 +10,7 @@ import SecurityTab from "./components/ChangePassword"
 import MyOrder from "./components/MyOrders"
 import OrderHistory from "./components/OrderHistory"
 import '@styles/base/pages/page-faq.scss'
+import RewardDetail from "./components/RewardDetail"
 
 const data = {
     accountSetting: {
@@ -90,20 +91,25 @@ const Customer = () => {
                                    </TabPane>
                                    <TabPane tabId='3'>
                                        <div className="row justify-content-center">
-                                           <div className="col-md-12 mt-4"><BillingAddress data={data}/></div>
+                                           <div className="col-md-12 mt-4"><RewardDetail data={data}/></div>
                                        </div>
                                    </TabPane>
                                    <TabPane tabId='4'>
                                        <div className="row justify-content-center">
-                                           <div className="col-md-12 mt-4"><SecurityTab data={data}/></div>
+                                           <div className="col-md-12 mt-4"><BillingAddress data={data}/></div>
                                        </div>
                                    </TabPane>
                                    <TabPane tabId='5'>
                                        <div className="row justify-content-center">
-                                           <div className="col-md-12 mt-4"><MyOrder data={data}/></div>
+                                           <div className="col-md-12 mt-4"><SecurityTab data={data}/></div>
                                        </div>
                                    </TabPane>
                                    <TabPane tabId='6'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><MyOrder data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='7'>
                                        <div className="row justify-content-center">
                                            <div className="col-md-12 mt-4"><OrderHistory data={data}/></div>
                                        </div>

@@ -7,22 +7,19 @@ import {ProductTypes} from "../../../../utility/enums/Types"
 import Counter from "../../options/components/Counter"
 import ProductImage from "./ProductImage"
 import chilli from '../../../../assets/images/ORDER/chilli.png'
+import Vegi from '../../../../assets/images/ORDER/vegetable.png'
+import Vegan from '../../../../assets/images/ORDER/vegan.png'
+import CA from '../../../../assets/images/ORDER/almonds.png'
+import GF from '../../../../assets/images/ORDER/gluten-free.png'
 import {getUserData} from "../../../../auth/utils"
 import {getWinePackageByCustomer} from "../../../../redux/memberShipType/action"
 import {useDispatch, useSelector} from "react-redux"
 import {MdArrowBackIos} from "react-icons/md"
+import ReactTooltip from "react-tooltip"
 
-const ProductCard = ({   item,
-                         limit,
-                         selectedItems,
-                         onItemClick,
-                         attachment,
-                         subCatId,
-                         onOptionClick,
-                         onQuantityChange,
-                         setShowExtra,
-                         showExtra
-                     }) => {
+const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCatId, onOptionClick, onQuantityChange, setShowExtra, showExtra}) => {
+
+
     //local state
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
@@ -165,13 +162,14 @@ const ProductCard = ({   item,
                         <div className="col-lg-9 col-md-9 col-7">
                             <div className="card-body ">
                                 <div className=''>
-                                    <div
-                                        className="card-title text-start text-uppercase mb-0 text-primary fw-bolder "
-                                        style={{
-                                            fontSize: '1.1em',
-                                            lineHeight: "18px",
-                                            marginTop: "-6px"
-                                        }}>{item?.name}{item.flavour === 'Spicy' && <img src={chilli} width={20} alt="image"/>}</div>
+                                    <div className="card-title text-start text-uppercase mb-0 text-primary fw-bolder " style={{fontSize: '1.1em', lineHeight: "18px", marginTop: "-6px"}}>
+                                        {item?.name}
+                                        <br />
+                                        <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
+                                        <p className='text-info' style={{paddingTop: '3px'}}>
+                                            {item.flavour === 'Spicy' ? <img src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? <span data-tip="Normal">N</span> : item.flavour === "Contains Almonds" ? <img src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : item.flavour === "Vegan" ? <img src={Vegan} width={20} alt="image" data-tip="Vegan"/> : item.flavour === "Gluten free" ? <img src={GF} width={20} alt="image" data-tip="Gluten free"/> : item.flavour === "Vegetarian" ? <img src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''}
+                                        </p>
+                                    </div>
                                     <p className="mb-0 text-dark">{item?.description}</p>
                                 </div>
                             </div>

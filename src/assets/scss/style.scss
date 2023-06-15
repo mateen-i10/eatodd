@@ -96,3 +96,10 @@ body {
   height: 37px;
   display: flex !important;
 }
+
+.custom-tooltip {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid black;
+  border-radius: 5px;
+}
