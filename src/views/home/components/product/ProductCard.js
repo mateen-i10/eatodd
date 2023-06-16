@@ -10,7 +10,7 @@ import chilli from '../../../../assets/images/ORDER/chilli.png'
 import Vegi from '../../../../assets/images/ORDER/vegetable.png'
 import Vegan from '../../../../assets/images/ORDER/vegan.png'
 import CA from '../../../../assets/images/ORDER/almonds.png'
-import GF from '../../../../assets/images/ORDER/gluten-free.png'
+import GF from '../../../../assets/images/ORDER/gluten.png'
 import {getUserData} from "../../../../auth/utils"
 import {getWinePackageByCustomer} from "../../../../redux/memberShipType/action"
 import {useDispatch, useSelector} from "react-redux"
@@ -167,7 +167,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                         <br />
                                         <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
                                         <p className='text-info' style={{paddingTop: '3px'}}>
-                                            {item.flavour === 'Spicy' ? <img src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? <span data-tip="Normal">N</span> : item.flavour === "Contains Almonds" ? <img src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : item.flavour === "Vegan" ? <img src={Vegan} width={20} alt="image" data-tip="Vegan"/> : item.flavour === "Gluten free" ? <img src={GF} width={20} alt="image" data-tip="Gluten free"/> : item.flavour === "Vegetarian" ? <img src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''}
+                                            {item.flavour === 'Spicy' ? <img src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? '' : item.flavour === "Contains Almonds" ? <img src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : item.flavour === "Vegan" ? <img src={Vegan} width={20} alt="image" data-tip="Vegan"/> : item.flavour === "Gluten free" ? <img src={GF} width={20} alt="image" data-tip="Gluten free"/> : item.flavour === "Vegetarian" ? <img src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''}
                                         </p>
                                     </div>
                                     <p className="mb-0 text-dark">{item?.description}</p>
