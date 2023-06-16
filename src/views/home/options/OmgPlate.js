@@ -258,7 +258,7 @@ const Menu = () => {
                 setSelectedProducts([...final])
             } else {
                 // new product case
-                if (limit !== 0 && final.filter(p => p.subCategory.id === subCatId).length === limit) return
+                if (limit !== 0 && final.filter(p => p.subCategory?.id === subCatId).length === limit) return
                 product.options.forEach(op => { op.isSelected = false })
                 product.options[index].isSelected = true
                 setSelectedProducts([...final, product])
