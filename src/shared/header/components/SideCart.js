@@ -202,7 +202,7 @@ const Cart = (props) => {
         )
     }
 
-// methods
+    // methods
     const handleRemove = (index, isCatering) => {
         let result = false
         if (isCatering) {

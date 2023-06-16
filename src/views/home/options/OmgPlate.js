@@ -349,13 +349,13 @@ const Menu = () => {
                                 ))}
                             </div>
                         ))}
-                        {category?.isWinePaired && <Wines
-                            restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
-                            handleSelectOption={handleSelectOption}
-                            handleChangeQuantity={handleChangeQuantity}
-                            handleSelectProduct={handleSelectProduct}
-                            selectedProducts={selectedProducts}
-                        />}
+                        {/*{category?.isWinePaired && <Wines*/}
+                        {/*    restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}*/}
+                        {/*    handleSelectOption={handleSelectOption}*/}
+                        {/*    handleChangeQuantity={handleChangeQuantity}*/}
+                        {/*    handleSelectProduct={handleSelectProduct}*/}
+                        {/*    selectedProducts={selectedProducts}*/}
+                        {/*/>}*/}
                     </div>
                 </div>
             </div>

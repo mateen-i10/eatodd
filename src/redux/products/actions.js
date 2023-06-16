@@ -100,7 +100,7 @@ export const updateproduct = (data) => {
             data,
             method: 'put',
             isSuccessToast: true,
-            successMessage: 'product Updated Successfully',
+            successMessage: 'Product Updated Successfully',
             requestCompleted: setRequestCompleted.type,
             onError: setIsproductError.type,
             isSuccess: setIsproductSuccess.type,

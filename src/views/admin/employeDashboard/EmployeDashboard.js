@@ -119,7 +119,7 @@ const EmployeeDashboard = () => {
                                 </section>
                             </CardTitle>
 
-                            {/*<CardBody className='statistics-body'>
+                            <CardBody className='statistics-body'>
                                 <Row>
                                     <Col xl={3} sm={6}>
                                         <div className='d-flex align-items-center'>
@@ -158,7 +158,7 @@ const EmployeeDashboard = () => {
                                         </div>
                                     </Col>
                                 </Row>
-                            </CardBody>*/}
+                            </CardBody>
                         </Card>
                     </Col>
                 </Row>
