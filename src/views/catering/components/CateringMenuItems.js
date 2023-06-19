@@ -87,7 +87,7 @@ const CateringMenuItems = (props) => {
                                 <div className="card-body align-items-center justify-content-center">
                                     <h2 className="fw-bolder text-center text-primary mb-2" style={{fontSize: '20px', textTransform: 'capitalize'}}>{item.title.toUpperCase()}</h2>
                                     <Row>
-                                        <Col lg={12} className='text-center imgBefore'>
+                                        <Col lg={12} className='text-center'>
                                             <img className='imgCenter imgStyle' width="35%" src={cardImage} height="auto" alt="standard-plan-img"/>
                                         </Col>
                                     </Row>
