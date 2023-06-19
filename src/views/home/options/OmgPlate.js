@@ -277,7 +277,14 @@ const Menu = () => {
         final[index].selectedQuantity = value
         setSelectedProducts([...final])
     }
+// Define an empty array for sortedProducts
+    let sortedProducts = []
 
+// Check if filteredProducts has a value before sorting
+    if (filteredProducts) {
+        // Sort the filteredProducts array based on priority
+        sortedProducts = filteredProducts.sort((a, b) => a.priority - b.priority)
+    }
     console.log(selectedProducts, "Lets see the selection")
 
     return (
@@ -306,7 +313,7 @@ const Menu = () => {
                 {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
                     <div className="container-sm">
-                        {filteredProducts.map(prod => (
+                        {sortedProducts.map((prod) => (
                             <div key={prod.id}>
                                 {!prod.isHidden && (
                                     <ProductsSubcategoryMenu
@@ -324,40 +331,63 @@ const Menu = () => {
                                 )}
                                 {prod.subCatId && !prod.isHidden && (
                                     <div className="row">
-                                        <div className="col-md-6" style={{margin: 'auto'}}>
-                                            <div onClick={() => toggleSubcategory(prod.subCatId)} className="card add mb-lg-2 mb-1 overflow-hidden" style={{maxHeight: '98px', minHeight: '98px', position: 'relative', width: '550px', margin:'auto', cursor:'pointer'}}>
-                                                <i className="fas fa-times-circle" style={{position: 'absolute', left: '20%', transform: 'translateX(-50%)', color: subcategoryVisible === prod.subCatId ? 'red' : 'black', fontSize: '40px', marginTop: '25px', cursor: 'pointer'}}></i>
-                                                <h2 style={{margin: 'auto', display: 'inline-block'}}>No {prod.name}</h2>
+                                        <div
+                                            className="col-md-6"
+                                            style={{ margin: "auto" }}
+                                        >
+                                            <div
+                                                onClick={() => toggleSubcategory(prod.subCatId)}
+                                                className="card add mb-lg-2 mb-1 overflow-hidden"
+                                                style={{
+                                                    maxHeight: "98px",
+                                                    minHeight: "98px",
+                                                    position: "relative",
+                                                    width: "550px",
+                                                    margin: "auto",
+                                                    cursor: "pointer"
+                                                }}
+                                            >
+                                                <i
+                                                    className="fas fa-times-circle"
+                                                    style={{
+                                                        position: "absolute",
+                                                        left: "20%",
+                                                        transform: "translateX(-50%)",
+                                                        color: subcategoryVisible === prod.subCatId ? "red" : "black",
+                                                        fontSize: "40px",
+                                                        marginTop: "25px",
+                                                        cursor: "pointer"
+                                                    }}
+                                                ></i>
+                                                <h2 style={{ margin: "auto", display: "inline-block" }}>
+                                                    No {prod.name}
+                                                </h2>
                                             </div>
                                         </div>
                                     </div>
                                 )}
-                                {prod.subCatId && hiddenSubcategories.filter(subCat => subCat.subCatId === prod.id).map(subCat => (
-                                    <ProductsSubcategoryMenu
-                                        key={subCat.id}
-                                        heading={subCat.name}
-                                        limit={subCat.fillingLimit}
-                                        products={subCat.products}
-                                        subCatId={subCat.id}
-                                        isBlank={subCat.isBlank}
-                                        prodsubId={prod.subCatId}
-                                        ispriority={subCat.priority}
-                                        handleSelectOption={handleSelectOption}
-                                        handleChangeQuantity={handleChangeQuantity}
-                                        handleSelectProduct={handleSelectProduct}
-                                        selectedProducts={selectedProducts}
-                                        toggleSubcategory={toggleSubcategory}
-                                    />
-                                ))}
+                                {prod.subCatId &&
+                                    hiddenSubcategories
+                                        .filter((subCat) => subCat.subCatId === prod.id)
+                                        .map((subCat) => (
+                                            <ProductsSubcategoryMenu
+                                                key={subCat.id}
+                                                heading={subCat.name}
+                                                limit={subCat.fillingLimit}
+                                                products={subCat.products}
+                                                subCatId={subCat.id}
+                                                isBlank={subCat.isBlank}
+                                                prodsubId={prod.subCatId}
+                                                ispriority={subCat.priority}
+                                                handleSelectOption={handleSelectOption}
+                                                handleChangeQuantity={handleChangeQuantity}
+                                                handleSelectProduct={handleSelectProduct}
+                                                selectedProducts={selectedProducts}
+                                                toggleSubcategory={toggleSubcategory}
+                                            />
+                                        ))}
                             </div>
                         ))}
-                        {/*{category?.isWinePaired && <Wines*/}
-                        {/*    restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}*/}
-                        {/*    handleSelectOption={handleSelectOption}*/}
-                        {/*    handleChangeQuantity={handleChangeQuantity}*/}
-                        {/*    handleSelectProduct={handleSelectProduct}*/}
-                        {/*    selectedProducts={selectedProducts}*/}
-                        {/*/>}*/}
                     </div>
                 </div>
             </div>

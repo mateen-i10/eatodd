@@ -237,6 +237,12 @@ const SubCategory = (props) => {
             minWidth: '50px'
         },
         {
+            name: 'Priority',
+            selector: (row) => row.priority,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
             name: 'Actions',
             allowOverflow: true,
             cell: row => {
