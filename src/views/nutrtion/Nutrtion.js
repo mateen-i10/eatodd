@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import './stylesheet/Nutrition.css'
 import {Link, useHistory} from "react-router-dom"
 import NutTable from "./NutTable"
@@ -19,12 +19,8 @@ const Nutrition = () => {
     // const [cartItems, setCartItems] = useState([])
     const history = useHistory()
     // console.log(selectedItem)
-
     const cartItems = getCartData()
-
-
     console.log("cartItems data *******", cartItems)
-
 
     const nutritionData = (index) => {
         console.log("selected item -----", cartItems.meals[index])
@@ -73,6 +69,7 @@ const Nutrition = () => {
     }
 
     return (
+        <Fragment>
         <div>
             <Header/>
             <NutritionHeader cartItems={cartItems} customerMealName={customerMealName}
@@ -118,36 +115,9 @@ const Nutrition = () => {
             {cartItems?.meals?.length > 0 ? <div className="mt-1">
                 <NutTable nutritionCal={nutritionCal}/>
             </div> : null}
-            <div className='container-fluid bgimg'
-                 style={{textAlign: 'center', paddingTop: '100px', paddingBottom: '100px'}}>
-                <div className='row'>
-                    <h1 style={{fontSize: 140, fontWeight: 'bolder', color: '#57ab00'}}>53</h1>
-                    <h4 style={{
-                        fontSize: 50,
-                        textTransform: 'uppercase',
-                        fontWeight: 'bolder',
-                        color: '#57ab00'
-                    }}>Ingredients</h4>
-                    <p style={{fontWeight: 'bolder', color: '#57ab00'}}>Thats all we need</p>
-                    <Link to='/NutrtionIngredients'>
-                        <button style={{
-                            backgroundColor: 'transparent',
-                            borderWidth: 0.1,
-                            border: 'solid',
-                            borderColor: 'black',
-                            paddingLeft: 30,
-                            paddingRight: 30,
-                            textTransform: 'uppercase',
-                            marginBottom: 50,
-                            color: 'black',
-                            fontWeight: 'bolder'
-                        }}>View all
-                        </button>
-                    </Link>
-                </div>
-            </div>
             <Footer/>
         </div>
+        </Fragment>
     )
 }
 export default Nutrition

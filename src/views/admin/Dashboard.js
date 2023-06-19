@@ -11,7 +11,7 @@ import {
 } from 'reactstrap'
 import {MoreVertical, Edit, Trash} from "react-feather"
 // ** React Imports
-import React, {useContext, useState} from 'react'
+import React, {Fragment, useContext, useState} from 'react'
 // ** Context
 import { ThemeColors } from '../../utility/context/ThemeColors'
 // ** Demo Components
@@ -62,7 +62,8 @@ const Dashboard = () => {
     console.log(obj2, 'obj2')
 
     return (
-        <div id='dashboard-ecommerce'>
+        <Fragment>
+            <div id='dashboard-ecommerce'>
             <div className='card'>
                 <section>
                     <Row>
@@ -394,6 +395,7 @@ const Dashboard = () => {
                 </Col>
             </Row>
         </div>
+        </Fragment>
     )
 }
 

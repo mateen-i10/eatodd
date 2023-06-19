@@ -322,7 +322,7 @@ const GenralProducts = (props) => {
         {
             name: 'Photo',
             sortable: true,
-            minWidth: '250px',
+            minWidth: '50px',
             cell: row => (
                 <div className='d-flex align-items-center'>
                     <div className="thumbnail ">
@@ -335,7 +335,7 @@ const GenralProducts = (props) => {
             name: 'Name',
             selector: (row) => row.name,
             sortable: true,
-            minWidth: '50px'
+            minWidth: '100px'
         },
         {
             name: 'Description',

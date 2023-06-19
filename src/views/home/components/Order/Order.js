@@ -123,7 +123,7 @@ const Order = () => {
     }
     return (
         <div className="order-main">
-            <div className="container-fluid unlock-section">
+            {isUserLoggedIn() ? null : <div className="container-fluid unlock-section">
                 <div className="container-sm">
                     <div className="row align-items-center justify-content-center pt-1 pb-1">
                         <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
@@ -131,7 +131,7 @@ const Order = () => {
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
                             <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        {isUserLoggedIn() ? null : <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
+                        <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
                                     <Link to='/wine/membership'>
@@ -143,10 +143,10 @@ const Order = () => {
                                     <div className="fw-bolder text-primary text-uppercase fs-4 ">Sign In</div>
                                 </Link>
                             </div>
-                        </div>}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>}
             <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
                 <div className="row ms-0 me-1 ">
                     {
