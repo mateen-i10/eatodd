@@ -134,17 +134,17 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
 
                 })}
                 <div className="col-md-10 col-10 "  onClick={() => {
-                  if (showExtra !== undefined && item.isBlank === true) setShowExtra(!showExtra)
+                    if (showExtra !== undefined && item.isBlank === true) setShowExtra(!showExtra)
                     onItemClick(item, subCatId, limit)
                     setValue(!value)
-                    if (limit !== 0 && selectedItems.length === limit) {
+                    // if limit is -1, user can select all items, so we do not apply any limit
+                    if (limit !== -1 && limit !== 0 && selectedItems.length === limit) {
                         if (item.isBlank === true) {
                             setValue(!value)
                         }  else {
                             setIsLength(true)
                             setValue(false)
                         }
-
                     }
                 }}>
                     <div className="row g-0">

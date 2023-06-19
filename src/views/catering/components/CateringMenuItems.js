@@ -7,7 +7,6 @@ const CateringMenuItems = (props) => {
     const {item} = props
 
     return (
-
         <div className="card" style={{height: "450px", paddingBottom: "15px"}}>
             <div>
                 <ProductImage attachment={item.attachment} classes="card-img-top" styles={{height: 185, objectFit: "cover"}}/>

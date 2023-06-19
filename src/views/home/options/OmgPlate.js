@@ -1,4 +1,4 @@
-import React, {useEffect, useState, memo} from 'react'
+import React, {useEffect, useState, memo, Fragment} from 'react'
 import TopShelf from "./components/TopShelf"
 import Header from "../../../shared/header/Header"
 import Footer from "./components/Footer"
@@ -15,6 +15,7 @@ import {groupOrderId, groupOrderMemberName} from "../../../utility/constants"
 import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
+import UILoader from "../../../@core/components/ui-loader"
 
 
 const Menu = () => {
@@ -280,7 +281,8 @@ const Menu = () => {
     console.log(selectedProducts, "Lets see the selection")
 
     return (
-        <>
+        <Fragment>
+            <UILoader blocking={isLoading}>
             <Header/>
             <div className="sticky-top headerScroll">
                 <div className="" style={{marginBottom: 0, height: "45px"}}>
@@ -349,13 +351,13 @@ const Menu = () => {
                                 ))}
                             </div>
                         ))}
-                        {category?.isWinePaired && <Wines
-                            restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}
-                            handleSelectOption={handleSelectOption}
-                            handleChangeQuantity={handleChangeQuantity}
-                            handleSelectProduct={handleSelectProduct}
-                            selectedProducts={selectedProducts}
-                        />}
+                        {/*{category?.isWinePaired && <Wines*/}
+                        {/*    restaurantId={userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId}*/}
+                        {/*    handleSelectOption={handleSelectOption}*/}
+                        {/*    handleChangeQuantity={handleChangeQuantity}*/}
+                        {/*    handleSelectProduct={handleSelectProduct}*/}
+                        {/*    selectedProducts={selectedProducts}*/}
+                        {/*/>}*/}
                     </div>
                 </div>
             </div>
@@ -366,7 +368,8 @@ const Menu = () => {
                 productList={selectedProducts}
             />
             <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
-        </>
+            </UILoader>
+        </Fragment>
     )
 }
 export default memo(Menu)

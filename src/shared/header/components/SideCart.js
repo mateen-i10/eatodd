@@ -72,6 +72,12 @@ const Cart = (props) => {
     }, [isDeleted])
 
     useEffect(() => {
+        const localStorageData = localStorage.getItem('cartItems')
+        const parsedData = JSON.parse(localStorageData)
+        setCartItems(parsedData)
+    }, [])
+
+    useEffect(() => {
         const ids = cartItems && cartItems.catering ? cartItems?.catering?.map(c => {
             const selected = c.selectedProducts?.map(s => {
                 return s.productId
@@ -136,7 +142,24 @@ const Cart = (props) => {
 
     const addRecommended = (slide, e) => {
         e.preventDefault()
-        setRecommendedProductModal(!recommendedProductModal)
+        const localStorageData = localStorage.getItem('cartItems')
+        const cartItems = JSON.parse(localStorageData) || { meals: [] }
+
+        const meal = cartItems.meals[0] // Replace 0 with the index of the desired meal
+
+        if (meal) {
+            meal.selectedProducts.push({
+                ...slide,
+                selectedQuantity: 1,
+                price: slide.wholePrice,
+                calculatedPrice: slide.wholePrice
+            })
+            meal.totalPrice += slide.wholePrice
+
+            // Update the cartItems object in localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems))
+        }
+
         setGetRecommendedProduct(slide)
     }
 
@@ -202,7 +225,7 @@ const Cart = (props) => {
         )
     }
 
-// methods
+    // methods
     const handleRemove = (index, isCatering) => {
         let result = false
         if (isCatering) {

@@ -350,7 +350,6 @@ const Restaurant = (props) => {
         console.log('clicked', e)
     }*/
 
-
     const editClick = (id) => {
         toggle()
         dispatch(getRestaurant(id, true))
@@ -610,8 +609,7 @@ const Restaurant = (props) => {
             />
 
             <CompareData IsModalOpened={modalIsOpen}
-                         onCloseModal={handleCloseModal}
-            />
+                         onCloseModal={handleCloseModal}/>
 
         </Fragment>
     )

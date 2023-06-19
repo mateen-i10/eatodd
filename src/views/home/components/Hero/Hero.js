@@ -50,7 +50,7 @@ const Hero = () => {
                             }}
                         ></div>
                         <div className="banner-content" style={{position: 'absolute', zIndex: 1}}>
-                            <h1 className="banner-text" style={{color: '#000000', fontWeight: '700'}}>
+                            <h1 className="banner-text" style={{color: 'white', fontWeight: '700'}}>
                                 TREAT YOUR CO WORKERS, FAMILY AND FRIENDS TO OMG CATERING!
                             </h1>
                             <h3 style={{color: 'white'}}>
@@ -72,7 +72,7 @@ const Hero = () => {
                             }}
                         ></div>
                         <div className="banner-content">
-                            <h1 style={{color: '#000000', fontSize: 70, fontWeight: '700'}} className="banner-text">
+                            <h1 style={{color: 'white', fontSize: 70, fontWeight: '700'}} className="banner-text">
                                 OMG
                             </h1>
                             <h2 style={{color: 'white', fontSize: 70}}>Eat, Love, Live</h2>
@@ -110,7 +110,7 @@ const Hero = () => {
                 autoPlay="autoplay"
                 muted="muted"
                 loop="loop"
-                src={'https://remote.vu360solutions.org/static/eatomg.mp4'}
+                src={'https://remote.vu360solutions.org/static/eatomgs.mp4'}
                 className="background-video"
             />
         </div>

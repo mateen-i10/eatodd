@@ -424,7 +424,7 @@ const Product = (props) => {
         {
             name: 'Photo',
             sortable: true,
-            minWidth: '250px',
+            minWidth: '50px',
             cell: row => (
                 <div className='d-flex align-items-center'>
                     <div className="thumbnail ">
@@ -437,13 +437,7 @@ const Product = (props) => {
             name: 'Name',
             selector: (row) => row.name,
             sortable: true,
-            minWidth: '50px'
-        },
-        {
-            name: 'Description',
-            selector: (row) => row.description,
-            sortable: true,
-            minWidth: '50px'
+            minWidth: '100px'
         },
         {
             name: 'WholePrice',
@@ -609,7 +603,7 @@ const Product = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable'
+                        className='react-dataTable myDataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10} />}
                         paginationComponent={CustomPagination}

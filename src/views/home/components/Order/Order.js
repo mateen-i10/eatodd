@@ -123,7 +123,7 @@ const Order = () => {
     }
     return (
         <div className="order-main">
-            <div className="container-fluid unlock-section">
+            {isUserLoggedIn() ? null : <div className="container-fluid unlock-section">
                 <div className="container-sm">
                     <div className="row align-items-center justify-content-center pt-1 pb-1">
                         <div className="col-md-8" style={{display: 'flex', paddingTop: '3px'}}>
@@ -131,7 +131,7 @@ const Order = () => {
                                  alt="JOIN THE OMG WINE CLUB. UNLOCK"/>
                             <div className="loyalty-text">JOIN THE OMG WINE CLUB. UNLOCK VENDOR PRICING.</div>
                         </div>
-                        {isUserLoggedIn() ? null : <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
+                        <div className="col-md-4 col-12" style={{paddingTop: '3px'}}>
                             <div className="content d-inline-flex mb-1 text-center">
                                 <div className="create-an-account">
                                     <Link to='/wine/membership'>
@@ -143,10 +143,10 @@ const Order = () => {
                                     <div className="fw-bolder text-primary text-uppercase fs-4 ">Sign In</div>
                                 </Link>
                             </div>
-                        </div>}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>}
             <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
                 <div className="row ms-0 me-1 ">
                     {
@@ -190,7 +190,7 @@ const Order = () => {
                 <div className="row align-items-center justify-content-center">
                     <div className="promo col-11 col-md-5 container-fluid">
                         <div className="row">
-                            <div className="text-container col-md-6 col-6">
+                            <div className="text-container col-md-6 col-sm-12">
                                 <h1 className="banner-title mt-4">CATER YOUR NEXT PARTY</h1>
                                 <div className="banner-subtitle">
                                     <p>OMG offers catering for groups from 20-2000! Easy to order and customizable so your guests can enjoy taste & flavor that happens to be healthy. </p>
@@ -199,14 +199,14 @@ const Order = () => {
                                 <div className="slot-wrapper btn btn-primary mb-2">ORDER CATERING</div>
                                 </Link>
                             </div>
-                            <div className="col-md-6 col-6">
+                            <div className="col-md-6 col-sm-12">
                                 <img src={gallery_1} style={{height: '370px', width: '100%'}} className="img-container col-md-6 col-6" alt="catering order"/>
                             </div>
                         </div>
                     </div>
                     <div className="promo col-11 col-md-5 container-fluid ">
                         <div className="row">
-                            <div className="text-container col-md-6 col-6">
+                            <div className="text-container col-md-6 col-sm-12">
                                 <h1 className="banner-title mt-4">SAVE $10 OFF YOUR NEXT OMG ORDER!</h1>
                                 <div className="banner-subtitle">
                                     <p>Join the OMG Wine Club, and save $10 off your next OMG food order! Wine Club
@@ -269,7 +269,7 @@ const Order = () => {
                     <div className="pleaser-title col-12 text-center mt-3">CROWD PLEASERS</div>
                     <div className=" container-fluid ms-2">
                         <div className="row justify-content-center align-items-center mt-2 mb-3">
-                            <div className="col-xxl-6 col-md-6 col-6">
+                            <div className="col-xxl-6 col-md-6 col-sm-12">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
@@ -279,20 +279,8 @@ const Order = () => {
                                             position: 'absolute',
                                             top: 0,
                                             height: "100%",
-                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
                                             width: "100%"
                                         }}>
-                                            <div className="text-center text-white fw-bolder"
-                                                 style={{
-                                                     fontSize: "2.8rem",
-                                                     position: 'absolute',
-                                                     top: "50%",
-                                                     left: "50%",
-                                                     transform: "translate(-50%, -50%)",
-                                                     width: "100%"
-                                                 }}
-                                            >CATERING
-                                            </div>
                                         </div>
                                     </div>
                                     <div className="card-body" style={{
@@ -301,9 +289,9 @@ const Order = () => {
                                         textOverflow: 'ellipsis',
                                         overflow: "hidden"
                                     }}>
-                                        <div className="">
-                                            <ul className=""
-                                            >
+                                        <div>
+                                            <b><h2 style={{fontWeight:'600'}}>CATERING</h2></b>
+                                            <ul>
                                                 <li>From 20 to 2000 people</li>
                                                 <li>Starting at $15 per person</li>
                                                 <li>Build Your Own/Boxed Lunches/A La Carte</li>
@@ -322,7 +310,7 @@ const Order = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-xxl-6 col-md-6 col-6">
+                            <div className="col-xxl-6 col-md-6 col-sm-12">
                                 <div className="card ">
                                     <div style={{position: "relative"}}>
                                         <img className='img-fluid'
@@ -332,20 +320,8 @@ const Order = () => {
                                             position: 'absolute',
                                             top: 0,
                                             height: "100%",
-                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
                                             width: "100%"
                                         }}>
-                                            <div className="text-center text-white fw-bolder"
-                                                 style={{
-                                                     fontSize: "2.8rem",
-                                                     position: 'absolute',
-                                                     top: "50%",
-                                                     left: "50%",
-                                                     transform: "translate(-50%, -50%)",
-                                                     width: "100%"
-                                                 }}
-                                            >GROUP ORDER
-                                            </div>
                                         </div>
                                     </div>
                                     <div className="card-body" style={{
@@ -355,13 +331,13 @@ const Order = () => {
                                         overflow: "hidden"
                                     }}>
                                         <div className="">
+                                            <b><h2 style={{fontWeight:'600'}}>GROUP ORDER</h2></b>
                                             <ul className="">
                                                 <li>Invite up to 20 people</li>
                                                 <li>Normal menu pricing</li>
                                                 <li>Full menu</li>
                                                 <li>Personalized meals</li>
                                                 <li>Organizer pays</li>
-                                                <li><b>Order and Eat today</b></li>
                                             </ul>
                                         </div>
                                     </div>

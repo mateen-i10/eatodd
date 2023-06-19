@@ -136,14 +136,14 @@ const COMenu = () => {
                 </div>
 
                 <div className='container-sm'>
-                    <div className="row g-0">
+                    <div className="row g-0" style={{ margin: 'auto'}}>
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
                             <Form>
                                 <div className=''>
                                     <div className="col-md-4">
                                         <h2 className='form-label mt-2' htmlFor='qty' style={{fontSize: '20px', float: 'left'}}>
-                                            Select Quantity:
+                                            Select People Quantity:
                                         </h2>
                                     </div>
                                     <div className="col-md-8">

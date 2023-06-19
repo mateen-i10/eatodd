@@ -1,64 +1,79 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import './Reward.css'
-// import img from '../../assets/images/my-images/new.gif'
+import {Col, Container, Row} from "reactstrap"
 
 const Reward = () => {
     return (
+        <Fragment>
         <div>
-            <Header/>
-            <div className="container-sm">
-                <div className="row">
-                    <div className="col-md-6" style={{marginTop:"120px"}}>
-                        <p className="text-primary fs-2 fw-bolder">OMG LOYALISTS
-                        </p>
-                        <h1 className="text-black text-uppercase" style={{fontSize: '45px'}}>
+            <Header />
+            <Container>
+                <Row>
+                    <Col xs={12} md={6} className="d-flex flex-column align-items-start" style={{marginTop: '150px' }}>
+                        <p className="text-primary fs-2 fw-bolder">OMG LOYALISTS</p>
+                        <h1 className="text-black text-uppercase" style={{ fontSize: '45px' }}>
                             The More you EAT, the More we TREAT.
                         </h1>
                         <div className="fs-4 mb-1">
-                            <p>Earn points while enjoying your favorite flavorful plates and sandwiches, and cash them
-                                out in a variety of ways in the Loyalists Trade Desk! Not a member yet? </p>
-                            {/*<a className="text-decoration-underline " href="#">Program Term</a>*/}
+                            <p>Earn points while enjoying your favorite flavorful plates and sandwiches, and cash them out in a variety of ways in the Loyalists Trade Desk! Not a member yet?</p>
                         </div>
-                        {/*<button type="button" className="btn fs-4 "*/}
-                        {/*        style={{backgroundColor: '#57ab00', color: 'white', width: '150px'}}>Join Now*/}
-                        {/*</button>*/}
-                    </div>
-                    <div className="col-md-6" style={{textAlign: '-webkit-center'}}>
-                        <img className="new mt-5 imgWidth" alt='image'
-                             src={require("../../assets/images/updated/position 3.jpeg").default}/>
-                    </div>
-                </div>
-            </div>
-            {/*<div className="container-fluid mt-5 mb-5"*/}
-            {/*     style={{paddingTop: '20px', paddingBottom: '20px', backgroundColor: "#efffd5"}}>*/}
-            {/*    <div className="row align-items-center justify-content-center g-2">*/}
-            {/*        <h1 className="text-center text-primary fw-bolder mb-3 mt-3"> HOW IT WORKS</h1>*/}
-            {/*        <div className="col-md-3 col-12 text-center mb-2 ">*/}
-            {/*            <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'*/}
-            {/*                 src={require("../../assets/images/rewards/earn-point.png").default}/>*/}
-            {/*            <p className=" fs-4"> 10 points for every $1 spent in the restaurant, in the app, or*/}
-            {/*                online.</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-3 col-12 text-center mb-2">*/}
-            {/*            <img className="mx-auto mb-3" style={{height: 100, width: 100}} alt='image'*/}
-            {/*                 src={require("../../assets/images/rewards/birthday-cake.png").default}/>*/}
-            {/*            <p className=" fs-4"> Let’s just say we won’t forget you on your birthday.</p>*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-3 col-12 text-center mb-2">*/}
-            {/*            <img className="mx-auto mb-3" style={{*/}
-            {/*                height: 100,*/}
-            {/*                width: 100,*/}
-            {/*                color: "green"*/}
-            {/*            }}  src={require("../../assets/images/rewards/free-food.png").default} alt='image'/>*/}
-            {/*            <p className=" fs-4">Free Chips & Guac after your first purchase as a Member.</p>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <Footer/>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <img
+                            className="new mt-5 imgWidth"
+                            alt="image"
+                            src={require("../../assets/images/updated/position 3.jpeg").default}
+                            style={{
+                                width: "100%",
+                                height: "auto",
+                                maxWidth: "100%",
+                                display: "block"
+                            }}
+                        />
+                    </Col>
+                </Row>
+                <Row style={{ marginTop: '100px'}}>
+                    <Col xs={12} md={6} style={{ margin: 'auto', padding: '20px' }}>
+                        <h2 style={{ fontWeight: 'bold', marginBottom:'20px', fontSize: '38px'}}>Rewards Rules for OMG Rewards</h2>
+                        <p className="fs-4">
+                            <strong>Earn Points:</strong> As a member of OMG Rewards, you will earn 1 point for every dollar spent on eligible purchases at Olive Mediterranean Grill.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Reward Threshold:</strong> Once you accumulate 100 points, you will qualify for a $10 discount on your next order at Olive Mediterranean Grill.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Redemption:</strong> When you reach the reward threshold of 100 points, you can choose to redeem your points for a $10 discount on any future order. The discount will be automatically applied to your total bill.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Point Calculation:</strong> Points will be calculated based on the pre-tax full dollar amount of your eligible purchases. For example, if your order subtotal is $15.50, you will earn 15 points.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Eligible Purchases:</strong> Points will be earned on all food and beverage purchases made at Olive Mediterranean Grill. Exclusions may apply to gift card purchases, alcohol, taxes, tips, and other non-food items.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Point Tracking:</strong> Your point balance will be tracked automatically and updated in your OMG Rewards account. You can view your current point balance and transaction history by logging into your account on our website or mobile app.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Non-Transferable:</strong> Points earned through OMG Rewards are non-transferable and cannot be combined with points from another account.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Expiration:</strong> Points earned through OMG Rewards do not expire as long as your account remains active. However, if your account becomes inactive for a period of 12 months, your points may be forfeited.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Membership Requirements:</strong> To participate in OMG Rewards, you must be a registered member with a valid email address. Membership is free and open to individuals aged 18 years or older.
+                        </p>
+                        <p className="fs-4 mb-1">
+                            <strong>Program Changes:</strong> Olive Mediterranean Grill reserves the right to modify or terminate the OMG Rewards program at any time, including changes to point accumulation, redemption thresholds, and program benefits. Any changes will be communicated to members via email or through the OMG Rewards website and mobile app.
+                        </p>
+                    </Col>
+                </Row>
+            </Container>
+            <Footer />
         </div>
+        </Fragment>
     )
 }
-export default Reward
 
+export default Reward
