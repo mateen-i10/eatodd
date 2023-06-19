@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect} from 'react'
 import {
     Badge,
     Button,
@@ -14,12 +14,30 @@ import {
     Row
 } from "reactstrap"
 import UILoader from "../../../@core/components/ui-loader"
+import {useDispatch, useSelector} from "react-redux"
+import {getCustomersReward} from "../../../redux/customer/actions"
+//import {getUserData} from "../../../auth/utils"
 
 const RewardDetail = () => {
 
+    const isLoading = useSelector(state => state.customer.isLoading)
+    const customerReward = useSelector(state => state.customer.rewardObject)
+    //const isRequestCompleted = useSelector(state => state.customer.isRequestCompleted)
+    //const isSuccess = useSelector(state => state.customer.isSuccess)
+
+    console.log('customerReward', customerReward)
+
+    //const customerId = getUserData().customerId
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCustomersReward())
+    }, [])
+
     return (
         <Fragment>
-            <UILoader>
+            <UILoader blocking={isLoading}>
                 <Card>
                     <CardHeader className='border-bottom'>
                         <CardTitle tag='h4'>Reward Points</CardTitle>
@@ -38,8 +56,8 @@ const RewardDetail = () => {
                             <div className='row'>
                                 <div className='col-md-3'></div>
                                 <div className='col-md-6' style={{marginLeft: '6px', textAlign: '-webkit-center'}}>
-                                    <Badge className="" color={'light-success'} style={{fontSize: '50px'}} pill>
-                                        400
+                                    <Badge className="" color={'light-success'} style={{fontSize: '50px'}}>
+                                        {customerReward.totalEATOMGPoints !== null ? customerReward.totalEATOMGPoints : '-'}
                                     </Badge>
                                 </div>
                                 <div className='col-md-3'></div>

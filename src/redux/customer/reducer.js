@@ -11,7 +11,8 @@ const initialState = {
     isEdit: false,
     isError: false,
     isSuccess: false,
-    isGroupOrderExist: false
+    isGroupOrderExist: false,
+    rewardObject: {}
 }
 
 export const setCustomers = createAction("customerReducer/setCustomers")
@@ -26,6 +27,7 @@ export const setIsCustomerError = createAction("customerReducer/setIsCustomerErr
 export const setIsCustomerSuccess = createAction("customerReducer/setIsCustomerSuccess")
 export const setRequestCompleted = createAction("customerReducer/setRequestCompleted")
 export const setGroupOrderExist = createAction("customerReducer/setGroupOrderExist")
+export const setCustomersReward = createAction("customerReducer/setCustomersReward")
 
 const customerReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -55,6 +57,13 @@ const customerReducer = (state = initialState, action) => {
                 isEdit: false,
                 isLoading: false,
                 isDetailLoading: false
+            }
+        case setCustomersReward.type:
+            console.log('action.payload.data', action.payload.data)
+            return {
+                ...state,
+                rewardObject: action.payload.data,
+                isLoading: false
             }
         case setLoading.type:
             return {

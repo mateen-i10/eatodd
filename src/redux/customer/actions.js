@@ -6,7 +6,7 @@ import {
     setCustomer,
     setDetailLoading,
     setRequestCompleted,
-    setIsCustomerError, setIsCustomerSuccess, setIsEdit, setCustomerAddress, editCustomerAddress
+    setIsCustomerError, setIsCustomerSuccess, setIsEdit, setCustomerAddress, editCustomerAddress, setCustomersReward
 } from "./reducer"
 import httpService, {baseURL} from "../../utility/http"
 import {toast} from "react-toastify"
@@ -153,5 +153,18 @@ export const updateCustomerAddress = (data) => {
             isSuccess: setIsCustomerSuccess.type
         }))
         dispatch(setIsEdit(false))
+    }
+}
+
+export const getCustomersReward = (data) => {
+    console.log('rewardActionData', data)
+    return async dispatch => {
+        //dispatch(setLoading(true))
+        dispatch(apiCall({
+            url: `${url}/GetCustomerReward`,
+            data,
+            method: 'get',
+            onSuccess: setCustomersReward.type
+        }))
     }
 }
