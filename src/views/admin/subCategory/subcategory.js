@@ -182,7 +182,7 @@ const SubCategory = (props) => {
         event.preventDefault()
         setSubmit(true)
         console.log(subcategoryId, "Subcategory iD")
-        const finalData = {...formState, subCatId: null, categoryId: formState.category?.value}
+        const finalData = {...formState, subCatId: subcategoryId, categoryId: formState.category?.value}
         console.log("final Data", finalData)
         const isError = formModalRef.current.validate(formState)
         if (isError) return
