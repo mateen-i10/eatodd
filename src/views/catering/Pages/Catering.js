@@ -16,7 +16,7 @@ const Catering = () => {
     const [selectedMenuId, setSelectedMenuId] = useState()
     const [isWineSelected, setWineSelected] = useState(false)
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
-    const [formComponent, setFormComponent] = useState(false)
+    //const [formComponent, setFormComponent] = useState(false)
     const [wineShow, setWineShow] = useState(false)
 
 
@@ -61,37 +61,25 @@ const Catering = () => {
     return (
         <>
             <Header/>
-            <div style={{backgroundImage: `url(${luxurayWine})`, height: '300px', backgroundSize: '100%'}}>
-            </div>
-            <section style={{paddingTop:'50px', paddingBottom: '50px'}}>
-                <div className="continer-sm">
-                    <h5 style={{
-                        textAlign: 'center',
-                        paddingTop: '50px',
-                        fontSize: '2.8em',
-                        textTransform: 'uppercase',
-                        fontFamily: 'Gotham Bold',
-                        color: 'black'
-                    }}>OMG Catering</h5>
-                    <h4 style={{
-                        textAlign: 'center',
-                        fontSize: '2.2em',
-                        paddingTop: '10px',
-                        paddingBottom: '30px',
-                        textTransform: 'uppercase'
-                    }}>A Warm, Charming Atmosphere</h4>
-                    <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '50px', marginTop: '-30px'}}>Allow
-                        us to make your next special event extra special. We cater for all sized<br/>functions, ideal
+
+            <section style={{backgroundColor: 'aliceblue', paddingTop:'50px', paddingBottom: '50px'}}>
+                <div className="container-sm">
+                    <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
+                        OMG Catering
+                    </h5>
+                    <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '50px'}}>
+                        Allow us to make your next special event extra special. We cater for all sized<br/>functions, ideal
                         for your larger functions or an intimate gathering, our team can<br/>curate a menu to suit your
-                        taste.</p>
+                        taste.
+                    </p>
                 </div>
             </section>
 
-            <section>
+            <section style={{backgroundColor: 'rgb(245, 248, 251)'}}>
                 <div className="fs-1 fw-bolder text-primary text-center"
                      style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG CATERING PACKAGES
                 </div>
-                <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '70px'}}>Treat your group to Taste &
+                <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '35px'}}>Treat your group to Taste &
                     Flavor that happens to be Healthy!<br/>*24 hour advance notice requested</p>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3">
@@ -104,16 +92,20 @@ const Catering = () => {
 
                         </div>
                     </div>
+
+                    <div style={{backgroundImage: `url(${luxurayWine})`, height: '500px', backgroundSize: '100%'}}>
+                    </div>
+
                     <Row style={{textAlign: "center"}}>
                         <Col md={12}>
                             <div className="fs-1 fw-bolder text-primary text-center"
                                  style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG GRAZING TABLE
                             </div>
-                            <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '70px'}}>CATERING PACKAGE
+                            <p style={{textAlign: 'center', fontSize: '1.5em'}}>CATERING PACKAGE
                                 SERVES 25+ PEOPLE</p>
                         </Col>
                     </Row>
-                    <Row>
+                    {/*<Row>
                         <Col lg={4}></Col>
                         <Col lg={4} style={{textAlign: "center"}}>
                             <button className='btn btn-primary mt-2 mb-2'
@@ -121,8 +113,8 @@ const Catering = () => {
                             </button>
                         </Col>
                         <Col lg={4}></Col>
-                    </Row>
-                    {formComponent ? <>
+                    </Row>*/}
+
                         <Row>
                             <Col lg={2}></Col>
                             <Col lg={8}>
@@ -130,7 +122,7 @@ const Catering = () => {
                             </Col>
                             <Col lg={2}></Col>
                         </Row>
-                    </> : ''}
+
                     {/*{selectedMenuId === '1' ? <CateringSubForm/> : []}*/}
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>

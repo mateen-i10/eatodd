@@ -95,12 +95,12 @@ const CateringSubForm = () => {
             {/*<h1 style={{marginTop: '50px'}}>OMG GRAZING TABLE</h1>
             <h5>CATERING PACKAGE SERVES 25+ PEOPLE</h5>*/}
             <p className='mt-5' style={{color: 'rgb(234, 84, 85)'}}>*Requires 1 week notice for all orders.</p>
-            <p>Our OMG Grazing Tables are the perfect way to entertain and feed larger groups. They provide a beautiful
-                statement piece at your gathering. Styled to perfection with high quality artisanal products. Components
-                include a Variety of Premium Cheeses, Grilled & Cured Meats, Antipasto Items, Jams, Nuts, Dried Fruit,
-                Mediterranean Dips, Meat Pies, Mediterranean Pizza’s, Crudités, Seasonal Fresh Fruit, Crackers, and
-                Fresh Herbal Accents & a Variety of Single Serve Desserts such as: Baklava, Strawberry Shortcake, Panna
-                Cotta, Cupcakes, Tiramisu, Chocolate Chip Cookies, Salt & Pepper Cookies, and Cardamom Cookies. </p>
+            <p>Our OMG Grazing Events are reserved for people that care about impressing their guests. With each event,
+                we strive to create the perfect melody of hearty menu items surrounded by the highest quality Cured Meats,
+                a blend of Cheeses, Crudités, Sweet & Savory snacks, a variety of Mediterranean Dips along with seasonal Accoutrements.
+                We also offer a Variety of Single Serve Desserts such as: Baklava, Strawberry Shortcake, Panna Cotta, Cupcakes, Tiramisu,
+                Chocolate Chip Cookies, Salt & Pepper Cookies, and Cardamom Cookies. Finally, with OMG Wine Pairings
+                completing the party set up, all you have left to do is pick out the perfect outfit!  </p>
             <p style={{color: 'rgb(234, 84, 85)'}}>*All items are seasonal and based on weekly availability.</p>
             <p style={{marginTop: '-10px', color: 'rgb(234, 84, 85)'}}>*OMG Offers Complete Event Catering, Wine Selection and Event Design.</p>
 
