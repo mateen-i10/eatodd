@@ -46,12 +46,12 @@ const Sections = (props) => {
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')
-    const sectionItemObject = {name: '', price: '', productId: 0}
+    const sectionItemObject = {name: '', price: '', generalProductId: 0}
     const [sectionItems, setSectionItem] = useState([sectionItemObject])
     const [existingProducts, setExistingProducts] = useState([])
 
     const products = async (input) => {
-        const res = httpService._get(`${baseURL}product?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
+        const res = httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}`)
             .then(response => {
                 if (response.status === 200 && response.data.statusCode === 200) {
                     setExistingProducts([...response.data.data])
@@ -68,27 +68,21 @@ const Sections = (props) => {
 
         return res
     }
+
     const sectionTypes = [
-        {
-            label: 'Modifier', value: 1
-        },
-        {
-            label: 'Add-on', value: 2
-        }
+        {label: 'Modifier', value: 1},
+        {label: 'Add-on', value: 2}
     ]
+
     const sectionItemTypes = [
-        {
-            label: 'Radio', value: 1
-        },
-        {
-            label: 'Checkbox', value: 2
-        }
+        {label: 'Radio', value: 1},
+        {label: 'Checkbox', value: 2}
     ]
 
     useEffect(() => {
         if (formInitialState && formInitialState.sectionItems) {
             const final = formInitialState.sectionItems && formInitialState.sectionItems.length > 0 && formInitialState.sectionItems.map(p => {
-                return {...p, productId: {label: p.product?.name, value: p.product?.id}}
+                return {...p, generalProductId: {label: p.generalProduct?.name, value: p.generalProduct?.id}}
             })
             setSectionItem(final)
         }
@@ -114,10 +108,10 @@ const Sections = (props) => {
         setSectionItem(newArray)
     }
 
-    const onSelectProduct = (index, productId) => {
+    const onSelectProduct = (index, generalProductId) => {
         const final = [...sectionItems]
-        final[index].productId = productId
-        const found = existingProducts.find(p => p.id === productId.value)
+        final[index].generalProductId = generalProductId
+        const found = existingProducts.find(p => p.id === generalProductId.value)
         if (found) {
             final[index].name = found.name
             final[index].price = found.options ? found.options.find(f => f.isDefault)?.price : 0
@@ -129,11 +123,12 @@ const Sections = (props) => {
         return <div className='ms-1'>
             <h5>Section Item</h5>
             {sectionItems.map((i, index) => {
-                return <div key={i.productId} className='row mt-1'>
+                return <div key={`optionKey-${index} `} className='row mt-1'>
                     <div className='col-4'>
                         <AsyncSelect
                             defaultOptions
-                            value={i.productId}
+                            cacheOptions
+                            value={i.generalProductId}
                             onChange={(e) => onSelectProduct(index, e)}
                             loadOptions={products}
                             closeMenuOnSelect={true}
@@ -248,7 +243,7 @@ const Sections = (props) => {
     }
 
     const handleSubmit = (event) => {
-        const finalSectionItems = sectionItems && sectionItems.length > 0 ? sectionItems.map(i => ({...i, productId: i.productId.value})) : []
+        const finalSectionItems = sectionItems && sectionItems.length > 0 ? sectionItems.map(i => ({...i, generalProductId: i.generalProductId.value})) : []
         const finalData = {...formState, sectionItems: finalSectionItems}
         event.preventDefault()
         const isError = formModalRef.current.validate(formState)

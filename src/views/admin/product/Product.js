@@ -165,7 +165,7 @@ const Product = (props) => {
         {type:FieldTypes.Select, label: 'Ingredients', placeholder: 'Select ingredients', name:'productIngredients', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Ingredient, isAsyncSelect: true, isMulti:true},
         {type:FieldTypes.Select, label: 'OptionType', placeholder: 'Select option type', name:'optionType', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:options, isAsyncSelect: true, isMulti:false},
         {type:FieldTypes.Select, label: 'Category', placeholder: 'Select category', name:'category', isRequired:true, fieldGroupClasses: 'col-6', loadOptions:categories, isAsyncSelect: true, isMulti:false},
-        {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false},
+        {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:true},
         {type:FieldTypes.SwitchButton, label: 'Is Drink', name:'isDrink', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
         {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
         {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'}
@@ -333,6 +333,7 @@ const Product = (props) => {
 
     const handleSubmit = (event) => {
         console.log('subcatId', subcategoryId)
+        console.log('formState', formState)
         console.log('the option type wala!!!', optionType)
         setSubmit(true)
         event.preventDefault()
@@ -354,7 +355,7 @@ const Product = (props) => {
            const Ingredient = formState.productIngredients?.map(i => {
                return {ingredientId: i.value}
            })
-           finalData  = {...formState, retailPrice: formState.retailPrice, flavour: formState.flavour?.value, subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
+           finalData  = {...formState, retailPrice: formState.retailPrice, flavour: formState.flavour?.map(f => f?.value).toString(), subCategoryId: subcategoryId, restaurantId: formState.restaurant?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, categoryId: formState.category?.value, productIngredientsString: JSON.stringify(Ingredient)}
            delete finalData.generalProductId
        } else if (formFeilds === 0) {
            finalSchema = Joi.object({
@@ -464,7 +465,7 @@ const Product = (props) => {
                 return (
                     <div className='d-flex'>
                         <UncontrolledDropdown>
-                            <DropdownToggle className='pe-1' tag='span'>
+                            <DropdownToggle className='pe-1 cursor-pointer' tag='span'>
                                 <MoreVertical size={15} />
                             </DropdownToggle>
                             <DropdownMenu end>

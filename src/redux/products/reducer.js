@@ -70,11 +70,17 @@ const productReducer = (state = initialState, action) => {
             console.log(data, 'here is the cat id ')
             data.options = data.options.filter(c => c.name !== "Numeric" && c.name !== "Normal")
             data.optionsString = JSON.stringify(data.options)
+
+            const fla = data.flavour
+            const arr = fla.split(",")
+            console.log('fla', fla)
+            console.log('arr', arr)
+
             return {
                 ...state,
                 object: {...data,
                     retailPrice: data.retailPrice,
-                    flavour: {label: data.flavour, value: data.flavour},
+                    flavour: arr.map(f => { return {label: f, value: f} }),
                     category: {label: data.category.name, value: data.category.id},
                     restaurant: {label: data.restaurant.name, value: data.restaurant.id},
                     productIngredients: data.productIngredients.map(i => {

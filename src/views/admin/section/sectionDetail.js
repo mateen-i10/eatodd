@@ -56,6 +56,18 @@ const SectionsDetail = ({match}) => {
                                                 <CardText className="mmb-25 ms-1 mb-1">{section.limit}</CardText>
                                             </div>
                                         </Col>
+                                        <Col xl={6} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'> Section Type:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{section.sectionType === 1 ? "Modifier" : section.sectionType === 2 ? "Add-on" : ''}</CardText>
+                                            </div>
+                                        </Col>
+                                        <Col xl={6} className="p-0">
+                                            <div className='mt-2 invoice-date-wrapper ps-1'>
+                                                <p className='fw-bolder'> Section Item Type:</p>
+                                                <CardText className="mmb-25 ms-1 mb-1">{section.sectionItemType === 1 ? "Radio" : section.sectionItemType === 2 ? "Checkbox" : ''}</CardText>
+                                            </div>
+                                        </Col>
                                     </Row>
 
                                     <hr className='invoice-spacing' />
@@ -77,16 +89,16 @@ const SectionsDetail = ({match}) => {
                                             <table className="table table-responsive">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col" style={{backgroundColor: "transparent"}}>Product</th>
+                                                    <th scope="col" style={{backgroundColor: "transparent"}}>General Product</th>
                                                     <th scope="col" style={{backgroundColor: "transparent"}}>Name</th>
                                                     <th scope="col" style={{backgroundColor: "transparent"}}>Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {section && section.sectionItems && section.sectionItems.map(i => {
+                                                {section && section.sectionItems && section.sectionItems.map((i, index) => {
                                                     console.log('find application user', i.employee)
-                                                    return <tr>
-                                                        <td>{i.product?.name}</td>
+                                                    return <tr key={`optionKey-${index} `}>
+                                                        <td>{i?.name}</td>
                                                         <td>{i.name}</td>
                                                         <td>{i.price}</td>
                                                     </tr>

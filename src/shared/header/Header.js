@@ -22,6 +22,23 @@ export default function Header({isSimple, setKey}) {
     const [count, setCount] = useState(1)
     const dispatch = useDispatch()
 
+    // start hide checkout bar on scroll down and appear on scroll top
+    const [isHidden, setIsHidden] = useState(false)
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+
+            setIsHidden(scrollTop > 0)
+        }
+
+        window.addEventListener('scroll', handleScroll)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+    // End hide checkout bar on scroll down and appear on scroll top
+
     const {userLocation} = useSelector(state => state)
     const breakpoint = 1200
 
@@ -114,30 +131,33 @@ export default function Header({isSimple, setKey}) {
                         )}
                     </div>
                 </header>
-                {count > 0 && !isJoinedByLink() && totalItems > 0 ? <div className="container-fluid mb-0 pb-0">
-                    <div className="row alert alert-primary align-items-center" style={{
-                        marginBottom: 0,
-                        height: "45px"
-                    }
-                    }>
-                        <div className="col-9 text-center text-black text-uppercase">Items in cart. Please complete your
-                            order!
-                        </div>
-                        <div className="col-3 me-0 text-end" style={{}}>
-                            <div className='btn btn-primary btn-sm text-uppercase me-1'
-                                 onClick={() => {
-                                     checkOut()
-                                 }}>Checkout
+                {!isHidden && <>
+                    {count > 0 && !isJoinedByLink() && totalItems > 0 ? <div className="container-fluid mb-0 pb-0">
+                        <div className="row alert alert-primary align-items-center" style={{
+                            marginBottom: 0,
+                            height: "45px"
+                        }
+                        }>
+                            <div className="col-9 text-center text-black text-uppercase">Items in cart. Please complete your
+                                order!
                             </div>
-                            <div className='btn btn-danger btn-sm text-uppercase'
-                                 onClick={() => {
-                                     setCount(0)
-                                     // history.push('/checkout')
-                                 }}>X
+                            <div className="col-3 me-0 text-end" style={{}}>
+                                <div className='btn btn-primary btn-sm text-uppercase me-1'
+                                     onClick={() => {
+                                         checkOut()
+                                     }}>Checkout
+                                </div>
+                                <div className='btn btn-danger btn-sm text-uppercase'
+                                     onClick={() => {
+                                         setCount(0)
+                                         // history.push('/checkout')
+                                     }}>X
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> : null }
+                    </div> : null }
+                </>}
+
             </div>
         )
     }

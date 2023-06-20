@@ -201,7 +201,7 @@ const GenralProducts = (props) => {
             {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false},
-            {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false}
+            {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:true}
         ])
         setModalTitle('Add Product')
         toggle()
@@ -222,7 +222,7 @@ const GenralProducts = (props) => {
             {type:FieldTypes.SwitchButton, label: 'Is Blank', name:'isBlank', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type:FieldTypes.SwitchButton, label: 'Is Extra', name:'isExtra', isRequired:false, fieldGroupClasses: 'col-6 mt-2'},
             {type: FieldTypes.Select, label: 'Category', placeholder: 'Select Category', name: 'category', isRequired: true, fieldGroupClasses: 'col-6', loadOptions: categories, isAsyncSelect: true, isMulti: false},
-            {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:false}
+            {type:FieldTypes.Select, label: 'Flavour', placeholder: 'Select Flavour', name:'flavour', isRequired:false, fieldGroupClasses: 'col-6', loadOptions:Flavour, isAsyncSelect: true, isMulti:true}
         ])
         setSchema(Joi.object({
             name: Joi.string().required().label("Name"),
@@ -288,7 +288,7 @@ const GenralProducts = (props) => {
         const ingredients = formState.generalProductIngredients?.map(i => {
             return {ingredientId: i.value}
         })
-        const finalData = {...formState, flavour: formState.flavour?.value, subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
+        const finalData = {...formState, flavour: formState.flavour?.map(f => f?.value).toString(), subCategoryId: subcategoryId, categoryId: formState.category?.value, optionsString: JSON.stringify(optionType), optionType: formState.optionType?.value, generalProductIngredientsString: JSON.stringify(ingredients)}
         const isError = formModalRef.current.validate(finalData)
         if (isError) return
         if (!subcategoryId || subcategoryId === 0) {
