@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import '../style.css'
 import ReactPaginate from "react-paginate"
 import UILoader from "../../../@core/components/ui-loader"
 import {
@@ -186,7 +187,7 @@ const Contact = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable'
+                        className='react-dataTable myDataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}

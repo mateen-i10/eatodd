@@ -47,7 +47,7 @@ import AssignItems from "./AssignItems"
 import {useHistory, useLocation} from "react-router-dom"
 import ProductImage from "../../home/components/product/ProductImage"
 // import AssignGeneralRecommendation from "./AssignGeneralRecommendation"
-
+import '../style.css'
 const getQueryParams = (search) => {
     return search ? (/^[?#]/.test(search) ? search.slice(1) : search)
         .split("&")

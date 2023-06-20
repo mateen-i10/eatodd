@@ -1,6 +1,6 @@
 // ** React Imports
 import React, {Fragment, useEffect, useState} from 'react'
-
+import '../style.css'
 // ** Form Modal Component for Add and Update
 
 // ** Third Party Components
@@ -184,7 +184,7 @@ const Template = (props) => {
                     pagination
                     columns={columns}
                     paginationPerPage={7}
-                    className='react-dataTable'
+                    className='react-dataTable myDataTable'
                     sortIcon={<ChevronDown size={10} />}
                     paginationDefaultPage={currentPage + 1}
                     paginationComponent={CustomPagination}

@@ -62,7 +62,7 @@ const Catering = () => {
         <>
             <Header/>
 
-            <section style={{backgroundColor: 'aliceblue', paddingTop:'50px', paddingBottom: '50px'}}>
+            <section style={{paddingTop:'50px', paddingBottom: '50px'}}>
                 <div className="container-sm">
                     <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
                         OMG Catering

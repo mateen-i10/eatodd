@@ -1,6 +1,6 @@
 // ** React Imports
 import React, {Fragment, useRef, useState} from 'react'
-
+import '../style.css'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -334,7 +334,7 @@ const Employees = (props) => {
                    noHeader
                    pagination
                    paginationServer
-                   className='react-dataTable'
+                   className='react-dataTable myDataTable'
                    columns={columns}
                    sortIcon={<ChevronDown size={10} />}
                    paginationComponent={CustomPagination}
