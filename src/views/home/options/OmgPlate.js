@@ -287,6 +287,11 @@ const Menu = () => {
     }
     console.log(selectedProducts, "Lets see the selection")
 
+    const handleClick = () => {
+        const sectionId = '/#orderSection' // Replace with the desired section ID
+        history.push(`/?section=${sectionId}`)
+    }
+
     return (
         <Fragment>
             <UILoader blocking={isLoading}>
@@ -295,9 +300,7 @@ const Menu = () => {
                 <div className="" style={{marginBottom: 0, height: "45px"}}>
                     <div className="">
                         <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
-                             onClick={() => {
-                                 history.push('/#orderSection')
-                             }}>Return to Menu
+                             onClick={handleClick}>Return to Menu
                         </div>
                     </div>
                 </div>
