@@ -63,7 +63,7 @@ const HeaderWine = ({isSimple}) => {
                         </div>}
                     </div>
                     <div className="head-sec-2">
-                        <Link to="/wine/homepage"><h2>Home</h2></Link>
+                        <Link to="/wine/homepage"><h2>About</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/faq"><h2 className='pe-1'>F.A.Q's</h2></Link>
                         <Link to="#" style={{marginTop: '-10px'}}>
@@ -75,7 +75,7 @@ const HeaderWine = ({isSimple}) => {
                     <div className="head-sec-wine">
                         <Link to="/home">
                             <Button.Ripple color='primary'
-                                           onClick={() => dispatch(scrollToOrderAdded("home"))}>EATOMG</Button.Ripple>
+                                           onClick={() => dispatch(scrollToOrderAdded("home"))}>HOME</Button.Ripple>
                         </Link>
                     </div>
                 </header>

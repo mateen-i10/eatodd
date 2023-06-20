@@ -15,6 +15,7 @@ import {
     UncontrolledDropdown
 } from "reactstrap"
 import AsyncSelect from "react-select/async"
+import '../style.css'
 import {ChevronDown, Delete, Edit, FileText, MoreVertical, Plus, Search, Trash} from "react-feather"
 import {loadOptions} from "../../../utility/Utils"
 import {setDetailLoading} from "../../../redux/generalRecommendation/reducer"
@@ -403,7 +404,7 @@ const AssignGeneralRecommendation = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable'
+                        className='react-dataTable myDataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10} />}
                         paginationComponent={CustomPagination}

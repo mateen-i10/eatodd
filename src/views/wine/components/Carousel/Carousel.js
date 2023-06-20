@@ -5,7 +5,6 @@ import {Link} from "react-router-dom"
 import {Carousel, CarouselCaption, CarouselControl, CarouselIndicators, CarouselItem} from "reactstrap"
 import sliderImage1 from '../../../../assets/images/wineClub/YouPlanTheParty-1770x950-1.png'
 import sliderImage2 from '../../../../assets/images/wineClub/DrinkTheBest_PayTheLeast-1770x950-1.png'
-import sliderImage3 from '../../../../assets/images/wineClub/winepic.png'
 import sliderImage4 from '../../../../assets/images/wineClub/MembersGetWholesalePricing-1770x950-1.png'
 
 const VideoHero = () => {
@@ -21,18 +20,13 @@ const VideoHero = () => {
             header: <span></span>
         },
         {
-            src: sliderImage3,
+            src: sliderImage1,
             id: 2,
             header: <span></span>
         },
         {
-            src: sliderImage1,
-            id: 3,
-            header: <span></span>
-        },
-        {
             src: sliderImage4,
-            id: 4,
+            id: 3,
             header: <span></span>
         }
     ]

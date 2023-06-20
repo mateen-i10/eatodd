@@ -116,7 +116,7 @@ export default [
     },
     {
         id: 'rewardConfiguration',
-        title: 'Reward Configuration',
+        title: 'Settings',
         icon: <Grid size={20}/>,
         navLink: '/rewardConfiguration'
     },
