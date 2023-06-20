@@ -43,7 +43,7 @@ import AsyncSelect from "react-select/async"
 import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import GeneralProductFormChild from "./GeneralProductFormChild"
 import ProductImage from "../../home/components/product/ProductImage"
-
+import '../style.css'
 
 const GenralProducts = (props) => {
 
@@ -496,7 +496,7 @@ const GenralProducts = (props) => {
                         noHeader
                         pagination
                         paginationServer
-                        className='react-dataTable'
+                        className='react-dataTable myDataTable'
                         columns={columns}
                         sortIcon={<ChevronDown size={10}/>}
                         paginationComponent={CustomPagination}
