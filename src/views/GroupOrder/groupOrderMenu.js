@@ -122,7 +122,7 @@ const GroupOrderMenu = () => {
         <>
             <Header isSimple={true}/>
             {memberNameModal()}
-            <div className="order-main">
+            <div className="order-main" id="orderSection">
                 {friendName?.length > 0 ? <div className="container-fluid mt-5">
                     <div className="row align-items-center justify-content-center section-joined">
                         <div className="col-12 text-center">
@@ -144,7 +144,7 @@ const GroupOrderMenu = () => {
                         </div>
                     </div>
                 </div>}
-                <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
+                <div className="menu-list container-sm pb-5 pt-5  mx-auto" ref={orderRef}>
                     <div className="row ms-0 me-1 ">
                         {
                             mainCategory.length ? mainCategory.map(item => {

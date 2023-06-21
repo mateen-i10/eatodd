@@ -9,13 +9,9 @@ const Footer = (props) => {
     const items = localStorage.getItem(cartName)
     const cart = JSON.parse(items)
 
-    console.log(cart, "cart")
-
     const {dispatchingItems, productList} = props
 
     // const [basicNameFoodModal, setBasicNameFoodModal] = useState(false)
-
-    console.log(productList, "product list coming from footer")
 
     // methods
     // const handleKeyDown = event => {

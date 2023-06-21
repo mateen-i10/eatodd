@@ -16,6 +16,8 @@ import {calculateTotalItems} from "../../../redux/cartItems/actions"
 import {useDispatch, useSelector} from "react-redux"
 import OrdersList from "./OrdersList"
 import UILoader from "../../../@core/components/ui-loader"
+import {List, X} from "react-feather"
+import {Modal, ModalBody, ModalFooter, Table} from "reactstrap"
 
 
 const Menu = () => {
@@ -36,6 +38,10 @@ const Menu = () => {
     console.log('iss', isPageLoading)
     const initialRestaurantId = localStorage.getItem("restaurantId") || ""
     const [restaurantId, setRestaurantId] = useState(initialRestaurantId)
+
+    console.log('selectedProducts', selectedProducts)
+
+    const [basicModal, setBasicModal] = useState(false)
 
     useEffect(() => {
         const storedRestaurantId = localStorage.getItem("restaurantId")
@@ -81,7 +87,6 @@ const Menu = () => {
                      return pro
                 })
                 setFilteredProducts([...subCatIdToHide])
-                console.log('setFilteredProducts', subCatIdToHide, products)
                 /*if (subCatIdToHide) {
                     toggleSubcategory(subCatIdToHide.id)
                 }*/
@@ -105,11 +110,11 @@ const Menu = () => {
             })
             // grouping products by sub category
             const final = data.products && data.products.length > 0 ? data.products.reduce((acc, currentValue) => {
-                const a = currentValue['squareItemId']
+                //const a = currentValue['squareItemId']
                 if (!acc[currentValue.subCategory['name']]) {
                     acc[currentValue.subCategory['name']] = {}
                 }
-                console.log('currentValue.options', currentValue.options)
+
                 currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault)?.price : null
                 if (currentValue.options && currentValue.options.length > 0 && currentValue.options.find(op => op.isDefault))  currentValue.options.find(op => op.isDefault).isSelected = true
                 acc[currentValue.subCategory['name']] = {
@@ -121,8 +126,7 @@ const Menu = () => {
                     subCatId: currentValue.subCategory['subCatId'],
                     products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, {...currentValue }] : [{...currentValue}]
                 }
-                console.log('ccc', a)
-                console.log('ccc2', acc)
+                //console.log('ccc', a)
                 return acc
             }, {}) : []
             const values = Object.values(final)
@@ -130,8 +134,7 @@ const Menu = () => {
             // ArrValues.sort((a, b) => a?.priority - b?.priority)
             // console.log("arrayValues", ArrValues)
             // setProducts([...ArrValues])
-            console.log('mmmm', final)
-            console.log('mmmm', values)
+
             setProducts([...values])
         }
 
@@ -285,11 +288,98 @@ const Menu = () => {
         // Sort the filteredProducts array based on priority
         sortedProducts = filteredProducts.sort((a, b) => a.priority - b.priority)
     }
-    console.log(selectedProducts, "Lets see the selection")
 
     const handleClick = () => {
         const sectionId = '/#orderSection' // Replace with the desired section ID
         history.push(`/?section=${sectionId}`)
+    }
+
+    const RenderModal = () => {
+        return (
+            <div className='modal-lg'>
+                <Modal className='modal-xl' isOpen={basicModal} toggle={() => setBasicModal(!basicModal)}>
+                    <div className='d-flex' style={{padding: 20}}>
+                        <h1 className="modal-head flex-fill">
+                            Nutrition Preferences
+                        </h1>
+                        <X className='close-modal-button cursor-pointer' onClick={() => setBasicModal(!basicModal)}/>
+                    </div>
+                    <hr/>
+                    <ModalBody style={{paddingRight: 50, paddingLeft: 50}}>
+
+                        <div className="container-sm">
+                            <div className="row mt-3 mb-3">
+                                <div className="col-12">
+                                    <Table hover responsive>
+                                        <thead className="">
+                                        <tr className="">
+                                            <th style={{fontSize: "1rem", color: '#262626'}}>Product</th>
+                                            <th style={{fontSize: "1rem", color: '#262626'}}>Ingredients Name</th>
+                                            <th style={{fontSize: "1rem", color: '#262626'}}>Calories</th>
+                                            <th style={{fontSize: "1rem", color: "#9c1f16"}}>Fat</th>
+                                            <th style={{fontSize: "1rem", color: '#57ab00'}}>Protein</th>
+                                            <th style={{fontSize: "1rem", color: "#c98200"}}>Carbs</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className=''>
+                                        {selectedProducts && selectedProducts.length > 0 ? selectedProducts?.map((p) => {
+                                            return p.productIngredients?.map((pi, index) => {
+                                                   return <tr key={`optionsKey-${index}`}>
+                                                            {/*<td rowSpan={`${p.productIngredients.length}`}>{p.productIngredients.length === `${index[0]}` ? p.name : ''}</td>*/}
+                                                            <td>{p.name}</td>
+                                                            <td>{pi.ingredient?.name }</td>
+                                                            <td>{pi.ingredient?.calories}</td>
+                                                            <td>{pi.ingredient?.fat}</td>
+                                                            <td>{pi.ingredient?.protein}</td>
+                                                            <td>{pi.ingredient?.carb}</td>
+                                                   </tr>
+                                            }
+                                            )
+
+
+                                            /*<tr key={`optionsKey-${index}`}>
+                                                        <td>{p.name === p.name ? p.name : '-'}</td>
+                                                        {p.productIngredients?.map((pi) => {
+                                                            return <td>{pi.ingredient?.calories}</td>
+                                                        })}
+                                                        {p.productIngredients?.map(pi => {
+                                                            return <td>{pi.ingredient?.fat}</td>
+                                                        })}
+                                                        {p.productIngredients?.map(pi => {
+                                                            return <td>{pi.ingredient?.protein}</td>
+                                                        })}
+                                                        {p.productIngredients?.map(pi => {
+                                                            return <td>{pi.ingredient?.carb}</td>
+                                                        })}
+
+                                                    </tr>*/
+
+                                        }) : <p>No data Found</p>}
+
+                                        </tbody>
+                                    </Table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ModalBody>
+                    <ModalFooter style={{justifyContent: 'center'}}>
+                        <button style={{
+                            backgroundColor: '#451400',
+                            color: 'white',
+                            //alignText: 'center',
+                            paddingLeft: 60,
+                            paddingRight: 60,
+                            paddingTop: 10,
+                            paddingBottom: 10,
+                            marginBottom: 30
+                        }} onClick={() => setBasicModal(!basicModal)}>
+                            Cancel
+                        </button>
+                    </ModalFooter>
+                </Modal>
+            </div>
+        )
     }
 
     return (
@@ -312,6 +402,25 @@ const Menu = () => {
                     name={category?.name}
                     description={category?.description}
                 />
+
+                <div className="row">
+                    <div className="col-12 cursor-pointer" style={{textAlign: 'right'}}>
+                        <h3
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setBasicModal((!basicModal))
+                            }}
+                            style={{
+                                textTransform: 'uppercase',
+                                color: "black",
+                                fontWeight: 'bolder'
+                            }}>
+                            Nutrition Preferences
+                            <List color="black"/>
+                        </h3>
+                    </div>
+                </div>
+
                 <hr className="text-dark"/>
                 {/*<NutritionPrefModel/>*/}
                 <div className="container-sm">
@@ -401,8 +510,12 @@ const Menu = () => {
                 productList={selectedProducts}
             />
             <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
+
+            {RenderModal()}
+
             </UILoader>
         </Fragment>
     )
 }
+
 export default memo(Menu)

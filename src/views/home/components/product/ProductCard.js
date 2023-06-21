@@ -24,7 +24,6 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
     const [customize, setCustomize] = useState(false)
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
-    console.log(item, "items")
 
     // console.log(item, "lets see the items")
     const imgStyles = {
@@ -38,14 +37,12 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
     const dispatch = useDispatch()
 
     const customerId = getUserData()?.customerId
-    const diff = []
 
     useEffect(() => {
         if (customerId) dispatch(getWinePackageByCustomer(customerId))
     }, [])
 
     const membershipObj = useSelector(state => state.memberShip.object)
-    console.log('Data for price section', membershipObj.id)
 
     // hooks
     useEffect(() => {
@@ -72,15 +69,6 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                 onMouseLeave={() => setCustomize(!customize)}>
                 {item && item.options && item.options.length > 0 && item.options.map((op, index) => {
                     console.log("op", op)
-                    const diffDouble = op.name === "Double" ? op.price : 0
-                    const diffNormal = op.name === "Normal" ? op.price : 0
-                    if (diffDouble > 0) {
-                        diff.push(diffDouble)
-                    } else if (diffNormal > 0) {
-                        diff.push(diffNormal)
-                    }
-                    console.log("diff", diff)
-
                     const cols = index === 0 ? Math.ceil(10 / item.options.length) : Math.floor(10 / item.options.length)
                     return <div key={`optionsKey-${index}`}
                                 className={`col-${cols} ${op.isSelected ? 'bg-primary text-white' : 'text-dark'} text-center cursor-pointer`}
@@ -92,7 +80,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                 }}>
                         <div style={{marginTop: 32, fontSize: 16, fontWeight: 440}}>
                             {/*{`${op?.name} ${op?.price ? ` - $${op.price}` : ''}`}*/}
-                            {op.name === "Normal" ? `${op?.price ? `$${op.price}` : ''}` : op.name === "Double" ? `${op?.name}   + $${diff?.length === 2 ? diff[1] - diff[0] : ''}` : `${op?.name} ${op?.price ? ` + $${op.price - item.wholePrice}` : ''}`}
+                            {op.name === "Normal" ? `${item?.name} Price: ${op?.price ? `$${op.price}` : ''}` : op.name === "Double" ? `${op?.name} ${item?.name} ${op?.price ? ` Price: $${op.price - item.wholePrice}` : ''}` : `${op?.name} ${item?.name} ${op?.price ? ` Price: $${op.price - item.wholePrice}` : ''}`}
                         </div>
                     </div>
                 })}

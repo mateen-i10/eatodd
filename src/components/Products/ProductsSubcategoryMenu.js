@@ -3,7 +3,6 @@ import ProductDetail from "../../views/home/components/product/ProductCard"
 const ProductsSubcategoryMenu = ({heading, limit, products, subCatId, selectedProducts, handleSelectProduct, handleSelectOption, handleChangeQuantity, isBlank}) => {
     const [showExtra, setShowExtra] = useState(false)
 
-    console.log("Products----- ---- ---", products)
     const mainProducts = products?.filter(product => product.isExtra === false)
     const extraProducts = products?.filter(product => product.isExtra === true)
     return <>
