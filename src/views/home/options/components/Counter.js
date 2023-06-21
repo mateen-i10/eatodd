@@ -5,6 +5,8 @@ const Counter = ({min, max, setProductQuantity, selectedProductIndex, handleSele
 
     const [value, setValue] = useState(min)
 
+    console.log('value', value)
+
     useEffect(() => {
         setProductQuantity(selectedProductIndex, value)
     }, [value])
