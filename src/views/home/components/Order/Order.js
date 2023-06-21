@@ -29,7 +29,7 @@ SwiperCore.use([Navigation, Pagination, Autoplay])
 
 const Order = () => {
     //get redux state
-    const {userLocation} = useSelector(state => state)
+    //const {userLocation} = useSelector(state => state)
     const {scrollSlice} = useSelector(state => state)
     const [mainCategory, setMainCategory] = useState([])
     const [omgPlate, setOmgPlate] = useState([])
@@ -362,7 +362,12 @@ const Order = () => {
                         <div className="row">
                     {selectedCategory === 1 && omgPlate.map((item) => (
 
-                            <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
+                        <div className="col-6 text-center cursor-pointer" onClick={() => {
+                            const categoryId = item.id
+                            const storedRestaurantId = localStorage.getItem('restaurantId')
+                            const destination = storedRestaurantId ? "/OmgPlate" : "/gmap"
+                            history.push(destination, { categoryId })
+                        }}>
                                 <div className=" ">
                                     <ProductImage attachment={item.attachment}
                                                   styles={{width: "200px", height: "200px", margin: "auto"}}/>
@@ -376,7 +381,12 @@ const Order = () => {
                     <div className="container-sm">
                         <div className="row">
                             {selectedCategory === 2 && omgSandwich.map((item) => (
-                                <div className="col-6 text-center cursor-pointer " onClick={() => history.push(userLocation.length ? "/OmgPlate" : "/gmap", {categoryId: item.id})}>
+                                <div className="col-6 text-center cursor-pointer" onClick={() => {
+                                    const categoryId = item.id
+                                    const storedRestaurantId = localStorage.getItem('restaurantId')
+                                    const destination = storedRestaurantId ? "/OmgPlate" : "/gmap"
+                                    history.push(destination, { categoryId })
+                                }}>
                                     <div className=" ">
                                         <ProductImage attachment={item.attachment}
                                                       styles={{width: "200px", height: "200px", margin: "auto"}}/>
