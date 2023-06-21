@@ -12,7 +12,6 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
                 setIsLoading(true)
                  http._request({baseURL, url, method, data, responseType /*signal: controller.signal*/ })
                     .then(res => {
-                        console.log('res', res)
                         if (res && res.status === 200 && (res.data instanceof Blob || res.data.statusCode === 200)) {
                             setIsLoading(false)
                             setResponse(res.data)

@@ -11,8 +11,6 @@ const orderList = (props) => {
         props.onCloseModal(!props.openCan)
     }
 
-    console.log('products', props.productList)
-
     return (
         <div className='demo-inline-spacing'>
             <Offcanvas
@@ -22,7 +20,7 @@ const orderList = (props) => {
                 style={{height: 300, boxShadow: '10px 0px 39px 10px #afca85'}}
             >
                 <OffcanvasHeader onClick={toggleCanvasBackdrop} style={{backgroundColor: '#8aca46'}}>
-                    <h5 style={{color: 'white'}}>Selected Items List <span className='cursor-pointer' style={{paddingLeft: 100}}>X</span></h5>
+                    <div style={{color: 'white'}}>Selected Items List <span className='cursor-pointer' style={{paddingLeft: 100}}>X</span></div>
                 </OffcanvasHeader>
                 <OffcanvasBody className='my-auto mx-0 flex-grow-0'>
                     <Table>

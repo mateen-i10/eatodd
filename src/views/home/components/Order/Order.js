@@ -147,45 +147,47 @@ const Order = () => {
                     </div>
                 </div>
             </div>}
-            <div className="menu-list container-sm pb-5 pt-5  mx-auto" id="orderSection" ref={orderRef}>
-                <div className="row ms-0 me-1 ">
-                    {
-                        mainCategory.length ? mainCategory.map(item => {
-                            // eslint-disable-next-line multiline-ternary
-                            // item.name.toString().toLowerCase() !== "wine" ?
-                            return (
-                                <div className="col-md-3  col-12 top-level-menu" key={item.id}>
-                                    <div className="menu-item-1" onClick={() => {
-                                        const storedRestaurantId = localStorage.getItem('restaurantId')
-                                        const redirectTo = storedRestaurantId ? "/OmgPlate" : "/gmap"
+            <section id="orderSection">
+                <div className="menu-list container-sm pb-5 pt-5  mx-auto"  ref={orderRef}>
+                    <div className="row ms-0 me-1 ">
+                        {
+                            mainCategory.length ? mainCategory.map(item => {
+                                // eslint-disable-next-line multiline-ternary
+                                // item.name.toString().toLowerCase() !== "wine" ?
+                                return (
+                                    <div className="col-md-3  col-12 top-level-menu" key={item.id}>
+                                        <div className="menu-item-1" onClick={() => {
+                                            const storedRestaurantId = localStorage.getItem('restaurantId')
+                                            const redirectTo = storedRestaurantId ? "/OmgPlate" : "/gmap"
 
-                                        if (item.name.toString().trim().toLowerCase() === "omg plate") {
-                                            setModalClicked(!modalClicked)
-                                            setSelectedCategory(1)
-                                        } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
-                                            setModalClicked(!modalClicked)
-                                            setSelectedCategory(2)
-                                        } else {
-                                            history.push(redirectTo, { categoryId: item.id })
-                                        }
-                                    }}>
-                                        <div className="thumbnail">
-                                            <ProductImage attachment={item.attachment}
-                                                          styles={{width: "180px", height: "180px", margin: "auto"}} classes="categoryImage"/>
-                                        </div>
-                                        <div className="text2">
-                                            <div className="display-name">{item.name}</div>
-                                            <div className="order-cta">Order
-                                                <div className="arrow-right"></div>
+                                            if (item.name.toString().trim().toLowerCase() === "omg plate") {
+                                                setModalClicked(!modalClicked)
+                                                setSelectedCategory(1)
+                                            } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
+                                                setModalClicked(!modalClicked)
+                                                setSelectedCategory(2)
+                                            } else {
+                                                history.push(redirectTo, { categoryId: item.id })
+                                            }
+                                        }}>
+                                            <div className="thumbnail">
+                                                <ProductImage attachment={item.attachment}
+                                                              styles={{width: "180px", height: "180px", margin: "auto"}} classes="categoryImage"/>
+                                            </div>
+                                            <div className="text2">
+                                                <div className="display-name">{item.name}</div>
+                                                <div className="order-cta">Order
+                                                    <div className="arrow-right"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>)
-                        }) : <ComponentSpinner/>
-                        // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
-                    }
+                                    </div>)
+                            }) : <ComponentSpinner/>
+                            // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
+                        }
+                    </div>
                 </div>
-            </div>
+            </section>
             <div className="promo-banner container-fluid  ">
                 <div className="row align-items-center justify-content-center">
                     <div className="promo col-11 col-md-5 container-fluid">

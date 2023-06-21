@@ -9,9 +9,6 @@ const ProductImage = ({attachment, classes, styles}) => {
 
     // hooks
     const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
-    console.log('isLoading in image card', isLoading)
-    /*console.log('response in image card', response)
-    console.log('attachment in image card', attachment)*/
 
     useEffect(() => {
         if (attachment && attachment.path && attachment.extension) {
