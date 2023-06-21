@@ -23,7 +23,10 @@ const Counter = ({min, max, setProductQuantity, selectedProductIndex, handleSele
                          style={{backgroundColor: 'rgb(220 220 220 / 80%)', zIndex: '100'}}>
                         <Plus color='black' size={25} onClick={() => {
                             if (value === max) {
-                                setValue(value)
+                                //setValue(value)
+                                setValue(value + 1)
+                            } else if (value > 9) {
+                                setValue(value + 5)
                             } else {
                                 setValue(value + 1)
                             }
@@ -34,6 +37,8 @@ const Counter = ({min, max, setProductQuantity, selectedProductIndex, handleSele
                         <Minus color='black' size={25} onClick={() => {
                             if (value > min) {
                                 setValue(value - 1)
+                            } else if (value > 14) {
+                                setValue(value - 5)
                             } else if (value === 1) {
                                 handleSelectProduct(product)
                             }
