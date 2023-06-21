@@ -314,7 +314,6 @@ const Menu = () => {
                                         <thead className="">
                                         <tr className="">
                                             <th style={{fontSize: "1rem", color: '#262626'}}>Product</th>
-                                            <th style={{fontSize: "1rem", color: '#262626'}}>Ingredients Name</th>
                                             <th style={{fontSize: "1rem", color: '#262626'}}>Calories</th>
                                             <th style={{fontSize: "1rem", color: "#9c1f16"}}>Fat</th>
                                             <th style={{fontSize: "1rem", color: '#57ab00'}}>Protein</th>
@@ -327,7 +326,6 @@ const Menu = () => {
                                                    return <tr key={`optionsKey-${index}`}>
                                                             {/*<td rowSpan={`${p.productIngredients.length}`}>{p.productIngredients.length === `${index[0]}` ? p.name : ''}</td>*/}
                                                             <td>{p.name}</td>
-                                                            <td>{pi.ingredient?.name }</td>
                                                             <td>{pi.ingredient?.calories}</td>
                                                             <td>{pi.ingredient?.fat}</td>
                                                             <td>{pi.ingredient?.protein}</td>
@@ -364,10 +362,7 @@ const Menu = () => {
 
                     </ModalBody>
                     <ModalFooter style={{justifyContent: 'center'}}>
-                        <button style={{
-                            backgroundColor: '#451400',
-                            color: 'white',
-                            //alignText: 'center',
+                        <button className='text-primary btn btn-primary' style={{
                             paddingLeft: 60,
                             paddingRight: 60,
                             paddingTop: 10,
