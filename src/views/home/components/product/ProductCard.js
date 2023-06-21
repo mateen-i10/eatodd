@@ -25,6 +25,8 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
 
+    console.log('item', item)
+
     // console.log(item, "lets see the items")
     const imgStyles = {
         width: "100%",
@@ -50,6 +52,11 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
             setIsLength(false)
         }, 1000)
     }, [isLength])
+
+    const fla = item.flavour
+    const arr = fla?.split(",")
+    console.log('fla', fla)
+    console.log('arr', arr)
 
     return <>
         <div className="card add mb-lg-2 mb-1 overflow-hidden "
@@ -154,8 +161,10 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                         {item?.name}
                                         <br />
                                         <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
-                                        <p className='text-info' style={{paddingTop: '3px'}}>
-                                            {item.flavour === 'Spicy' ? <img src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? '' : item.flavour === "Contains Almonds" ? <img src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : item.flavour === "Vegan" ? <img src={Vegan} width={20} alt="image" data-tip="Vegan"/> : item.flavour === "Gluten free" ? <img src={GF} width={20} alt="image" data-tip="Gluten free"/> : item.flavour === "Vegetarian" ? <img src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''}
+                                        <p className='text-info img-Container1' style={{paddingTop: '3px'}}>
+                                            {arr?.map(f => {
+                                                return  f === 'Spicy' ? <img className='imgMargin' src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? '' : f === "Contains Almonds" ? <img className='imgMargin' src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : f === "Vegan" ? <img className='imgMargin' src={Vegan} width={20} alt="image" data-tip="Vegan"/> : f === "Gluten free" ? <img className='imgMargin' src={GF} width={20} alt="image" data-tip="Gluten free"/> : f === "Vegetarian" ? <img className='imgMargin' src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''
+                                            })}
                                         </p>
                                     </div>
                                     <p className="mb-0 text-dark">{item?.description}</p>
