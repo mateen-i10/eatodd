@@ -32,9 +32,11 @@ const COMenu = () => {
     const [menuItem, setMenuItem] = useState({})
     const [sections, setSections] = useState([])
     const [selectedItems, setSelectedItems] = useState([])
-    console.log(selectedItems, "see")
 
     const [quantity, setQuantity] = useState(10)
+    const [quantityArray, setQuantityArray] = useState([])
+
+    console.log('menuItem', menuItem)
 
     // hooks
     const [isLoading, response] = useAPI(`cateringMenuItem/${id}`, 'get', {}, {}, true)
@@ -118,9 +120,22 @@ const COMenu = () => {
         history.push('/catering')
     }
 
-    console.log('responses', response)
+    console.log('responsesddd', response)
     console.log('sec', sections)
 
+    const limit = {response}
+    const finalLimit = limit.response?.data?.limit
+    console.log('limit', finalLimit)
+    let resultArray = []
+
+    useEffect(() => {
+        if (finalLimit !== 0 || finalLimit !== null) {
+            const divideLimit = 5
+            const arrayLength = finalLimit / 5
+            resultArray = (Array.from({ length: arrayLength }, (_, index) => finalLimit - (divideLimit * index))).reverse()
+            setQuantityArray(resultArray)
+        }
+    }, [finalLimit])
 
     return (
         <div>
@@ -146,7 +161,7 @@ const COMenu = () => {
                                             Select People Quantity:
                                         </h2>
                                     </div>
-                                    <div className="col-md-8">
+                                    <div className="col-md-6">
                                         <div style={{
                                             //display: 'flex',
                                             //justifyContent: 'space-around',
@@ -155,16 +170,22 @@ const COMenu = () => {
                                             float: 'left',
                                             marginLeft: '50px'
                                         }}>
-                                            <UncontrolledDropdown style={{}}>
+                                            <UncontrolledDropdown>
                                                 <DropdownToggle caret color="transparent" style={{
                                                     border: "1px solid #81be41",
                                                     color: '#81be41',
                                                     fontWeight: 700
                                                 }}>
-                                                    {quantity} <ChevronDown size={18}/>
+                                                    {quantity}<ChevronDown size={18}/>
                                                 </DropdownToggle>
-                                                <DropdownMenu>
-                                                    <DropdownItem onClick={() => setQuantity(10)}>
+                                                <DropdownMenu style={{height: '200px', overflowY: 'scroll'}}>
+                                                    {quantityArray.length > 0 && quantityArray.map((p, index) => {
+                                                        return <div key={index}>
+                                                            {index > 1 ? <DropdownItem onClick={() => setQuantity(p) }>{p} People</DropdownItem> : ''}
+                                                        </div>
+                                                    })}
+
+                                                    {/*<DropdownItem onClick={() => setQuantity(10)}>
                                                         10 People
                                                     </DropdownItem>
                                                     <DropdownItem onClick={() => setQuantity(15)}>
@@ -180,11 +201,12 @@ const COMenu = () => {
                                                         30 People
                                                     </DropdownItem>
                                                     <DropdownItem
-                                                        onClick={() => setQuantity(100)}>100 People</DropdownItem>
+                                                        onClick={() => setQuantity(100)}>
+                                                        100 People
+                                                    </DropdownItem>*/}
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </div>
-
                                         <FormFeedback>
                                             Quantity is required
                                         </FormFeedback>
