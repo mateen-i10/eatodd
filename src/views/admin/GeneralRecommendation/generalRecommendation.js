@@ -81,6 +81,7 @@ const AssignGeneralRecommendation = (props) => {
 
     console.log('product', product)
     console.log('setSubmit', setSubmit)
+    console.log('categoryProduct', categoryProduct)
 
     const dispatch = useDispatch()
 
@@ -101,7 +102,7 @@ const AssignGeneralRecommendation = (props) => {
         console.log('search', search)
         const final = []
         //return loadOptions(`}`, search, 1, 100)
-        await httpService._get(`${baseURL}product/categoryProducts?categoryId=${modalCategory.value}`)
+        await httpService._get(`${baseURL}product/categoryProducts?categoryId=${modalCategory.value}&&searchQuery=${search}`)
             .then(response => {
                 if (response.status === 200 && response.data.statusCode === 200) {
                     console.log('data in category products', response.data)
@@ -129,8 +130,6 @@ const AssignGeneralRecommendation = (props) => {
         if (modalCategory) {
             modalProductOptions("")
         }
-
-
     }, [modalCategory])
 
     const onSelectProduct = (e) => {

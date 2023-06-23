@@ -294,6 +294,41 @@ const Menu = () => {
         history.push(`/?section=${sectionId}`)
     }
 
+    const caloriesList = selectedProducts.map(p => {
+        return p.productIngredients.map(l => {
+            return l.ingredient?.calories
+        })
+    })
+
+    const fatList = selectedProducts.map(p => {
+        return p.productIngredients.map(l => {
+            return l.ingredient.fat
+        })
+    })
+
+    const proteinList = selectedProducts.map(p => {
+        return p.productIngredients.map(l => {
+            return l.ingredient.protein
+        })
+    })
+
+    const carbList = selectedProducts.map(p => {
+        return p.productIngredients.map(l => {
+            return l.ingredient.carb
+        })
+    })
+
+    const mergedArrayCalories = caloriesList.reduce((result, array) => [...result, ...array], [])
+    const mergedArrayFat = fatList.reduce((result, array) => [...result, ...array], [])
+    const mergedArrayProtein = proteinList.reduce((result, array) => [...result, ...array], [])
+    const mergedArrayCarb = carbList.reduce((result, array) => [...result, ...array], [])
+
+    const caloriesSum = mergedArrayCalories.reduce((total, current) => total + current, 0)
+    const fatSum = mergedArrayFat.reduce((total, current) => total + current, 0)
+    const proteinSum = mergedArrayProtein.reduce((total, current) => total + current, 0)
+    const carbSum = mergedArrayCarb.reduce((total, current) => total + current, 0)
+
+
     const RenderModal = () => {
         return (
             <div className='modal-lg'>
@@ -323,37 +358,23 @@ const Menu = () => {
                                         <tbody className=''>
                                         {selectedProducts && selectedProducts.length > 0 ? selectedProducts?.map((p) => {
                                             return p.productIngredients?.map((pi, index) => {
-                                                   return <tr key={`optionsKey-${index}`}>
-                                                            {/*<td rowSpan={`${p.productIngredients.length}`}>{p.productIngredients.length === `${index[0]}` ? p.name : ''}</td>*/}
-                                                            <td>{p.name}</td>
-                                                            <td>{pi.ingredient?.calories}</td>
-                                                            <td>{pi.ingredient?.fat}</td>
-                                                            <td>{pi.ingredient?.protein}</td>
-                                                            <td>{pi.ingredient?.carb}</td>
-                                                   </tr>
-                                            }
-                                            )
-
-
-                                            /*<tr key={`optionsKey-${index}`}>
-                                                        <td>{p.name === p.name ? p.name : '-'}</td>
-                                                        {p.productIngredients?.map((pi) => {
-                                                            return <td>{pi.ingredient?.calories}</td>
-                                                        })}
-                                                        {p.productIngredients?.map(pi => {
-                                                            return <td>{pi.ingredient?.fat}</td>
-                                                        })}
-                                                        {p.productIngredients?.map(pi => {
-                                                            return <td>{pi.ingredient?.protein}</td>
-                                                        })}
-                                                        {p.productIngredients?.map(pi => {
-                                                            return <td>{pi.ingredient?.carb}</td>
-                                                        })}
-
-                                                    </tr>*/
-
-                                        }) : <p>No data Found</p>}
-
+                                                return <tr key={`optionsKey-${index}`}>
+                                                    <td>{p.name}</td>
+                                                    <td>{pi.ingredient?.calories}</td>
+                                                    <td>{pi.ingredient?.fat}</td>
+                                                    <td>{pi.ingredient?.protein}</td>
+                                                    <td>{pi.ingredient?.carb}</td>
+                                                </tr>
+                                            })
+                                        }) : <p>No data Found</p>
+                                        }
+                                        {selectedProducts && selectedProducts.length > 0 ? <tr style={{backgroundColor: '#f3f2f7'}}>
+                                                <td style={{fontSize: "1rem", color: '#262626'}}> Total</td>
+                                                <td style={{fontSize: "1rem", color: '#262626'}}> {caloriesSum}</td>
+                                                <td style={{fontSize: "1rem", color: "#9c1f16"}}> {fatSum}</td>
+                                                <td style={{fontSize: "1rem", color: '#57ab00'}}> {proteinSum}</td>
+                                                <td style={{fontSize: "1rem", color: "#c98200"}}> {carbSum}</td>
+                                            </tr> : ''}
                                         </tbody>
                                     </Table>
                                 </div>
