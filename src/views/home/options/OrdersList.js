@@ -28,7 +28,7 @@ const orderList = (props) => {
                         <th style={{color: '#81be41'}}>Price</th>
                         {props.productList && props.productList.map(p => {
                             return  <tbody>
-                                    <td style={{borderBottom: '1px solid'}}>{p.name} ({p.options.map(op => op.isSelected && op.name)})</td>
+                                    <td style={{borderBottom: '1px solid'}}>{p.name} {p.options.map(op => op.isSelected && (op.name === 'Extra' ? '(Extra)' : ''))}</td>
                                     <td className='text-center' style={{borderBottom: '1px solid'}}>{p.options.map(op => op.isSelected && op.price)}</td>
                                 </tbody>
                         })}
