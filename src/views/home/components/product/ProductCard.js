@@ -110,7 +110,11 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                             </div>
                         } else if (selectedItem.id === item.id) {
                             return <div className="check3">
-                                <ExtraQty value={lmt} selectedItems={selectedItems} selectedItem={selectedItem} key={`${selectedItem.id}-${index}`}/>
+                                {limit === 2 ? (
+                                    <CheckSign styles={{marginLeft: 10}} key={`${selectedItem.id}-${index}`} />
+                                ) : (
+                                    <ExtraQty value={lmt} selectedItems={selectedItems} selectedItem={selectedItem} key={`${selectedItem.id}-${index}`} />
+                                )}
                             </div>
                         }
                     } else if (selectedItem.optionType === ProductTypes.Numeric && selectedItem.id === item.id) {
