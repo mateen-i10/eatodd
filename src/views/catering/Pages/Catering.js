@@ -62,9 +62,9 @@ const Catering = () => {
         <>
             <Header/>
 
-            <section style={{paddingTop:'50px', paddingBottom: '50px'}}>
+            <section style={{paddingTop:'200px', paddingBottom: '200px'}}>
                 <div className="container-sm">
-                    <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '2.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
+                    <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '4.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
                         OMG Catering
                     </h5>
                     <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '50px'}}>
@@ -82,7 +82,7 @@ const Catering = () => {
                 <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '35px'}}>Treat your group to Taste &
                     Flavor that happens to be Healthy!<br/>*24 hour advance notice requested</p>
                 {cateringMenu.length ? <div className="container-sm mb-3">
-                    <div className="row mt-3">
+                    <div className="row mt-3" style={{marginBottom: '200px'}}>
                         <div className="col-md-12">
                             {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
                                 /*xl={xl}
@@ -127,7 +127,7 @@ const Catering = () => {
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>
 
-            <section className="container-sm" style={{backgroundColor: '#f5f8fb'}}>
+            <section className="container-sm">
                 <Row>
                     <Col lg={7} style={{paddingBottom: '50px'}}>
                         <div className='ps-5 mt-5'>

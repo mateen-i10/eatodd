@@ -1,5 +1,5 @@
 // ** React Imports
-import { Suspense, lazy, Fragment } from 'react'
+import React, { Suspense, lazy, Fragment } from 'react'
 
 // ** Utils
 import { useLayout } from '@hooks/useLayout'
@@ -26,6 +26,7 @@ import {
   isCustomer,
   isUserLoggedIn
 } from "../auth/utils"
+import PlaySound from "../views/PlaySound"
 
 const Router = () => {
   // ** Hooks
@@ -162,6 +163,9 @@ const Router = () => {
 
                           {route.layout === 'BlankLayout' ? (
                             <Fragment>
+                              {/*<div className="switch-container">*/}
+                              {/*  Pause /Play<PlaySound/>*/}
+                              {/*</div>*/}
                               <route.component {...props} />
                             </Fragment>
                           ) : (

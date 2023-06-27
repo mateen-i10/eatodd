@@ -10,7 +10,7 @@ function PlaySound() {
                 src={'https://remote.vu360solutions.org/static/mixkit-tech.mp3'}
                 playing={playing}
                 loop={true}
-                volume={0.01}
+                volume={0.06}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
             />

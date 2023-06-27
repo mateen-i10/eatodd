@@ -1,5 +1,5 @@
 // ** React Imports
-import React, { Suspense, lazy } from 'react'
+import React, {Suspense, lazy, Fragment} from 'react'
 import ReactDOM from 'react-dom'
 
 // ** Redux Imports
@@ -40,15 +40,11 @@ import './assets/scss/style.scss'
 import * as serviceWorker from './serviceWorker'
 import PlaySound from "./views/PlaySound"
 
-
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'))
 
 ReactDOM.render(
       <Provider store={store}>
-          {/*<div className="switch-container">*/}
-          {/*    Pause /Play<PlaySound/>*/}
-          {/*</div>*/}
         <Suspense fallback={<Spinner />}>
               <ThemeContext>
                 <LazyApp />

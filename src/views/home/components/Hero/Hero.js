@@ -27,7 +27,7 @@ const Hero = () => {
                                 OMG OFFERS BOTTLES OF WINE WITH ZERO MARK UP
                             </h1>
                             <h3 style={{color: 'white'}}>
-                                Sign Up for the omg wine club and start saving on your Favorite bottles Today
+                                SIGN UP TODAY!
                             </h3>
                             <div
                                 className="btn btn-danger"

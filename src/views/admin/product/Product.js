@@ -439,6 +439,11 @@ const Product = (props) => {
             selector: (row) => row.name,
             sortable: true,
             minWidth: '100px'
+        }, {
+            name: 'Description',
+            selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
         },
         {
             name: 'WholePrice',

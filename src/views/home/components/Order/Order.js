@@ -13,7 +13,7 @@ import {Link, useHistory} from "react-router-dom"
 import ComponentSpinner from "../../../../@core/components/spinner/Loading-spinner"
 import ProductImage from "../product/ProductImage"
 import {isUserLoggedIn} from "../../../../auth/utils"
-import {Card, CardBody, Modal, ModalBody, ModalHeader} from "reactstrap"
+import {Card, CardBody, Modal, ModalBody, ModalHeader, Row} from "reactstrap"
 import Rating from "react-rating"
 import {Star} from "react-feather"
 import {Swiper, SwiperSlide} from "swiper/react/swiper-react.js"
@@ -49,7 +49,8 @@ const Order = () => {
                         attachment: item.attachment,
                         id: item.id,
                         name: item.name,
-                        description: item.description
+                        description: item.description,
+                        priority: item.priority
                     }))
                     const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
                     const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
@@ -66,7 +67,7 @@ const Order = () => {
             .catch(error => {
                 toast.error(error.message)
             })
-
+        console.log('category', mainCategory)
         httpService._get(`${baseURL}Review?pageIndex=1&&pageSize=12`)
             .then(response => {
 
@@ -150,40 +151,46 @@ const Order = () => {
             <section id="orderSection">
                 <div className="menu-list container-sm pb-5 pt-5  mx-auto"  ref={orderRef}>
                     <div className="row ms-0 me-1 ">
-                        {
-                            mainCategory.length ? mainCategory.map(item => {
-                                // eslint-disable-next-line multiline-ternary
-                                // item.name.toString().toLowerCase() !== "wine" ?
+                        {mainCategory.length ? mainCategory
+                            .sort((b, a) => b.priority - a.priority) // Sort categories by priority
+                            .map(item => {
                                 return (
-                                    <div className="col-md-3  col-12 top-level-menu" key={item.id}>
-                                        <div className="menu-item-1" onClick={() => {
-                                            const storedRestaurantId = localStorage.getItem('restaurantId')
-                                            const redirectTo = storedRestaurantId ? "/OmgPlate" : "/gmap"
+                                    <div className="col-md-3 col-12 top-level-menu" key={item.id}>
+                                        <div
+                                            className="menu-item-1"
+                                            onClick={() => {
+                                                const storedRestaurantId = localStorage.getItem('restaurantId')
+                                                const redirectTo = storedRestaurantId ? "/OmgPlate" : "/gmap"
 
-                                            if (item.name.toString().trim().toLowerCase() === "omg plate") {
-                                                setModalClicked(!modalClicked)
-                                                setSelectedCategory(1)
-                                            } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
-                                                setModalClicked(!modalClicked)
-                                                setSelectedCategory(2)
-                                            } else {
-                                                history.push(redirectTo, { categoryId: item.id })
-                                            }
-                                        }}>
+                                                if (item.name.toString().trim().toLowerCase() === "omg plate") {
+                                                    setModalClicked(!modalClicked)
+                                                    setSelectedCategory(1)
+                                                } else if (item.name.toString().trim().toLowerCase() === "omg sandwich") {
+                                                    setModalClicked(!modalClicked)
+                                                    setSelectedCategory(2)
+                                                } else {
+                                                    history.push(redirectTo, { categoryId: item.id })
+                                                }
+                                            }}
+                                        >
                                             <div className="thumbnail">
-                                                <ProductImage attachment={item.attachment}
-                                                              styles={{width: "180px", height: "180px", margin: "auto"}} classes="categoryImage"/>
+                                                <ProductImage
+                                                    attachment={item.attachment}
+                                                    styles={{ width: "180px", height: "180px", margin: "auto" }}
+                                                    classes="categoryImage"
+                                                />
                                             </div>
                                             <div className="text2">
                                                 <div className="display-name">{item.name}</div>
-                                                <div className="order-cta">Order
+                                                <div className="order-cta">
+                                                    Order
                                                     <div className="arrow-right"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>)
+                                    </div>
+                                )
                             }) : <ComponentSpinner/>
-                            // <div className="fs-1 fw-bolder text-center mt-5"> No item found in Database</div>
                         }
                     </div>
                 </div>

@@ -45,28 +45,7 @@ const StatisticsCards = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Statistics Cards' breadCrumbParent='Card' breadCrumbActive='Statistics Cards' />
-
-      <Row>
-        {/* Orders Bar Chart */}
-        <Col lg='2' xs='6'>
-          <OrdersBarChart warning={context.colors.warning.main} />
-        </Col>
-        {/* Orders Bar Chart */}
-
-        {/* Profit Line Chart */}
-        <Col lg='2' xs='6'>
-          <ProfitLineChart info={context.colors.info.main} />
-        </Col>
-        {/* Profit Line Chart */}
-
-        {/* Stats Card */}
-        <Col lg='8' sm='12'>
-          <StatsCard cols={{ md: '3', sm: '6', xs: '12' }} />
-        </Col>
-        {/* Stats Card */}
-      </Row>
-
+      <Breadcrumbs breadCrumbTitle='Statistics' breadCrumbParent='Dashboard' breadCrumbActive='Statistics' />
       <Row>
         {/* Stats With Icons */}
         <Col xl='2' md='4' sm='6'>
