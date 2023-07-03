@@ -62,7 +62,7 @@ const Catering = () => {
         <>
             <Header/>
 
-            <section style={{paddingTop:'200px', paddingBottom: '200px'}}>
+            {/*<section style={{paddingTop:'200px', paddingBottom: '200px'}}>
                 <div className="container-sm">
                     <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '4.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
                         OMG Catering
@@ -73,14 +73,26 @@ const Catering = () => {
                         taste.
                     </p>
                 </div>
-            </section>
+            </section>*/}
 
             <section style={{backgroundColor: 'rgb(245, 248, 251)'}}>
                 <div className="fs-1 fw-bolder text-primary text-center"
-                     style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG CATERING PACKAGES
+                     style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG CATERING
                 </div>
-                <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '35px'}}>Treat your group to Taste &
-                    Flavor that happens to be Healthy!<br/>*24 hour advance notice requested</p>
+                <div className='row'>
+                    <div className='col-md-2'></div>
+                    <div className='col-md-8'>
+                        <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '5px'}}>
+                            Allow us to make your next special event extra special. We cater for any size event.
+                            Treat your group to Taste & Flavor that happens to be Healthy!
+                        </p>
+                    </div>
+                    <div className='col-md-2'></div>
+                </div>
+                <ul style={{textAlign: 'center', fontSize: '1.5em'}}>
+                    <li>*24-hour advance notice requested</li>
+                    <li>*Minimum order is for 10 people</li>
+                </ul>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3" style={{marginBottom: '200px'}}>
                         <div className="col-md-12">

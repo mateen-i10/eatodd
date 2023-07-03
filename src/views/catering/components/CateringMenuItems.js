@@ -11,7 +11,7 @@ const CateringMenuItems = (props) => {
             <div className="row align-items-center justify-content-center" style={{ marginTop: '0px !important' }}>
                 <div className="col-md-12 mt-5">
                     <div className="member-card card border" style={{ width: "100%", height: "550px" }}>
-                        <div className='card-header'>
+                        <div className='mt-3'>
                             <h2 className="fw-bolder text-center text-primary mb-2" style={{ fontSize: '20px', textTransform: 'capitalize' }}>
                                 {item.title.toUpperCase()}
                             </h2>
