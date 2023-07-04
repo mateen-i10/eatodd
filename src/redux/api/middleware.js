@@ -1,18 +1,27 @@
-import httpService, {baseURL} from "../../utility/http"
-import {toast} from "react-toastify"
-import {apiCall} from "./actions"
-// import {isUserLoggedIn} from "../../auth/utils"
-import {unAuthorize} from "../auth/actions"
-// import {useNavigate} from "react-router"
+import httpService, { baseURL } from "../../utility/http"
+import { toast } from "react-toastify"
+import { apiCall } from "./actions"
+import { unAuthorize } from "../auth/actions"
 
-const apiMiddleware = ({dispatch}) => (next) => (action) => {
+const activeRequests = {} // Object to store active API requests and their corresponding toast IDs
+
+const apiMiddleware = ({ dispatch }) => (next) => (action) => {
     if (action.type !== apiCall.type) return next(action)
-    const { url, onSuccess, onError, method, data : semiFinal, isSuccessToast, requestCompleted, successMessage, isSuccess, isFormData} = action.payload
 
-    // const navigate = useNavigate()
+    const {
+        url,
+        onSuccess,
+        onError,
+        method,
+        data: semiFinal,
+        isSuccessToast,
+        requestCompleted,
+        successMessage,
+        isSuccess,
+        isFormData
+    } = action.payload
 
     let data = null
-    // to pass form-data
     if (isFormData) {
         const entries = Object.entries(semiFinal)
         data = new FormData()
@@ -22,46 +31,49 @@ const apiMiddleware = ({dispatch}) => (next) => (action) => {
     } else {
         data = semiFinal
     }
-    console.log('api mid', url, onSuccess, onError, method, data)
-    httpService._request({ baseURL, url, method, data })
-        .then(response => {
-            console.log('response', response)
-            // action called on every response if provided
-            if (requestCompleted) dispatch({type: requestCompleted, payload: true})
-            // success case
+
+    const toastId = activeRequests[url] // Get the toast ID for the current API request
+
+    // If a toast is already active for the same API request, return immediately
+    if (toastId) {
+        return
+    }
+
+    httpService
+        ._request({ baseURL, url, method, data })
+        .then((response) => {
+            if (requestCompleted) dispatch({ type: requestCompleted, payload: true })
+
             if (response.status === 200 && response.data.statusCode === 200) {
-                // If it is provided then toast message on success is shown
                 if (isSuccessToast) {
-                    successMessage ? toast.success(successMessage) : toast.success(response.data.message)
+                    successMessage ? (activeRequests[url] = toast.success(successMessage)) : (activeRequests[url] = toast.success(response.data.message))
                 }
-                // specific success action
                 if (onSuccess) {
-                    dispatch({type: onSuccess, payload: response.data})
+                    dispatch({ type: onSuccess, payload: response.data })
                 }
-                // specific success case to check true or false
                 if (isSuccess) {
-                    dispatch({type: isSuccess, payload: true})
+                    dispatch({ type: isSuccess, payload: true })
                 }
             } else if (response.status === 401) {
-                // dispatch unAuthorize() if the response status is 401
                 dispatch(unAuthorize())
             } else {
-                //general Error Action
                 toast.error(response.data.message)
-                if (onError) dispatch({type: onError, payload: true})
+                if (onError) dispatch({ type: onError, payload: true })
             }
-        }).catch(error => {
-        // action called on every response if provided
-        if (requestCompleted) dispatch({type: requestCompleted, payload: true})
-        console.log('err here', error)
-        if (error.response && error.response.status === 401) {
-            // dispatch unAuthorize() if the response status is 401
-            dispatch(unAuthorize())
-        } else {
-            if (onError) dispatch({type: onError, payload: true})
-            toast.error(error.message)
-        }
-    })
+        })
+        .catch((error) => {
+            if (requestCompleted) dispatch({ type: requestCompleted, payload: true })
+
+            if (error.response && error.response.status === 401) {
+                dispatch(unAuthorize())
+            } else {
+                if (onError) dispatch({ type: onError, payload: true })
+                toast.error(error.message)
+            }
+        })
+        .finally(() => {
+            delete activeRequests[url] // Remove the API request from active requests after completion
+        })
 }
 
 export default apiMiddleware
