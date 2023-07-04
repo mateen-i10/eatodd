@@ -161,7 +161,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                         <div className="col-lg-9 col-md-9 col-7">
                             <div className="card-body ">
                                 <div className=''>
-                                    <div className="card-title text-start text-uppercase mb-0 text-primary fw-bolder " style={{fontSize: '1.1em', lineHeight: "18px", marginTop: "-6px"}}>
+                                    <div className="card-title text-start text-uppercase mb-0 text-primary fw-bolder mobileView" style={{fontSize: '1.1em', lineHeight: "18px", marginTop: "-6px"}}>
                                         {item?.name}
                                         <br />
                                         <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
@@ -171,7 +171,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                             })}
                                         </p>
                                     </div>
-                                    <p className="mb-0 text-dark">{item?.description}</p>
+                                    <p className="mb-0 text-dark mobileView">{item?.description}</p>
                                 </div>
                             </div>
                             {item && item.options && item.options.length > 1 && <div className='bg-primary tooltipAdd d-none fs-5 text-white' style={{
@@ -191,7 +191,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                              onMouseOver={() => setCustomize(!customize)}>
                             <Plus size={20} />
                         </div>}
-                    <div className=" fs-5 fw-bolder text-dark me-2 " style={{marginTop: 25}}>
+                    <div className=" fs-5 fw-bolder text-dark me-2 mobileView" style={{marginTop: 25}}>
                         {membershipObj.id ? (
                             item.retailPrice || item.price ? (
                                 `$${item.retailPrice ? item.retailPrice : item.price}`

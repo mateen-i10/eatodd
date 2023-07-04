@@ -404,11 +404,9 @@ const Menu = () => {
             <Header/>
             <div className="sticky-top headerScroll">
                 <div className="" style={{marginBottom: 0, height: "45px"}}>
-                    <div className="">
                         <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
                              onClick={handleClick}>Return to Menu
                         </div>
-                    </div>
                 </div>
             </div>
 
