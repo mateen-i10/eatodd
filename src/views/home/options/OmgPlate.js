@@ -19,7 +19,6 @@ import UILoader from "../../../@core/components/ui-loader"
 import {List, X} from "react-feather"
 import {Modal, ModalBody, ModalFooter, Table} from "reactstrap"
 
-
 const Menu = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState({})
@@ -143,10 +142,27 @@ const Menu = () => {
     const [canvasOpen, setCanvasOpen] = useState(false)
     //console.log('canvas', canvasOpen)
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (selectedProducts.length > 0) {
             setCanvasOpen(true)
         }
+    }, [selectedProducts])*/
+
+    useEffect(() => {
+        const handleResize = () => {
+            const windowWidth = window.innerWidth
+            if (selectedProducts.length > 0) {
+                setCanvasOpen(windowWidth > 800)
+            }
+        }
+        // Add event listener to handle window resize
+        window.addEventListener('resize', handleResize)
+
+        // Initial check for component visibility
+        handleResize()
+
+        // Clean up the event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize)
     }, [selectedProducts])
 
     const dispatchingItems = () => {
@@ -340,7 +356,7 @@ const Menu = () => {
                         <X className='close-modal-button cursor-pointer' onClick={() => setBasicModal(!basicModal)}/>
                     </div>
                     <hr/>
-                    <ModalBody style={{paddingRight: 50, paddingLeft: 50}}>
+                    <ModalBody style={{paddingRight: 10, paddingLeft: 10}}>
 
                         <div className="container-sm">
                             <div className="row mt-3 mb-3">
@@ -396,6 +412,12 @@ const Menu = () => {
                 </Modal>
             </div>
         )
+    }
+
+    const toggleComponentVisibility = () => {
+        if (selectedProducts.length > 0) {
+            setCanvasOpen(true)
+        }
     }
 
     return (
@@ -523,7 +545,18 @@ const Menu = () => {
                 setMealName={setMealName}
                 productList={selectedProducts}
             />
-            <OrdersList openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
+            {/*<OrdersList className='hide-on-small-screen'  openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />*/}
+
+                <div>
+                    {/* Your other components and content */}
+                    <button className='mobile-button' onClick={toggleComponentVisibility}>
+                        <List size={25}></List>
+                    </button>
+                </div>
+
+                {canvasOpen && <div>
+                    <OrdersList className='hide-on-Mobile' openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
+                </div> }
 
             {RenderModal()}
 
