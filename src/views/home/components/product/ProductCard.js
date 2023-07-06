@@ -164,9 +164,6 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                     <div className="card-title text-start text-uppercase mb-0 text-primary fw-bolder mobileView" style={{fontSize: '1.1em', lineHeight: "18px", marginTop: "-6px"}}>
                                         {item?.name}
                                         <br />
-                                    <div className="card-title text-start text-uppercase mb-0 text-primary fw-bolder " style={item.isBlank ? { marginTop: '12px', pointerEvents:"none"} : {fontSize: '1.1em', lineHeight: "18px", marginTop: "-6px"}}>
-                                            {item?.name}
-                                            <br />
                                         <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
                                         <p className='text-info img-Container1' style={{paddingTop: '3px'}}>
                                             {arr?.map(f => {
