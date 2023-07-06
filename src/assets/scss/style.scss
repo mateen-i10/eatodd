@@ -129,7 +129,22 @@ body {
 
 @media screen and (max-width: 770px) and (min-width: 300px) {
   .mobileView {
-    font-size: 9px !important;
-    line-height: 9px !important;
+    font-size: 10px !important;
+    line-height: 10px !important;
+  }
+}
+
+.mobile-button {
+  display: none; /* Initially hide the button */
+}
+
+@media (max-width: 800px) {
+  /* Apply styles only for devices with a maximum width of 768px (adjust the value as needed) */
+  .mobile-button {
+    display: block; /* Show the button on mobile devices */
+    position: fixed; /* Fix the button position */
+    top: 150px; /* Adjust the bottom position as needed */
+    left: 15px; /* Adjust the right position as needed */
+    z-index: 9999; /* Adjust the z-index as needed to ensure it appears above other elements */
   }
 }
