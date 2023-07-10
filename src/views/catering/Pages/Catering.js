@@ -89,20 +89,17 @@ const Catering = () => {
                     </div>
                     <div className='col-md-2'></div>
                 </div>
-                <ul style={{textAlign: 'center', fontSize: '1.5em'}}>
+                <ul style={{textAlign: 'center', fontSize: '1.2em'}}>
                     <li>*24-hour advance notice requested</li>
                     <li>*Minimum order is for 10 people</li>
                 </ul>
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3" style={{marginBottom: '200px'}}>
-                        <div className="col-md-12">
                             {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
                                 /*xl={xl}
                                 md={md}*/
                                 id={selectedMenuId}
                             />}
-
-                        </div>
                     </div>
 
                     <div style={{backgroundImage: `url(${luxurayWine})`, height: '500px', backgroundSize: '100%'}}>

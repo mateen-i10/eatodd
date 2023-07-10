@@ -27,12 +27,9 @@ export default function Header({isSimple, setKey}) {
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-
             setIsHidden(scrollTop > 0)
         }
-
         window.addEventListener('scroll', handleScroll)
-
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }

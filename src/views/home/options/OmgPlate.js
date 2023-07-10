@@ -239,7 +239,7 @@ const Menu = () => {
                 let updatedProducts = [...selectedProducts]
                 const sectionLimit = existingProducts.length
 
-                if (limit === 0) {
+                if (limit === 1) {
                     if (sectionLimit === 1) {
                         toast.info(`You can only select one item from '${product?.subCategory?.name?.toUpperCase()}'`)
                         return
