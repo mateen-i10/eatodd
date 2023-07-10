@@ -18,6 +18,7 @@ import OrdersList from "./OrdersList"
 import UILoader from "../../../@core/components/ui-loader"
 import {List, X} from "react-feather"
 import {Modal, ModalBody, ModalFooter, Table} from "reactstrap"
+import {scrollToOrderAdded} from "../../../redux/scroll/scrollSlice"
 
 const Menu = () => {
     const [products, setProducts] = useState([])
@@ -306,8 +307,8 @@ const Menu = () => {
     }
 
     const handleClick = () => {
-        const sectionId = '/#orderSection' // Replace with the desired section ID
-        history.push(`/?section=${sectionId}`)
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
     }
 
     const caloriesList = selectedProducts.map(p => {

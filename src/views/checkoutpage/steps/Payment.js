@@ -97,9 +97,11 @@ const Payment = (props) => {
                 restaurantId: Number(restaurantId),
                 paymentId,
                 paymentDateTime,
+                locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
+                pickUpAt: localStorage.getItem('pickUpAt'),
                 groupOrderId : getGroupOrderId() ? Number(getGroupOrderId()) : null
             }
-            console.log("Final data afte call", order)
+            console.log("Final data after call", order)
             setPlaceOrder({url: 'order', order: {...order}})
         }
     }
@@ -150,17 +152,18 @@ const Payment = (props) => {
                 cateringOrderWines,
                 restaurantId: Number(restaurantId),
                 paymentId,
-                paymentDateTime
+                paymentDateTime,
+                locationId: process.env.REACT_APP_SQUARE_LOCATION_ID
             }
-            console.log('order', order)
+            console.log('orderObj', order)
             setPlaceOrder({url: 'cateringOrder', order: {...order}})
         }
 
     }
     const submitOrder = (payment) => {
-        console.log("payemtn", payment)
-        if (isCatering) placeCateringOrder(payment.id, payment.createdAt)
-        else placeMealOrder(payment.id, payment.createdAt)
+        console.log("payment", payment)
+        if (isCatering) placeCateringOrder(payment?.id, payment.createdAt)
+        else placeMealOrder(payment?.id, payment.createdAt)
     }
 
     const getToken = async (token, verifiedBuyer) => {
@@ -195,6 +198,42 @@ const Payment = (props) => {
         }
 
     }
+
+    /*const getToken = async (token, verifiedBuyer) => {
+        console.info('Token:', token)
+        console.info('Verified Buyer:', verifiedBuyer)
+        if (token && token.token && token.status === "OK" && verifiedBuyer && verifiedBuyer.token) {
+            const body = {
+                sourceId: token.token,
+                locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
+                verificationToken: verifiedBuyer.token,
+                customerEmail: getUserData().email,
+                amountMoney: {
+                    amount: Number(cartTotalPrice() * 100),
+                    currency: 'USD'
+                }
+            }
+            setLoading(true)
+            setLoadingMessage('Booking Order...')
+            const orderData = submitOrder(payment?.id, payment.createdAt)
+            console.log('body data:', body)
+            console.log('orderData:', orderData)
+
+            if (orderData && orderData.data.statusCode === 200) {
+                //console.log('final data inside:', res)
+                setLoadingMessage('Payment InProgress...')
+                const res = await http._post(`${baseURL}payment`, {...body})
+                console.log('final data:', res)
+            } else {
+                setLoading(false)
+                toast.error(res && res.data ? res.data.message : "Unexpected error occurred while adding payment")
+            }
+            console.info('payment details', res)
+            console.log('final data after:', res)
+        }
+
+    }*/
+
     const cardVerification = () => {
         setLoading(true)
         return {

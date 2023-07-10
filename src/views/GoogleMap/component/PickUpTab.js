@@ -6,6 +6,7 @@ import NearByPlaces from "./NearByPlaces"
 import UILoader from "../../../@core/components/ui-loader"
 
 const PickUpTab = ({places, userLocation, netStatus, returnURl}) => {
+    console.log('places', places)
     return (
         <div className="mt-1">
             <InputGroup className="bg-white input-group-merge">
