@@ -124,10 +124,12 @@ const CompareData = (props) => {
                         <h1 className='mb-1'>Assign Location To Restaurant</h1>
                     </div>
                     <Row tag='form' className='gy-1 pt-75' /*onSubmit={handleSubmit(onSubmit)}*/>
+                        <div className='col-md-5 text-center'><h4 className='fw-bolder'>EATOMG</h4></div>
+                        <div className='col-md-5 text-center'><h4 className='fw-bolder'>SQUARE</h4></div>
                         <div className='ms-1'>
                             {compare.map((i, index) => {
                                 return <div key={`list-${index}`} className='row mt-1'>
-                                    <div className='col-5'>
+                                    <div className='col-5' style={{borderRight: '1px solid #c2b8b8'}}>
                                         <Label className='form-label' for='name'>Select Restaurant:</Label>
                                         <AsyncSelect
                                             cacheOptions

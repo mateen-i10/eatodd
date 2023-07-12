@@ -31,6 +31,8 @@ const OrderHistory = () => {
     const isLoading = useSelector(state => state.reorderHistory.isLoading)
     const dispatch = useDispatch()
 
+    console.log('orderHistory', orderHistory)
+
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
     const [pageSize] = useState(10)
     const [searchValue, setSearchValue] = useState('')

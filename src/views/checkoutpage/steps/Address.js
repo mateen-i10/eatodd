@@ -363,6 +363,9 @@ const Address = props => {
                                             Note:
                                         </Label>
                                         <Input
+                                            rows="5"
+                                            rows={5}
+                                            type="textarea"
                                             id='note'
                                             name='customerNote'
                                             placeholder='Enter Note'
