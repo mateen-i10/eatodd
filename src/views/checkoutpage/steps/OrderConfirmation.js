@@ -64,10 +64,15 @@ const OrderConfirmation = () => {
 
                             <div className="row mt-1">
                                 {mealItem.meal.mealProducts.length > 0 ? mealItem.meal.mealProducts.map((item, i) => (
-                                    <div key={i} className="col-6 "><span>{item.product.name}</span></div>
-                                    // eslint-disable-next-line multiline-ternary
-                                )) : null
-                                } </div>
+                                   <>
+                                     <div key={i} className="col-6 ">
+                                        <span>{item.product.name}</span>
+                                    </div>
+                                    <div className="col-4 text-end ">
+                                        <span>$ {(item.unitPrice * item.quantity) / 100}</span>
+                                    </div>
+                                   </>))  : null}
+                            </div>
 
                             {/*<div className="row mt-1">*/}
                             {/*    <div className="col-6">Souce</div>*/}
@@ -188,7 +193,7 @@ const OrderConfirmation = () => {
                         <hr className='col-10 mt-1'/>
                         <div className="row mt-1">
                             <div className="col-6">SubTotal</div>
-                            <div className="col-4 text-end">$ {state.data.totalPrice}</div>
+                            <div className="col-4 text-end">$ {state.data.totalPrice / 100}</div>
                         </div>
                         <div className="row mt-1">
                             <div className="col-6">Discount</div>
@@ -205,7 +210,7 @@ const OrderConfirmation = () => {
                         <div className="row  fs-4 text-uppercase fw-bolder">
                             <div className="col-6">Total Price</div>
                             <div
-                                className="col-4 text-end">${state.data.totalPrice - state.data.discount}</div>
+                                className="col-4 text-end">${(state.data.totalPrice / 100) - state.data.discount}</div>
                         </div>
                     </div>
                 </div>
