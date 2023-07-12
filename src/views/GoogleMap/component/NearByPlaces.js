@@ -18,7 +18,12 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
     const {categoryId} = state
 
     const [pickUpDate, setPickUpDate] = useState(moment(new Date()).format())
+
     console.log('returnURl', returnURl)
+    const handleDateChange = () => {
+        setPickUpDate(moment(new Date()).format())
+    }
+
 
     const [isDivVisible, setDivVisible] = useState(true)
 
@@ -39,13 +44,13 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                             <div className='justify-content-center align-items-center'>
                                 {(isDivVisible === true || returnURl === 'catering') &&
                                     <div className=''>
-                                    <div>
-                                        <h6 className='transaction-title' color="primary">{place.name}</h6>
-                                        <small>{place.address}</small>
-                                    </div>
+                                        <div>
+                                            <h6 className='transaction-title' color="primary">{place.name}</h6>
+                                            <small>{place.address}</small>
+                                        </div>
                                     </div>}
                                 {isDivVisible === false && <>
-                                    <DateTimePicker className='mt-1' onChange={setPickUpDate} value={pickUpDate}/>
+                                    <DateTimePicker className='mt-1' onChange={handleDateChange} value={pickUpDate}/>
                                 </>}
                                 {(isDivVisible === false || returnURl === 'catering') && <>
                                     <div onClick={() => {
