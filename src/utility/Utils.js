@@ -120,7 +120,8 @@ export const cartTotalItems = () => {
 }
 export const clearCart = () => {
   localStorage.removeItem(cartName)
-  localStorage.removeItem(restaurantId)
+  localStorage.removeItem('restaurantId')
+  localStorage.removeItem('fullFilmentType')
 }
 
 // meal items

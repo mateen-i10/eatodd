@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, TabContent, TabPane} from "reactstrap"
 import DeliveryTab from "./component/DeliveryTab"
 import PickUpTab from "./component/PickUpTab"
@@ -27,6 +27,13 @@ const Sidebar = ({
         setPickDelivery(gMapSelect)
         setUserLocation(null)
     }
+    useEffect(() => {
+        localStorage.setItem('fullFilmentType', 1)
+    }, [])
+    const handleTabClick = (type) => {
+        localStorage.setItem('fullFilmentType', type)
+    }
+
     return (
         <>
             <div
@@ -61,6 +68,7 @@ const Sidebar = ({
                             onClick={() => {
                                 toggle('1', true)
                                 showActiveColor("1")
+                                handleTabClick(1)
                             }}>PickUp
                     </Button>
                     <Button className="col-3 text-uppercase " name="2" color={activeColor === "2" ? "primary" : "flat"}
@@ -74,6 +82,7 @@ const Sidebar = ({
                             onClick={() => {
                                 toggle('2', false)
                                 showActiveColor("2")
+                                handleTabClick(2)
                             }}
                     >delivery
                     </Button>

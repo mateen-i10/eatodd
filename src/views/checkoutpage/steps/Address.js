@@ -37,6 +37,7 @@ const Address = props => {
     const [billZipCode, setBillZipCode] = useState()
     const [billPhoneNo, setBillPhoneNo] = useState()
     const [billAddress, setBillAddress] = useState()
+    const [customerNote, setCustomerNote] = useState()
     const [errors, setErrors] = useState({})
 
     // hooks
@@ -61,9 +62,12 @@ const Address = props => {
             shipPhoneNo,
             shipAddress
         }
+        const note = localStorage.setItem('note', customerNote)
         const result = Joi.validate({...shipAdd, ...billAdd}, schema, {abortEarly: false})
-        console.log(result)
-        const {error} = result
+        console.log('result', result)
+        const final = {...result, note}
+        console.log('final', final)
+        const {error} = final
         if (!error) {
             dispatch(addShippingAddress({
                 city: shipCity,
@@ -352,6 +356,14 @@ const Address = props => {
                                                 </Col>
                                             </CardBody>
                                         </Card>
+                                    </Col>
+                                    <Col md='6'>
+                                        <Input
+                                            id='note'
+                                            name='customerNote'
+                                            placeholder='Enter Note'
+                                            onChange={(e) => setCustomerNote(e.target.value)}
+                                        />
                                     </Col>
                                     <Col sm='6'>
                                         <Button color='primary' onClick={() => stepper.previous()}>
