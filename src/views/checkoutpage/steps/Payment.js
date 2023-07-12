@@ -93,7 +93,7 @@ const Payment = (props) => {
                             return {
                                 productId: p.id,
                                 quantity: p.selectedQuantity,
-                                unitPrice: p.price,
+                                unitPrice: p.price * 100,
                                 optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null,
                                 squareItemId: p.squareItemId
                             }
@@ -107,7 +107,7 @@ const Payment = (props) => {
                 orderDetails.push({
                     productId: p.id,
                     productQuantity: p.selectedQuantity,
-                    unitPrice: p.price,
+                    unitPrice: p.price * 100,
                     productOptionId: p.options && p.options.length > 0 ? p.options.find(p => p.isDefault)?.id : null
                 })
             })
@@ -117,7 +117,7 @@ const Payment = (props) => {
                 shippingAddress: shippingAddress ? shippingAddress.payload : null,
                 billingAddress: billingAddress ? billingAddress.payload : null,
                 ordersDetail: [...orderDetails],
-                totalPrice: Number(cartTotalPrice()),
+                totalPrice: Number(cartTotalPrice() * 100),
                 customerId: getUserData()?.customerId,
                 quantity: orderDetails.length,
                 restaurantId: Number(restaurantId),
@@ -129,6 +129,7 @@ const Payment = (props) => {
                 groupOrderId : getGroupOrderId() ? Number(getGroupOrderId()) : null
             }
             console.log("Final data after call", order)
+            console.log("totalPrice", order.totalPrice)
             setPlaceOrder({url: 'order', order: {...order}})
         }
     }
@@ -149,7 +150,7 @@ const Payment = (props) => {
                         cateringOrderSectionItems.push({
                             sectionItemId: p.id,
                             cateringMenuItemId: i.id,
-                            unitPrice: p.price,
+                            unitPrice: p.price * 100,
                             quantity: 1
                         })
                     })
@@ -159,7 +160,7 @@ const Payment = (props) => {
                 cartData.wines.forEach(i => {
                     cateringOrderWines.push({
                         quantity: i.selectedQuantity,
-                        unitPrice: i.price,
+                        unitPrice: i.price * 100,
                         wineId: i.id
                     })
                 })
@@ -171,7 +172,7 @@ const Payment = (props) => {
             const order = {
                 shippingAddress: shippingAddress ? shippingAddress.payload : null,
                 billingAddress: billingAddress ? billingAddress.payload : null,
-                totalPrice: cartTotalPrice(),
+                totalPrice: cartTotalPrice() * 100,
                 customerId: getUserData()?.customerId,
                 quantity: totalQuantity,
                 cateringOrderSectionItems,
