@@ -148,3 +148,12 @@ body {
     z-index: 9999; /* Adjust the z-index as needed to ensure it appears above other elements */
   }
 }
+
+.react-datetime-picker__clock {
+  padding-left: 22px !important;
+}
+
+.react-datetime-picker__wrapper {
+  padding: 8px !important;
+  border-radius: 5px !important;
+}

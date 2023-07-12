@@ -18,7 +18,7 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
     const {categoryId} = state
 
     const [pickUpDate, setPickUpDate] = useState(moment(new Date()).format())
-    console.log('pickUpDate', pickUpDate)
+    console.log('returnURl', returnURl)
 
     const [isDivVisible, setDivVisible] = useState(true)
 
@@ -37,13 +37,17 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                     {places.length ? places.map((place, i) => (
                         <CardBody key={i}>
                             <div className='justify-content-center align-items-center'>
-                                {isDivVisible ?  <div className=''>
+                                {(isDivVisible === true || returnURl === 'catering') &&
+                                    <div className=''>
                                     <div>
                                         <h6 className='transaction-title' color="primary">{place.name}</h6>
                                         <small>{place.address}</small>
                                     </div>
-                                </div> : <>
+                                    </div>}
+                                {isDivVisible === false && <>
                                     <DateTimePicker className='mt-1' onChange={setPickUpDate} value={pickUpDate}/>
+                                </>}
+                                {(isDivVisible === false || returnURl === 'catering') && <>
                                     <div onClick={() => {
                                         localStorage.setItem('restaurantId', place.id)
                                         localStorage.setItem('pickUpAt', pickUpDate)
@@ -59,12 +63,12 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                                         }}>
                                             Select
                                         </Button>
-
                                     </div>
                                 </>}
-
                             </div>
-                            {isDivVisible ? <Button className='text-uppercase mt-1' color='primary' onClick={toggleDivVisibility}>Select</Button> : ''}
+
+                            {/*{isDivVisible === true  && <Button className='text-uppercase mt-1' color='primary' onClick={toggleDivVisibility}>Select</Button>}*/}
+                            {(isDivVisible === false || returnURl === 'catering')  ? '' : <Button className='text-uppercase mt-1' color='primary' onClick={toggleDivVisibility}>Select</Button>}
 
                         </CardBody>
                     )) : ""}

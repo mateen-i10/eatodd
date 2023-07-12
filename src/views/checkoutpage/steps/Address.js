@@ -354,10 +354,14 @@ const Address = props => {
                                                         )}
                                                     </div>
                                                 </Col>
+
                                             </CardBody>
                                         </Card>
                                     </Col>
-                                    <Col md='6'>
+                                    <Col md='6' style={{paddingLeft: '34px', paddingRight: '35px'}}>
+                                        <Label className='form-label' for=''>
+                                            Note:
+                                        </Label>
                                         <Input
                                             id='note'
                                             name='customerNote'
@@ -365,7 +369,8 @@ const Address = props => {
                                             onChange={(e) => setCustomerNote(e.target.value)}
                                         />
                                     </Col>
-                                    <Col sm='6'>
+                                    <br/>
+                                    <Col className='mt-2' sm='6'>
                                         <Button color='primary' onClick={() => stepper.previous()}>
                                             Go Back
                                         </Button>
