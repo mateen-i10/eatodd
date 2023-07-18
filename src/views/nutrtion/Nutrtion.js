@@ -9,6 +9,8 @@ import {getCartData} from "../../utility/Utils"
 import "./../home/components/Order/Order.css"
 import NutritionHeader from "./components/NutritionHeader"
 import CartMeals from "./components/CartMeals"
+import {useDispatch} from "react-redux"
+import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
 
 const Nutrition = () => {
     const [selectedItem, setSelectedItem] = useState(0)
@@ -18,6 +20,7 @@ const Nutrition = () => {
     const [mealCategoryName, setMealCategoryName] = useState("")
     // const [cartItems, setCartItems] = useState([])
     const history = useHistory()
+    const dispatch = useDispatch()
     // console.log(selectedItem)
     const cartItems = getCartData()
     console.log("cartItems data *******", cartItems)
@@ -68,10 +71,24 @@ const Nutrition = () => {
         }
     }
 
+    const handleClick = () => {
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
+    }
+
     return (
         <Fragment>
         <div>
             <Header/>
+
+            <div className="sticky-top headerScroll">
+                <div className="" style={{marginBottom: 0}}>
+                    <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                         onClick={handleClick}>Return to Menu
+                    </div>
+                </div>
+            </div>
+
             <NutritionHeader cartItems={cartItems} customerMealName={customerMealName}
                              nutritionCal={nutritionCal} mealCategoryName={mealCategoryName}/>
             {/* eslint-disable-next-line multiline-ternary */}

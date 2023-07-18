@@ -3,7 +3,7 @@ import "../header/Header.css"
 import {Button} from 'reactstrap'
 import logo from "../../assets/images/my-images/omgwineclub-logo-2.png"
 import usericon from "../../assets/images/my-images/user-outline.svg"
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import {isUserLoggedIn} from "../../auth/utils"
 import UserDropdown from "../../@core/layouts/components/navbar/UserDropdown"
 import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
@@ -50,6 +50,13 @@ const HeaderWine = ({isSimple}) => {
         document.body.classList.toggle('nav-open', isOpen)
     }, [isOpen])
 
+    const history = useHistory()
+
+    const handleClick = () => {
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
+    }
+
     // console.log(isuserlogedin)
     if (width > breakpoint) {
         return (
@@ -63,6 +70,11 @@ const HeaderWine = ({isSimple}) => {
                         </div>}
                     </div>
                     <div className="head-sec-2">
+                            <div className="" style={{marginBottom: 0}}>
+                                <div className='btn btn-primary btn-lg text-uppercase me-1'
+                                     onClick={handleClick}>Return to Menu
+                                </div>
+                            </div>
                         <Link to="/wine/homepage"><h2>About</h2></Link>
                         <Link to="/wine/membership"><h2>Membership</h2></Link>
                         <Link to="/wine/faq"><h2 className='pe-1'>F.A.Q's</h2></Link>

@@ -9,6 +9,9 @@ import WineOrderMenu from "../../wine/Pages/wineOrderMenu"
 import CateringSubForm from "../components/CateringSubForm"
 import luxurayWine from "../../../assets/images/images/DSC1371.jpg"
 import {Col, Row} from "reactstrap"
+import {scrollToOrderAdded} from "../../../redux/scroll/scrollSlice"
+import {useDispatch} from "react-redux"
+import {useHistory} from "react-router-dom"
 
 const Catering = () => {
     //const [elHovered, setElHovered] = useState({})
@@ -18,6 +21,9 @@ const Catering = () => {
     const [isLoading, response] = useAPI('CateringMenu?TotalPages=1&PageIndex=1&PageSize=10', 'get', {}, {}, true)
     //const [formComponent, setFormComponent] = useState(false)
     const [wineShow, setWineShow] = useState(false)
+
+    const dispatch = useDispatch()
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -58,6 +64,11 @@ const Catering = () => {
 
     console.log("selectedMenuId", selectedMenuId)
 
+    const handleClick = () => {
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
+    }
+
     return (
         <>
             <Header/>
@@ -74,6 +85,14 @@ const Catering = () => {
                     </p>
                 </div>
             </section>*/}
+
+            <div className="sticky-top headerScroll">
+                <div className="" style={{marginBottom: 0}}>
+                    <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                         onClick={handleClick}>Return to Menu
+                    </div>
+                </div>
+            </div>
 
             <section style={{backgroundColor: 'rgb(245, 248, 251)'}}>
                 <div className="fs-1 fw-bolder text-primary text-center"

@@ -23,10 +23,13 @@ import {
 } from "reactstrap"
 import {ChevronDown} from "react-feather"
 import Select from "react-select"
+import {useDispatch} from "react-redux"
+import {scrollToOrderAdded} from "../../../redux/scroll/scrollSlice"
 
 const COMenu = () => {
     const {id} = useParams()
     const history = useHistory()
+    const dispatch = useDispatch()
 
     // local states
     const [menuItem, setMenuItem] = useState({})
@@ -137,10 +140,23 @@ const COMenu = () => {
         }
     }, [finalLimit])
 
+    const handleClick = () => {
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
+    }
+
+
     return (
         <div>
             <UILoader blocking={isLoading}>
                 <Header/>
+                <div className="sticky-top headerScroll">
+                    <div className="" style={{marginBottom: 0, height: "45px"}}>
+                        <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                             onClick={handleClick}>Return to Menu
+                        </div>
+                    </div>
+                </div>
                 <div className="container-sm mb-0">
                     <TopShelf attachment={menuItem?.attachment}
                               name={menuItem.name}

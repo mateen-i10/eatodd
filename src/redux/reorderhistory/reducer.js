@@ -2,6 +2,7 @@ import {createAction} from '@reduxjs/toolkit'
 const initialState = {
     list: [],
     mealList: [],
+    activeOrdersList: [],
     object: {},
     isLoading: false,
     isEdit: false
@@ -9,6 +10,7 @@ const initialState = {
 
 export const setReorderHistorys = createAction("reorderHistory/setReorderHistorys")
 export const getMeal = createAction("reorderHistory/getMeal")
+export const getActiveOrdersList = createAction("reorderHistory/getActiveOrdersList")
 export const setReorderHistory = createAction("reorderHistory/setReorderHistory")
 export const setLoading = createAction("reorderHistory/setLoading")
 export const editReorderHistory = createAction("reorderHistory/editReorderHistory")
@@ -28,6 +30,15 @@ const reorderHistory = (state = initialState, action) => {
             return {
                 ...state,
                 mealList: action.payload.data,
+                miscData: action.payload.miscData,
+                isLoading: false,
+                isError: false,
+                isSuccess: false
+            }
+        case getActiveOrdersList.type:
+            return {
+                ...state,
+                activeOrdersList: action.payload.data,
                 miscData: action.payload.miscData,
                 isLoading: false,
                 isError: false,

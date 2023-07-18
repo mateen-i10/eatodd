@@ -3,12 +3,33 @@ import Header from "../../shared/header/Header"
 import Footer from "../../shared/footer/Footer"
 import './Reward.css'
 import {Col, Container, Row} from "reactstrap"
+import {scrollToOrderAdded} from "../../redux/scroll/scrollSlice"
+import {useHistory} from "react-router-dom"
+import {useDispatch} from "react-redux"
 
 const Reward = () => {
+
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    const handleClick = () => {
+        dispatch(scrollToOrderAdded("order"))
+        history.push(`/`)
+    }
+
     return (
         <Fragment>
         <div>
             <Header />
+
+            <div className="sticky-top headerScroll">
+                <div className="" style={{marginBottom: 0, height: "45px"}}>
+                    <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
+                         onClick={handleClick}>Return to Menu
+                    </div>
+                </div>
+            </div>
+
             <Container>
                 <Row>
                     <Col xs={12} md={6} className="d-flex flex-column align-items-start" style={{marginTop: '150px' }}>

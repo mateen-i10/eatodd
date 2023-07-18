@@ -50,11 +50,20 @@ const NearByPlaces = ({places, isLoading, userLocation, returnURl}) => {
                                         </div>
                                     </div>}
                                 {isDivVisible === false && <>
-                                    <DateTimePicker className='mt-1' onChange={handleDateChange} value={pickUpDate}/>
+                                    <label>Select PickUp Time</label>
+                                    <br/>
+                                    <DateTimePicker
+                                        className='mt-1'
+                                        onChange={handleDateChange}
+                                        value={pickUpDate}
+                                        format="h:mm a"
+                                        calendarIcon={null}
+                                    />
                                 </>}
                                 {(isDivVisible === false || returnURl === 'catering') && <>
                                     <div onClick={() => {
                                         localStorage.setItem('restaurantId', place.id)
+                                        //const pickUpDate = pickUpTime.toLocaleString().split('T')[1]
                                         localStorage.setItem('pickUpAt', pickUpDate)
                                         returnURl ? history.push(`/${returnURl}`) : history.push('/OmgPlate', categoryId ? {
                                             categoryId,
