@@ -352,7 +352,7 @@ const Menu = () => {
                 <Modal className='modal-xl' isOpen={basicModal} toggle={() => setBasicModal(!basicModal)}>
                     <div className='d-flex' style={{padding: 20}}>
                         <h1 className="modal-head flex-fill">
-                            Nutrition Preferences
+                            Nutrition Information
                         </h1>
                         <X className='close-modal-button cursor-pointer' onClick={() => setBasicModal(!basicModal)}/>
                     </div>
@@ -452,7 +452,7 @@ const Menu = () => {
                                 color: "black",
                                 fontWeight: 'bolder'
                             }}>
-                            Nutrition Preferences
+                            Nutrition Information
                             <List color="black"/>
                         </h3>
                     </div>

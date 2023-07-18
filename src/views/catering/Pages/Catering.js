@@ -61,7 +61,6 @@ const Catering = () => {
     return (
         <>
             <Header/>
-
             {/*<section style={{paddingTop:'200px', paddingBottom: '200px'}}>
                 <div className="container-sm">
                     <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '4.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
@@ -74,8 +73,7 @@ const Catering = () => {
                     </p>
                 </div>
             </section>*/}
-
-            <section style={{backgroundColor: 'rgb(245, 248, 251)'}}>
+            <section style={{backgroundColor: 'rgb(245, 248, 251)', paddingBottom: '100px'}}>
                 <div className="fs-1 fw-bolder text-primary text-center"
                      style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG CATERING
                 </div>
@@ -114,28 +112,13 @@ const Catering = () => {
                                 SERVES 25+ PEOPLE</p>
                         </Col>
                     </Row>
-                    {/*<Row>
-                        <Col lg={4}></Col>
-                        <Col lg={4} style={{textAlign: "center"}}>
-                            <button className='btn btn-primary mt-2 mb-2'
-                                    onClick={() => setFormComponent(!formComponent)}>Show More
-                            </button>
+                    <Row>
+                        <Col lg={8} style={{margin:'auto'}}>
+                            <CateringSubForm/>
                         </Col>
-                        <Col lg={4}></Col>
-                    </Row>*/}
-
-                        <Row>
-                            <Col lg={2}></Col>
-                            <Col lg={8}>
-                                <CateringSubForm/>
-                            </Col>
-                            <Col lg={2}></Col>
-                        </Row>
-
-                    {/*{selectedMenuId === '1' ? <CateringSubForm/> : []}*/}
+                    </Row>
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>
-
             <section className="container-sm">
                 <Row>
                     <Col lg={7} style={{paddingBottom: '50px'}}>
@@ -149,9 +132,8 @@ const Catering = () => {
                             </h1>
                             <div className="fs-4 mb-2">
                                 <p>
-                                    OMG will streamline your event planning by taking care of your food + WINE. We offer
-                                    the
-                                    ability to Mix and Match your wine selection to make sure no guest leaves thirsty.
+                                    OMG will streamline your event planning by taking care of your Food + WINE. We offer
+                                    the Ability to Mix and Match your wine selection to make sure no guest leaves thirsty.
                                 </p>
                                 <div className="mb-2" style={{fontSize: "15px"}}>
                                     *All wine will be sold at wholesale prices
@@ -174,7 +156,6 @@ const Catering = () => {
                         </div>
                     </Col>
                 </Row>
-
                 {wineShow ? <>
                     <Row>
                         <Col lg={12}>
@@ -182,9 +163,7 @@ const Catering = () => {
                         </Col>
                     </Row>
                 </> : ''}
-
             </section>
-
             <Footer/>
         </>
     )

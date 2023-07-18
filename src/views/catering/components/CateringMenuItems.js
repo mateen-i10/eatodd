@@ -13,7 +13,7 @@ const CateringMenuItems = (props) => {
                             </h2>
                             <div className="fw-bolder text-center amountMargin">
                                 <sup className="fs-4 dollarSign text-primary"></sup>
-                                <span className="text-primary" style={{ fontSize: "3rem" }}>${item.price}</span>
+                                <span className="text-primary" style={{ fontSize: "5rem" }}>${item.price}</span>
                                 {item.price !== 0 && (
                                     <>
                                         <span className="fw-bolder text-primary text-center"> / </span>
@@ -23,7 +23,7 @@ const CateringMenuItems = (props) => {
                             </div>
                         </div>
                         <div className="card-body align-items-center justify-content-center">
-                            <h5 className="text-capitalize text-center mt-3" style={{ fontSize: '16px', fontWeight: '500' }}>
+                            <h5 className="text-capitalize text-center mt-1" style={{ fontSize: '16px', fontWeight: '500' }}>
                                 {item.detail}
                             </h5>
                         </div>

@@ -413,9 +413,7 @@ const Product = (props) => {
 
         history.push(`${location.pathname}?subcategoryId=${subcategoryId}`)
         dispatch(loadproducts(currentPage, pageSize, "", refId, restId))
-
         /*if (refId !== 0) {
-
         } else {
             console.log("Please select a value to search for")
         }*/
@@ -649,11 +647,9 @@ const Product = (props) => {
             <AssignItems IsModalOpened={modalIsOpen}
                          onCloseModal={handleCloseModal}
             />
-
            {/* <AssignGeneralRecommendation IsModalOpened={recommendedModalIsOpen}
                          onCloseModal={handleRecommendedCloseModal}
             />*/}
-
         </Fragment>
     )
 }

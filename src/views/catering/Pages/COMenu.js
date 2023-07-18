@@ -149,11 +149,8 @@ const COMenu = () => {
                     />
                     <hr className="text-dark mt-1"/>
                 </div>
-
-                <div className='container-sm'>
-                    <div className="row g-0" style={{ margin: 'auto'}}>
-                        <div className="col-md-2"></div>
-                        <div className="col-md-8">
+                <div className="row g-0">
+                        <div className="col-md-8" style={{margin:"auto"}}>
                             <Form>
                                 <div className=''>
                                     <div className="col-md-4">
@@ -176,7 +173,7 @@ const COMenu = () => {
                                                     color: '#81be41',
                                                     fontWeight: 700
                                                 }}>
-                                                    {quantity}<ChevronDown size={18}/>
+                                                    {quantity}<ChevronDown size={50}/>
                                                 </DropdownToggle>
                                                 <DropdownMenu style={{height: '200px', overflowY: 'scroll'}}>
                                                     {quantityArray.length > 0 && quantityArray.map((p, index) => {
@@ -214,7 +211,13 @@ const COMenu = () => {
                                 </div>
                             </Form>
                         </div>
-                        <div className="col-md-2"></div>
+                </div>
+                <div className='row'>
+                    <div className='col-md-8' style={{margin:"auto"}}>
+                        <h2 style={{textAlign: 'center'}}>A LA CARTE CATERING ADD ONS</h2>
+                        <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '5px'}}>
+                            *Each order serves 10 people
+                        </p>
                     </div>
                 </div>
                 {sections.map(s => {
