@@ -2,7 +2,7 @@ import {
     Row,
     Col,
     Table,
-    Input, Label, Card, CardBody, CardTitle
+    Input, Label, Card, CardBody, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap'
 // ** React Imports
 import React, {useEffect, useState} from 'react'
@@ -10,7 +10,11 @@ import React, {useEffect, useState} from 'react'
 import ReactPaginate from "react-paginate"
 import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
-import {getEmployeeOrdersStats, getEmployeesOrders} from "../../../redux/employeeDashboard/employeeOrders/action"
+import {
+    getEmployeeOrdersStats,
+    getEmployeesOrders,
+    onChangeOrderStatus
+} from "../../../redux/employeeDashboard/employeeOrders/action"
 import Select from "react-select"
 import {selectThemeColors} from "../../../utility/Utils"
 import {useParams} from "react-router-dom"
@@ -23,6 +27,26 @@ import refund from '../../../assets/images/empDashboard/refund.png'
 import schedule from '../../../assets/images/empDashboard/calendar.png'
 import all from '../../../assets/images/empDashboard/all-inclusive.png'
 import growth from "../../../assets/images/empDashboard/growth.png"
+import {ChevronDown, Edit, FileText, MoreVertical, Trash} from "react-feather"
+import DataTable from "react-data-table-component"
+/*import {
+    BsXSquare, CgPlayTrackPrev, FaFirstOrder,
+    FaPrescription,
+    FcCancel, FcPrevious, GoListOrdered,
+    MdCancel,
+    MdIncompleteCircle,
+    MdOutlineSmsFailed,
+    MdSmsFailed, RiReservedFill
+} from "react-icons/all"*/
+
+/*const orderStatus = [
+    { value: 1, label: 'Proposed' },
+    { value: 2, label: 'Reserved' },
+    { value: 3, label: 'Prepared' },
+    { value: 4, label: 'Completed' },
+    { value: 5, label: 'Canceled' },
+    { value: 6, label: 'Failed' }
+]*/
 
 const orderStatus = [
     { value: 1, label: 'Paid' },
@@ -60,7 +84,7 @@ const EmployeeOrders = () => {
     const miscData = useSelector(state => state.empOrder.miscData)
     const empOrders = useSelector(state => state.empOrder.list)
     const empOrdersStat = useSelector(state => state.empOrder.object)
-    console.log('emp', empOrders)
+    console.log('empOrders', empOrders)
     console.log('empOrdersStat', empOrdersStat)
 
     const [changeState, setChangeState] = useState({ value: 2, label: 'Pending' })
@@ -69,7 +93,14 @@ const EmployeeOrders = () => {
 
     useEffect(() => {
         if (empOrdersStat !== null) {
-            const totalOrder = empOrdersStat.confirmedCount += empOrdersStat.cookingCount += empOrdersStat.readyToDeliverCount += empOrdersStat.foodOnTheWayCount += empOrdersStat.deliveredCount += empOrdersStat.refundedCount += empOrdersStat.scheduledCount
+            const totalOrder =
+                empOrdersStat.confirmedCount +
+                empOrdersStat.cookingCount +
+                empOrdersStat.readyToDeliverCount +
+                empOrdersStat.foodOnTheWayCount +
+                empOrdersStat.deliveredCount +
+                empOrdersStat.refundedCount +
+                empOrdersStat.scheduledCount
             setTotalOrders(totalOrder)
             console.log('total', totalOrder)
         }
@@ -94,22 +125,73 @@ const EmployeeOrders = () => {
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
-    const [pageSize] = useState(10)
+    const [pageSize] = useState(12)
     const [searchValue, setSearchValue] = useState('')
+
+    const changeOrderStatus = (id, status) => {
+        console.log("e", status, id)
+        dispatch(onChangeOrderStatus(id, status?.value))
+    }
+
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
         const value = e.target.value
         if (e.keyCode === 13) {
-            dispatch(getEmployeesOrders(currentPage, pageSize, value))
+            dispatch(getEmployeesOrders(currentPage, pageSize, value, id, changeState.value))
         }
         setSearchValue(value)
     }
 
     const handlePagination = page => {
-        dispatch(getEmployeesOrders(page.selected + 1, pageSize, searchValue))
+        dispatch(getEmployeesOrders(page.selected + 1, pageSize, searchValue, id, changeState.value))
         setCurrentPage(page.selected + 1)
     }
+
+    const columns = [
+        {
+            name: 'Quantity',
+            selector: (row) => row.quantity,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Total Price',
+            selector: (row) => row.totalPrice,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'City',
+            selector: (row) => row.shippingAddress?.city,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Status',
+            selector: (row) => { return row.status === 1 ? "Paid" : row.status === 2 ? "Pending" : row.status === 3 ? "Cancelled" : row.status === 4 ? "Completed" : row.status === 5 ? "Cooking" : row.status === 6 ? "Read To Deliver" : row.status === 7 ? "Food On Th eWay" : row.status === 8 ? "Delivered" : row.status === 9 ? "Confirmed" : row.status === 10 ? "Refunded" : row.status === 11 ? "Scheduled"  : '' },
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Change Status',
+            allowOverflow: true,
+            cell: row => {
+                return (
+                    <div className='d-flex'>
+                        <Select
+                            options={orderStatus}
+                            onChange={(e) => { changeOrderStatus(row.id, e) }}
+                            theme={selectThemeColors}
+                            className='react-select'
+                            classNamePrefix='select'
+                            styles={{maxWidth: '200px'}}
+                        />
+                    </div>
+                )
+            }
+        }
+    ]
 
     const CustomPagination = () => {
         const count = miscData?.totalPages ?? 0
@@ -136,6 +218,14 @@ const EmployeeOrders = () => {
                 'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1 mt-1'
             }
         />
+    }
+
+    const dataToRender = () => {
+        if (empOrders.length > 0) {
+            return empOrders
+        }  else {
+            return empOrders.slice(0, pageSize)
+        }
     }
 
     return (
@@ -345,7 +435,7 @@ const EmployeeOrders = () => {
                         </Row>
 
                         <div className="card-body">
-                            <Table className="table table-responsive" paginationComponent={CustomPagination}>
+                           {/* <Table className="table table-responsive" paginationComponent={CustomPagination}>
                                 <thead>
                                 <tr>
                                     <th>Meal Name</th>
@@ -356,16 +446,16 @@ const EmployeeOrders = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {empOrders && empOrders.map(e => {
+                                {empOrders && empOrders.map((e, index) => {
                                     return <>
-                                        <tr>
+                                        <tr key={`optionsKey-${index}`}>
                                             <td>{e.ordersDetail?.map(m => { return m.meal?.name })}</td>
                                             <td>{e.quantity}</td>
                                             <td>{e.totalPrice}</td>
                                             <td>{e.shippingAddress?.city}</td>
-                                            <td>{e.status === 1 ? "Paid" : e.status === 2 ? "Pending" : e.status === 3 ? "Cancelled" : e.status === 4 ? "Completed" : e.status === 5 ? "Cooking" : e.status === 6 ? "Read To Deliver" : e.status === 7 ? "Food On The Way" : e.status === 8 ? "Delivered" : e.status === 9 ? "Confirmed" : e.status === 10 ? "Refunded" : e.status === 11 ? "Scheduled" : ""}</td>
-                                            {/*<td>{moment(new Date(d.expectedStartDate)).format('YYYY-MM-DD') }</td>
-                                            <td>{moment(new Date(d.expectedEndDate)).format('YYYY-MM-DD') }</td>*/}
+                                            <td>{e.status === 1 ? "Proposed" : e.status === 2 ? "Reserved" : e.status === 3 ? "Prepared" : e.status === 4 ? "Completed" : e.status === 5 ? "Canceled" : e.status === 6 ? "Failed" : ""}</td>
+                                            <td>{moment(new Date(d.expectedStartDate)).format('YYYY-MM-DD') }</td>
+                                            <td>{moment(new Date(d.expectedEndDate)).format('YYYY-MM-DD') }</td>
                                         </tr>
                                     </>
                                 })
@@ -373,7 +463,17 @@ const EmployeeOrders = () => {
                                 }
 
                                 </tbody>
-                            </Table>
+                            </Table>*/}
+                            <DataTable
+                                noHeader
+                                pagination
+                                paginationServer
+                                className='react-dataTable'
+                                columns={columns}
+                                sortIcon={<ChevronDown size={10} />}
+                                paginationComponent={CustomPagination}
+                                data={dataToRender()}
+                            />
                         </div>
 
                     </div>

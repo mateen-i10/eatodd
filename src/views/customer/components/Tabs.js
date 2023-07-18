@@ -69,6 +69,17 @@ const Tabs = ({toggleTab}) => {
                         <ListGroupItem
                             className='cursor-pointer'
                             onClick={ () => {
+                                toggleTab('8')
+                                setFlag(8)
+                            }}
+                            style={{ backgroundColor: flag === 8 ? '#81be41' : 'white',
+                                color: flag === 8 ? 'white' : '#5e5873',
+                                fontWeight: flag === 8 ? 700 : 500}}>
+                            Active Orders
+                        </ListGroupItem>
+                        {/*<ListGroupItem
+                            className='cursor-pointer'
+                            onClick={ () => {
                             toggleTab('6')
                             setFlag(6)
                             }}
@@ -76,7 +87,7 @@ const Tabs = ({toggleTab}) => {
                                      color: flag === 6 ? 'white' : '#5e5873',
                                      fontWeight: flag === 6 ? 700 : 500}}>
                             Meals
-                        </ListGroupItem>
+                        </ListGroupItem>*/}
                         <ListGroupItem
                             className='cursor-pointer'
                             onClick={ () => {

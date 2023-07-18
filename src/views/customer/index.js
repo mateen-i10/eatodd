@@ -11,6 +11,7 @@ import MyOrder from "./components/MyOrders"
 import OrderHistory from "./components/OrderHistory"
 import '@styles/base/pages/page-faq.scss'
 import RewardDetail from "./components/RewardDetail"
+import ActiveOrders from "./components/ActiveOrders"
 
 const data = {
     accountSetting: {
@@ -102,6 +103,11 @@ const Customer = () => {
                                    <TabPane tabId='5'>
                                        <div className="row justify-content-center">
                                            <div className="col-md-12 mt-4"><SecurityTab data={data}/></div>
+                                       </div>
+                                   </TabPane>
+                                   <TabPane tabId='8'>
+                                       <div className="row justify-content-center">
+                                           <div className="col-md-12 mt-4"><ActiveOrders data={data}/></div>
                                        </div>
                                    </TabPane>
                                    <TabPane tabId='6'>

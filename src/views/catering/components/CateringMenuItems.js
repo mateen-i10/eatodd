@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Col, Row } from "reactstrap"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 
 const CateringMenuItems = (props) => {
     const { item } = props
 
     return (
+        <>
         <div className="member-card card border" style={{ width: "100%", height: "550px" }}>
                         <div className='mt-3'>
                             <h2 className="fw-bolder text-center text-primary mb-2" style={{ fontSize: '20px' }}>
@@ -35,6 +36,8 @@ const CateringMenuItems = (props) => {
                             </Link>
                         </div>
                     </div>
+
+        </>
     )
 }
 
