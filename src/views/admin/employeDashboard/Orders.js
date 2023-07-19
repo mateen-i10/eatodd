@@ -84,6 +84,7 @@ const EmployeeOrders = () => {
     const miscData = useSelector(state => state.empOrder.miscData)
     const empOrders = useSelector(state => state.empOrder.list)
     const empOrdersStat = useSelector(state => state.empOrder.object)
+    const isSuccess = useSelector(state => state.reorderHistory.isSuccess)
     console.log('empOrders', empOrders)
     console.log('empOrdersStat', empOrdersStat)
 
@@ -104,7 +105,7 @@ const EmployeeOrders = () => {
             setTotalOrders(totalOrder)
             console.log('total', totalOrder)
         }
-    }, [empOrdersStat])
+    }, [empOrdersStat, isSuccess])
     // hooks
     const dispatch = useDispatch()
     const {id} = useParams()
@@ -121,7 +122,7 @@ const EmployeeOrders = () => {
 
     useEffect(() => {
         dispatch(getEmployeeOrdersStats(id))
-    }, [])
+    }, [empOrders])
 
     // ** refs
     const [currentPage, setCurrentPage] = useState(miscData && miscData.pageIndex ? miscData.pageIndex : 1)
@@ -132,7 +133,6 @@ const EmployeeOrders = () => {
         console.log("e", status, id)
         dispatch(onChangeOrderStatus(id, status?.value))
     }
-
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
