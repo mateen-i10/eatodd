@@ -1,4 +1,12 @@
-import {getActiveOrdersList, getMeal, setLoading, setReorderHistorys} from "./reducer"
+import {
+    getActiveOrdersList,
+    getMeal,
+    setIsCancelOrderError,
+    setIsCancelOrderSuccess,
+    setLoading,
+    setReorderHistorys,
+    setRequestCompleted
+} from "./reducer"
 // ** Table Data & Columns
 import {apiCall} from "../api/actions"
 
@@ -40,6 +48,21 @@ export const loadActiveOrders = (pageIndex = 1, pageSize = 10, searchQuery = nul
             data: {},
             method: 'get',
             onSuccess: getActiveOrdersList.type
+        }))
+    }
+}
+
+export const cancelOrder = (id) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `Order/OrderCancel/${id}`,
+            data: {},
+            method: 'get',
+            isSuccessToast: true,
+            successMessage: 'Cancel Order Successfully',
+            requestCompleted: setRequestCompleted.type,
+            onError: setIsCancelOrderError.type,
+            isSuccess: setIsCancelOrderSuccess.type
         }))
     }
 }

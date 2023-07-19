@@ -73,19 +73,6 @@ const Catering = () => {
         <>
             <Header/>
 
-            {/*<section style={{paddingTop:'200px', paddingBottom: '200px'}}>
-                <div className="container-sm">
-                    <h5 className='text-primary' style={{textAlign: 'center', paddingTop: '50px', fontSize: '4.8em', textTransform: 'uppercase', fontFamily: 'Gotham Bold', color: 'black'}}>
-                        OMG Catering
-                    </h5>
-                    <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '50px'}}>
-                        Allow us to make your next special event extra special. We cater for all sized<br/>functions, ideal
-                        for your larger functions or an intimate gathering, our team can<br/>curate a menu to suit your
-                        taste.
-                    </p>
-                </div>
-            </section>*/}
-
             <div className="sticky-top headerScroll">
                 <div className="" style={{marginBottom: 0}}>
                     <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
@@ -94,9 +81,9 @@ const Catering = () => {
                 </div>
             </div>
 
-            <section style={{backgroundColor: 'rgb(245, 248, 251)'}}>
-                <div className="fs-1 fw-bolder text-primary text-center"
-                     style={{paddingTop: "50px", paddingBottom: "20px"}}>OMG CATERING
+            <section>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop: "50px", paddingBottom: "20px"}}>
+                    OMG CATERING
                 </div>
                 <div className='row'>
                     <div className='col-md-2'></div>
@@ -155,7 +142,7 @@ const Catering = () => {
                 </div> : <div className="m-5"><ComponentSpinner/></div>}
             </section>
 
-            <section className="container-sm">
+            <section className="container-sm" style={{backgroundColor: 'rgb(245, 248, 251)'}}>
                 <Row>
                     <Col lg={7} style={{paddingBottom: '50px'}}>
                         <div className='ps-5 mt-5'>

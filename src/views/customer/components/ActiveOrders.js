@@ -15,11 +15,12 @@ import {
 } from 'reactstrap'
 import {useDispatch, useSelector} from "react-redux"
 import UILoader from "../../../@core/components/ui-loader"
-import {loadActiveOrders} from "../../../redux/reorderhistory/actions"
+import {cancelOrder, loadActiveOrders} from "../../../redux/reorderhistory/actions"
 import {getUserData} from "../../../auth/utils"
 
 //import { useHistory } from "react-router-dom"
 import moment from "moment"
+import Swal from "sweetalert2"
 
 const ActiveOrders = (props) => {
 
@@ -29,6 +30,7 @@ const ActiveOrders = (props) => {
     const activeOrdersList = useSelector(state => state.reorderHistory.activeOrdersList)
     const miscData = useSelector(state => state.reorderHistory.miscData)
     const isLoading = useSelector(state => state.reorderHistory.isLoading)
+    const isSuccess = useSelector(state => state.reorderHistory.isSuccess)
     const dispatch = useDispatch()
 
     console.log('activeOrdersList', activeOrdersList)
@@ -46,7 +48,7 @@ const ActiveOrders = (props) => {
             //setIsActive(true)
         }
         console.log(props.history, 'prop data')
-    }, [isActive])
+    }, [isActive, isSuccess])
 
     const handleFilter = e => {
         console.log('e.keyCode', e.keyCode)
@@ -63,10 +65,27 @@ const ActiveOrders = (props) => {
         setCurrentPage(page.selected + 1)
     }
 
-    const cancelOrder = (id, e) => {
-        e.preventDefault()
+    /*const onCancelOrder = (id) => {
         console.log('user selected id', id)
+        dispatch(cancelOrder(id))
+    }*/
 
+    const onCancelOrder = (id, e) => {
+        e.preventDefault()
+        // show sweet alert here
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7367f0',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(cancelOrder(id))
+            }
+        })
     }
 
     const columns = [
@@ -100,7 +119,7 @@ const ActiveOrders = (props) => {
             cell: row => {
                 return (
                     <div className='d-flex'>
-                        <span className='cursor-pointer' onClick={() => { cancelOrder(row.id) }}><Trash size={15} /></span>
+                        <span className='cursor-pointer' onClick={e => onCancelOrder(row.id, e)}><Trash size={15} /></span>
                     </div>
                 )
             }

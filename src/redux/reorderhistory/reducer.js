@@ -5,7 +5,10 @@ const initialState = {
     activeOrdersList: [],
     object: {},
     isLoading: false,
-    isEdit: false
+    isEdit: false,
+    isRequestCompleted: false,
+    isError: false,
+    isSuccess: false
 }
 
 export const setReorderHistorys = createAction("reorderHistory/setReorderHistorys")
@@ -14,10 +17,14 @@ export const getActiveOrdersList = createAction("reorderHistory/getActiveOrdersL
 export const setReorderHistory = createAction("reorderHistory/setReorderHistory")
 export const setLoading = createAction("reorderHistory/setLoading")
 export const editReorderHistory = createAction("reorderHistory/editReorderHistory")
+export const setIsCancelOrderError = createAction("reorderHistory/setIsCancelOrderError")
+export const setIsCancelOrderSuccess = createAction("reorderHistory/setIsCancelOrderSuccess")
+export const setRequestCompleted = createAction("reorderHistory/setRequestCompleted")
 
 const reorderHistory = (state = initialState, action) => {
     switch (action.type) {
         case setReorderHistorys.type:
+
             return {
                 ...state,
                 list: action.payload.data,
@@ -36,6 +43,9 @@ const reorderHistory = (state = initialState, action) => {
                 isSuccess: false
             }
         case getActiveOrdersList.type:
+            /*const updatedRecords = state.activeOrdersList.filter(
+                (record) => record.id === action.payload.data
+            )*/
             return {
                 ...state,
                 activeOrdersList: action.payload.data,
@@ -60,6 +70,21 @@ const reorderHistory = (state = initialState, action) => {
                 ...state,
                 object: action.payload,
                 isEdit: true
+            }
+        case setRequestCompleted.type:
+            return {
+                ...state,
+                isRequestCompleted: action.payload
+            }
+        case setIsCancelOrderError.type:
+            return {
+                ...state,
+                isError: action.payload
+            }
+        case setIsCancelOrderSuccess.type:
+            return {
+                ...state,
+                isSuccess: action.payload
             }
         default:
             return state
