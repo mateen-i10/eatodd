@@ -12,7 +12,7 @@ import {
     Button,
     Input,
     Row,
-    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledTooltip
+    Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledTooltip, Badge
 } from 'reactstrap'
 
 import {useDispatch, useSelector} from "react-redux"
@@ -75,6 +75,8 @@ const Product = (props) => {
     const isError = useSelector(state => state.product.isError)
     const isSuccess = useSelector(state => state.product.isSuccess)
     const dispatch = useDispatch()
+
+    console.log('productList', productList)
 
     // ** refs
     const formModalRef = useRef(null)
@@ -462,6 +464,12 @@ const Product = (props) => {
             selector: (row) => row.quantity,
             sortable: true,
             minWidth: '50px'
+        },
+        {
+            name: 'Square',
+            selector: (row) => <Badge className="" color={'light-primary'} pill>{row.squareItemId !== null ? "Mapped" : ''}</Badge>,
+            sortable: true,
+            minWidth: '100px'
         },
         {
             name: 'Actions',
