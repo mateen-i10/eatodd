@@ -231,7 +231,7 @@ export default function Header({isSimple, setKey}) {
                                 <span
                                     className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
                                     style={{marginLeft: "6px"}}>
-                                    {10}
+                                    {totalItems}
                                 </span>
                             </div>
                             {openDrawer && (<div>
