@@ -157,10 +157,10 @@ const AssignLocationAndItems = (props) => {
                     <Row tag='form' className='gy-1 pt-75' /*onSubmit={handleSubmit(onSubmit)}*/>
                         <div className='col-md-3 text-center'><h4 className='fw-bolder'>EATOMG</h4></div>
                         <div className='col-md-7 text-center'><h4 className='fw-bolder'>SQUARE</h4></div>
-                        <div className='ms-1'>
+                        <div>
                             {item.map((i, index) => {
                                 return <div key={`list-${index}`} className='row mt-1'>
-                                    <div className='col-3' style={{borderRight: '1px solid #c2b8b8'}}>
+                                    <div className='col-4' style={{borderRight: '1px solid #c2b8b8'}}>
                                         <Label className='form-label' for='name'>Select General Product:</Label>
                                         <AsyncSelect
                                             cacheOptions
@@ -172,7 +172,7 @@ const AssignLocationAndItems = (props) => {
                                             isMulti = {false}
                                         />
                                     </div>
-                                    <div className='col-3'>
+                                    <div className='col-4'>
                                         <Label className='form-label' for='name'>Select Items:</Label>
                                         <AsyncSelect
                                             cacheOptions
@@ -184,7 +184,7 @@ const AssignLocationAndItems = (props) => {
                                             isMulti = {false}
                                         />
                                     </div>
-                                    <div className='col-4'>
+                                    <div className='col-3'>
                                         <Label className='form-label' for='name'>Select Location:</Label>
                                         <AsyncSelect
                                             cacheOptions
@@ -196,12 +196,14 @@ const AssignLocationAndItems = (props) => {
                                             isMulti = {true}
                                         />
                                     </div>
-                                    {item.length > 1 && <div className='col-2'>
-                                        <Button.Ripple className='btn-icon' style={{marginTop: '26px'}} color='danger' onClick={() => removeCompareList(index)}>
-                                            <Delete size={12}/>
-                                        </Button.Ripple>
+                                    <div className='col-1'>
+                                        {item.length > 1 && <div className='col-2'>
+                                            <Button.Ripple className='btn-icon' style={{marginTop: '26px'}} color='danger' onClick={() => removeCompareList(index)}>
+                                                <Delete size={12}/>
+                                            </Button.Ripple>
+                                        </div>
+                                        }
                                     </div>
-                                    }
                                 </div>
                             })}
                             <div className='col-2'>
