@@ -72,7 +72,6 @@ const Catering = () => {
     return (
         <>
             <Header/>
-
             <div className="sticky-top headerScroll">
                 <div className="" style={{marginBottom: 0}}>
                     <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
@@ -82,23 +81,23 @@ const Catering = () => {
             </div>
 
             <section>
-                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop: "50px", paddingBottom: "20px"}}>
+                <div className="fs-1 fw-bolder text-primary text-center" style={{paddingTop: "20px", paddingBottom: "20px"}}>
                     OMG CATERING
                 </div>
-                <div className='row'>
-                    <div className='col-md-2'></div>
-                    <div className='col-md-8'>
-                        <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '5px'}}>
-                            Allow us to make your next special event extra special. We cater for any size event.
-                            Treat your group to Taste & Flavor that happens to be Healthy!
-                        </p>
-                    </div>
-                    <div className='col-md-2'></div>
-                </div>
-                <ul style={{textAlign: 'center', fontSize: '1.2em'}}>
-                    <li>*24-hour advance notice requested</li>
-                    <li>*Minimum order is for 10 people</li>
-                </ul>
+                {/*<div className='row'>*/}
+                {/*    <div className='col-md-2'></div>*/}
+                {/*    <div className='col-md-8'>*/}
+                {/*        <p style={{textAlign: 'center', fontSize: '1.5em', paddingBottom: '5px'}}>*/}
+                {/*            Allow us to make your next special event extra special. We cater for any size event.*/}
+                {/*            Treat your group to Taste & Flavor that happens to be Healthy!*/}
+                {/*        </p>*/}
+                {/*    </div>*/}
+                {/*    <div className='col-md-2'></div>*/}
+                {/*</div>*/}
+                {/*<ul style={{textAlign: 'center', fontSize: '1.2em'}}>*/}
+                {/*    <li>*24-hour advance notice requested</li>*/}
+                {/*    <li>*Minimum order is for 10 people</li>*/}
+                {/*</ul>*/}
                 {cateringMenu.length ? <div className="container-sm mb-3">
                     <div className="row mt-3" style={{marginBottom: '200px'}}>
                             {selectedMenuId === 0 && isWineSelected ? <WineOrderMenu/> : <CateringDetailMenu
@@ -129,7 +128,6 @@ const Catering = () => {
                         </Col>
                         <Col lg={4}></Col>
                     </Row>*/}
-
                         <Row>
                             <Col lg={2}></Col>
                             <Col lg={8}>
