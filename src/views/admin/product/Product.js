@@ -87,9 +87,7 @@ const Product = (props) => {
     const [d, setD] = useState()
 
     const [modalIsOpen, setIsOpen] = useState(false)
-    const openFromParent = () => {
-        setIsOpen(true)
-    }
+
 
     const handleCloseModal = (event) => {
         console.log(event)
@@ -321,6 +319,12 @@ const Product = (props) => {
                 dispatch(deleteproduct(id))
             }
         })
+    }
+
+    const openFromParent = () => {
+        setIsOpen(true)
+        //toggle()
+        //return AddFromExistingData()
     }
 
     const detailOptClick = (id, e) => {
@@ -654,8 +658,7 @@ const Product = (props) => {
                        />}
             />
 
-            <AssignItems IsModalOpened={modalIsOpen}
-                         onCloseModal={handleCloseModal}
+            <AssignItems subcategoryId={subcategoryId} IsModalOpened={modalIsOpen} onCloseModal={handleCloseModal}
             />
 
            {/* <AssignGeneralRecommendation IsModalOpened={recommendedModalIsOpen}

@@ -178,7 +178,7 @@ const EmployeeOrders = () => {
             allowOverflow: true,
             cell: row => {
                 return (
-                    <div className='d-flex'>
+
                         <Select
                             options={orderStatus}
                             onChange={(e) => { changeOrderStatus(row.id, e) }}
@@ -187,7 +187,7 @@ const EmployeeOrders = () => {
                             classNamePrefix='select'
                             styles={{maxWidth: '200px'}}
                         />
-                    </div>
+
                 )
             }
         }

@@ -25,7 +25,7 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
     const [value, setValue] = useState(false)
     const [isLength, setIsLength] = useState(false)
 
-    console.log('item', item)
+    /*console.log('item', item)*/
 
     // console.log(item, "lets see the items")
     const imgStyles = {
@@ -55,8 +55,8 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
 
     const fla = item.flavour
     const arr = fla?.split(",")
-    console.log('fla', fla)
-    console.log('arr', arr)
+    /*console.log('fla', fla)
+    console.log('arr', arr)*/
 
     return <>
         <div className="card add mb-lg-2 mb-1 overflow-hidden "

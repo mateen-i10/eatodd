@@ -15,6 +15,9 @@ const AssignLocationAndItems = (props) => {
 
     const dispatch = useDispatch()
 
+    const [d, setD] = useState()
+    console.log(d, "the d")
+
     const locations = async () => {
         return httpService._get(`${baseURL}restaurant/getLocations`)
             .then(response => {
@@ -32,7 +35,7 @@ const AssignLocationAndItems = (props) => {
             })
     }
 
-    const generalProducts = async () => {
+    /*const generalProducts = async () => {
         return httpService._get(`${baseURL}generalProduct/ItemsFromSqaure`)
             .then(response => {
                 // success case
@@ -49,7 +52,26 @@ const AssignLocationAndItems = (props) => {
             }).catch(error => {
                 toast.error(error.message)
             })
+    }*/
+    const generalProducts = (input) => {
+        return httpService._get(`${baseURL}GeneralProduct?pageIndex=1&&pageSize=12&&searchQuery=${input}&&refId=${props.subcategoryId}`)
+            .then(response => {
+                console.log(response, "gp response")
+                // success case
+                if (response.status === 200 && response.data.statusCode === 200) {
+                    return response.data.data.map(d =>  {
+                        setD(response.data.data)
+                        return {label: `${d.name}`, value: d.id}
+                    })
+                } else {
+                    //general Error Action
+                    toast.error(response.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
     }
+
 
     const Items = async () => {
         return httpService._get(`${baseURL}generalProduct/ItemsFromSqaure`)
