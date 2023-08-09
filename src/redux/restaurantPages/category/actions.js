@@ -122,3 +122,16 @@ export const updateImage = (data) => {
         })
     }
 }
+
+export const addAtSquare = (id) => {
+    return async dispatch => {
+        dispatch(apiCall({
+            url: `${url}/AddCategoryInSquare`,
+            data: [id],
+            method: 'post',
+            isSuccessToast: true,
+            successMessage: 'Category Added at Square Successfully',
+            onSuccess: setCategorys.type
+        }))
+    }
+}

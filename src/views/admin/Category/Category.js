@@ -1,11 +1,12 @@
 // ** React Imports
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import {ChevronDown, Edit, FileText, MoreVertical, Trash} from 'react-feather'
+import {ChevronDown, Edit, FileText, MoreVertical, Plus, Trash} from 'react-feather'
 import {
+    Badge,
     Button,
     Card,
     CardHeader,
@@ -32,12 +33,14 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 // import Datetime from "react-datetime"
 // my changes
 import {
+    addAtSquare,
     addCategory,
     deleteCategory,
     getCategory,
     loadCategorys,
     updateCategory
 } from "../../../redux/restaurantPages/category/actions"
+import {toast} from "react-toastify"
 
 const Category = (props) => {
 
@@ -49,6 +52,8 @@ const Category = (props) => {
     const isError = useSelector(state => state.category.isError)
     const isSuccess = useSelector(state => state.category.isSuccess)
     const dispatch = useDispatch()
+
+    console.log('isSuccess', isSuccess)
 
     // ** refs
     const formModalRef = useRef(null)
@@ -196,6 +201,16 @@ const Category = (props) => {
         props.history.push(`/CategoryDetail/${id}`)
     }
 
+    const onAddCategoryAtSquare = async (id) => {
+        console.log("event", id)
+        dispatch(addAtSquare(id))
+        toast("Category Added at Square Successfully")
+    }
+
+    useEffect(() => {
+
+    }, [categoryList])
+
     const columns = [
         {
             name: 'Name',
@@ -206,6 +221,12 @@ const Category = (props) => {
         {
             name: 'Description',
             selector: (row) => row.description,
+            sortable: true,
+            minWidth: '50px'
+        },
+        {
+            name: 'Square',
+            selector: (row) => <Badge className="" color={'light-primary'} pill>{row.isAddedSquare === true ? "Mapped" : ''}</Badge>,
             sortable: true,
             minWidth: '50px'
         },
@@ -227,6 +248,11 @@ const Category = (props) => {
                                 <DropdownItem tag='a' href='/' className='w-100' onClick={e => deleteClick(row.id, e)}>
                                     <Trash size={15} />
                                     <span className='align-middle ms-50'>Delete</span>
+                                </DropdownItem>
+                                <hr />
+                                <DropdownItem className='w-100' onClick={() => onAddCategoryAtSquare(row.id)}>
+                                    <Plus size={15} />
+                                    <span className='align-middle ms-50'>Add Category At Square</span>
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
