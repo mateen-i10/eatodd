@@ -96,7 +96,7 @@ const AssignGeneralRecommendation = (props) => {
     }
 
     const products = async (search) => {
-        return loadOptions('product', search, 1, 100)
+        return loadOptions('product/getall', search, 1, 100)
     }
     const loadModalProducts = async (search) => {
         console.log('search', search)
