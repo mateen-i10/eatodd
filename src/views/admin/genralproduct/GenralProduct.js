@@ -44,6 +44,9 @@ import SubcategoryDropdown from "../Components/SubcategoryDropdown"
 import GeneralProductFormChild from "./GeneralProductFormChild"
 import ProductImage from "../../home/components/product/ProductImage"
 import '../style.css'
+import {setLoading} from "../../../redux/products/reducer"
+import httpService, {baseURL} from "../../../utility/http"
+import {toast} from "react-toastify"
 
 const GenralProducts = (props) => {
 
@@ -54,6 +57,9 @@ const GenralProducts = (props) => {
     const isLoading = useSelector(state => state.genralProduct.isLoading)
     const isError = useSelector(state => state.genralProduct.isError)
     const isSuccess = useSelector(state => state.genralProduct.isSuccess)
+    const store = useSelector(state => state)
+
+    console.log("store", store.genralProduct.isLoading)
     const dispatch = useDispatch()
 
     const [catId, setCatId] = useState(0)
@@ -92,7 +98,7 @@ const GenralProducts = (props) => {
         if (formInitialState && formInitialState.subCategory && !isObjEmpty(formInitialState.subCategory)) {
             setSubcategoryId(formInitialState.subCategory.id)
         }
-    }, [isEdit])
+    }, [isEdit, isSuccess])
     const removeOption = (index) => {
         const newArray = [...optionType]
         newArray.splice(index, 1)
@@ -130,6 +136,8 @@ const GenralProducts = (props) => {
     const [isModal, setModal] = useState(false)
     const [isModalLoading, setModalLoading] = useState(false)
     const [formData, setFormData] = useState([])
+
+    const [isSquareLoading, setIsSquareLoading] = useState(false)
 
     // ** schema for validations
     const [schema, setSchema] = useState(Joi.object({
@@ -277,6 +285,39 @@ const GenralProducts = (props) => {
     const detailOptClick = (id, e) => {
         e.preventDefault()
         props.history.push(`/generalProductsDetail/${id}`)
+    }
+
+    console.log('isSquareLoading', isSquareLoading)
+   const compareItemToSquare = async () => {
+       setIsSquareLoading(true)
+       dispatch(setLoading(true))
+        // show sweet alert here
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to add products to square!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7367f0',
+            cancelButtonColor: '#d33'
+        }).then((result) => {
+            console.log('result', result)
+            if (result.isConfirmed) {
+                    httpService._get(`${baseURL}Category/CompareProductandCategory`
+                    ).then(response => {
+                        console.log('responseA', response)
+                        // success case
+                        if (response.status === 200) {
+                            setIsSquareLoading(false)
+                            toast.success('Products added to square Successfully')
+                        } else {
+                            //general Error Action
+                            toast.error(response.data.message)
+                        }
+                    }).catch(error => {
+                        toast.error(error.message)
+                    })
+            }
+        })
     }
 
     const handleSubmit = (event) => {
@@ -448,7 +489,7 @@ const GenralProducts = (props) => {
 
     return (
         <Fragment>
-            <UILoader blocking={isLoading}>
+            <UILoader blocking={(isLoading || isSquareLoading)}>
                 <Card>
                     <CardHeader
                         className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
@@ -456,8 +497,16 @@ const GenralProducts = (props) => {
                             <CardTitle tag='h4'>Genral Products</CardTitle>
                             {/*<h6>Friday June 10, 2022, 08:10 AM</h6>*/}
                         </div>
-                        <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>Add a new Genral
-                            Product</Button.Ripple>
+                        <Row>
+                            <Col className='d-flex justify-content-end'>
+                                <Button.Ripple bssize='sm' color='primary' onClick={compareItemToSquare} style={{marginRight:'4px'}}>
+                                    Add All Item to Square
+                                </Button.Ripple>
+                                <Button.Ripple bssize='sm' color='primary' onClick={(e) => addClick(e)}>
+                                    Add a new General Product
+                                </Button.Ripple>
+                            </Col>
+                        </Row>
                     </CardHeader>
                     <Row className='justify-content-end mx-0'>
                         <Col className='mt-1' md='12' sm='12'>

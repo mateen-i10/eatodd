@@ -45,6 +45,7 @@ const Order = () => {
                 // success case
                 if (response.status === 200 && response.data.statusCode === 200) {
                     const data = response.data.data
+                    console.log('dataA', data)
                     const finalData = data.map(item => ({
                         attachment: item.attachment,
                         id: item.id,
@@ -52,6 +53,7 @@ const Order = () => {
                         description: item.description,
                         priority: item.priority
                     }))
+                    console.log('finalDataA', finalData)
                     const finalCategory = finalData.filter((item) => item.name.toString().trim().toLowerCase() !== 'signature plates' && item.name.toString().trim().toLowerCase() !== 'signature sandwich')
                     const finalOmgPlate = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature plates' || item.name.toString().trim().toLowerCase() === 'omg plate')
                     const finalSandwich = finalData.filter((item) => item.name.toString().trim().toLowerCase() === 'signature sandwich' || item.name.toString().trim().toLowerCase() === 'omg sandwich')
