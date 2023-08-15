@@ -23,17 +23,15 @@ const UserDropdown = () => {
     // ** State
     const [userData, setUserData] = useState(null)
     const dispatch = useDispatch()
-
+    const usernameArray = userData?.userName?.trim().split(/\s+/)
+    //** Vars
+    const userAvatar = (userData && userData.avatar) || defaultAvatar
     //** ComponentDidMount
     useEffect(() => {
         if (isUserLoggedIn() !== null) {
             setUserData(JSON.parse(localStorage.getItem('userData')))
         }
     }, [])
-    const usernameArray = userData?.userName.trim().split(/\s+/)
-
-    //** Vars
-    const userAvatar = (userData && userData.avatar) || defaultAvatar
 
     return (
         <UncontrolledDropdown tag='li' className='dropdown-user nav-item '>
@@ -45,7 +43,7 @@ const UserDropdown = () => {
                 {/*              marginRight: 15,*/}
                 {/*              marginTop: 12,*/}
                 {/*              fontSize: "1.2rem"*/}
-                {/*          }}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>*/}
+                {/*          }}>{userData?.name ? usernameArray[0] : (userData && userData['userName']) || ''}</span>*/}
                 {/*        <span style={{*/}
                 {/*            marginRight: 8,*/}
                 {/*            fontSize: ".7rem"*/}
@@ -59,7 +57,7 @@ const UserDropdown = () => {
                     <section>
                         <Row>
                             <Col lg={7} style={{marginTop:12}}>
-                                <span style={{fontSize: "1.2rem"}}>{userData?.name.length > 12 ? usernameArray[0].toUpperCase() : (userData && userData['userName'].toUpperCase()) || ''}</span>
+                                <span style={{fontSize: "1.2rem"}}>{userData?.name ? usernameArray[0] : (userData && userData['userName']) || ''}</span>
                             </Col>
                             <Col lg={3}>
                                 <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online'/>
@@ -74,31 +72,6 @@ const UserDropdown = () => {
                     <User size={14} className='me-75'/>
                     <span className='align-middle'>Profile</span>
                 </DropdownItem>
-                {/* <DropdownItem tag='a' href='/apps/email' onClick={e => e.preventDefault()}>
-                    <Mail size={14} className='me-75'/>
-                    <span className='align-middle'>Inbox</span>
-                </DropdownItem>
-                <DropdownItem tag='a' href='/apps/todo' onClick={e => e.preventDefault()}>
-                    <CheckSquare size={14} className='me-75'/>
-                    <span className='align-middle'>Tasks</span>
-                </DropdownItem>
-                <DropdownItem tag='a' href='/apps/chat' onClick={e => e.preventDefault()}>
-                    <MessageSquare size={14} className='me-75'/>
-                    <span className='align-middle'>Chats</span>
-                </DropdownItem>
-                <DropdownItem divider/>
-                <DropdownItem tag='a' href='/pages/account-settings' onClick={e => e.preventDefault()}>
-                    <Settings size={14} className='me-75'/>
-                    <span className='align-middle'>Settings</span>
-                </DropdownItem>
-                <DropdownItem tag='a' href='/pages/pricing' onClick={e => e.preventDefault()}>
-                    <CreditCard size={14} className='me-75'/>
-                    <span className='align-middle'>Pricing</span>
-                </DropdownItem>
-                <DropdownItem tag='a' href='/pages/faq' onClick={e => e.preventDefault()}>
-                    <HelpCircle size={14} className='me-75'/>
-                    <span className='align-middle'>FAQ</span>
-                </DropdownItem>*/}
                 <DropdownItem tag={Link} to='/login' onClick={() => dispatch(unAuthorize())}>
                     <Power size={14} className='me-75'/>
                     <span className='align-middle'>Logout</span>

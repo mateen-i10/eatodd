@@ -25,12 +25,12 @@ const SignUp = () => {
         firstName: '', lastName: '', userName: '', email: '', password: '', confirmPassword:'', acceptTerms: false
     })
     const [formData] = useState([
-        {type:FieldTypes.Text, label: 'First Name', placeholder: 'Enter First Name', name:'firstName', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Text, label: 'User Name', placeholder: 'Enter User Name', name:'userName', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter Email', name:'email', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Password, label: 'Password', placeholder: 'Enter Password', name:'password', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false},
-        {type:FieldTypes.Password, label: 'Confirm Password', placeholder: 'Enter Confirm Password', name:'confirmPassword', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false}
+        {type:FieldTypes.Text, label: 'First Name', placeholder: 'Enter First Name', name:'firstName', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false},
+        {type:FieldTypes.Text, label: 'Last Name', placeholder: 'Enter Last Name', name:'lastName', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false},
+        {type:FieldTypes.Text, label: 'User Name', placeholder: 'Enter User Name', name:'userName', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false},
+        {type:FieldTypes.Email, label: 'Email', placeholder: 'Enter Email', name:'email', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false},
+        {type:FieldTypes.Password, label: 'Password', placeholder: 'Enter Password', name:'password', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false},
+        {type:FieldTypes.Password, label: 'Confirm Password', placeholder: 'Enter Confirm Password', name:'confirmPassword', isRequired:true, fieldGroupClasses: 'col-6 mb-1', isFormGroup: false}
         // {type:FieldTypes.CheckBox, label: 'I agree to privacy policy & terms', placeholder: '', name:'acceptTerms', isRequired:true, fieldGroupClasses: 'col-12 mb-1', isFormGroup: false}
     ])
     const [isBlock, setBlock] = useState(false)
@@ -93,7 +93,7 @@ const SignUp = () => {
                 <Col className='d-flex align-items-center auth-bg px-2 p-lg-5' lg='6' sm='12'>
                     <Col className='px-xl-2 mx-auto' sm='8' md='6' lg='12'>
                         <CardTitle tag='h2' className='fw-bold mb-1'>
-                            Welcome to EATOMG! 👋
+                            Welcome to EATOMG!
                         </CardTitle>
                         <CardText className='mb-2'>Please sign-up to your account and start the adventure</CardText>
                         <MyForm ref={formModalRef}
@@ -103,7 +103,7 @@ const SignUp = () => {
                                 schema={schema}
                                 handleSubmit={handleSubmit}
                                 buttonHtml={
-                                    <Button color='primary col-12 mt-1'>
+                                    <Button color='primary col-6 mt-1'>
                                         Sign up
                                     </Button>
                                 }
@@ -114,23 +114,23 @@ const SignUp = () => {
                                 <span>Sign in</span>
                             </Link>
                         </p>
-                        <div className='divider my-2'>
-                            <div className='divider-text'>or</div>
-                        </div>
-                        <div className='auth-footer-btn d-flex justify-content-center'>
-                            <Button color='facebook'>
-                                <Facebook size={14} />
-                            </Button>
-                            <Button color='twitter'>
-                                <Twitter size={14} />
-                            </Button>
-                            <Button color='google'>
-                                <Mail size={14} />
-                            </Button>
-                            <Button className='me-0' color='github'>
-                                <GitHub size={14} />
-                            </Button>
-                        </div>
+                        {/*<div className='divider my-2'>*/}
+                        {/*    <div className='divider-text'>or</div>*/}
+                        {/*</div>*/}
+                        {/*<div className='auth-footer-btn d-flex justify-content-center'>*/}
+                        {/*    <Button color='facebook'>*/}
+                        {/*        <Facebook size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button color='twitter'>*/}
+                        {/*        <Twitter size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button color='google'>*/}
+                        {/*        <Mail size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*    <Button className='me-0' color='github'>*/}
+                        {/*        <GitHub size={14} />*/}
+                        {/*    </Button>*/}
+                        {/*</div>*/}
                     </Col>
                 </Col>
             </Row>

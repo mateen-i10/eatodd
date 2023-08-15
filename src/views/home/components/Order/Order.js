@@ -372,7 +372,7 @@ const Order = () => {
                         <div className="row">
                     {selectedCategory === 1 && omgPlate.map((item) => (
 
-                        <div className="col-6 text-center cursor-pointer" onClick={() => {
+                        <div key={item.id} className="col-6 text-center cursor-pointer" onClick={() => {
                             const categoryId = item.id
                             const storedRestaurantId = localStorage.getItem('restaurantId')
                             const destination = storedRestaurantId ? "/OmgPlate" : "/gmap"
@@ -391,7 +391,7 @@ const Order = () => {
                     <div className="container-sm">
                         <div className="row">
                             {selectedCategory === 2 && omgSandwich.map((item) => (
-                                <div className="col-6 text-center cursor-pointer" onClick={() => {
+                                <div key={item.id} className="col-6 text-center cursor-pointer" onClick={() => {
                                     const categoryId = item.id
                                     const storedRestaurantId = localStorage.getItem('restaurantId')
                                     const destination = storedRestaurantId ? "/OmgPlate" : "/gmap"
