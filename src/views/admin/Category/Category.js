@@ -70,6 +70,8 @@ const Category = (props) => {
     const [isModalLoading, setModalLoading] = useState(false)
     const [formData, setFormData] = useState([])
 
+    const [isSquareLoading, setIsSquareLoading] = useState(false)
+
     // ** schema for validations
     const [schema, setSchema] = useState(Joi.object({
         name: Joi.string().required().label("Name")
@@ -202,10 +204,52 @@ const Category = (props) => {
     }
 
     const onAddCategoryAtSquare = async (id) => {
+        setIsSquareLoading(true)
         console.log("event", id)
         dispatch(addAtSquare(id))
         toast("Category Added at Square Successfully")
+        setTimeout(() => {
+            setIsSquareLoading(false)
+        }, 5000)
     }
+
+
+  /*  const onAddCategoryAtSquare = async (id) => {
+        setIsSquareLoading(true)
+        dispatch(setLoading(true))
+
+        // show sweet alert here
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to add products to square!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#7367f0',
+            cancelButtonColor: '#d33'
+        }).then((result) => {
+            console.log('result', result)
+            if (result.isConfirmed) {
+                httpService._post(`${baseURL}Category/AddCategoryInSquare`
+                ).then(response => {
+                    console.log('responseA', response)
+                    // success case
+                    if (response.status === 200) {
+                        const data = response.data
+                        console.log('dataA', data)
+                        const finalData = data.map(id)
+                        console.log('finalDataA', finalData)
+                        setIsSquareLoading(false)
+                        toast.success('Category Added at Square Successfully')
+                    } else {
+                        //general Error Action
+                        toast.error(response.data.message)
+                    }
+                }).catch(error => {
+                    toast.error(error.message)
+                })
+            }
+        })
+    }*/
 
     useEffect(() => {
 
@@ -301,7 +345,7 @@ const Category = (props) => {
 
     return (
         <Fragment>
-            <UILoader blocking={isLoading}>
+            <UILoader blocking={(isLoading || isSquareLoading)}>
                 <Card>
                     <CardHeader
                         className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
