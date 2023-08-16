@@ -54,6 +54,7 @@ const Menu = () => {
     }, [])
     // hooks
     const [isLoading, response] = useAPI(`product/categoryProducts?categoryId=${categoryId}&&restaurantId=${userLocation.length ? userLocation[0].action.payload.restaurantId : restaurantId} `, 'get', {}, '', true)
+
     /*function filterProductsBySubCatId(products, subCatId) {
         return products.filter(prod => prod.id !== subCatId)
     }*/
@@ -79,18 +80,18 @@ const Menu = () => {
     }
 
     useEffect(() => {
-            if (products && products.length > 0) {
-                const subCatIdToHide = products.map(pro => {
-                     if (products.find(prod => pro.id === prod.subCatId)) {
-                        pro.isHidden = true
-                    }
-                     return pro
-                })
-                setFilteredProducts([...subCatIdToHide])
-                /*if (subCatIdToHide) {
-                    toggleSubcategory(subCatIdToHide.id)
-                }*/
-            }
+        if (products && products.length > 0) {
+            const subCatIdToHide = products.map(pro => {
+                if (products.find(prod => pro.id === prod.subCatId)) {
+                    pro.isHidden = true
+                }
+                return pro
+            })
+            setFilteredProducts([...subCatIdToHide])
+            /*if (subCatIdToHide) {
+                toggleSubcategory(subCatIdToHide.id)
+            }*/
+        }
 
 
     }, [products])
@@ -116,7 +117,7 @@ const Menu = () => {
                 }
 
                 currentValue.price = currentValue.options && currentValue.options.length > 0 ? currentValue.options.find(op => op.isDefault)?.price : null
-                if (currentValue.options && currentValue.options.length > 0 && currentValue.options.find(op => op.isDefault))  currentValue.options.find(op => op.isDefault).isSelected = true
+                if (currentValue.options && currentValue.options.length > 0 && currentValue.options.find(op => op.isDefault)) currentValue.options.find(op => op.isDefault).isSelected = true
                 acc[currentValue.subCategory['name']] = {
                     id: currentValue.subCategory['id'],
                     name: currentValue.subCategory['name'],
@@ -124,7 +125,7 @@ const Menu = () => {
                     priority: currentValue.subCategory['priority'],
                     fillingLimit: currentValue.subCategory['fillingLimit'],
                     subCatId: currentValue.subCategory['subCatId'],
-                    products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, {...currentValue }] : [{...currentValue}]
+                    products: acc[currentValue.subCategory['name']].products ? [...acc[currentValue.subCategory['name']].products, {...currentValue}] : [{...currentValue}]
                 }
                 //console.log('ccc', a)
                 return acc
@@ -175,8 +176,8 @@ const Menu = () => {
             finalItems = selectedProducts.map(item => {
                 if (!isObjEmpty(item)) {
                     const found = item.options.find(op => op.isSelected)
-                    const price = found ? found.price  : item.price
-                    totalPrice =  totalPrice + (price * item.selectedQuantity)
+                    const price = found ? found.price : item.price
+                    totalPrice = totalPrice + (price * item.selectedQuantity)
                     return {...item, calculatedPrice: price * item.selectedQuantity, price}
                 }
             })
@@ -184,39 +185,39 @@ const Menu = () => {
 
         if (isGroupOrder()) {
             setIsLoading(true)
-            const meal =  {
-                    name: mealName,
-                    categoryId,
-                    guestName: isUserLoggedIn() && isCustomer() ? getUserData().name : isGroupOrderMemberName() ? localStorage.getItem(groupOrderMemberName) : null,
-                    customerId: isUserLoggedIn() && isCustomer() ? getUserData().customerId : null,
-                    mealProducts : selectedProducts && selectedProducts.length > 0 ? selectedProducts.map(p => {
-                        return {
-                            productId : p.id,
-                            quantity: p.selectedQuantity,
-                            unitPrice : p.price,
-                            optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
-                        }
-                    }) : []
-                }
-                http._post(`${baseURL}groupOrder/addMeals/${Number(localStorage.getItem(groupOrderId))}`, {...meal}).then(res => {
-                    setIsLoading(false)
-                    if (res.status === 200 && res.data && res.data.statusCode === 200) {
-                        dispatch(calculateTotalItems(res?.data.data?.mealCount))
-                        toast.success(`${mealName} Added to cart`)
-                        isJoinedByLink() ? history.goBack() : history.push('/home')
-                    } else {
-                        toast.error(res.data.message)
+            const meal = {
+                name: mealName,
+                categoryId,
+                guestName: isUserLoggedIn() && isCustomer() ? getUserData().name : isGroupOrderMemberName() ? localStorage.getItem(groupOrderMemberName) : null,
+                customerId: isUserLoggedIn() && isCustomer() ? getUserData().customerId : null,
+                mealProducts: selectedProducts && selectedProducts.length > 0 ? selectedProducts.map(p => {
+                    return {
+                        productId: p.id,
+                        quantity: p.selectedQuantity,
+                        unitPrice: p.price,
+                        optionId: p.options && p.options.length > 0 ? p.options.find(p => p.isSelected)?.id : null
                     }
-                }).catch(error => {
-                    toast.error(error.message)
-                })
+                }) : []
+            }
+            http._post(`${baseURL}groupOrder/addMeals/${Number(localStorage.getItem(groupOrderId))}`, {...meal}).then(res => {
+                setIsLoading(false)
+                if (res.status === 200 && res.data && res.data.statusCode === 200) {
+                    dispatch(calculateTotalItems(res?.data.data?.mealCount))
+                    toast.success(`${mealName} Added to cart`)
+                    isJoinedByLink() ? history.goBack() : history.push('/home')
+                } else {
+                    toast.error(res.data.message)
+                }
+            }).catch(error => {
+                toast.error(error.message)
+            })
         } else {
             const meal = {
                 mealName,
                 totalPrice,
                 categoryName: category?.name,
                 categoryId,
-                selectedProducts : [...finalItems]
+                selectedProducts: [...finalItems]
             }
             addItemToCart(meal)
             history.push('/home')
@@ -251,7 +252,7 @@ const Menu = () => {
                 } else if (limit !== 0 && sectionLimit > 0 && sectionLimit < limit && !product.isWine) {
                     updatedProducts = [
                         ...selectedProducts.filter(p => p.subCategory.id !== subCatId || p.isWine),
-                        ...existingProducts.map(p => ({ ...p, selectedQuantity: 1 / limit }))
+                        ...existingProducts.map(p => ({...p, selectedQuantity: 1 / limit}))
                     ]
                     product.selectedQuantity = 1 / limit
                 } else {
@@ -274,20 +275,26 @@ const Menu = () => {
             const proIndex = final.findIndex((item) => item.id === product.id)
             // existing product case
             if (proIndex > -1) {
-                final[proIndex].options.forEach(op => { op.isSelected = false })
+                final[proIndex].options.forEach(op => {
+                    op.isSelected = false
+                })
                 final[proIndex].options[index].isSelected = true
                 setSelectedProducts([...final])
             } else {
                 // new product case
                 if (limit !== 0 && final.filter(p => p.subCategory?.id === subCatId).length === limit) return
-                product.options.forEach(op => { op.isSelected = false })
+                product.options.forEach(op => {
+                    op.isSelected = false
+                })
                 product.options[index].isSelected = true
                 setSelectedProducts([...final, product])
             }
 
         } else {
             //empty case
-            product.options.forEach(op => { op.isSelected = false })
+            product.options.forEach(op => {
+                op.isSelected = false
+            })
             product.options[index].isSelected = true
             setSelectedProducts([product])
         }
@@ -384,8 +391,7 @@ const Menu = () => {
                                                 </tr>
                                             })
                                         }) : <p>No data Found</p>
-                                        }
-                                        {selectedProducts && selectedProducts.length > 0 ? <tr style={{backgroundColor: '#f3f2f7'}}>
+                                        }{selectedProducts && selectedProducts.length > 0 ? <tr style={{backgroundColor: '#f3f2f7'}}>
                                                 <td style={{fontSize: "1rem", color: '#262626'}}> Total</td>
                                                 <td style={{fontSize: "1rem", color: '#262626'}}> {caloriesSum}</td>
                                                 <td style={{fontSize: "1rem", color: "#9c1f16"}}> {fatSum}</td>
@@ -424,129 +430,133 @@ const Menu = () => {
     return (
         <Fragment>
             <UILoader blocking={isLoading}>
-            <Header/>
-            <div className="sticky-top headerScroll">
-                <div className="" style={{marginBottom: 0, height: "45px"}}>
+                <Header/>
+                <div className="sticky-top headerScroll">
+                    <div className="" style={{marginBottom: 0, height: "45px"}}>
                         <div className='btn btn-primary btn-lg text-uppercase me-1 returnBtn'
                              onClick={handleClick}>Return to Menu
                         </div>
-                </div>
-            </div>
-
-            <div className="container-sm" style={{marginTop: '45px'}}>
-                <TopShelf
-                    attachment={category?.attachment}
-                    name={category?.name}
-                    description={category?.description}
-                />
-
-                <div className="row">
-                    <div className="col-12 cursor-pointer" style={{textAlign: 'right'}}>
-                        <h3
-                            onClick={(e) => {
-                                e.preventDefault()
-                                setBasicModal((!basicModal))
-                            }}
-                            style={{
-                                textTransform: 'uppercase',
-                                color: "black",
-                                fontWeight: 'bolder'
-                            }}>
-                            Nutrition Information
-                            <List color="black"/>
-                        </h3>
                     </div>
                 </div>
 
-                <hr className="text-dark"/>
-                {/*<NutritionPrefModel/>*/}
-                <div className="container-sm">
+                <div className="container-sm" style={{marginTop: '45px'}}>
+                    <TopShelf
+                        attachment={category?.attachment}
+                        name={category?.name}
+                        description={category?.description}
+                    />
+
+                    <div className="row">
+                        <div className="col-12 cursor-pointer" style={{textAlign: 'right'}}>
+                            <h3
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    setBasicModal((!basicModal))
+                                }}
+                                style={{
+                                    textTransform: 'uppercase',
+                                    color: "black",
+                                    fontWeight: 'bolder'
+                                }}>
+                                Nutrition Information
+                                <List color="black"/>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <hr className="text-dark"/>
+                    {/*<NutritionPrefModel/>*/}
                     <div className="container-sm">
-                        {sortedProducts.map((prod) => (
-                            <div key={prod.id}>
-                                {!prod.isHidden && (
-                                    <ProductsSubcategoryMenu
-                                        heading={prod.name}
-                                        limit={prod.fillingLimit}
-                                        products={prod.products}
-                                        subCatId={prod.id}
-                                        isBlank={prod.isBlank}
-                                        ispriority={prod.priority}
-                                        handleSelectOption={handleSelectOption}
-                                        handleChangeQuantity={handleChangeQuantity}
-                                        handleSelectProduct={handleSelectProduct}
-                                        selectedProducts={selectedProducts}
-                                    />
-                                )}
-                                {prod.subCatId && !prod.isHidden && (
-                                    <div className="row">
-                                        <div
-                                            className="col-md-6"
-                                            style={{ margin: "auto" }}
-                                        >
+                        <div className="container-sm">
+                            {sortedProducts.map((prod) => (
+                                <div key={prod.id}>
+                                    {!prod.isHidden && (
+                                        <ProductsSubcategoryMenu
+                                            heading={prod.name}
+                                            limit={prod.fillingLimit}
+                                            products={prod.products}
+                                            subCatId={prod.id}
+                                            isBlank={prod.isBlank}
+                                            ispriority={prod.priority}
+                                            handleSelectOption={handleSelectOption}
+                                            handleChangeQuantity={handleChangeQuantity}
+                                            handleSelectProduct={handleSelectProduct}
+                                            selectedProducts={selectedProducts}
+                                        />
+                                    )}
+                                    {prod.subCatId && !prod.isHidden && (
+                                        <div className="row">
                                             <div
-                                                onClick={() => toggleSubcategory(prod.subCatId)}
-                                                className="card add mb-lg-2 mb-1 overflow-hidden"
-                                                style={{
-                                                    maxHeight: "98px",
-                                                    minHeight: "98px",
-                                                    position: "relative",
-                                                    width: "550px",
-                                                    margin: "auto",
-                                                    cursor: "pointer"
-                                                }}
+                                                className="col-md-6"
+                                                style={{margin: "auto"}}
                                             >
-                                                <i
-                                                    className="fas fa-times-circle"
+                                                <div
+                                                    onClick={() => toggleSubcategory(prod.subCatId)}
+                                                    className="card add mb-lg-2 mb-1 overflow-hidden"
                                                     style={{
-                                                        position: "absolute",
-                                                        left: "20%",
-                                                        transform: "translateX(-50%)",
-                                                        color: subcategoryVisible === prod.subCatId ? "red" : "black",
-                                                        fontSize: "40px",
-                                                        marginTop: "25px",
+                                                        maxHeight: "98px",
+                                                        minHeight: "98px",
+                                                        position: "relative",
+                                                        width: "550px",
+                                                        margin: "auto",
                                                         cursor: "pointer"
                                                     }}
-                                                ></i>
-                                                <h2 style={{ margin: "auto", display: "inline-block" }}>
-                                                    No {prod.name}
-                                                </h2>
+                                                >
+                                                    <i
+                                                        className="fas fa-times-circle"
+                                                        style={{
+                                                            position: "absolute",
+                                                            left: "20%",
+                                                            transform: "translateX(-50%)",
+                                                            color: subcategoryVisible === prod.subCatId ? "red" : "black",
+                                                            fontSize: "40px",
+                                                            marginTop: "25px",
+                                                            cursor: "pointer"
+                                                        }}
+                                                    ></i>
+                                                    <h2 style={{margin: "auto", display: "inline-block"}}>
+                                                        No {prod.name}
+                                                    </h2>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )}
-                                {prod.subCatId &&
-                                    hiddenSubcategories
-                                        .filter((subCat) => subCat.subCatId === prod.id)
-                                        .map((subCat) => (
-                                            <ProductsSubcategoryMenu
-                                                key={subCat.id}
-                                                heading={subCat.name}
-                                                limit={subCat.fillingLimit}
-                                                products={subCat.products}
-                                                subCatId={subCat.id}
-                                                isBlank={subCat.isBlank}
-                                                prodsubId={prod.subCatId}
-                                                ispriority={subCat.priority}
-                                                handleSelectOption={handleSelectOption}
-                                                handleChangeQuantity={handleChangeQuantity}
-                                                handleSelectProduct={handleSelectProduct}
-                                                selectedProducts={selectedProducts}
-                                                toggleSubcategory={toggleSubcategory}
-                                            />
-                                        ))}
-                            </div>
-                        ))}
+                                    )}
+                                    {prod.subCatId &&
+                                        hiddenSubcategories
+                                            .filter((subCat) => subCat.subCatId === prod.id)
+                                            .map((subCat) => (
+                                                <ProductsSubcategoryMenu
+                                                    key={subCat.id}
+                                                    heading={subCat.name}
+                                                    limit={subCat.fillingLimit}
+                                                    products={subCat.products}
+                                                    subCatId={subCat.id}
+                                                    isBlank={subCat.isBlank}
+                                                    prodsubId={prod.subCatId}
+                                                    ispriority={subCat.priority}
+                                                    handleSelectOption={handleSelectOption}
+                                                    handleChangeQuantity={handleChangeQuantity}
+                                                    handleSelectProduct={handleSelectProduct}
+                                                    selectedProducts={selectedProducts}
+                                                    toggleSubcategory={toggleSubcategory}
+                                                />
+                                            ))}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer
-                mealName={mealName}
-                dispatchingItems={dispatchingItems}
-                setMealName={setMealName}
-                productList={selectedProducts}
-            />
-            {/*<OrdersList className='hide-on-small-screen'  openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />*/}
+                {
+                    selectedProducts.length > 0 ? (
+                        <Footer
+                            mealName={mealName}
+                            dispatchingItems={dispatchingItems}
+                            setMealName={setMealName}
+                            productList={selectedProducts}
+                        />
+                    ) : null
+                }
+                {/*<OrdersList className='hide-on-small-screen'  openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />*/}
 
                 <div>
                     {/* Your other components and content */}
@@ -556,10 +566,11 @@ const Menu = () => {
                 </div>
 
                 {canvasOpen && <div>
-                    <OrdersList className='hide-on-Mobile' openCan={canvasOpen} onCloseModal={setCanvasOpen} productList={selectedProducts} />
-                </div> }
+                    <OrdersList className='hide-on-Mobile' openCan={canvasOpen} onCloseModal={setCanvasOpen}
+                                productList={selectedProducts}/>
+                </div>}
 
-            {RenderModal()}
+                {RenderModal()}
 
             </UILoader>
         </Fragment>

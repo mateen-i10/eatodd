@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {X} from "react-feather"
 import {Button} from "reactstrap"
 
@@ -10,7 +10,8 @@ const ItemsInCart = ({foodItems, index, removeMeal, mainSectionName, menuName, i
     const totalPrice = foodItems.totalPrice
     const mainItems = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => !p.isWine)] : []
     const wines = selectedProducts && selectedProducts.length > 0 ? [...foodItems.selectedProducts.filter(p => p.isWine)] : []
-
+    useEffect(() => {
+    }, [mainItems])
     return (
         <div className='text-uppercase'>
             <div className='row'>

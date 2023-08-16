@@ -343,7 +343,6 @@ const AssignGeneralRecommendation = (props) => {
     return (
         <>
         <Fragment>
-
             <UILoader blocking={isLoading}>
                 <Card>
                     <CardHeader className='row border-bottom'>
@@ -411,8 +410,6 @@ const AssignGeneralRecommendation = (props) => {
                     />
                 </Card>
             </UILoader>
-
-
         </Fragment>
 
             <div className='demo-inline-spacing'>
