@@ -80,8 +80,8 @@ const AssignLocationAndItems = (props) => {
                 console.log('ressss2', response)
                 if (response.status === 200 && response.data.statusCode === 200) {
                     console.log('ressss21', response)
-                    return response.data.data.items.map(d =>  {
-                        return {label: `${d.itemName}`, value: d.itemId}
+                    return response.data.data.items?.map(d =>  {
+                        return {label: `${d.result?.itemName} - (${d.result?.categoryName})`, value: d.result?.itemId}
                     })
                 } else {
                     //general Error Action
