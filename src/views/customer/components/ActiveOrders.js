@@ -103,7 +103,7 @@ const ActiveOrders = (props) => {
         },
         {
             name: 'Total Price',
-            selector: (row) => row.totalPrice,
+            selector: (row) => Number((row.totalPrice) / 100),
             sortable: true,
             minWidth: '50px'
         },

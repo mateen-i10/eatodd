@@ -72,6 +72,7 @@ const Payment = (props) => {
         if (response && response.data) {
             console.log('paymentBody2', paymentBody)
             const payment = {...paymentBody, orderId: response?.data?.squareOrderId, locationId: response.data.squareLocationId, customerId: response.data.squareCustomerId, amountMoney: response.data.totalPrice}
+            console.log('payment', payment)
             await createPayment(payment)
         } else {
             setPlaceOrder({url: '', order: {}})
@@ -122,7 +123,7 @@ const Payment = (props) => {
                 quantity: orderDetails.length,
                 restaurantId: Number(restaurantId),
                 locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
-                pickUpAt: localStorage.getItem('pickUpAt'),
+                pickupAt: localStorage.getItem('pickUpAt'),
                 isNoContactDelivery: false,
                 note,
                 fullFilmentType,
@@ -197,7 +198,7 @@ const Payment = (props) => {
         if (token && token.token && token.status === "OK" && verifiedBuyer && verifiedBuyer.token) {
             const body = {
                 sourceId: token.token,
-                //locationId: response.data.squareLocationId,
+                /*locationId: response?.data?.squareLocationId,*/
                 verificationToken: verifiedBuyer.token,
                 customerEmail: getUserData().email
                 //customerId: response.data.squareCustomerId,

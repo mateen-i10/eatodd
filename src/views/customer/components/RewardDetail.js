@@ -57,7 +57,7 @@ const RewardDetail = () => {
                                 <div className='col-md-3'></div>
                                 <div className='col-md-6' style={{marginLeft: '6px', textAlign: '-webkit-center'}}>
                                     <Badge className="" color={'light-success'} style={{fontSize: '50px'}}>
-                                        {customerReward.totalEATOMGPoints !== null ? customerReward.totalEATOMGPoints : '-'}
+                                        {customerReward.totalEATOMGPoints !== null ? Number((customerReward.totalEATOMGPoints) / 100) : '-'}
                                     </Badge>
                                 </div>
                                 <div className='col-md-3'></div>
