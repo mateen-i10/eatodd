@@ -1,34 +1,34 @@
-import React, {memo, useEffect, useState} from "react"
-import useAPI from "../../../../utility/customHooks/useAPI"
-import UILoader from "../../../../@core/components/ui-loader"
+import React, { useEffect, useState } from "react"
 
-const ProductImage = ({attachment, classes, styles}) => {
+const ProductImage = ({ attachment, classes, styles }) => {
     const defaultImage = require("../../../../assets/images/default/defaultImage.png").default
     const [imageURL, setImageURL] = useState(defaultImage)
-    const [imagePath, setImagePath] = useState('')
-
-    // hooks
-    const [isLoading, response] = useAPI(imagePath, 'get', {}, 'blob')
 
     useEffect(() => {
-        if (attachment && attachment.path && attachment.extension) {
-            setImagePath(`media/getMediaByPath?path=${attachment.path}&&extension=${attachment.extension}`)
+        if (attachment && attachment.path) {
+            // Replace backslashes with forward slashes, then split the path into segments
+            const pathSegments = attachment.path.replace(/\\/g, '/').split('/')
+
+            // Extract the last two segments (subfolder and image name)
+            const subfolder = pathSegments[pathSegments.length - 2]
+            const imageName = pathSegments[pathSegments.length - 1]
+
+            // Form the direct URL to the image
+            const directImageUrl = `https://devapi.eatomg.com/Media/${subfolder}/${imageName}`
+
+            // Set the image URL directly
+            setImageURL(directImageUrl)
+        } else {
+            // Fallback to default image if attachment is not valid
+            setImageURL(defaultImage)
         }
     }, [attachment])
 
-    useEffect(() => {
-        if (response) {
-            setImageURL(URL.createObjectURL(response))
-        }
-    }, [response])
-
-    return <>
-        <UILoader blocking={isLoading}>
-            <div style={{justifyContent: "center", display: "flex" }} >
-                <img src={imageURL} className={classes} alt="product image" style={styles} />
-            </div>
-        </UILoader>
-    </>
+    return (
+        <div style={{ justifyContent: "center", display: "flex" }}>
+            <img src={imageURL} alt="Product" className={classes} style={styles} />
+        </div>
+    )
 }
 
-export default memo(ProductImage)
+export default ProductImage
