@@ -166,8 +166,8 @@ const ProductCard = ({item, limit, selectedItems, onItemClick, attachment, subCa
                                         <br />
                                         <ReactTooltip place="bottom" effect="solid" className="custom-tooltip"/>
                                         <p className='text-info img-Container1' style={{paddingTop: '3px'}}>
-                                            {arr?.map(f => {
-                                                return  f === 'Spicy' ? <img className='imgMargin' src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? '' : f === "Contains Almonds" ? <img className='imgMargin' src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : f === "Vegan" ? <img className='imgMargin' src={Vegan} width={20} alt="image" data-tip="Vegan"/> : f === "Gluten free" ? <img className='imgMargin' src={GF} width={20} alt="image" data-tip="Gluten free"/> : f === "Vegetarian" ? <img className='imgMargin' src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''
+                                            {arr?.map((f, index) => {
+                                                return  f === 'Spicy' ? <img key={index} className='imgMargin' src={chilli} width={20} alt="image" data-tip="Spicy"/> : item.flavour === "Normal" ? '' : f === "Contains Almonds" ? <img key={index} className='imgMargin' src={CA} width={20} alt="image" data-tip="Contains Almonds"/> : f === "Vegan" ? <img key={index} className='imgMargin' src={Vegan} width={20} alt="image" data-tip="Vegan"/> : f === "Gluten free" ? <img key={index} className='imgMargin' src={GF} width={20} alt="image" data-tip="Gluten free"/> : f === "Vegetarian" ? <img key={index} className='imgMargin' src={Vegi} width={20} alt="image" data-tip="Vegetarian"/> : ''
                                             })}
                                         </p>
                                     </div>
