@@ -8,13 +8,13 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
 
     useEffect(() => {
         // Variable to track if the component is still mounted
-        let isMounted = true
+        //let isMounted = true
 
         if (url && url !== '') {
             setIsLoading(true)
             http._request({baseURL, url, method, data, responseType})
                 .then(res => {
-                    if (isMounted) { // Only update the state if the component is still mounted
+                   // Only update the state if the component is still mounted
                         if (res && res.status === 200 && (res.data instanceof Blob || res.data.statusCode === 200)) {
                             setIsLoading(false)
                             setResponse(res.data)
@@ -23,19 +23,19 @@ const useAPI = (url, method, data, responseType, isErrorToast = false, isSuccess
                             if (isErrorToast) toast.error(res.data.message)
                             setIsLoading(false)
                         }
-                    }
+
                 })
                 .catch(e => {
-                    if (isMounted) { // Only update the state if the component is still mounted
+                    // Only update the state if the component is still mounted
                         console.log('abc', e)
                         setIsLoading(false)
                         if (isErrorToast) toast.error(e.message)
-                    }
+
                 })
         }
 
         return () => { // Cleanup function that runs when the component is unmounted
-            isMounted = false
+            //isMounted = false
         }
     }, [url])
 
