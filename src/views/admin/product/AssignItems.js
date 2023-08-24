@@ -4,9 +4,10 @@ import httpService, {baseURL} from "../../../utility/http"
 import {toast} from "react-toastify"
 import {Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from "reactstrap"
 import AsyncSelect from "react-select/async"
-import {Delete, Plus} from "react-feather"
+import {Delete, Plus, Search} from "react-feather"
 import {addItemsToProduct} from "../../../redux/products/actions"
 import {setDetailLoading} from "../../../redux/products/reducer"
+import Tooltip from 'react-tooltip'
 
 const AssignLocationAndItems = (props) => {
 
@@ -169,7 +170,7 @@ const AssignLocationAndItems = (props) => {
 
     return (
         <Fragment>
-            <Modal isOpen={props.IsModalOpened} className='modal-dialog-centered modal-lg'>
+            <Modal isOpen={props.IsModalOpened} className='modal-dialog-centered modal-xl'>
                 <ModalHeader className='bg-transparent' onClick={e => onModalClose(e)}></ModalHeader>
                 <ModalBody className='mx-50 pb-5'>
                     <div className='text-center mb-2'>
@@ -182,7 +183,7 @@ const AssignLocationAndItems = (props) => {
                         <div>
                             {item.map((i, index) => {
                                 return <div key={`list-${index}`} className='row mt-1'>
-                                    <div className='col-4' style={{borderRight: '1px solid #c2b8b8'}}>
+                                    <div className='col-3' style={{borderRight: '1px solid #c2b8b8'}}>
                                         <Label className='form-label' for='name'>Select General Product:</Label>
                                         <AsyncSelect
                                             cacheOptions
@@ -205,6 +206,16 @@ const AssignLocationAndItems = (props) => {
                                             closeMenuOnSelect={true}
                                             isMulti = {false}
                                         />
+                                    </div>
+                                    <Tooltip
+                                        place="top"
+                                        type="dark"
+                                        effect="float"
+                                        className='text-white'
+                                        data-width="200"
+                                    />
+                                    <div className='col-1 text-center' data-tip="Search From Item" sm='12' style={{marginTop:'22px'}}>
+                                        <Button style={{padding:'0.715rem 0.736rem'}} type="button" color='primary'><Search size={18}/></Button>
                                     </div>
                                     <div className='col-3'>
                                         <Label className='form-label' for='name'>Select Location:</Label>
